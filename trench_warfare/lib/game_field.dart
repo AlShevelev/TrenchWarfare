@@ -17,15 +17,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   @override
   Color backgroundColor() => const Color(0x00000000); // Must be transparent to show the background
 
-  GameField()
-      : super(
-    // TODO(AS): you should hide the system panels, calculate a read screen size
-    // and pass it to the camera. How can you do it - see the hexagon pazzle sources
-    // camera: CameraComponent.withFixedResolution(
-    //   width: 16 * 28,
-    //   height: 16 * 14,
-    // ),
-  );
+  GameField() : super();
 
   @override
   Future<void> onLoad() async {
@@ -38,6 +30,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       Vector2(64, 73), // Should be as same as a size of tile in the Tiled
     );
     world.add(mapComponent);
+
     _checkBorders();
   }
 
