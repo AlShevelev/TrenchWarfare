@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:trench_warfare/tile_info.dart';
+import 'package:trench_warfare/screens/game_field_screen/tile_info.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
   late TiledComponent mapComponent;
@@ -14,10 +14,14 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   static const double _maxZoom = 2.0;
   double _startZoom = _minZoom;
 
+  late final String _mapName;
+
+  GameField({required mapName}) : super() {
+    _mapName = mapName;
+  }
+
   @override
   Color backgroundColor() => const Color(0x00000000); // Must be transparent to show the background
-
-  GameField() : super();
 
   @override
   Future<void> onLoad() async {
@@ -26,7 +30,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       ..anchor = Anchor.center;
 
     mapComponent = await TiledComponent.load(
-      'gb_and_france.tmx',
+      _mapName,
       Vector2(64, 73), // Should be as same as a size of tile in the Tiled
     );
     world.add(mapComponent);

@@ -1,0 +1,23 @@
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
+import 'package:trench_warfare/screens/game_field_screen/game_field.dart';
+import 'package:trench_warfare/shared/ui_kit/background.dart';
+
+class GameFieldScreen extends StatelessWidget {
+  late final String _mapName;
+
+  GameFieldScreen({required mapName, Key? key}) : super(key: key) {
+    _mapName = mapName;
+  }
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Background(
+        child: GameWidget(game: GameField(mapName: _mapName)),
+      ),
+    );
+  }
+}
