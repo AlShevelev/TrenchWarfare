@@ -5,9 +5,12 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:trench_warfare/screens/game_field_screen/tile_info.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/tile_info.dart';
+import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
+  late final GameFieldViewModel _viewModel;
+
   late TiledComponent mapComponent;
 
   static const double _minZoom = 0.5;
@@ -18,6 +21,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
+    _viewModel = GameFieldViewModel();
   }
 
   @override
@@ -36,6 +40,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     world.add(mapComponent);
 
     _checkBorders();
+
+    _viewModel.init(mapComponent.tileMap.map);
   }
 
   @override
@@ -156,5 +162,11 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     }
 
     return TileInfo(center: targetCenter, row: targetRow, col: targetCol);
+  }
+
+  @override
+  void onDispose() {
+    _viewModel.dispose();
+    super.onDispose();
   }
 }

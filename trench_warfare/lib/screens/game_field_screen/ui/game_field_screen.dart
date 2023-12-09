@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/screens/game_field_screen/game_field.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 
 class GameFieldScreen extends StatelessWidget {

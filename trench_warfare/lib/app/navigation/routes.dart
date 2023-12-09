@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/navigation/fade_route.dart';
-import 'package:trench_warfare/screens/game_field_screen/game_field_screen.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_field_screen.dart';
 
 class Routes {
   static const startScreen = '/';
