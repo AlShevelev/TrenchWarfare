@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../../atlas/game_objects.tsx"/>
+ <object gid="10" width="64" height="64">
+  <properties>
+   <property name="level" value="level1"/>
+   <property name="productionCenter" value="airField"/>
+   <property name="type" value="productionCenter"/>
+  </properties>
+ </object>
+</template>

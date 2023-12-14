@@ -27,6 +27,8 @@ flutter:
   assets:
     # maps
     - assets/tiles/
+    - assets/tiles/game_objects/atlas/game_objects.tsx
+    - assets/images/tiles/
 
     # images
     - assets/images/

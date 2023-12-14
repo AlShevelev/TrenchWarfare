@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../../atlas/game_objects.tsx"/>
+ <object gid="28" width="64" height="64">
+  <properties>
+   <property name="boost1" value=""/>
+   <property name="boost2" value=""/>
+   <property name="boost3" value=""/>
+   <property name="experienceRank" value="rookies"/>
+   <property name="fatigue" type="float" value="0"/>
+   <property name="health" type="float" value="1"/>
+   <property name="movementPoints" type="float" value="1"/>
+   <property name="type" value="unit"/>
+   <property name="unit" value="battleship"/>
+  </properties>
+ </object>
+</template>

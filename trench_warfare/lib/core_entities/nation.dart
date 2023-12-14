@@ -21,3 +21,8 @@ enum Nation {
   usNorth,
   usSouth,
 }
+
+// 72
+// 9 x 8
+// 64 x 64
+// 576 x 512
