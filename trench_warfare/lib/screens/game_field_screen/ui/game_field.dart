@@ -41,7 +41,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
     _checkBorders();
 
-    _viewModel.init(mapComponent.tileMap.map);
+    _viewModel.init(mapComponent.tileMap);
   }
 
   @override

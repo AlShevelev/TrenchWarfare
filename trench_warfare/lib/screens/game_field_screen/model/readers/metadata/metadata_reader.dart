@@ -5,17 +5,11 @@ import 'package:trench_warfare/app/localization/locale.dart';
 import 'package:trench_warfare/core_entities/aggressiveness.dart';
 import 'package:trench_warfare/core_entities/nation.dart';
 import 'package:trench_warfare/core_entities/relationship.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/map_reader/dto/map_metadata.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
 
-class MapReader {
-  late final TiledMap _map;
-
-  MapReader(TiledMap map) {
-    _map = map;
-  }
-
-  MapMetadata readMetadata() {
-    final properties = _map.properties.byName;
+class MetadataReader {
+  static MapMetadata read(TiledMap map) {
+    final properties = map.properties.byName;
     final metadataJsonString = (properties['metadata'] as StringProperty).value;
 
     final decodedMetadata = jsonDecode(metadataJsonString) as Map<String, dynamic>;
@@ -29,12 +23,12 @@ class MapReader {
     );
   }
 
-  Map<Locale, String> _readLocale(Map<String, dynamic> metadata, String keyName) {
+  static Map<Locale, String> _readLocale(Map<String, dynamic> metadata, String keyName) {
     final localeNames = Locale.values.asNameMap();
     return (metadata[keyName] as Map<String, dynamic>).map((key, value) => MapEntry(localeNames[key]!, value as String));
   }
 
-  List<NationRecord> _readNations(Map<String, dynamic> metadata) {
+  static List<NationRecord> _readNations(Map<String, dynamic> metadata) {
     final nationNames = Nation.values.asNameMap();
     final aggressivenessNames = Aggressiveness.values.asNameMap();
 
@@ -49,7 +43,7 @@ class MapReader {
         .toList();
   }
 
-  List<DiplomacyRecord> _readDiplomacy(Map<String, dynamic> metadata) {
+  static List<DiplomacyRecord> _readDiplomacy(Map<String, dynamic> metadata) {
     final nationNames = Nation.values.asNameMap();
     final relationshipNames = Relationship.values.asNameMap();
 

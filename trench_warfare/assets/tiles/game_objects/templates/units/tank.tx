@@ -9,6 +9,7 @@
    <property name="experienceRank" value="rookies"/>
    <property name="fatigue" type="float" value="0"/>
    <property name="health" type="float" value="1"/>
+   <property name="indexInArmy" type="int" value="0"/>
    <property name="movementPoints" type="float" value="1"/>
    <property name="type" value="unit"/>
    <property name="unit" value="tank"/>

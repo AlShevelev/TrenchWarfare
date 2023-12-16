@@ -17,9 +17,9 @@ class GameFieldViewModel extends ViewModelBase {
     _state.update(Loading());
   }
 
-  void init(TiledMap map) {
+  void init(RenderableTiledMap tileMap) {
     _model = GameFieldModel();
-    _model.init(map);
+    _model.init(tileMap);
 
     _state.update(Playing());
   }
