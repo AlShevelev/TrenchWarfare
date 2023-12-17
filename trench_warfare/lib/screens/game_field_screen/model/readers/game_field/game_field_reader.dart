@@ -39,6 +39,9 @@ class GameFieldReader {
       );
     }
 
+    final gameObjectLayer = map.layerByName("GameObjects") as ObjectGroup;
+    final p = gameObjectLayer.objects[0].properties.byName;
+
     return gameField;
   }
 

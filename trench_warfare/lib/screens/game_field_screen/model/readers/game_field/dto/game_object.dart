@@ -1,7 +1,8 @@
+
 abstract class GameObject {
 
 }
 
-class Army extends GameObject {
+class Unit extends GameObject {
 
 }

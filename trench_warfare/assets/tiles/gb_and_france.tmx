@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="hexagonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="7" nextobjectid="110">
+<map version="1.10" tiledversion="1.10.2" orientation="hexagonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="8" nextobjectid="169">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;First Battle of the Marne (1914)&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;First Battle of the Marne, (September 6–12, 1914), an offensive during World War I by the French army and the British Expeditionary Force (BEF) against the advancing Germans who had invaded Belgium and northeastern France and were within 30 miles (48 km) of Paris. The French threw back the massive German advance and thwarted German plans for a quick and total victory on the Western Front.&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;belgium&quot;, &quot;aggressiveness&quot;: &quot;passive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;allied&quot; }, { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; } ] }"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="64" tileheight="74" tilecount="80" columns="10">
   <image source="../images/tiles/terrain_atlas.png" width="640" height="592"/>
  </tileset>
- <tileset firstgid="81" source="game_objects/atlas/game_objects.tsx"/>
+ <tileset firstgid="81" source="game_objects.tsx"/>
  <layer id="1" name="Terrain" width="40" height="40">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,2,2,2,
@@ -95,8 +95,187 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="6" name="Game objects">
-  <object id="90" template="game_objects/templates/units/infantry.tx" x="1408.52" y="400.707"/>
-  <object id="91" template="game_objects/templates/nations/usa.tx" x="1407.59" y="391.409"/>
+ <objectgroup id="6" name="GameObjects">
+  <object id="167" name="infantry" type="unit" gid="107" x="1410.55" y="506.193" width="64" height="64">
+   <properties>
+    <property name="experienceRank" value="elite"/>
+   </properties>
+  </object>
+  <object id="168" name="usa" type="nation" gid="112" x="1406.71" y="510.658" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup id="7" name="GameObjectsTemplates">
+  <object id="111" name="seaMine" type="terrainModifier" gid="81" x="-1.33962" y="68.5566" width="64" height="64"/>
+  <object id="113" name="antiAirGun" type="terrainModifier" gid="86" x="317.057" y="68.5566" width="64" height="64"/>
+  <object id="115" name="landMine" type="terrainModifier" gid="82" x="61.1604" y="67.3774" width="64" height="64"/>
+  <object id="116" name="trench" type="terrainModifier" gid="83" x="129.557" y="70.9151" width="64" height="64"/>
+  <object id="117" name="landFort" type="terrainModifier" gid="84" x="194.415" y="68.5566" width="64" height="64"/>
+  <object id="118" name="barbedWire" type="terrainModifier" gid="85" x="258.094" y="69.7358" width="64" height="64"/>
+  <object id="119" name="level1" type="navalBase" gid="87" x="-0.160377" y="179.406" width="64" height="64"/>
+  <object id="120" name="level2" type="navalBase" gid="88" x="62.3396" y="177.047" width="64" height="64"/>
+  <object id="121" name="level3" type="navalBase" gid="89" x="129.557" y="175.868" width="64" height="64"/>
+  <object id="122" name="level1" type="airField" gid="90" x="258.094" y="180.585" width="64" height="64"/>
+  <object id="123" name="level2" type="airField" gid="91" x="324.132" y="179.406" width="64" height="64"/>
+  <object id="124" name="level1" type="factory" gid="92" x="35.217" y="232.472" width="64" height="64"/>
+  <object id="125" name="level2" type="factory" gid="93" x="95.3585" y="230.113" width="64" height="64"/>
+  <object id="126" name="level3" type="factory" gid="94" x="160.217" y="231.292" width="64" height="64"/>
+  <object id="127" name="level4" type="factory" gid="95" x="227.434" y="231.292" width="64" height="64"/>
+  <object id="128" name="level1" type="city" gid="96" x="-1.33962" y="285.538" width="64" height="64"/>
+  <object id="129" name="level2" type="city" gid="97" x="61.1604" y="287.896" width="64" height="64"/>
+  <object id="130" name="level3" type="city" gid="98" x="126.019" y="283.179" width="64" height="64"/>
+  <object id="131" name="level4" type="city" gid="99" x="192.057" y="289.075" width="64" height="64"/>
+  <object id="132" name="capital" type="city" gid="100" x="254.557" y="291.434" width="64" height="64"/>
+  <object id="133" name="armoredCar" type="unit" gid="101" x="1.01887" y="396.387" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="134" name="artillery" type="unit" gid="102" x="64.6981" y="394.028" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="135" name="machineGuns" type="unit" gid="103" x="129.226" y="395.044" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="136" name="machineGunnersCart" type="unit" gid="104" x="194.974" y="394.472" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="137" name="tank" type="unit" gid="105" x="258.435" y="396.187" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="138" name="cavalry" type="unit" gid="106" x="327.614" y="391.614" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="139" name="infantry" type="unit" gid="107" x="385.929" y="399.046" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="141" name="cruiser" type="unit" gid="109" x="93.779" y="452.788" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="140" name="battleship" type="unit" gid="108" x="33.7481" y="452.216" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="142" name="destroyer" type="unit" gid="110" x="157.24" y="453.931" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="143" name="carrier" type="unit" gid="111" x="226.419" y="453.36" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="0"/>
+    <property name="health" type="float" value="1"/>
+    <property name="indexInArmy" type="int" value="0"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="144" name="usa" type="nation" gid="112" x="35.725" y="566.261" width="64" height="64"/>
+  <object id="145" name="usSouth" type="nation" gid="113" x="90.6793" y="562.721" width="64" height="64"/>
+  <object id="146" name="usNorth" type="nation" gid="114" x="158.694" y="565.284" width="64" height="64"/>
+  <object id="147" name="greatBritain" type="nation" gid="115" x="222.76" y="565.07" width="64" height="64"/>
+  <object id="148" name="turkey" type="nation" gid="116" x="289.813" y="565.019" width="64" height="64"/>
+  <object id="149" name="serbia" type="nation" gid="117" x="348.804" y="562.936" width="64" height="64"/>
+  <object id="150" name="russia" type="nation" gid="118" x="414.204" y="566.619" width="64" height="64"/>
+  <object id="151" name="romania" type="nation" gid="119" x="-2.09825" y="619.783" width="64" height="64"/>
+  <object id="152" name="montenegro" type="nation" gid="120" x="61.1226" y="621.492" width="64" height="64"/>
+  <object id="153" name="mongolia" type="nation" gid="121" x="130.324" y="622.346" width="64" height="64"/>
+  <object id="154" name="mexico" type="nation" gid="122" x="190.982" y="622.346" width="64" height="64"/>
+  <object id="155" name="korea" type="nation" gid="123" x="262.746" y="620.637" width="64" height="64"/>
+  <object id="156" name="japan" type="nation" gid="124" x="323.404" y="619.783" width="64" height="64"/>
+  <object id="157" name="italy" type="nation" gid="125" x="391.751" y="619.783" width="64" height="64"/>
+  <object id="158" name="germany" type="nation" gid="126" x="32.0752" y="678.732" width="64" height="64"/>
+  <object id="159" name="france" type="nation" gid="127" x="94.4417" y="678.732" width="64" height="64"/>
+  <object id="160" name="china" type="nation" gid="128" x="161.934" y="681.295" width="64" height="64"/>
+  <object id="161" name="bulgaria" type="nation" gid="129" x="226.009" y="680.441" width="64" height="64"/>
+  <object id="162" name="belgium" type="nation" gid="130" x="287.522" y="680.441" width="64" height="64"/>
+  <object id="163" name="austriaHungary" type="nation" gid="131" x="350.742" y="676.169" width="64" height="64"/>
+  <object id="164" name="greece" type="nation" gid="132" x="415.672" y="677.023" width="64" height="64"/>
  </objectgroup>
 </map>

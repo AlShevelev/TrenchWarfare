@@ -1,7 +1,7 @@
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:trench_warfare/core_entities/cell_terrain.dart';
+import 'package:trench_warfare/core_entities/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/dto/game_object.dart';
 
 class GameFieldCell {
@@ -16,6 +16,9 @@ class GameFieldCell {
   final bool hasRiver;
   final bool hasRoad;
 
+  Nation? _nation;
+  Nation get nation => _nation!;
+
   final List<GameObject> _gameObjects = [];
   Iterable<GameObject> get gameObjects => _gameObjects;
 
@@ -27,4 +30,8 @@ class GameFieldCell {
     required this.row,
     required this.col,
   });
+
+  void setNation(Nation? nation) {
+    _nation = nation;
+  }
 }
