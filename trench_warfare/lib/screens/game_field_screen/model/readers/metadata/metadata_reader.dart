@@ -2,13 +2,22 @@ import 'dart:convert';
 
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/app/localization/locale.dart';
-import 'package:trench_warfare/core_entities/aggressiveness.dart';
-import 'package:trench_warfare/core_entities/nation.dart';
-import 'package:trench_warfare/core_entities/relationship.dart';
+import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core_entities/enums/relationship.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_validator.dart';
 
 class MetadataReader {
   static MapMetadata read(TiledMap map) {
+    final metadata = _readMetadata(map);
+
+    MetadataValidator.validate(metadata);
+
+    return metadata;
+  }
+
+  static MapMetadata _readMetadata(TiledMap map) {
     final properties = map.properties.byName;
     final metadataJsonString = (properties['metadata'] as StringProperty).value;
 

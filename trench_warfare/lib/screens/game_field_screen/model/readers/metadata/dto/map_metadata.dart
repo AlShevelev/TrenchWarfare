@@ -1,7 +1,7 @@
 import 'package:trench_warfare/app/localization/locale.dart';
-import 'package:trench_warfare/core_entities/aggressiveness.dart';
-import 'package:trench_warfare/core_entities/nation.dart';
-import 'package:trench_warfare/core_entities/relationship.dart';
+import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core_entities/enums/relationship.dart';
 
 class MapMetadata {
   final int version;

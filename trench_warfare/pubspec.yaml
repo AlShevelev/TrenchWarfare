@@ -1,5 +1,5 @@
 name: trench_warfare
-description: A Trench Warfare turn-bases stratety game
+description: A Trench Warfare turn-bases strategy game
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
