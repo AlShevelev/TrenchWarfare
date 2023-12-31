@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
+import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/tile_info.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
@@ -19,6 +21,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   late final String _mapName;
 
+  late final TextureAtlas spritesAtlas;
+
   GameField({required mapName}) : super() {
     _mapName = mapName;
     _viewModel = GameFieldViewModel();
@@ -29,6 +33,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   Future<void> onLoad() async {
+    spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+
     camera.viewfinder
       ..zoom = _startZoom
       ..anchor = Anchor.center;
@@ -74,7 +80,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     final spriteComponent = SpriteComponent(
       size: Vector2.all(64.0),
 
-      sprite: await Sprite.load('unit_infantry_germany.png'),
+      sprite: spritesAtlas.findSpriteByName('Unit-Germany-Infantry'),
     )
       ..anchor = Anchor.center
       ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)

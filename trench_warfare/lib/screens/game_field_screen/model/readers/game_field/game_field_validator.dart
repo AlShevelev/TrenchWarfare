@@ -4,6 +4,7 @@ import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
+import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 
 class GameFieldValidator {
@@ -13,6 +14,7 @@ class GameFieldValidator {
       _validateLandUnitsOnLandCell(cell);
       _validateSeaUnitsOnWaterCell(cell);
       _validateNoMinesForUnits(cell);
+      _validateSeaUnitCanNotHaveTransportBooster(cell);
 
       // Production centers
       _validateLandProductionCenterMustBeOnLandCell(cell);
@@ -58,6 +60,16 @@ class GameFieldValidator {
     if (cell.isLand && !cell.hasRiver) {
       if (cell.units.any((e) => !e.isLand)) {
         throw AssertionError("Sea units must be on a sea cell only [${cell.row}; ${cell.col}]");
+      }
+    }
+  }
+
+  /// A sea unit can't have a transport booster
+  static void _validateSeaUnitCanNotHaveTransportBooster(GameFieldCell cell) {
+    if (cell.units.isNotEmpty) {
+      if (cell.units.any((u) =>
+          !u.isLand && (u.boost1 == UnitBoost.transport || u.boost2 == UnitBoost.transport || u.boost3 == UnitBoost.transport))) {
+        throw AssertionError("A sea unit can't have a transport booster (cell is: [${cell.row}; ${cell.col}])");
       }
     }
   }
@@ -166,8 +178,9 @@ class GameFieldValidator {
   // Marsh can contain infantry, machine gunners and cavalry only
   static void _validateMarshUnits(GameFieldCell cell) {
     if (cell.terrain == CellTerrain.marsh) {
-      if (cell.units.isNotEmpty && !cell.units
-          .any((u) => u.unitType == UnitType.infantry || u.unitType == UnitType.machineGuns || u.unitType == UnitType.cavalry)) {
+      if (cell.units.isNotEmpty &&
+          !cell.units.any(
+              (u) => u.unitType == UnitType.infantry || u.unitType == UnitType.machineGuns || u.unitType == UnitType.cavalry)) {
         throw AssertionError("Marsh cell [${cell.row}; ${cell.col}] can contain infantry, machine gunners and cavalry only");
       }
     }

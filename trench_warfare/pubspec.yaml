@@ -13,6 +13,7 @@ dependencies:
   tuple: ^2.0.2
   flame: ^1.12.0
   flame_tiled: ^1.18.1
+  flame_gdx_texture_packer: ^0.6.1
   easy_localization: ^3.0.3
   provider: ^6.1.1
 
@@ -29,7 +30,10 @@ flutter:
     - assets/tiles/
     - assets/images/tiles/
 
-    # images
+    # sprites
+    - assets/images/sprites/
+
+    # general purpose images
     - assets/images/
 
     # localisation
