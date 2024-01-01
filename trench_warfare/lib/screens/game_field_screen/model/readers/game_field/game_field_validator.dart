@@ -2,6 +2,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
+import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
@@ -20,6 +21,7 @@ class GameFieldValidator {
       _validateLandProductionCenterMustBeOnLandCell(cell);
       _validateSeaProductionCenterMustBeOnSea(cell);
       _validateCellWithProductionCenterMustNotContainTerrainModifier(cell);
+      _validateProductionCenterMaxLevel(cell);
 
       // Terrain modifies
       _validateLandTerrainModifierMustBeOnLandCell(cell);
@@ -107,6 +109,35 @@ class GameFieldValidator {
   static void _validateCellWithProductionCenterMustNotContainTerrainModifier(GameFieldCell cell) {
     if (cell.productionCenter != null && cell.terrainModifier != null) {
       throw AssertionError("A cell [${cell.row}; ${cell.col}] with a production center mustn't contain a terrain modifier");
+    }
+  }
+
+  // A level of a production center if too high
+  static void _validateProductionCenterMaxLevel(GameFieldCell cell) {
+    final productionCenter = cell.productionCenter;
+
+    if (productionCenter == null) {
+      return;
+    }
+
+    if (productionCenter.type == ProductionCenterType.airField) {
+      if (productionCenter.level == ProductionCenterLevel.level3 ||
+          productionCenter.level == ProductionCenterLevel.level4 ||
+          productionCenter.level == ProductionCenterLevel.capital) {
+        throw AssertionError("A level of a production center if too high (the cell is: [${cell.row}; ${cell.col}])");
+      }
+    }
+
+    if (productionCenter.type == ProductionCenterType.navalBase) {
+      if (productionCenter.level == ProductionCenterLevel.level4 || productionCenter.level == ProductionCenterLevel.capital) {
+        throw AssertionError("A level of a production center if too high (the cell is: [${cell.row}; ${cell.col}])");
+      }
+    }
+
+    if (productionCenter.type == ProductionCenterType.factory) {
+      if (productionCenter.level == ProductionCenterLevel.capital) {
+        throw AssertionError("A level of a production center if too high (the cell is: [${cell.row}; ${cell.col}])");
+      }
     }
   }
 

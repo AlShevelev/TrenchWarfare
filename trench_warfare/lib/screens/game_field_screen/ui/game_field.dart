@@ -77,15 +77,35 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   Future<void> onTapUp(TapUpInfo info) async {
     final tappedCel = _getTappedCell(info);
 
-    final spriteComponent = SpriteComponent(
-      size: Vector2.all(64.0),
+    // final unit = SpriteComponent(
+    //   size: Vector2.all(64.0),
+    //   sprite: spritesAtlas.findSpriteByName('Unit-Germany-Infantry'),
+    // )
+    //   ..anchor = Anchor.center
+    //   ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
+    //   ..priority = 1;
+    //
+    // mapComponent.add(unit);
 
-      sprite: spritesAtlas.findSpriteByName('Unit-Germany-Infantry'),
+    // final banner = SpriteComponent(
+    //   size: Vector2.all(64.0),
+    //   sprite: spritesAtlas.findSpriteByName('Banner-Germany'),
+    // )
+    //   ..anchor = Anchor.center
+    //   ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
+    //   ..priority = 1;
+    //
+    // mapComponent.add(banner);
+
+    final flag = SpriteComponent(
+      size: Vector2.all(64.0),
+      sprite: spritesAtlas.findSpriteByName('Flag US'),
     )
       ..anchor = Anchor.center
       ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
       ..priority = 1;
-    mapComponent.add(spriteComponent);
+
+    mapComponent.add(flag);
   }
 
   void _checkBorders() {

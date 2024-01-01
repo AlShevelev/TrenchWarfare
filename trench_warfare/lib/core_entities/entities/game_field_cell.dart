@@ -30,6 +30,8 @@ class GameFieldCell {
 
   bool get isLand => terrain != CellTerrain.water;
 
+  bool get isEmpty => nation == null && productionCenter == null && terrainModifier == null && units.isEmpty;
+
   GameFieldCell({
     required this.terrain,
     required this.hasRiver,
