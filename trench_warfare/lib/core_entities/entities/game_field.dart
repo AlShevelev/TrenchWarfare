@@ -4,7 +4,7 @@ abstract class GameFieldReadOnly {
   final int rows = 0;
   final int cols = 0;
 
-  Iterable<GameFieldCell> get cells;
+    Iterable<GameFieldCell> get cells;
 
   GameFieldCell getCell(int row, int col);
 }

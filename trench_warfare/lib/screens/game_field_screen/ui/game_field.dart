@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
@@ -7,6 +8,8 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_field_cell_component.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/tile_info.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
@@ -21,7 +24,9 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   late final String _mapName;
 
-  late final TextureAtlas spritesAtlas;
+  late final TextureAtlas _spritesAtlas;
+
+  StreamSubscription? _updateGameObjectsSubscription;
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -33,7 +38,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   Future<void> onLoad() async {
-    spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+    _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
 
     camera.viewfinder
       ..zoom = _startZoom
@@ -46,6 +51,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     world.add(mapComponent);
 
     _checkBorders();
+
+    _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(onUpdateGameEvent);
 
     await _viewModel.init(mapComponent.tileMap);
   }
@@ -75,37 +82,33 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   Future<void> onTapUp(TapUpInfo info) async {
-    final tappedCel = _getTappedCell(info);
-
-    // final unit = SpriteComponent(
-    //   size: Vector2.all(64.0),
-    //   sprite: spritesAtlas.findSpriteByName('Unit-Germany-Infantry'),
-    // )
-    //   ..anchor = Anchor.center
-    //   ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
-    //   ..priority = 1;
-    //
-    // mapComponent.add(unit);
-
-    // final banner = SpriteComponent(
-    //   size: Vector2.all(64.0),
-    //   sprite: spritesAtlas.findSpriteByName('Banner-Germany'),
-    // )
-    //   ..anchor = Anchor.center
-    //   ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
-    //   ..priority = 1;
-    //
-    // mapComponent.add(banner);
-
+    final tappedCell = _getTappedCell(info);
     final flag = SpriteComponent(
       size: Vector2.all(64.0),
-      sprite: spritesAtlas.findSpriteByName('Flag US'),
+      sprite: _spritesAtlas.findSpriteByName('Flag-US'),
     )
       ..anchor = Anchor.center
-      ..position = Vector2(tappedCel.center.dx, tappedCel.center.dy)
+      ..position = Vector2(tappedCell.center.dx, tappedCell.center.dy)
       ..priority = 1;
 
     mapComponent.add(flag);
+  }
+
+  void onUpdateGameEvent(UpdateGameEvent event) {
+    switch (event) {
+      case AddObjects(cells: var cells): {
+        for (var cell in cells) {
+          final cellComponent = GameFieldCellComponent(
+              size: Vector2.all(64.0),
+              spritesAtlas: _spritesAtlas,
+              cell: cell,
+              position: Vector2(cell.center.dx, cell.center.dy),
+          );
+
+          mapComponent.add(cellComponent);
+        }
+      }
+    }
   }
 
   void _checkBorders() {
@@ -192,6 +195,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   void onDispose() {
+    _updateGameObjectsSubscription?.cancel();
     _viewModel.dispose();
     super.onDispose();
   }
