@@ -14,21 +14,26 @@ import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
 class GameFieldCellComponent extends PositionComponent {
-  late final Vector2? _size;
+  late final Vector2 _baseSize;
   late final TextureAtlas _spritesAtlas;
   late final GameFieldCell _cell;
   late final Vector2 _position;
 
+  late final Vector2 _smallSize;
+
+
   GameFieldCellComponent({
-    required Vector2 size,
+    required Vector2 baseSize,
     required TextureAtlas spritesAtlas,
     required GameFieldCell cell,
     required Vector2 position,
   }) {
-    _size = size;
+    _baseSize = baseSize;
     _spritesAtlas = spritesAtlas;
     _cell = cell;
     _position = position;
+
+    _smallSize = _baseSize.scaled(0.85);
   }
 
   @override
@@ -247,23 +252,23 @@ class GameFieldCellComponent extends PositionComponent {
       UnitType.carrier => 'Unit-Carrier',
     };
 
-    _addSprite(primaryUnitName, grayscale: unit.movementPoints == 0.0);
-    _addSprite(secondaryUnitName, grayscale: unit.movementPoints == 0.0);
-    _addSprite(healthName);
-    _addSprite(quantityName);
-    _addSprite(experienceRankName);
-    _addSprite(boost1Name);
-    _addSprite(boost2Name);
-    _addSprite(boost3Name);
+    _addSprite(primaryUnitName, grayscale: unit.movementPoints == 0.0, smallSize: false);
+    _addSprite(secondaryUnitName, grayscale: unit.movementPoints == 0.0, smallSize: false);
+    _addSprite(healthName, smallSize: false);
+    _addSprite(quantityName, smallSize: false);
+    _addSprite(experienceRankName, smallSize: false);
+    _addSprite(boost1Name, smallSize: false);
+    _addSprite(boost2Name, smallSize: false);
+    _addSprite(boost3Name, smallSize: false);
   }
 
-  void _addSprite(String? spriteName, {bool grayscale = false}) {
+  void _addSprite(String? spriteName, {bool grayscale = false, bool smallSize = true}) {
     if (spriteName == null) {
       return;
     }
 
     final sprite = SpriteComponent(
-      size: _size,
+      size: smallSize ? _smallSize : _baseSize,
       sprite: _spritesAtlas.findSpriteByName(spriteName),
     )
       ..anchor = Anchor.center

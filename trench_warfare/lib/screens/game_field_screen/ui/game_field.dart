@@ -99,7 +99,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       case AddObjects(cells: var cells): {
         for (var cell in cells) {
           final cellComponent = GameFieldCellComponent(
-              size: Vector2.all(64.0),
+              baseSize: Vector2.all(64.0),
               spritesAtlas: _spritesAtlas,
               cell: cell,
               position: Vector2(cell.center.dx, cell.center.dy),
