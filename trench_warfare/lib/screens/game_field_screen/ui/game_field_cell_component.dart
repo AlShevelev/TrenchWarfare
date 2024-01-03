@@ -5,6 +5,7 @@ import 'package:flame/text.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
@@ -291,11 +292,11 @@ class GameFieldCellComponent extends PositionComponent {
       return;
     }
 
-    final style = TextStyle(
-      color: BasicPalette.white.color,
+    const style = TextStyle(
+      color: AppColors.white,
       fontSize: 16.0,
       fontStyle: FontStyle.italic,
-      shadows: const [
+      shadows: [
         Shadow(
           offset: Offset(1, 1),
           blurRadius: 5.0,
