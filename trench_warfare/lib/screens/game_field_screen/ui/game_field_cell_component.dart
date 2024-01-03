@@ -1,7 +1,10 @@
 import 'package:flame/components.dart';
+import 'package:flame/palette.dart';
 import 'package:flame/rendering.dart';
+import 'package:flame/text.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
@@ -20,7 +23,6 @@ class GameFieldCellComponent extends PositionComponent {
   late final Vector2 _position;
 
   late final Vector2 _smallSize;
-
 
   GameFieldCellComponent({
     required Vector2 baseSize,
@@ -90,6 +92,7 @@ class GameFieldCellComponent extends PositionComponent {
 
     _addSprite(bodyName);
     _addSprite(levelName);
+    _addText(productionCenter.name);
   }
 
   void _addUnitsSprites() {
@@ -281,5 +284,34 @@ class GameFieldCellComponent extends PositionComponent {
     }
 
     add(sprite);
+  }
+
+  void _addText(String? text) {
+    if (text == null || text.isEmpty) {
+      return;
+    }
+
+    final style = TextStyle(
+      color: BasicPalette.white.color,
+      fontSize: 16.0,
+      fontStyle: FontStyle.italic,
+      shadows: const [
+        Shadow(
+          offset: Offset(1, 1),
+          blurRadius: 5.0,
+        )
+      ],
+    );
+    final regular = TextPaint(style: style);
+
+    TextComponent textComponent = TextComponent(
+      text: text,
+      textRenderer: regular,
+    )
+      ..anchor = Anchor.topCenter
+      ..position = _position.translated(0, _baseSize.y * 0.2)
+      ..priority = 2;
+
+    add(textComponent);
   }
 }

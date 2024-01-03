@@ -294,7 +294,7 @@
   </object>
   <object id="199" name="capital" type="city" gid="100" x="1207.73" y="828.667" width="64" height="64">
    <properties>
-    <property name="name" value=""/>
+    <property name="name" value="Glasgow"/>
    </properties>
   </object>
   <object id="200" name="level4" type="factory" gid="95" x="1321.37" y="575.98" width="64" height="64">
