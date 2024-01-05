@@ -28,6 +28,8 @@ class GameFieldCell {
   late final List<Unit> _units;
   Iterable<Unit> get units => _units;
 
+  Unit? get activeUnit => _units.firstOrNull;
+
   bool get isLand => terrain != CellTerrain.water;
 
   bool get isEmpty => nation == null && productionCenter == null && terrainModifier == null && units.isEmpty;

@@ -1,3 +1,4 @@
+import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
@@ -23,6 +24,10 @@ class GameFieldViewModel extends ViewModelBase {
     await _model.init(tileMap);
 
     _state.update(Playing());
+  }
+
+  void onClick(Vector2 position) {
+    _model.onClick(position);
   }
 
   @override

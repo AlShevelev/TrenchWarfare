@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flame/components.dart';
@@ -10,7 +9,6 @@ import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field_cell_component.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/tile_info.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
@@ -82,16 +80,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   Future<void> onTapUp(TapUpInfo info) async {
-    final tappedCell = _getTappedCell(info);
-    final flag = SpriteComponent(
-      size: Vector2.all(64.0),
-      sprite: _spritesAtlas.findSpriteByName('Flag-US'),
-    )
-      ..anchor = Anchor.center
-      ..position = Vector2(tappedCell.center.dx, tappedCell.center.dy)
-      ..priority = 1;
-
-    mapComponent.add(flag);
+    _viewModel.onClick(camera.globalToLocal(info.eventPosition.global));
   }
 
   void onUpdateGameEvent(UpdateGameEvent event) {
@@ -159,38 +148,6 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     }
 
     camera.viewfinder.position = currentPosition.translated(xTranslate, yTranslate);
-  }
-
-  TileInfo _getTappedCell(TapUpInfo info) {
-    final clickOnMapPoint = camera.globalToLocal(info.eventPosition.global);
-
-    final rows = mapComponent.tileMap.map.width;
-    final cols = mapComponent.tileMap.map.height;
-
-    final tileSize = mapComponent.tileMap.destTileSize;
-
-    var targetRow = 0;
-    var targetCol = 0;
-    var minDistance = double.maxFinite;
-    var targetCenter = Offset.zero;
-
-    for (var row = 0; row < rows; row++) {
-      for (var col = 0; col < cols; col++) {
-        final xCenter = col * tileSize.x + tileSize.x / 2 + (row.isEven ? 0 : tileSize.x / 2);
-        final yCenter = row * tileSize.y - (row * tileSize.y / 4) + tileSize.y / 2;
-
-        final distance = math.sqrt(math.pow(xCenter - clickOnMapPoint.x, 2) + math.pow(yCenter - clickOnMapPoint.y, 2));
-
-        if (distance < minDistance) {
-          minDistance = distance;
-          targetRow = row;
-          targetCol = col;
-          targetCenter = Offset(xCenter, yCenter);
-        }
-      }
-    }
-
-    return TileInfo(center: targetCenter, row: targetRow, col: targetCol);
   }
 
   @override

@@ -100,7 +100,7 @@ class GameFieldCellComponent extends PositionComponent {
       return;
     }
 
-    _addUnitSprites(_cell.units.first, _cell.units.length);
+    _addUnitSprites(_cell.activeUnit!, _cell.units.length);
   }
 
   void _addNationSprites() {
