@@ -5,6 +5,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cells_around.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_reader.dart';
@@ -31,9 +32,20 @@ class GameFieldModel implements Disposable {
   }
 
   void onClick(Vector2 position) {
-    final clickedCell = FindCellByPosition.findCell(gameField.cells, position);
+    final clickedCell = FindCellByPosition.find(gameField, position);
+    print("cell: ${clickedCell.row}, ${clickedCell.col}");
+
     clickedCell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.seaMine));
     _updateGameObjectsEvent.update(AddObjects([clickedCell]));
+
+/*
+    final cellsAround = FindCellsAround.find(gameField, clickedCell);
+
+    for (var cell in cellsAround) {
+      cell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.landFort));
+    }
+    _updateGameObjectsEvent.update(AddObjects(cellsAround));
+*/
   }
 
   @override
