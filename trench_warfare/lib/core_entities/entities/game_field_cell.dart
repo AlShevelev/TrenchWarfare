@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 
 class GameFieldCell {
   /// Center of the cell in map coordinates
@@ -10,6 +11,8 @@ class GameFieldCell {
 
   final int row;
   final int col;
+
+  int get id => pair(row, col);
 
   final CellTerrain terrain;
 
