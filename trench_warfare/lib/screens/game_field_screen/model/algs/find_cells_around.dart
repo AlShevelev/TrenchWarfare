@@ -4,7 +4,7 @@ import 'package:trench_warfare/shared/utils/range.dart';
 
 /// Looks for all cells around some cell
 class FindCellsAround {
-  static List<GameFieldCell> find(GameFieldReadOnly gameField, GameFieldCell centralCell) {
+  static Iterable<GameFieldCell> find(GameFieldReadOnly gameField, GameFieldCell centralCell) {
     final result = List<GameFieldCell>.empty(growable: true);
 
     final rowRange = Range(0, gameField.rows - 1);
