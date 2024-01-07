@@ -5,9 +5,11 @@ import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cells_around.dart';
 
 /// Calculations for the G part of the F factor
-class FindPathGFactorHeuristic {
-  /// Default implementation
-  double calculate(GameFieldCell priorCell, GameFieldCell nextCell) => 1.0;
+abstract class FindPathSettings {
+  /// Null value means the [nextCell] is unreachable
+  double? calculateGFactorHeuristic(GameFieldCell priorCell, GameFieldCell nextCell);
+
+  bool isCellReachable(GameFieldCell cell);
 }
 
 /// Looks for a path from one cell to another
@@ -22,11 +24,11 @@ class FindPath {
 
   late final GameFieldReadOnly _gameField;
 
-  late final FindPathGFactorHeuristic _findPathGFactorHeuristic;
+  late final FindPathSettings _settings;
 
-  FindPath(GameFieldReadOnly gameField, FindPathGFactorHeuristic findPathGFactorHeuristic) {
+  FindPath(GameFieldReadOnly gameField, FindPathSettings findPathGFactorHeuristic) {
     _gameField = gameField;
-    _findPathGFactorHeuristic = findPathGFactorHeuristic;
+    _settings = findPathGFactorHeuristic;
   }
 
   Iterable<GameFieldCell> find(GameFieldCell startCell, GameFieldCell endCell) {
@@ -34,6 +36,10 @@ class FindPath {
     _cameFrom.clear();
     _gScore.clear();
     _fScore.clear();
+
+    if (startCell == endCell || !_settings.isCellReachable(endCell)) {
+      return List<GameFieldCell>.empty();
+    }
 
     _open.add(startCell);
 
@@ -53,7 +59,14 @@ class FindPath {
       final neighbors = FindCellsAround.find(_gameField, current);
 
       for (var neighbor in neighbors) {
-        final tentativeGScore = _gScore[current]! + _findPathGFactorHeuristic.calculate(current, neighbor);
+        final nextGScope = _settings.calculateGFactorHeuristic(current, neighbor);
+
+        // An unreachable cell must be skipped
+        if (nextGScope == null) {
+          continue;
+        }
+
+        final tentativeGScore = _gScore[current]! + nextGScope;
 
         if (tentativeGScore < (_gScore[neighbor] ?? double.maxFinite)) {
           _cameFrom[neighbor] = current;
@@ -68,7 +81,8 @@ class FindPath {
       }
     }
 
-    throw ArgumentError("An open set is empty but the end cell was never reached");
+    // Can't construct a path - for example, when a reachable cell (the final one) is surrounded by unreachable cells
+    return List<GameFieldCell>.empty();
   }
 
   /// Calculates the H part of the F factor

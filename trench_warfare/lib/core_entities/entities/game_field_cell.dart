@@ -56,7 +56,7 @@ class GameFieldCell {
     _productionCenter = productionCenter;
   }
 
-  void setTerrainModifier(TerrainModifier terrainModifier) {
+  void setTerrainModifier(TerrainModifier? terrainModifier) {
     _terrainModifier = terrainModifier;
   }
 

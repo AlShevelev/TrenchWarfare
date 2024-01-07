@@ -6,7 +6,8 @@ import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/find_path.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_reader.dart';
@@ -25,13 +26,15 @@ class GameFieldModel implements Disposable {
   Stream<UpdateGameEvent> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   GameFieldCell? _start;
+  Iterable<GameFieldCell>? _lastPath;
+
 
   Future<void> init(RenderableTiledMap tileMap) async {
     metadata = await compute(MetadataReader.read, tileMap.map);
     gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
     final cellsToAdd = gameField.cells.where((c) => !c.isEmpty);
-    _updateGameObjectsEvent.update(AddObjects(cellsToAdd));
+    _updateGameObjectsEvent.update(UpdateObjects(cellsToAdd));
   }
 
 /*
@@ -63,14 +66,26 @@ class GameFieldModel implements Disposable {
     if (_start == null) {
       _start = clickedCell;
     } else {
-      final findPath = FindPath(gameField, FindPathGFactorHeuristic());
+      // Clean an old path
+      final lastPath = _lastPath;
+      if (lastPath != null) {
+        for (var cell in lastPath) {
+          cell.setTerrainModifier(null);
+        }
+        _updateGameObjectsEvent.update(UpdateObjects(lastPath));
+      }
+
+      // Calculate a new one
+      final findPath = FindPath(gameField, SeaFindPathSettings(startCell: _start!));
       final path = findPath.find(_start!, clickedCell);
 
+      // And display it
       for (var cell in path) {
         cell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.barbedWire));
       }
-      _updateGameObjectsEvent.update(AddObjects(path));
+      _updateGameObjectsEvent.update(UpdateObjects(path));
 
+      _lastPath = path;
       _start = null;
     }
   }

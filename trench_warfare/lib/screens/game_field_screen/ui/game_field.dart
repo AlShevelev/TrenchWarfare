@@ -26,6 +26,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   StreamSubscription? _updateGameObjectsSubscription;
 
+  Map<int, GameFieldCellComponent> _cellComponent = {};
+
   GameField({required mapName}) : super() {
     _mapName = mapName;
     _viewModel = GameFieldViewModel();
@@ -85,16 +87,24 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   void onUpdateGameEvent(UpdateGameEvent event) {
     switch (event) {
-      case AddObjects(cells: var cells): {
+      case UpdateObjects(cells: var cells): {
         for (var cell in cells) {
-          final cellComponent = GameFieldCellComponent(
+          final oldComponent = _cellComponent.remove(cell.id);
+
+          if (oldComponent != null) {
+            mapComponent.remove(oldComponent);
+          }
+
+          final newComponent = GameFieldCellComponent(
               baseSize: Vector2.all(64.0),
               spritesAtlas: _spritesAtlas,
               cell: cell,
               position: Vector2(cell.center.dx, cell.center.dy),
           );
 
-          mapComponent.add(cellComponent);
+          mapComponent.add(newComponent);
+
+          _cellComponent[cell.id] = newComponent;
         }
       }
     }
