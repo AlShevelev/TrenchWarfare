@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
+import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
@@ -70,7 +71,7 @@ class GameFieldModel implements Disposable {
       final lastPath = _lastPath;
       if (lastPath != null) {
         for (var cell in lastPath) {
-          cell.setTerrainModifier(null);
+          cell.setPathItem(null);
         }
         _updateGameObjectsEvent.update(UpdateObjects(lastPath));
       }
@@ -81,7 +82,7 @@ class GameFieldModel implements Disposable {
 
       // And display it
       for (var cell in path) {
-        cell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.barbedWire));
+        cell.setPathItem(PathItemType.normal);
       }
       _updateGameObjectsEvent.update(UpdateObjects(path));
 

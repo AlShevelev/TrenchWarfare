@@ -45,6 +45,7 @@ class GameFieldCellComponent extends PositionComponent {
     _addProductionCenterSprites();
     _addUnitsSprites();
     _addNationSprites();
+    _addPathSprites();
   }
 
   void _addTerrainModifierSprites() {
@@ -137,6 +138,16 @@ class GameFieldCellComponent extends PositionComponent {
     final name = _cell.terrainModifier != null || _cell.productionCenter != null || _cell.units.isNotEmpty ? 'Banner' : 'Flag';
 
     _addSprite('$name-$nationSuffix');
+  }
+
+  void _addPathSprites() {
+    final pathItem = _cell.pathItem;
+
+    if (pathItem == null) {
+      return;
+    }
+
+    _addSprite('Path-Normal');
   }
 
   void _addUnitSprites(Unit unit, int unitsTotal) {

@@ -30,7 +30,7 @@ bounds:912,1692,128,128
 Banner-Romania
 bounds:262,1692,128,128
 Banner-Russia
-bounds:1042,782,128,128
+bounds:1172,912,128,128
 Banner-Serbia
 bounds:132,2,128,128
 Banner-Turkey
@@ -46,7 +46,7 @@ bounds:522,522,128,128
 Flag-Austra-Hungaria
 bounds:782,1302,128,128
 Flag-Belgium
-bounds:912,652,128,128
+bounds:1042,782,128,128
 Flag-Bulgaria
 bounds:392,652,128,128
 Flag-China
@@ -70,7 +70,7 @@ bounds:1562,1432,128,128
 Flag-Montenegro
 bounds:652,1822,128,128
 Flag-Romania
-bounds:1822,1692,128,128
+bounds:262,2,128,128
 Flag-Russia
 bounds:1562,1822,128,128
 Flag-Serbia
@@ -85,6 +85,8 @@ Flag-US-North
 bounds:1432,1822,128,128
 Flag-US-South
 bounds:132,1172,128,128
+Path-Normal
+bounds:1692,1562,128,128
 Production-centers-air-field-level-1
 bounds:1302,1562,128,128
 Production-centers-air-field-level-2
@@ -102,7 +104,7 @@ bounds:392,1822,128,128
 Production-centers-factory-level-1
 bounds:522,1042,128,128
 Production-centers-factory-level-2
-bounds:1432,1172,128,128
+bounds:1562,1302,128,128
 Production-centers-factory-level-3
 bounds:912,1042,128,128
 Production-centers-factory-level-4
@@ -110,7 +112,7 @@ bounds:132,912,128,128
 Production-centers-level-1
 bounds:2,652,128,128
 Production-centers-level-2
-bounds:262,2,128,128
+bounds:392,132,128,128
 Production-centers-level-3
 bounds:132,392,128,128
 Production-centers-level-4
@@ -146,13 +148,13 @@ bounds:1172,1042,128,128
 Unit-Belgia-Infantry
 bounds:652,912,128,128
 Unit-Boost-0-Attack
-bounds:392,132,128,128
+bounds:522,262,128,128
 Unit-Boost-0-Commander
 bounds:132,1692,128,128
 Unit-Boost-0-Defence
 bounds:392,262,128,128
 Unit-Boost-1-Attack
-bounds:1692,1562,128,128
+bounds:1822,1692,128,128
 Unit-Boost-1-Commander
 bounds:2,1432,128,128
 Unit-Boost-1-Defence
@@ -192,9 +194,9 @@ bounds:912,1432,128,128
 Unit-Germany-Infantry
 bounds:262,1042,128,128
 Unit-Greece-Infantry
-bounds:652,392,128,128
+bounds:782,522,128,128
 Unit-Health-10
-bounds:1172,912,128,128
+bounds:1302,1042,128,128
 Unit-Health-100
 bounds:1172,1302,128,128
 Unit-Health-15
@@ -222,9 +224,9 @@ bounds:912,912,128,128
 Unit-Health-65
 bounds:1302,1172,128,128
 Unit-Health-70
-bounds:522,262,128,128
+bounds:652,392,128,128
 Unit-Health-75
-bounds:1562,1302,128,128
+bounds:1692,1432,128,128
 Unit-Health-80
 bounds:2,1302,128,128
 Unit-Health-85
@@ -240,7 +242,7 @@ bounds:132,1562,128,128
 Unit-Korea-Infantry
 bounds:2,1042,128,128
 Unit-Land-Rank-2
-bounds:1302,1042,128,128
+bounds:1432,1172,128,128
 Unit-Land-Rank-3
 bounds:132,262,128,128
 Unit-Land-Rank-4
@@ -258,7 +260,7 @@ bounds:782,782,128,128
 Unit-Montenegro-Infantry
 bounds:522,1562,128,128
 Unit-Quantity-1
-bounds:782,522,128,128
+bounds:912,652,128,128
 Unit-Quantity-2
 bounds:782,1042,128,128
 Unit-Quantity-3
