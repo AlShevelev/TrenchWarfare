@@ -88,7 +88,7 @@ class FindPath {
   /// Calculates the H part of the F factor
   /// In our case it is a Euclidean distance between the cells
   double _calculateHFactor(GameFieldCell givenCell, GameFieldCell finalCell) =>
-    math.sqrt(math.pow(givenCell.center.dx - finalCell.center.dx, 2) + math.pow(givenCell.center.dy - finalCell.center.dy, 2));
+    math.sqrt(math.pow(givenCell.row - finalCell.row, 2) + math.pow(givenCell.col - finalCell.col, 2));
 
   int _getOpenCellWithMinFIndex() {
     var minF = double.maxFinite;

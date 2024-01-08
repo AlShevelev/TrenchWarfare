@@ -1,4 +1,5 @@
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/game_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
 
@@ -13,9 +14,19 @@ class SeaFindPathSettings implements FindPathSettings {
   double? calculateGFactorHeuristic(GameFieldCell priorCell, GameFieldCell nextCell) {
     if (!isCellReachable(nextCell)) {
       return null;
-    } else {
-      return 1;
     }
+
+    // Try to avoid mine fields
+    if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
+      return 8;
+    }
+
+    // Try to avoid enemy formations
+    if (nextCell.nation != null && nextCell.nation != _startCell.nation && _startCell.units.isNotEmpty) {
+      return 8;
+    }
+
+    return 1;
   }
 
   @override

@@ -12,7 +12,7 @@ class StartScreen extends StatelessWidget {
       child: Center(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'gb_and_france.tmx');
+              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'water_test.tmx');
             },
             child: const Text(
               "Start",
