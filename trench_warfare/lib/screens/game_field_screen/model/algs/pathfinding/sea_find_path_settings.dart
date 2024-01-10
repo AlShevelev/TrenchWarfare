@@ -6,7 +6,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/
 class SeaFindPathSettings implements FindPathSettings {
   late final GameFieldCell _startCell;
 
-  SeaFindPathSettings({required GameFieldCell startCell,}) {
+  SeaFindPathSettings({required GameFieldCell startCell}) {
     _startCell = startCell;
   }
 
