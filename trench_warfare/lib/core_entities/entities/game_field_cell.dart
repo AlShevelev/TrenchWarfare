@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 
 class GameFieldCell {
@@ -29,8 +29,8 @@ class GameFieldCell {
   TerrainModifier? _terrainModifier;
   TerrainModifier? get terrainModifier => _terrainModifier;
 
-  PathItemType? _pathItem;
-  PathItemType? get pathItem => _pathItem;
+  PathItem? _pathItem;
+  PathItem? get pathItem => _pathItem;
 
   late final List<Unit> _units;
   Iterable<Unit> get units => _units;
@@ -64,7 +64,7 @@ class GameFieldCell {
     _terrainModifier = terrainModifier;
   }
 
-  void setPathItem(PathItemType? pathItem) {
+  void setPathItem(PathItem? pathItem) {
     _pathItem = pathItem;
   }
 

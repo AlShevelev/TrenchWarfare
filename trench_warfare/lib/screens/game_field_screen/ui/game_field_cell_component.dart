@@ -147,7 +147,7 @@ class GameFieldCellComponent extends PositionComponent {
       return;
     }
 
-    _addSprite('Path-Normal');
+    _addSprite('Path-Normal', grayscale: !pathItem.isActive);
   }
 
   void _addUnitSprites(Unit unit, int unitsTotal) {
@@ -291,7 +291,7 @@ class GameFieldCellComponent extends PositionComponent {
 
     // See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale
     if (grayscale) {
-      sprite.decorator = PaintDecorator.grayscale(opacity: 0.75);
+      sprite.decorator.addLast(PaintDecorator.grayscale(opacity: 1));
     }
 
     add(sprite);

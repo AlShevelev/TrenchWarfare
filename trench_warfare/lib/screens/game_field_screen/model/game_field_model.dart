@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
@@ -65,7 +66,7 @@ class GameFieldModel implements Disposable {
   void onClick(Vector2 position) {
     final clickedCell = FindCellByPosition.find(gameField, position);
 
-    if (_start == null) {
+    if (_start == null && clickedCell.nation != null && clickedCell.activeUnit != null) {
       _start = clickedCell;
     } else {
       // Clean an old path
@@ -83,7 +84,7 @@ class GameFieldModel implements Disposable {
 
       // And display it
       for (var cell in path) {
-        cell.setPathItem(PathItemType.normal);
+        cell.setPathItem(PathItem(type: PathItemType.normal, isActive: false, moveToCellCost: 0));
       }
       _updateGameObjectsEvent.update(UpdateObjects(path));
 
