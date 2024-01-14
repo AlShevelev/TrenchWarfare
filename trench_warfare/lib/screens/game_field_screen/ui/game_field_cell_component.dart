@@ -8,6 +8,7 @@ import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
@@ -147,7 +148,14 @@ class GameFieldCellComponent extends PositionComponent {
       return;
     }
 
-    _addSprite('Path-Normal', grayscale: !pathItem.isActive);
+    final pathSprite = switch (pathItem.type) {
+      PathItemType.normal => 'Path-Normal',
+      PathItemType.explosion => 'Path-Explosion',
+      PathItemType.battle => 'Path-Battle',
+      PathItemType.end => 'Path-End',
+    };
+
+    _addSprite(pathSprite, grayscale: !pathItem.isActive);
   }
 
   void _addUnitSprites(Unit unit, int unitsTotal) {

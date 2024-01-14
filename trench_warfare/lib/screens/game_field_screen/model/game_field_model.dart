@@ -11,6 +11,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_find_path_settings.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_reader.dart';
@@ -79,13 +80,10 @@ class GameFieldModel implements Disposable {
       }
 
       // Calculate a new one
-      final findPath = FindPath(gameField, LandFindPathSettings(startCell: _start!));
-      final path = findPath.find(_start!, clickedCell);
+      final findPath = FindPath(gameField, SeaFindPathSettings(startCell: _start!));
+      Iterable<GameFieldCell> path = findPath.find(_start!, clickedCell);
+      path = SeaPathCostCalculator(path).calculate();
 
-      // And display it
-      for (var cell in path) {
-        cell.setPathItem(PathItem(type: PathItemType.normal, isActive: false, moveToCellCost: 0));
-      }
       _updateGameObjectsEvent.update(UpdateObjects(path));
 
       _lastPath = path;

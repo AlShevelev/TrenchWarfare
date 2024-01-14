@@ -6,7 +6,7 @@ class PathItem {
   final bool isActive;
 
   /// How many movement point do you need to move from a previous cell to this one
-  final double moveToCellCost;
+  final double movementPointsLeft;
 
-  PathItem({required this.type, required this.isActive, required this.moveToCellCost});
+  PathItem({required this.type, required this.isActive, required this.movementPointsLeft});
 }
