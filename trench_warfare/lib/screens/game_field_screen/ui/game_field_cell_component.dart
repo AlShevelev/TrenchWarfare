@@ -236,9 +236,9 @@ class GameFieldCellComponent extends PositionComponent {
       UnitBoost.transport => unit.isLand ? 'Unit-Boost-3-Transport' : null,
     };
 
-    final secondaryUnitName = unit.unitType == UnitType.cavalry ? 'Unit-Cavalry-Horse' : null;
+    final secondaryUnitName = unit.type == UnitType.cavalry ? 'Unit-Cavalry-Horse' : null;
 
-    final primaryUnitName = switch (unit.unitType) {
+    final primaryUnitName = switch (unit.type) {
       UnitType.armoredCar => 'Unit-Armored-car',
       UnitType.artillery => 'Unit-Artillery',
       UnitType.infantry || UnitType.cavalry => switch (_cell.nation) {

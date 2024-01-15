@@ -57,16 +57,16 @@ class Unit extends GameObject {
 
   Range<double> get damage => _getDamage();
 
-  final UnitType unitType;
+  final UnitType type;
 
   bool get isLand =>
-      unitType == UnitType.armoredCar ||
-      unitType == UnitType.artillery ||
-      unitType == UnitType.infantry ||
-      unitType == UnitType.cavalry ||
-      unitType == UnitType.machineGunnersCart ||
-      unitType == UnitType.machineGuns ||
-      unitType == UnitType.tank;
+      type == UnitType.armoredCar ||
+      type == UnitType.artillery ||
+      type == UnitType.infantry ||
+      type == UnitType.cavalry ||
+      type == UnitType.machineGunnersCart ||
+      type == UnitType.machineGuns ||
+      type == UnitType.tank;
 
   Unit({
     required this.boost1,
@@ -76,7 +76,7 @@ class Unit extends GameObject {
     required this.fatigue,
     required double health,
     required double movementPoints,
-    required this.unitType,
+    required this.type,
   }) {
     tookPartInBattles = _calculateTookPartInBattles();
     this.health = maxHealth * health;
@@ -99,7 +99,7 @@ class Unit extends GameObject {
   }
 
   double _getMaxHealth() {
-    switch (unitType) {
+    switch (type) {
       case UnitType.armoredCar:
         return 8;
       case UnitType.artillery:
@@ -126,7 +126,7 @@ class Unit extends GameObject {
   }
 
   double _getMaxMovementPoints() {
-    switch (unitType) {
+    switch (type) {
       case UnitType.armoredCar:
         return 3;
       case UnitType.artillery:
@@ -153,7 +153,7 @@ class Unit extends GameObject {
   }
 
   double _getAttack() {
-    switch (unitType) {
+    switch (type) {
       case UnitType.armoredCar:
         return 3;
       case UnitType.artillery:
@@ -180,7 +180,7 @@ class Unit extends GameObject {
   }
 
   double _getDefence() {
-    switch (unitType) {
+    switch (type) {
       case UnitType.armoredCar:
         return 5;
       case UnitType.artillery:
@@ -207,7 +207,7 @@ class Unit extends GameObject {
   }
 
   Range<double> _getDamage() {
-    switch (unitType) {
+    switch (type) {
       case UnitType.armoredCar:
         return Range(3, 4);
       case UnitType.artillery:
@@ -246,7 +246,7 @@ class Carrier extends Unit {
     required super.fatigue,
     required super.health,
     required super.movementPoints,
-    required super.unitType,
+    required super.type,
     required this.units,
   });
 }

@@ -9,7 +9,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/
 class LandFindPathSettings implements FindPathSettings {
   late final GameFieldCell _startCell;
 
-  UnitType? get _unit => _startCell.activeUnit?.unitType;
+  UnitType? get _unit => _startCell.activeUnit?.type;
 
   LandFindPathSettings({required GameFieldCell startCell}) {
     _startCell = startCell;

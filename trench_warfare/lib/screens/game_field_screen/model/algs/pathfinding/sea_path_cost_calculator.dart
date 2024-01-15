@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/path_item.dart';
@@ -8,16 +9,18 @@ import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 class SeaPathCostCalculator {
   late final Iterable<GameFieldCell> _sourcePath;
 
-  Unit get _activeUnit => _sourcePath.first.activeUnit!;
+  @protected
+  Unit get activeUnit => _sourcePath.first.activeUnit!;
 
-  Nation get _nation => _sourcePath.first.nation!;
+  @protected
+  Nation get nation => _sourcePath.first.nation!;
 
   SeaPathCostCalculator(Iterable<GameFieldCell> sourcePath) {
     _sourcePath = sourcePath;
   }
 
   Iterable<GameFieldCell> calculate() {
-    var movementPointsLeft = _activeUnit.movementPoints;
+    var movementPointsLeft = activeUnit.movementPoints;
 
     for (var cell in _sourcePath) {
       if (cell == _sourcePath.first) {
@@ -29,12 +32,12 @@ class SeaPathCostCalculator {
         continue;
       }
 
-      final pathItemType = _getPathItemType(cell, cell == _sourcePath.last);
+      final pathItemType = getPathItemType(cell, cell == _sourcePath.last);
 
-      if (_mustResetMovementPoints(cell)) {
+      if (mustResetMovementPoints(cell)) {
         movementPointsLeft = 0;
       } else {
-        movementPointsLeft -= _getMoveToCellCost(cell);
+        movementPointsLeft -= getMoveToCellCost(cell);
       }
 
       cell.setPathItem(PathItem(
@@ -47,12 +50,13 @@ class SeaPathCostCalculator {
     return _sourcePath;
   }
 
-  PathItemType _getPathItemType(GameFieldCell nextCell, bool isLast) {
+  @protected
+  PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
     if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
       return PathItemType.explosion;
     }
 
-    if (nextCell.activeUnit != null && nextCell.nation != _nation) {
+    if (nextCell.activeUnit != null && nextCell.nation != nation) {
       return PathItemType.battle;
     }
 
@@ -63,7 +67,9 @@ class SeaPathCostCalculator {
     return PathItemType.normal;
   }
 
-  bool _mustResetMovementPoints(GameFieldCell nextCell) => false;
+  @protected
+  bool mustResetMovementPoints(GameFieldCell nextCell) => false;
 
-  double _getMoveToCellCost(GameFieldCell nextCell) => 1;
+  @protected
+  double getMoveToCellCost(GameFieldCell nextCell) => 1;
 }

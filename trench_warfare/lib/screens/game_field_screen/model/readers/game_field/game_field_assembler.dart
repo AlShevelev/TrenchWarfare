@@ -54,7 +54,7 @@ class GameFieldAssembler {
         fatigue: raw.fatigue,
         health: raw.health,
         movementPoints: raw.movementPoints,
-        unitType: raw.unit,
+        type: raw.unit,
       );
     } else {
       final carrierRaw = raw as CarrierRaw;
@@ -67,7 +67,7 @@ class GameFieldAssembler {
           fatigue: raw.fatigue,
           health: raw.health,
           movementPoints: raw.movementPoints,
-          unitType: raw.unit,
+          type: raw.unit,
           units: _getUnits(allGameObjects, [carrierRaw.unit1Id, carrierRaw.unit2Id, carrierRaw.unit3Id, carrierRaw.unit4Id]));
     }
   }

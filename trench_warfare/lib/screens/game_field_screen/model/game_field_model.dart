@@ -10,6 +10,7 @@ import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_find_path_settings.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_path_cost_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/game_field_reader.dart';
@@ -80,9 +81,9 @@ class GameFieldModel implements Disposable {
       }
 
       // Calculate a new one
-      final findPath = FindPath(gameField, SeaFindPathSettings(startCell: _start!));
+      final findPath = FindPath(gameField, LandFindPathSettings(startCell: _start!));
       Iterable<GameFieldCell> path = findPath.find(_start!, clickedCell);
-      path = SeaPathCostCalculator(path).calculate();
+      path = LandPathCostCalculator(path).calculate();
 
       _updateGameObjectsEvent.update(UpdateObjects(path));
 

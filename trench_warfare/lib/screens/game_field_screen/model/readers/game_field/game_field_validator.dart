@@ -211,7 +211,7 @@ class GameFieldValidator {
     if (cell.terrain == CellTerrain.marsh) {
       if (cell.units.isNotEmpty &&
           !cell.units.any(
-              (u) => u.unitType == UnitType.infantry || u.unitType == UnitType.machineGuns || u.unitType == UnitType.cavalry)) {
+              (u) => u.type == UnitType.infantry || u.type == UnitType.machineGuns || u.type == UnitType.cavalry)) {
         throw AssertionError("Marsh cell [${cell.row}; ${cell.col}] can contain infantry, machine gunners and cavalry only");
       }
     }
@@ -279,7 +279,7 @@ class GameFieldValidator {
   // Mountains can contain an infantry only
   static void _validateMountainsUnits(GameFieldCell cell) {
     if (cell.terrain == CellTerrain.mountains) {
-      if (cell.units.isNotEmpty && cell.units.any((u) => u.unitType != UnitType.infantry)) {
+      if (cell.units.isNotEmpty && cell.units.any((u) => u.type != UnitType.infantry)) {
         throw AssertionError("Mountains cell [${cell.row}; ${cell.col}] can contain an infantry only");
       }
     }
