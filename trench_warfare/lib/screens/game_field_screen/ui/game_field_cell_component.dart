@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/entities/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';

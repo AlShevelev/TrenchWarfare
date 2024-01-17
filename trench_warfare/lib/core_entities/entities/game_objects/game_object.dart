@@ -1,0 +1,16 @@
+library game_objects;
+
+import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
+import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
+import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
+import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
+import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
+import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/shared/utils/range.dart';
+
+part 'production_center.dart';
+part 'terrain_modifier.dart';
+part 'unit.dart';
+part 'carrier.dart';
+
+abstract class GameObject {}

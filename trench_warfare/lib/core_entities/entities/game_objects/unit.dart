@@ -1,40 +1,5 @@
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/shared/utils/range.dart';
+part of game_objects;
 
-abstract class GameObject {}
-
-///
-class ProductionCenter extends GameObject {
-  final ProductionCenterType type;
-  final ProductionCenterLevel level;
-  final String name;
-
-  bool get isLand => type != ProductionCenterType.navalBase;
-
-  ProductionCenter({
-    required this.type,
-    required this.level,
-    required this.name,
-  });
-}
-
-///
-class TerrainModifier extends GameObject {
-  final TerrainModifierType type;
-
-  bool get isLand => type != TerrainModifierType.seaMine;
-
-  TerrainModifier({
-    required this.type,
-  });
-}
-
-///
 class Unit extends GameObject {
   final UnitBoost? boost1;
   final UnitBoost? boost2;
@@ -61,12 +26,12 @@ class Unit extends GameObject {
 
   bool get isLand =>
       type == UnitType.armoredCar ||
-      type == UnitType.artillery ||
-      type == UnitType.infantry ||
-      type == UnitType.cavalry ||
-      type == UnitType.machineGunnersCart ||
-      type == UnitType.machineGuns ||
-      type == UnitType.tank;
+          type == UnitType.artillery ||
+          type == UnitType.infantry ||
+          type == UnitType.cavalry ||
+          type == UnitType.machineGunnersCart ||
+          type == UnitType.machineGuns ||
+          type == UnitType.tank;
 
   Unit({
     required this.boost1,
@@ -232,21 +197,4 @@ class Unit extends GameObject {
         return Range(0, 0);
     }
   }
-}
-
-///
-class Carrier extends Unit {
-  final Iterable<Unit> units;
-
-  Carrier({
-    required super.boost1,
-    required super.boost2,
-    required super.boost3,
-    required super.experienceRank,
-    required super.fatigue,
-    required super.health,
-    required super.movementPoints,
-    required super.type,
-    required this.units,
-  });
 }

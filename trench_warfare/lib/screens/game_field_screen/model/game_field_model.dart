@@ -2,98 +2,39 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/entities/game_object.dart';
-import 'package:trench_warfare/core_entities/entities/path_item.dart';
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cell_by_position.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_path_cost_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_reader.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/sm/game_field_sm.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
-import 'package:trench_warfare/shared/architecture/simple_stream.dart';
 import 'package:tuple/tuple.dart';
 
 class GameFieldModel implements Disposable {
+  late final MapMetadata _metadata;
+  late final GameFieldReadOnly _gameField;
+
+  late final GameFieldStateMachine _stateMachine = GameFieldStateMachine();
+
+  Stream<UpdateGameEvent> get updateGameObjectsEvent => _stateMachine.updateGameObjectsEvent;
+
   GameFieldModel();
 
-  late final MapMetadata metadata;
-  late final GameFieldReadOnly gameField;
-
-  final SimpleStream<UpdateGameEvent> _updateGameObjectsEvent = SimpleStream<UpdateGameEvent>();
-  Stream<UpdateGameEvent> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
-
-  GameFieldCell? _start;
-  Iterable<GameFieldCell>? _lastPath;
-
-
   Future<void> init(RenderableTiledMap tileMap) async {
-    metadata = await compute(MetadataReader.read, tileMap.map);
-    gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
+    _metadata = await compute(MetadataReader.read, tileMap.map);
+    _gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
-    final cellsToAdd = gameField.cells.where((c) => !c.isEmpty);
-    _updateGameObjectsEvent.update(UpdateObjects(cellsToAdd));
+    _stateMachine.process(Init(_gameField, _metadata.nations.first.code));
   }
 
-/*
   void onClick(Vector2 position) {
-    final clickedCell = FindCellByPosition.find(gameField, position);
-    //print("cell: ${clickedCell.row}, ${clickedCell.col}");
-
-    clickedCell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.seaMine));
-    _updateGameObjectsEvent.update(AddObjects([clickedCell]));
-  }
-*/
-
-/*
-  void onClick(Vector2 position) {
-    final clickedCell = FindCellByPosition.find(gameField, position);
-
-    final cellsAround = FindCellsAround.find(gameField, clickedCell);
-
-    for (var cell in cellsAround) {
-      cell.setTerrainModifier(TerrainModifier(type: TerrainModifierType.landFort));
-    }
-    _updateGameObjectsEvent.update(AddObjects(cellsAround));
-  }
-*/
-
-  void onClick(Vector2 position) {
-    final clickedCell = FindCellByPosition.find(gameField, position);
-
-    if (_start == null && clickedCell.nation != null && clickedCell.activeUnit != null) {
-      _start = clickedCell;
-    } else {
-      // Clean an old path
-      final lastPath = _lastPath;
-      if (lastPath != null) {
-        for (var cell in lastPath) {
-          cell.setPathItem(null);
-        }
-        _updateGameObjectsEvent.update(UpdateObjects(lastPath));
-      }
-
-      // Calculate a new one
-      final findPath = FindPath(gameField, LandFindPathSettings(startCell: _start!));
-      Iterable<GameFieldCell> path = findPath.find(_start!, clickedCell);
-      path = LandPathCostCalculator(path).calculate();
-
-      _updateGameObjectsEvent.update(UpdateObjects(path));
-
-      _lastPath = path;
-      _start = null;
-    }
+    final clickedCell = FindCellByPosition.find(_gameField, position);
+    _stateMachine.process(Click(clickedCell));
   }
 
   @override
   void dispose() {
-    _updateGameObjectsEvent.close();
+    _stateMachine.dispose();
   }
 }

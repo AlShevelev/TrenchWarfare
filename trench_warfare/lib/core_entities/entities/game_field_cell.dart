@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:trench_warfare/core_entities/entities/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
