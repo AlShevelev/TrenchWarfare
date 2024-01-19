@@ -24,6 +24,9 @@ class Unit extends GameObject {
 
   final UnitType type;
 
+  UnitState _state = UnitState.enabled;
+  UnitState  get state => _state;
+
   bool get isLand =>
       type == UnitType.armoredCar ||
           type == UnitType.artillery ||
@@ -47,6 +50,8 @@ class Unit extends GameObject {
     this.health = maxHealth * health;
     this.movementPoints = movementPoints * maxMovementPoints;
   }
+
+  void setState(UnitState state) => _state = state;
 
   int _calculateTookPartInBattles() {
     switch (experienceRank) {

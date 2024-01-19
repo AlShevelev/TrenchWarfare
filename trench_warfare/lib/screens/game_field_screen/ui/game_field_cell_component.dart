@@ -14,8 +14,15 @@ import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
+import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
+
+enum _SpriteSize {
+  small,
+  base,
+  large,
+}
 
 class GameFieldCellComponent extends PositionComponent {
   late final Vector2 _baseSize;
@@ -24,6 +31,7 @@ class GameFieldCellComponent extends PositionComponent {
   late final Vector2 _position;
 
   late final Vector2 _smallSize;
+  late final Vector2 _largeSize;
 
   GameFieldCellComponent({
     required Vector2 baseSize,
@@ -37,6 +45,7 @@ class GameFieldCellComponent extends PositionComponent {
     _position = position;
 
     _smallSize = _baseSize.scaled(0.85);
+    _largeSize = _baseSize.scaled(1.15);
   }
 
   @override
@@ -155,7 +164,7 @@ class GameFieldCellComponent extends PositionComponent {
       PathItemType.end => 'Path-End',
     };
 
-    _addSprite(pathSprite, grayscale: !pathItem.isActive);
+    _addSprite(pathSprite, decorator: pathItem.isActive ? null : _getDisabledDecorator());
   }
 
   void _addUnitSprites(Unit unit, int unitsTotal) {
@@ -274,36 +283,60 @@ class GameFieldCellComponent extends PositionComponent {
       UnitType.carrier => 'Unit-Carrier',
     };
 
-    _addSprite(primaryUnitName, grayscale: unit.movementPoints == 0.0, smallSize: false);
-    _addSprite(secondaryUnitName, grayscale: unit.movementPoints == 0.0, smallSize: false);
-    _addSprite(healthName, smallSize: false);
-    _addSprite(quantityName, smallSize: false);
-    _addSprite(experienceRankName, smallSize: false);
-    _addSprite(boost1Name, smallSize: false);
-    _addSprite(boost2Name, smallSize: false);
-    _addSprite(boost3Name, smallSize: false);
+    if (unit.state == UnitState.disabled) {
+      _addSprite(primaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
+      _addSprite(secondaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
+    } else {
+      if (unit.state == UnitState.active) {
+        _addSprite('Selection-Frame', size: _SpriteSize.base);
+      }
+
+      _addSprite(primaryUnitName, size: _SpriteSize.base);
+      _addSprite(secondaryUnitName, size: _SpriteSize.base);
+    }
+
+    _addSprite(healthName, size: _SpriteSize.base);
+    _addSprite(quantityName, size: _SpriteSize.base);
+    _addSprite(experienceRankName, size: _SpriteSize.base);
+    _addSprite(boost1Name, size: _SpriteSize.base);
+    _addSprite(boost2Name, size: _SpriteSize.base);
+    _addSprite(boost3Name, size: _SpriteSize.base);
   }
 
-  void _addSprite(String? spriteName, {bool grayscale = false, bool smallSize = true}) {
+  void _addSprite(
+    String? spriteName, {
+    _SpriteSize size = _SpriteSize.small,
+    Decorator? decorator,
+  }) {
     if (spriteName == null) {
       return;
     }
 
+    final componentSize = switch (size) {
+      _SpriteSize.small => _smallSize,
+      _SpriteSize.base => _baseSize,
+      _SpriteSize.large => _largeSize,
+    };
+
     final sprite = SpriteComponent(
-      size: smallSize ? _smallSize : _baseSize,
+      size: componentSize,
       sprite: _spritesAtlas.findSpriteByName(spriteName),
     )
       ..anchor = Anchor.center
       ..position = _position
       ..priority = 1;
 
-    // See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale
-    if (grayscale) {
-      sprite.decorator.addLast(PaintDecorator.grayscale(opacity: 1));
+    if (decorator != null) {
+      sprite.decorator.addLast(decorator);
     }
 
     add(sprite);
   }
+
+  /// See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale
+  Decorator _getDisabledDecorator() => PaintDecorator.tint(AppColors.halfDark);
+
+  Decorator _getActiveDecorator() => PaintDecorator.tint(AppColors.yellow);
 
   void _addText(String? text) {
     if (text == null || text.isEmpty) {
