@@ -7,6 +7,7 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field_cell_component.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
@@ -87,27 +88,20 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   void onUpdateGameEvent(UpdateGameEvent event) {
     switch (event) {
-      case UpdateObjects(cells: var cells): {
+      case UpdateObjects(cells: var cells):
         for (var cell in cells) {
-          final oldComponent = _cellComponent.remove(cell.id);
-
-          if (oldComponent != null) {
-            mapComponent.remove(oldComponent);
-          }
-
-          final newComponent = GameFieldCellComponent(
-              baseSize: Vector2.all(64.0),
-              spritesAtlas: _spritesAtlas,
-              cell: cell,
-              position: Vector2(cell.center.dx, cell.center.dy),
-          );
-
-          mapComponent.add(newComponent);
-
-          _cellComponent[cell.id] = newComponent;
+          _updateCell(cell);
         }
-      }
+      case UpdateObject(cell: var cell):
+        _updateCell(cell);
     }
+  }
+
+  @override
+  void onDispose() {
+    _updateGameObjectsSubscription?.cancel();
+    _viewModel.dispose();
+    super.onDispose();
   }
 
   void _checkBorders() {
@@ -160,10 +154,22 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     camera.viewfinder.position = currentPosition.translated(xTranslate, yTranslate);
   }
 
-  @override
-  void onDispose() {
-    _updateGameObjectsSubscription?.cancel();
-    _viewModel.dispose();
-    super.onDispose();
+  void _updateCell(GameFieldCell cell) {
+    final oldComponent = _cellComponent.remove(cell.id);
+
+    if (oldComponent != null) {
+      mapComponent.remove(oldComponent);
+    }
+
+    final newComponent = GameFieldCellComponent(
+      baseSize: Vector2.all(64.0),
+      spritesAtlas: _spritesAtlas,
+      cell: cell,
+      position: Vector2(cell.center.dx, cell.center.dy),
+    );
+
+    mapComponent.add(newComponent);
+
+    _cellComponent[cell.id] = newComponent;
   }
 }

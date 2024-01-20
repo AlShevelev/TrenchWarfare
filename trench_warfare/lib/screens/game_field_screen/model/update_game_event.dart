@@ -7,3 +7,9 @@ class UpdateObjects implements UpdateGameEvent {
 
   UpdateObjects(this.cells);
 }
+
+class UpdateObject implements UpdateGameEvent {
+  final GameFieldCell cell;
+
+  UpdateObject(this.cell);
+}
