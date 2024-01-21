@@ -27,7 +27,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   StreamSubscription? _updateGameObjectsSubscription;
 
-  Map<int, GameFieldCellComponent> _cellComponent = {};
+  final Map<int, GameFieldCellComponent> _cellComponent = {};
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -86,14 +86,12 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     _viewModel.onClick(camera.globalToLocal(info.eventPosition.global));
   }
 
-  void onUpdateGameEvent(UpdateGameEvent event) {
-    switch (event) {
-      case UpdateObjects(cells: var cells):
-        for (var cell in cells) {
+  void onUpdateGameEvent(Iterable<UpdateGameEvent> events) {
+    for (var event in events) {
+      switch (event) {
+        case UpdateObject(cell: var cell):
           _updateCell(cell);
-        }
-      case UpdateObject(cell: var cell):
-        _updateCell(cell);
+      }
     }
   }
 

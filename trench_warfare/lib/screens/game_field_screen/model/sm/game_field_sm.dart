@@ -7,6 +7,8 @@ import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_find_path_settings.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_path_cost_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/simple_stream.dart';
@@ -19,8 +21,8 @@ class GameFieldStateMachine implements Disposable {
 
   late final GameFieldReadOnly _gameField;
 
-  final SimpleStream<UpdateGameEvent> _updateGameObjectsEvent = SimpleStream<UpdateGameEvent>();
-  Stream<UpdateGameEvent> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
+  final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SimpleStream<Iterable<UpdateGameEvent>>();
+  Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   State _currentState = Initial();
 
@@ -39,9 +41,9 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
-        Click(cell: var cell) => _processFromPathIsShownOnClick(path, cell),
-        _ => _currentState,
-      },
+          Click(cell: var cell) => _processFromPathIsShownOnClick(path, cell),
+          _ => _currentState,
+        },
     };
 
     _currentState = newState;
@@ -57,7 +59,7 @@ class GameFieldStateMachine implements Disposable {
     _nation = nation;
 
     final cellsToAdd = _gameField.cells.where((c) => !c.isEmpty);
-    _updateGameObjectsEvent.update(UpdateObjects(cellsToAdd));
+    _updateGameObjectsEvent.update(cellsToAdd.map((c) => UpdateObject(c)));
 
     return ReadyForInput();
   }
@@ -74,32 +76,33 @@ class GameFieldStateMachine implements Disposable {
     }
 
     unit.setState(UnitState.active);
-    _updateGameObjectsEvent.update(UpdateObject(cell));
+    _updateGameObjectsEvent.update([UpdateObject(cell)]);
 
     return WaitingForEndOfPath(cell);
   }
 
   State _processFromWaitingForEndOfPathOnClick(GameFieldCell startCell, GameFieldCell endCell) {
+    final unit = startCell.activeUnit!;
+
     if (startCell == endCell) {
       // reset the unit active state
-      startCell.activeUnit!.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update(UpdateObject(startCell));
+      unit.setState(UnitState.enabled);
+      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
       return ReadyForInput();
     }
 
     // calculate a path
-    final pathFinder = FindPath(_gameField, LandFindPathSettings(startCell: startCell));
-    Iterable<GameFieldCell> path = pathFinder.find(startCell, endCell);
+    Iterable<GameFieldCell> path = calculatePath(startCell: startCell, endCell: endCell, isLandUnit: unit.isLand);
 
     if (path.isEmpty) {
       // reset the unit active state
-      startCell.activeUnit!.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update(UpdateObject(startCell));
+      unit.setState(UnitState.enabled);
+      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
       return ReadyForInput();
     }
 
-    final estimatedPath = LandPathCostCalculator(path).calculate();
-    _updateGameObjectsEvent.update(UpdateObjects(estimatedPath));
+    final estimatedPath = estimatePath(path: path, isLandUnit: unit.isLand);
+    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateObject(c)));
 
     return PathIsShown(estimatedPath);
   }
@@ -107,17 +110,19 @@ class GameFieldStateMachine implements Disposable {
   State _processFromPathIsShownOnClick(Iterable<GameFieldCell> path, GameFieldCell cell) {
     final firstCell = path.first;
 
+    final unit = firstCell.activeUnit!;
+
     /// Clear the old path
     void resetPath() {
       for (var pathCell in path) {
         pathCell.setPathItem(null);
       }
-      _updateGameObjectsEvent.update(UpdateObjects(path));
+      _updateGameObjectsEvent.update(path.map((c) => UpdateObject(c)));
     }
 
     /// Clear the path and make the unit enabled
     State resetPathAndEnableUnit() {
-      firstCell.activeUnit!.setState(UnitState.enabled);
+      unit.setState(UnitState.enabled);
       resetPath();
       return ReadyForInput();
     }
@@ -127,8 +132,7 @@ class GameFieldStateMachine implements Disposable {
     }
 
     // calculate a path
-    final pathFinder = FindPath(_gameField, LandFindPathSettings(startCell: firstCell));
-    Iterable<GameFieldCell> newPath = pathFinder.find(firstCell, cell);
+    Iterable<GameFieldCell> newPath = calculatePath(startCell: firstCell, endCell: cell, isLandUnit: unit.isLand);
 
     if (newPath.isEmpty) {
       return resetPathAndEnableUnit();
@@ -137,9 +141,26 @@ class GameFieldStateMachine implements Disposable {
     resetPath();
 
     // show the new path
-    final estimatedPath = LandPathCostCalculator(newPath).calculate();
-    _updateGameObjectsEvent.update(UpdateObjects(estimatedPath));
-    
+    final estimatedPath = estimatePath(path: newPath, isLandUnit: unit.isLand);
+    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateObject(c)));
+
     return PathIsShown(newPath);
   }
+
+  Iterable<GameFieldCell> calculatePath({
+    required GameFieldCell startCell,
+    required GameFieldCell endCell,
+    required bool isLandUnit,
+  }) {
+    final settings = isLandUnit ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
+
+    final pathFinder = FindPath(_gameField, settings);
+    return pathFinder.find(startCell, endCell);
+  }
+
+  Iterable<GameFieldCell> estimatePath({
+    required Iterable<GameFieldCell> path,
+    required bool isLandUnit,
+  }) =>
+      (isLandUnit ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
 }

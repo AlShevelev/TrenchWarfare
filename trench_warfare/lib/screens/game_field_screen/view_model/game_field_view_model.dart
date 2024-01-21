@@ -10,7 +10,7 @@ class GameFieldViewModel extends ViewModelBase {
   final SimpleStream<GameFieldState> _state = SimpleStream<GameFieldState>();
   Stream<GameFieldState> get state => _state.output;
 
-  Stream<UpdateGameEvent> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
+  Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
   late final GameFieldModel _model;
 

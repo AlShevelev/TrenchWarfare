@@ -17,7 +17,7 @@ class GameFieldModel implements Disposable {
 
   late final GameFieldStateMachine _stateMachine = GameFieldStateMachine();
 
-  Stream<UpdateGameEvent> get updateGameObjectsEvent => _stateMachine.updateGameObjectsEvent;
+  Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _stateMachine.updateGameObjectsEvent;
 
   GameFieldModel();
 
