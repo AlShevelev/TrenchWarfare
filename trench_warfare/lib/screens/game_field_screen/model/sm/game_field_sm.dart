@@ -1,5 +1,6 @@
 library game_field_sm;
 
+import 'package:flutter/cupertino.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
@@ -15,6 +16,11 @@ import 'package:trench_warfare/shared/architecture/simple_stream.dart';
 
 part 'event.dart';
 part 'state.dart';
+part 'transitions/transition_base.dart';
+part 'transitions/from_initial_on_init_transition.dart';
+part 'transitions/from_ready_for_input_on_click.dart';
+part 'transitions/from_waiting_for_end_of_path_on_click.dart';
+part 'transitions/from_path_is_shown_on_click.dart';
 
 class GameFieldStateMachine implements Disposable {
   late final Nation _nation;
@@ -33,15 +39,16 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
-          Click(cell: var cell) => _processFromReadyForInputOnClick(cell),
+          Click(cell: var cell) => FromReadyForInputOnClick(_updateGameObjectsEvent, _gameField, _nation).process(cell),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
-          Click(cell: var cell) => _processFromWaitingForEndOfPathOnClick(startPathCell, cell),
+          Click(cell: var cell) =>
+            FromWaitingForEndOfPathOnClick(_updateGameObjectsEvent, _gameField).process(startPathCell, cell),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
-          Click(cell: var cell) => _processFromPathIsShownOnClick(path, cell),
+          Click(cell: var cell) => FromPathIsShownOnClick(_updateGameObjectsEvent, _gameField).process(path, cell),
           _ => _currentState,
         },
     };
@@ -58,109 +65,6 @@ class GameFieldStateMachine implements Disposable {
     _gameField = gameField;
     _nation = nation;
 
-    final cellsToAdd = _gameField.cells.where((c) => !c.isEmpty);
-    _updateGameObjectsEvent.update(cellsToAdd.map((c) => UpdateObject(c)));
-
-    return ReadyForInput();
+    return FromInitialOnInitTransition(_updateGameObjectsEvent, _gameField).process();
   }
-
-  State _processFromReadyForInputOnClick(GameFieldCell cell) {
-    if (cell.nation != _nation) {
-      return ReadyForInput();
-    }
-
-    final unit = cell.activeUnit;
-
-    if (unit == null || unit.state != UnitState.enabled) {
-      return ReadyForInput();
-    }
-
-    unit.setState(UnitState.active);
-    _updateGameObjectsEvent.update([UpdateObject(cell)]);
-
-    return WaitingForEndOfPath(cell);
-  }
-
-  State _processFromWaitingForEndOfPathOnClick(GameFieldCell startCell, GameFieldCell endCell) {
-    final unit = startCell.activeUnit!;
-
-    if (startCell == endCell) {
-      // reset the unit active state
-      unit.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
-      return ReadyForInput();
-    }
-
-    // calculate a path
-    Iterable<GameFieldCell> path = calculatePath(startCell: startCell, endCell: endCell, isLandUnit: unit.isLand);
-
-    if (path.isEmpty) {
-      // reset the unit active state
-      unit.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
-      return ReadyForInput();
-    }
-
-    final estimatedPath = estimatePath(path: path, isLandUnit: unit.isLand);
-    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateObject(c)));
-
-    return PathIsShown(estimatedPath);
-  }
-
-  State _processFromPathIsShownOnClick(Iterable<GameFieldCell> path, GameFieldCell cell) {
-    final firstCell = path.first;
-
-    final unit = firstCell.activeUnit!;
-
-    /// Clear the old path
-    void resetPath() {
-      for (var pathCell in path) {
-        pathCell.setPathItem(null);
-      }
-      _updateGameObjectsEvent.update(path.map((c) => UpdateObject(c)));
-    }
-
-    /// Clear the path and make the unit enabled
-    State resetPathAndEnableUnit() {
-      unit.setState(UnitState.enabled);
-      resetPath();
-      return ReadyForInput();
-    }
-
-    if (cell == path.first) {
-      return resetPathAndEnableUnit();
-    }
-
-    // calculate a path
-    Iterable<GameFieldCell> newPath = calculatePath(startCell: firstCell, endCell: cell, isLandUnit: unit.isLand);
-
-    if (newPath.isEmpty) {
-      return resetPathAndEnableUnit();
-    }
-
-    resetPath();
-
-    // show the new path
-    final estimatedPath = estimatePath(path: newPath, isLandUnit: unit.isLand);
-    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateObject(c)));
-
-    return PathIsShown(newPath);
-  }
-
-  Iterable<GameFieldCell> calculatePath({
-    required GameFieldCell startCell,
-    required GameFieldCell endCell,
-    required bool isLandUnit,
-  }) {
-    final settings = isLandUnit ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
-
-    final pathFinder = FindPath(_gameField, settings);
-    return pathFinder.find(startCell, endCell);
-  }
-
-  Iterable<GameFieldCell> estimatePath({
-    required Iterable<GameFieldCell> path,
-    required bool isLandUnit,
-  }) =>
-      (isLandUnit ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
 }
