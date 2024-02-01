@@ -7,7 +7,7 @@ import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/dto/game_object_raw.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/dto/game_object_raw.dart';
 
 extension _PropertyHelper on Map<String, Property<Object>> {
   double getFloat(String name) => (this[name] as FloatProperty).value;

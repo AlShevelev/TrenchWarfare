@@ -2,7 +2,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/readers/game_field/dto/game_object_raw.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/dto/game_object_raw.dart';
 
 class GameFieldAssembler {
   static GameField assemble(

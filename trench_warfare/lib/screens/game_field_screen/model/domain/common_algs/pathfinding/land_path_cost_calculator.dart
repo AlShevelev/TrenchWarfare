@@ -3,7 +3,7 @@ import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/sea_path_cost_calculator.dart';
 
 class LandPathCostCalculator extends SeaPathCostCalculator {
   LandPathCostCalculator(super.sourcePath);

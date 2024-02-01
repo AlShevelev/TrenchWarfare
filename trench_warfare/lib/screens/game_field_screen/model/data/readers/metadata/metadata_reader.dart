@@ -5,8 +5,8 @@ import 'package:trench_warfare/app/localization/locale.dart';
 import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/relationship.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/readers/metadata/metadata_validator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_validator.dart';
 
 class MetadataReader {
   static MapMetadata read(TiledMap map) {

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/find_cells_around.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/find_cells_around.dart';
 
 /// Calculations for the G part of the F factor
 abstract class FindPathSettings {
