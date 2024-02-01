@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/game_field_cell_component.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/components/game_object_position_component_base.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
@@ -27,7 +30,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   StreamSubscription? _updateGameObjectsSubscription;
 
-  final Map<int, GameFieldCellComponent> _cellComponent = {};
+  final Map<UniqueKey, GameObjectPositionComponentBase> _gameObjects = {};
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -86,11 +89,26 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     _viewModel.onClick(camera.globalToLocal(info.eventPosition.global));
   }
 
-  void onUpdateGameEvent(Iterable<UpdateGameEvent> events) {
+  void onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
     for (var event in events) {
       switch (event) {
         case UpdateObject(cell: var cell):
           _updateCell(cell);
+
+        case CreateUntiedUnit(cell: var cell, unit: var unit):
+          _createUntiedUnit(cell, unit);
+
+        case RemoveUntiedUnit(unit: var unit):
+          _removeUntiedUnit(unit);
+
+        case MoveUntiedUnit(startCell: var startCell, endCell: var endCell, unit: var unit, time: var time):
+          await _moveUntiedUnit(startCell, endCell, unit, time);
+
+        case Pause(time: var time):
+          await _pause(time);
+
+        case MovementCompleted():
+          _viewModel.onMovementComplete();
       }
     }
   }
@@ -153,21 +171,59 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   }
 
   void _updateCell(GameFieldCell cell) {
-    final oldComponent = _cellComponent.remove(cell.id);
+    _removeGameObject(cell.id);
 
-    if (oldComponent != null) {
-      mapComponent.remove(oldComponent);
-    }
-
-    final newComponent = GameFieldCellComponent(
-      baseSize: Vector2.all(64.0),
+    final gameObject = CellGameObject(
       spritesAtlas: _spritesAtlas,
       cell: cell,
-      position: Vector2(cell.center.dx, cell.center.dy),
     );
 
-    mapComponent.add(newComponent);
+    _addGameObject(gameObject, cell.id);
+  }
 
-    _cellComponent[cell.id] = newComponent;
+  void _createUntiedUnit(GameFieldCell cell, Unit unit) {
+    final gameObject = UntiedUnitGameObject(
+      spritesAtlas: _spritesAtlas,
+      position: cell.center,
+      unit: unit,
+      nation: cell.nation!,
+    );
+
+    _addGameObject(gameObject, unit.id);
+  }
+
+  void _removeUntiedUnit(Unit unit) {
+    _removeGameObject(unit.id);
+  }
+
+  Future<void> _moveUntiedUnit(GameFieldCell startCell, GameFieldCell endCell, Unit unit, int time) async {
+    final unitSprite = _gameObjects[unit.id];
+
+    if (unitSprite == null) {
+      return;
+    }
+
+    final effectDuration = 1 / 1000 * time;
+    final effect = MoveToEffect(endCell.center, EffectController(duration: effectDuration));
+    unitSprite.add(effect);
+
+    await Future.delayed(Duration(milliseconds: time));
+  }
+
+  Future<void> _pause(int time) async {
+   await Future.delayed(Duration(milliseconds: time));
+  }
+
+  void _addGameObject(GameObjectPositionComponentBase gameObject, UniqueKey id) {
+    mapComponent.add(gameObject);
+    _gameObjects[id] = gameObject;
+  }
+
+  void _removeGameObject(UniqueKey id) {
+    final gameObject = _gameObjects.remove(id);
+
+    if (gameObject != null) {
+      mapComponent.remove(gameObject);
+    }
   }
 }

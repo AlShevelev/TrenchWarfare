@@ -11,7 +11,7 @@ class FindCellByPosition {
     GameFieldCell? targetCell;
 
     for (var cell in gameField.cells) {
-      final distance = math.sqrt(math.pow(cell.center.dx - position.x, 2) + math.pow(cell.center.dy - position.y, 2));
+      final distance = math.sqrt(math.pow(cell.center.x - position.x, 2) + math.pow(cell.center.y - position.y, 2));
 
       if (distance < minDistance) {
         minDistance = distance;

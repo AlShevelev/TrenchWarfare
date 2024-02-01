@@ -33,6 +33,8 @@ class GameFieldModel implements Disposable {
     _stateMachine.process(Click(clickedCell));
   }
 
+  void onMovementComplete() => _stateMachine.process(MovementComplete());
+
   @override
   void dispose() {
     _stateMachine.dispose();

@@ -1,6 +1,8 @@
 part of game_objects;
 
 class Unit extends GameObject {
+  late final UniqueKey id;
+
   final UnitBoost? boost1;
   final UnitBoost? boost2;
   final UnitBoost? boost3;
@@ -14,7 +16,7 @@ class Unit extends GameObject {
   late final double health;
   double get maxHealth => _getMaxHealth();
 
-  late final double movementPoints;
+  late double movementPoints;
   double get maxMovementPoints => _getMaxMovementPoints();
 
   double get attack => _getAttack();
@@ -46,12 +48,15 @@ class Unit extends GameObject {
     required double movementPoints,
     required this.type,
   }) {
+    id = UniqueKey();
     tookPartInBattles = _calculateTookPartInBattles();
     this.health = maxHealth * health;
     this.movementPoints = movementPoints * maxMovementPoints;
   }
 
   void setState(UnitState state) => _state = state;
+
+  void setMovementPoints(double movementPoints) => this.movementPoints = movementPoints;
 
   int _calculateTookPartInBattles() {
     switch (experienceRank) {

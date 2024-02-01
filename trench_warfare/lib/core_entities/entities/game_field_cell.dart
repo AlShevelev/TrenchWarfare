@@ -1,19 +1,18 @@
-import 'dart:ui';
-
+import 'package:flame/components.dart';
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/shared/utils/math.dart';
 
 class GameFieldCell {
   /// Center of the cell in map coordinates
-  final Offset center;
+  final Vector2 center;
 
   final int row;
   final int col;
 
-  int get id => pair(row, col);
+  late final UniqueKey id;
 
   final CellTerrain terrain;
 
@@ -49,6 +48,7 @@ class GameFieldCell {
     required this.row,
     required this.col,
   }) {
+    id = UniqueKey();
     _units = [];
   }
 
@@ -72,7 +72,13 @@ class GameFieldCell {
     _units.add(unit);
   }
 
+  void addUnitAsActive(Unit unit) {
+    _units.insert(0, unit);
+  }
+
   void addUnits(Iterable<Unit> units) {
     _units.addAll(units);
   }
+
+  Unit removeActiveUnit() =>  _units.removeAt(0);
 }

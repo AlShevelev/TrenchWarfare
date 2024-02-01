@@ -3,13 +3,10 @@ library game_field_sm;
 import 'package:flutter/cupertino.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/find_path.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/land_path_cost_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/sea_path_cost_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/algs/pathfinding/path_facade.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/simple_stream.dart';
@@ -48,9 +45,13 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
-          Click(cell: var cell) => FromPathIsShownOnClick(_updateGameObjectsEvent, _gameField).process(path, cell),
+          Click(cell: var cell) => FromPathIsShownOnClick(_updateGameObjectsEvent, _gameField, _nation).process(path, cell),
           _ => _currentState,
         },
+      MovingInProgress() => switch (event) {
+        MovementComplete() => ReadyForInput(),
+        _ => _currentState,
+      },
     };
 
     _currentState = newState;

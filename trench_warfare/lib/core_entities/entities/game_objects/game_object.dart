@@ -1,5 +1,6 @@
 library game_objects;
 
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';

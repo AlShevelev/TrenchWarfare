@@ -17,3 +17,5 @@ class PathIsShown implements State {
 
   PathIsShown(this.path);
 }
+
+class MovingInProgress implements State { }

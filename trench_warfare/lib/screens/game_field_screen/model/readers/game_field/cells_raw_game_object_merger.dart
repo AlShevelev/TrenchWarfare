@@ -19,7 +19,7 @@ class CellsRawGameObjectMerger {
     GameFieldCell? targetCell;
 
     for (var cell in cells) {
-      final distance = math.sqrt(math.pow(cell.center.dx - object.center.dx, 2) + math.pow(cell.center.dy - object.center.dy, 2));
+      final distance = math.sqrt(math.pow(cell.center.x - object.center.x, 2) + math.pow(cell.center.y - object.center.y, 2));
 
       if (distance < minDistance) {
         minDistance = distance;

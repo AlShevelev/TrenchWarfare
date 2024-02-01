@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
@@ -129,7 +128,7 @@ class RawGameObjectReader {
         center: _calculateCenter(tiledObject),
       );
 
-  static Offset _calculateCenter(TiledObject tiledObject) => Offset(
+  static Vector2 _calculateCenter(TiledObject tiledObject) => Vector2(
         tiledObject.x + tiledObject.width / 2,
         tiledObject.y - tiledObject.height / 2,
       );

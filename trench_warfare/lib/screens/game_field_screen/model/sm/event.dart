@@ -14,3 +14,5 @@ class Click implements Event {
 
   Click(this.cell);
 }
+
+class MovementComplete implements Event {}

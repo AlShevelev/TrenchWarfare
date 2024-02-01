@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flame/components.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
@@ -9,7 +8,7 @@ import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 
 abstract class GameObjectRaw {
-  final Offset center;
+  final Vector2 center;
 
   final int id;
 

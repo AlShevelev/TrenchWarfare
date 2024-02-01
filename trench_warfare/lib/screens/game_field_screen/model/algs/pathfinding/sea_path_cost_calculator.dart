@@ -50,6 +50,24 @@ class SeaPathCostCalculator {
     return _sourcePath;
   }
 
+  bool isEndOfPathReachable() {
+    var movementPointsLeft = activeUnit.movementPoints;
+
+    for (var cell in _sourcePath) {
+      if (cell == _sourcePath.first) {
+        continue;
+      }
+
+      if (mustResetMovementPoints(cell)) {
+        movementPointsLeft = 0;
+      } else {
+        movementPointsLeft -= getMoveToCellCost(cell);
+      }
+    }
+
+    return movementPointsLeft >= 0;
+  }
+
   @protected
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
     if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {

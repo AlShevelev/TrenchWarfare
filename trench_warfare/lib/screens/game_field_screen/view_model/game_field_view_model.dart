@@ -26,9 +26,9 @@ class GameFieldViewModel extends ViewModelBase {
     _state.update(Playing());
   }
 
-  void onClick(Vector2 position) {
-    _model.onClick(position);
-  }
+  void onClick(Vector2 position) => _model.onClick(position);
+
+  void onMovementComplete() => _model.onMovementComplete();
 
   @override
   void dispose() {

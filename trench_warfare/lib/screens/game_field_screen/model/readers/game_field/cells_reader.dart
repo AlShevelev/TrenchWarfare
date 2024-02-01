@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
@@ -24,7 +22,7 @@ class CellsReader {
           terrain: _decodeTerrain(terrainLayer.data![i]),
           hasRiver: _hasRiver(roadsAndRiversLayer.data![i]),
           hasRoad: _hasRoad(roadsAndRiversLayer.data![i]),
-          center: Offset(
+          center: Vector2(
             col * tileSize.x + tileSize.x / 2 + (row.isEven ? 0 : tileSize.x / 2), // x
             row * tileSize.y - (row * tileSize.y / 4) + tileSize.y / 2, // y
           ),

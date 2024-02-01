@@ -7,6 +7,8 @@ abstract class TransitionBase {
   @protected
   late final GameFieldReadOnly _gameField;
 
+  PathFacade? _pathFacade;
+
   TransitionBase(SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent, GameFieldReadOnly gameField) {
     _updateGameObjectsEvent = updateGameObjectsEvent;
     _gameField = gameField;
@@ -17,17 +19,19 @@ abstract class TransitionBase {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
     required bool isLandUnit,
-  }) {
-    final settings = isLandUnit ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
-
-    final pathFinder = FindPath(_gameField, settings);
-    return pathFinder.find(startCell, endCell);
-  }
+  }) => _getPathFacade(isLandUnit).calculatePath(startCell: startCell, endCell: endCell);
 
   @protected
   Iterable<GameFieldCell> _estimatePath({
     required Iterable<GameFieldCell> path,
     required bool isLandUnit,
-  }) =>
-      (isLandUnit ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
+  }) => _getPathFacade(isLandUnit).estimatePath(path: path);
+
+  PathFacade _getPathFacade(bool isLandUnit) {
+    final pathFacade = _pathFacade ?? PathFacade(isLandUnit, _gameField);
+    _pathFacade = pathFacade;
+    return pathFacade;
+  }
+
+  bool canMove({required GameFieldCell startCell, required bool isLandUnit,}) => _getPathFacade(isLandUnit).canMove(startCell);
 }
