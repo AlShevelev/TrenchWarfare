@@ -17,7 +17,7 @@ class FromPathIsShownOnClick extends TransitionBase {
     }
 
     if (cell == path.last) {
-      return MovementWithoutObstaclesCalculator(
+      return MovementFacade(
         nation: _nation,
         gameField: _gameField,
         updateGameObjectsEvent: _updateGameObjectsEvent,

@@ -1,11 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/shared/architecture/simple_stream.dart';
+part of movement;
 
 class MovementWithoutObstaclesCalculator {
   static const int _unitMovementTime = 100; // [ms]
