@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/components/game_object_position_component_base.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
@@ -27,10 +27,11 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   late final String _mapName;
 
   late final TextureAtlas _spritesAtlas;
+  late final Image _animationAtlas;
 
   StreamSubscription? _updateGameObjectsSubscription;
 
-  final Map<UniqueKey, GameObjectPositionComponentBase> _gameObjects = {};
+  final Map<UniqueKey, GameObjectComponentBase> _gameObjects = {};
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -43,6 +44,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   @override
   Future<void> onLoad() async {
     _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+    _animationAtlas = await images.load('sprites/animation_atlas.png');
 
     camera.viewfinder
       ..zoom = _startZoom
@@ -106,6 +108,9 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
         case Pause(time: var time):
           await _pause(time);
+
+        case ShowExplosion(unit: var unit, time: var time):
+          await _showExplosion(unit, time);
 
         case MovementCompleted():
           _viewModel.onMovementComplete();
@@ -173,7 +178,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   void _updateCell(GameFieldCell cell) {
     _removeGameObject(cell.id);
 
-    final gameObject = CellGameObject(
+    final gameObject = GameObjectCell(
       spritesAtlas: _spritesAtlas,
       cell: cell,
     );
@@ -182,7 +187,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   }
 
   void _createUntiedUnit(GameFieldCell cell, Unit unit) {
-    final gameObject = UntiedUnitGameObject(
+    final gameObject = GameObjectUntiedUnit(
       spritesAtlas: _spritesAtlas,
       position: cell.center,
       unit: unit,
@@ -203,18 +208,39 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       return;
     }
 
-    final effectDuration = 1 / 1000 * time;
-    final effect = MoveToEffect(endCell.center, EffectController(duration: effectDuration));
+    final effect = MoveToEffect(endCell.center, EffectController(duration: _millisecondsToSeconds(time)));
     unitSprite.add(effect);
 
     await Future.delayed(Duration(milliseconds: time));
   }
 
   Future<void> _pause(int time) async {
-   await Future.delayed(Duration(milliseconds: time));
+    await Future.delayed(Duration(milliseconds: time));
   }
 
-  void _addGameObject(GameObjectPositionComponentBase gameObject, UniqueKey id) {
+  Future<void> _showExplosion(Unit unit, int time) async {
+    final unitSprite = _gameObjects[unit.id];
+
+    if (unitSprite == null) {
+      return;
+    }
+
+    final timeInSeconds = _millisecondsToSeconds(time);
+
+    final animationComponent = AnimationFrameToFrameComponent(
+      animationAtlas: _animationAtlas,
+      stepTime: timeInSeconds / 8,
+      position: unitSprite.position,
+    );
+
+    animationComponent.add(RemoveEffect(delay: timeInSeconds));
+
+    mapComponent.add(animationComponent);
+
+    await Future.delayed(Duration(milliseconds: time));
+  }
+
+  void _addGameObject(GameObjectComponentBase gameObject, UniqueKey id) {
     mapComponent.add(gameObject);
     _gameObjects[id] = gameObject;
   }
@@ -226,4 +252,6 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       mapComponent.remove(gameObject);
     }
   }
+
+  double _millisecondsToSeconds(int time) => 1 / 1000 * time;
 }

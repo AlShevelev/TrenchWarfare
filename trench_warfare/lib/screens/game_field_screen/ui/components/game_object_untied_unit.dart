@@ -1,10 +1,10 @@
 part of game_field_components;
 
-final class UntiedUnitGameObject extends GameObjectPositionComponentBase {
+final class GameObjectUntiedUnit extends GameObjectComponentBase {
   late final Unit _unit;
   late final Nation _nation;
 
-  UntiedUnitGameObject({
+  GameObjectUntiedUnit({
     required super.spritesAtlas,
     required super.position,
     required Unit unit,

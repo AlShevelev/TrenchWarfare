@@ -1,10 +1,10 @@
 part of game_field_components;
 
 
-final class CellGameObject extends GameObjectPositionComponentBase {
+final class GameObjectCell extends GameObjectComponentBase {
   late final GameFieldCell _cell;
 
-  CellGameObject({
+  GameObjectCell({
     required TextureAtlas spritesAtlas,
     required GameFieldCell cell,
   }) : super(spritesAtlas: spritesAtlas, position: cell.center) {

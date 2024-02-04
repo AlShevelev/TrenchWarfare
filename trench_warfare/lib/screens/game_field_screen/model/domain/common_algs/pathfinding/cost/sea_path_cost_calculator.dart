@@ -86,7 +86,13 @@ class SeaPathCostCalculator {
   }
 
   @protected
-  bool mustResetMovementPoints(GameFieldCell nextCell) => false;
+  bool mustResetMovementPoints(GameFieldCell nextCell) {
+    if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
+      return true;
+    }
+
+    return false;
+  }
 
   @protected
   double getMoveToCellCost(GameFieldCell nextCell) => 1;

@@ -41,4 +41,13 @@ class Pause implements UpdateGameEvent {
   Pause(this.time);
 }
 
+class ShowExplosion implements UpdateGameEvent {
+  final Unit unit;
+
+  /// Animation time in [ms]
+  final int time;
+
+  ShowExplosion({required this.unit, required this.time});
+}
+
 class MovementCompleted implements UpdateGameEvent {}

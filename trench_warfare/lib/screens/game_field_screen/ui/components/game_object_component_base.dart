@@ -1,27 +1,4 @@
-library game_field_components;
-
-import 'package:flame/components.dart';
-import 'package:flame/rendering.dart';
-import 'package:flame/text.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
-import 'package:trench_warfare/app/theme/colors.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
-import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/shared/utils/range.dart';
-
-part 'cell_game_object.dart';
-part 'untied_unit_game_object.dart';
+part of game_field_components;
 
 enum _SpriteSize {
   small,
@@ -29,7 +6,7 @@ enum _SpriteSize {
   large,
 }
 
-abstract base class GameObjectPositionComponentBase  extends PositionComponent {
+abstract base class GameObjectComponentBase  extends PositionComponent {
   @protected
   late final Vector2 _baseSize;
   @protected
@@ -42,7 +19,7 @@ abstract base class GameObjectPositionComponentBase  extends PositionComponent {
   @protected
   late final Vector2 _largeSize;
 
-  GameObjectPositionComponentBase({
+  GameObjectComponentBase({
     required TextureAtlas spritesAtlas,
     required Vector2 position,
   }) {
@@ -50,7 +27,7 @@ abstract base class GameObjectPositionComponentBase  extends PositionComponent {
     _position = position;
     this.position = position;
 
-    _baseSize = Vector2.all(64.0);
+    _baseSize = ComponentConstants.cellSize;
     _smallSize = _baseSize.scaled(0.85);
     _largeSize = _baseSize.scaled(1.15);
   }
@@ -224,9 +201,8 @@ abstract base class GameObjectPositionComponentBase  extends PositionComponent {
     final sprite = SpriteComponent(
       size: componentSize,
       sprite: _spritesAtlas.findSpriteByName(spriteName),
-    )
-      ..anchor = Anchor.center
-      ..priority = 1;
+      anchor: Anchor.center,
+    );
 
     if (decorator != null) {
       sprite.decorator.addLast(decorator);

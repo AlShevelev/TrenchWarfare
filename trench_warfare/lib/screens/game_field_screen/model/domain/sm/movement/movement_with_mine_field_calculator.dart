@@ -1,11 +1,14 @@
 part of movement;
 
-/// Move from the start to the end without obstacles
-class MovementWithoutObstaclesCalculator extends MovementCalculator {
+/// Move through a mine field
+class MovementWithMineFieldCalculator extends MovementCalculator {
+  static const minPossibleDamage = 0.1;   // of a unit's max health value
+  static const maxPossibleDamage = 0.5;   // of a unit's max health value
+
   late final Nation _nation;
   late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
-  MovementWithoutObstaclesCalculator({
+  MovementWithMineFieldCalculator({
     required Nation nation,
     required super.gameField,
     required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
@@ -25,14 +28,25 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       cell.setNation(_nation);
     }
 
-    lastReachableCell.addUnitAsActive(unit);
-    unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
+    final damage = _calculateExplosionDamage(unit);
 
-    if (unit.movementPoints > 0) {
-      final state = _canMove(startCell: lastReachableCell, isLandUnit: unit.isLand) ? UnitState.enabled : UnitState.disabled;
-      unit.setState(state);
-    } else {
-      unit.setState(UnitState.disabled);
+    // the mine field is removed
+    lastReachableCell.setTerrainModifier(null);
+
+    final isUnitAlive = damage < unit.health;
+
+    if (isUnitAlive) {
+      lastReachableCell.addUnitAsActive(unit);
+
+      unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
+      unit.setHealth(unit.health - damage);
+
+      if (unit.movementPoints > 0) {
+        final state = _canMove(startCell: lastReachableCell, isLandUnit: unit.isLand) ? UnitState.enabled : UnitState.disabled;
+        unit.setState(state);
+      } else {
+        unit.setState(UnitState.disabled);
+      }
     }
 
     for (var cell in path) {
@@ -42,6 +56,13 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     _updateUI(path: path, reachableCells: reachableCells, unit: unit);
 
     return MovingInProgress();
+  }
+
+  double _calculateExplosionDamage(Unit unit) {
+    final min = unit.maxHealth * minPossibleDamage;
+    final max = unit.maxHealth * maxPossibleDamage;
+
+    return Random().nextDouble() * (max - min) + min;
   }
 
   void _updateUI({
@@ -68,6 +89,8 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       }
       priorCell = cell;
     }
+
+    updateEvents.add(ShowExplosion(unit: unit, time: MovementConstants.explosionTime));
 
     updateEvents.add(RemoveUntiedUnit(unit));
 

@@ -13,7 +13,7 @@ class Unit extends GameObject {
 
   final double fatigue;
 
-  late final double health;
+  late double health;
   double get maxHealth => _getMaxHealth();
 
   late double movementPoints;
@@ -57,6 +57,8 @@ class Unit extends GameObject {
   void setState(UnitState state) => _state = state;
 
   void setMovementPoints(double movementPoints) => this.movementPoints = movementPoints;
+
+  void setHealth(double health) => this.health = health;
 
   int _calculateTookPartInBattles() {
     switch (experienceRank) {

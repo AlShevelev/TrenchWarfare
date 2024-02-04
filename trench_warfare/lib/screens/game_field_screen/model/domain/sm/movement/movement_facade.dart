@@ -1,15 +1,4 @@
-library movement;
-
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/shared/architecture/simple_stream.dart';
-
-part 'movement_without_obstacles_calculator.dart';
+part of movement;
 
 class MovementFacade {
   late final Nation _nation;
@@ -27,7 +16,13 @@ class MovementFacade {
   }
 
   State startMovement(Iterable<GameFieldCell> path) {
-    final calculator = MovementWithoutObstaclesCalculator(
+    final calculator = path.map((e) => e.pathItem!).any((e) => e.isActive && e.type == PathItemType.explosion) ?
+    MovementWithMineFieldCalculator(
+      nation: _nation,
+      gameField: _gameField,
+      updateGameObjectsEvent: _updateGameObjectsEvent,
+    ) :
+    MovementWithoutObstaclesCalculator(
       nation: _nation,
       gameField: _gameField,
       updateGameObjectsEvent: _updateGameObjectsEvent,
