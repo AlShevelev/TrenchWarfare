@@ -34,7 +34,7 @@ class SeaPathCostCalculator {
 
       final pathItemType = getPathItemType(cell, cell == _sourcePath.last);
 
-      if (mustResetMovementPoints(cell)) {
+      if (mustResetMovementPoints(cell) && movementPointsLeft > 0) {
         movementPointsLeft = 0;
       } else {
         movementPointsLeft -= getMoveToCellCost(cell);
@@ -58,7 +58,7 @@ class SeaPathCostCalculator {
         continue;
       }
 
-      if (mustResetMovementPoints(cell)) {
+      if (mustResetMovementPoints(cell) && movementPointsLeft > 0) {
         movementPointsLeft = 0;
       } else {
         movementPointsLeft -= getMoveToCellCost(cell);
