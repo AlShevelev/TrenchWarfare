@@ -8,6 +8,7 @@ import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
 part 'production_center.dart';

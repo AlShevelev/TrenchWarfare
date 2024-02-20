@@ -2,17 +2,11 @@ part of movement;
 
 /// Move from the start to the end without obstacles
 class MovementWithoutObstaclesCalculator extends MovementCalculator {
-  late final Nation _nation;
-  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
-
   MovementWithoutObstaclesCalculator({
-    required Nation nation,
+    required super.nation,
     required super.gameField,
-    required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-  }) {
-    _nation = nation;
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-  }
+    required super.updateGameObjectsEvent,
+  });
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {

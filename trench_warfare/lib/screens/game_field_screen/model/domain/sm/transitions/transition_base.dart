@@ -17,11 +17,11 @@ abstract class TransitionBase {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
     required bool isLandUnit,
-  }) => PathFacade(isLandUnit, _gameField).calculatePath(startCell: startCell, endCell: endCell);
+  }) => PathFacade.calculatePath(gameField: _gameField, startCell: startCell, endCell: endCell);
 
   @protected
   Iterable<GameFieldCell> _estimatePath({
     required Iterable<GameFieldCell> path,
     required bool isLandUnit,
-  }) => PathFacade(isLandUnit, _gameField).estimatePath(path: path);
+  }) => PathFacade.estimatePath(path: path);
 }

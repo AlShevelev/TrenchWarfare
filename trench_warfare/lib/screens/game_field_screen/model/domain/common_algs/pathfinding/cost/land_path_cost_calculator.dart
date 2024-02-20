@@ -10,11 +10,11 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
 
   @override
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
-    if (nextCell.terrainModifier?.type == TerrainModifierType.landMine) {
+    if (isMineField(nextCell)) {
       return PathItemType.explosion;
     }
 
-    if (nextCell.activeUnit != null && nextCell.nation != nation) {
+    if (isBattleCell(nextCell)) {
       return PathItemType.battle;
     }
 
@@ -32,7 +32,11 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
       return true;
     }
 
-    if (nextCell.terrainModifier?.type == TerrainModifierType.landMine) {
+    if (isMineField(nextCell)) {
+      return true;
+    }
+
+    if (isBattleCell(nextCell)) {
       return true;
     }
 
@@ -112,4 +116,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
       _ => double.maxFinite,
     };
   }
+
+  @override
+  bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.landMine;
 }

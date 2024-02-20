@@ -70,11 +70,11 @@ class SeaPathCostCalculator {
 
   @protected
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
-    if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
+    if (isMineField(nextCell)) {
       return PathItemType.explosion;
     }
 
-    if (nextCell.activeUnit != null && nextCell.nation != nation) {
+    if (isBattleCell(nextCell)) {
       return PathItemType.battle;
     }
 
@@ -87,7 +87,11 @@ class SeaPathCostCalculator {
 
   @protected
   bool mustResetMovementPoints(GameFieldCell nextCell) {
-    if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
+    if (isMineField(nextCell)) {
+      return true;
+    }
+
+    if (isBattleCell(nextCell)) {
       return true;
     }
 
@@ -96,4 +100,10 @@ class SeaPathCostCalculator {
 
   @protected
   double getMoveToCellCost(GameFieldCell nextCell) => 1;
+
+  @protected
+  bool isBattleCell(GameFieldCell cell) => cell.activeUnit != null && cell.nation != nation;
+
+  @protected
+  bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.seaMine;
 }

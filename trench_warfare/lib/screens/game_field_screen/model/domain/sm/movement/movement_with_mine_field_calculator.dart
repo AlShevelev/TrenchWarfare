@@ -2,20 +2,14 @@ part of movement;
 
 /// Move through a mine field
 class MovementWithMineFieldCalculator extends MovementCalculator {
-  static const minPossibleDamage = 0.1;   // of a unit's max health value
-  static const maxPossibleDamage = 0.5;   // of a unit's max health value
-
-  late final Nation _nation;
-  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  static const minPossibleDamage = 0.1; // of a unit's max health value
+  static const maxPossibleDamage = 0.5; // of a unit's max health value
 
   MovementWithMineFieldCalculator({
-    required Nation nation,
+    required super.nation,
     required super.gameField,
-    required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-  }) {
-    _nation = nation;
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-  }
+    required super.updateGameObjectsEvent,
+  });
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
@@ -62,7 +56,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final min = unit.maxHealth * minPossibleDamage;
     final max = unit.maxHealth * maxPossibleDamage;
 
-    return Random().nextDouble() * (max - min) + min;
+    return RandomGen.random(min, max);
   }
 
   void _updateUI({
@@ -90,7 +84,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       priorCell = cell;
     }
 
-    updateEvents.add(ShowExplosion(unit: unit, time: MovementConstants.explosionTime));
+    updateEvents.add(ShowDamage(
+      cell: reachableCells.last,
+      damageType: DamageType.explosion,
+      time: MovementConstants.damageAnimationTime,
+    ));
 
     updateEvents.add(RemoveUntiedUnit(unit));
 

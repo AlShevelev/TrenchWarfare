@@ -16,17 +16,25 @@ class MovementFacade {
   }
 
   State startMovement(Iterable<GameFieldCell> path) {
-    final calculator = path.map((e) => e.pathItem!).any((e) => e.isActive && e.type == PathItemType.explosion) ?
-    MovementWithMineFieldCalculator(
-      nation: _nation,
-      gameField: _gameField,
-      updateGameObjectsEvent: _updateGameObjectsEvent,
-    ) :
-    MovementWithoutObstaclesCalculator(
-      nation: _nation,
-      gameField: _gameField,
-      updateGameObjectsEvent: _updateGameObjectsEvent,
-    );
+    final activePathItems = path.map((e) => e.pathItem!).where((e) => e.isActive).toList();
+
+    final calculator = activePathItems.any((e) => e.type == PathItemType.explosion)
+        ? MovementWithMineFieldCalculator(
+            nation: _nation,
+            gameField: _gameField,
+            updateGameObjectsEvent: _updateGameObjectsEvent,
+          )
+        : activePathItems.any((e) => e.type == PathItemType.battle)
+            ? MovementWithBattleCalculator(
+                nation: _nation,
+                gameField: _gameField,
+                updateGameObjectsEvent: _updateGameObjectsEvent,
+              )
+            : MovementWithoutObstaclesCalculator(
+                nation: _nation,
+                gameField: _gameField,
+                updateGameObjectsEvent: _updateGameObjectsEvent,
+              );
 
     return calculator.startMovement(path);
   }

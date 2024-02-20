@@ -7,6 +7,8 @@ abstract class GameFieldReadOnly {
   Iterable<GameFieldCell> get cells;
 
   GameFieldCell getCell(int row, int col);
+
+  GameFieldCell getCellById(String id);
 }
 
 class GameField implements GameFieldReadOnly {
@@ -23,6 +25,9 @@ class GameField implements GameFieldReadOnly {
 
   @override
   GameFieldCell getCell(int row, int col) => _cells[_getCellIndex(row, col)];
+
+  @override
+  GameFieldCell getCellById(String id) => _cells.where((c) => c.id == id).first;
 
   void setCells(List<GameFieldCell> cells) {
     _cells = cells;

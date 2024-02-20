@@ -8,7 +8,6 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
@@ -27,11 +26,12 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   late final String _mapName;
 
   late final TextureAtlas _spritesAtlas;
-  late final Image _animationAtlas;
+  late final Image _explosionAnimationAtlas;
+  late final Image _bloodSplashesAnimationAtlas;
 
   StreamSubscription? _updateGameObjectsSubscription;
 
-  final Map<UniqueKey, GameObjectComponentBase> _gameObjects = {};
+  final Map<String, GameObjectComponentBase> _gameObjects = {};
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -44,7 +44,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   @override
   Future<void> onLoad() async {
     _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
-    _animationAtlas = await images.load('sprites/animation_atlas.png');
+    _explosionAnimationAtlas = await images.load('sprites/animation_explosion_atlas.png');
+    _bloodSplashesAnimationAtlas = await images.load('sprites/animation_blood_splashes_atlas.png');
 
     camera.viewfinder
       ..zoom = _startZoom
@@ -109,8 +110,17 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
         case Pause(time: var time):
           await _pause(time);
 
-        case ShowExplosion(unit: var unit, time: var time):
-          await _showExplosion(unit, time);
+        case ShowDamage(cell: var cell, damageType: var damageType, time: var time):
+          await _showDamage(cell, damageType, time);
+
+        case ShowDualDamage(
+            cell1: var cell1,
+            damageType1: var damageType1,
+            cell2: var cell2,
+            damageType2: var damageType2,
+            time: var time,
+          ):
+          await _showDualDamage(cell1, damageType1, cell2, damageType2, time);
 
         case MovementCompleted():
           _viewModel.onMovementComplete();
@@ -218,34 +228,29 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  Future<void> _showExplosion(Unit unit, int time) async {
-    final unitSprite = _gameObjects[unit.id];
-
-    if (unitSprite == null) {
-      return;
-    }
-
-    final timeInSeconds = _millisecondsToSeconds(time);
-
-    final animationComponent = AnimationFrameToFrameComponent(
-      animationAtlas: _animationAtlas,
-      stepTime: timeInSeconds / 8,
-      position: unitSprite.position,
-    );
-
-    animationComponent.add(RemoveEffect(delay: timeInSeconds));
-
-    mapComponent.add(animationComponent);
-
+  Future<void> _showDamage(GameFieldCell cell, DamageType damageType, int time) async {
+    _showAnimation(cell: cell, time: time, atlas: _getAnimationAtlas(damageType), frames: _getAnimationFrames(damageType));
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  void _addGameObject(GameObjectComponentBase gameObject, UniqueKey id) {
+  Future<void> _showDualDamage(
+    GameFieldCell cell1,
+    DamageType damageType1,
+    GameFieldCell cell2,
+    DamageType damageType2,
+    int time,
+  ) async {
+    _showAnimation(cell: cell1, time: time, atlas: _getAnimationAtlas(damageType1), frames: _getAnimationFrames(damageType1));
+    _showAnimation(cell: cell2, time: time, atlas: _getAnimationAtlas(damageType2), frames: _getAnimationFrames(damageType2));
+    await Future.delayed(Duration(milliseconds: time));
+  }
+
+  void _addGameObject(GameObjectComponentBase gameObject, String id) {
     mapComponent.add(gameObject);
     _gameObjects[id] = gameObject;
   }
 
-  void _removeGameObject(UniqueKey id) {
+  void _removeGameObject(String id) {
     final gameObject = _gameObjects.remove(id);
 
     if (gameObject != null) {
@@ -254,4 +259,33 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   }
 
   double _millisecondsToSeconds(int time) => 1 / 1000 * time;
+
+  void _showAnimation({
+    required GameFieldCell cell,
+    required int time,
+    required Image atlas,
+    required int frames,
+  }) {
+    final timeInSeconds = _millisecondsToSeconds(time);
+
+    final animationComponent = AnimationFrameToFrameComponent(
+      animationAtlas: atlas,
+      stepTime: timeInSeconds / frames,
+      position: cell.center,
+    );
+
+    animationComponent.add(RemoveEffect(delay: timeInSeconds));
+
+    mapComponent.add(animationComponent);
+  }
+
+  Image _getAnimationAtlas(DamageType damageType) => switch (damageType) {
+        DamageType.explosion => _explosionAnimationAtlas,
+        DamageType.bloodSplash => _bloodSplashesAnimationAtlas,
+      };
+
+  int _getAnimationFrames(DamageType damageType) => switch (damageType) {
+        DamageType.explosion => 8,
+        DamageType.bloodSplash => 13,
+      };
 }

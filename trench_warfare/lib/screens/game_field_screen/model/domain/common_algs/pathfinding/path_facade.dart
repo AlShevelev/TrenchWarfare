@@ -8,43 +8,44 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/common_alg
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/cost/sea_path_cost_calculator.dart';
 
 class PathFacade {
-  late final bool _isLandUnit;
-  late final GameFieldReadOnly _gameField;
-
-  PathFacade(bool isLandUnit, GameFieldReadOnly gameField) {
-    _isLandUnit = isLandUnit;
-    _gameField = gameField;
-  }
-
-  Iterable<GameFieldCell> calculatePath({
+  static Iterable<GameFieldCell> calculatePath({
+    required GameFieldReadOnly gameField,
     required GameFieldCell startCell,
     required GameFieldCell endCell,
   }) {
-    final settings = _isLandUnit ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
+    final settings = startCell.isLand ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
 
-    final pathFinder = FindPath(_gameField, settings);
+    final pathFinder = FindPath(gameField, settings);
     return pathFinder.find(startCell, endCell);
   }
 
-  Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCell> path}) =>
-      (_isLandUnit ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
+  static Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCell> path}) {
+    if (path.isEmpty) {
+      return path;
+    }
 
-  bool canMove(GameFieldCell cell) {
-    final allCellsAround = FindCellsAround.find(_gameField, cell);
+    return (path.first.isLand ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
+  }
 
-    for(var cellAround in allCellsAround) {
-      final settings = _isLandUnit ? LandFindPathSettings(startCell: cell) : SeaFindPathSettings(startCell: cell);
-      final path = FindPath(_gameField, settings).find(cell, cellAround);
+  static bool canMove(GameFieldReadOnly gameField, GameFieldCell cell) {
+    final allCellsAround = FindCellsAround.find(gameField, cell);
+
+    for (var cellAround in allCellsAround) {
+      final settings = cell.isLand ? LandFindPathSettings(startCell: cell) : SeaFindPathSettings(startCell: cell);
+      final path = FindPath(gameField, settings).find(cell, cellAround);
 
       if (path.isEmpty) {
         continue;
       }
 
-      if ((_isLandUnit ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).isEndOfPathReachable()) {
+      if ((cell.isLand ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).isEndOfPathReachable()) {
         return true;
       }
     }
 
     return false;
   }
+
+  static Iterable<GameFieldCell> getCellsAround(GameFieldReadOnly gameField, GameFieldCell cell) =>
+      FindCellsAround.find(gameField, cell);
 }

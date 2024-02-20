@@ -1,19 +1,23 @@
 part of game_objects;
 
 class Unit extends GameObject {
-  late final UniqueKey id;
+  late final String id;
 
   final UnitBoost? boost1;
   final UnitBoost? boost2;
   final UnitBoost? boost3;
 
-  final UnitExperienceRank experienceRank;
+  UnitExperienceRank get experienceRank => calculateExperienceRank(_tookPartInBattles);
 
-  late final int tookPartInBattles;
+  late int _tookPartInBattles;
+  int get tookPartInBattles => _tookPartInBattles;
 
-  final double fatigue;
+  late double _fatigue;
+  double get fatigue => _fatigue;
 
-  late double health;
+  late double _health;
+  double get health => _health;
+
   double get maxHealth => _getMaxHealth();
 
   late double movementPoints;
@@ -27,30 +31,53 @@ class Unit extends GameObject {
   final UnitType type;
 
   UnitState _state = UnitState.enabled;
-  UnitState  get state => _state;
+  UnitState get state => _state;
 
   bool get isLand =>
       type == UnitType.armoredCar ||
-          type == UnitType.artillery ||
-          type == UnitType.infantry ||
-          type == UnitType.cavalry ||
-          type == UnitType.machineGunnersCart ||
-          type == UnitType.machineGuns ||
-          type == UnitType.tank;
+      type == UnitType.artillery ||
+      type == UnitType.infantry ||
+      type == UnitType.cavalry ||
+      type == UnitType.machineGunnersCart ||
+      type == UnitType.machineGuns ||
+      type == UnitType.tank;
+
+  /// Non flash & blood unit
+  bool get isMechanical =>
+      type == UnitType.armoredCar ||
+      type == UnitType.artillery ||
+      type == UnitType.tank ||
+      type == UnitType.destroyer ||
+      type == UnitType.cruiser ||
+      type == UnitType.battleship ||
+      type == UnitType.carrier;
+
+  bool get hasMachineGun =>
+      type == UnitType.armoredCar || type == UnitType.machineGunnersCart || type == UnitType.machineGuns || type == UnitType.tank;
+
+  bool get hasArtillery =>
+      type == UnitType.artillery ||
+      type == UnitType.tank ||
+      type == UnitType.destroyer ||
+      type == UnitType.cruiser ||
+      type == UnitType.battleship;
 
   Unit({
     required this.boost1,
     required this.boost2,
     required this.boost3,
-    required this.experienceRank,
-    required this.fatigue,
+    required UnitExperienceRank experienceRank,
+    required double fatigue,
     required double health,
     required double movementPoints,
     required this.type,
   }) {
-    id = UniqueKey();
-    tookPartInBattles = _calculateTookPartInBattles();
-    this.health = maxHealth * health;
+    id = RandomGen.generateId();
+
+    _tookPartInBattles = _calculateStartTookPartInBattlesValue(experienceRank);
+    _health = maxHealth * health;
+    _fatigue = fatigue;
+
     this.movementPoints = movementPoints * maxMovementPoints;
   }
 
@@ -58,9 +85,13 @@ class Unit extends GameObject {
 
   void setMovementPoints(double movementPoints) => this.movementPoints = movementPoints;
 
-  void setHealth(double health) => this.health = health;
+  void setHealth(double health) => _health = health;
 
-  int _calculateTookPartInBattles() {
+  void setFatigue(double fatigue) => _fatigue = fatigue;
+
+  void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
+
+  int _calculateStartTookPartInBattlesValue(UnitExperienceRank experienceRank) {
     switch (experienceRank) {
       case UnitExperienceRank.rookies:
         return 0;
@@ -73,6 +104,26 @@ class Unit extends GameObject {
       case UnitExperienceRank.elite:
         return 10;
     }
+  }
+
+  static UnitExperienceRank calculateExperienceRank(int tookPartInBattles) {
+    if (tookPartInBattles == 0) {
+      return UnitExperienceRank.rookies;
+    }
+
+    if (tookPartInBattles >= 1 && tookPartInBattles < 3) {
+      return UnitExperienceRank.fighters;
+    }
+
+    if (tookPartInBattles >= 3 && tookPartInBattles < 6) {
+      return UnitExperienceRank.proficients;
+    }
+
+    if (tookPartInBattles >= 6 && tookPartInBattles < 10) {
+      return UnitExperienceRank.veterans;
+    }
+
+    return UnitExperienceRank.elite;
   }
 
   double _getMaxHealth() {

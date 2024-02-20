@@ -4,8 +4,20 @@ abstract class MovementCalculator {
   @protected
   late final GameFieldReadOnly _gameField;
 
-  MovementCalculator({required GameFieldReadOnly gameField}) {
+  @protected
+  late final Nation _nation;
+
+  @protected
+  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+
+  MovementCalculator({
+    required GameFieldReadOnly gameField,
+    required Nation nation,
+    required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
+  }) {
     _gameField = gameField;
+    _nation = nation;
+    _updateGameObjectsEvent = updateGameObjectsEvent;
   }
 
   State startMovement(Iterable<GameFieldCell> path);
@@ -15,5 +27,5 @@ abstract class MovementCalculator {
     required GameFieldCell startCell,
     required bool isLandUnit,
   }) =>
-      PathFacade(isLandUnit, _gameField).canMove(startCell);
+      PathFacade.canMove(_gameField, startCell);
 }

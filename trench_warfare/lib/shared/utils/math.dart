@@ -1,4 +1,3 @@
-
 /// This is the so-called Cantor pairing function
 /// https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function
 int pair(int a, int b) {

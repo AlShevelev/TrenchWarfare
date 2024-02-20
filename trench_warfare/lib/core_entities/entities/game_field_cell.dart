@@ -1,9 +1,9 @@
 import 'package:flame/components.dart';
-import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 class GameFieldCell {
   /// Center of the cell in map coordinates
@@ -12,7 +12,7 @@ class GameFieldCell {
   final int row;
   final int col;
 
-  late final UniqueKey id;
+  late final String id;
 
   final CellTerrain terrain;
 
@@ -48,7 +48,7 @@ class GameFieldCell {
     required this.row,
     required this.col,
   }) {
-    id = UniqueKey();
+    id = RandomGen.generateId();
     _units = [];
   }
 
@@ -56,7 +56,7 @@ class GameFieldCell {
     _nation = nation;
   }
 
-  void setProductionCenter(ProductionCenter productionCenter) {
+  void setProductionCenter(ProductionCenter? productionCenter) {
     _productionCenter = productionCenter;
   }
 
