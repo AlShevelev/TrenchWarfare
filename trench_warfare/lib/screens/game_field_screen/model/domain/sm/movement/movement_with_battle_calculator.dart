@@ -131,6 +131,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
   void _addAttackingUnitToCell(Unit unit, GameFieldCell cell) {
     cell.addUnitAsActive(unit);
+
     unit.setMovementPoints(cell.pathItem!.movementPointsLeft);
 
     if (unit.movementPoints > 0) {

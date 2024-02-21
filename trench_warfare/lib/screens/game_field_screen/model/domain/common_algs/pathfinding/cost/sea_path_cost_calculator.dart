@@ -22,11 +22,13 @@ class SeaPathCostCalculator {
   Iterable<GameFieldCell> calculate() {
     var movementPointsLeft = activeUnit.movementPoints;
 
+    var pathIsActive = true;
+
     for (var cell in _sourcePath) {
       if (cell == _sourcePath.first) {
         cell.setPathItem(PathItem(
           type: PathItemType.normal,
-          isActive: movementPointsLeft >= 0,
+          isActive: movementPointsLeft >= 0 && pathIsActive,
           movementPointsLeft: movementPointsLeft,
         ));
         continue;
@@ -42,9 +44,11 @@ class SeaPathCostCalculator {
 
       cell.setPathItem(PathItem(
         type: pathItemType,
-        isActive: movementPointsLeft >= 0,
+        isActive: movementPointsLeft >= 0 && pathIsActive,
         movementPointsLeft: movementPointsLeft,
       ));
+
+      pathIsActive = pathIsActive && !mustDeactivateNextPath(cell);
     }
 
     return _sourcePath;
@@ -86,17 +90,10 @@ class SeaPathCostCalculator {
   }
 
   @protected
-  bool mustResetMovementPoints(GameFieldCell nextCell) {
-    if (isMineField(nextCell)) {
-      return true;
-    }
+  bool mustResetMovementPoints(GameFieldCell nextCell) => false;
 
-    if (isBattleCell(nextCell)) {
-      return true;
-    }
-
-    return false;
-  }
+  @protected
+  bool mustDeactivateNextPath(GameFieldCell nextCell) => isMineField(nextCell) || isBattleCell(nextCell);
 
   @protected
   double getMoveToCellCost(GameFieldCell nextCell) => 1;

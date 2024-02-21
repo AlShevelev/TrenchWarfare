@@ -32,14 +32,6 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
       return true;
     }
 
-    if (isMineField(nextCell)) {
-      return true;
-    }
-
-    if (isBattleCell(nextCell)) {
-      return true;
-    }
-
     if (nextCell.nation != nation) {
       if (nextCell.terrainModifier?.type == TerrainModifierType.trench) {
         return true;
@@ -52,6 +44,9 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
 
     return false;
   }
+
+  @override
+  bool mustDeactivateNextPath(GameFieldCell nextCell) => isMineField(nextCell) || isBattleCell(nextCell);
 
   // terrain & units, what else?
   @override
