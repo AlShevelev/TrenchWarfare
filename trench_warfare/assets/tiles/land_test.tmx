@@ -502,7 +502,7 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="341"/>
+    <property name="unit1" type="object" value="373"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -512,7 +512,7 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="341"/>
+    <property name="unit1" type="object" value="373"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -760,4 +760,4 @@
    </properties>
   </object>
  </objectgroup>
-</map>
+ </map>

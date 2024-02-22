@@ -64,14 +64,14 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       newAttackingUnitCell.setNation(_nation);
 
-      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell);
+      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: newAttackingUnitCell, defendingCell:  defendingCell);
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is Alive) {
       _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info);
       _updateUnit(defendingCell.activeUnit!, (battleResult.defendingUnit as Alive).info);
 
-      _addAttackingUnitToCell(attackingUnit, attackingCell);
+      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: attackingCell, defendingCell: defendingCell);
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is InPanic) {
@@ -87,7 +87,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       newAttackingUnitCell.setNation(_nation);
 
-      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell);
+      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: newAttackingUnitCell, defendingCell:  defendingCell);
     }
 
     // Remove calculated path
@@ -129,16 +129,22 @@ class MovementWithBattleCalculator extends MovementCalculator {
     unitToUpdate.setFatigue(updateInfo.fatigue);
   }
 
-  void _addAttackingUnitToCell(Unit unit, GameFieldCell cell) {
-    cell.addUnitAsActive(unit);
+  void _addAttackingUnitToCell(
+    Unit attackingUnit, {
+    required GameFieldCell newAttackingUnitCell,
+    required GameFieldCell defendingCell,
+  }) {
+    newAttackingUnitCell.addUnitAsActive(attackingUnit);
 
-    unit.setMovementPoints(cell.pathItem!.movementPointsLeft);
+    // We must update the movement points based on defending cell - to reduce the movement points after every attack
+    attackingUnit.setMovementPoints(defendingCell.pathItem!.movementPointsLeft);
 
-    if (unit.movementPoints > 0) {
-      final state = _canMove(startCell: cell, isLandUnit: unit.isLand) ? UnitState.enabled : UnitState.disabled;
-      unit.setState(state);
+    if (attackingUnit.movementPoints > 0) {
+      final state =
+          _canMove(startCell: newAttackingUnitCell, isLandUnit: attackingUnit.isLand) ? UnitState.enabled : UnitState.disabled;
+      attackingUnit.setState(state);
     } else {
-      unit.setState(UnitState.disabled);
+      attackingUnit.setState(UnitState.disabled);
     }
   }
 
