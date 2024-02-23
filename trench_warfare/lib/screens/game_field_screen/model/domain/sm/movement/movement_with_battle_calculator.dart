@@ -38,20 +38,22 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     // Update the units' state
+
+    GameFieldCell? newDefendingUnitCell;
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is Died) {
       defendingCell.removeActiveUnit();
     }
 
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is Alive) {
-      _updateUnit(defendingCell.activeUnit!, (battleResult.defendingUnit as Alive).info);
+      _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info);
     }
 
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is InPanic) {
-      _updateUnit(defendingCell.activeUnit!, (battleResult.defendingUnit as InPanic).info);
+      _updateUnit(defendingUnit, (battleResult.defendingUnit as InPanic).info);
 
       if (battleResult.defendingUnitCellId != defendingCell.id) {
-        final newCell = _gameField.getCellById(battleResult.defendingUnitCellId!);
-        newCell.addUnitAsActive(defendingCell.removeActiveUnit());
+        newDefendingUnitCell = _gameField.getCellById(battleResult.defendingUnitCellId!);
+        newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
     }
 
@@ -69,17 +71,17 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is Alive) {
       _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info);
-      _updateUnit(defendingCell.activeUnit!, (battleResult.defendingUnit as Alive).info);
+      _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info);
 
       _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: attackingCell, defendingCell: defendingCell);
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is InPanic) {
       _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info);
-      _updateUnit(defendingCell.activeUnit!, (battleResult.defendingUnit as InPanic).info);
+      _updateUnit(defendingUnit, (battleResult.defendingUnit as InPanic).info);
 
       if (battleResult.defendingUnitCellId != defendingCell.id) {
-        final newDefendingUnitCell = _gameField.getCellById(battleResult.defendingUnitCellId!);
+        newDefendingUnitCell = _gameField.getCellById(battleResult.defendingUnitCellId!);
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
 
@@ -102,6 +104,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       defendingUnit: defendingUnit,
       attackingCell: attackingCell,
       defendingCell: defendingCell,
+      newDefendingUnitCell: newDefendingUnitCell,
     );
 
     return MovingInProgress();
@@ -153,6 +156,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required List<GameFieldCell> reachableCells,
     required GameFieldCell attackingCell,
     required GameFieldCell defendingCell,
+    GameFieldCell? newDefendingUnitCell,
     required Unit attackingUnit,
     required Unit defendingUnit,
   }) {
@@ -237,6 +241,10 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     // Update the defending cell
     updateEvents.add(UpdateObject(reachableCells.last));
+
+    if (newDefendingUnitCell != null) {
+      updateEvents.add(UpdateObject(newDefendingUnitCell));
+    }
 
     // Update cells in an inactive part of the path
     for (var cell in path) {

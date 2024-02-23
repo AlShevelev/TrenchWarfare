@@ -107,7 +107,7 @@ class BattleResultCalculator {
       UnitExperienceRank.elite => false,
     };
 
-    if (willTryToWithdraw) {
+    if (!willTryToWithdraw) {
       return null;
     }
 
