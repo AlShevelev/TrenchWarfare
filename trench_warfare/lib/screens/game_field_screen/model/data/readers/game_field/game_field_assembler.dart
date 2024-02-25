@@ -1,8 +1,10 @@
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/dto/game_object_raw.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 
 class GameFieldAssembler {
   static GameField assemble(
@@ -12,6 +14,8 @@ class GameFieldAssembler {
   ) {
     final lastCell = allCells.last;
     final gameField = GameField(rows: lastCell.row + 1, cols: lastCell.col + 1);
+
+    final ownershipPolygons = allGameObjects.entries.map((e) => e.value).whereType<RegionOwnershipRaw>().toList();
 
     for (var cell in allCells) {
       final ownership = cellOwnership[cell];
@@ -28,12 +32,30 @@ class GameFieldAssembler {
         }
 
         cell.addUnits(_getUnits(allGameObjects, [ownership.unit1Id, ownership.unit2Id, ownership.unit3Id, ownership.unit4Id]));
+      } else {
+        final nation = _tryToFindOwnership(cell, ownershipPolygons);
+
+        if (nation != null) {
+          cell.setNation(nation);
+        }
       }
     }
 
     gameField.setCells(allCells);
 
     return gameField;
+  }
+
+  static Nation? _tryToFindOwnership(GameFieldCell cell, List<RegionOwnershipRaw> ownerships) {
+    for (var ownership in ownerships) {
+      if (isPointInsideRect(cell.center, ownership.bounds)) {         // fast check
+       if (isPointInsidePolygon(cell.center, ownership.vertices)) {   // exact check
+         return ownership.nation;
+       }
+      }
+    }
+
+    return null;
   }
 
   static ProductionCenter _mapProductionCenter(ProductionCenterRaw raw) => ProductionCenter(

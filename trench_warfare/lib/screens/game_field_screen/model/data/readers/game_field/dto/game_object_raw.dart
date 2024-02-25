@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
@@ -38,6 +40,22 @@ class CellOwnershipRaw extends GameObjectRaw {
     required this.nation,
     required super.center,
   });
+}
+
+class RegionOwnershipRaw extends GameObjectRaw {
+  final Nation nation;
+
+  final List<Vector2> vertices;
+
+  final Rect bounds;
+
+  RegionOwnershipRaw(
+      super.id, {
+        required this.nation,
+        required this.vertices,
+        required this.bounds,
+        required super.center,
+      });
 }
 
 class ProductionCenterRaw extends GameObjectRaw {

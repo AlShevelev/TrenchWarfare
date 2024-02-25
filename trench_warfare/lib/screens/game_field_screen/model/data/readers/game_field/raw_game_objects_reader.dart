@@ -8,6 +8,7 @@ import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/dto/game_object_raw.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 
 extension _PropertyHelper on Map<String, Property<Object>> {
   double getFloat(String name) => (this[name] as FloatProperty).value;
@@ -42,6 +43,8 @@ class RawGameObjectReader {
     switch (type) {
       case "ownership":
         return _decodeOwnership(tiledObject);
+      case "ownershipRegion":
+        return _decodeOwnershipRegion(tiledObject);
       case "unit":
         return _decodeUnit(tiledObject);
       case "city":
@@ -69,6 +72,19 @@ class RawGameObjectReader {
       terrainModifierId: properties.getObject("terrainModifier"),
       nation: Nation.values.byName(tiledObject.name),
       center: _calculateCenter(tiledObject),
+    );
+  }
+
+  static GameObjectRaw _decodeOwnershipRegion(TiledObject tiledObject) {
+    var vertices = tiledObject.polygon.map((e) => Vector2(e.x + tiledObject.x, e.y + tiledObject.y)).toList();
+    var bounds = getBoundRectForPolygon(vertices);
+
+    return RegionOwnershipRaw(
+      tiledObject.id,
+      nation: Nation.values.byName(tiledObject.name),
+      vertices: vertices,
+      bounds: bounds,
+      center: Vector2(bounds.center.dx, bounds.center.dy),
     );
   }
 
