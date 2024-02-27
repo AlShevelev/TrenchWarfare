@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_state.dart';
@@ -13,6 +14,8 @@ class GameFieldViewModel extends ViewModelBase {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
   late final GameFieldModel _model;
+
+  GameFieldRead get gameField => _model.gameField;
 
   GameFieldViewModel() {
     _model = GameFieldModel();

@@ -4,10 +4,10 @@ part of game_field_components;
 final class GameObjectCell extends GameObjectComponentBase {
   late final GameFieldCell _cell;
 
-  GameObjectCell({
-    required TextureAtlas spritesAtlas,
-    required GameFieldCell cell,
-  }) : super(spritesAtlas: spritesAtlas, position: cell.center) {
+  GameObjectCell(
+    TextureAtlas spritesAtlas,
+    GameFieldCell cell,
+  ) : super(spritesAtlas: spritesAtlas, position: cell.center) {
     _cell = cell;
   }
 
@@ -16,7 +16,7 @@ final class GameObjectCell extends GameObjectComponentBase {
     _addTerrainModifierSprites();
     _addProductionCenterSprites();
     _addUnitsSprites();
-    _addNationSprites();
+    //_addNationSprites();
     _addPathSprites();
   }
 

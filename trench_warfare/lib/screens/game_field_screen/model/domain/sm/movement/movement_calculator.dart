@@ -2,7 +2,7 @@ part of movement;
 
 abstract class MovementCalculator {
   @protected
-  late final GameFieldReadOnly _gameField;
+  late final GameFieldRead _gameField;
 
   @protected
   late final Nation _nation;
@@ -11,7 +11,7 @@ abstract class MovementCalculator {
   late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   MovementCalculator({
-    required GameFieldReadOnly gameField,
+    required GameFieldRead gameField,
     required Nation nation,
     required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
   }) {

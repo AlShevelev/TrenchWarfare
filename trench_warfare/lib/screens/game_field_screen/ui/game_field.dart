@@ -6,6 +6,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_objects_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
@@ -38,7 +39,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
     mapComponent = await TiledComponent.load(
       _mapName,
-      Vector2(64, 73), // Should be as same as a size of tile in the Tiled
+      ComponentConstants.cellRealSize,
     );
     world.add(mapComponent);
 
@@ -54,6 +55,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
     );
 
     await _viewModel.init(mapComponent.tileMap);
+
+    _gameObjectsComposer.init(_viewModel.gameField);
   }
 
   @override

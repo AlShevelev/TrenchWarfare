@@ -5,9 +5,9 @@ abstract class TransitionBase {
   late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   @protected
-  late final GameFieldReadOnly _gameField;
+  late final GameFieldRead _gameField;
 
-  TransitionBase(SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent, GameFieldReadOnly gameField) {
+  TransitionBase(SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent, GameFieldRead gameField) {
     _updateGameObjectsEvent = updateGameObjectsEvent;
     _gameField = gameField;
   }

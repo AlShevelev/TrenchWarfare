@@ -1,9 +1,9 @@
 part of battle;
 
 class BattleResultCalculator {
-  late final GameFieldReadOnly _gameField;
+  late final GameFieldRead _gameField;
 
-  BattleResultCalculator(GameFieldReadOnly gameField) {
+  BattleResultCalculator(GameFieldRead gameField) {
     _gameField = gameField;
   }
 

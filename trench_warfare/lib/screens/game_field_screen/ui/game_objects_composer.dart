@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
@@ -11,6 +13,8 @@ import 'package:trench_warfare/screens/game_field_screen/ui/components/game_fiel
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 
 class GameObjectsComposer implements Disposable {
+  late final GameFieldRead _gameField;
+
   late final TextureAtlas _spritesAtlas;
   late final Image _explosionAnimationAtlas;
   late final Image _bloodSplashesAnimationAtlas;
@@ -19,7 +23,7 @@ class GameObjectsComposer implements Disposable {
 
   late final TiledComponent _mapComponent;
 
-  final Map<String, GameObjectComponentBase> _gameObjects = {};
+  final Map<String, PositionComponent> _gameObjects = {};
 
   late final void Function() _onMoveCompletedCallback;
 
@@ -39,6 +43,10 @@ class GameObjectsComposer implements Disposable {
     _mapComponent = mapComponent;
 
     _onMoveCompletedCallback = onMoveCompletedCallback;
+  }
+
+  void init(GameFieldRead gameField) {
+    _gameField = gameField;
   }
 
   @override
@@ -68,12 +76,12 @@ class GameObjectsComposer implements Disposable {
           await _showDamage(cell, damageType, time);
 
         case ShowDualDamage(
-        cell1: var cell1,
-        damageType1: var damageType1,
-        cell2: var cell2,
-        damageType2: var damageType2,
-        time: var time,
-        ):
+            cell1: var cell1,
+            damageType1: var damageType1,
+            cell2: var cell2,
+            damageType2: var damageType2,
+            time: var time,
+          ):
           await _showDualDamage(cell1, damageType1, cell2, damageType2, time);
 
         case MovementCompleted():
@@ -83,14 +91,13 @@ class GameObjectsComposer implements Disposable {
   }
 
   void _updateCell(GameFieldCell cell) {
+    final borderComponentKey = '${cell.id}_border';
+
     _removeGameObject(cell.id);
+    _removeGameObject(borderComponentKey);
 
-    final gameObject = GameObjectCell(
-      spritesAtlas: _spritesAtlas,
-      cell: cell,
-    );
-
-    _addGameObject(gameObject, cell.id);
+    _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
+    _addGameObject(GameObjectCell(_spritesAtlas, cell), cell.id);
   }
 
   void _createUntiedUnit(GameFieldCell cell, Unit unit) {
@@ -131,18 +138,18 @@ class GameObjectsComposer implements Disposable {
   }
 
   Future<void> _showDualDamage(
-      GameFieldCell cell1,
-      DamageType damageType1,
-      GameFieldCell cell2,
-      DamageType damageType2,
-      int time,
-      ) async {
+    GameFieldCell cell1,
+    DamageType damageType1,
+    GameFieldCell cell2,
+    DamageType damageType2,
+    int time,
+  ) async {
     _showAnimation(cell: cell1, time: time, atlas: _getAnimationAtlas(damageType1), frames: _getAnimationFrames(damageType1));
     _showAnimation(cell: cell2, time: time, atlas: _getAnimationAtlas(damageType2), frames: _getAnimationFrames(damageType2));
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  void _addGameObject(GameObjectComponentBase gameObject, String id) {
+  void _addGameObject(PositionComponent gameObject, String id) {
     _mapComponent.add(gameObject);
     _gameObjects[id] = gameObject;
   }
@@ -177,12 +184,12 @@ class GameObjectsComposer implements Disposable {
   }
 
   Image _getAnimationAtlas(DamageType damageType) => switch (damageType) {
-    DamageType.explosion => _explosionAnimationAtlas,
-    DamageType.bloodSplash => _bloodSplashesAnimationAtlas,
-  };
+        DamageType.explosion => _explosionAnimationAtlas,
+        DamageType.bloodSplash => _bloodSplashesAnimationAtlas,
+      };
 
   int _getAnimationFrames(DamageType damageType) => switch (damageType) {
-    DamageType.explosion => 8,
-    DamageType.bloodSplash => 13,
-  };
+        DamageType.explosion => 8,
+        DamageType.bloodSplash => 13,
+      };
 }

@@ -3,7 +3,7 @@ part of game_field_sm;
 sealed class Event {}
 
 class Init implements Event {
-  final GameFieldReadOnly gameField;
+  final GameFieldRead gameField;
   final Nation nation;
 
   Init(this.gameField, this.nation);

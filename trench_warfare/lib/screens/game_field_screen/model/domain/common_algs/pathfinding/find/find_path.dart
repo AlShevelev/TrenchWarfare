@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/find_cells_around.dart';
 
 /// Calculations for the G part of the F factor
 abstract class FindPathSettings {
@@ -22,11 +21,11 @@ class FindPath {
   final Map<GameFieldCell, double> _gScore = <GameFieldCell, double>{};
   final Map<GameFieldCell, double> _fScore = <GameFieldCell, double>{};
 
-  late final GameFieldReadOnly _gameField;
+  late final GameFieldRead _gameField;
 
   late final FindPathSettings _settings;
 
-  FindPath(GameFieldReadOnly gameField, FindPathSettings findPathGFactorHeuristic) {
+  FindPath(GameFieldRead gameField, FindPathSettings findPathGFactorHeuristic) {
     _gameField = gameField;
     _settings = findPathGFactorHeuristic;
   }
@@ -56,7 +55,7 @@ class FindPath {
 
       _open.removeAt(currentIndex);
 
-      final neighbors = FindCellsAround.find(_gameField, current);
+      final neighbors = _gameField.findCellsAround(current);
 
       for (var neighbor in neighbors) {
         final nextGScope = _settings.calculateGFactorHeuristic(current, neighbor);

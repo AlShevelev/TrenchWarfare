@@ -24,7 +24,7 @@ part 'transitions/from_path_is_shown_on_click.dart';
 class GameFieldStateMachine implements Disposable {
   late final Nation _nation;
 
-  late final GameFieldReadOnly _gameField;
+  late final GameFieldRead _gameField;
 
   final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SimpleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
@@ -64,7 +64,7 @@ class GameFieldStateMachine implements Disposable {
     _updateGameObjectsEvent.close();
   }
 
-  State _processFromInitialOnInit(GameFieldReadOnly gameField, Nation nation) {
+  State _processFromInitialOnInit(GameFieldRead gameField, Nation nation) {
     _gameField = gameField;
     _nation = nation;
 

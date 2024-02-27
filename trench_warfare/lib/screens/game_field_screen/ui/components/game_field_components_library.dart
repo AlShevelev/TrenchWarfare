@@ -1,7 +1,9 @@
 library game_field_components;
 
+import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
+import 'package:flame/palette.dart';
 import 'package:flame/rendering.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/text.dart';
@@ -9,6 +11,7 @@ import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
+import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
@@ -24,6 +27,7 @@ import 'package:trench_warfare/shared/utils/range.dart';
 
 part 'component_constants.dart';
 part 'animation_frame_to_frame_component.dart';
+part 'game_cell_border.dart';
 part 'game_object_component_base.dart';
 part 'game_object_cell.dart';
 part 'game_object_untied_unit.dart';

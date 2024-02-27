@@ -2,7 +2,6 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/find_cell_by_position.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
@@ -13,7 +12,9 @@ import 'package:tuple/tuple.dart';
 
 class GameFieldModel implements Disposable {
   late final MapMetadata _metadata;
-  late final GameFieldReadOnly _gameField;
+
+  late final GameFieldRead _gameField;
+  GameFieldRead get gameField => _gameField;
 
   late final GameFieldStateMachine _stateMachine = GameFieldStateMachine();
 
@@ -29,7 +30,7 @@ class GameFieldModel implements Disposable {
   }
 
   void onClick(Vector2 position) {
-    final clickedCell = FindCellByPosition.find(_gameField, position);
+    final clickedCell = _gameField.findCellByPosition(position);
     _stateMachine.process(Click(clickedCell));
   }
 
