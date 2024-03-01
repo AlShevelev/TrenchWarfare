@@ -386,7 +386,6 @@ class GameCellBorder extends PositionComponent {
           ..strokeWidth = _borderWidth
           ..strokeCap = StrokeCap.round,
       ],
-      _ => throw UnimplementedError()
     };
   }
 }
