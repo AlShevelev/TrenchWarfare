@@ -16,6 +16,7 @@ final class GameObjectCell extends GameObjectComponentBase {
     _addTerrainModifierSprites();
     _addProductionCenterSprites();
     _addUnitsSprites();
+    _addNationSprites();
     _addPathSprites();
   }
 
@@ -73,6 +74,38 @@ final class GameObjectCell extends GameObjectComponentBase {
     }
 
     _addUnitSprites(unit: _cell.activeUnit!, nation: _cell.nation, unitsTotal: _cell.units.length);
+  }
+
+  void _addNationSprites() {
+    if (_cell.isEmpty) {
+      return;
+    }
+
+    final nationSuffix = switch (_cell.nation!) {
+      Nation.austriaHungary => 'Austro-Hungaria',
+      Nation.belgium => 'Belgium',
+      Nation.bulgaria => 'Bulgaria',
+      Nation.china => 'China',
+      Nation.france => 'France',
+      Nation.germany => 'Germany',
+      Nation.greatBritain => 'UK',
+      Nation.greece => 'Greece',
+      Nation.italy => 'Italy',
+      Nation.japan => 'Japan',
+      Nation.korea => 'Korea',
+      Nation.mexico => 'Mexico',
+      Nation.mongolia => 'Mongolia',
+      Nation.montenegro => 'Montenegro',
+      Nation.romania => 'Romania',
+      Nation.russia => 'Russia',
+      Nation.serbia => 'Serbia',
+      Nation.turkey => 'Turkey',
+      Nation.usa => 'US',
+      Nation.usNorth => 'US-North',
+      Nation.usSouth => 'US-South',
+    };
+
+    _addSprite('Banner-$nationSuffix');
   }
 
   void _addPathSprites() {

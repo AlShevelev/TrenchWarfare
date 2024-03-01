@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:tuple/tuple.dart';
 
 /// This is the so-called Cantor pairing function
 /// https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function
@@ -96,4 +97,26 @@ Rect getBoundRectForPolygon(List<Vector2> polygon) {
   }
 
   return Rect.fromLTRB(minX, minY, maxX, maxY);
+}
+
+/// [parts] is  monotonically increasing sequence
+/// For example, if we would like to split a line into 25%-50%-25% parts
+/// it must contain next values: [0.25, 0.75]
+List<Tuple2<Offset, Offset>> splitLine(List<double> parts, {required Offset start, required Offset end}) {
+  Offset getPointOnLine(double part, {required Offset start, required Offset end}) =>
+    Offset(start.dx + (end.dx - start.dx) * part, start.dy + (end.dy - start.dy) * part);
+
+  final List<Tuple2<Offset, Offset>> result = [];
+
+  var activeStart = start;
+
+  for (var part in parts) {
+    final activeEnd = getPointOnLine(part, start: start, end: end);
+    result.add(Tuple2(activeStart, activeEnd));
+    activeStart = activeEnd;
+  }
+
+  result.add(Tuple2(activeStart, end));   // the last one
+
+  return result;
 }

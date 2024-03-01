@@ -1,5 +1,6 @@
 library game_field_components;
 
+import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
@@ -23,7 +24,9 @@ import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
+import 'package:tuple/tuple.dart';
 
 part 'component_constants.dart';
 part 'animation_frame_to_frame_component.dart';

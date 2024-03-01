@@ -84,7 +84,7 @@ class GameFieldCell implements GameFieldCellRead {
   bool get isLand => terrain != CellTerrain.water;
 
   @override
-  bool get isEmpty => nation == null && productionCenter == null && terrainModifier == null && units.isEmpty;
+  bool get isEmpty => productionCenter == null && terrainModifier == null && units.isEmpty;
 
   GameFieldCell({
     required this.terrain,
