@@ -43,7 +43,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     required Iterable<GameFieldCell> reachableCells,
     required Unit unit,
   }) {
-    var updateEvents = [
+    final updateEvents = [
       CreateUntiedUnit(path.first, unit),
       UpdateObject(path.first),
     ];
