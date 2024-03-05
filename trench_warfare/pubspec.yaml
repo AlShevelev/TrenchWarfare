@@ -36,6 +36,7 @@ flutter:
 
     # general purpose images
     - assets/images/
+    - assets/images/game_field_controls/
 
     # localisation
     - assets/translations/

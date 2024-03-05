@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 
 class GameFieldScreen extends StatelessWidget {
@@ -16,7 +17,14 @@ class GameFieldScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Background(
-        child: GameWidget(game: GameField(mapName: _mapName)),
+        child: GameWidget(
+          game: GameField(mapName: _mapName),
+          overlayBuilderMap: {
+            GameFieldControls.overlayKey: (BuildContext context, GameField game) {
+              return GameFieldControls(game);
+            },
+          },
+        ),
       ),
     );
   }
