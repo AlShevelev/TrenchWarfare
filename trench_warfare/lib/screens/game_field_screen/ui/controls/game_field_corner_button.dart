@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/app/theme/colors.dart';
 
 class GameFieldCornerButton extends StatelessWidget {
-  static const _buttonSize = 40.0;
+  static const _size = 40.0;
 
   final double? left;
   final double? top;
@@ -29,17 +30,17 @@ class GameFieldCornerButton extends StatelessWidget {
       top: top,
       right: right,
       bottom: bottom,
-      width: _buttonSize,
-      height: _buttonSize,
+      width: _size,
+      height: _size,
       child: Material(
         child: InkWell(
           onTap: () { onPress(); }, // Handle your callback.
-          splashColor: Colors.brown.withOpacity(0.5),
+          splashColor: AppColors.brown.withOpacity(0.5),
           child: Ink(
-            height: _buttonSize,
-            width: _buttonSize,
+            height: _size,
+            width: _size,
             decoration: BoxDecoration(
-              color: Colors.black.withAlpha(100),
+              color: AppColors.black.withAlpha(100),
               image: DecorationImage(
                 image: image,
                 fit: BoxFit.cover,

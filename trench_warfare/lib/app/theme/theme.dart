@@ -10,15 +10,15 @@ class AppThemeFactory {
       colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: AppColors.white,
-        onPrimary: AppColors.brown,
-        secondary: AppColors.brown,
+        onPrimary: AppColors.ginger,
+        secondary: AppColors.ginger,
         onSecondary: AppColors.white,
         error: AppColors.red,
         onError: AppColors.white,
         background: AppColors.white,
-        onBackground: AppColors.brown,
+        onBackground: AppColors.ginger,
         surface: AppColors.white,
-        onSurface: AppColors.brown
+        onSurface: AppColors.ginger
       ),
 
       scaffoldBackgroundColor: AppColors.white,
