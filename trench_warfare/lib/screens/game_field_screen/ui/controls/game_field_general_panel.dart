@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 
 class GameFieldGeneralPanel extends StatelessWidget {
@@ -29,8 +30,9 @@ class GameFieldGeneralPanel extends StatelessWidget {
       height: _height,
       child: Material(
         child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
+          decoration: BoxDecoration(
+            color: AppColors.black.withAlpha(100),
+            image: const DecorationImage(
               image: AssetImage("assets/images/game_field_controls/panel_general_info.webp"),
               fit: BoxFit.cover,
             ),

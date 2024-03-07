@@ -9,7 +9,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/components/game_field_components_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 
 class GameObjectsComposer implements Disposable {
