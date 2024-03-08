@@ -9,7 +9,7 @@ import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
-import 'package:trench_warfare/shared/architecture/simple_stream.dart';
+import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 
 import 'movement/movement_library.dart';
 
@@ -26,7 +26,7 @@ class GameFieldStateMachine implements Disposable {
 
   late final GameFieldRead _gameField;
 
-  final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SimpleStream<Iterable<UpdateGameEvent>>();
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SingleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   State _currentState = Initial();

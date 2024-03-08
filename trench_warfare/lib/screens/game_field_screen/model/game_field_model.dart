@@ -20,13 +20,18 @@ class GameFieldModel implements Disposable {
 
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _stateMachine.updateGameObjectsEvent;
 
+  NationRecord get _playerNation => _metadata.nations.first;
+
+  int get money => _playerNation.startMoney;
+  int get industryPoints => _playerNation.startIndustryPoints;
+
   GameFieldModel();
 
   Future<void> init(RenderableTiledMap tileMap) async {
     _metadata = await compute(MetadataReader.read, tileMap.map);
     _gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
-    _stateMachine.process(Init(_gameField, _metadata.nations.first.code));
+    _stateMachine.process(Init(_gameField, _playerNation.code));
   }
 
   void onClick(Vector2 position) {

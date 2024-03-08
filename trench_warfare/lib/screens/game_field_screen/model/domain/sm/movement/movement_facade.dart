@@ -3,12 +3,12 @@ part of movement;
 class MovementFacade {
   late final Nation _nation;
   late final GameFieldRead _gameField;
-  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   MovementFacade({
     required Nation nation,
     required GameFieldRead gameField,
-    required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
+    required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
   }) {
     _nation = nation;
     _gameField = gameField;

@@ -10,6 +10,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_gestures_compos
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_objects_composer.dart';
+import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_controls_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
 class GameField extends FlameGame with ScaleDetector, TapDetector {
@@ -21,6 +22,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
+
+  Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
 
   GameField({required mapName}) : super() {
     _mapName = mapName;

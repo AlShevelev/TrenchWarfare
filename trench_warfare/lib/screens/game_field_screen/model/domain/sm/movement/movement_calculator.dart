@@ -8,12 +8,12 @@ abstract class MovementCalculator {
   late final Nation _nation;
 
   @protected
-  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   MovementCalculator({
     required GameFieldRead gameField,
     required Nation nation,
-    required SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
+    required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
   }) {
     _gameField = gameField;
     _nation = nation;

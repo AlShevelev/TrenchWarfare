@@ -1,4 +1,4 @@
-abstract class GameFieldState {}
+sealed class GameFieldState {}
 
 class Loading extends GameFieldState {}
 

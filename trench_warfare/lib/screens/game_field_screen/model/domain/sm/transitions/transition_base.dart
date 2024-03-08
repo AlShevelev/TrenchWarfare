@@ -2,12 +2,12 @@ part of game_field_sm;
 
 abstract class TransitionBase {
   @protected
-  late final SimpleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   @protected
   late final GameFieldRead _gameField;
 
-  TransitionBase(SimpleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent, GameFieldRead gameField) {
+  TransitionBase(SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent, GameFieldRead gameField) {
     _updateGameObjectsEvent = updateGameObjectsEvent;
     _gameField = gameField;
   }

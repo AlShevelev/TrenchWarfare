@@ -1,7 +1,7 @@
-import 'dart:async';
+part of streams;
 
-class SimpleStream<T> {
-  final StreamController<T> _stream = StreamController<T>();
+abstract class SimpleStream<T> {
+  late final StreamController<T> _stream = getStreamController();
 
   Sink<T> get _input => _stream.sink;
 
@@ -21,4 +21,7 @@ class SimpleStream<T> {
   void close() {
     _stream.close();
   }
+
+  @protected
+  StreamController<T> getStreamController();
 }
