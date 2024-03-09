@@ -37,6 +37,10 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onClick(Vector2 position) => _model.onClick(position);
 
+  void onLongClickStart(Vector2 position) { }
+
+  void onLongClickEnd() { }
+
   void onMovementComplete() => _model.onMovementComplete();
 
   @override
