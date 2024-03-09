@@ -4,7 +4,7 @@ import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 
 class GameFieldGeneralPanel extends StatelessWidget {
-  static const _width = 188.0;
+  static const _width = 162.0;
   static const _height = 30.0;
 
   final int money;
@@ -48,7 +48,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                   child: Text(
-                    money < 100000 ? money.toString() : tr('greater_100_k'),
+                    money < 10000 ? money.toString() : tr('greater_10_k'),
                     style: AppTypography.s20w600,
                     overflow: TextOverflow.fade,
                   ),
@@ -61,7 +61,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
                   child: Text(
-                      industryPoints < 100000 ? industryPoints.toString() : tr('greater_100_k'),
+                      industryPoints < 10000 ? industryPoints.toString() : tr('greater_10_k'),
                     style: AppTypography.s20w600,
                     overflow: TextOverflow.fade,
                   ),
