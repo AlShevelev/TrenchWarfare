@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cell_info/game_field_cell_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -55,7 +56,11 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 industryPoints: state.industryPoints,
                 left: 15,
                 top: 0,
-              )
+              ),
+              if (state.cellInfo != null)
+                GameFieldCellInfoPanel(cellInfo: state.cellInfo!, left: 15, top: 30)
+              else
+                const SizedBox.shrink(),
             ],
           );
         });

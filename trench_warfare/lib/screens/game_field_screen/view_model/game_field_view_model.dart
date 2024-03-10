@@ -1,6 +1,8 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
+import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
+import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_controls_state.dart';
@@ -32,14 +34,24 @@ class GameFieldViewModel extends ViewModelBase {
     await _model.init(tileMap);
 
     _state.update(Playing());
-    _controlsState.update(Visible(money: _model.money, industryPoints: _model.industryPoints));
+    _controlsState.update(Visible(
+      cellInfo: GameFieldControlsCellInfo(
+        money: 42,
+        industryPoints: 43,
+        terrain: CellTerrain.snow,
+        terrainModifier: TerrainModifierType.trench,
+        productionCenter: null,
+      ),
+      money: _model.money,
+      industryPoints: _model.industryPoints,
+    ));
   }
 
   void onClick(Vector2 position) => _model.onClick(position);
 
-  void onLongClickStart(Vector2 position) { }
+  void onLongClickStart(Vector2 position) {}
 
-  void onLongClickEnd() { }
+  void onLongClickEnd() {}
 
   void onMovementComplete() => _model.onMovementComplete();
 

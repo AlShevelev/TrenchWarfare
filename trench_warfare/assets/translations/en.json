@@ -1,4 +1,12 @@
 {
   "app_title": "Trench warfare",
-  "greater_10_k": "10K+"
+  "greater_10_k": "10K+",
+  "plain": "Plain",
+  "wood": "Wood",
+  "marsh": "Marsh",
+  "sand": "Sand",
+  "hills": "Hills",
+  "mountains": "Mountains",
+  "snow": "Snow",
+  "water": "Water"
 }

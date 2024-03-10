@@ -7,9 +7,10 @@ import 'package:flutter/services.dart';
 import 'background_painter.dart';
 
 class Background extends StatefulWidget {
-  const Background({required this.child, super.key});
-
   final Widget child;
+  final String imagePath;
+
+  const Background({required this.child, super.key, required this.imagePath});
 
   @override
   State<Background> createState() => _BackgroundState();
@@ -26,7 +27,7 @@ class _BackgroundState extends State<Background> {
   }
 
   Future init() async {
-    final data = await rootBundle.load('assets/images/background.webp');
+    final data = await rootBundle.load(widget.imagePath);
     _background = await loadImage(Uint8List.view(data.buffer));
   }
 
