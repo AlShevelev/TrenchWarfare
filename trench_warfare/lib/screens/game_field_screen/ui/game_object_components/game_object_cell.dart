@@ -16,7 +16,7 @@ final class GameObjectCell extends GameObjectComponentBase {
     _addTerrainModifierSprites();
     _addProductionCenterSprites();
     _addUnitsSprites();
-    _addNationSprites();
+    _addNationBannerSprites();
     _addPathSprites();
   }
 
@@ -27,14 +27,7 @@ final class GameObjectCell extends GameObjectComponentBase {
       return;
     }
 
-    final name = switch (terrainModifier.type) {
-      TerrainModifierType.antiAirGun => 'Terrain-modifiers-anti-air-gun',
-      TerrainModifierType.barbedWire => 'Terrain-modifiers-wire',
-      TerrainModifierType.landFort => 'Terrain-modifiers-land-fort',
-      TerrainModifierType.landMine => 'Terrain-modifiers-land-mine',
-      TerrainModifierType.seaMine => 'Terrain-modifiers-sea-mine',
-      TerrainModifierType.trench => 'Terrain-modifiers-trench',
-    };
+    final name = SpriteAtlasNames.getTerrainModifier(terrainModifier.type);
 
     _addSprite(name);
   }
@@ -46,22 +39,9 @@ final class GameObjectCell extends GameObjectComponentBase {
       return;
     }
 
-    final levelDigit = switch (productionCenter.level) {
-      ProductionCenterLevel.level1 => '1',
-      ProductionCenterLevel.level2 => '2',
-      ProductionCenterLevel.level3 => '3',
-      ProductionCenterLevel.level4 => '4',
-      ProductionCenterLevel.capital => '5',
-    };
+    final bodyName = SpriteAtlasNames.getProductionCenter(productionCenter);
 
-    final bodyName = switch (productionCenter.type) {
-      ProductionCenterType.airField => 'Production-centers-air-field-level-$levelDigit',
-      ProductionCenterType.navalBase => 'Production-centers-naval-base-level-$levelDigit',
-      ProductionCenterType.factory => 'Production-centers-factory-level-$levelDigit',
-      ProductionCenterType.city => 'Production-centers-city-level-$levelDigit',
-    };
-
-    final levelName = 'Production-centers-level-$levelDigit';
+    final levelName = SpriteAtlasNames.getProductionCenterLevel(productionCenter);
 
     _addSprite(bodyName);
     _addSprite(levelName);
@@ -76,36 +56,12 @@ final class GameObjectCell extends GameObjectComponentBase {
     _addUnitSprites(unit: _cell.activeUnit!, nation: _cell.nation, unitsTotal: _cell.units.length);
   }
 
-  void _addNationSprites() {
+  void _addNationBannerSprites() {
     if (_cell.isEmpty) {
       return;
     }
 
-    final nationSuffix = switch (_cell.nation!) {
-      Nation.austriaHungary => 'Austro-Hungaria',
-      Nation.belgium => 'Belgium',
-      Nation.bulgaria => 'Bulgaria',
-      Nation.china => 'China',
-      Nation.france => 'France',
-      Nation.germany => 'Germany',
-      Nation.greatBritain => 'UK',
-      Nation.greece => 'Greece',
-      Nation.italy => 'Italy',
-      Nation.japan => 'Japan',
-      Nation.korea => 'Korea',
-      Nation.mexico => 'Mexico',
-      Nation.mongolia => 'Mongolia',
-      Nation.montenegro => 'Montenegro',
-      Nation.romania => 'Romania',
-      Nation.russia => 'Russia',
-      Nation.serbia => 'Serbia',
-      Nation.turkey => 'Turkey',
-      Nation.usa => 'US',
-      Nation.usNorth => 'US-North',
-      Nation.usSouth => 'US-South',
-    };
-
-    _addSprite('Banner-$nationSuffix');
+    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!));
   }
 
   void _addPathSprites() {
@@ -115,12 +71,7 @@ final class GameObjectCell extends GameObjectComponentBase {
       return;
     }
 
-    final pathSprite = switch (pathItem.type) {
-      PathItemType.normal => 'Path-Normal',
-      PathItemType.explosion => 'Path-Explosion',
-      PathItemType.battle => 'Path-Battle',
-      PathItemType.end => 'Path-End',
-    };
+    final pathSprite = SpriteAtlasNames.getPath(pathItem.type);
 
     _addSprite(pathSprite, decorator: pathItem.isActive ? null : _getDisabledDecorator());
   }

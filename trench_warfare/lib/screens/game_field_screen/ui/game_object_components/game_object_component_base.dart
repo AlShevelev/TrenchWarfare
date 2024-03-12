@@ -44,120 +44,18 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
 
   @protected
   void _addUnitSprites({required Unit unit, required Nation? nation, required int? unitsTotal, bool alwaysEnabled = false,}) {
-    final quantityName = unitsTotal != null ? 'Unit-Quantity-$unitsTotal' : null;
+    final quantityName = SpriteAtlasNames.getUnitQuantity(unitsTotal);
 
-    final relativeHealth = unit.health / unit.maxHealth;
+    final healthName =  SpriteAtlasNames.getUnitHealth(unit);
 
-    final healthSuffix = Range(0.0, 0.05).isInRange(relativeHealth)
-        ? 5
-        : Range(0.05, 0.10).isInRange(relativeHealth)
-        ? 10
-        : Range(0.10, 0.15).isInRange(relativeHealth)
-        ? 15
-        : Range(0.15, 0.20).isInRange(relativeHealth)
-        ? 20
-        : Range(0.20, 0.25).isInRange(relativeHealth)
-        ? 25
-        : Range(0.25, 0.30).isInRange(relativeHealth)
-        ? 30
-        : Range(0.30, 0.35).isInRange(relativeHealth)
-        ? 35
-        : Range(0.35, 0.40).isInRange(relativeHealth)
-        ? 40
-        : Range(0.40, 0.45).isInRange(relativeHealth)
-        ? 45
-        : Range(0.45, 0.50).isInRange(relativeHealth)
-        ? 50
-        : Range(0.50, 0.55).isInRange(relativeHealth)
-        ? 55
-        : Range(0.55, 0.60).isInRange(relativeHealth)
-        ? 60
-        : Range(0.60, 0.65).isInRange(relativeHealth)
-        ? 65
-        : Range(0.65, 0.70).isInRange(relativeHealth)
-        ? 70
-        : Range(0.70, 0.75).isInRange(relativeHealth)
-        ? 75
-        : Range(0.75, 0.80).isInRange(relativeHealth)
-        ? 80
-        : Range(0.80, 0.85).isInRange(relativeHealth)
-        ? 85
-        : Range(0.85, 0.90).isInRange(relativeHealth)
-        ? 90
-        : Range(0.90, 0.95).isInRange(relativeHealth)
-        ? 95
-        : 100;
-    final healthName = 'Unit-Health-$healthSuffix';
+    final experienceRankName = SpriteAtlasNames.getUnitExperienceRank(unit);
 
-    final experienceRankName = switch (unit.experienceRank) {
-      UnitExperienceRank.rookies => null,
-      UnitExperienceRank.fighters => unit.isLand ? 'Unit-Land-Rank-2' : 'Unit-Sea-Rank-2',
-      UnitExperienceRank.proficients => unit.isLand ? 'Unit-Land-Rank-3' : 'Unit-Sea-Rank-3',
-      UnitExperienceRank.veterans => unit.isLand ? 'Unit-Land-Rank-4' : 'Unit-Sea-Rank-4',
-      UnitExperienceRank.elite => unit.isLand ? 'Unit-Land-Rank-5' : 'Unit-Sea-Rank-5',
-    };
+    final boost1Name = SpriteAtlasNames.getUnitBoost1(unit);
+    final boost2Name = SpriteAtlasNames.getUnitBoost2(unit);
+    final boost3Name = SpriteAtlasNames.getUnitBoost3(unit);
 
-    final boost1Name = switch (unit.boost1) {
-      null => null,
-      UnitBoost.attack => unit.isLand ? 'Unit-Boost-1-Attack' : 'Unit-Boost-0-Attack',
-      UnitBoost.defence => unit.isLand ? 'Unit-Boost-1-Defence' : 'Unit-Boost-0-Defence',
-      UnitBoost.commander => unit.isLand ? 'Unit-Boost-1-Commander' : 'Unit-Boost-0-Commander',
-      UnitBoost.transport => unit.isLand ? 'Unit-Boost-1-Transport' : null,
-    };
-
-    final boost2Name = switch (unit.boost2) {
-      null => null,
-      UnitBoost.attack => unit.isLand ? 'Unit-Boost-2-Attack' : 'Unit-Boost-1-Attack',
-      UnitBoost.defence => unit.isLand ? 'Unit-Boost-2-Defence' : 'Unit-Boost-1-Defence',
-      UnitBoost.commander => unit.isLand ? 'Unit-Boost-2-Commander' : 'Unit-Boost-1-Commander',
-      UnitBoost.transport => unit.isLand ? 'Unit-Boost-2-Transport' : null,
-    };
-
-    final boost3Name = switch (unit.boost3) {
-      null => null,
-      UnitBoost.attack => unit.isLand ? 'Unit-Boost-3-Attack' : 'Unit-Boost-2-Attack',
-      UnitBoost.defence => unit.isLand ? 'Unit-Boost-3-Defence' : 'Unit-Boost-2-Defence',
-      UnitBoost.commander => unit.isLand ? 'Unit-Boost-3-Commander' : 'Unit-Boost-2-Commander',
-      UnitBoost.transport => unit.isLand ? 'Unit-Boost-3-Transport' : null,
-    };
-
-    final secondaryUnitName = unit.type == UnitType.cavalry ? 'Unit-Cavalry-Horse' : null;
-
-    final primaryUnitName = switch (unit.type) {
-      UnitType.armoredCar => 'Unit-Armored-car',
-      UnitType.artillery => 'Unit-Artillery',
-      UnitType.infantry || UnitType.cavalry => switch (nation) {
-        null => null,
-        Nation.austriaHungary => 'Unit-Austro-Hungarian-Infantry',
-        Nation.belgium => 'Unit-Belgia-Infantry',
-        Nation.bulgaria => 'Unit-Bulgaria-Infantry',
-        Nation.china => 'Unit-China-Infantry',
-        Nation.france => 'Unit-France-Infantry',
-        Nation.germany => 'Unit-Germany-Infantry',
-        Nation.greatBritain => 'Unit-UK-Infantry',
-        Nation.greece => 'Unit-Greece-Infantry',
-        Nation.italy => 'Unit-Italy-Infantry',
-        Nation.japan => 'Unit-Japan-Infantry',
-        Nation.korea => 'Unit-Korea-Infantry',
-        Nation.mexico => 'Unit-Mexico-Infantry',
-        Nation.mongolia => 'Unit-Mongolia-Infantry',
-        Nation.montenegro => 'Unit-Montenegro-Infantry',
-        Nation.romania => 'Unit-Romania-Infantry',
-        Nation.russia => 'Unit-Russia-Infantry',
-        Nation.serbia => 'Unit-Serbia-Infantry',
-        Nation.turkey => 'Unit-Turkey-Infantry',
-        Nation.usa => 'Unit-US-Infantry',
-        Nation.usNorth => 'Unit-US-North-Infantry',
-        Nation.usSouth => 'Unit-US-South-Infantry',
-      },
-      UnitType.machineGunnersCart => 'Unit-Machine-gunners-cart',
-      UnitType.machineGuns => 'Unit-Machine-gunners',
-      UnitType.tank => 'Unit-Tank',
-      UnitType.destroyer => 'Unit-Destroyer',
-      UnitType.cruiser => 'Unit-Cruiser',
-      UnitType.battleship => 'Unit-Battleship',
-      UnitType.carrier => 'Unit-Carrier',
-    };
+    final secondaryUnitName = SpriteAtlasNames.getUnitSecondary(unit);
+    final primaryUnitName = SpriteAtlasNames.getUnitPrimary(unit, nation);
 
     final state = alwaysEnabled ? UnitState.enabled : unit.state;
     if (state == UnitState.disabled) {
@@ -165,7 +63,7 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
       _addSprite(secondaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
     } else {
       if (state == UnitState.active) {
-        _addSprite('Selection-Frame', size: _SpriteSize.base);
+        _addSprite(SpriteAtlasNames.getSelectionFrame(), size: _SpriteSize.base);
       }
 
       _addSprite(primaryUnitName, size: _SpriteSize.base);
