@@ -1,7 +1,10 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
+import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
+import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
@@ -39,8 +42,12 @@ class GameFieldViewModel extends ViewModelBase {
         money: 42,
         industryPoints: 43,
         terrain: CellTerrain.snow,
-        terrainModifier: TerrainModifierType.trench,
-        productionCenter: null,
+        terrainModifier: null/*TerrainModifierType.landMine*/,
+        productionCenter: ProductionCenter(
+          type: ProductionCenterType.city,
+          name: "New York",
+          level: ProductionCenterLevel.capital,
+        ),
       ),
       money: _model.money,
       industryPoints: _model.industryPoints,

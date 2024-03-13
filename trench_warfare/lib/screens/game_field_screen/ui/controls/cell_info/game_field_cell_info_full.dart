@@ -3,41 +3,42 @@ part of game_field_cell_info;
 class GameFieldCellInfoFull extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
-  const GameFieldCellInfoFull({
+  late final TextureAtlas _spritesAtlas;
+
+  GameFieldCellInfoFull({
     super.key,
     required this.cellInfo,
-  });
+    required TextureAtlas spritesAtlas
+  }) {
+    _spritesAtlas = spritesAtlas;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
-            color: Colors.blue,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  _getTerrainName(cellInfo.terrain),
-                  style: AppTypography.s18w600,
-                  overflow: TextOverflow.fade,
-                ),
-                _getMoneyWidget()
-              ],
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              _getTerrainName(cellInfo.terrain),
+              style: AppTypography.s18w600,
+              overflow: TextOverflow.fade,
             ),
-          ),
-          Expanded(
+            _getMoneyWidget()
+          ],
+        ),
+        Expanded(
+          child: CustomPaint(
+            painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
             child: Container(
-              color: Colors.yellow,
               child: null,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

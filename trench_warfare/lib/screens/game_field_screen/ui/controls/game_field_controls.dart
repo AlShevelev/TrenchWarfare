@@ -58,7 +58,12 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 top: 0,
               ),
               if (state.cellInfo != null)
-                GameFieldCellInfoPanel(cellInfo: state.cellInfo!, left: 15, top: 30)
+                GameFieldCellInfoPanel(
+                  cellInfo: state.cellInfo!,
+                  spritesAtlas: widget._gameField.spritesAtlas,
+                  left: 15,
+                  top: 30,
+                )
               else
                 const SizedBox.shrink(),
             ],

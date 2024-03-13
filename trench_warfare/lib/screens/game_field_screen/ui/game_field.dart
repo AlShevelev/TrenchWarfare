@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
@@ -16,7 +17,7 @@ import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_v
 class GameField extends FlameGame with ScaleDetector, TapDetector {
   late final GameFieldViewModel _viewModel;
 
-  late TiledComponent mapComponent;
+  late TiledComponent _mapComponent;
 
   late final String _mapName;
 
@@ -24,6 +25,9 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   late final GameGesturesComposer _gameGesturesComposer;
 
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
+
+  late final TextureAtlas _spritesAtlas;
+  TextureAtlas get spritesAtlas => _spritesAtlas;
 
   GameField({required mapName}) : super() {
     _mapName = mapName;
@@ -39,28 +43,30 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
       ..zoom = GameGesturesComposer.minZoom
       ..anchor = Anchor.center;
 
-    mapComponent = await TiledComponent.load(
+    _mapComponent = await TiledComponent.load(
       _mapName,
       ComponentConstants.cellRealSize,
     );
-    world.add(mapComponent);
+    world.add(_mapComponent);
 
     _gameGesturesComposer = GameGesturesComposer(
-      mapSize: Offset(mapComponent.width, mapComponent.height),
+      mapSize: Offset(_mapComponent.width, _mapComponent.height),
       camera: GesturesCamera(camera),
       onGestureEvent: _onGestureEvent,
     );
 
+    _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+
     _gameObjectsComposer = GameObjectsComposer(
-      mapComponent,
+      _mapComponent,
       _viewModel.updateGameObjectsEvent,
-      await fromAtlas('images/sprites/sprites_atlas'),
+      _spritesAtlas,
       _viewModel.onMovementComplete,
       explosionAnimationAtlas: await images.load('sprites/animation_explosion_atlas.png'),
       bloodSplashesAnimationAtlas: await images.load('sprites/animation_blood_splashes_atlas.png'),
     );
 
-    await _viewModel.init(mapComponent.tileMap);
+    await _viewModel.init(_mapComponent.tileMap);
 
     _gameObjectsComposer.init(_viewModel.gameField);
 

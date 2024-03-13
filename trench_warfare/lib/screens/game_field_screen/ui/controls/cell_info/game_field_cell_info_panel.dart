@@ -6,15 +6,20 @@ class GameFieldCellInfoPanel extends StatelessWidget {
 
   final GameFieldControlsCellInfo cellInfo;
 
+  late final TextureAtlas _spritesAtlas;
+
   final double left;
   final double top;
 
-  const GameFieldCellInfoPanel({
+  GameFieldCellInfoPanel({
     super.key,
     required this.cellInfo,
     required this.left,
     required this.top,
-  });
+    required TextureAtlas spritesAtlas
+  }) {
+    _spritesAtlas = spritesAtlas;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class GameFieldCellInfoPanel extends StatelessWidget {
               style: AppTypography.s20w600,
               child: cellInfo.terrainModifier == null && cellInfo.productionCenter == null
                   ? GameFieldCellInfoBrief(cellInfo: cellInfo)
-                  : GameFieldCellInfoFull(cellInfo: cellInfo)
+                  : GameFieldCellInfoFull(cellInfo: cellInfo, spritesAtlas: _spritesAtlas,)
             ),
           )),
     );
