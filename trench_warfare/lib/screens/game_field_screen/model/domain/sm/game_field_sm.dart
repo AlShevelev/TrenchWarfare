@@ -7,13 +7,12 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
-
-import 'movement/movement_library.dart';
 
 part 'event.dart';
 part 'state.dart';
