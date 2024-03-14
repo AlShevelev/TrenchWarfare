@@ -1,7 +1,10 @@
 part of game_field_sm;
 
-class FromWaitingForEndOfPathOnClick extends TransitionBase {
-  FromWaitingForEndOfPathOnClick(super.updateGameObjectsEvent, super.gameField);
+class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
+  FromWaitingForEndOfPathOnClick(
+    super.updateGameObjectsEvent,
+    super.gameField,
+  );
 
   State process(GameFieldCell startCell, GameFieldCell endCell) {
     final unit = startCell.activeUnit!;

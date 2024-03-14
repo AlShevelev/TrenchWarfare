@@ -4,7 +4,7 @@ class GameGesturesComposer {
   static const double minZoom = 0.5;
   static const double maxZoom = 2.0;
 
-  static const int longTapDuration = 1000; // ms
+  static const int longTapDuration = 700; // ms
 
   double _zoom = minZoom;
   double get zoom => _zoom;

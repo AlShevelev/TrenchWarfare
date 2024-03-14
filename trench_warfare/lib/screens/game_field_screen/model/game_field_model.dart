@@ -7,6 +7,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/meta
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:tuple/tuple.dart';
 
@@ -18,12 +19,11 @@ class GameFieldModel implements Disposable {
 
   late final GameFieldStateMachine _stateMachine = GameFieldStateMachine();
 
+  Stream<GameFieldControlsState> get controlsState => _stateMachine.controlsState;
+
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _stateMachine.updateGameObjectsEvent;
 
   NationRecord get _playerNation => _metadata.nations.first;
-
-  int get money => _playerNation.startMoney;
-  int get industryPoints => _playerNation.startIndustryPoints;
 
   GameFieldModel();
 
@@ -31,12 +31,21 @@ class GameFieldModel implements Disposable {
     _metadata = await compute(MetadataReader.read, tileMap.map);
     _gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
-    _stateMachine.process(Init(_gameField, _playerNation.code));
+    _stateMachine.process(Init(_gameField, _playerNation));
   }
 
   void onClick(Vector2 position) {
     final clickedCell = _gameField.findCellByPosition(position);
     _stateMachine.process(Click(clickedCell));
+  }
+
+  void onLongClickStart(Vector2 position) {
+    final clickedCell = _gameField.findCellByPosition(position);
+    _stateMachine.process(LongClickStart(clickedCell));
+  }
+
+  void onLongClickEnd() {
+    _stateMachine.process(LongClickEnd());
   }
 
   void onMovementComplete() => _stateMachine.process(MovementComplete());

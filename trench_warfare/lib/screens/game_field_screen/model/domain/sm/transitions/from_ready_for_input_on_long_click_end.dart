@@ -1,18 +1,16 @@
 part of game_field_sm;
 
-class FromInitialOnInitTransition extends GameObjectTransitionBase {
+class FromReadyForInputOnLongClickEnd {
   late final NationRecord _nationRecord;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
-  FromInitialOnInitTransition(
-    super.updateGameObjectsEvent,
-    SingleStream<GameFieldControlsState> controlsState,
-    super.gameField,
+  FromReadyForInputOnLongClickEnd(
     NationRecord nationRecord,
+    SingleStream<GameFieldControlsState> controlsState,
   ) {
-    _controlsState = controlsState;
     _nationRecord = nationRecord;
+    _controlsState = controlsState;
   }
 
   State process() {
@@ -21,9 +19,6 @@ class FromInitialOnInitTransition extends GameObjectTransitionBase {
       money: _nationRecord.startMoney,
       industryPoints: _nationRecord.startIndustryPoints,
     ));
-
-    final cellsToAdd = _gameField.cells.where((c) => c.nation != null);
-    _updateGameObjectsEvent.update(cellsToAdd.map((c) => UpdateObject(c)));
 
     return ReadyForInput();
   }

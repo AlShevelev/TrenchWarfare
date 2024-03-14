@@ -3,7 +3,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/cell_info/g
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
-import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 
 class GameFieldControls extends StatefulWidget {
   static const overlayKey = 'GameFieldControls';
@@ -63,9 +63,7 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   spritesAtlas: widget._gameField.spritesAtlas,
                   left: 15,
                   top: 30,
-                )
-              else
-                const SizedBox.shrink(),
+                ),
             ],
           );
         });

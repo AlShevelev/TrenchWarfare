@@ -1,14 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
-import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_state.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
@@ -17,8 +12,7 @@ class GameFieldViewModel extends ViewModelBase {
   final SingleStream<GameFieldState> _state = SingleStream<GameFieldState>();
   Stream<GameFieldState> get state => _state.output;
 
-  final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState => _controlsState.output;
+  Stream<GameFieldControlsState> get controlsState => _model.controlsState;
 
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
@@ -30,35 +24,19 @@ class GameFieldViewModel extends ViewModelBase {
     _model = GameFieldModel();
 
     _state.update(Loading());
-    _controlsState.update(Invisible());
   }
 
   Future<void> init(RenderableTiledMap tileMap) async {
     await _model.init(tileMap);
 
     _state.update(Playing());
-    _controlsState.update(Visible(
-      cellInfo: GameFieldControlsCellInfo(
-        money: 42,
-        industryPoints: 43,
-        terrain: CellTerrain.snow,
-        terrainModifier: null/*TerrainModifierType.landMine*/,
-        productionCenter: ProductionCenter(
-          type: ProductionCenterType.city,
-          name: "New York",
-          level: ProductionCenterLevel.capital,
-        ),
-      ),
-      money: _model.money,
-      industryPoints: _model.industryPoints,
-    ));
   }
 
   void onClick(Vector2 position) => _model.onClick(position);
 
-  void onLongClickStart(Vector2 position) {}
+  void onLongClickStart(Vector2 position) => _model.onLongClickStart(position);
 
-  void onLongClickEnd() {}
+  void onLongClickEnd() => _model.onLongClickEnd();
 
   void onMovementComplete() => _model.onMovementComplete();
 
@@ -66,7 +44,6 @@ class GameFieldViewModel extends ViewModelBase {
   void dispose() {
     // _audioController.stopSound();
     _state.close();
-    _controlsState.close();
 
     _model.dispose();
   }

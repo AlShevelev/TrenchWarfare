@@ -1,9 +1,13 @@
 part of game_field_sm;
 
-class FromReadyForInputOnClick extends TransitionBase {
+class FromReadyForInputOnClick extends GameObjectTransitionBase {
   late final Nation _nation;
 
-  FromReadyForInputOnClick(super.updateGameObjectsEvent, super.gameField, Nation nation) {
+  FromReadyForInputOnClick(
+    super.updateGameObjectsEvent,
+    super.gameField,
+    Nation nation,
+  ) {
     _nation = nation;
   }
 

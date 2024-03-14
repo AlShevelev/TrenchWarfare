@@ -1,9 +1,13 @@
 part of game_field_sm;
 
-class FromPathIsShownOnClick extends TransitionBase {
+class FromPathIsShownOnClick extends GameObjectTransitionBase {
   late final Nation _nation;
 
-  FromPathIsShownOnClick(super.updateGameObjectsEvent, super.gameField, Nation nation) {
+  FromPathIsShownOnClick(
+    super.updateGameObjectsEvent,
+    super.gameField,
+    Nation nation,
+  ) {
     _nation = nation;
   }
 

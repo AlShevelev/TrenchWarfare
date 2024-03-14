@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/sprite_atlas/sprite_atlas_names.dart';
-import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 
 class GameFieldCellInfoGameObjectPainter extends CustomPainter {
   late final GameFieldControlsCellInfo _cellInfo;
