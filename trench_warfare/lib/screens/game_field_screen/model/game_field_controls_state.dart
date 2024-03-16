@@ -25,11 +25,14 @@ class GameFieldControlsCellInfo {
 
   final ProductionCenter? productionCenter;
 
+  final List<Unit>? army;
+
   GameFieldControlsCellInfo({
     required this.money,
     required this.industryPoints,
     required this.terrain,
     required this.terrainModifier,
     required this.productionCenter,
+    required this.army,
   });
 }

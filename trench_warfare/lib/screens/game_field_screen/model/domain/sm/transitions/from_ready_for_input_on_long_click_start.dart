@@ -21,6 +21,7 @@ class FromReadyForInputOnLongClickStart {
         terrain: cell.terrain,
         terrainModifier: cell.terrainModifier?.type,
         productionCenter: cell.productionCenter,
+        army: null,
       ),
       money: _nationRecord.startMoney,
       industryPoints: _nationRecord.startIndustryPoints,

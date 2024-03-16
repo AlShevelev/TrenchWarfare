@@ -104,6 +104,8 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
 
     if (decorator != null) {
       sprite.decorator.addLast(decorator);
+    } else {
+      sprite.decorator.removeLast();
     }
 
     add(sprite);

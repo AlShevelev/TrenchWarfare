@@ -1,11 +1,4 @@
-import 'package:flame/components.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/sprite_atlas/sprite_atlas_names.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
+part of game_field_cell_info;
 
 class GameFieldCellInfoGameObjectPainter extends CustomPainter {
   late final GameFieldControlsCellInfo _cellInfo;
@@ -72,6 +65,6 @@ class GameFieldCellInfoGameObjectPainter extends CustomPainter {
     }
 
     final sideSize = size.width > size.height ? size.height : size.width;
-    return Rect.fromLTWH((size.width - sideSize) / 2, (size.height - sideSize) / 2, sideSize, sideSize);
+    return Rect.fromLTWH(size.width - sideSize, (size.height - sideSize) / 2, sideSize, sideSize);
   }
 }

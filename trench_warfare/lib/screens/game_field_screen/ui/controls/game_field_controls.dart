@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cell_info/game_field_cell_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_general_panel.dart';
@@ -29,6 +30,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
           }
 
           final state = value.data as Visible;
+
+          final screenWidth = MediaQuery.of(context).size.width;
+          final screenHeight = MediaQuery.of(context).size.height;
 
           return Stack(
             alignment: AlignmentDirectional.topCenter,
@@ -64,6 +68,12 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   left: 15,
                   top: 30,
                 ),
+              GameFieldArmyInfoPanel(
+                //cellInfo: state.cellInfo,
+                spritesAtlas: widget._gameField.spritesAtlas,
+                left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
+                top: screenHeight - GameFieldArmyInfoPanel.height,
+              ),
             ],
           );
         });
