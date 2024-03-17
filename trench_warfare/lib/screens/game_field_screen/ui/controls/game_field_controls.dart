@@ -68,12 +68,13 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   left: 15,
                   top: 30,
                 ),
-              GameFieldArmyInfoPanel(
-                //cellInfo: state.cellInfo,
-                spritesAtlas: widget._gameField.spritesAtlas,
-                left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
-                top: screenHeight - GameFieldArmyInfoPanel.height,
-              ),
+              if (state.armyInfo != null)
+                GameFieldArmyInfoPanel(
+                  armyInfo: state.armyInfo!,
+                  spritesAtlas: widget._gameField.spritesAtlas,
+                  left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
+                  top: screenHeight - GameFieldArmyInfoPanel.height,
+                ),
             ],
           );
         });

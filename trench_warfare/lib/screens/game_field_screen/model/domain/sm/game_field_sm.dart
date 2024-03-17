@@ -48,7 +48,8 @@ class GameFieldStateMachine implements Disposable {
           Click(cell: var cell) => FromReadyForInputOnClick(
               _updateGameObjectsEvent,
               _gameField,
-              _nationCode,
+              _nationRecord,
+              _controlsState,
             ).process(cell),
           LongClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(
               _nationRecord,
@@ -64,6 +65,8 @@ class GameFieldStateMachine implements Disposable {
           Click(cell: var cell) => FromWaitingForEndOfPathOnClick(
               _updateGameObjectsEvent,
               _gameField,
+              _nationRecord,
+              _controlsState,
             ).process(startPathCell, cell),
           _ => _currentState,
         },
@@ -71,7 +74,8 @@ class GameFieldStateMachine implements Disposable {
           Click(cell: var cell) => FromPathIsShownOnClick(
               _updateGameObjectsEvent,
               _gameField,
-              _nationCode,
+              _nationRecord,
+              _controlsState,
             ).process(path, cell),
           _ => _currentState,
         },

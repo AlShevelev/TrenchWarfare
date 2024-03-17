@@ -12,7 +12,14 @@ class Visible extends GameFieldControlsState {
 
   final GameFieldControlsCellInfo? cellInfo;
 
-  Visible({required this.cellInfo, required this.money, required this.industryPoints});
+  final GameFieldControlsArmyInfo? armyInfo;
+
+  Visible({
+    required this.money,
+    required this.industryPoints,
+    required this.cellInfo,
+    required this.armyInfo,
+  });
 }
 
 class GameFieldControlsCellInfo {
@@ -25,14 +32,22 @@ class GameFieldControlsCellInfo {
 
   final ProductionCenter? productionCenter;
 
-  final List<Unit>? army;
-
   GameFieldControlsCellInfo({
     required this.money,
     required this.industryPoints,
     required this.terrain,
     required this.terrainModifier,
     required this.productionCenter,
-    required this.army,
+  });
+}
+
+class GameFieldControlsArmyInfo {
+  final String cellId;
+
+  final List<Unit> units;
+
+  GameFieldControlsArmyInfo({
+    required this.cellId,
+    required this.units,
   });
 }

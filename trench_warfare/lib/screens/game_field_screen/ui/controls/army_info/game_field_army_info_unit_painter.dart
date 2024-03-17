@@ -98,6 +98,10 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
         position: Vector2(drawingRect.left, drawingRect.top),
         size: Vector2(drawingRect.width, drawingRect.height),
       );
+
+      if (decorator != null) {
+        sprite.decorator.removeLast();
+      }
     }
   }
 

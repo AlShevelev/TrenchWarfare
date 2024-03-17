@@ -4,7 +4,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
   static const width = 250.0;
   static const height = 70.0;
 
-  //final GameFieldControlsCellInfo cellInfo;
+  final GameFieldControlsArmyInfo armyInfo;
 
   late final TextureAtlas _spritesAtlas;
 
@@ -13,7 +13,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 
   GameFieldArmyInfoPanel({
     super.key,
-    //required this.cellInfo,
+    required this.armyInfo,
     required this.left,
     required this.top,
     required TextureAtlas spritesAtlas,
@@ -26,49 +26,6 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 }
 
 class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> implements GameFieldArmyInfoUnitsCache {
-  final List<Unit> _units = [
-    Unit(
-      boost1: UnitBoost.attack,
-      boost2: UnitBoost.defence,
-      boost3: UnitBoost.commander,
-      experienceRank: UnitExperienceRank.proficients,
-      fatigue: 1,
-      health: 1,
-      movementPoints: 10,
-      type: UnitType.machineGuns,
-    ),
-    Unit(
-      boost1: UnitBoost.attack,
-      boost2: UnitBoost.defence,
-      boost3: UnitBoost.commander,
-      experienceRank: UnitExperienceRank.proficients,
-      fatigue: 1,
-      health: 1,
-      movementPoints: 10,
-      type: UnitType.infantry,
-    )..setState(UnitState.disabled),
-    Unit(
-      boost1: UnitBoost.attack,
-      boost2: UnitBoost.defence,
-      boost3: UnitBoost.commander,
-      experienceRank: UnitExperienceRank.proficients,
-      fatigue: 1,
-      health: 1,
-      movementPoints: 10,
-      type: UnitType.cavalry,
-    ),
-    Unit(
-      boost1: UnitBoost.attack,
-      boost2: UnitBoost.defence,
-      boost3: UnitBoost.commander,
-      experienceRank: UnitExperienceRank.proficients,
-      fatigue: 1,
-      health: 1,
-      movementPoints: 10,
-      type: UnitType.battleship,
-    ),
-  ];
-
   final Map<String, Picture> _cachedUnitPictures = {};
 
   @override
@@ -97,12 +54,12 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> impleme
               scrollDirection: Axis.horizontal,
               buildDefaultDragHandles: false,
               children: <Widget>[
-                for (var i = 0; i < _units.length; i++)
+                for (var i = 0; i < widget.armyInfo.units.length; i++)
                   ReorderableDragStartListener(
                     key: UniqueKey(),
                     index: i,
                     child: GameFieldArmyInfoUnit(
-                      unit: _units[i],
+                      unit: widget.armyInfo.units[i],
                       spritesAtlas: widget._spritesAtlas,
                       cache: this,
                     ),
@@ -113,8 +70,8 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> impleme
                   if (oldIndex < newIndex) {
                     newIndex -= 1;
                   }
-                  final Unit item = _units.removeAt(oldIndex);
-                  _units.insert(newIndex, item);
+                  final Unit item = widget.armyInfo.units.removeAt(oldIndex);
+                  widget.armyInfo.units.insert(newIndex, item);
                 });
               },
             ),

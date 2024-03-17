@@ -17,9 +17,10 @@ class FromInitialOnInitTransition extends GameObjectTransitionBase {
 
   State process() {
     _controlsState.update(Visible(
-      cellInfo: null,
       money: _nationRecord.startMoney,
       industryPoints: _nationRecord.startIndustryPoints,
+      cellInfo: null,
+      armyInfo: null,
     ));
 
     final cellsToAdd = _gameField.cells.where((c) => c.nation != null);

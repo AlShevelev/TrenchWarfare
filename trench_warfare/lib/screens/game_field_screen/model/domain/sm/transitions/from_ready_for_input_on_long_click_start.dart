@@ -15,16 +15,16 @@ class FromReadyForInputOnLongClickStart {
 
   State process(GameFieldCell cell) {
     _controlsState.update(Visible(
+      money: _nationRecord.startMoney,
+      industryPoints: _nationRecord.startIndustryPoints,
       cellInfo: GameFieldControlsCellInfo(
         money: 0,
         industryPoints: 0,
         terrain: cell.terrain,
         terrainModifier: cell.terrainModifier?.type,
         productionCenter: cell.productionCenter,
-        army: null,
       ),
-      money: _nationRecord.startMoney,
-      industryPoints: _nationRecord.startIndustryPoints,
+      armyInfo: null,
     ));
 
     return ReadyForInput();

@@ -15,9 +15,10 @@ class FromReadyForInputOnLongClickEnd {
 
   State process() {
     _controlsState.update(Visible(
-      cellInfo: null,
       money: _nationRecord.startMoney,
       industryPoints: _nationRecord.startIndustryPoints,
+      cellInfo: null,
+      armyInfo: null,
     ));
 
     return ReadyForInput();
