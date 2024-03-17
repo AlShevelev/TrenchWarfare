@@ -1,6 +1,6 @@
 part of game_field_army_info;
 
-class GameFieldArmyInfoPanel extends StatelessWidget {
+class GameFieldArmyInfoPanel extends StatefulWidget {
   static const width = 250.0;
   static const height = 70.0;
 
@@ -11,6 +11,21 @@ class GameFieldArmyInfoPanel extends StatelessWidget {
   final double left;
   final double top;
 
+  GameFieldArmyInfoPanel({
+    super.key,
+    //required this.cellInfo,
+    required this.left,
+    required this.top,
+    required TextureAtlas spritesAtlas,
+  }) {
+    _spritesAtlas = spritesAtlas;
+  }
+
+  @override
+  State<GameFieldArmyInfoPanel> createState() => _GameFieldArmyInfoPanelState();
+}
+
+class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> implements GameFieldArmyInfoUnitsCache {
   final List<Unit> _units = [
     Unit(
       boost1: UnitBoost.attack,
@@ -54,46 +69,55 @@ class GameFieldArmyInfoPanel extends StatelessWidget {
     ),
   ];
 
-  GameFieldArmyInfoPanel({
-    super.key,
-    //required this.cellInfo,
-    required this.left,
-    required this.top,
-    required TextureAtlas spritesAtlas,
-  }) {
-    _spritesAtlas = spritesAtlas;
-  }
+  final Map<String, Picture> _cachedUnitPictures = {};
+
+  @override
+  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
+
+  @override
+  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
 
   @override
   Widget build(BuildContext context) {
-    final widgets = List<Widget>.empty(growable: true);
-    for (var i = 0; i < _units.length; i++) {
-      widgets.add(
-          Padding(
-            padding: EdgeInsets.fromLTRB(i == 0 ? 0 : 10, 0, 0, 0),
-            child: CustomPaint(
-              painter: GameFieldArmyInfoUnitPainter(_units[i], Nation.austriaHungary, _spritesAtlas),
-              child: const SizedBox(
-                width: 50,
-                height: 50,
-                child: null,
-              ),
-            ),
-          )
-      );
-    }
-
     return Positioned(
-      left: left,
-      top: top,
-      width: width,
-      height: height,
+      left: widget.left,
+      top: widget.top,
+      width: GameFieldArmyInfoPanel.width,
+      height: GameFieldArmyInfoPanel.height,
       child: Background(
         imagePath: 'assets/images/game_field_controls/panel_army_info.webp',
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: widgets,
+          padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              canvasColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+            ),
+            child: ReorderableListView(
+              scrollDirection: Axis.horizontal,
+              buildDefaultDragHandles: false,
+              children: <Widget>[
+                for (var i = 0; i < _units.length; i++)
+                  ReorderableDragStartListener(
+                    key: UniqueKey(),
+                    index: i,
+                    child: GameFieldArmyInfoUnit(
+                      unit: _units[i],
+                      spritesAtlas: widget._spritesAtlas,
+                      cache: this,
+                    ),
+                  ),
+              ],
+              onReorder: (int oldIndex, int newIndex) {
+                setState(() {
+                  if (oldIndex < newIndex) {
+                    newIndex -= 1;
+                  }
+                  final Unit item = _units.removeAt(oldIndex);
+                  _units.insert(newIndex, item);
+                });
+              },
+            ),
           ),
         ),
       ),

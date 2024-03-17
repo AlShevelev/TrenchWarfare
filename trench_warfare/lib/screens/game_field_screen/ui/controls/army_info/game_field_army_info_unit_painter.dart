@@ -7,31 +7,59 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
 
   late final TextureAtlas _spritesAtlas;
 
-  GameFieldArmyInfoUnitPainter(Unit unit, Nation nation, TextureAtlas spritesAtlas) {
+  late final GameFieldArmyInfoUnitsCache _cache;
+
+  GameFieldArmyInfoUnitPainter({
+    required Unit unit,
+    required Nation nation,
+    required TextureAtlas spritesAtlas,
+    required GameFieldArmyInfoUnitsCache cache,
+  }) {
     _unit = unit;
     _nation = nation;
     _spritesAtlas = spritesAtlas;
+    _cache = cache;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
+    var cachedPicture = _cache.getUnitPicture(_unit.id);
+
+    if (cachedPicture != null) {
+      canvas.drawPicture(cachedPicture);
+      return;
+    }
+
+    cachedPicture = _drawPicture(size);
+    _cache.putUnitPicture(_unit.id, cachedPicture);
+
+    canvas.drawPicture(cachedPicture);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+
+  Picture _drawPicture(Size size) {
     final drawingRect = Rect.fromLTWH(0, 0, size.width, size.height);
+
+    final recorder = PictureRecorder();
+    final picCanvas = Canvas(recorder, drawingRect);
 
     _draw(
       spriteName: SpriteAtlasNames.getUnitPrimary(_unit, _nation),
-      canvas: canvas,
+      canvas: picCanvas,
       drawingRect: drawingRect,
       decorator: _unit.state == UnitState.disabled ? _getDisabledDecorator() : null,
     );
     _draw(
       spriteName: SpriteAtlasNames.getUnitSecondary(_unit),
-      canvas: canvas,
+      canvas: picCanvas,
       drawingRect: drawingRect,
       decorator: _unit.state == UnitState.disabled ? _getDisabledDecorator() : null,
     );
 
     _drawAll(
-      canvas,
+      picCanvas,
       spriteNames: [
         SpriteAtlasNames.getUnitHealth(_unit),
         SpriteAtlasNames.getUnitExperienceRank(_unit),
@@ -41,10 +69,9 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
       ],
       drawingRect: drawingRect,
     );
-  }
 
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+    return recorder.endRecording();
+  }
 
   void _drawAll(Canvas canvas, {required List<String?> spriteNames, required Rect drawingRect}) {
     for (var s in spriteNames) {
