@@ -25,7 +25,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
         cellInfo: null,
         armyInfo: GameFieldControlsArmyInfo(
           cellId: cell.id,
-          units: cell.units.toList(growable: false),
+          units: cell.units.toList(growable: true),
         ),
       ));
     } else {
