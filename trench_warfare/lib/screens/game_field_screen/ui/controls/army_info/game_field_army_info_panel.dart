@@ -4,21 +4,29 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
   static const width = 250.0;
   static const height = 70.0;
 
-  final GameFieldControlsArmyInfo armyInfo;
+  late final String _cellId;
 
-  late final TextureAtlas _spritesAtlas;
+  final GameFieldControlsArmyInfo armyInfo;
 
   final double left;
   final double top;
 
+  late final TextureAtlas _spritesAtlas;
+
+  late final GameFieldForControls _gameField;
+
   GameFieldArmyInfoPanel({
     super.key,
+    required String cellId,
     required this.armyInfo,
     required this.left,
     required this.top,
     required TextureAtlas spritesAtlas,
+    required GameFieldForControls gameField,
   }) {
+    _cellId = cellId;
     _spritesAtlas = spritesAtlas;
+    _gameField = gameField;
   }
 
   @override
@@ -72,6 +80,8 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> impleme
                   }
                   final Unit item = widget.armyInfo.units.removeAt(oldIndex);
                   widget.armyInfo.units.insert(newIndex, item);
+
+                  widget._gameField.onResortUnits(widget._cellId, widget.armyInfo.units.map((u) => u.id).toList(growable: false));
                 });
               },
             ),

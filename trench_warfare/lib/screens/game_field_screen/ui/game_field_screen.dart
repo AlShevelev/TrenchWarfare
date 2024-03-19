@@ -21,8 +21,8 @@ class GameFieldScreen extends StatelessWidget {
         child: GameWidget(
           game: GameField(mapName: _mapName),
           overlayBuilderMap: {
-            GameFieldControls.overlayKey: (BuildContext context, GameField game) {
-              return GameFieldControls(game);
+            GameFieldControls.overlayKey: (BuildContext context, GameField gameField) {
+              return GameFieldControls(gameField);
             },
           },
         ),

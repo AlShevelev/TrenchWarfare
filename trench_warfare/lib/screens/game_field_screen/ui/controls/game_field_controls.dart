@@ -9,9 +9,9 @@ import 'package:trench_warfare/screens/game_field_screen/model/game_field_contro
 class GameFieldControls extends StatefulWidget {
   static const overlayKey = 'GameFieldControls';
 
-  late final GameField _gameField;
+  late final GameFieldForControls _gameField;
 
-  GameFieldControls(GameField gameField, {super.key}) {
+  GameFieldControls(GameFieldForControls gameField, {super.key}) {
     _gameField = gameField;
   }
 
@@ -70,10 +70,12 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 ),
               if (state.armyInfo != null)
                 GameFieldArmyInfoPanel(
+                  cellId: state.armyInfo!.cellId,
                   armyInfo: state.armyInfo!,
                   spritesAtlas: widget._gameField.spritesAtlas,
                   left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
                   top: screenHeight - GameFieldArmyInfoPanel.height,
+                  gameField: widget._gameField,
                 ),
             ],
           );

@@ -21,8 +21,11 @@ part 'transitions/from_initial_on_init_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_long_click_start.dart';
 part 'transitions/from_ready_for_input_on_long_click_end.dart';
+part 'transitions/from_ready_for_input_on_resort_unit.dart';
 part 'transitions/from_waiting_for_end_of_path_on_click.dart';
+part 'transitions/from_waiting_for_end_of_path_on_resort_unit.dart';
 part 'transitions/from_path_is_shown_on_click.dart';
+part 'transitions/from_path_is_shown_on_resort_unit.dart';
 
 class GameFieldStateMachine implements Disposable {
   late final NationRecord _nationRecord;
@@ -59,6 +62,10 @@ class GameFieldStateMachine implements Disposable {
               _nationRecord,
               _controlsState,
             ).process(),
+          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
+            _updateGameObjectsEvent,
+            _gameField,
+          ).process(cellId, unitsId),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
@@ -68,6 +75,10 @@ class GameFieldStateMachine implements Disposable {
               _nationRecord,
               _controlsState,
             ).process(startPathCell, cell),
+            ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
+              _updateGameObjectsEvent,
+              _gameField,
+            ).process(cellId, unitsId),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -77,6 +88,10 @@ class GameFieldStateMachine implements Disposable {
               _nationRecord,
               _controlsState,
             ).process(path, cell),
+            ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
+              _updateGameObjectsEvent,
+              _gameField,
+            ).process(path, cellId, unitsId),
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {

@@ -24,3 +24,11 @@ class LongClickStart implements Event {
 class LongClickEnd implements Event { }
 
 class MovementComplete implements Event {}
+
+class ResortUnits implements Event {
+  final String cellId;
+
+  final Iterable<String> unitsId;
+
+  ResortUnits(this.cellId, this.unitsId);
+}

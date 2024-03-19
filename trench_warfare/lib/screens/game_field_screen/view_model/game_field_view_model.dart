@@ -40,6 +40,8 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onMovementComplete() => _model.onMovementComplete();
 
+  void onResortUnits(String cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
+
   @override
   void dispose() {
     // _audioController.stopSound();

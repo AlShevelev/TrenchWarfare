@@ -8,7 +8,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
   FromPathIsShownOnClick(
     super.updateGameObjectsEvent,
     super.gameField,
-      NationRecord nationRecord,
+    NationRecord nationRecord,
     SingleStream<GameFieldControlsState> controlsState,
   ) {
     _nationRecord = nationRecord;

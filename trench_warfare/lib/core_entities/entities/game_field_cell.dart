@@ -127,4 +127,15 @@ class GameFieldCell implements GameFieldCellRead {
   }
 
   Unit removeActiveUnit() =>  _units.removeAt(0);
+
+  void resortUnits(Iterable<String> unitsId) {
+    final result = List<Unit>.empty(growable: true);
+
+    for (var unitId in unitsId) {
+      result.add(_units.singleWhere((u) => u.id == unitId));
+    }
+
+    _units.clear();
+    _units.addAll(result);
+  }
 }

@@ -14,7 +14,15 @@ import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objec
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 
-class GameField extends FlameGame with ScaleDetector, TapDetector {
+abstract interface class GameFieldForControls {
+  Stream<GameFieldControlsState> get controlsState;
+
+  TextureAtlas get spritesAtlas;
+
+  void onResortUnits(String cellId, Iterable<String> unitsId);
+}
+
+class GameField extends FlameGame with ScaleDetector, TapDetector implements GameFieldForControls {
   late final GameFieldViewModel _viewModel;
 
   late TiledComponent _mapComponent;
@@ -24,9 +32,11 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
+  @override
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
 
   late final TextureAtlas _spritesAtlas;
+  @override
   TextureAtlas get spritesAtlas => _spritesAtlas;
 
   GameField({required mapName}) : super() {
@@ -93,6 +103,9 @@ class GameField extends FlameGame with ScaleDetector, TapDetector {
 
   @override
   void onTapCancel() => _gameGesturesComposer.onTapEnd();
+
+  @override
+  void onResortUnits(String cellId, Iterable<String> unitsId) => _viewModel.onResortUnits(cellId, unitsId);
 
   @override
   void onDispose() {
