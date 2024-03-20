@@ -79,6 +79,8 @@ class Unit extends GameObject {
     _fatigue = fatigue;
 
     this.movementPoints = movementPoints * maxMovementPoints;
+
+    _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
   void setState(UnitState state) => _state = state;
