@@ -16,7 +16,7 @@ class FromWaitingForEndOfPathOnResortUnit extends GameObjectTransitionBase {
 
     cell.resortUnits(unitsId);
 
-    _updateGameObjectsEvent.update([UpdateObject(cell)]);
+    _updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
 
     return ReadyForInput();
   }

@@ -24,7 +24,7 @@ class FromInitialOnInitTransition extends GameObjectTransitionBase {
     ));
 
     final cellsToAdd = _gameField.cells.where((c) => c.nation != null);
-    _updateGameObjectsEvent.update(cellsToAdd.map((c) => UpdateObject(c)));
+    _updateGameObjectsEvent.update(cellsToAdd.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return ReadyForInput();
   }

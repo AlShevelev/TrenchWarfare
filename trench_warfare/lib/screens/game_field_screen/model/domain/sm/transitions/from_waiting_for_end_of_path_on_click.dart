@@ -22,7 +22,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
       // reset the unit active state
       _hideArmyPanel();
       unit.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
+      _updateGameObjectsEvent.update([UpdateCell(startCell, updateBorderCells: [])]);
       return ReadyForInput();
     }
 
@@ -33,12 +33,12 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
       // reset the unit active state
       _hideArmyPanel();
       unit.setState(UnitState.enabled);
-      _updateGameObjectsEvent.update([UpdateObject(startCell)]);
+      _updateGameObjectsEvent.update([UpdateCell(startCell, updateBorderCells: [])]);
       return ReadyForInput();
     }
 
     final estimatedPath = _estimatePath(path: path, isLandUnit: unit.isLand);
-    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateObject(c)));
+    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return PathIsShown(estimatedPath);
   }

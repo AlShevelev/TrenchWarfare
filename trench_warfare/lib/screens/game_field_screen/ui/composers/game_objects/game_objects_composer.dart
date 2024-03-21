@@ -57,8 +57,8 @@ class GameObjectsComposer implements Disposable {
   void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
     for (var event in events) {
       switch (event) {
-        case UpdateObject(cell: var cell):
-          _updateCell(cell);
+        case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
+          _updateCell(cell, updateBorderCells);
 
         case CreateUntiedUnit(cell: var cell, unit: var unit):
           _createUntiedUnit(cell, unit);
@@ -90,14 +90,20 @@ class GameObjectsComposer implements Disposable {
     }
   }
 
-  void _updateCell(GameFieldCell cell) {
-    final borderComponentKey = '${cell.id}_border';
+  void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
+    final borderComponentKey = _getBorderComponentKey(cell);
 
     _removeGameObject(cell.id);
     _removeGameObject(borderComponentKey);
 
     _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
     _addGameObject(GameObjectCell(_spritesAtlas, cell), cell.id);
+
+    for (var updateBorderCell in updateBorderCells) {
+      final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
+      _removeGameObject(updateBorderComponentKey);
+      _addGameObject(GameCellBorder(updateBorderCell, _gameField), updateBorderComponentKey);
+    }
   }
 
   void _createUntiedUnit(GameFieldCell cell, Unit unit) {
@@ -192,4 +198,6 @@ class GameObjectsComposer implements Disposable {
         DamageType.explosion => 8,
         DamageType.bloodSplash => 13,
       };
+
+  String _getBorderComponentKey(GameFieldCell cell) => '${cell.id}_border';
 }

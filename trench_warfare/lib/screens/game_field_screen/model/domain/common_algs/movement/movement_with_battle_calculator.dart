@@ -163,7 +163,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
       CreateUntiedUnit(path.first, attackingUnit),
-      UpdateObject(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
     // Move the attacking unit to the attack cell
@@ -177,7 +177,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
           unit: attackingUnit,
           time: MovementConstants.unitMovementTime,
         ));
-        updateEvents.add(UpdateObject(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
         updateEvents.add(Pause(MovementConstants.unitMovementPause));
       }
       priorCell = cell;
@@ -240,16 +240,16 @@ class MovementWithBattleCalculator extends MovementCalculator {
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
 
     // Update the defending cell
-    updateEvents.add(UpdateObject(reachableCells.last));
+    updateEvents.add(UpdateCell(reachableCells.last, updateBorderCells: _gameField.findCellsAround(reachableCells.last)));
 
     if (newDefendingUnitCell != null) {
-      updateEvents.add(UpdateObject(newDefendingUnitCell));
+      updateEvents.add(UpdateCell(newDefendingUnitCell, updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell)));
     }
 
     // Update cells in an inactive part of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateObject(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 

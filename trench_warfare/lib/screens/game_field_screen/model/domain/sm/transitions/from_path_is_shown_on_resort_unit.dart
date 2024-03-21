@@ -19,7 +19,7 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
     for (var pathCell in path) {
       pathCell.setPathItem(null);
     }
-    _updateGameObjectsEvent.update(path.map((c) => UpdateObject(c)));
+    _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return ReadyForInput();
   }

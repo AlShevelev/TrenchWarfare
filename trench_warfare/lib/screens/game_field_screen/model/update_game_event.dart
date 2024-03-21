@@ -8,10 +8,12 @@ enum DamageType {
 
 sealed class UpdateGameEvent {}
 
-class UpdateObject implements UpdateGameEvent {
+class UpdateCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
-  UpdateObject(this.cell);
+  final Iterable<GameFieldCell> updateBorderCells;
+
+  UpdateCell(this.cell, {required this.updateBorderCells});
 }
 
 class CreateUntiedUnit implements UpdateGameEvent {

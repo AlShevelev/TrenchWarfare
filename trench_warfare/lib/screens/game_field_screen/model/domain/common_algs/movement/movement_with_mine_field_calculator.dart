@@ -64,11 +64,14 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required Iterable<GameFieldCell> reachableCells,
     required Unit unit,
   }) {
+
+    // setup untied unit
     var updateEvents = [
       CreateUntiedUnit(path.first, unit),
-      UpdateObject(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
+    // move the unit
     GameFieldCell? priorCell;
     for (var cell in reachableCells) {
       if (cell != reachableCells.first) {
@@ -78,7 +81,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
           unit: unit,
           time: MovementConstants.unitMovementTime,
         ));
-        updateEvents.add(UpdateObject(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
         updateEvents.add(Pause(MovementConstants.unitMovementPause));
       }
       priorCell = cell;
@@ -92,9 +95,10 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
 
     updateEvents.add(RemoveUntiedUnit(unit));
 
+    // clear the rest of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateObject(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 
