@@ -120,3 +120,5 @@ List<Tuple2<Offset, Offset>> splitLine(List<double> parts, {required Offset star
 
   return result;
 }
+
+int multiplyBy(int value, double factor) => (value * factor).round();
