@@ -1,4 +1,5 @@
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 
@@ -7,8 +8,7 @@ sealed class GameFieldControlsState {}
 class Invisible extends GameFieldControlsState {}
 
 class Visible extends GameFieldControlsState {
-  final int money;
-  final int industryPoints;
+  final MoneyUnit money;
 
   final GameFieldControlsCellInfo? cellInfo;
 
@@ -16,15 +16,13 @@ class Visible extends GameFieldControlsState {
 
   Visible({
     required this.money,
-    required this.industryPoints,
     required this.cellInfo,
     required this.armyInfo,
   });
 }
 
 class GameFieldControlsCellInfo {
-  final int money;
-  final int industryPoints;
+  final MoneyUnit income;
 
   final CellTerrain terrain;
 
@@ -33,8 +31,7 @@ class GameFieldControlsCellInfo {
   final ProductionCenter? productionCenter;
 
   GameFieldControlsCellInfo({
-    required this.money,
-    required this.industryPoints,
+    required this.income,
     required this.terrain,
     required this.terrainModifier,
     required this.productionCenter,

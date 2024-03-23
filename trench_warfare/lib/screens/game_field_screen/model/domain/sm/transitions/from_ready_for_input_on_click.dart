@@ -1,27 +1,26 @@
 part of game_field_sm;
 
 class FromReadyForInputOnClick extends GameObjectTransitionBase {
-  late final NationRecord _nationRecord;
+  late final Nation _nation;
+
+  late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromReadyForInputOnClick(
     super.updateGameObjectsEvent,
     super.gameField,
-    NationRecord nationRecord,
-    SingleStream<GameFieldControlsState> controlsState
-  ) {
-    _nationRecord = nationRecord;
-    _controlsState = controlsState;
-  }
+    this._nation,
+    this._nationMoney,
+    this._controlsState,
+  );
 
   State process(GameFieldCell cell) {
     final unit = cell.activeUnit;
 
-    if (cell.nation == _nationRecord.code && cell.units.length > 1) {
+    if (cell.nation == _nation && cell.units.length > 1) {
       _controlsState.update(Visible(
-        money: _nationRecord.startMoney,
-        industryPoints: _nationRecord.startIndustryPoints,
+        money: _nationMoney,
         cellInfo: null,
         armyInfo: GameFieldControlsArmyInfo(
           cellId: cell.id,
@@ -30,14 +29,13 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
       ));
     } else {
       _controlsState.update(Visible(
-        money: _nationRecord.startMoney,
-        industryPoints: _nationRecord.startIndustryPoints,
+        money: _nationMoney,
         cellInfo: null,
         armyInfo: null,
       ));
     }
 
-    if (cell.nation != _nationRecord.code) {
+    if (cell.nation != _nation) {
       return ReadyForInput();
     }
 

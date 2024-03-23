@@ -1,19 +1,16 @@
 part of game_field_sm;
 
 class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
-  late final NationRecord _nationRecord;
+  late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromWaitingForEndOfPathOnClick(
     super.updateGameObjectsEvent,
     super.gameField,
-    NationRecord nationRecord,
-    SingleStream<GameFieldControlsState> controlsState
-  ) {
-    _nationRecord = nationRecord;
-    _controlsState = controlsState;
-  }
+    this._nationMoney,
+    this._controlsState,
+  );
 
   State process(GameFieldCell startCell, GameFieldCell endCell) {
     final unit = startCell.activeUnit!;
@@ -45,8 +42,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
 
   void _hideArmyPanel() =>
     _controlsState.update(Visible(
-      money: _nationRecord.startMoney,
-      industryPoints: _nationRecord.startIndustryPoints,
+      money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
     ));

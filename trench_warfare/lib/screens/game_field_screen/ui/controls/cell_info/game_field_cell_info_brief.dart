@@ -46,7 +46,7 @@ class GameFieldCellInfoBrief extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
           child: Text(
-            cellInfo.money < 10000 ? cellInfo.money.toString() : tr('greater_10_k'),
+            cellInfo.income.currency < 10000 ? cellInfo.income.currency.toString() : tr('greater_10_k'),
             style: AppTypography.s20w600,
             overflow: TextOverflow.fade,
           ),
@@ -59,7 +59,7 @@ class GameFieldCellInfoBrief extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
           child: Text(
-            cellInfo.industryPoints < 10000 ? cellInfo.industryPoints.toString() : tr('greater_10_k'),
+            cellInfo.income.industryPoints < 10000 ? cellInfo.income.industryPoints.toString() : tr('greater_10_k'),
             style: AppTypography.s20w600,
             overflow: TextOverflow.fade,
           ),

@@ -4,8 +4,8 @@ import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 
 class MoneyTerrainModifierCalculator {
-  static const baseCurrency = 5;
-  static const baseIndustryPoints = 5;
+  static const _baseCurrency = 5;
+  static const _baseIndustryPoints = 5;
 
   static MoneyUnit? getBuildCost(CellTerrain terrain, TerrainModifierType type) => switch (terrain) {
         CellTerrain.plain => switch (type) {
@@ -60,27 +60,27 @@ class MoneyTerrainModifierCalculator {
 
   static MoneyUnit _calculateBaseCost(TerrainModifierType type) => switch (type) {
         TerrainModifierType.antiAirGun => MoneyUnit(
-            currency: multiplyBy(baseCurrency, 2),
-            industryPoints: multiplyBy(baseIndustryPoints, 2),
+            currency: multiplyBy(_baseCurrency, 2),
+            industryPoints: multiplyBy(_baseIndustryPoints, 2),
           ),
         TerrainModifierType.barbedWire => MoneyUnit(
-            currency: baseCurrency,
-            industryPoints: baseIndustryPoints,
+            currency: _baseCurrency,
+            industryPoints: _baseIndustryPoints,
           ),
         TerrainModifierType.landFort => MoneyUnit(
-            currency: multiplyBy(baseCurrency, 3),
-            industryPoints: multiplyBy(baseIndustryPoints, 3),
+            currency: multiplyBy(_baseCurrency, 3),
+            industryPoints: multiplyBy(_baseIndustryPoints, 3),
           ),
         TerrainModifierType.landMine => MoneyUnit(
-            currency: multiplyBy(baseCurrency, 2),
-            industryPoints: multiplyBy(baseIndustryPoints, 2),
+            currency: multiplyBy(_baseCurrency, 2),
+            industryPoints: multiplyBy(_baseIndustryPoints, 2),
           ),
         TerrainModifierType.seaMine => MoneyUnit(
-            currency: multiplyBy(baseCurrency, 2),
-            industryPoints: multiplyBy(baseIndustryPoints, 2),
+            currency: multiplyBy(_baseCurrency, 2),
+            industryPoints: multiplyBy(_baseIndustryPoints, 2),
           ),
         TerrainModifierType.trench => MoneyUnit(
-            currency: baseCurrency,
+            currency: _baseCurrency,
             industryPoints: 0,
           ),
       };

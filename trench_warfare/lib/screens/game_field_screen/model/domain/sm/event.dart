@@ -4,9 +4,12 @@ sealed class Event {}
 
 class Init implements Event {
   final GameFieldRead gameField;
-  final NationRecord nation;
 
-  Init(this.gameField, this.nation);
+  final Nation nation;
+
+  final MoneyStorageRead money;
+
+  Init(this.gameField, this.nation, this.money);
 }
 
 class Click implements Event {

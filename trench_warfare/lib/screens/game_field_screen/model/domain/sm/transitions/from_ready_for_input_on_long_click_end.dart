@@ -1,22 +1,18 @@
 part of game_field_sm;
 
 class FromReadyForInputOnLongClickEnd {
-  late final NationRecord _nationRecord;
+  late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromReadyForInputOnLongClickEnd(
-    NationRecord nationRecord,
-    SingleStream<GameFieldControlsState> controlsState,
-  ) {
-    _nationRecord = nationRecord;
-    _controlsState = controlsState;
-  }
+    this._nationMoney,
+    this._controlsState,
+  );
 
   State process() {
     _controlsState.update(Visible(
-      money: _nationRecord.startMoney,
-      industryPoints: _nationRecord.startIndustryPoints,
+      money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
     ));

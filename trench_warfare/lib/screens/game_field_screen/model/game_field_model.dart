@@ -5,6 +5,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
@@ -25,13 +26,17 @@ class GameFieldModel implements Disposable {
 
   NationRecord get _playerNation => _metadata.nations.first;
 
+  late final MoneyStorage _money;
+
   GameFieldModel();
 
   Future<void> init(RenderableTiledMap tileMap) async {
     _metadata = await compute(MetadataReader.read, tileMap.map);
     _gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
-    _stateMachine.process(Init(_gameField, _playerNation));
+    _money = MoneyStorage(_gameField, _playerNation);
+
+    _stateMachine.process(Init(_gameField, _playerNation.code, _money));
   }
 
   void onClick(Vector2 position) {

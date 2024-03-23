@@ -4,11 +4,11 @@ import 'package:trench_warfare/core_entities/enums/production_center_level.dart'
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 
 class MoneyProductionCenterCalculator {
-  static const baseCurrency = 20;
-  static const baseIndustryPoints = 20;
+  static const _baseCurrency = 20;
+  static const _baseIndustryPoints = 20;
 
-  static const upgradePerLevelCurrency = 10;
-  static const upgradePerLevelIndustryPoints = 10;
+  static const _upgradePerLevelCurrency = 10;
+  static const _upgradePerLevelIndustryPoints = 10;
 
   static MoneyUnit? getBuildCost(CellTerrain terrain, ProductionCenterType type, ProductionCenterLevel level) =>
       switch (terrain) {
@@ -48,7 +48,7 @@ class MoneyProductionCenterCalculator {
 
   static MoneyUnit _calculateBaseCost(ProductionCenterLevel level) {
     if (level == ProductionCenterLevel.level1) {
-      return MoneyUnit(currency: baseCurrency, industryPoints: baseIndustryPoints);
+      return MoneyUnit(currency: _baseCurrency, industryPoints: _baseIndustryPoints);
     }
 
     final levelFactor = switch (level) {
@@ -60,8 +60,8 @@ class MoneyProductionCenterCalculator {
     };
 
     return MoneyUnit(
-      currency: upgradePerLevelCurrency,
-      industryPoints: upgradePerLevelIndustryPoints,
+      currency: _upgradePerLevelCurrency,
+      industryPoints: _upgradePerLevelIndustryPoints,
     ).multiplyBy(levelFactor);
   }
 }

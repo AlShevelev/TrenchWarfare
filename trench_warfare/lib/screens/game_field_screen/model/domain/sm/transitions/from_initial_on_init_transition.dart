@@ -1,24 +1,20 @@
 part of game_field_sm;
 
 class FromInitialOnInitTransition extends GameObjectTransitionBase {
-  late final NationRecord _nationRecord;
+  late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromInitialOnInitTransition(
     super.updateGameObjectsEvent,
-    SingleStream<GameFieldControlsState> controlsState,
     super.gameField,
-    NationRecord nationRecord,
-  ) {
-    _controlsState = controlsState;
-    _nationRecord = nationRecord;
-  }
+    this._controlsState,
+    this._nationMoney,
+  );
 
   State process() {
     _controlsState.update(Visible(
-      money: _nationRecord.startMoney,
-      industryPoints: _nationRecord.startIndustryPoints,
+      money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
     ));

@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
+import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_cell_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
@@ -28,10 +30,11 @@ part 'transitions/from_path_is_shown_on_click.dart';
 part 'transitions/from_path_is_shown_on_resort_unit.dart';
 
 class GameFieldStateMachine implements Disposable {
-  late final NationRecord _nationRecord;
-  Nation get _nationCode => _nationRecord.code;
-
   late final GameFieldRead _gameField;
+
+  late final Nation _nation;
+
+  late final MoneyStorageRead _money;
 
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SingleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
@@ -44,22 +47,23 @@ class GameFieldStateMachine implements Disposable {
   void process(Event event) {
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          Init(gameField: var gameField, nation: var nation) => _processFromInitialOnInit(gameField, nation),
+          Init(gameField: var gameField, nation: var nation, money: var money) => _processInit(gameField, nation, money),
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
           Click(cell: var cell) => FromReadyForInputOnClick(
               _updateGameObjectsEvent,
               _gameField,
-              _nationRecord,
+              _nation,
+              _money.actual,
               _controlsState,
             ).process(cell),
           LongClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(
-              _nationRecord,
+              _money.actual,
               _controlsState,
             ).process(cell),
           LongClickEnd() => FromReadyForInputOnLongClickEnd(
-              _nationRecord,
+              _money.actual,
               _controlsState,
             ).process(),
           ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
@@ -72,7 +76,7 @@ class GameFieldStateMachine implements Disposable {
           Click(cell: var cell) => FromWaitingForEndOfPathOnClick(
               _updateGameObjectsEvent,
               _gameField,
-              _nationRecord,
+              _money.actual,
               _controlsState,
             ).process(startPathCell, cell),
             ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
@@ -85,7 +89,8 @@ class GameFieldStateMachine implements Disposable {
           Click(cell: var cell) => FromPathIsShownOnClick(
               _updateGameObjectsEvent,
               _gameField,
-              _nationRecord,
+              _nation,
+              _money.actual,
               _controlsState,
             ).process(path, cell),
             ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
@@ -109,15 +114,16 @@ class GameFieldStateMachine implements Disposable {
     _controlsState.close();
   }
 
-  State _processFromInitialOnInit(GameFieldRead gameField, NationRecord nation) {
+  State _processInit(GameFieldRead gameField, Nation nation, MoneyStorageRead money) {
     _gameField = gameField;
-    _nationRecord = nation;
+    _nation = nation;
+    _money = money;
 
     return FromInitialOnInitTransition(
       _updateGameObjectsEvent,
-      _controlsState,
       _gameField,
-      nation,
+      _controlsState,
+      _money.actual,
     ).process();
   }
 }

@@ -1,19 +1,19 @@
 part of game_field_sm;
 
 class FromPathIsShownOnClick extends GameObjectTransitionBase {
-  late final NationRecord _nationRecord;
+  late final Nation _nation;
+
+  late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromPathIsShownOnClick(
     super.updateGameObjectsEvent,
     super.gameField,
-    NationRecord nationRecord,
-    SingleStream<GameFieldControlsState> controlsState,
-  ) {
-    _nationRecord = nationRecord;
-    _controlsState = controlsState;
-  }
+    this._nation,
+    this._nationMoney,
+    this._controlsState,
+  );
 
   State process(Iterable<GameFieldCell> path, GameFieldCell cell) {
     final firstCell = path.first;
@@ -26,14 +26,13 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
 
     if (cell == path.last) {
       _controlsState.update(Visible(
-        money: _nationRecord.startMoney,
-        industryPoints: _nationRecord.startIndustryPoints,
+        money: _nationMoney,
         cellInfo: null,
         armyInfo: null,
       ));
 
       return MovementFacade(
-        nation: _nationRecord.code,
+        nation: _nation,
         gameField: _gameField,
         updateGameObjectsEvent: _updateGameObjectsEvent,
       ).startMovement(path);

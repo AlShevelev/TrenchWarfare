@@ -8,6 +8,8 @@ class MoneyUnit {
   @override
   int get hashCode => math.pair(currency, industryPoints);
 
+  static MoneyUnit get zero => MoneyUnit(currency: 0, industryPoints: 0);
+
   MoneyUnit({required this.currency, required this.industryPoints});
 
   @override

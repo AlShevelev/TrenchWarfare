@@ -56,8 +56,8 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 onPress: () {},
               ),
               GameFieldGeneralPanel(
-                money: state.money,
-                industryPoints: state.industryPoints,
+                money: state.money.currency,
+                industryPoints: state.money.industryPoints,
                 left: 15,
                 top: 0,
               ),
