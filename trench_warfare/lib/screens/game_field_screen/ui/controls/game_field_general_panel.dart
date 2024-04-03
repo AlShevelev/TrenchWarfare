@@ -33,7 +33,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.black.withAlpha(100),
             image: const DecorationImage(
-              image: AssetImage("assets/images/game_field_controls/panel_general_info.webp"),
+              image: AssetImage("assets/images/game_field_overlays/main/panel_general_info.webp"),
               fit: BoxFit.cover,
             ),
           ),
@@ -42,7 +42,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
             child: Row(
               children: [
                 Image.asset(
-                  'assets/images/game_field_controls/icon_money.webp',
+                  'assets/images/game_field_overlays/icon_money.webp',
                   height: 18,
                 ),
                 Padding(
@@ -55,7 +55,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
                 ),
                 const Spacer(),
                 Image.asset(
-                  'assets/images/game_field_controls/icon_industry_points.webp',
+                  'assets/images/game_field_overlays/icon_industry_points.webp',
                   height: 18,
                 ),
                 Padding(

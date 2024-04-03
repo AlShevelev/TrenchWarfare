@@ -40,19 +40,19 @@ class _GameFieldControlsState extends State<GameFieldControls> {
               GameFieldCornerButton(
                 left: 15,
                 bottom: 15,
-                image: const AssetImage('assets/images/game_field_controls/button_cards.webp'),
+                image: const AssetImage('assets/images/game_field_overlays/main/button_cards.webp'),
                 onPress: () {},
               ),
               GameFieldCornerButton(
                 right: 15,
                 bottom: 15,
-                image: const AssetImage('assets/images/game_field_controls/button_next_turn.webp'),
+                image: const AssetImage('assets/images/game_field_overlays/main/button_next_turn.webp'),
                 onPress: () {},
               ),
               GameFieldCornerButton(
                 right: 15,
                 top: 15,
-                image: const AssetImage('assets/images/game_field_controls/button_menu.webp'),
+                image: const AssetImage('assets/images/game_field_overlays/main/button_menu.webp'),
                 onPress: () {},
               ),
               GameFieldGeneralPanel(

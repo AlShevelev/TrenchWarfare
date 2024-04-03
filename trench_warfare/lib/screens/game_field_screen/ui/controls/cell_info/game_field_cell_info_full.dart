@@ -59,7 +59,7 @@ class GameFieldCellInfoFull extends StatelessWidget {
     return Row(
       children: [
         Image.asset(
-          'assets/images/game_field_controls/icon_money.webp',
+          'assets/images/game_field_overlays/icon_money.webp',
           height: 16,
         ),
         Padding(
@@ -71,7 +71,7 @@ class GameFieldCellInfoFull extends StatelessWidget {
           ),
         ),
         Image.asset(
-          'assets/images/game_field_controls/icon_industry_points.webp',
+          'assets/images/game_field_overlays/icon_industry_points.webp',
           height: 16,
         ),
         Padding(

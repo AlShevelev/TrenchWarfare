@@ -29,7 +29,7 @@ class GameFieldCellInfoPanel extends StatelessWidget {
       width: _width,
       height: _height,
       child: Background(
-          imagePath: 'assets/images/game_field_controls/panel_cell_info.webp',
+          imagePath: 'assets/images/game_field_overlays/main/panel_cell_info.webp',
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
             child: DefaultTextStyle(

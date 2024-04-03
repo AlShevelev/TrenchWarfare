@@ -36,7 +36,14 @@ flutter:
 
     # general purpose images
     - assets/images/
-    - assets/images/game_field_controls/
+    - assets/images/game_field_overlays/
+    - assets/images/game_field_overlays/main/
+    - assets/images/game_field_overlays/cards/
+    - assets/images/game_field_overlays/cards/production_centers/
+    - assets/images/game_field_overlays/cards/special_strikes/
+    - assets/images/game_field_overlays/cards/terrain_modifiers/
+    - assets/images/game_field_overlays/cards/troop_boosters/
+    - assets/images/game_field_overlays/cards/units/
 
     # localisation
     - assets/translations/
