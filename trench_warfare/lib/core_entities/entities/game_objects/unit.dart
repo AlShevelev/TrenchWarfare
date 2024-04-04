@@ -151,7 +151,7 @@ class Unit extends GameObject {
       case UnitType.battleship:
         return 50;
       case UnitType.carrier:
-        return 15;
+        return 50;
     }
   }
 
@@ -178,7 +178,7 @@ class Unit extends GameObject {
       case UnitType.battleship:
         return 2;
       case UnitType.carrier:
-        return 1;
+        return 3;
     }
   }
 
