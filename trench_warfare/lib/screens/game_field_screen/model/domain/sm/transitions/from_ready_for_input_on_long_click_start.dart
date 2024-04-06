@@ -11,7 +11,7 @@ class FromReadyForInputOnLongClickStart {
   );
 
   State process(GameFieldCell cell) {
-    _controlsState.update(Visible(
+    _controlsState.update(MainControls(
       money: _nationMoney,
       cellInfo: GameFieldControlsCellInfo(
         income: MoneyCellCalculator.getCellIncome(cell),

@@ -57,6 +57,10 @@ class GameFieldModel implements Disposable {
 
   void onResortUnits(String cellId, Iterable<String> unitsId) => _stateMachine.process(ResortUnits(cellId, unitsId));
 
+  void onCardsButtonClick() => _stateMachine.process(CardsButtonClick());
+
+  void onCardsClose() => _stateMachine.process(CardsClose());
+
   @override
   void dispose() {
     _stateMachine.dispose();

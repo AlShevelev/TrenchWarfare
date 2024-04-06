@@ -42,6 +42,10 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onResortUnits(String cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
 
+  void onCardsButtonClick() => _model.onCardsButtonClick();
+
+  void onCardsClose() => _model.onCardsClose();
+
   @override
   void dispose() {
     // _audioController.stopSound();

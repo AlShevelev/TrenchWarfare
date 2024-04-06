@@ -1,11 +1,11 @@
 part of game_field_sm;
 
-class FromReadyForInputOnLongClickEnd {
+class FromReadyForInputOnCardsClose {
   late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
-  FromReadyForInputOnLongClickEnd(
+  FromReadyForInputOnCardsClose(
     this._nationMoney,
     this._controlsState,
   );

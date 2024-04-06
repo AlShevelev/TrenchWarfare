@@ -35,3 +35,7 @@ class ResortUnits implements Event {
 
   ResortUnits(this.cellId, this.unitsId);
 }
+
+class CardsButtonClick implements Event { }
+
+class CardsClose implements Event { }

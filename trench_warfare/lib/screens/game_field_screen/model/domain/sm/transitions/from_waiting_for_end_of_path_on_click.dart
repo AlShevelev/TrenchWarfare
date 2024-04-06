@@ -41,7 +41,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
   }
 
   void _hideArmyPanel() =>
-    _controlsState.update(Visible(
+    _controlsState.update(MainControls(
       money: _nationMoney,
       cellInfo: null,
       armyInfo: null,

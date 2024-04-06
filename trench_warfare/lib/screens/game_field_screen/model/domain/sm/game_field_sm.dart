@@ -21,6 +21,8 @@ part 'state.dart';
 part 'transitions/game_object_transition_base.dart';
 part 'transitions/from_initial_on_init_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
+part 'transitions/from_ready_for_input_on_cards_button_click.dart';
+part 'transitions/from_ready_for_input_on_cards_close.dart';
 part 'transitions/from_ready_for_input_on_long_click_start.dart';
 part 'transitions/from_ready_for_input_on_long_click_end.dart';
 part 'transitions/from_ready_for_input_on_resort_unit.dart';
@@ -67,9 +69,17 @@ class GameFieldStateMachine implements Disposable {
               _controlsState,
             ).process(),
           ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
-            _updateGameObjectsEvent,
-            _gameField,
-          ).process(cellId, unitsId),
+              _updateGameObjectsEvent,
+              _gameField,
+            ).process(cellId, unitsId),
+          CardsButtonClick() => FromReadyForInputOnCardsButtonClick(
+              _money.actual,
+              _controlsState,
+            ).process(),
+          CardsClose() => FromReadyForInputOnCardsClose(
+              _money.actual,
+              _controlsState,
+            ).process(),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
@@ -79,7 +89,7 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(startPathCell, cell),
-            ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
+          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
             ).process(cellId, unitsId),
@@ -93,7 +103,7 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(path, cell),
-            ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
+          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
             ).process(path, cellId, unitsId),

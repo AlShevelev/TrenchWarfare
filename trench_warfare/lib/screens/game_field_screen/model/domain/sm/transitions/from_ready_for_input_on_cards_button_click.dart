@@ -1,20 +1,18 @@
 part of game_field_sm;
 
-class FromReadyForInputOnLongClickEnd {
+class FromReadyForInputOnCardsButtonClick {
   late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
-  FromReadyForInputOnLongClickEnd(
+  FromReadyForInputOnCardsButtonClick(
     this._nationMoney,
     this._controlsState,
   );
 
   State process() {
-    _controlsState.update(MainControls(
+    _controlsState.update(Cards(
       money: _nationMoney,
-      cellInfo: null,
-      armyInfo: null,
     ));
 
     return ReadyForInput();

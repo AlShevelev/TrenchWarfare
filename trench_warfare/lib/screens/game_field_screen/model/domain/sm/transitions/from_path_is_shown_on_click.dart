@@ -25,7 +25,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     }
 
     if (cell == path.last) {
-      _controlsState.update(Visible(
+      _controlsState.update(MainControls(
         money: _nationMoney,
         cellInfo: null,
         armyInfo: null,

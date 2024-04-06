@@ -13,7 +13,7 @@ class FromInitialOnInitTransition extends GameObjectTransitionBase {
   );
 
   State process() {
-    _controlsState.update(Visible(
+    _controlsState.update(MainControls(
       money: _nationMoney,
       cellInfo: null,
       armyInfo: null,

@@ -7,17 +7,25 @@ sealed class GameFieldControlsState {}
 
 class Invisible extends GameFieldControlsState {}
 
-class Visible extends GameFieldControlsState {
+class MainControls extends GameFieldControlsState {
   final MoneyUnit money;
 
   final GameFieldControlsCellInfo? cellInfo;
 
   final GameFieldControlsArmyInfo? armyInfo;
 
-  Visible({
+  MainControls({
     required this.money,
     required this.cellInfo,
     required this.armyInfo,
+  });
+}
+
+class Cards extends GameFieldControlsState {
+  final MoneyUnit money;
+
+  Cards({
+    required this.money,
   });
 }
 

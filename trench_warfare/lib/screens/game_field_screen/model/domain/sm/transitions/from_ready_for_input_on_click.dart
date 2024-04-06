@@ -19,7 +19,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
     final unit = cell.activeUnit;
 
     if (cell.nation == _nation && cell.units.length > 1) {
-      _controlsState.update(Visible(
+      _controlsState.update(MainControls(
         money: _nationMoney,
         cellInfo: null,
         armyInfo: GameFieldControlsArmyInfo(
@@ -28,7 +28,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
         ),
       ));
     } else {
-      _controlsState.update(Visible(
+      _controlsState.update(MainControls(
         money: _nationMoney,
         cellInfo: null,
         armyInfo: null,
