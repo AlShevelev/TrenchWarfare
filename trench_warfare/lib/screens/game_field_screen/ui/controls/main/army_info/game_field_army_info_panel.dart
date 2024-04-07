@@ -49,7 +49,7 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> impleme
       top: widget.top,
       width: GameFieldArmyInfoPanel.width,
       height: GameFieldArmyInfoPanel.height,
-      child: Background(
+      child: Background.path(
         imagePath: 'assets/images/game_field_overlays/main/panel_army_info.webp',
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 10, 10, 0),

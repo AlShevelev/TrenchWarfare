@@ -2,21 +2,30 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:trench_warfare/shared/ui_kit/image_loading.dart';
 
 import 'background_painter.dart';
 
 class Background extends StatefulWidget {
   final Widget child;
-  final String imagePath;
+  late final String? _imagePath;
+  late final ui.Image? _image;
 
-  const Background({required this.child, super.key, required this.imagePath});
+  Background.path({required this.child, super.key, required String? imagePath}) {
+    _imagePath = imagePath;
+    _image = null;
+  }
+
+  Background.image({required this.child, super.key, required ui.Image? image}) {
+    _image = image;
+    _imagePath = null;
+  }
 
   @override
   State<Background> createState() => _BackgroundState();
 }
 
-class _BackgroundState extends State<Background> {
+class _BackgroundState extends State<Background> with ImageLoading {
   late final ui.Image _background;
   bool _isBackgroundLoaded = false;
 
@@ -27,19 +36,19 @@ class _BackgroundState extends State<Background> {
   }
 
   Future init() async {
-    final data = await rootBundle.load(widget.imagePath);
-    _background = await loadImage(Uint8List.view(data.buffer));
-  }
+    if (widget._image != null) {
+      _background = widget._image!;
 
-  Future<ui.Image> loadImage(Uint8List img) async {
-    final completer = Completer<ui.Image>();
-    ui.decodeImageFromList(img, (ui.Image img) {
       setState(() {
         _isBackgroundLoaded = true;
       });
-      return completer.complete(img);
-    });
-    return completer.future;
+    } else {
+      _background = await loadImage(widget._imagePath!, completeCallback: () {
+        setState(() {
+          _isBackgroundLoaded = true;
+        });
+      });
+    }
   }
 
   @override

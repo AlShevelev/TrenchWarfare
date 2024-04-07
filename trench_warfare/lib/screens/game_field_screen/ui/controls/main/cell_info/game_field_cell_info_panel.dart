@@ -28,7 +28,7 @@ class GameFieldCellInfoPanel extends StatelessWidget {
       top: top,
       width: _width,
       height: _height,
-      child: Background(
+      child: Background.path(
           imagePath: 'assets/images/game_field_overlays/main/panel_cell_info.webp',
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
