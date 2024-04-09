@@ -3,11 +3,13 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class BackgroundPainter extends CustomPainter {
-  BackgroundPainter({required ui.Image backgroundImage}) {
+  late ui.Image _backgroundImage;
+
+  final double topOffset;
+
+  BackgroundPainter({required ui.Image backgroundImage, this.topOffset = 0}) {
     _backgroundImage = backgroundImage;
   }
-
-  late ui.Image _backgroundImage;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -19,7 +21,12 @@ class BackgroundPainter extends CustomPainter {
         _backgroundImage.width.toDouble(),
         _backgroundImage.height.toDouble(),
       ),
-      Rect.fromLTWH(0, 0, size.width, size.height),
+      Rect.fromLTWH(
+        0,
+        topOffset,
+        size.width,
+        size.height,
+      ),
       Paint(),
     );
   }

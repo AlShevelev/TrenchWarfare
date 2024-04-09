@@ -1,7 +1,9 @@
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/card_tabs_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -22,6 +24,9 @@ class CardsWidget extends StatefulWidget {
 }
 
 class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
+  static const double _coverTopOffset = 50;
+  static const double _coverTopPadding = 85;
+
   bool _isBackgroundLoaded = false;
 
   late final ui.Image _background;
@@ -56,19 +61,25 @@ class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
         alignment: AlignmentDirectional.center,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(7, 77, 7, 40),
+            padding: const EdgeInsets.fromLTRB(7, _coverTopPadding - _coverTopOffset, 7, 60),
             child: Background.image(
               image: _oldBookCover,
+              topOffset: _coverTopOffset,
               child: Stack(
                 alignment: AlignmentDirectional.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(18),
-                    child: Background.image(
-                      image: _oldPaper,
-                      child: Stack(
-                        alignment: AlignmentDirectional.center,
-                        children: [],
+                  CardTabsWidgets(onSwitchTab: (selectedTab) {},),
+                  IgnorePointer(
+                    ignoring: true,
+                    child: Padding(
+                      padding: const EdgeInsets.all(18),
+                      child: Background.image(
+                        image: _oldPaper,
+                        topOffset: _coverTopOffset,
+                        child: Stack(
+                          alignment: AlignmentDirectional.center,
+                          children: [],
+                        ),
                       ),
                     ),
                   ),

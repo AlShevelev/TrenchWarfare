@@ -10,13 +10,14 @@ class Background extends StatefulWidget {
   final Widget child;
   late final String? _imagePath;
   late final ui.Image? _image;
+  final double topOffset;
 
-  Background.path({required this.child, super.key, required String? imagePath}) {
+  Background.path({required this.child, super.key, required String? imagePath, this.topOffset = 0}) {
     _imagePath = imagePath;
     _image = null;
   }
 
-  Background.image({required this.child, super.key, required ui.Image? image}) {
+  Background.image({required this.child, super.key, required ui.Image? image, this.topOffset = 0}) {
     _image = image;
     _imagePath = null;
   }
@@ -55,7 +56,7 @@ class _BackgroundState extends State<Background> with ImageLoading {
   Widget build(BuildContext context) {
     if(_isBackgroundLoaded) {
       return CustomPaint(
-        painter: BackgroundPainter(backgroundImage: _background),
+        painter: BackgroundPainter(backgroundImage: _background, topOffset: widget.topOffset),
         child: Container(
           constraints: const BoxConstraints.expand(),
           child: widget.child,
