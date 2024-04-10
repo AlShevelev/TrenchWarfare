@@ -8,7 +8,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/update_game_event.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 

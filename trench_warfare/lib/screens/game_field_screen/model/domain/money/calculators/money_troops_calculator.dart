@@ -35,7 +35,10 @@ class MoneyTroopsCalculator {
             currency: multiplyBy(_baseCurrency, 3),
             industryPoints: multiplyBy(_baseIndustryPoints, 4),
           ),
-        UnitType.carrier => throw UnsupportedError("Carrier is a card, not a unit"),
+        UnitType.carrier => MoneyUnit(
+          currency: multiplyBy(_baseCurrency, 4),
+          industryPoints: multiplyBy(_baseIndustryPoints, 6),
+        ),
         UnitType.destroyer => MoneyUnit(
             currency: multiplyBy(_baseCurrency, 4),
             industryPoints: multiplyBy(_baseIndustryPoints, 6),

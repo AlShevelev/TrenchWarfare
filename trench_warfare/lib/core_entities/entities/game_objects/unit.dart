@@ -83,6 +83,18 @@ class Unit extends GameObject {
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
+  static Unit createEmpty(UnitType type) =>
+      Unit(
+        boost1: null,
+        boost2: null,
+        boost3: null,
+        experienceRank: UnitExperienceRank.rookies,
+        fatigue: 0,
+        health: 0,
+        movementPoints: 0,
+        type: type
+      );
+
   void setState(UnitState state) => _state = state;
 
   void setMovementPoints(double movementPoints) => this.movementPoints = movementPoints;

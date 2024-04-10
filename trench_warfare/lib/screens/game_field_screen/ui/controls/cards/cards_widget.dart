@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/card_tabs_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
@@ -66,7 +66,7 @@ class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
               image: _oldBookCover,
               topOffset: _coverTopOffset,
               child: Stack(
-                alignment: AlignmentDirectional.center,
+                alignment: AlignmentDirectional.topStart,
                 children: [
                   CardTabsWidgets(onSwitchTab: (selectedTab) {},),
                   IgnorePointer(
@@ -102,8 +102,8 @@ class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
             onPress: () { widget._gameField.onCardsClose(); },
           ),
           GameFieldGeneralPanel(
-            money: widget.state.money.currency,
-            industryPoints: widget.state.money.industryPoints,
+            money: widget.state.totalMoney.currency,
+            industryPoints: widget.state.totalMoney.industryPoints,
             left: 15,
             top: 0,
           ),

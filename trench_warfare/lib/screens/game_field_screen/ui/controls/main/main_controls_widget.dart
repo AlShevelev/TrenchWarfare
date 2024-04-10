@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';

@@ -14,21 +14,20 @@ class CardTabsWidgets extends StatefulWidget {
 }
 
 class _CardTabsWidgetsState extends State<CardTabsWidgets> {
-  static const double _inactiveTabPadding = 15;
+  static const double _inactiveTabPadding = 20;
 
   static const double _bookmarkWidth = 50;
   static const double _bookmarkHeight = 83;
 
   static const double _bookmarkStartOffset = 40;
-  static const double _bookmarksGap = 10;
+  static const double _bookmarksGap = 5;
 
   CardsTab _activeTab = CardsTab.units;
   CardsTab get activeTab => _activeTab;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.topStart,
+    return Row(
       children: [
         _getBookmark(
           index: 0,
@@ -60,19 +59,29 @@ class _CardTabsWidgetsState extends State<CardTabsWidgets> {
   }
 
   Widget _getBookmark({required int index, required CardsTab tab, required String folder}) =>
-      Positioned(
-        left: _bookmarkStartOffset + index * (_bookmarkWidth + _bookmarksGap),
-        top: _activeTab == tab ? 0 : _inactiveTabPadding,
-        width: _bookmarkWidth,
-        height: _bookmarkHeight,
-        child: GestureDetector(
-          onTap: () {
-            setState(() {
-              _activeTab = tab;
-              widget._onSwitchTab(tab);
-            });
-          },
-          child: Image.asset('assets/images/game_field_overlays/cards/$folder/bookmark.webp'),
+      GestureDetector(
+        onTap: () {
+          setState(() {
+            _activeTab = tab;
+            widget._onSwitchTab(tab);
+          });
+        },
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            index == 0 ?_bookmarkStartOffset : _bookmarksGap,
+            _activeTab == tab ? 0 : _inactiveTabPadding,
+            0,
+            0,
+          ),
+          child: Container(
+            width: _bookmarkWidth,
+            height: _bookmarkHeight,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('assets/images/game_field_overlays/cards/$folder/bookmark.webp'),
+              fit: BoxFit.cover,
+            )),
+          ),
         ),
       );
 }

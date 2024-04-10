@@ -14,4 +14,17 @@ class Carrier extends Unit {
     required super.type,
     required this.units,
   });
+
+  static Unit createEmpty() =>
+      Carrier(
+          boost1: null,
+          boost2: null,
+          boost3: null,
+          experienceRank: UnitExperienceRank.rookies,
+          fatigue: 0,
+          health: 0,
+          movementPoints: 0,
+          type: UnitType.carrier,
+          units: [],
+      );
 }
