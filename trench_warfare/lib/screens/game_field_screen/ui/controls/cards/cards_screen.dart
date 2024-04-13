@@ -3,29 +3,28 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/card_tabs_widget.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_bookmarks.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_list.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 import 'package:trench_warfare/shared/ui_kit/image_loading.dart';
 
-class CardsWidget extends StatefulWidget {
+class CardsScreen extends StatefulWidget {
   final Cards state;
 
   late final GameFieldForControls _gameField;
 
-  CardsWidget({required this.state, required GameFieldForControls gameField, super.key}) {
+  CardsScreen({required this.state, required GameFieldForControls gameField, super.key}) {
     _gameField = gameField;
   }
 
   @override
-  State<CardsWidget> createState() => _CardsWidgetState();
+  State<CardsScreen> createState() => _CardsScreenState();
 }
 
-class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
-  static const double _coverTopOffset = 50;
-  static const double _coverTopPadding = 85;
+class _CardsScreenState extends State<CardsScreen> with ImageLoading {
 
   bool _isBackgroundLoaded = false;
 
@@ -61,25 +60,21 @@ class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
         alignment: AlignmentDirectional.center,
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(7, _coverTopPadding - _coverTopOffset, 7, 60),
+            padding: const EdgeInsets.fromLTRB(7, 36, 7, 36),
             child: Background.image(
               image: _oldBookCover,
-              topOffset: _coverTopOffset,
               child: Stack(
                 alignment: AlignmentDirectional.topStart,
                 children: [
-                  CardTabsWidgets(onSwitchTab: (selectedTab) {},),
-                  IgnorePointer(
-                    ignoring: true,
-                    child: Padding(
-                      padding: const EdgeInsets.all(18),
-                      child: Background.image(
-                        image: _oldPaper,
-                        topOffset: _coverTopOffset,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [],
-                        ),
+                  CardsBookmarks(onSwitchTab: (selectedTab) {},),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
+                    child: Background.image(
+                      image: _oldPaper,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                        alignment: AlignmentDirectional.topCenter,
+                        child: CardsList(units: widget.state.units),
                       ),
                     ),
                   ),
@@ -102,8 +97,7 @@ class _CardsWidgetState extends State<CardsWidget> with ImageLoading {
             onPress: () { widget._gameField.onCardsClose(); },
           ),
           GameFieldGeneralPanel(
-            money: widget.state.totalMoney.currency,
-            industryPoints: widget.state.totalMoney.industryPoints,
+            money: widget.state.totalMoney,
             left: 15,
             top: 0,
           ),

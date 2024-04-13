@@ -18,7 +18,7 @@ class GameFieldCellInfoBrief extends StatelessWidget {
           _getTerrainName(cellInfo.terrain),
           overflow: TextOverflow.fade,
         ),
-        _getMoneyWidget(),
+        MoneyPanel(money: cellInfo.income, smallFont: false, stretch: true,),
       ],
     );
   }
@@ -34,37 +34,5 @@ class GameFieldCellInfoBrief extends StatelessWidget {
       CellTerrain.snow => tr('snow'),
       CellTerrain.water => tr('water'),
     };
-  }
-
-  Widget _getMoneyWidget() {
-    return Row(
-      children: [
-        Image.asset(
-          'assets/images/game_field_overlays/icon_money.webp',
-          height: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
-          child: Text(
-            cellInfo.income.currency < 10000 ? cellInfo.income.currency.toString() : tr('greater_10_k'),
-            style: AppTypography.s20w600,
-            overflow: TextOverflow.fade,
-          ),
-        ),
-        const Spacer(),
-        Image.asset(
-          'assets/images/game_field_overlays/icon_industry_points.webp',
-          height: 18,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
-          child: Text(
-            cellInfo.income.industryPoints < 10000 ? cellInfo.income.industryPoints.toString() : tr('greater_10_k'),
-            style: AppTypography.s20w600,
-            overflow: TextOverflow.fade,
-          ),
-        ),
-      ],
-    );
   }
 }

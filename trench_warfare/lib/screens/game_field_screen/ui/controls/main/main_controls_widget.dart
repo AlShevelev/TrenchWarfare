@@ -47,8 +47,7 @@ class MainControlsWidget extends StatelessWidget {
           onPress: () {},
         ),
         GameFieldGeneralPanel(
-          money: state.money.currency,
-          industryPoints: state.money.industryPoints,
+          money: state.money,
           left: 15,
           top: 0,
         ),

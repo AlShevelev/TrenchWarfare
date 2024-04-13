@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_widget.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_screen.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -33,7 +33,7 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 state: value.data as MainControls,
                 gameField: widget._gameField,
               ),
-            Cards() => CardsWidget(
+            Cards() => CardsScreen(
               state: value.data as Cards,
               gameField: widget._gameField,
             ),

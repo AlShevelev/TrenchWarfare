@@ -17,7 +17,8 @@ class AppTypography {
   static const s18w400 = TextStyle(
       fontFamily: 'Lemon',
       fontSize: 18.0,
-      fontWeight: FontWeight.w400
+      fontWeight: FontWeight.w400,
+      color: AppColors.black,
   );
 
   static const s18w600 = TextStyle(
@@ -40,10 +41,28 @@ class AppTypography {
       color: AppColors.black,
   );
 
+  static const s22w400 = TextStyle(
+      fontFamily: 'Lemon',
+      fontSize: 22.0,
+      fontWeight: FontWeight.w400
+  );
+
+  static const s22w600 = TextStyle(
+      fontFamily: 'Lemon',
+      fontSize: 22.0,
+      fontWeight: FontWeight.w600
+  );
+
   static const s24w400 = TextStyle(
       fontFamily: 'Lemon',
       fontSize: 24.0,
       fontWeight: FontWeight.w400
+  );
+
+  static const s24w600 = TextStyle(
+      fontFamily: 'Lemon',
+      fontSize: 24.0,
+      fontWeight: FontWeight.w600
   );
 
   static const s32w400 = TextStyle(

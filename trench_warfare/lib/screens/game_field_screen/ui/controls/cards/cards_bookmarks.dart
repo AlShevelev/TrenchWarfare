@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_tab.dart';
 
-class CardTabsWidgets extends StatefulWidget {
+class CardsBookmarks extends StatefulWidget {
   late final void Function(CardsTab) _onSwitchTab;
 
-  CardTabsWidgets({super.key, required void Function(CardsTab) onSwitchTab}) {
+  CardsBookmarks({super.key, required void Function(CardsTab) onSwitchTab}) {
     _onSwitchTab = onSwitchTab;
   }
 
   @override
-  State<CardTabsWidgets> createState() => _CardTabsWidgetsState();
+  State<CardsBookmarks> createState() => _CardsBookmarksState();
 }
 
-class _CardTabsWidgetsState extends State<CardTabsWidgets> {
+class _CardsBookmarksState extends State<CardsBookmarks> {
   static const double _inactiveTabPadding = 20;
 
   static const double _bookmarkWidth = 50;

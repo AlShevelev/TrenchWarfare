@@ -7,6 +7,7 @@ import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/money_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/sprite_atlas/sprite_atlas_names.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 

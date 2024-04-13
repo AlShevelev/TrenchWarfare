@@ -27,7 +27,7 @@ class GameFieldCellInfoFull extends StatelessWidget {
               style: AppTypography.s18w600,
               overflow: TextOverflow.fade,
             ),
-            _getMoneyWidget()
+            MoneyPanel(money: cellInfo.income, smallFont: true, stretch: false,),
           ],
         ),
         Expanded(
@@ -53,36 +53,5 @@ class GameFieldCellInfoFull extends StatelessWidget {
       CellTerrain.snow => tr('snow'),
       CellTerrain.water => tr('water'),
     };
-  }
-
-  Widget _getMoneyWidget() {
-    return Row(
-      children: [
-        Image.asset(
-          'assets/images/game_field_overlays/icon_money.webp',
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(2, 0, 8, 0),
-          child: Text(
-            cellInfo.income.currency < 10000 ? cellInfo.income.currency.toString() : tr('greater_10_k'),
-            style: AppTypography.s18w600,
-            overflow: TextOverflow.fade,
-          ),
-        ),
-        Image.asset(
-          'assets/images/game_field_overlays/icon_industry_points.webp',
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(2, 0, 4, 0),
-          child: Text(
-            cellInfo.income.industryPoints < 10000 ? cellInfo.income.industryPoints.toString() : tr('greater_10_k'),
-            style: AppTypography.s18w600,
-            overflow: TextOverflow.fade,
-          ),
-        ),
-      ],
-    );
   }
 }
