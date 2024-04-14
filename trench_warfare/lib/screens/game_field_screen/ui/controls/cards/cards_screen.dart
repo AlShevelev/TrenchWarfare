@@ -1,15 +1,4 @@
-import 'dart:ui' as ui;
-
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_bookmarks.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_list.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
-import 'package:trench_warfare/shared/ui_kit/background.dart';
-import 'package:trench_warfare/shared/ui_kit/image_loading.dart';
+part of card_controls;
 
 class CardsScreen extends StatefulWidget {
   final Cards state;
@@ -74,7 +63,7 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                         alignment: AlignmentDirectional.topCenter,
-                        child: CardsList(units: widget.state.units),
+                        child: CardsList(factory: UnitsCardFactory(widget.state.units),),
                       ),
                     ),
                   ),

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_tab.dart';
+part of card_controls;
 
 class CardsBookmarks extends StatefulWidget {
   late final void Function(CardsTab) _onSwitchTab;
