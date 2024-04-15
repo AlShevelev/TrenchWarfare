@@ -40,9 +40,11 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
     _selected = widget._selected.value;
 
     widget._selected.addListener(() {
-      setState(() {
-        _selected = widget._selected.value;
-      });
+      if (mounted) {
+        setState(() {
+          _selected = widget._selected.value;
+        });
+      }
     });
   }
 
