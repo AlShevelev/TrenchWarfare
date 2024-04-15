@@ -1,6 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/shared/utils/math.dart';
+part of money_calculators;
 
 class MoneyUnitBoostCalculator {
   static const _baseCurrency = 5;

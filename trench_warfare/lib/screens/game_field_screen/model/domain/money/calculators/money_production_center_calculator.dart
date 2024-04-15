@@ -1,7 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
+part of money_calculators;
 
 class MoneyProductionCenterCalculator {
   static const _baseCurrency = 20;

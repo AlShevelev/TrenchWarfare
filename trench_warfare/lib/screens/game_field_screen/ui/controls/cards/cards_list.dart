@@ -15,6 +15,12 @@ class _CardsListState extends State<CardsList> {
   int selectedIndex = 0;
 
   @override
+  void initState() {
+    selectedIndex = widget._factory.startSelectedIndex;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final List<CardBase> allCards = [];
 

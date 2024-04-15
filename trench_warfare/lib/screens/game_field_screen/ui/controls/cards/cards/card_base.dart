@@ -29,6 +29,11 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
 
   bool _selected = false;
 
+  bool get canBuild {
+    final buildPossibility = _getBuildPossibility();
+    return buildPossibility.canBuildOnGameField && buildPossibility.canBuildByIndustryPoint && buildPossibility.canBuildByCurrency;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -61,7 +66,7 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: () {
-            if (!_selected) {
+            if (!_selected && canBuild) {
               widget._onClick(widget.index);
             }
           },
@@ -94,7 +99,7 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
                       child: _getFeaturesPanel(),
                     ),
                     _getDescription(_getDescriptionText()),
-                    _getFooter(_getFooterMoney()),
+                    _getFooter(_getFooterMoney(), _getFooterRestriction(), _getBuildPossibility()),
                   ],
                 ),
               )),
@@ -110,14 +115,20 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
   MoneyUnit _getFooterMoney();
 
   @protected
-  Widget _getFooter(MoneyUnit money) {
+  BuildRestriction? _getFooterRestriction() => null;
+
+  @protected
+  BuildPossibility _getBuildPossibility();
+
+  @protected
+  Widget _getFooter(MoneyUnit money, BuildRestriction? restriction, BuildPossibility buildPossibility) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MoneyPanel(
+        BuildRestrictionPanel(
           money: money,
-          smallFont: true,
-          stretch: false,
+          restriction: restriction,
+          buildPossibility: buildPossibility,
         ),
         GestureDetector(
           onTap: () {

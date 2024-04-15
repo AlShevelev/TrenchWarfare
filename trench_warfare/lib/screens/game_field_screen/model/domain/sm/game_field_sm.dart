@@ -8,10 +8,10 @@ import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_cell_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_troops_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
@@ -78,6 +78,7 @@ class GameFieldStateMachine implements Disposable {
           CardsButtonClick() => FromReadyForInputOnCardsButtonClick(
               _money.actual,
               _controlsState,
+              _gameField,
             ).process(),
           CardsClose() => FromReadyForInputOnCardsClose(
               _money.actual,

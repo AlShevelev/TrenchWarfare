@@ -2,7 +2,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_cell_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
 
 abstract interface class MoneyStorageRead {
   MoneyUnit get actual;

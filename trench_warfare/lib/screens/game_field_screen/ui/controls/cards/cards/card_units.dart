@@ -115,4 +115,10 @@ class _CardUnitsState extends CardBaseState<CardUnits> {
 
     return '$_unitsPath$photo';
   }
+
+  @override
+  BuildRestriction? _getFooterRestriction() => widget.unit.buildRestriction;
+
+  @override
+  BuildPossibility _getBuildPossibility() => widget.unit;
 }

@@ -1,7 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/shared/utils/math.dart';
+part of money_calculators;
 
 class MoneyTerrainModifierCalculator {
   static const _baseCurrency = 5;
