@@ -79,6 +79,7 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
               _gameField,
+              _nation,
             ).process(),
           CardsClose() => FromReadyForInputOnCardsClose(
               _money.actual,

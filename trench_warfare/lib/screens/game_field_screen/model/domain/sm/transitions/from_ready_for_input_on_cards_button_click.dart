@@ -7,14 +7,17 @@ class FromReadyForInputOnCardsButtonClick {
 
   late final GameFieldRead _gameField;
 
+  late final Nation _myNation;
+
   FromReadyForInputOnCardsButtonClick(
     this._nationMoney,
     this._controlsState,
     this._gameField,
+    this._myNation,
   );
 
   State process() {
-    final unitBuildCalculator = UnitBuildCalculator(_gameField);
+    final unitBuildCalculator = UnitBuildCalculator(_gameField, _myNation);
 
     _controlsState.update(
       Cards(

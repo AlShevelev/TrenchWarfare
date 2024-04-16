@@ -3,8 +3,11 @@ part of build_calculators;
 class UnitBuildCalculator {
   late final GameFieldRead _gameField;
 
-  UnitBuildCalculator(GameFieldRead gameField) {
+  late final Nation _myNation;
+
+  UnitBuildCalculator(GameFieldRead gameField, Nation myNation) {
     _gameField = gameField;
+    _myNation = myNation;
   }
 
   static BuildRestriction getRestriction(UnitType unitType) => switch (unitType) {
@@ -55,6 +58,10 @@ class UnitBuildCalculator {
       };
 
   bool canBuildOnCell(GameFieldCellRead cell, UnitType unitType) {
+    if (cell.nation != _myNation) {
+      return false;
+    }
+
     final pc = cell.productionCenter;
 
     if (pc == null) {
