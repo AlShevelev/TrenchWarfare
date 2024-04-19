@@ -50,8 +50,30 @@ class GameFieldControlsProductionCentersCard {
   GameFieldControlsProductionCentersCard();
 }
 
-class GameFieldControlsTerrainModifiersCard {
-  GameFieldControlsTerrainModifiersCard();
+class GameFieldControlsTerrainModifiersCard implements BuildPossibility {
+  final MoneyUnit cost;
+
+  final TerrainModifierType type;
+
+  final BuildRestriction buildRestriction;
+
+  @override
+  final bool canBuildByCurrency;
+
+  @override
+  final bool canBuildByIndustryPoint;
+
+  @override
+  final bool canBuildOnGameField;
+
+  GameFieldControlsTerrainModifiersCard({
+    required this.cost,
+    required this.type,
+    required this.buildRestriction,
+    required this.canBuildByCurrency,
+    required this.canBuildByIndustryPoint,
+    required this.canBuildOnGameField,
+  });
 }
 
 class GameFieldControlsTroopBoostersCard {

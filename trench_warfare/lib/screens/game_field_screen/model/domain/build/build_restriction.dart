@@ -1,9 +1,13 @@
 part of build_calculators;
 
-class BuildRestriction {
+sealed class BuildRestriction {}
+
+class UnitBuildRestriction extends BuildRestriction {
   final ProductionCenterType productionCenterType;
 
   final ProductionCenterLevel productionCenterLevel;
 
-  BuildRestriction({required this.productionCenterType, required this.productionCenterLevel});
+  UnitBuildRestriction({required this.productionCenterType, required this.productionCenterLevel});
 }
+
+class AppropriateCell extends BuildRestriction { }

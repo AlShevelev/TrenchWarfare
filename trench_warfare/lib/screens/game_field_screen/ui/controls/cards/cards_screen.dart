@@ -14,12 +14,13 @@ class CardsScreen extends StatefulWidget {
 }
 
 class _CardsScreenState extends State<CardsScreen> with ImageLoading {
-
   bool _isBackgroundLoaded = false;
 
   late final ui.Image _background;
   late final ui.Image _oldBookCover;
   late final ui.Image _oldPaper;
+
+  CardsTab _selectedTab = CardsTab.units;
 
   @override
   void initState() {
@@ -55,7 +56,13 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
               child: Stack(
                 alignment: AlignmentDirectional.topStart,
                 children: [
-                  CardsBookmarks(onSwitchTab: (selectedTab) {},),
+                  CardsBookmarks(
+                    onSwitchTab: (selectedTab) {
+                      setState(() {
+                        _selectedTab = selectedTab;
+                      });
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
                     child: Background.image(
@@ -63,7 +70,10 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                         alignment: AlignmentDirectional.topCenter,
-                        child: CardsList(factory: UnitsCardFactory(widget.state.units),),
+                        child: CardsList(
+                          key: ObjectKey(_selectedTab),
+                          factory: _getCardsFactory(_selectedTab),
+                        ),
                       ),
                     ),
                   ),
@@ -76,14 +86,16 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
             left: 15,
             bottom: 15,
             image: const AssetImage('assets/images/game_field_overlays/cards/button_select.webp'),
-            onPress: () { },
+            onPress: () {},
           ),
           // Close button
           GameFieldCornerButton(
             right: 15,
             bottom: 15,
             image: const AssetImage('assets/images/game_field_overlays/cards/button_close.webp'),
-            onPress: () { widget._gameField.onCardsClose(); },
+            onPress: () {
+              widget._gameField.onCardsClose();
+            },
           ),
           GameFieldGeneralPanel(
             money: widget.state.totalMoney,
@@ -94,4 +106,12 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
       ),
     );
   }
+
+  CardsFactory<BuildPossibility> _getCardsFactory(CardsTab tab) => switch (tab) {
+        CardsTab.units => UnitsCardFactory(widget.state.units) as CardsFactory<BuildPossibility>,
+        CardsTab.productionCenters => throw UnimplementedError(),
+        CardsTab.terrainModifiers => TerrainModifiersCardFactory(widget.state.terrainModifiers),
+        CardsTab.troopBoosters => throw UnimplementedError(),
+        CardsTab.specialStrikes => throw UnimplementedError(),
+      };
 }

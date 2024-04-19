@@ -10,48 +10,48 @@ class UnitBuildCalculator {
     _myNation = myNation;
   }
 
-  static BuildRestriction getRestriction(UnitType unitType) => switch (unitType) {
-        UnitType.armoredCar => BuildRestriction(
+  BuildRestriction getRestriction(UnitType unitType) => switch (unitType) {
+        UnitType.armoredCar => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.factory,
             productionCenterLevel: ProductionCenterLevel.level3,
           ),
-        UnitType.artillery => BuildRestriction(
+        UnitType.artillery => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.factory,
             productionCenterLevel: ProductionCenterLevel.level2,
           ),
-        UnitType.infantry => BuildRestriction(
+        UnitType.infantry => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.city,
             productionCenterLevel: ProductionCenterLevel.level1,
           ),
-        UnitType.cavalry => BuildRestriction(
+        UnitType.cavalry => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.city,
             productionCenterLevel: ProductionCenterLevel.level2,
           ),
-        UnitType.machineGunnersCart => BuildRestriction(
+        UnitType.machineGunnersCart => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.factory,
             productionCenterLevel: ProductionCenterLevel.level1,
           ),
-        UnitType.machineGuns => BuildRestriction(
+        UnitType.machineGuns => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.city,
             productionCenterLevel: ProductionCenterLevel.level2,
           ),
-        UnitType.tank => BuildRestriction(
+        UnitType.tank => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.factory,
             productionCenterLevel: ProductionCenterLevel.level4,
           ),
-        UnitType.destroyer => BuildRestriction(
+        UnitType.destroyer => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.navalBase,
             productionCenterLevel: ProductionCenterLevel.level1,
           ),
-        UnitType.cruiser => BuildRestriction(
+        UnitType.cruiser => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.navalBase,
             productionCenterLevel: ProductionCenterLevel.level2,
           ),
-        UnitType.battleship => BuildRestriction(
+        UnitType.battleship => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.navalBase,
             productionCenterLevel: ProductionCenterLevel.level3,
           ),
-        UnitType.carrier => BuildRestriction(
+        UnitType.carrier => UnitBuildRestriction(
             productionCenterType: ProductionCenterType.navalBase,
             productionCenterLevel: ProductionCenterLevel.level1,
           ),
@@ -68,7 +68,7 @@ class UnitBuildCalculator {
       return false;
     }
 
-    final restriction = getRestriction(unitType);
+    final restriction = getRestriction(unitType) as UnitBuildRestriction;
 
     return pc.type == restriction.productionCenterType && pc.level >= restriction.productionCenterLevel;
   }
@@ -81,5 +81,17 @@ class UnitBuildCalculator {
     }
 
     return false;
+  }
+
+  List<GameFieldCellRead> getAllCellsToBuild(UnitType unitType) {
+    final List<GameFieldCellRead> result = [];
+
+    for (var cell in _gameField.cells) {
+      if (canBuildOnCell(cell, unitType)) {
+        result.add(cell);
+      }
+    }
+
+    return result;
   }
 }

@@ -18,6 +18,7 @@ class FromReadyForInputOnCardsButtonClick {
 
   State process() {
     final unitBuildCalculator = UnitBuildCalculator(_gameField, _myNation);
+    final terrainModifiersBuildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
 
     _controlsState.update(
       Cards(
@@ -36,7 +37,14 @@ class FromReadyForInputOnCardsButtonClick {
           _mapUnit(Unit.createEmpty(UnitType.battleship), unitBuildCalculator),
         ],
         productionCenters: [],
-        terrainModifiers: [],
+        terrainModifiers: [
+          _mapTerrainModifier(TerrainModifierType.trench, terrainModifiersBuildCalculator),
+          _mapTerrainModifier(TerrainModifierType.barbedWire, terrainModifiersBuildCalculator),
+          _mapTerrainModifier(TerrainModifierType.landFort, terrainModifiersBuildCalculator),
+          _mapTerrainModifier(TerrainModifierType.landMine, terrainModifiersBuildCalculator),
+          _mapTerrainModifier(TerrainModifierType.antiAirGun, terrainModifiersBuildCalculator),
+          _mapTerrainModifier(TerrainModifierType.seaMine, terrainModifiersBuildCalculator),
+        ],
         troopBoosters: [],
         specialStrikes: [],
       ),
@@ -47,7 +55,7 @@ class FromReadyForInputOnCardsButtonClick {
 
   GameFieldControlsUnitCard _mapUnit(Unit unit, UnitBuildCalculator buildCalculator) {
     final cost = MoneyTroopsCalculator.getProductionCost(unit.type);
-    final restriction = UnitBuildCalculator.getRestriction(unit.type);
+    final restriction = buildCalculator.getRestriction(unit.type);
 
     return GameFieldControlsUnitCard(
       cost: MoneyTroopsCalculator.getProductionCost(unit.type),
@@ -61,6 +69,40 @@ class FromReadyForInputOnCardsButtonClick {
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
       canBuildOnGameField: buildCalculator.canBuildOnGameField(unit.type),
+    );
+  }
+
+  GameFieldControlsTerrainModifiersCard _mapTerrainModifier(
+    TerrainModifierType type,
+    TerrainModifierBuildCalculator buildCalculator,
+  ) {
+    final allCells = buildCalculator.getAllCellsToBuild(type);
+
+    int minCurrency = 1000000;
+    int minIndustryPoints = 1000000;
+
+    for (var cell in allCells) {
+      final cost = MoneyTerrainModifierCalculator.getBuildCost(cell.terrain, type)!;
+      if (cost.currency < minCurrency) {
+        minCurrency = cost.currency;
+      }
+
+      if (cost.industryPoints < minIndustryPoints) {
+        minIndustryPoints = cost.industryPoints;
+      }
+    }
+
+    final cost = allCells.isEmpty
+        ? MoneyTerrainModifierCalculator.getBuildCost(CellTerrain.plain, type)!
+        : MoneyUnit(currency: minCurrency, industryPoints: minIndustryPoints);
+
+    return GameFieldControlsTerrainModifiersCard(
+      cost: cost,
+      type: type,
+      buildRestriction: buildCalculator.getRestriction(),
+      canBuildByCurrency: _nationMoney.currency >= cost.currency,
+      canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
+      canBuildOnGameField: allCells.isNotEmpty,
     );
   }
 }

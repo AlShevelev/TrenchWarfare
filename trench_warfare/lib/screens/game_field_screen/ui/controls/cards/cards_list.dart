@@ -25,11 +25,11 @@ class _CardsListState extends State<CardsList> {
     final List<CardBase> allCards = [];
 
     allCards.addAll(
-      widget._factory.getAllCards((index) {
-        allCards[selectedIndex].updateSelection(false);
-        selectedIndex = index;
-        allCards[selectedIndex].updateSelection(true);
-      })
+        widget._factory.getAllCards((index) {
+          allCards[selectedIndex].updateSelection(false);
+          selectedIndex = index;
+          allCards[selectedIndex].updateSelection(true);
+        })
     );
 
     return ListView(
