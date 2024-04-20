@@ -20,24 +20,24 @@ class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {
-    SpecialStrikeType.gasAttack => tr('gas_attack_card_description'),
-    SpecialStrikeType.flechettes => tr('flechettes_card_description'),
-    SpecialStrikeType.airBombardment => tr('air_bombing_card_description'),
-    SpecialStrikeType.flameTroopers => tr('flametroopers_card_description'),
-    SpecialStrikeType.propaganda => tr('propaganda_card_description'),
-  };
+        SpecialStrikeType.gasAttack => tr('gas_attack_card_description'),
+        SpecialStrikeType.flechettes => tr('flechettes_card_description'),
+        SpecialStrikeType.airBombardment => tr('air_bombing_card_description'),
+        SpecialStrikeType.flameTroopers => tr('flametroopers_card_description'),
+        SpecialStrikeType.propaganda => tr('propaganda_card_description'),
+      };
 
   @override
   MoneyUnit _getFooterMoney() => widget.cardInfo.cost;
 
   @override
   String _getTitleText() => switch (widget.cardInfo.type) {
-    SpecialStrikeType.gasAttack => tr('gas_attack_card_name'),
-    SpecialStrikeType.flechettes => tr('flechettes_card_name'),
-    SpecialStrikeType.airBombardment => tr('air_bombing_card_name'),
-    SpecialStrikeType.flameTroopers => tr('flametroopers_card_name'),
-    SpecialStrikeType.propaganda => tr('propaganda_card_name'),
-  };
+        SpecialStrikeType.gasAttack => tr('gas_attack_card_name'),
+        SpecialStrikeType.flechettes => tr('flechettes_card_name'),
+        SpecialStrikeType.airBombardment => tr('air_bombing_card_name'),
+        SpecialStrikeType.flameTroopers => tr('flametroopers_card_name'),
+        SpecialStrikeType.propaganda => tr('propaganda_card_name'),
+      };
 
   @override
   String getBackgroundImage() => '${_pathToImages}card_background.webp';
@@ -62,5 +62,8 @@ class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
   BuildPossibility _getBuildPossibility() => widget.cardInfo;
 
   @override
-  BuildRestrictionPanelPolicy _getBuildRestrictionPanelPolicy() => BuildRestrictionPanelPolicy.hideTheLastIfOk;
+  BuildRestrictionPanelPolicy _getBuildRestrictionPanelPolicy() =>
+      widget.cardInfo.type == SpecialStrikeType.flechettes || widget.cardInfo.type == SpecialStrikeType.airBombardment
+          ? BuildRestrictionPanelPolicy.alwaysShowTheLast
+          : BuildRestrictionPanelPolicy.hideTheLastIfOk;
 }

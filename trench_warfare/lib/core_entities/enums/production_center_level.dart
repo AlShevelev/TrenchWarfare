@@ -5,8 +5,11 @@ enum ProductionCenterLevel {
   level4,
   capital;
 
-  bool operator >=(covariant ProductionCenterLevel other) =>
+  bool operator >= (covariant ProductionCenterLevel other) =>
     _getWeight() >= other._getWeight();
+
+  bool operator < (covariant ProductionCenterLevel other) =>
+      _getWeight() < other._getWeight();
 
   int _getWeight() =>
       switch(this) {

@@ -19,4 +19,11 @@ class ProductionCenter extends GameObject {
   }
 
   void setLevel(ProductionCenterLevel newLevel) => _level = newLevel;
+
+  static ProductionCenterLevel getMaxLevel(ProductionCenterType type) => switch(type) {
+    ProductionCenterType.airField => ProductionCenterLevel.level2,
+    ProductionCenterType.navalBase => ProductionCenterLevel.level3,
+    ProductionCenterType.factory => ProductionCenterLevel.level4,
+    ProductionCenterType.city => ProductionCenterLevel.capital,
+  };
 }

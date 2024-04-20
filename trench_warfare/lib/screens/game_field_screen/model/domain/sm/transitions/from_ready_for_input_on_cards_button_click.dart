@@ -24,6 +24,7 @@ class FromReadyForInputOnCardsButtonClick {
     final terrainModifiersBuildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final unitBoosterBuildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final specialStrikesBuildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata);
+    final productionCentersBuildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
 
     _controlsState.update(
       Cards(
@@ -41,7 +42,12 @@ class FromReadyForInputOnCardsButtonClick {
           _mapUnit(Unit.createEmpty(UnitType.cruiser), unitBuildCalculator),
           _mapUnit(Unit.createEmpty(UnitType.battleship), unitBuildCalculator),
         ],
-        productionCenters: [],
+        productionCenters: [
+          _mapProductionCenter(ProductionCenterType.city, productionCentersBuildCalculator),
+          _mapProductionCenter(ProductionCenterType.factory, productionCentersBuildCalculator),
+          _mapProductionCenter(ProductionCenterType.airField, productionCentersBuildCalculator),
+          _mapProductionCenter(ProductionCenterType.navalBase, productionCentersBuildCalculator),
+        ],
         terrainModifiers: [
           _mapTerrainModifier(TerrainModifierType.trench, terrainModifiersBuildCalculator),
           _mapTerrainModifier(TerrainModifierType.barbedWire, terrainModifiersBuildCalculator),
@@ -145,6 +151,44 @@ class FromReadyForInputOnCardsButtonClick {
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
       canBuildOnGameField: buildCalculator.canBuildOnGameField(type),
+    );
+  }
+
+  GameFieldControlsProductionCentersCard _mapProductionCenter(
+    ProductionCenterType type,
+    ProductionCentersBuildCalculator buildCalculator,
+  ) {
+    final allCells = buildCalculator.getAllCellsToBuild(type);
+
+    int minCurrency = 1000000;
+    int minIndustryPoints = 1000000;
+
+    for (var cell in allCells) {
+      final cost = MoneyProductionCenterCalculator.calculateBuildCost(cell.terrain, type, ProductionCenterLevel.level1)!;
+      if (cost.currency < minCurrency) {
+        minCurrency = cost.currency;
+      }
+
+      if (cost.industryPoints < minIndustryPoints) {
+        minIndustryPoints = cost.industryPoints;
+      }
+    }
+
+    final cost = allCells.isEmpty
+        ? MoneyProductionCenterCalculator.calculateBuildCost(
+            type == ProductionCenterType.navalBase ? CellTerrain.water : CellTerrain.plain,
+            type,
+            ProductionCenterLevel.level1,
+          )!
+        : MoneyUnit(currency: minCurrency, industryPoints: minIndustryPoints);
+
+    return GameFieldControlsProductionCentersCard(
+      cost: cost,
+      type: type,
+      buildRestriction: buildCalculator.getRestriction(),
+      canBuildByCurrency: _nationMoney.currency >= cost.currency,
+      canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
+      canBuildOnGameField: allCells.isNotEmpty,
     );
   }
 }

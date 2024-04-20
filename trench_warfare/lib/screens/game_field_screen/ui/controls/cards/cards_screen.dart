@@ -108,8 +108,9 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
   }
 
   CardsFactory<BuildPossibility> _getCardsFactory(CardsTab tab) => switch (tab) {
+        // ignore: unnecessary_cast
         CardsTab.units => UnitsCardFactory(widget.state.units) as CardsFactory<BuildPossibility>,
-        CardsTab.productionCenters => throw UnimplementedError(),
+        CardsTab.productionCenters => ProductionCentersCardFactory(widget.state.productionCenters),
         CardsTab.terrainModifiers => TerrainModifiersCardFactory(widget.state.terrainModifiers),
         CardsTab.troopBoosters => UnitBoosterCardFactory(widget.state.unitBoosters),
         CardsTab.specialStrikes => SpecialStrikesCardFactory(widget.state.specialStrikes),

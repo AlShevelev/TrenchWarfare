@@ -72,3 +72,18 @@ class SpecialStrikesCardFactory extends CardsFactory<GameFieldControlsSpecialStr
         );
       });
 }
+
+class ProductionCentersCardFactory extends CardsFactory<GameFieldControlsProductionCentersCard> {
+  ProductionCentersCardFactory(super.items);
+
+  @override
+  Iterable<CardBase> getAllCards(OnCardClick onCardClick) =>
+      items.asMap().entries.map((u) {
+        return CardProductionCenter(
+          cardInfo: u.value,
+          selected: u.key == startSelectedIndex,
+          index: u.key,
+          onClick: onCardClick,
+        );
+      });
+}

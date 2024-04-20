@@ -33,3 +33,4 @@ part 'cards/card_terrain_modifier.dart';
 part 'cards/card_unit.dart';
 part 'cards/card_unit_booster.dart';
 part 'cards/card_special_strikes.dart';
+part 'cards/card_production_center.dart';

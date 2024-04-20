@@ -2,6 +2,8 @@ library build_calculators;
 
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
+import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
@@ -16,3 +18,4 @@ part 'build_restriction.dart';
 part 'terrain_modifier_build_calculator.dart';
 part 'unit_booster_build_calculator.dart';
 part 'special_strikes_build_calculator.dart';
+part 'production_centers_build_calculator.dart';
