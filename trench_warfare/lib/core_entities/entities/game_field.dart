@@ -26,6 +26,9 @@ abstract interface class GameFieldRead {
 
   /// Looks for a cell by some position on a map
   GameFieldCell findCellByPosition(Vector2 position);
+
+  /// Calculates a logical (in terms of rows and cols) distance between the cells
+  double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2);
 }
 
 class GameField implements GameFieldRead {
@@ -141,4 +144,9 @@ class GameField implements GameFieldRead {
 
     return targetCell!;
   }
+
+  /// Calculates a logical (in terms of rows and cols) distance between the cells
+  @override
+  double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2) =>
+      math.sqrt(math.pow(cell1.row - cell2.row, 2) + math.pow(cell1.col - cell2.col, 2));
 }

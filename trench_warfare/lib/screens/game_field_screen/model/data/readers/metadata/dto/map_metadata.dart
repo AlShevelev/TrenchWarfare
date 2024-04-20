@@ -3,7 +3,11 @@ import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/relationship.dart';
 
-class MapMetadata {
+abstract interface class MapMetadataRead {
+  bool isInWar(Nation? nation1, Nation? nation2);
+}
+
+class MapMetadata implements MapMetadataRead {
   final int version;
   final Map<Locale, String> title;
   final Map<Locale, String> description;
@@ -17,6 +21,21 @@ class MapMetadata {
     required this.nations,
     required this.diplomacy,
   });
+
+  @override
+  bool isInWar(Nation? nation1, Nation? nation2) {
+    if (nation1 == null || nation2 == null) {
+      return false;
+    }
+
+    if (nation1 == nation2) {
+      return false;
+    }
+
+    return diplomacy
+        .singleWhere((e) => (e.firstNation == nation1 && e.secondNation == nation2) || (e.firstNation == nation2 && e.secondNation == nation1))
+        .relationship == Relationship.war;
+  }
 }
 
 class NationRecord {

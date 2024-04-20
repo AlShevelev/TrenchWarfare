@@ -44,15 +44,6 @@ class UnitBoosterBuildCalculator {
     return false;
   }
 
-  List<GameFieldCellRead> getAllCellsToBuild(UnitBoost type) {
-    final List<GameFieldCellRead> result = [];
-
-    for (var cell in _gameField.cells) {
-      if (canBuildOnCell(cell, type)) {
-        result.add(cell);
-      }
-    }
-
-    return result;
-  }
+  List<GameFieldCellRead> getAllCellsToBuild(UnitBoost type) =>
+    _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 }

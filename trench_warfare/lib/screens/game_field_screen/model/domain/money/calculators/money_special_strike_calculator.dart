@@ -4,7 +4,7 @@ class MoneySpecialStrikeCalculator {
   static const _baseCurrency = 10;
   static const _baseIndustryPoints = 10;
 
-  static MoneyUnit? getCost(SpecialStrikeType type) => switch (type) {
+  static MoneyUnit calculateCost(SpecialStrikeType type) => switch (type) {
         SpecialStrikeType.gasAttack => MoneyUnit(
             currency: multiplyBy(_baseCurrency, 2),
             industryPoints: multiplyBy(_baseIndustryPoints, 3),

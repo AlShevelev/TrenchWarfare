@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 
@@ -87,7 +85,7 @@ class FindPath {
   /// Calculates the H part of the F factor
   /// In our case it is a Euclidean distance between the cells
   double _calculateHFactor(GameFieldCell givenCell, GameFieldCell finalCell) =>
-    math.sqrt(math.pow(givenCell.row - finalCell.row, 2) + math.pow(givenCell.col - finalCell.col, 2));
+    _gameField.calculateDistance(givenCell, finalCell);
 
   int _getOpenCellWithMinFIndex() {
     var minF = double.maxFinite;

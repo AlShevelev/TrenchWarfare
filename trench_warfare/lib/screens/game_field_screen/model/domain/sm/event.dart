@@ -9,7 +9,9 @@ class Init implements Event {
 
   final MoneyStorageRead money;
 
-  Init(this.gameField, this.nation, this.money);
+  final MapMetadataRead metadata;
+
+  Init(this.gameField, this.nation, this.money, this.metadata);
 }
 
 class Click implements Event {

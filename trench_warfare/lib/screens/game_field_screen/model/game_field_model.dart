@@ -36,7 +36,7 @@ class GameFieldModel implements Disposable {
 
     _money = MoneyStorage(_gameField, _playerNation);
 
-    _stateMachine.process(Init(_gameField, _playerNation.code, _money));
+    _stateMachine.process(Init(_gameField, _playerNation.code, _money, _metadata));
   }
 
   void onClick(Vector2 position) {

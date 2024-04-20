@@ -68,15 +68,6 @@ class TerrainModifierBuildCalculator {
     return false;
   }
 
-  List<GameFieldCellRead> getAllCellsToBuild(TerrainModifierType type) {
-    final List<GameFieldCellRead> result = [];
-
-    for (var cell in _gameField.cells) {
-      if (canBuildOnCell(cell, type)) {
-        result.add(cell);
-      }
-    }
-
-    return result;
-  }
+  List<GameFieldCellRead> getAllCellsToBuild(TerrainModifierType type) =>
+    _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 }

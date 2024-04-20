@@ -9,17 +9,21 @@ class FromReadyForInputOnCardsButtonClick {
 
   late final Nation _myNation;
 
+  late final MapMetadataRead _mapMetadata;
+
   FromReadyForInputOnCardsButtonClick(
     this._nationMoney,
     this._controlsState,
     this._gameField,
     this._myNation,
+    this._mapMetadata,
   );
 
   State process() {
     final unitBuildCalculator = UnitBuildCalculator(_gameField, _myNation);
     final terrainModifiersBuildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final unitBoosterBuildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
+    final specialStrikesBuildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata);
 
     _controlsState.update(
       Cards(
@@ -52,7 +56,13 @@ class FromReadyForInputOnCardsButtonClick {
           _mapUnitBooster(UnitBoost.transport, unitBoosterBuildCalculator),
           _mapUnitBooster(UnitBoost.commander, unitBoosterBuildCalculator),
         ],
-        specialStrikes: [],
+        specialStrikes: [
+          _mapSpecialStrikes(SpecialStrikeType.gasAttack, specialStrikesBuildCalculator),
+          _mapSpecialStrikes(SpecialStrikeType.flameTroopers, specialStrikesBuildCalculator),
+          _mapSpecialStrikes(SpecialStrikeType.flechettes, specialStrikesBuildCalculator),
+          _mapSpecialStrikes(SpecialStrikeType.airBombardment, specialStrikesBuildCalculator),
+          _mapSpecialStrikes(SpecialStrikeType.propaganda, specialStrikesBuildCalculator),
+        ],
       ),
     );
 
@@ -60,8 +70,7 @@ class FromReadyForInputOnCardsButtonClick {
   }
 
   GameFieldControlsUnitCard _mapUnit(Unit unit, UnitBuildCalculator buildCalculator) {
-    final cost = MoneyTroopsCalculator.getProductionCost(unit.type);
-    final restriction = buildCalculator.getRestriction(unit.type);
+    final cost = MoneyTroopsCalculator.calculateProductionCost(unit.type);
 
     return GameFieldControlsUnitCard(
       cost: cost,
@@ -71,7 +80,7 @@ class FromReadyForInputOnCardsButtonClick {
       defence: unit.defence.toInt(),
       damage: Range<int>(unit.damage.min.toInt(), unit.damage.max.toInt()),
       movementPoints: unit.maxMovementPoints,
-      buildRestriction: restriction,
+      buildRestriction: buildCalculator.getRestriction(unit.type),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
       canBuildOnGameField: buildCalculator.canBuildOnGameField(unit.type),
@@ -88,7 +97,7 @@ class FromReadyForInputOnCardsButtonClick {
     int minIndustryPoints = 1000000;
 
     for (var cell in allCells) {
-      final cost = MoneyTerrainModifierCalculator.getBuildCost(cell.terrain, type)!;
+      final cost = MoneyTerrainModifierCalculator.calculateBuildCost(cell.terrain, type)!;
       if (cost.currency < minCurrency) {
         minCurrency = cost.currency;
       }
@@ -99,7 +108,7 @@ class FromReadyForInputOnCardsButtonClick {
     }
 
     final cost = allCells.isEmpty
-        ? MoneyTerrainModifierCalculator.getBuildCost(CellTerrain.plain, type)!
+        ? MoneyTerrainModifierCalculator.calculateBuildCost(CellTerrain.plain, type)!
         : MoneyUnit(currency: minCurrency, industryPoints: minIndustryPoints);
 
     return GameFieldControlsTerrainModifiersCard(
@@ -114,15 +123,28 @@ class FromReadyForInputOnCardsButtonClick {
 
   GameFieldControlsUnitBoostersCard _mapUnitBooster(UnitBoost boost, UnitBoosterBuildCalculator buildCalculator) {
     final cost = MoneyUnitBoostCalculator.calculateCost(boost);
-    final restriction = buildCalculator.getRestriction();
 
     return GameFieldControlsUnitBoostersCard(
       cost: cost,
       type: boost,
-      buildRestriction: restriction,
+      buildRestriction: buildCalculator.getRestriction(),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
       canBuildOnGameField: buildCalculator.canBuildOnGameField(boost),
+    );
+  }
+
+  GameFieldControlsSpecialStrikesCard _mapSpecialStrikes(SpecialStrikeType type, SpecialStrikesBuildCalculator buildCalculator) {
+    final cost = MoneySpecialStrikeCalculator.calculateCost(type);
+    final restriction = buildCalculator.getRestriction(type);
+
+    return GameFieldControlsSpecialStrikesCard(
+      cost: cost,
+      type: type,
+      buildRestriction: restriction,
+      canBuildByCurrency: _nationMoney.currency >= cost.currency,
+      canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
+      canBuildOnGameField: buildCalculator.canBuildOnGameField(type),
     );
   }
 }

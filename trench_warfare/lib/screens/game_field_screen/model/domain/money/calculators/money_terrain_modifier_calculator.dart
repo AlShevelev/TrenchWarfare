@@ -4,7 +4,7 @@ class MoneyTerrainModifierCalculator {
   static const _baseCurrency = 5;
   static const _baseIndustryPoints = 5;
 
-  static MoneyUnit? getBuildCost(CellTerrain terrain, TerrainModifierType type) => switch (terrain) {
+  static MoneyUnit? calculateBuildCost(CellTerrain terrain, TerrainModifierType type) => switch (terrain) {
         CellTerrain.plain => switch (type) {
             TerrainModifierType.antiAirGun ||
             TerrainModifierType.barbedWire ||

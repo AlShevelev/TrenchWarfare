@@ -7,10 +7,12 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
@@ -44,6 +46,8 @@ class GameFieldStateMachine implements Disposable {
 
   late final MoneyStorageRead _money;
 
+  late final MapMetadataRead _mapMetadata;
+
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SingleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
@@ -55,7 +59,13 @@ class GameFieldStateMachine implements Disposable {
   void process(Event event) {
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          Init(gameField: var gameField, nation: var nation, money: var money) => _processInit(gameField, nation, money),
+          Init(
+            gameField: var gameField,
+            nation: var nation,
+            money: var money,
+            metadata: var metadata,
+          ) =>
+            _processInit(gameField, nation, money, metadata),
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
@@ -83,6 +93,7 @@ class GameFieldStateMachine implements Disposable {
               _controlsState,
               _gameField,
               _nation,
+              _mapMetadata,
             ).process(),
           CardsClose() => FromReadyForInputOnCardsClose(
               _money.actual,
@@ -132,10 +143,11 @@ class GameFieldStateMachine implements Disposable {
     _controlsState.close();
   }
 
-  State _processInit(GameFieldRead gameField, Nation nation, MoneyStorageRead money) {
+  State _processInit(GameFieldRead gameField, Nation nation, MoneyStorageRead money, MapMetadataRead mapMetadata) {
     _gameField = gameField;
     _nation = nation;
     _money = money;
+    _mapMetadata = mapMetadata;
 
     return FromInitialOnInitTransition(
       _updateGameObjectsEvent,

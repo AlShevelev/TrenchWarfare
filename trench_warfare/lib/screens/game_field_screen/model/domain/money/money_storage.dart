@@ -25,7 +25,7 @@ class MoneyStorage implements MoneyStorageRead {
   void recalculate() {
     _actual = _actual + _gameField.cells
         .where((c) => c.nation == _nation)
-        .map((c) => MoneyCellCalculator.getCellIncome(c))
+        .map((c) => MoneyCellCalculator.calculateCellIncome(c))
         .reduce((c1, c2) => c1 + c2);
   }
 

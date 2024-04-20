@@ -4,7 +4,7 @@ class MoneyTroopsCalculator {
   static const _baseCurrency = 5;
   static const _baseIndustryPoints = 5;
 
-  static MoneyUnit getProductionCost(UnitType unitType) => switch (unitType) {
+  static MoneyUnit calculateProductionCost(UnitType unitType) => switch (unitType) {
         UnitType.infantry => MoneyUnit(
             currency: _baseCurrency,
             industryPoints: 0,

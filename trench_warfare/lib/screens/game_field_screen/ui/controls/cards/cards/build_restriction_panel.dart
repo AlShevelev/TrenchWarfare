@@ -80,7 +80,7 @@ class BuildRestrictionPanel extends StatelessWidget {
   }
 
   String _getRestrictionIcon() => switch (restriction) {
-        UnitBuildRestriction(productionCenterType: var productionCenterType) => switch (productionCenterType) {
+        ProductionCenterBuildRestriction(productionCenterType: var productionCenterType) => switch (productionCenterType) {
             ProductionCenterType.city => 'assets/images/game_field_overlays/icon_city.webp',
             ProductionCenterType.factory => 'assets/images/game_field_overlays/icon_factory.webp',
             ProductionCenterType.airField => 'assets/images/game_field_overlays/icon_air_field.webp',
@@ -92,7 +92,7 @@ class BuildRestrictionPanel extends StatelessWidget {
       };
 
   String _getRestrictionText() => switch (restriction) {
-        UnitBuildRestriction(productionCenterLevel: var productionCenterLevel) => switch (productionCenterLevel) {
+        ProductionCenterBuildRestriction(productionCenterLevel: var productionCenterLevel) => switch (productionCenterLevel) {
             ProductionCenterLevel.level1 => tr('level_1'),
             ProductionCenterLevel.level2 => tr('level_2'),
             ProductionCenterLevel.level3 => tr('level_3'),

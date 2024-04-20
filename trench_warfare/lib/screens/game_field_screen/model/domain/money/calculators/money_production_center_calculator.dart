@@ -7,7 +7,7 @@ class MoneyProductionCenterCalculator {
   static const _upgradePerLevelCurrency = 10;
   static const _upgradePerLevelIndustryPoints = 10;
 
-  static MoneyUnit? getBuildCost(CellTerrain terrain, ProductionCenterType type, ProductionCenterLevel level) =>
+  static MoneyUnit? calculateBuildCost(CellTerrain terrain, ProductionCenterType type, ProductionCenterLevel level) =>
       switch (terrain) {
         CellTerrain.plain => switch (type) {
             ProductionCenterType.city => _calculateBaseCost(level),

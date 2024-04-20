@@ -4,7 +4,7 @@ class MoneyCellCalculator {
   static const _baseCurrency = 10;
   static const _baseIndustryPoints = 10;
 
-  static MoneyUnit getCellIncome(GameFieldCellRead cell) {
+  static MoneyUnit calculateCellIncome(GameFieldCellRead cell) {
     if (cell.terrainModifier != null) {
       // A cell with terrain modifiers doesn't produce money or industry points.
       return MoneyUnit(currency: 0, industryPoints: 0);

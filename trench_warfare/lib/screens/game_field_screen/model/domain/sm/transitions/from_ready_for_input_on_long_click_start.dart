@@ -14,7 +14,7 @@ class FromReadyForInputOnLongClickStart {
     _controlsState.update(MainControls(
       money: _nationMoney,
       cellInfo: GameFieldControlsCellInfo(
-        income: MoneyCellCalculator.getCellIncome(cell),
+        income: MoneyCellCalculator.calculateCellIncome(cell),
         terrain: cell.terrain,
         terrainModifier: cell.terrainModifier?.type,
         productionCenter: cell.productionCenter,

@@ -102,6 +102,28 @@ class GameFieldControlsUnitBoostersCard implements BuildPossibility {
   });
 }
 
-class GameFieldControlsSpecialStrikesCard {
-  GameFieldControlsSpecialStrikesCard();
+class GameFieldControlsSpecialStrikesCard implements BuildPossibility {
+  final MoneyUnit cost;
+
+  final SpecialStrikeType type;
+
+  final BuildRestriction buildRestriction;
+
+  @override
+  final bool canBuildByCurrency;
+
+  @override
+  final bool canBuildByIndustryPoint;
+
+  @override
+  final bool canBuildOnGameField;
+
+  GameFieldControlsSpecialStrikesCard({
+    required this.cost,
+    required this.type,
+    required this.buildRestriction,
+    required this.canBuildByCurrency,
+    required this.canBuildByIndustryPoint,
+    required this.canBuildOnGameField,
+  });
 }
