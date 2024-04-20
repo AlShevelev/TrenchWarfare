@@ -12,10 +12,10 @@ class CardTerrainModifier extends CardBase {
   });
 
   @override
-  State<StatefulWidget> createState() => _CardTerrainModifier();
+  State<StatefulWidget> createState() => _CardTerrainModifierState();
 }
 
-class _CardTerrainModifier extends CardBaseState<CardTerrainModifier> {
+class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
   static const _pathToImages = 'assets/images/game_field_overlays/cards/terrain_modifiers/';
 
   @override
@@ -47,12 +47,12 @@ class _CardTerrainModifier extends CardBaseState<CardTerrainModifier> {
   @override
   String _getPhoto() {
     final photo = switch (widget.cardInfo.type) {
-      TerrainModifierType.seaMine => tr('photo_sea_mine_field.webp'),
-      TerrainModifierType.antiAirGun => tr('photo_anti_air_gun.webp'),
-      TerrainModifierType.landMine => tr('photo_land_mine_field.webp'),
-      TerrainModifierType.landFort => tr('photo_land_fort.webp'),
-      TerrainModifierType.barbedWire => tr('photo_barbed_wire.webp'),
-      TerrainModifierType.trench => tr('photo_trench.webp'),
+      TerrainModifierType.seaMine => 'photo_sea_mine_field.webp',
+      TerrainModifierType.antiAirGun => 'photo_anti_air_gun.webp',
+      TerrainModifierType.landMine => 'photo_land_mine_field.webp',
+      TerrainModifierType.landFort => 'photo_land_fort.webp',
+      TerrainModifierType.barbedWire => 'photo_barbed_wire.webp',
+      TerrainModifierType.trench => 'photo_trench.webp',
     };
 
     return '$_pathToImages$photo';

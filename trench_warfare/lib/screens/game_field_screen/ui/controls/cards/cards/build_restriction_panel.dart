@@ -87,6 +87,7 @@ class BuildRestrictionPanel extends StatelessWidget {
             ProductionCenterType.navalBase => 'assets/images/game_field_overlays/icon_naval_base.webp',
           },
         AppropriateCell() => 'assets/images/game_field_overlays/icon_cell.webp',
+        AppropriateUnit() => 'assets/images/game_field_overlays/icon_unit.webp',
         _ => throw UnsupportedError(''),
       };
 
@@ -99,6 +100,7 @@ class BuildRestrictionPanel extends StatelessWidget {
             ProductionCenterLevel.capital => tr('level_capital'),
           },
         AppropriateCell() => tr('no_cell_to_add'),
+        AppropriateUnit() => tr('no_unit_to_add'),
         _ => throw UnsupportedError(''),
       };
 }

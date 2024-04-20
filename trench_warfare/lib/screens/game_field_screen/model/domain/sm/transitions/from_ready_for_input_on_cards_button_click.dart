@@ -19,6 +19,7 @@ class FromReadyForInputOnCardsButtonClick {
   State process() {
     final unitBuildCalculator = UnitBuildCalculator(_gameField, _myNation);
     final terrainModifiersBuildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
+    final unitBoosterBuildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
 
     _controlsState.update(
       Cards(
@@ -45,7 +46,12 @@ class FromReadyForInputOnCardsButtonClick {
           _mapTerrainModifier(TerrainModifierType.antiAirGun, terrainModifiersBuildCalculator),
           _mapTerrainModifier(TerrainModifierType.seaMine, terrainModifiersBuildCalculator),
         ],
-        troopBoosters: [],
+        unitBoosters: [
+          _mapUnitBooster(UnitBoost.attack, unitBoosterBuildCalculator),
+          _mapUnitBooster(UnitBoost.defence, unitBoosterBuildCalculator),
+          _mapUnitBooster(UnitBoost.transport, unitBoosterBuildCalculator),
+          _mapUnitBooster(UnitBoost.commander, unitBoosterBuildCalculator),
+        ],
         specialStrikes: [],
       ),
     );
@@ -58,7 +64,7 @@ class FromReadyForInputOnCardsButtonClick {
     final restriction = buildCalculator.getRestriction(unit.type);
 
     return GameFieldControlsUnitCard(
-      cost: MoneyTroopsCalculator.getProductionCost(unit.type),
+      cost: cost,
       type: unit.type,
       maxHealth: unit.maxHealth.toInt(),
       attack: unit.attack.toInt(),
@@ -103,6 +109,20 @@ class FromReadyForInputOnCardsButtonClick {
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
       canBuildOnGameField: allCells.isNotEmpty,
+    );
+  }
+
+  GameFieldControlsUnitBoostersCard _mapUnitBooster(UnitBoost boost, UnitBoosterBuildCalculator buildCalculator) {
+    final cost = MoneyUnitBoostCalculator.calculateCost(boost);
+    final restriction = buildCalculator.getRestriction();
+
+    return GameFieldControlsUnitBoostersCard(
+      cost: cost,
+      type: boost,
+      buildRestriction: restriction,
+      canBuildByCurrency: _nationMoney.currency >= cost.currency,
+      canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
+      canBuildOnGameField: buildCalculator.canBuildOnGameField(boost),
     );
   }
 }

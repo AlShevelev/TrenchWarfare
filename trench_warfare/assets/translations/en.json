@@ -16,6 +16,7 @@
   "level_4": "Level 4",
   "level_capital": "Capital",
   "no_cell_to_add": "No cell to place",
+  "no_unit_to_add": "No unit to place",
 
   "armored_car_card_name": "Armored car",
   "armored_car_card_description": "An armored car is a light, but tenacious and fast combat unit. Armed with machine guns, it causes additional damage to manpower. The unit can be built in a factory of level 3 or higher.",
@@ -75,7 +76,7 @@
 
   "attack_card_name": "Attack booster",
   "attack_card_description": "[proper description needed, proper description needed]",
-  "commander_card_name": "[proper description needed, proper description needed]",
+  "commander_card_name": "Commander",
   "commander_card_description": "[proper description needed, proper description needed]",
   "defence_card_name": "Defence booster",
   "defence_card_description": "[proper description needed, proper description needed]",

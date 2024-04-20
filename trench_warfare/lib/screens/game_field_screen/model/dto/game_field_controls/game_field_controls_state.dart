@@ -27,7 +27,7 @@ class Cards extends GameFieldControlsState {
 
   final List<GameFieldControlsTerrainModifiersCard> terrainModifiers;
 
-  final List<GameFieldControlsTroopBoostersCard> troopBoosters;
+  final List<GameFieldControlsUnitBoostersCard> unitBoosters;
 
   final List<GameFieldControlsSpecialStrikesCard> specialStrikes;
 
@@ -36,7 +36,7 @@ class Cards extends GameFieldControlsState {
     required this.units,
     required this.productionCenters,
     required this.terrainModifiers,
-    required this.troopBoosters,
+    required this.unitBoosters,
     required this.specialStrikes,
   });
 }

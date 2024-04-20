@@ -11,3 +11,5 @@ class UnitBuildRestriction extends BuildRestriction {
 }
 
 class AppropriateCell extends BuildRestriction { }
+
+class AppropriateUnit extends BuildRestriction { }

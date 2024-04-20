@@ -42,3 +42,18 @@ class TerrainModifiersCardFactory extends CardsFactory<GameFieldControlsTerrainM
         );
       });
 }
+
+class UnitBoosterCardFactory extends CardsFactory<GameFieldControlsUnitBoostersCard> {
+  UnitBoosterCardFactory(super.items);
+
+  @override
+  Iterable<CardBase> getAllCards(OnCardClick onCardClick) =>
+      items.asMap().entries.map((u) {
+        return CardUnitBooster(
+          cardInfo: u.value,
+          selected: u.key == startSelectedIndex,
+          index: u.key,
+          onClick: onCardClick,
+        );
+      });
+}

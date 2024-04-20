@@ -111,7 +111,7 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
         CardsTab.units => UnitsCardFactory(widget.state.units) as CardsFactory<BuildPossibility>,
         CardsTab.productionCenters => throw UnimplementedError(),
         CardsTab.terrainModifiers => TerrainModifiersCardFactory(widget.state.terrainModifiers),
-        CardsTab.troopBoosters => throw UnimplementedError(),
+        CardsTab.troopBoosters => UnitBoosterCardFactory(widget.state.unitBoosters),
         CardsTab.specialStrikes => throw UnimplementedError(),
       };
 }
