@@ -10,7 +10,7 @@ class UnitBoosterBuildCalculator {
     _myNation = myNation;
   }
 
-  BuildRestriction getRestriction() => AppropriateUnit();
+  BuildRestriction getError() => AppropriateUnit();
 
   bool canBuildOnCell(GameFieldCellRead cell, UnitBoost type) {
     if (cell.nation != _myNation) {

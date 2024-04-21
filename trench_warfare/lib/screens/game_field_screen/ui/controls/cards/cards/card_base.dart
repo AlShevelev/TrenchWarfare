@@ -31,7 +31,7 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
 
   bool get canBuild {
     final buildPossibility = _getBuildPossibility();
-    return buildPossibility.canBuildOnGameField &&
+    return buildPossibility.buildError == null &&
         buildPossibility.canBuildByIndustryPoint &&
         buildPossibility.canBuildByCurrency;
   }
@@ -107,7 +107,6 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
                       _getFooterMoney(),
                       _getFooterRestriction(),
                       _getBuildPossibility(),
-                      _getBuildRestrictionPanelPolicy(),
                     ),
                   ],
                 ),
@@ -130,23 +129,17 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
   BuildPossibility _getBuildPossibility();
 
   @protected
-  BuildRestrictionPanelPolicy _getBuildRestrictionPanelPolicy();
-
-  @protected
   Widget _getFooter(
     MoneyUnit money,
     BuildRestriction? restriction,
     BuildPossibility buildPossibility,
-    BuildRestrictionPanelPolicy policy,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         BuildRestrictionPanel(
           money: money,
-          restriction: restriction,
           buildPossibility: buildPossibility,
-          policy: policy,
         ),
         GestureDetector(
           onTap: () {

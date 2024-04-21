@@ -26,57 +26,59 @@ class FromReadyForInputOnCardsButtonClick {
     final specialStrikesBuildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata);
     final productionCentersBuildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
 
-    _controlsState.update(
-      Cards(
-        totalMoney: _nationMoney,
-        units: [
-          _mapUnit(Unit.createEmpty(UnitType.infantry), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.cavalry), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.machineGuns), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.artillery), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.machineGunnersCart), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.armoredCar), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.tank), unitBuildCalculator),
-          _mapUnit(Carrier.createEmpty(), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.destroyer), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.cruiser), unitBuildCalculator),
-          _mapUnit(Unit.createEmpty(UnitType.battleship), unitBuildCalculator),
-        ],
-        productionCenters: [
-          _mapProductionCenter(ProductionCenterType.city, productionCentersBuildCalculator),
-          _mapProductionCenter(ProductionCenterType.factory, productionCentersBuildCalculator),
-          _mapProductionCenter(ProductionCenterType.airField, productionCentersBuildCalculator),
-          _mapProductionCenter(ProductionCenterType.navalBase, productionCentersBuildCalculator),
-        ],
-        terrainModifiers: [
-          _mapTerrainModifier(TerrainModifierType.trench, terrainModifiersBuildCalculator),
-          _mapTerrainModifier(TerrainModifierType.barbedWire, terrainModifiersBuildCalculator),
-          _mapTerrainModifier(TerrainModifierType.landFort, terrainModifiersBuildCalculator),
-          _mapTerrainModifier(TerrainModifierType.landMine, terrainModifiersBuildCalculator),
-          _mapTerrainModifier(TerrainModifierType.antiAirGun, terrainModifiersBuildCalculator),
-          _mapTerrainModifier(TerrainModifierType.seaMine, terrainModifiersBuildCalculator),
-        ],
-        unitBoosters: [
-          _mapUnitBooster(UnitBoost.attack, unitBoosterBuildCalculator),
-          _mapUnitBooster(UnitBoost.defence, unitBoosterBuildCalculator),
-          _mapUnitBooster(UnitBoost.transport, unitBoosterBuildCalculator),
-          _mapUnitBooster(UnitBoost.commander, unitBoosterBuildCalculator),
-        ],
-        specialStrikes: [
-          _mapSpecialStrikes(SpecialStrikeType.gasAttack, specialStrikesBuildCalculator),
-          _mapSpecialStrikes(SpecialStrikeType.flameTroopers, specialStrikesBuildCalculator),
-          _mapSpecialStrikes(SpecialStrikeType.flechettes, specialStrikesBuildCalculator),
-          _mapSpecialStrikes(SpecialStrikeType.airBombardment, specialStrikesBuildCalculator),
-          _mapSpecialStrikes(SpecialStrikeType.propaganda, specialStrikesBuildCalculator),
-        ],
-      ),
+    final cards = Cards(
+      totalMoney: _nationMoney,
+      units: [
+        _mapUnit(Unit.createEmpty(UnitType.infantry), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.cavalry), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.machineGuns), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.artillery), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.machineGunnersCart), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.armoredCar), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.tank), unitBuildCalculator),
+        _mapUnit(Carrier.createEmpty(), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.destroyer), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.cruiser), unitBuildCalculator),
+        _mapUnit(Unit.createEmpty(UnitType.battleship), unitBuildCalculator),
+      ],
+      productionCenters: [
+        _mapProductionCenter(ProductionCenterType.city, productionCentersBuildCalculator),
+        _mapProductionCenter(ProductionCenterType.factory, productionCentersBuildCalculator),
+        _mapProductionCenter(ProductionCenterType.airField, productionCentersBuildCalculator),
+        _mapProductionCenter(ProductionCenterType.navalBase, productionCentersBuildCalculator),
+      ],
+      terrainModifiers: [
+        _mapTerrainModifier(TerrainModifierType.trench, terrainModifiersBuildCalculator),
+        _mapTerrainModifier(TerrainModifierType.barbedWire, terrainModifiersBuildCalculator),
+        _mapTerrainModifier(TerrainModifierType.landFort, terrainModifiersBuildCalculator),
+        _mapTerrainModifier(TerrainModifierType.landMine, terrainModifiersBuildCalculator),
+        _mapTerrainModifier(TerrainModifierType.antiAirGun, terrainModifiersBuildCalculator),
+        _mapTerrainModifier(TerrainModifierType.seaMine, terrainModifiersBuildCalculator),
+      ],
+      unitBoosters: [
+        _mapUnitBooster(UnitBoost.attack, unitBoosterBuildCalculator),
+        _mapUnitBooster(UnitBoost.defence, unitBoosterBuildCalculator),
+        _mapUnitBooster(UnitBoost.transport, unitBoosterBuildCalculator),
+        _mapUnitBooster(UnitBoost.commander, unitBoosterBuildCalculator),
+      ],
+      specialStrikes: [
+        _mapSpecialStrikes(SpecialStrikeType.gasAttack, specialStrikesBuildCalculator),
+        _mapSpecialStrikes(SpecialStrikeType.flameTroopers, specialStrikesBuildCalculator),
+        _mapSpecialStrikes(SpecialStrikeType.flechettes, specialStrikesBuildCalculator),
+        _mapSpecialStrikes(SpecialStrikeType.airBombardment, specialStrikesBuildCalculator),
+        _mapSpecialStrikes(SpecialStrikeType.propaganda, specialStrikesBuildCalculator),
+      ],
     );
+
+    _controlsState.update(cards);
 
     return ReadyForInput();
   }
 
   GameFieldControlsUnitCard _mapUnit(Unit unit, UnitBuildCalculator buildCalculator) {
     final cost = MoneyTroopsCalculator.calculateProductionCost(unit.type);
+
+    final canBuildOnGameField = buildCalculator.canBuildOnGameField(unit.type);
 
     return GameFieldControlsUnitCard(
       cost: cost,
@@ -86,10 +88,10 @@ class FromReadyForInputOnCardsButtonClick {
       defence: unit.defence.toInt(),
       damage: Range<int>(unit.damage.min.toInt(), unit.damage.max.toInt()),
       movementPoints: unit.maxMovementPoints,
-      buildRestriction: buildCalculator.getRestriction(unit.type),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
-      canBuildOnGameField: buildCalculator.canBuildOnGameField(unit.type),
+      buildDisplayRestriction: canBuildOnGameField ? buildCalculator.getRestriction(unit.type) : null,
+      buildError: canBuildOnGameField ? null : buildCalculator.getError(unit.type),
     );
   }
 
@@ -120,10 +122,10 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsTerrainModifiersCard(
       cost: cost,
       type: type,
-      buildRestriction: buildCalculator.getRestriction(),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
-      canBuildOnGameField: allCells.isNotEmpty,
+      buildDisplayRestriction: null,
+      buildError: allCells.isEmpty ? buildCalculator.getError() : null,
     );
   }
 
@@ -133,24 +135,25 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsUnitBoostersCard(
       cost: cost,
       type: boost,
-      buildRestriction: buildCalculator.getRestriction(),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
-      canBuildOnGameField: buildCalculator.canBuildOnGameField(boost),
+      buildDisplayRestriction: null,
+      buildError: buildCalculator.canBuildOnGameField(boost) ? null : buildCalculator.getError(),
     );
   }
 
   GameFieldControlsSpecialStrikesCard _mapSpecialStrikes(SpecialStrikeType type, SpecialStrikesBuildCalculator buildCalculator) {
     final cost = MoneySpecialStrikeCalculator.calculateCost(type);
-    final restriction = buildCalculator.getRestriction(type);
+
+    final canBuildOnGameField = buildCalculator.canBuildOnGameField(type);
 
     return GameFieldControlsSpecialStrikesCard(
       cost: cost,
       type: type,
-      buildRestriction: restriction,
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
-      canBuildOnGameField: buildCalculator.canBuildOnGameField(type),
+      buildDisplayRestriction: canBuildOnGameField ? buildCalculator.getDisplayRestriction(type) : null,
+      buildError: canBuildOnGameField ? null : buildCalculator.getError(type),
     );
   }
 
@@ -185,10 +188,10 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsProductionCentersCard(
       cost: cost,
       type: type,
-      buildRestriction: buildCalculator.getRestriction(),
       canBuildByCurrency: _nationMoney.currency >= cost.currency,
       canBuildByIndustryPoint: _nationMoney.industryPoints >= cost.industryPoints,
-      canBuildOnGameField: allCells.isNotEmpty,
+      buildDisplayRestriction: null,
+      buildError: allCells.isEmpty ? buildCalculator.getError() : null,
     );
   }
 }

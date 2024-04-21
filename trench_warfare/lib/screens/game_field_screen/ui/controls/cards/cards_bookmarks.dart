@@ -44,7 +44,7 @@ class _CardsBookmarksState extends State<CardsBookmarks> {
         ),
         _getBookmark(
           index: 3,
-          tab: CardsTab.troopBoosters,
+          tab: CardsTab.unitBoosters,
           folder: 'troop_boosters',
         ),
         _getBookmark(

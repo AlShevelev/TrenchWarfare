@@ -3,8 +3,11 @@ part of card_controls;
 class CardsList extends StatefulWidget {
   late final CardsFactory _factory;
 
-  CardsList({super.key, required CardsFactory factory}) {
+  late final OnCardClick _onCardSelected;
+
+  CardsList({super.key, required CardsFactory factory, required OnCardClick onCardSelected}) {
     _factory = factory;
+    _onCardSelected = onCardSelected;
   }
 
   @override
@@ -12,11 +15,13 @@ class CardsList extends StatefulWidget {
 }
 
 class _CardsListState extends State<CardsList> {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+  int get selectedIndex => _selectedIndex;
 
   @override
   void initState() {
-    selectedIndex = widget._factory.startSelectedIndex;
+    _selectedIndex = widget._factory.startSelectedIndex;
+    widget._onCardSelected(_selectedIndex);
     super.initState();
   }
 
@@ -26,9 +31,13 @@ class _CardsListState extends State<CardsList> {
 
     allCards.addAll(
         widget._factory.getAllCards((index) {
-          allCards[selectedIndex].updateSelection(false);
-          selectedIndex = index;
-          allCards[selectedIndex].updateSelection(true);
+          if (_selectedIndex != -1) {
+            allCards[_selectedIndex].updateSelection(false);
+          }
+
+          _selectedIndex = index;
+          allCards[_selectedIndex].updateSelection(true);
+          widget._onCardSelected(index);
         })
     );
 

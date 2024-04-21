@@ -56,14 +56,8 @@ class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
   }
 
   @override
-  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildRestriction;
+  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;
 
   @override
   BuildPossibility _getBuildPossibility() => widget.cardInfo;
-
-  @override
-  BuildRestrictionPanelPolicy _getBuildRestrictionPanelPolicy() =>
-      widget.cardInfo.type == SpecialStrikeType.flechettes || widget.cardInfo.type == SpecialStrikeType.airBombardment
-          ? BuildRestrictionPanelPolicy.alwaysShowTheLast
-          : BuildRestrictionPanelPolicy.hideTheLastIfOk;
 }

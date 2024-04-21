@@ -4,6 +4,6 @@ enum CardsTab {
   units,
   productionCenters,
   terrainModifiers,
-  troopBoosters,
+  unitBoosters,
   specialStrikes
 }

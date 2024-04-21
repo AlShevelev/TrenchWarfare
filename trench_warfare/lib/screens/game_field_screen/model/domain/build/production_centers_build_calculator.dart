@@ -10,7 +10,7 @@ class ProductionCentersBuildCalculator {
     _myNation = myNation;
   }
 
-  BuildRestriction getRestriction() => AppropriateCell();
+  BuildRestriction getError() => AppropriateCell();
 
   bool canBuildOnCell(GameFieldCellRead cell, ProductionCenterType type) {
     if (cell.nation == null || cell.nation != _myNation) {

@@ -1,25 +1,14 @@
 part of card_controls;
 
-enum BuildRestrictionPanelPolicy {
-  alwaysShowTheLast,
-  hideTheLastIfOk,
-}
-
 class BuildRestrictionPanel extends StatelessWidget {
   final MoneyUnit money;
 
-  final BuildRestriction? restriction;
-
   final BuildPossibility buildPossibility;
-
-  final BuildRestrictionPanelPolicy policy;
 
   const BuildRestrictionPanel({
     super.key,
     required this.money,
-    required this.restriction,
     required this.buildPossibility,
-    required this.policy,
   });
 
   @override
@@ -28,9 +17,11 @@ class BuildRestrictionPanel extends StatelessWidget {
     const rejectedColor = AppColors.darkRed;
     const textStyle = AppTypography.s18w600;
 
-    final showLastRestriction = restriction != null &&
-        (policy == BuildRestrictionPanelPolicy.alwaysShowTheLast ||
-            (policy == BuildRestrictionPanelPolicy.hideTheLastIfOk && !buildPossibility.canBuildOnGameField));
+    final showLastRestriction = buildPossibility.buildError != null || buildPossibility.buildDisplayRestriction != null;
+
+    final hasError = buildPossibility.buildError != null;
+
+    final lastRestriction = buildPossibility.buildError ?? buildPossibility.buildDisplayRestriction;
 
     return Row(
       children: [
@@ -62,16 +53,16 @@ class BuildRestrictionPanel extends StatelessWidget {
         ),
         if (showLastRestriction)
           Image.asset(
-            _getRestrictionIcon(),
+            _getRestrictionIcon(lastRestriction!),
             height: 18,
-            color: buildPossibility.canBuildOnGameField ? acceptedColor : rejectedColor,
+            color: hasError ? rejectedColor : acceptedColor,
           ),
         if (showLastRestriction)
           Padding(
             padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
             child: Text(
-              _getRestrictionText(),
-              style: buildPossibility.canBuildOnGameField ? textStyle : textStyle.copyWith(color: rejectedColor),
+              _getRestrictionText(lastRestriction!),
+              style: hasError ? textStyle.copyWith(color: rejectedColor) : textStyle,
               overflow: TextOverflow.fade,
             ),
           ),
@@ -79,7 +70,7 @@ class BuildRestrictionPanel extends StatelessWidget {
     );
   }
 
-  String _getRestrictionIcon() => switch (restriction) {
+  String _getRestrictionIcon(BuildRestriction restriction) => switch (restriction) {
         ProductionCenterBuildRestriction(productionCenterType: var productionCenterType) => switch (productionCenterType) {
             ProductionCenterType.city => 'assets/images/game_field_overlays/icon_city.webp',
             ProductionCenterType.factory => 'assets/images/game_field_overlays/icon_factory.webp',
@@ -88,10 +79,9 @@ class BuildRestrictionPanel extends StatelessWidget {
           },
         AppropriateCell() => 'assets/images/game_field_overlays/icon_cell.webp',
         AppropriateUnit() => 'assets/images/game_field_overlays/icon_unit.webp',
-        _ => throw UnsupportedError(''),
       };
 
-  String _getRestrictionText() => switch (restriction) {
+  String _getRestrictionText(BuildRestriction restriction) => switch (restriction) {
         ProductionCenterBuildRestriction(productionCenterLevel: var productionCenterLevel) => switch (productionCenterLevel) {
             ProductionCenterLevel.level1 => tr('level_1'),
             ProductionCenterLevel.level2 => tr('level_2'),
@@ -101,6 +91,5 @@ class BuildRestrictionPanel extends StatelessWidget {
           },
         AppropriateCell() => tr('no_cell_to_add'),
         AppropriateUnit() => tr('no_unit_to_add'),
-        _ => throw UnsupportedError(''),
       };
 }

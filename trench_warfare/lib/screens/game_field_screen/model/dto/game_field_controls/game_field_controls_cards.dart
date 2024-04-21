@@ -3,10 +3,12 @@ part of game_field_controls;
 abstract interface class BuildPossibility {
   final bool canBuildByCurrency = false;
   final bool canBuildByIndustryPoint = false;
-  final bool canBuildOnGameField = false;
+  final BuildRestriction? buildDisplayRestriction = null;
+  final BuildRestriction? buildError = null;
 }
+abstract class GameFieldControlsCard implements BuildPossibility { }
 
-class GameFieldControlsUnitCard implements BuildPossibility {
+class GameFieldControlsUnitCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
   final UnitType type;
@@ -20,8 +22,6 @@ class GameFieldControlsUnitCard implements BuildPossibility {
 
   final double movementPoints;
 
-  final BuildRestriction buildRestriction;
-
   @override
   final bool canBuildByCurrency;
 
@@ -29,7 +29,10 @@ class GameFieldControlsUnitCard implements BuildPossibility {
   final bool canBuildByIndustryPoint;
 
   @override
-  final bool canBuildOnGameField;
+  final BuildRestriction? buildDisplayRestriction;
+
+  @override
+  BuildRestriction? buildError;
 
   GameFieldControlsUnitCard({
     required this.cost,
@@ -39,20 +42,18 @@ class GameFieldControlsUnitCard implements BuildPossibility {
     required this.defence,
     required this.damage,
     required this.movementPoints,
-    required this.buildRestriction,
     required this.canBuildByCurrency,
     required this.canBuildByIndustryPoint,
-    required this.canBuildOnGameField,
+    required this.buildDisplayRestriction,
+    required this.buildError,
   });
 }
 
-class GameFieldControlsProductionCentersCard implements BuildPossibility {
+class GameFieldControlsProductionCentersCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
   final ProductionCenterType type;
 
-  final BuildRestriction buildRestriction;
-
   @override
   final bool canBuildByCurrency;
 
@@ -60,25 +61,26 @@ class GameFieldControlsProductionCentersCard implements BuildPossibility {
   final bool canBuildByIndustryPoint;
 
   @override
-  final bool canBuildOnGameField;
+  final BuildRestriction? buildDisplayRestriction;
+
+  @override
+  BuildRestriction? buildError;
 
   GameFieldControlsProductionCentersCard({
     required this.cost,
     required this.type,
-    required this.buildRestriction,
     required this.canBuildByCurrency,
     required this.canBuildByIndustryPoint,
-    required this.canBuildOnGameField,
+    required this.buildDisplayRestriction,
+    required this.buildError,
   });
 }
 
-class GameFieldControlsTerrainModifiersCard implements BuildPossibility {
+class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
   final TerrainModifierType type;
 
-  final BuildRestriction buildRestriction;
-
   @override
   final bool canBuildByCurrency;
 
@@ -86,25 +88,26 @@ class GameFieldControlsTerrainModifiersCard implements BuildPossibility {
   final bool canBuildByIndustryPoint;
 
   @override
-  final bool canBuildOnGameField;
+  final BuildRestriction? buildDisplayRestriction;
+
+  @override
+  BuildRestriction? buildError;
 
   GameFieldControlsTerrainModifiersCard({
     required this.cost,
     required this.type,
-    required this.buildRestriction,
     required this.canBuildByCurrency,
     required this.canBuildByIndustryPoint,
-    required this.canBuildOnGameField,
+    required this.buildDisplayRestriction,
+    required this.buildError,
   });
 }
 
-class GameFieldControlsUnitBoostersCard implements BuildPossibility {
+class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
   final UnitBoost type;
 
-  final BuildRestriction buildRestriction;
-
   @override
   final bool canBuildByCurrency;
 
@@ -112,24 +115,25 @@ class GameFieldControlsUnitBoostersCard implements BuildPossibility {
   final bool canBuildByIndustryPoint;
 
   @override
-  final bool canBuildOnGameField;
+  final BuildRestriction? buildDisplayRestriction;
+
+  @override
+  BuildRestriction? buildError;
 
   GameFieldControlsUnitBoostersCard({
     required this.cost,
     required this.type,
-    required this.buildRestriction,
     required this.canBuildByCurrency,
     required this.canBuildByIndustryPoint,
-    required this.canBuildOnGameField,
+    required this.buildDisplayRestriction,
+    required this.buildError,
   });
 }
 
-class GameFieldControlsSpecialStrikesCard implements BuildPossibility {
+class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
   final SpecialStrikeType type;
-
-  final BuildRestriction buildRestriction;
 
   @override
   final bool canBuildByCurrency;
@@ -138,14 +142,17 @@ class GameFieldControlsSpecialStrikesCard implements BuildPossibility {
   final bool canBuildByIndustryPoint;
 
   @override
-  final bool canBuildOnGameField;
+  final BuildRestriction? buildDisplayRestriction;
+
+  @override
+  BuildRestriction? buildError;
 
   GameFieldControlsSpecialStrikesCard({
     required this.cost,
     required this.type,
-    required this.buildRestriction,
     required this.canBuildByCurrency,
     required this.canBuildByIndustryPoint,
-    required this.canBuildOnGameField,
+    required this.buildDisplayRestriction,
+    required this.buildError,
   });
 }

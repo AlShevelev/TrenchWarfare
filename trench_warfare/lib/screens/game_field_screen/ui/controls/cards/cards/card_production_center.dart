@@ -53,11 +53,8 @@ class _CardProductionCenterState extends CardBaseState<CardProductionCenter> {
   }
 
   @override
-  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildRestriction;
+  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;
 
   @override
   BuildPossibility _getBuildPossibility() => widget.cardInfo;
-
-  @override
-  BuildRestrictionPanelPolicy _getBuildRestrictionPanelPolicy() => BuildRestrictionPanelPolicy.hideTheLastIfOk;
 }

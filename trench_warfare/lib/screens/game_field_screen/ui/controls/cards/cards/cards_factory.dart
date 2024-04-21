@@ -1,12 +1,12 @@
 part of card_controls;
 
-abstract class CardsFactory<T extends BuildPossibility> {
+abstract class CardsFactory<T extends GameFieldControlsCard> {
   @protected
   final List<T> items;
 
   /// -1 value means no ona card can be selected
   int get startSelectedIndex =>
-      items.indexWhere((i) => i.canBuildOnGameField && i.canBuildByIndustryPoint && i.canBuildByCurrency);
+      items.indexWhere((i) => false /*i.buildError == null && i.canBuildByIndustryPoint && i.canBuildByCurrency*/);
 
   CardsFactory(this.items);
 

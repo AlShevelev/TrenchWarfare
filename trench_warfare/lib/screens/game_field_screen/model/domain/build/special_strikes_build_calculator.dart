@@ -22,8 +22,8 @@ class SpecialStrikesBuildCalculator {
         .toList(growable: false);
   }
 
-  BuildRestriction getRestriction(SpecialStrikeType type) => switch (type) {
-        SpecialStrikeType.propaganda || SpecialStrikeType.flameTroopers || SpecialStrikeType.gasAttack => AppropriateUnit(),
+  BuildRestriction? getDisplayRestriction(SpecialStrikeType type) => switch (type) {
+        SpecialStrikeType.propaganda || SpecialStrikeType.flameTroopers || SpecialStrikeType.gasAttack => null,
         SpecialStrikeType.airBombardment => ProductionCenterBuildRestriction(
             productionCenterType: ProductionCenterType.airField,
             productionCenterLevel: ProductionCenterLevel.level2,
@@ -32,6 +32,23 @@ class SpecialStrikesBuildCalculator {
             productionCenterType: ProductionCenterType.airField,
             productionCenterLevel: ProductionCenterLevel.level1,
           )
+      };
+
+  BuildRestriction getError(SpecialStrikeType type) => switch (type) {
+        SpecialStrikeType.propaganda || SpecialStrikeType.flameTroopers || SpecialStrikeType.gasAttack => AppropriateUnit(),
+        SpecialStrikeType.airBombardment =>
+          _allCellsWithMyAirFields.any((c) => c.productionCenter?.level == ProductionCenterLevel.level2)
+              ? AppropriateUnit()
+              : ProductionCenterBuildRestriction(
+                  productionCenterType: ProductionCenterType.airField,
+                  productionCenterLevel: ProductionCenterLevel.level2,
+                ),
+        SpecialStrikeType.flechettes => _allCellsWithMyAirFields.isNotEmpty
+            ? AppropriateUnit()
+            : ProductionCenterBuildRestriction(
+                productionCenterType: ProductionCenterType.airField,
+                productionCenterLevel: ProductionCenterLevel.level1,
+              )
       };
 
   bool canBuildOnCell(GameFieldCellRead cell, SpecialStrikeType type) {

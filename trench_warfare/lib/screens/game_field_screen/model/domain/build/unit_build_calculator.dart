@@ -10,6 +10,8 @@ class UnitBuildCalculator {
     _myNation = myNation;
   }
 
+  BuildRestriction getError(UnitType unitType) => getRestriction(unitType);
+
   BuildRestriction getRestriction(UnitType unitType) => switch (unitType) {
         UnitType.armoredCar => ProductionCenterBuildRestriction(
             productionCenterType: ProductionCenterType.factory,

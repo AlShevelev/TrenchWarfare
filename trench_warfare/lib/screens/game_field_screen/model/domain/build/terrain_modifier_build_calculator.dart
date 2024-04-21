@@ -10,7 +10,7 @@ class TerrainModifierBuildCalculator {
     _myNation = myNation;
   }
 
-  BuildRestriction getRestriction() => AppropriateCell();
+  BuildRestriction getError() => AppropriateCell();
 
   bool canBuildOnCell(GameFieldCellRead cell, TerrainModifierType type) {
     switch(type) {
