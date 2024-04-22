@@ -5,12 +5,14 @@ class UnitBuildCalculator {
 
   late final Nation _myNation;
 
+  bool _inappropriateCell = false;
+
   UnitBuildCalculator(GameFieldRead gameField, Nation myNation) {
     _gameField = gameField;
     _myNation = myNation;
   }
 
-  BuildRestriction getError(UnitType unitType) => getRestriction(unitType);
+  BuildRestriction getError(UnitType unitType) => _inappropriateCell ? AppropriateCell() : getRestriction(unitType);
 
   BuildRestriction getRestriction(UnitType unitType) => switch (unitType) {
         UnitType.armoredCar => ProductionCenterBuildRestriction(
@@ -71,11 +73,23 @@ class UnitBuildCalculator {
     }
 
     final restriction = getRestriction(unitType) as ProductionCenterBuildRestriction;
+    final hasProperProductionCenter = pc.type == restriction.productionCenterType && pc.level >= restriction.productionCenterLevel;
 
-    return pc.type == restriction.productionCenterType && pc.level >= restriction.productionCenterLevel;
+    if (!hasProperProductionCenter) {
+      return false;
+    }
+
+    if (cell.units.length == GameConstants.maxUnitsInCell) {
+      _inappropriateCell = true;
+      return false;
+    }
+
+    return true;
   }
 
   bool canBuildOnGameField(UnitType unitType) {
+    _inappropriateCell = false;
+
     for (var cell in _gameField.cells) {
       if (canBuildOnCell(cell, unitType)) {
         return true;

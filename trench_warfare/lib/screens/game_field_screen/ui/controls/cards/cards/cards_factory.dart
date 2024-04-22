@@ -6,7 +6,7 @@ abstract class CardsFactory<T extends GameFieldControlsCard> {
 
   /// -1 value means no ona card can be selected
   int get startSelectedIndex =>
-      items.indexWhere((i) => false /*i.buildError == null && i.canBuildByIndustryPoint && i.canBuildByCurrency*/);
+      items.indexWhere((i) => i.buildError == null && i.canBuildByIndustryPoint && i.canBuildByCurrency);
 
   CardsFactory(this.items);
 

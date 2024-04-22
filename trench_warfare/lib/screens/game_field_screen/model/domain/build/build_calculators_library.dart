@@ -11,6 +11,7 @@ import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/core_entities/game_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 
 part 'unit_build_calculator.dart';
