@@ -1,11 +1,11 @@
 part of game_field_sm;
 
-class FromReadyForInputOnCardsClose {
+class FromCardSelectingOnCardsSelectionCancelled {
   late final MoneyUnit _nationMoney;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
-  FromReadyForInputOnCardsClose(
+  FromCardSelectingOnCardsSelectionCancelled(
     this._nationMoney,
     this._controlsState,
   );

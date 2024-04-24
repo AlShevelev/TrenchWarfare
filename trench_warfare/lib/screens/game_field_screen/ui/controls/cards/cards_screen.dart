@@ -108,7 +108,7 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
             bottom: 15,
             image: const AssetImage('assets/images/game_field_overlays/cards/button_close.webp'),
             onPress: () {
-              widget._gameField.onCardsClose();
+              widget._gameField.onCardsClosed();
             },
           ),
           GameFieldGeneralPanel(

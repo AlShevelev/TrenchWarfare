@@ -36,30 +36,38 @@ class GameFieldModel implements Disposable {
 
     _money = MoneyStorage(_gameField, _playerNation);
 
-    _stateMachine.process(Init(_gameField, _playerNation.code, _money, _metadata));
+    _stateMachine.process(OnInit(_gameField, _playerNation.code, _money, _metadata));
   }
 
   void onClick(Vector2 position) {
     final clickedCell = _gameField.findCellByPosition(position);
-    _stateMachine.process(Click(clickedCell));
+    _stateMachine.process(OnCellClick(clickedCell));
   }
 
   void onLongClickStart(Vector2 position) {
     final clickedCell = _gameField.findCellByPosition(position);
-    _stateMachine.process(LongClickStart(clickedCell));
+    _stateMachine.process(OnLongCellClickStart(clickedCell));
   }
 
   void onLongClickEnd() {
-    _stateMachine.process(LongClickEnd());
+    _stateMachine.process(OnLongCellClickEnd());
   }
 
-  void onMovementComplete() => _stateMachine.process(MovementComplete());
+  void onMovementComplete() => _stateMachine.process(OnMovementCompleted());
 
-  void onResortUnits(String cellId, Iterable<String> unitsId) => _stateMachine.process(ResortUnits(cellId, unitsId));
+  void onResortUnits(String cellId, Iterable<String> unitsId) => _stateMachine.process(OnUnitsResorted(cellId, unitsId));
 
-  void onCardsButtonClick() => _stateMachine.process(CardsButtonClick());
+  void onCardsButtonClick() => _stateMachine.process(OnCardsButtonClick());
 
-  void onCardsClose() => _stateMachine.process(CardsClose());
+  void onCardsClosed() => _stateMachine.process(OnCardsSelectionCancelled());
+
+  void onCardSelected(GameFieldControlsCard? card) {
+    if (card == null) {
+      _stateMachine.process(OnCardsSelectionCancelled());
+    } else {
+      _stateMachine.process(OnCardSelected(card));
+    }
+  }
 
   @override
   void dispose() {

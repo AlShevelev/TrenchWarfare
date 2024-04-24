@@ -32,7 +32,7 @@ part 'transitions/game_object_transition_base.dart';
 part 'transitions/from_initial_on_init_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_cards_button_click.dart';
-part 'transitions/from_ready_for_input_on_cards_close.dart';
+part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
 part 'transitions/from_ready_for_input_on_long_click_start.dart';
 part 'transitions/from_ready_for_input_on_long_click_end.dart';
 part 'transitions/from_ready_for_input_on_resort_unit.dart';
@@ -61,7 +61,7 @@ class GameFieldStateMachine implements Disposable {
   void process(Event event) {
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          Init(
+          OnInit(
             gameField: var gameField,
             nation: var nation,
             money: var money,
@@ -71,69 +71,74 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
-          Click(cell: var cell) => FromReadyForInputOnClick(
+          OnCellClick(cell: var cell) => FromReadyForInputOnClick(
               _updateGameObjectsEvent,
               _gameField,
               _nation,
               _money.actual,
               _controlsState,
             ).process(cell),
-          LongClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(
+          OnLongCellClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(
               _money.actual,
               _controlsState,
             ).process(cell),
-          LongClickEnd() => FromReadyForInputOnLongClickEnd(
+          OnLongCellClickEnd() => FromReadyForInputOnLongClickEnd(
               _money.actual,
               _controlsState,
             ).process(),
-          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
             ).process(cellId, unitsId),
-          CardsButtonClick() => FromReadyForInputOnCardsButtonClick(
+          OnCardsButtonClick() => FromReadyForInputOnCardsButtonClick(
               _money.actual,
               _controlsState,
               _gameField,
               _nation,
               _mapMetadata,
             ).process(),
-          CardsClose() => FromReadyForInputOnCardsClose(
-              _money.actual,
-              _controlsState,
-            ).process(),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
-          Click(cell: var cell) => FromWaitingForEndOfPathOnClick(
+          OnCellClick(cell: var cell) => FromWaitingForEndOfPathOnClick(
               _updateGameObjectsEvent,
               _gameField,
               _money.actual,
               _controlsState,
             ).process(startPathCell, cell),
-          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
             ).process(cellId, unitsId),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
-          Click(cell: var cell) => FromPathIsShownOnClick(
+          OnCellClick(cell: var cell) => FromPathIsShownOnClick(
               _updateGameObjectsEvent,
               _gameField,
               _nation,
               _money.actual,
               _controlsState,
             ).process(path, cell),
-          ResortUnits(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
             ).process(path, cellId, unitsId),
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {
-          MovementComplete() => ReadyForInput(),
+          OnMovementCompleted() => ReadyForInput(),
           _ => _currentState,
         },
+      CardSelecting() => switch (event) {
+        OnCardsSelectionCancelled() => FromCardSelectingOnCardsSelectionCancelled(
+          _money.actual,
+          _controlsState,
+        ).process(),
+        OnCardSelected(card: var card) => ReadyForInput(),
+        _ => _currentState,
+      },
+      CardPlacing(card: var card) => _currentState,
     };
 
     _currentState = newState;

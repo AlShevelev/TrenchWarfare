@@ -72,7 +72,7 @@ class FromReadyForInputOnCardsButtonClick {
 
     _controlsState.update(cards);
 
-    return ReadyForInput();
+    return CardSelecting();
   }
 
   GameFieldControlsUnitCard _mapUnit(Unit unit, UnitBuildCalculator buildCalculator) {

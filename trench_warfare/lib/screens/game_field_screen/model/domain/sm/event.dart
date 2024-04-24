@@ -2,7 +2,7 @@ part of game_field_sm;
 
 sealed class Event {}
 
-class Init implements Event {
+class OnInit implements Event {
   final GameFieldRead gameField;
 
   final Nation nation;
@@ -11,33 +11,47 @@ class Init implements Event {
 
   final MapMetadataRead metadata;
 
-  Init(this.gameField, this.nation, this.money, this.metadata);
+  OnInit(this.gameField, this.nation, this.money, this.metadata);
 }
 
-class Click implements Event {
+class OnCellClick implements Event {
   final GameFieldCell cell;
 
-  Click(this.cell);
+  OnCellClick(this.cell);
 }
 
-class LongClickStart implements Event {
+class OnLongCellClickStart implements Event {
   final GameFieldCell cell;
 
-  LongClickStart(this.cell);
+  OnLongCellClickStart(this.cell);
 }
 
-class LongClickEnd implements Event { }
+class OnLongCellClickEnd implements Event { }
 
-class MovementComplete implements Event {}
+class OnMovementCompleted implements Event { }
 
-class ResortUnits implements Event {
+class OnUnitsResorted implements Event {
   final String cellId;
 
   final Iterable<String> unitsId;
 
-  ResortUnits(this.cellId, this.unitsId);
+  OnUnitsResorted(this.cellId, this.unitsId);
 }
 
-class CardsButtonClick implements Event { }
+class OnCardsButtonClick implements Event { }
 
-class CardsClose implements Event { }
+class OnCardsSelectionCancelled implements Event { }
+
+class OnCardSelected implements Event {
+  final GameFieldControlsCard card;
+
+  OnCardSelected(this.card);
+}
+
+class OnCardPlaced implements Event {
+  final GameFieldCellRead cell;
+
+  OnCardPlaced(this.cell);
+}
+
+class OnCardPlacingCancelled implements Event { }

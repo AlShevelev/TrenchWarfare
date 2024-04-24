@@ -19,3 +19,11 @@ class PathIsShown implements State {
 }
 
 class MovingInProgress implements State { }
+
+class CardSelecting implements State { }
+
+class CardPlacing implements State {
+  final GameFieldControlsCard card;
+
+  CardPlacing(this.card);
+}

@@ -25,7 +25,7 @@ abstract interface class GameFieldForControls {
 
   void onCardSelected(GameFieldControlsCard? card);
 
-  void onCardsClose();
+  void onCardsClosed();
 }
 
 class GameField extends FlameGame with ScaleDetector, TapDetector implements GameFieldForControls {
@@ -135,10 +135,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   void onCardsButtonClick() => _viewModel.onCardsButtonClick();
 
   @override
-  void onCardsClose() => _viewModel.onCardsClose();
+  void onCardsClosed() => _viewModel.onCardsClosed();
 
   @override
-  void onCardSelected(GameFieldControlsCard? card) {
-    return;   // do nothing so far
-  }
+  void onCardSelected(GameFieldControlsCard? card) => _viewModel.onCardSelected(card);
 }
