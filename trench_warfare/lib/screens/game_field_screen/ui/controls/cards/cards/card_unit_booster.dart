@@ -41,16 +41,7 @@ class _CardUnitBoosterState extends CardBaseState<CardUnitBooster> {
   String getBackgroundImage() => '${_pathToImages}card_background.webp';
 
   @override
-  String _getPhoto() {
-    final photo = switch (widget.cardInfo.type) {
-      UnitBoost.attack => 'photo_attack.webp',
-      UnitBoost.defence => 'photo_defence.webp',
-      UnitBoost.transport => 'photo_transport.webp',
-      UnitBoost.commander => 'photo_commander.webp',
-    };
-
-    return '$_pathToImages$photo';
-  }
+  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
 
   @override
   BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;

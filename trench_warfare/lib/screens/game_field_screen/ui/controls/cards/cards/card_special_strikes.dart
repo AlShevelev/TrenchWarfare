@@ -43,17 +43,7 @@ class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
   String getBackgroundImage() => '${_pathToImages}card_background.webp';
 
   @override
-  String _getPhoto() {
-    final photo = switch (widget.cardInfo.type) {
-      SpecialStrikeType.gasAttack => 'photo_gas_attack.webp',
-      SpecialStrikeType.flechettes => 'photo_flechettes.webp',
-      SpecialStrikeType.airBombardment => 'photo_air_bombing.webp',
-      SpecialStrikeType.flameTroopers => 'photo_flametroopers.webp',
-      SpecialStrikeType.propaganda => 'photo_propaganda.webp',
-    };
-
-    return '$_pathToImages$photo';
-  }
+  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
 
   @override
   BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;

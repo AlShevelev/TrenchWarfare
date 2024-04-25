@@ -12,6 +12,7 @@ import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/card_photos.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -24,7 +25,7 @@ import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 
 part 'cards_bookmarks.dart';
 part 'cards_list.dart';
-part 'cards_screen.dart';
+part 'cards_selection_screen.dart';
 part 'cards_tab.dart';
 part 'cards/card_base.dart';
 part 'cards/build_restriction_panel.dart';

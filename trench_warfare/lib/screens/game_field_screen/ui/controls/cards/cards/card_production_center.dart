@@ -41,16 +41,7 @@ class _CardProductionCenterState extends CardBaseState<CardProductionCenter> {
   String getBackgroundImage() => '${_pathToImages}card_background.webp';
 
   @override
-  String _getPhoto() {
-    final photo = switch (widget.cardInfo.type) {
-      ProductionCenterType.city => 'photo_city.webp',
-      ProductionCenterType.factory => 'photo_factory.webp',
-      ProductionCenterType.airField => 'photo_air_field.webp',
-      ProductionCenterType.navalBase => 'photo_naval_base.webp',
-    };
-
-    return '$_pathToImages$photo';
-  }
+  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
 
   @override
   BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;

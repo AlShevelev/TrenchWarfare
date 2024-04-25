@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_controls_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placing/cards_placing_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -33,10 +34,14 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 state: value.data as MainControls,
                 gameField: widget._gameField,
               ),
-            Cards() => CardsScreen(
-              state: value.data as Cards,
-              gameField: widget._gameField,
-            ),
+            CardsSelectionControls() => CardsSelectionScreen(
+                state: value.data as CardsSelectionControls,
+                gameField: widget._gameField,
+              ),
+            CardsPlacingControls() => CardPlacingWidget(
+                state: value.data as CardsPlacingControls,
+                gameField: widget._gameField,
+              ),
             _ => const SizedBox.shrink(),
           };
         });

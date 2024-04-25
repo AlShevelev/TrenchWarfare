@@ -18,7 +18,7 @@ class MainControls extends GameFieldControlsState {
   });
 }
 
-class Cards extends GameFieldControlsState {
+class CardsSelectionControls extends GameFieldControlsState {
   final MoneyUnit totalMoney;
 
   final List<GameFieldControlsUnitCard> units;
@@ -31,7 +31,7 @@ class Cards extends GameFieldControlsState {
 
   final List<GameFieldControlsSpecialStrikesCard> specialStrikes;
 
-  Cards({
+  CardsSelectionControls({
     required this.totalMoney,
     required this.units,
     required this.productionCenters,
@@ -39,4 +39,12 @@ class Cards extends GameFieldControlsState {
     required this.unitBoosters,
     required this.specialStrikes,
   });
+}
+
+class CardsPlacingControls extends GameFieldControlsState {
+  final MoneyUnit totalMoney;
+
+  final GameFieldControlsCard card;
+
+  CardsPlacingControls({required this.totalMoney, required this.card});
 }

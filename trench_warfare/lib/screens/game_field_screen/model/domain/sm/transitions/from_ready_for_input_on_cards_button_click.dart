@@ -26,7 +26,7 @@ class FromReadyForInputOnCardsButtonClick {
     final specialStrikesBuildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata);
     final productionCentersBuildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
 
-    final cards = Cards(
+    final cards = CardsSelectionControls(
       totalMoney: _nationMoney,
       units: [
         _mapUnit(Unit.createEmpty(UnitType.infantry), unitBuildCalculator),

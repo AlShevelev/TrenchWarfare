@@ -1,19 +1,19 @@
 part of card_controls;
 
-class CardsScreen extends StatefulWidget {
-  final Cards state;
+class CardsSelectionScreen extends StatefulWidget {
+  final CardsSelectionControls state;
 
   late final GameFieldForControls _gameField;
 
-  CardsScreen({required this.state, required GameFieldForControls gameField, super.key}) {
+  CardsSelectionScreen({required this.state, required GameFieldForControls gameField, super.key}) {
     _gameField = gameField;
   }
 
   @override
-  State<CardsScreen> createState() => _CardsScreenState();
+  State<CardsSelectionScreen> createState() => _CardsSelectionScreenState();
 }
 
-class _CardsScreenState extends State<CardsScreen> with ImageLoading {
+class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageLoading {
   bool _isBackgroundLoaded = false;
 
   late final ui.Image _background;
@@ -108,7 +108,7 @@ class _CardsScreenState extends State<CardsScreen> with ImageLoading {
             bottom: 15,
             image: const AssetImage('assets/images/game_field_overlays/cards/button_close.webp'),
             onPress: () {
-              widget._gameField.onCardsClosed();
+              widget._gameField.onCardsSelectionCancelled();
             },
           ),
           GameFieldGeneralPanel(

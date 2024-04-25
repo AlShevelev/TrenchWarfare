@@ -98,23 +98,7 @@ class _CardUnitState extends CardBaseState<CardUnit> {
 
 
   @override
-  String _getPhoto() {
-    final photo = switch (widget.cardInfo.type) {
-      UnitType.armoredCar => 'photo_armored_car.webp',
-      UnitType.artillery => 'photo_artillery.webp',
-      UnitType.infantry => 'photo_infantry.webp',
-      UnitType.cavalry => 'photo_cavalry.webp',
-      UnitType.machineGunnersCart => 'photo_machine_gunners_cart.webp',
-      UnitType.machineGuns => 'photo_machine_gunners.webp',
-      UnitType.tank => 'photo_tank.webp',
-      UnitType.destroyer => 'photo_destroyer.webp',
-      UnitType.cruiser => 'photo_cruiser.webp',
-      UnitType.battleship => 'photo_battleship.webp',
-      UnitType.carrier => 'photo_carrier.webp',
-    };
-
-    return '$_pathToImages$photo';
-  }
+  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
 
   @override
   BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;

@@ -45,18 +45,7 @@ class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
   String getBackgroundImage() => '${_pathToImages}card_background.webp';
 
   @override
-  String _getPhoto() {
-    final photo = switch (widget.cardInfo.type) {
-      TerrainModifierType.seaMine => 'photo_sea_mine_field.webp',
-      TerrainModifierType.antiAirGun => 'photo_anti_air_gun.webp',
-      TerrainModifierType.landMine => 'photo_land_mine_field.webp',
-      TerrainModifierType.landFort => 'photo_land_fort.webp',
-      TerrainModifierType.barbedWire => 'photo_barbed_wire.webp',
-      TerrainModifierType.trench => 'photo_trench.webp',
-    };
-
-    return '$_pathToImages$photo';
-  }
+  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
 
   @override
   BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;

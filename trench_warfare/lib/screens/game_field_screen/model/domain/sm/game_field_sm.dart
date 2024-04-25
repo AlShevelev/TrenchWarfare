@@ -32,6 +32,8 @@ part 'transitions/game_object_transition_base.dart';
 part 'transitions/from_initial_on_init_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_cards_button_click.dart';
+part 'transitions/from_card_placing_on_card_placing_cancelled.dart';
+part 'transitions/from_card_selecting_on_card_selected.dart';
 part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
 part 'transitions/from_ready_for_input_on_long_click_start.dart';
 part 'transitions/from_ready_for_input_on_long_click_end.dart';
@@ -135,10 +137,19 @@ class GameFieldStateMachine implements Disposable {
           _money.actual,
           _controlsState,
         ).process(),
-        OnCardSelected(card: var card) => ReadyForInput(),
+        OnCardSelected(card: var card) => FromCardSelectingOnCardsSelected(
+          _money.actual,
+          _controlsState,
+        ).process(card),
         _ => _currentState,
       },
-      CardPlacing(card: var card) => _currentState,
+      CardPlacing(card: var card) => switch (event) {
+        OnCardPlacingCancelled() => FromCardPlacingOnCardPlacingCancelled(
+          _money.actual,
+          _controlsState,
+        ).process(),
+        _ => _currentState,
+      },
     };
 
     _currentState = newState;
