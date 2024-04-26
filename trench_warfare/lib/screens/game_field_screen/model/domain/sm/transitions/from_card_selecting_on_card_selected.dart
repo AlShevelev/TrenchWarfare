@@ -17,6 +17,7 @@ class FromCardSelectingOnCardsSelected {
     ));
 
     // the cells, are possible to place the card must be calculated here
+    // use _updateGameObjectsEvent
 
     return CardPlacing(card);
   }

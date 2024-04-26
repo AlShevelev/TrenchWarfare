@@ -98,6 +98,7 @@ class GameObjectsComposer implements Disposable {
 
     _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
     _addGameObject(GameObjectCell(_spritesAtlas, cell), cell.id);
+    //_addGameObject(GameCellInactive(cell, _gameField), '${cell.id}_inactive');
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
