@@ -1,10 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/entities/path_item.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
+part of pathfinding;
 
 class SeaPathCostCalculator {
   late final Iterable<GameFieldCell> _sourcePath;

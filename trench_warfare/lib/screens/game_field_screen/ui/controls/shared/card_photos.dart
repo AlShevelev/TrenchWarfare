@@ -15,7 +15,7 @@ class CardPhotos {
         UnitType.artillery => 'units/photo_artillery.webp',
         UnitType.infantry => 'units/photo_infantry.webp',
         UnitType.cavalry => 'units/photo_cavalry.webp',
-        UnitType.machineGunnersCart => 'units/units/photo_machine_gunners_cart.webp',
+        UnitType.machineGunnersCart => 'units/photo_machine_gunners_cart.webp',
         UnitType.machineGuns => 'units/photo_machine_gunners.webp',
         UnitType.tank => 'units/photo_tank.webp',
         UnitType.destroyer => 'units/photo_destroyer.webp',

@@ -7,9 +7,9 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/battle/battle_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/battle/battle_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';

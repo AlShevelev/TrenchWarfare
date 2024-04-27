@@ -157,7 +157,7 @@
     <property name="boost2" value=""/>
     <property name="boost3" value=""/>
     <property name="experienceRank" value="rookies"/>
-    <property name="fatigue" type="float" value="0"/>
+    <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>

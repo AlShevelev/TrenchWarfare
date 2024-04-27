@@ -12,16 +12,17 @@ class Unit extends GameObject {
   late int _tookPartInBattles;
   int get tookPartInBattles => _tookPartInBattles;
 
+  /// [0, 1]
   late double _fatigue;
   double get fatigue => _fatigue;
 
   late double _health;
   double get health => _health;
 
-  double get maxHealth => _getMaxHealth();
+  double get maxHealth => Unit._getMaxHealth(type);
 
   late double movementPoints;
-  double get maxMovementPoints => _getMaxMovementPoints();
+  double get maxMovementPoints => Unit._getMaxMovementPoints(type);
 
   double get attack => _getAttack();
   double get defence => _getDefence();
@@ -62,6 +63,9 @@ class Unit extends GameObject {
       type == UnitType.cruiser ||
       type == UnitType.battleship;
 
+  /// [fatigue] - from 0 to 1 (where 1 is well rested)
+  /// [health] - from 0 to 1
+  /// [movementPoints] - from 0 to 1
   Unit({
     required this.boost1,
     required this.boost2,
@@ -75,23 +79,23 @@ class Unit extends GameObject {
     id = RandomGen.generateId();
 
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(experienceRank);
-    _health = maxHealth * health;
+    _health = _getMaxHealth(type) * health;
     _fatigue = fatigue;
 
-    this.movementPoints = movementPoints * maxMovementPoints;
+    this.movementPoints = movementPoints * _getMaxMovementPoints(type);
 
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
-  static Unit createEmpty(UnitType type) =>
+  static Unit create(UnitType type) =>
       Unit(
         boost1: null,
         boost2: null,
         boost3: null,
         experienceRank: UnitExperienceRank.rookies,
-        fatigue: 0,
-        health: 0,
-        movementPoints: 0,
+        fatigue: 1,   // well rested
+        health: 1,    // max health
+        movementPoints: 1,    // max movement points
         type: type
       );
 
@@ -140,7 +144,9 @@ class Unit extends GameObject {
     return UnitExperienceRank.elite;
   }
 
-  double _getMaxHealth() {
+  static double _getMaxFatigue() => 1;
+
+  static double _getMaxHealth(UnitType type) {
     switch (type) {
       case UnitType.armoredCar:
         return 8;
@@ -167,7 +173,7 @@ class Unit extends GameObject {
     }
   }
 
-  double _getMaxMovementPoints() {
+  static double _getMaxMovementPoints(UnitType type) {
     switch (type) {
       case UnitType.armoredCar:
         return 3;

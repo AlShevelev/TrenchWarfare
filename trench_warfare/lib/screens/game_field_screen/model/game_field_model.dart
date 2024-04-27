@@ -6,7 +6,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';

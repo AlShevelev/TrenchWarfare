@@ -1,5 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+part of pathfinding;
 
 /// Calculations for the G part of the F factor
 abstract class FindPathSettings {

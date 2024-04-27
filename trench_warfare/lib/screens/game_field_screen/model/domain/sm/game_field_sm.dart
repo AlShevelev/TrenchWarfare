@@ -1,48 +1,4 @@
-library game_field_sm;
-
-import 'package:flutter/cupertino.dart';
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/movement/movement_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/path_facade.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
-import 'package:trench_warfare/shared/architecture/disposable.dart';
-import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
-import 'package:trench_warfare/shared/utils/range.dart';
-
-part 'event.dart';
-part 'state.dart';
-part 'transitions/game_object_transition_base.dart';
-part 'transitions/from_initial_on_init_transition.dart';
-part 'transitions/from_ready_for_input_on_click.dart';
-part 'transitions/from_ready_for_input_on_cards_button_click.dart';
-part 'transitions/from_card_placing_on_card_placing_cancelled.dart';
-part 'transitions/from_card_placing_on_cell_clicked.dart';
-part 'transitions/from_card_selecting_on_card_selected.dart';
-part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
-part 'transitions/from_ready_for_input_on_long_click_start.dart';
-part 'transitions/from_ready_for_input_on_long_click_end.dart';
-part 'transitions/from_ready_for_input_on_resort_unit.dart';
-part 'transitions/from_waiting_for_end_of_path_on_click.dart';
-part 'transitions/from_waiting_for_end_of_path_on_resort_unit.dart';
-part 'transitions/from_path_is_shown_on_click.dart';
-part 'transitions/from_path_is_shown_on_resort_unit.dart';
+part of game_field_sm;
 
 class GameFieldStateMachine implements Disposable {
   late final GameFieldRead _gameField;
@@ -158,8 +114,9 @@ class GameFieldStateMachine implements Disposable {
         OnCellClick(cell: var cell) => FromCardPlacingOnCellClicked(
           _updateGameObjectsEvent,
           _gameField,
-          nationMoney: _money.actual,
+          nationMoney: _money as MoneyStorage,
           controlsState: _controlsState,
+          myNation: _nation,
         ).process(cellsImpossibleToBuild, cell, card),
         _ => _currentState,
       },

@@ -1,10 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/core_entities/game_constants.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/find/find_path.dart';
+part of pathfinding;
 
 class LandFindPathSettings implements FindPathSettings {
   late final GameFieldCell _startCell;

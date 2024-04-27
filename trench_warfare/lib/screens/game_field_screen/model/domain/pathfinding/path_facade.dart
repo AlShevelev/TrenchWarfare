@@ -1,10 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/find/find_path.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/find/land_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/cost/land_path_cost_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/find/sea_find_path_settings.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/common_algs/pathfinding/cost/sea_path_cost_calculator.dart';
+part of pathfinding;
 
 class PathFacade {
   static Iterable<GameFieldCell> calculatePath({
