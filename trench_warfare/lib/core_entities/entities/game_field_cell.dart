@@ -3,7 +3,7 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/core_entities/entities/path_item.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/shared/utils/random_gen.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 
 abstract interface  class GameFieldCellRead {
   /// Center of the cell in map coordinates
@@ -12,7 +12,7 @@ abstract interface  class GameFieldCellRead {
   final int row = 0;
   final int col = 0;
 
-  late final String id;
+  late final int id;
 
   final CellTerrain terrain = CellTerrain.water;
 
@@ -47,7 +47,7 @@ class GameFieldCell implements GameFieldCellRead {
   final int col;
 
   @override
-  late final String id;
+  late final int id;
 
   @override
   final CellTerrain terrain;
@@ -94,7 +94,7 @@ class GameFieldCell implements GameFieldCellRead {
     required this.row,
     required this.col,
   }) {
-    id = RandomGen.generateId();
+    id = pair(row, col);
     _units = [];
   }
 

@@ -31,7 +31,7 @@ class OnLongCellClickEnd implements Event { }
 class OnMovementCompleted implements Event { }
 
 class OnUnitsResorted implements Event {
-  final String cellId;
+  final int cellId;
 
   final Iterable<String> unitsId;
 

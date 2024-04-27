@@ -17,9 +17,9 @@ class UpdateCell implements UpdateGameEvent {
 }
 
 class UpdateCellInactivity implements UpdateGameEvent {
-  final Map<String, GameFieldCellRead> newInactiveCells;
+  final Map<int, GameFieldCellRead> newInactiveCells;
 
-  final Map<String, GameFieldCellRead> oldInactiveCells;
+  final Map<int, GameFieldCellRead> oldInactiveCells;
 
   UpdateCellInactivity({required this.newInactiveCells, required this.oldInactiveCells});
 }

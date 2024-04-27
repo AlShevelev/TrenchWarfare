@@ -40,7 +40,7 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onMovementComplete() => _model.onMovementComplete();
 
-  void onResortUnits(String cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
+  void onResortUnits(int cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
 
   void onCardsButtonClick() => _model.onCardsButtonClick();
 

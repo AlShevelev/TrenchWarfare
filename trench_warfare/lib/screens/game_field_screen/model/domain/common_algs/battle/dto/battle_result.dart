@@ -5,10 +5,10 @@ class BattleResult {
   final UnitBattleResult defendingUnit;
 
   /// The value is null if the attacking unit is dead
-  final String? attackingUnitCellId;
+  final int? attackingUnitCellId;
 
   /// The value is null if the defending unit is dead
-  final String? defendingUnitCellId;
+  final int? defendingUnitCellId;
 
   final bool isDefendingCellTerrainModifierDestroyed;
 

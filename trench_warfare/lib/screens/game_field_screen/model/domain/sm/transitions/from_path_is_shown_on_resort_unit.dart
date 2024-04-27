@@ -6,7 +6,7 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
     super.gameField,
   );
 
-  State process(Iterable<GameFieldCell> path, String cellId, Iterable<String> unitsId) {
+  State process(Iterable<GameFieldCell> path, int cellId, Iterable<String> unitsId) {
     final cell = _gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit;

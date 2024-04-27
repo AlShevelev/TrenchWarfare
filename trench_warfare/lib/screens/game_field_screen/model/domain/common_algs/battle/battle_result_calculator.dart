@@ -98,7 +98,7 @@ class BattleResultCalculator {
     throw UnsupportedError('This case is not supported');
   }
 
-  String? _getCellToWithdraw(UnitInBattle unit, GameFieldCell cell) {
+  int? _getCellToWithdraw(UnitInBattle unit, GameFieldCell cell) {
     final willTryToWithdraw = switch (unit.experienceRank) {
       UnitExperienceRank.rookies => RandomGen.random(0, 1) >= 0.2,
       UnitExperienceRank.fighters => RandomGen.random(0, 1) >= 0.4,

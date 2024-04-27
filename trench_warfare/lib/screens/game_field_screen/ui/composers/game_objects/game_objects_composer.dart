@@ -96,11 +96,11 @@ class GameObjectsComposer implements Disposable {
   void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
     final borderComponentKey = _getBorderComponentKey(cell);
 
-    _removeGameObject(cell.id);
+    _removeGameObject(_getCellComponentKey(cell));
     _removeGameObject(borderComponentKey);
 
     _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
-    _addGameObject(GameObjectCell(_spritesAtlas, cell), cell.id);
+    _addGameObject(GameObjectCell(_spritesAtlas, cell), _getCellComponentKey(cell));
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
@@ -109,7 +109,7 @@ class GameObjectsComposer implements Disposable {
     }
   }
 
-  void _updateCellInactivity(Map<String, GameFieldCellRead> oldInactiveCells, Map<String, GameFieldCellRead> newInactiveCells) {
+  void _updateCellInactivity(Map<int, GameFieldCellRead> oldInactiveCells, Map<int, GameFieldCellRead> newInactiveCells) {
     for (var o in oldInactiveCells.entries) {
       if (!newInactiveCells.containsKey(o.key)) {
         _removeGameObject(_getInactivityComponentKey(o.value));
@@ -216,6 +216,8 @@ class GameObjectsComposer implements Disposable {
         DamageType.bloodSplash => 13,
       };
 
+  String _getCellComponentKey(GameFieldCell cell) => '${cell.id}_cell';
+  
   String _getBorderComponentKey(GameFieldCell cell) => '${cell.id}_border';
 
   String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';

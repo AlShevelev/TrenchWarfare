@@ -13,7 +13,7 @@ abstract interface class GameFieldRead {
 
   GameFieldCell getCell(int row, int col);
 
-  GameFieldCell getCellById(String id);
+  GameFieldCell getCellById(int id);
 
   int getCellIndex(int row, int col);
 
@@ -47,7 +47,7 @@ class GameField implements GameFieldRead {
   GameFieldCell getCell(int row, int col) => _cells[getCellIndex(row, col)];
 
   @override
-  GameFieldCell getCellById(String id) => _cells.where((c) => c.id == id).first;
+  GameFieldCell getCellById(int id) => _cells.where((c) => c.id == id).first;
 
   void setCells(List<GameFieldCell> cells) {
     _cells = cells;

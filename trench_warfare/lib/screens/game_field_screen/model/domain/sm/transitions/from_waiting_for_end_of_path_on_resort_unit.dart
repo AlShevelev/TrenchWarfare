@@ -6,7 +6,7 @@ class FromWaitingForEndOfPathOnResortUnit extends GameObjectTransitionBase {
     super.gameField,
   );
 
-  State process(String cellId, Iterable<String> unitsId) {
+  State process(int cellId, Iterable<String> unitsId) {
     final cell = _gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit;

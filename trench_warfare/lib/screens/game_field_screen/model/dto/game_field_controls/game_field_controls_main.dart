@@ -18,7 +18,7 @@ class GameFieldControlsCellInfo {
 }
 
 class GameFieldControlsArmyInfo {
-  final String cellId;
+  final int cellId;
 
   final List<Unit> units;
 

@@ -4,7 +4,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
   static const width = 250.0;
   static const height = 70.0;
 
-  late final String _cellId;
+  late final int _cellId;
 
   final GameFieldControlsArmyInfo armyInfo;
 
@@ -17,7 +17,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 
   GameFieldArmyInfoPanel({
     super.key,
-    required String cellId,
+    required int cellId,
     required this.armyInfo,
     required this.left,
     required this.top,
