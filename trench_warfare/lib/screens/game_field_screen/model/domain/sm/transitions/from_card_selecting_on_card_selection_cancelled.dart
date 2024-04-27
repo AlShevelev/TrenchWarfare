@@ -6,9 +6,12 @@ class FromCardSelectingOnCardsSelectionCancelled {
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   FromCardSelectingOnCardsSelectionCancelled(
-    this._nationMoney,
-    this._controlsState,
-  );
+    MoneyUnit nationMoney,
+    SingleStream<GameFieldControlsState> controlsState,
+  ) {
+    _nationMoney = nationMoney;
+    _controlsState = controlsState;
+  }
 
   State process() {
     _controlsState.update(MainControls(

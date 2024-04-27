@@ -59,17 +59,17 @@ class GameFieldModel implements Disposable {
 
   void onCardsButtonClick() => _stateMachine.process(OnCardsButtonClick());
 
-  void onCardsSelectionCancelled() => _stateMachine.process(OnCardsSelectionCancelled());
+  void onCardsSelectionCancelled() => _stateMachine.process(OnCancelled());
 
   void onCardSelected(GameFieldControlsCard? card) {
     if (card == null) {
-      _stateMachine.process(OnCardsSelectionCancelled());
+      _stateMachine.process(OnCancelled());
     } else {
       _stateMachine.process(OnCardSelected(card));
     }
   }
 
-  void onCardsPlacingCancelled() => _stateMachine.process(OnCardPlacingCancelled());
+  void onCardsPlacingCancelled() => _stateMachine.process(OnCancelled());
 
   @override
   void dispose() {

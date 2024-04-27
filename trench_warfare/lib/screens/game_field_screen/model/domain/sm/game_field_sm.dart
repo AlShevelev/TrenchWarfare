@@ -133,7 +133,7 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       CardSelecting() => switch (event) {
-        OnCardsSelectionCancelled() => FromCardSelectingOnCardsSelectionCancelled(
+        OnCancelled() => FromCardSelectingOnCardsSelectionCancelled(
           _money.actual,
           _controlsState,
         ).process(),
@@ -147,11 +147,13 @@ class GameFieldStateMachine implements Disposable {
         ).process(card),
         _ => _currentState,
       },
-      CardPlacing(card: var card) => switch (event) {
-        OnCardPlacingCancelled() => FromCardPlacingOnCardPlacingCancelled(
-          _money.actual,
-          _controlsState,
-        ).process(),
+      CardPlacing(card: var card, cellsImpossibleToBuild: var cellsImpossibleToBuild,) => switch (event) {
+        OnCancelled() => FromCardPlacingOnCardPlacingCancelled(
+          _updateGameObjectsEvent,
+          _gameField,
+          nationMoney: _money.actual,
+          controlsState: _controlsState,
+        ).process(cellsImpossibleToBuild),
         _ => _currentState,
       },
     };

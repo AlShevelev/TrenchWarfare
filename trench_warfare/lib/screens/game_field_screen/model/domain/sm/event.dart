@@ -40,7 +40,7 @@ class OnUnitsResorted implements Event {
 
 class OnCardsButtonClick implements Event { }
 
-class OnCardsSelectionCancelled implements Event { }
+class OnCancelled implements Event { }
 
 class OnCardSelected implements Event {
   final GameFieldControlsCard card;
@@ -53,5 +53,3 @@ class OnCardPlaced implements Event {
 
   OnCardPlaced(this.cell);
 }
-
-class OnCardPlacingCancelled implements Event { }
