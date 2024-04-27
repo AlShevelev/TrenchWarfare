@@ -25,5 +25,7 @@ class CardSelecting implements State { }
 class CardPlacing implements State {
   final GameFieldControlsCard card;
 
-  CardPlacing(this.card);
+  final Map<String, GameFieldCellRead> cellsImpossibleToBuild;
+
+  CardPlacing(this.card, this.cellsImpossibleToBuild);
 }

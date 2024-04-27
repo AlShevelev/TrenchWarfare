@@ -110,4 +110,7 @@ class SpecialStrikesBuildCalculator {
 
   List<GameFieldCellRead> getAllCellsToBuild(SpecialStrikeType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
+
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(SpecialStrikeType type) =>
+      _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
 }

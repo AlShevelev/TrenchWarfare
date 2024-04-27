@@ -9,7 +9,7 @@ class GameCellInactive extends PositionComponent {
   // ignore: unnecessary_late
   static late final List<Offset> _vertices = _calculateVertices(_borderAreaSize);
 
-  GameCellInactive(GameFieldCellRead cell, GameFieldRead gameField) {
+  GameCellInactive(GameFieldCellRead cell) {
     final positionCenter = Offset(cell.center.x, cell.center.y);
     _position = positionCenter - Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
   }

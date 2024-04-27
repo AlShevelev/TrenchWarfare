@@ -114,4 +114,7 @@ class ProductionCentersBuildCalculator {
 
   List<GameFieldCellRead> getAllCellsToBuild(ProductionCenterType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
+
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(ProductionCenterType type) =>
+      _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
 }

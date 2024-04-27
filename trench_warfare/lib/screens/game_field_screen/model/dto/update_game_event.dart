@@ -16,6 +16,14 @@ class UpdateCell implements UpdateGameEvent {
   UpdateCell(this.cell, {required this.updateBorderCells});
 }
 
+class UpdateCellInactivity implements UpdateGameEvent {
+  final Map<String, GameFieldCellRead> newInactiveCells;
+
+  final Map<String, GameFieldCellRead> oldInactiveCells;
+
+  UpdateCellInactivity({required this.newInactiveCells, required this.oldInactiveCells});
+}
+
 class CreateUntiedUnit implements UpdateGameEvent {
   final GameFieldCell cell;
 

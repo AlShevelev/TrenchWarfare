@@ -101,4 +101,7 @@ class UnitBuildCalculator {
 
   List<GameFieldCellRead> getAllCellsToBuild(UnitType unitType) =>
     _gameField.cells.where((c) => canBuildOnCell(c, unitType)).toList(growable: false);
+
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(UnitType unitType) =>
+      _gameField.cells.where((c) => !canBuildOnCell(c, unitType)).toList(growable: false);
 }

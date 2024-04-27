@@ -60,6 +60,9 @@ class GameObjectsComposer implements Disposable {
         case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
           _updateCell(cell, updateBorderCells);
 
+        case UpdateCellInactivity(oldInactiveCells: var oldInactiveCells, newInactiveCells: var newInactiveCells):
+          _updateCellInactivity(oldInactiveCells, newInactiveCells);
+
         case CreateUntiedUnit(cell: var cell, unit: var unit):
           _createUntiedUnit(cell, unit);
 
@@ -98,12 +101,25 @@ class GameObjectsComposer implements Disposable {
 
     _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
     _addGameObject(GameObjectCell(_spritesAtlas, cell), cell.id);
-    //_addGameObject(GameCellInactive(cell, _gameField), '${cell.id}_inactive');
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
       _removeGameObject(updateBorderComponentKey);
       _addGameObject(GameCellBorder(updateBorderCell, _gameField), updateBorderComponentKey);
+    }
+  }
+
+  void _updateCellInactivity(Map<String, GameFieldCellRead> oldInactiveCells, Map<String, GameFieldCellRead> newInactiveCells) {
+    for (var o in oldInactiveCells.entries) {
+      if (!newInactiveCells.containsKey(o.key)) {
+        _removeGameObject(_getInactivityComponentKey(o.value));
+      }
+    }
+
+    for (var n in newInactiveCells.entries) {
+      if (!oldInactiveCells.containsKey(n.key)) {
+        _addGameObject(GameCellInactive(n.value), _getInactivityComponentKey(n.value));
+      }
     }
   }
 
@@ -201,4 +217,6 @@ class GameObjectsComposer implements Disposable {
       };
 
   String _getBorderComponentKey(GameFieldCell cell) => '${cell.id}_border';
+
+  String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';
 }
