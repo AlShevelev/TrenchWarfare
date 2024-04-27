@@ -33,6 +33,7 @@ part 'transitions/from_initial_on_init_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_cards_button_click.dart';
 part 'transitions/from_card_placing_on_card_placing_cancelled.dart';
+part 'transitions/from_card_placing_on_cell_clicked.dart';
 part 'transitions/from_card_selecting_on_card_selected.dart';
 part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
 part 'transitions/from_ready_for_input_on_long_click_start.dart';
@@ -154,6 +155,12 @@ class GameFieldStateMachine implements Disposable {
           nationMoney: _money.actual,
           controlsState: _controlsState,
         ).process(cellsImpossibleToBuild),
+        OnCellClick(cell: var cell) => FromCardPlacingOnCellClicked(
+          _updateGameObjectsEvent,
+          _gameField,
+          nationMoney: _money.actual,
+          controlsState: _controlsState,
+        ).process(cellsImpossibleToBuild, cell, card),
         _ => _currentState,
       },
     };

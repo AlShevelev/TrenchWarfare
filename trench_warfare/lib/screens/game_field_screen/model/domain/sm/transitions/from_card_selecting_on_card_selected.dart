@@ -42,15 +42,15 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
       _ => throw UnsupportedError(''),
     };
 
-    final cellsImpossibleToBuildIds = {for (var e in cellsImpossibleToBuild) e.id: e};
+    final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
 
     _updateGameObjectsEvent.update([
       UpdateCellInactivity(
-        newInactiveCells: cellsImpossibleToBuildIds,
+        newInactiveCells: cellsImpossibleToBuildMap,
         oldInactiveCells: {},
       )
     ]);
 
-    return CardPlacing(card, cellsImpossibleToBuildIds);
+    return CardPlacing(card, cellsImpossibleToBuildMap);
   }
 }
