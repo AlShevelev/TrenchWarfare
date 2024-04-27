@@ -15,5 +15,5 @@ part 'money_cell_calculator.dart';
 part 'money_production_center_calculator.dart';
 part 'money_special_strike_calculator.dart';
 part 'money_terrain_modifier_calculator.dart';
-part 'money_troops_calculator.dart';
+part 'money_units_calculator.dart';
 part 'money_unit_boost_calculator.dart';

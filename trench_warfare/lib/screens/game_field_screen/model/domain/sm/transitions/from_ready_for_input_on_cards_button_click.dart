@@ -76,7 +76,7 @@ class FromReadyForInputOnCardsButtonClick {
   }
 
   GameFieldControlsUnitCard _mapUnit(Unit unit, UnitBuildCalculator buildCalculator) {
-    final cost = MoneyTroopsCalculator.calculateProductionCost(unit.type);
+    final cost = MoneyUnitsCalculator.calculateProductionCost(unit.type);
 
     final canBuildOnGameField = buildCalculator.canBuildOnGameField(unit.type);
 

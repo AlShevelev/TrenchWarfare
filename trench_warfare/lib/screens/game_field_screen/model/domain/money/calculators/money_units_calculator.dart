@@ -1,6 +1,6 @@
 part of money_calculators;
 
-class MoneyTroopsCalculator {
+class MoneyUnitsCalculator {
   static const _baseCurrency = 5;
   static const _baseIndustryPoints = 5;
 

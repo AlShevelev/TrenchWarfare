@@ -3,9 +3,14 @@ part of game_objects;
 class Unit extends GameObject {
   late final String id;
 
-  final UnitBoost? boost1;
-  final UnitBoost? boost2;
-  final UnitBoost? boost3;
+  UnitBoost? _boost1;
+  UnitBoost? get boost1 => _boost1;
+
+  UnitBoost? _boost2;
+  UnitBoost? get boost2 => _boost2;
+
+  UnitBoost? _boost3;
+  UnitBoost? get boost3 => _boost3;
 
   UnitExperienceRank get experienceRank => calculateExperienceRank(_tookPartInBattles);
 
@@ -67,9 +72,9 @@ class Unit extends GameObject {
   /// [health] - from 0 to 1
   /// [movementPoints] - from 0 to 1
   Unit({
-    required this.boost1,
-    required this.boost2,
-    required this.boost3,
+    required UnitBoost? boost1,
+    required UnitBoost? boost2,
+    required UnitBoost? boost3,
     required UnitExperienceRank experienceRank,
     required double fatigue,
     required double health,
@@ -77,6 +82,10 @@ class Unit extends GameObject {
     required this.type,
   }) {
     id = RandomGen.generateId();
+
+    _boost1 = _boost1;
+    _boost2 = _boost2;
+    _boost3 = _boost3;
 
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(experienceRank);
     _health = _getMaxHealth(type) * health;
@@ -108,6 +117,12 @@ class Unit extends GameObject {
   void setFatigue(double fatigue) => _fatigue = fatigue;
 
   void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
+
+  void setBoost1(UnitBoost boost) => _boost1 = boost;
+
+  void setBoost2(UnitBoost boost) => _boost2 = boost;
+
+  void setBoost3(UnitBoost boost) => _boost3 = boost;
 
   int _calculateStartTookPartInBattlesValue(UnitExperienceRank experienceRank) {
     switch (experienceRank) {
