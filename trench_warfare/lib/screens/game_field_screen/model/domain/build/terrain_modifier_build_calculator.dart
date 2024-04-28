@@ -13,48 +13,57 @@ class TerrainModifierBuildCalculator {
   BuildRestriction getError() => AppropriateCell();
 
   bool canBuildOnCell(GameFieldCellRead cell, TerrainModifierType type) {
-    switch(type) {
+    switch (type) {
       case TerrainModifierType.trench:
       case TerrainModifierType.landFort:
       case TerrainModifierType.barbedWire:
-      case TerrainModifierType.antiAirGun: {
-        if (cell.nation != _myNation || !cell.isLand || cell.hasRiver || cell.terrainModifier != null || cell.productionCenter != null ) {
-          return false;
-        }
+      case TerrainModifierType.antiAirGun:
+        {
+          if (cell.nation != _myNation ||
+              !cell.isLand ||
+              cell.hasRiver ||
+              cell.terrainModifier != null ||
+              cell.productionCenter != null) {
+            return false;
+          }
 
-        final activeUnit = cell.activeUnit;
-        if (activeUnit == null || activeUnit.type != UnitType.infantry || activeUnit.movementPoints != activeUnit.maxMovementPoints) {
-          return false;
-        }
+          final activeUnit = cell.activeUnit;
+          if (activeUnit == null ||
+              activeUnit.type != UnitType.infantry ||
+              activeUnit.movementPoints != activeUnit.maxMovementPoints) {
+            return false;
+          }
 
-        return true;
-      }
-      case TerrainModifierType.landMine: {
-        if (cell.nation != _myNation || !cell.isLand || cell.terrainModifier != null || cell.productionCenter != null ) {
-          return false;
+          return true;
         }
+      case TerrainModifierType.landMine:
+        {
+          if (cell.nation != _myNation || !cell.isLand || cell.terrainModifier != null || cell.productionCenter != null) {
+            return false;
+          }
 
-        if (cell.activeUnit != null) {
-          return false;
+          if (cell.activeUnit != null) {
+            return false;
+          }
+
+          return true;
         }
+      case TerrainModifierType.seaMine:
+        {
+          if (cell.nation != _myNation || cell.terrainModifier != null || cell.productionCenter != null) {
+            return false;
+          }
 
-        return true;
-      }
-      case TerrainModifierType.seaMine: {
-        if (cell.nation != _myNation || cell.terrainModifier != null || cell.productionCenter != null ) {
-          return false;
+          if (cell.isLand && !cell.hasRiver) {
+            return false;
+          }
+
+          if (cell.activeUnit != null) {
+            return false;
+          }
+
+          return true;
         }
-
-        if (cell.isLand && !cell.hasRiver) {
-          return false;
-        }
-
-        if (cell.activeUnit != null) {
-          return false;
-        }
-
-        return true;
-      }
     }
   }
 
@@ -69,8 +78,18 @@ class TerrainModifierBuildCalculator {
   }
 
   List<GameFieldCellRead> getAllCellsToBuild(TerrainModifierType type) =>
-    _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
+      _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 
-  List<GameFieldCellRead> getAllCellsImpossibleToBuild(TerrainModifierType type) =>
-      _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(TerrainModifierType type, MoneyUnit nationMoney) {
+    return _gameField.cells.where((c) {
+      final buildCost = MoneyTerrainModifierCalculator.calculateBuildCost(c.terrain, type);
+      final cantBuild = !canBuildOnCell(c, type);
+
+      if (buildCost == null) {
+        return cantBuild;
+      } else {
+        return nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints || cantBuild;
+      }
+    }).toList(growable: false);
+  }
 }

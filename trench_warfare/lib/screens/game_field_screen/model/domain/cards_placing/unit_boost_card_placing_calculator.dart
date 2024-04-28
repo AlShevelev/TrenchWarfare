@@ -66,7 +66,7 @@ class UnitBoostCardPlacingCalculator implements PlacingCalculator {
 
     // Calculate inactive cells
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
-    final cellsImpossibleToBuild = buildCalculator.getAllCellsImpossibleToBuild(_type);
+    final cellsImpossibleToBuild = buildCalculator.getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
 
     if (_canBuildNext(cellsImpossibleToBuild.length, productionCost)) {
       _controlsState.update(CardsPlacingControls(

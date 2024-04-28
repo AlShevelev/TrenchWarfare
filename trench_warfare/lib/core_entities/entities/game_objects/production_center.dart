@@ -26,4 +26,19 @@ class ProductionCenter extends GameObject {
     ProductionCenterType.factory => ProductionCenterLevel.level4,
     ProductionCenterType.city => ProductionCenterLevel.capital,
   };
+
+  static ProductionCenterLevel? getNextLevel(ProductionCenterType type, ProductionCenterLevel? current) {
+    if (getMaxLevel(type) == current) {
+      return null;
+    }
+
+    return switch(current) {
+      null => ProductionCenterLevel.level1,
+      ProductionCenterLevel.level1 => ProductionCenterLevel.level2,
+      ProductionCenterLevel.level2 => ProductionCenterLevel.level3,
+      ProductionCenterLevel.level3 => ProductionCenterLevel.level4,
+      ProductionCenterLevel.level4 => ProductionCenterLevel.capital,
+      ProductionCenterLevel.capital => null,
+    };
+  }
 }

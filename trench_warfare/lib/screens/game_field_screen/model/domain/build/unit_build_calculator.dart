@@ -102,6 +102,13 @@ class UnitBuildCalculator {
   List<GameFieldCellRead> getAllCellsToBuild(UnitType unitType) =>
     _gameField.cells.where((c) => canBuildOnCell(c, unitType)).toList(growable: false);
 
-  List<GameFieldCellRead> getAllCellsImpossibleToBuild(UnitType unitType) =>
-      _gameField.cells.where((c) => !canBuildOnCell(c, unitType)).toList(growable: false);
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(UnitType unitType, MoneyUnit nationMoney) {
+    final buildCost = MoneyUnitsCalculator.calculateProductionCost(unitType);
+
+    if (nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints) {
+      return _gameField.cells.toList(growable: false);
+    }
+
+    return _gameField.cells.where((c) => !canBuildOnCell(c, unitType)).toList(growable: false);
+  }
 }

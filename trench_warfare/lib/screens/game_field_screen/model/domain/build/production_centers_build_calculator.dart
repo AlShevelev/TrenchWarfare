@@ -115,6 +115,22 @@ class ProductionCentersBuildCalculator {
   List<GameFieldCellRead> getAllCellsToBuild(ProductionCenterType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 
-  List<GameFieldCellRead> getAllCellsImpossibleToBuild(ProductionCenterType type) =>
-      _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(ProductionCenterType type, MoneyUnit nationMoney) {
+    return _gameField.cells.where((c) {
+      final nextLevel = ProductionCenter.getNextLevel(type, c.productionCenter?.level);
+
+      MoneyUnit? buildCost;
+      if (nextLevel != null) {
+        buildCost = MoneyProductionCenterCalculator.calculateBuildCost(c.terrain, type, nextLevel);
+      }
+
+      final cantBuild = !canBuildOnCell(c, type);
+
+      if (buildCost == null) {
+        return cantBuild;
+      } else {
+        return nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints || cantBuild;
+      }
+    }).toList(growable: false);
+  }
 }

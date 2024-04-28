@@ -1,9 +1,9 @@
 part of cards_placing;
 
-class UnitCardPlacingCalculator implements PlacingCalculator {
-  late final GameFieldControlsUnitCard _card;
+class TerrainModifierCardPlacingCalculator implements PlacingCalculator {
+  late final GameFieldControlsTerrainModifiersCard _card;
 
-  UnitType get _type => _card.type;
+  TerrainModifierType get _type => _card.type;
 
   late final GameFieldCell _cell;
 
@@ -19,8 +19,8 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
 
   late final Map<int, GameFieldCellRead> _oldInactiveCells;
 
-  UnitCardPlacingCalculator({
-    required GameFieldControlsUnitCard card,
+  TerrainModifierCardPlacingCalculator({
+    required GameFieldControlsTerrainModifiersCard card,
     required GameFieldCell cell,
     required MoneyStorage nationMoney,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
@@ -41,10 +41,10 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
 
   @override
   State place() {
-    final unit = _type == UnitType.carrier ? Carrier.create() : Unit.create(_type);
+    final terrainModifier = TerrainModifier(type: _type);
 
     // Update the cell
-    _cell.addUnitAsActive(unit);
+    _cell.setTerrainModifier(terrainModifier);
 
     _updateGameObjectsEvent.update([
       UpdateCell(
@@ -54,11 +54,11 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
     ]);
 
     // Update the money
-    final productionCost = MoneyUnitsCalculator.calculateProductionCost(_type);
+    final productionCost = MoneyTerrainModifierCalculator.calculateBuildCost(_cell.terrain, _type)!;
     _nationMoney.withdraw(productionCost);
 
     // Calculate inactive cells
-    final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
+    final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsImpossibleToBuild = buildCalculator.getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
 
     if (_canBuildNext(cellsImpossibleToBuild.length, productionCost)) {
@@ -97,6 +97,6 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
 
   bool _canBuildNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
       totalCellsImpossibleToBuild < _gameField.cells.length &&
-      _nationMoney.actual.currency >= productionCost.currency &&
-      _nationMoney.actual.industryPoints >= productionCost.industryPoints;
+          _nationMoney.actual.currency >= productionCost.currency &&
+          _nationMoney.actual.industryPoints >= productionCost.industryPoints;
 }

@@ -111,6 +111,13 @@ class SpecialStrikesBuildCalculator {
   List<GameFieldCellRead> getAllCellsToBuild(SpecialStrikeType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 
-  List<GameFieldCellRead> getAllCellsImpossibleToBuild(SpecialStrikeType type) =>
-      _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(SpecialStrikeType type, MoneyUnit nationMoney) {
+    final buildCost = MoneySpecialStrikeCalculator.calculateCost(type);
+
+    if (nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints) {
+      return _gameField.cells.toList(growable: false);
+    }
+
+    return _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
+  }
 }
