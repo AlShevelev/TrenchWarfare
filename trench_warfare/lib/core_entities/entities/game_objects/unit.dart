@@ -27,7 +27,7 @@ class Unit extends GameObject {
   double get maxHealth => Unit._getMaxHealth(type);
 
   late double movementPoints;
-  double get maxMovementPoints => Unit._getMaxMovementPoints(type);
+  double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
 
   double get attack => _getAttack();
   double get defence => _getDefence();
@@ -91,22 +91,20 @@ class Unit extends GameObject {
     _health = _getMaxHealth(type) * health;
     _fatigue = fatigue;
 
-    this.movementPoints = movementPoints * _getMaxMovementPoints(type);
+    this.movementPoints = movementPoints * _getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
 
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
-  static Unit create(UnitType type) =>
-      Unit(
-        boost1: null,
-        boost2: null,
-        boost3: null,
-        experienceRank: UnitExperienceRank.rookies,
-        fatigue: 1,   // well rested
-        health: 1,    // max health
-        movementPoints: 1,    // max movement points
-        type: type
-      );
+  static Unit create(UnitType type) => Unit(
+      boost1: null,
+      boost2: null,
+      boost3: null,
+      experienceRank: UnitExperienceRank.rookies,
+      fatigue: 1, // well rested
+      health: 1, // max health
+      movementPoints: 1, // max movement points
+      type: type);
 
   void setState(UnitState state) => _state = state;
 
@@ -118,11 +116,20 @@ class Unit extends GameObject {
 
   void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
 
-  void setBoost1(UnitBoost boost) => _boost1 = boost;
+  void setBoost1(UnitBoost boost) {
+    _boost1 = boost;
+    movementPoints *= _hasTransportBoost() ? 2 : 1;
+  }
 
-  void setBoost2(UnitBoost boost) => _boost2 = boost;
+  void setBoost2(UnitBoost boost) {
+    _boost2 = boost;
+    movementPoints *= _hasTransportBoost() ? 2 : 1;
+  }
 
-  void setBoost3(UnitBoost boost) => _boost3 = boost;
+  void setBoost3(UnitBoost boost) {
+    _boost3 = boost;
+    movementPoints *= _hasTransportBoost() ? 2 : 1;
+  }
 
   int _calculateStartTookPartInBattlesValue(UnitExperienceRank experienceRank) {
     switch (experienceRank) {
@@ -295,4 +302,6 @@ class Unit extends GameObject {
         return Range(0, 0);
     }
   }
+
+  bool _hasTransportBoost() => _boost1 == UnitBoost.transport || _boost2 == UnitBoost.transport || _boost3 == UnitBoost.transport;
 }

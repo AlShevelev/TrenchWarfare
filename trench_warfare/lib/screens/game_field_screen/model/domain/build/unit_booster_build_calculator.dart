@@ -31,6 +31,10 @@ class UnitBoosterBuildCalculator {
       return false;
     }
 
+    if (type == UnitBoost.transport && !activeUnit.isLand) {
+      return false;
+    }
+
     return true;
   }
 
