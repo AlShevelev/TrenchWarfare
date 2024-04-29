@@ -1,5 +1,6 @@
 library cards_placing;
 
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
@@ -19,8 +20,6 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_e
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 
+part 'cards_placing_strategy.dart';
 part 'placing_calculator.dart';
-part 'production_center_card_placing_calculator.dart';
-part 'terrain_modifier_card_placing_calculator.dart';
-part 'unit_card_placing_calculator.dart';
-part 'unit_boost_card_placing_calculator.dart';
+part 'card_placing_calculator.dart';

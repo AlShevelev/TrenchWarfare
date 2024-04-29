@@ -6,11 +6,14 @@ abstract interface class BuildPossibility {
   final BuildRestriction? buildDisplayRestriction = null;
   final BuildRestriction? buildError = null;
 }
-abstract class GameFieldControlsCard implements BuildPossibility { }
+abstract class GameFieldControlsCard<T> implements BuildPossibility {
+  T get type;
+}
 
-class GameFieldControlsUnitCard extends GameFieldControlsCard {
+class GameFieldControlsUnitCard extends GameFieldControlsCard<UnitType> {
   final MoneyUnit cost;
 
+  @override
   final UnitType type;
 
   final int maxHealth;
@@ -49,9 +52,10 @@ class GameFieldControlsUnitCard extends GameFieldControlsCard {
   });
 }
 
-class GameFieldControlsProductionCentersCard extends GameFieldControlsCard {
+class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<ProductionCenterType> {
   final MoneyUnit cost;
 
+  @override
   final ProductionCenterType type;
 
   @override
@@ -76,9 +80,10 @@ class GameFieldControlsProductionCentersCard extends GameFieldControlsCard {
   });
 }
 
-class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard {
+class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<TerrainModifierType> {
   final MoneyUnit cost;
 
+  @override
   final TerrainModifierType type;
 
   @override
@@ -103,9 +108,10 @@ class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard {
   });
 }
 
-class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard {
+class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost> {
   final MoneyUnit cost;
 
+  @override
   final UnitBoost type;
 
   @override

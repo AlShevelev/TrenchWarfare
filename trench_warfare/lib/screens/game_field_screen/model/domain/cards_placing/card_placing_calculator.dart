@@ -1,70 +1,48 @@
 part of cards_placing;
 
-class UnitCardPlacingCalculator implements PlacingCalculator {
-  late final GameFieldControlsUnitCard _card;
-
-  UnitType get _type => _card.type;
-
-  late final GameFieldCell _cell;
-
-  late final MoneyStorage _nationMoney;
-
+class CardPlacingCalculator implements PlacingCalculator {
   late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
-
-  late final GameFieldRead _gameField;
-
-  late final Nation _myNation;
 
   late final SingleStream<GameFieldControlsState> _controlsState;
 
   late final Map<int, GameFieldCellRead> _oldInactiveCells;
 
-  UnitCardPlacingCalculator({
-    required GameFieldControlsUnitCard card,
-    required GameFieldCell cell,
-    required MoneyStorage nationMoney,
+  late final CardsPlacingStrategy _strategy;
+
+  CardPlacingCalculator({
+    required CardsPlacingStrategy strategy,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-    required GameFieldRead gameField,
-    required Nation myNation,
     required SingleStream<GameFieldControlsState> controlsState,
     required Map<int, GameFieldCellRead> oldInactiveCells,
   }) {
-    _card = card;
-    _cell = cell;
-    _nationMoney = nationMoney;
+    _strategy = strategy;
     _updateGameObjectsEvent = updateGameObjectsEvent;
-    _gameField = gameField;
-    _myNation = myNation;
     _controlsState = controlsState;
     _oldInactiveCells = oldInactiveCells;
   }
 
   @override
   State place() {
-    final unit = _type == UnitType.carrier ? Carrier.create() : Unit.create(_type);
-
-    // Update the cell
-    _cell.addUnitAsActive(unit);
+    _strategy.updateCell();
 
     _updateGameObjectsEvent.update([
       UpdateCell(
-        _cell,
+        _strategy.cell,
         updateBorderCells: [],
       )
     ]);
 
     // Update the money
-    final productionCost = MoneyUnitsCalculator.calculateProductionCost(_type);
-    _nationMoney.withdraw(productionCost);
+    final productionCost = _strategy.calculateProductionCost();
+    _strategy.nationMoney.withdraw(productionCost);
 
     // Calculate inactive cells
-    final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
-    final cellsImpossibleToBuild = buildCalculator.getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
+    final cellsImpossibleToBuild = _strategy.getAllCellsImpossibleToBuild();
 
     if (_canBuildNext(cellsImpossibleToBuild.length, productionCost)) {
       _controlsState.update(CardsPlacingControls(
-        totalMoney: _nationMoney.actual,
-        card: _card,
+        totalMoney: _strategy.nationMoney.actual,
+        card: _strategy.card,
       ));
 
       final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
@@ -76,10 +54,10 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
         )
       ]);
 
-      return CardPlacing(_card, cellsImpossibleToBuildMap);
+      return CardPlacing(_strategy.card, cellsImpossibleToBuildMap);
     } else {
       _controlsState.update(MainControls(
-        money: _nationMoney.actual,
+        money: _strategy.nationMoney.actual,
         cellInfo: null,
         armyInfo: null,
       ));
@@ -96,7 +74,7 @@ class UnitCardPlacingCalculator implements PlacingCalculator {
   }
 
   bool _canBuildNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
-      totalCellsImpossibleToBuild < _gameField.cells.length &&
-      _nationMoney.actual.currency >= productionCost.currency &&
-      _nationMoney.actual.industryPoints >= productionCost.industryPoints;
+      totalCellsImpossibleToBuild < _strategy.gameField.cells.length &&
+      _strategy.nationMoney.actual.currency >= productionCost.currency &&
+      _strategy.nationMoney.actual.industryPoints >= productionCost.industryPoints;
 }
