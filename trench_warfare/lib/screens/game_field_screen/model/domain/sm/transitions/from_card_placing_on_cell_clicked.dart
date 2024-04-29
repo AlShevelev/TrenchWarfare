@@ -56,6 +56,16 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
         controlsState: _controlsState,
         oldInactiveCells: cellsImpossibleToBuild,
       ),
+      GameFieldControlsProductionCentersCard() => ProductionCenterCardPlacingCalculator(
+        card: card,
+        cell: cell,
+        nationMoney: _nationMoney,
+        updateGameObjectsEvent: _updateGameObjectsEvent,
+        gameField: _gameField,
+        myNation: _myNation,
+        controlsState: _controlsState,
+        oldInactiveCells: cellsImpossibleToBuild,
+      ),
       _ => throw UnsupportedError(''),
     };
 

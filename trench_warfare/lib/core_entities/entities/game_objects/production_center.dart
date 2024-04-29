@@ -6,6 +6,10 @@ class ProductionCenter extends GameObject {
   late ProductionCenterLevel _level;
   ProductionCenterLevel get level => _level;
 
+  ProductionCenterLevel get maxLevel => ProductionCenter.getMaxLevel(type);
+
+  ProductionCenterLevel? get nextLevel => ProductionCenter.getNextLevel(type, level);
+
   final String name;
 
   bool get isLand => type != ProductionCenterType.navalBase;
