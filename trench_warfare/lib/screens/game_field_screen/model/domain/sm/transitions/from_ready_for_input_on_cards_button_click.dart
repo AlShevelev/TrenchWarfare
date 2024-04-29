@@ -167,7 +167,11 @@ class FromReadyForInputOnCardsButtonClick {
     int minIndustryPoints = 1000000;
 
     for (var cell in allCells) {
-      final cost = MoneyProductionCenterCalculator.calculateBuildCost(cell.terrain, type, ProductionCenterLevel.level1)!;
+      final cost = MoneyProductionCenterCalculator.calculateBuildCost(
+        cell.terrain,
+        type,
+        cell.productionCenter?.nextLevel ?? ProductionCenterLevel.level1,
+      )!;
       if (cost.currency < minCurrency) {
         minCurrency = cost.currency;
       }
