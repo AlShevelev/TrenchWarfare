@@ -7,7 +7,7 @@ class OnInit implements Event {
 
   final Nation nation;
 
-  final MoneyStorageRead money;
+  final MoneyStorage money;
 
   final MapMetadataRead metadata;
 
@@ -28,7 +28,7 @@ class OnLongCellClickStart implements Event {
 
 class OnLongCellClickEnd implements Event { }
 
-class OnMovementCompleted implements Event { }
+class OnAnimationCompleted implements Event { }
 
 class OnUnitsResorted implements Event {
   final int cellId;

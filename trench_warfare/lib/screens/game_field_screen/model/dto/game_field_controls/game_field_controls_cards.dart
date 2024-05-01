@@ -139,6 +139,7 @@ class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost>
 class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
+  @override
   final SpecialStrikeType type;
 
   @override

@@ -45,3 +45,4 @@ part 'transitions/from_waiting_for_end_of_path_on_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_resort_unit.dart';
 part 'transitions/from_path_is_shown_on_click.dart';
 part 'transitions/from_path_is_shown_on_resort_unit.dart';
+part 'transitions/from_card_placing_special_strike_in_progress_on_animation_completed.dart';

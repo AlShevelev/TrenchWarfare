@@ -18,9 +18,9 @@ class PathIsShown implements State {
   PathIsShown(this.path);
 }
 
-class MovingInProgress implements State { }
+class MovingInProgress implements State {}
 
-class CardSelecting implements State { }
+class CardSelecting implements State {}
 
 class CardPlacing implements State {
   final GameFieldControlsCard card;
@@ -28,4 +28,24 @@ class CardPlacing implements State {
   final Map<int, GameFieldCellRead> cellsImpossibleToBuild;
 
   CardPlacing(this.card, this.cellsImpossibleToBuild);
+}
+
+class CardPlacingSpecialStrikeInProgress implements State {
+  final GameFieldControlsCard card;
+
+  final Map<int, GameFieldCellRead> newInactiveCells;
+
+  final Map<int, GameFieldCellRead> oldInactiveCells;
+
+  final MoneyUnit productionCost;
+
+  final bool canPlaceNext;
+
+  CardPlacingSpecialStrikeInProgress({
+    required this.card,
+    required this.newInactiveCells,
+    required this.oldInactiveCells,
+    required this.canPlaceNext,
+    required this.productionCost,
+  });
 }

@@ -53,7 +53,7 @@ class GameFieldModel implements Disposable {
     _stateMachine.process(OnLongCellClickEnd());
   }
 
-  void onMovementComplete() => _stateMachine.process(OnMovementCompleted());
+  void onAnimationComplete() => _stateMachine.process(OnAnimationCompleted());
 
   void onResortUnits(int cellId, Iterable<String> unitsId) => _stateMachine.process(OnUnitsResorted(cellId, unitsId));
 

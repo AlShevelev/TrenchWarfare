@@ -39,7 +39,7 @@ class CardPlacingCalculator implements PlacingCalculator {
     // Calculate inactive cells
     final cellsImpossibleToBuild = _strategy.getAllCellsImpossibleToBuild();
 
-    if (_canBuildNext(cellsImpossibleToBuild.length, productionCost)) {
+    if (_canPlaceNext(cellsImpossibleToBuild.length, productionCost)) {
       _controlsState.update(CardsPlacingControls(
         totalMoney: _strategy.nationMoney.actual,
         card: _strategy.card,
@@ -73,7 +73,7 @@ class CardPlacingCalculator implements PlacingCalculator {
     }
   }
 
-  bool _canBuildNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
+  bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
       totalCellsImpossibleToBuild < _strategy.gameField.cells.length &&
       _strategy.nationMoney.actual.currency >= productionCost.currency &&
       _strategy.nationMoney.actual.industryPoints >= productionCost.industryPoints;

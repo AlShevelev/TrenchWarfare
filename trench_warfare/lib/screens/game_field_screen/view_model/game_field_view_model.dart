@@ -38,7 +38,7 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onLongClickEnd() => _model.onLongClickEnd();
 
-  void onMovementComplete() => _model.onMovementComplete();
+  void onAnimationComplete() => _model.onAnimationComplete();
 
   void onResortUnits(int cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
 

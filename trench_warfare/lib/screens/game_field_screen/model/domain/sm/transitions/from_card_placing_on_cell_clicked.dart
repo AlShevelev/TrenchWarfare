@@ -7,16 +7,20 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
 
   late final Nation _myNation;
 
+  late final MapMetadataRead _mapMetadata;
+
   FromCardPlacingOnCellClicked(
     super.updateGameObjectsEvent,
     super.gameField, {
     required MoneyStorage nationMoney,
     required SingleStream<GameFieldControlsState> controlsState,
     required Nation myNation,
+    required MapMetadataRead mapMetadata,
   }) {
     _nationMoney = nationMoney;
     _controlsState = controlsState;
     _myNation = myNation;
+    _mapMetadata = mapMetadata;
   }
 
   State process(
@@ -78,6 +82,15 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           controlsState: _controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
         ),
+      GameFieldControlsSpecialStrikesCard() => SpecialStrikesStartCalculator(
+        strategy: AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent),
+        oldInactiveCells: cellsImpossibleToBuild,
+        gameField: _gameField,
+        myNation: _myNation,
+        mapMetadata: _mapMetadata,
+        nationMoney: _nationMoney,
+        card: card,
+      ),
       _ => throw UnsupportedError(''),
     };
 

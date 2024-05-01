@@ -5,11 +5,12 @@ class GameFieldStateMachine implements Disposable {
 
   late final Nation _nation;
 
-  late final MoneyStorageRead _money;
+  late final MoneyStorage _money;
 
   late final MapMetadataRead _mapMetadata;
 
-  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent = SingleStream<Iterable<UpdateGameEvent>>();
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent =
+      SingleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
@@ -86,40 +87,68 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {
-          OnMovementCompleted() => ReadyForInput(),
+          OnAnimationCompleted() => ReadyForInput(),
           _ => _currentState,
         },
       CardSelecting() => switch (event) {
-        OnCancelled() => FromCardSelectingOnCardsSelectionCancelled(
-          _money.actual,
-          _controlsState,
-        ).process(),
-        OnCardSelected(card: var card) => FromCardSelectingOnCardsSelected(
-          _updateGameObjectsEvent,
-          _gameField,
-          nationMoney: _money.actual,
-          nation: _nation,
-          controlsState: _controlsState,
-          mapMetadata: _mapMetadata,
-        ).process(card),
-        _ => _currentState,
-      },
-      CardPlacing(card: var card, cellsImpossibleToBuild: var cellsImpossibleToBuild,) => switch (event) {
-        OnCancelled() => FromCardPlacingOnCardPlacingCancelled(
-          _updateGameObjectsEvent,
-          _gameField,
-          nationMoney: _money.actual,
-          controlsState: _controlsState,
-        ).process(cellsImpossibleToBuild),
-        OnCellClick(cell: var cell) => FromCardPlacingOnCellClicked(
-          _updateGameObjectsEvent,
-          _gameField,
-          nationMoney: _money as MoneyStorage,
-          controlsState: _controlsState,
-          myNation: _nation,
-        ).process(cellsImpossibleToBuild, cell, card),
-        _ => _currentState,
-      },
+          OnCancelled() => FromCardSelectingOnCardsSelectionCancelled(
+              _money.actual,
+              _controlsState,
+            ).process(),
+          OnCardSelected(card: var card) => FromCardSelectingOnCardsSelected(
+              _updateGameObjectsEvent,
+              _gameField,
+              nationMoney: _money.actual,
+              nation: _nation,
+              controlsState: _controlsState,
+              mapMetadata: _mapMetadata,
+            ).process(card),
+          _ => _currentState,
+        },
+      CardPlacing(
+        card: var card,
+        cellsImpossibleToBuild: var cellsImpossibleToBuild,
+      ) =>
+        switch (event) {
+          OnCancelled() => FromCardPlacingOnCardPlacingCancelled(
+              _updateGameObjectsEvent,
+              _gameField,
+              nationMoney: _money.actual,
+              controlsState: _controlsState,
+            ).process(cellsImpossibleToBuild),
+          OnCellClick(cell: var cell) => FromCardPlacingOnCellClicked(
+              _updateGameObjectsEvent,
+              _gameField,
+              nationMoney: _money as MoneyStorage,
+              controlsState: _controlsState,
+              myNation: _nation,
+              mapMetadata: _mapMetadata,
+            ).process(cellsImpossibleToBuild, cell, card),
+          _ => _currentState,
+        },
+      CardPlacingSpecialStrikeInProgress(
+        card: var card,
+        newInactiveCells: var newInactiveCells,
+        oldInactiveCells: var oldInactiveCells,
+        productionCost: var productionCost,
+        canPlaceNext: var canPlaceNext,
+      ) =>
+        switch (event) {
+          OnAnimationCompleted() => FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted(
+              _updateGameObjectsEvent,
+              _gameField,
+              card: card,
+              newInactiveCells: newInactiveCells,
+              oldInactiveCells: oldInactiveCells,
+              productionCost: productionCost,
+              canPlaceNext: canPlaceNext,
+              controlsState: _controlsState,
+              myNation: _nation,
+              mapMetadata: _mapMetadata,
+              nationMoney: _money,
+            ).process(),
+          _ => _currentState,
+        }
     };
 
     _currentState = newState;
@@ -131,7 +160,8 @@ class GameFieldStateMachine implements Disposable {
     _controlsState.close();
   }
 
-  State _processInit(GameFieldRead gameField, Nation nation, MoneyStorageRead money, MapMetadataRead mapMetadata) {
+  State _processInit(
+      GameFieldRead gameField, Nation nation, MoneyStorage money, MapMetadataRead mapMetadata) {
     _gameField = gameField;
     _nation = nation;
     _money = money;
