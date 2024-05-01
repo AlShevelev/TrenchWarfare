@@ -11,13 +11,13 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
+import 'package:trench_warfare/shared/utils/range.dart';
 
 class GameObjectsComposer implements Disposable {
   late final GameFieldRead _gameField;
 
   late final TextureAtlas _spritesAtlas;
-  late final Image _explosionAnimationAtlas;
-  late final Image _bloodSplashesAnimationAtlas;
+  late final Image _animationAtlas;
 
   StreamSubscription? _updateGameObjectsSubscription;
 
@@ -32,12 +32,10 @@ class GameObjectsComposer implements Disposable {
     Stream<Iterable<UpdateGameEvent>> updateGameObjectScream,
     TextureAtlas spritesAtlas,
     void Function() onMoveCompletedCallback, {
-    required Image explosionAnimationAtlas,
-    required Image bloodSplashesAnimationAtlas,
+    required Image animationAtlas,
   }) {
     _spritesAtlas = spritesAtlas;
-    _explosionAnimationAtlas = explosionAnimationAtlas;
-    _bloodSplashesAnimationAtlas = bloodSplashesAnimationAtlas;
+    _animationAtlas = animationAtlas;
 
     _updateGameObjectsSubscription = updateGameObjectScream.listen(_onUpdateGameEvent);
     _mapComponent = mapComponent;
@@ -156,7 +154,7 @@ class GameObjectsComposer implements Disposable {
   }
 
   Future<void> _showDamage(GameFieldCell cell, DamageType damageType, int time) async {
-    _showAnimation(cell: cell, time: time, atlas: _getAnimationAtlas(damageType), frames: _getAnimationFrames(damageType));
+    _showAnimation(cell: cell, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType));
     await Future.delayed(Duration(milliseconds: time));
   }
 
@@ -167,8 +165,8 @@ class GameObjectsComposer implements Disposable {
     DamageType damageType2,
     int time,
   ) async {
-    _showAnimation(cell: cell1, time: time, atlas: _getAnimationAtlas(damageType1), frames: _getAnimationFrames(damageType1));
-    _showAnimation(cell: cell2, time: time, atlas: _getAnimationAtlas(damageType2), frames: _getAnimationFrames(damageType2));
+    _showAnimation(cell: cell1, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType1));
+    _showAnimation(cell: cell2, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType2));
     await Future.delayed(Duration(milliseconds: time));
   }
 
@@ -191,30 +189,29 @@ class GameObjectsComposer implements Disposable {
     required GameFieldCell cell,
     required int time,
     required Image atlas,
-    required int frames,
+    required Range<int> frames,
   }) {
-    final timeInSeconds = _millisecondsToSeconds(time);
+    final totalTimeInSeconds = _millisecondsToSeconds(time);
 
     final animationComponent = AnimationFrameToFrameComponent(
       animationAtlas: atlas,
-      stepTime: timeInSeconds / frames,
+      totalTimeInSeconds: totalTimeInSeconds,
+      frames: frames,
       position: cell.center,
     );
 
-    animationComponent.add(RemoveEffect(delay: timeInSeconds));
+    animationComponent.add(RemoveEffect(delay: totalTimeInSeconds));
 
     _mapComponent.add(animationComponent);
   }
 
-  Image _getAnimationAtlas(DamageType damageType) => switch (damageType) {
-        DamageType.explosion => _explosionAnimationAtlas,
-        DamageType.bloodSplash => _bloodSplashesAnimationAtlas,
-      };
-
-  int _getAnimationFrames(DamageType damageType) => switch (damageType) {
-        DamageType.explosion => 8,
-        DamageType.bloodSplash => 13,
-      };
+  Range<int> _getAnimationFrames(DamageType damageType) => switch (damageType) {
+      DamageType.bloodSplash => Range(0, 12),
+      DamageType.explosion => Range(13, 20),
+      DamageType.flame => Range(21, 29),
+      DamageType.gasAttack => Range(30, 37),
+      DamageType.propaganda => Range(38, 46),
+    };
 
   String _getCellComponentKey(GameFieldCell cell) => '${cell.id}_cell';
   

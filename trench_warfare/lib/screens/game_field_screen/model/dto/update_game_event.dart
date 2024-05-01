@@ -4,6 +4,9 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 enum DamageType {
   explosion,
   bloodSplash,
+  gasAttack,
+  flame,
+  propaganda,
 }
 
 sealed class UpdateGameEvent {}

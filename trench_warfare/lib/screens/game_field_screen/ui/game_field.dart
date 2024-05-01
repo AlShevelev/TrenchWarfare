@@ -80,8 +80,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
       _viewModel.updateGameObjectsEvent,
       _spritesAtlas,
       _viewModel.onMovementComplete,
-      explosionAnimationAtlas: await images.load('sprites/animation_explosion_atlas.png'),
-      bloodSplashesAnimationAtlas: await images.load('sprites/animation_blood_splashes_atlas.png'),
+      animationAtlas: await images.load('sprites/animation.webp'),
     );
 
     await _viewModel.init(_mapComponent.tileMap);

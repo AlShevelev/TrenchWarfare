@@ -4,11 +4,17 @@ class AnimationFrameToFrameComponent extends SpriteAnimationComponent {
   /// [stepTime] in seconds
   AnimationFrameToFrameComponent({
     required Image animationAtlas,
-    required double stepTime,
+    required double totalTimeInSeconds,
+    required Range<int> frames,
     required Vector2 position,
   }) : super(
           animation: SpriteSheet(image: animationAtlas, srcSize: ComponentConstants.spriteInAtlasSize)
-              .createAnimation(row: 0, stepTime: stepTime),
+              .createAnimation(
+            row: 0,
+            stepTime: totalTimeInSeconds / (frames.max - frames.min + 1),
+            from: frames.min,
+            to: frames.max
+          ),
           scale: Vector2.all(1.0),
           position: position,
           anchor: Anchor.center,
