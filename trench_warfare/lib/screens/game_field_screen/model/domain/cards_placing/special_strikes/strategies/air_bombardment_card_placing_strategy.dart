@@ -1,18 +1,14 @@
 part of cards_placing;
 
 class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
-  late final GameFieldCell _cell;
-
-  AirBombardmentCardPlacingStrategy(super.updateGameObjectsEvent, GameFieldCell cell) {
-    _cell = cell;
-  }
+  AirBombardmentCardPlacingStrategy(super.updateGameObjectsEvent, super.cell);
 
   @override
   void updateGameField() {
     final hasAntiAir = _cell.terrainModifier?.type == TerrainModifierType.antiAirGun;
 
     for (var unit in _cell.units) {
-      final damage = RandomGen.random(unit.maxHealth / 2, unit.maxHealth) * (hasAntiAir ? 0.5 : 1);
+      final damage = RandomGen.random(unit.maxHealth * 0.5, unit.maxHealth) * (hasAntiAir ? 0.5 : 1);
       unit.setHealth(unit.health - damage);
     }
 

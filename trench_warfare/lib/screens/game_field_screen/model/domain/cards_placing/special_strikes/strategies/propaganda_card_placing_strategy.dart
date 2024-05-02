@@ -1,7 +1,7 @@
 part of cards_placing;
 
 class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
-  PropagandaCardPlacingStrategy(super.updateGameObjectsEvent);
+  PropagandaCardPlacingStrategy(super.updateGameObjectsEvent, super.cell);
 
   @override
   void updateGameField() {

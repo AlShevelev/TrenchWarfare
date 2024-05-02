@@ -83,7 +83,11 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           oldInactiveCells: cellsImpossibleToBuild,
         ),
       GameFieldControlsSpecialStrikesCard() => SpecialStrikesStartCalculator(
-        strategy: AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
+        strategy: switch(card.type) {
+          SpecialStrikeType.airBombardment => AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
+          SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(_updateGameObjectsEvent, cell),
+          _ => throw UnsupportedError(''),
+        },
         oldInactiveCells: cellsImpossibleToBuild,
         gameField: _gameField,
         myNation: _myNation,
