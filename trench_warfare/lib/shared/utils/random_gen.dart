@@ -1,7 +1,7 @@
 import 'dart:math';
 
 class RandomGen {
-  static final Random _random = Random(DateTime.now().millisecond);
+  static final Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
   static double random(double min, double max) => _random.nextDouble() * (max - min) + min;
 
