@@ -143,8 +143,6 @@ class GameFieldStateMachine implements Disposable {
               productionCost: productionCost,
               canPlaceNext: canPlaceNext,
               controlsState: _controlsState,
-              myNation: _nation,
-              mapMetadata: _mapMetadata,
               nationMoney: _money,
             ).process(),
           _ => _currentState,

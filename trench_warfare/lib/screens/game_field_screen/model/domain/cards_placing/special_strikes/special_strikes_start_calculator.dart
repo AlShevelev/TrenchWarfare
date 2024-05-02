@@ -46,6 +46,8 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
 
     final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
 
+    _strategy.showUpdate();
+
     if (_canPlaceNext(cellsImpossibleToBuild.length, productionCost)) {
       return CardPlacingSpecialStrikeInProgress(
           card: _card,
@@ -63,8 +65,8 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
     }
   }
 
-  bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
-      totalCellsImpossibleToBuild < _gameField.cells.length &&
-      _nationMoney.actual.currency >= productionCost.currency &&
-      _nationMoney.actual.industryPoints >= productionCost.industryPoints;
+  bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) {
+    final recalculatedNationMoney = _nationMoney.actual - productionCost;
+    return totalCellsImpossibleToBuild < _gameField.cells.length && recalculatedNationMoney >= productionCost;
+  }
 }

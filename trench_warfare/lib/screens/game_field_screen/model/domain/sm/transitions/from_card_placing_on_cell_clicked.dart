@@ -83,7 +83,7 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           oldInactiveCells: cellsImpossibleToBuild,
         ),
       GameFieldControlsSpecialStrikesCard() => SpecialStrikesStartCalculator(
-        strategy: AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent),
+        strategy: AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
         oldInactiveCells: cellsImpossibleToBuild,
         gameField: _gameField,
         myNation: _myNation,

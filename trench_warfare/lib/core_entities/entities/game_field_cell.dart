@@ -128,6 +128,8 @@ class GameFieldCell implements GameFieldCellRead {
 
   Unit removeActiveUnit() =>  _units.removeAt(0);
 
+  void removeUnit(Unit unit) =>  _units.remove(unit);
+
   void resortUnits(Iterable<String> unitsId) {
     final result = List<Unit>.empty(growable: true);
 

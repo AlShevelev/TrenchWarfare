@@ -102,7 +102,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       }
     }
 
-    updateEvents.add(MovementCompleted());
+    updateEvents.add(AnimationCompleted());
     _updateGameObjectsEvent.update(updateEvents);
   }
 }

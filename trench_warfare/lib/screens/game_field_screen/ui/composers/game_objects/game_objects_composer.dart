@@ -25,13 +25,13 @@ class GameObjectsComposer implements Disposable {
 
   final Map<String, PositionComponent> _gameObjects = {};
 
-  late final void Function() _onMoveCompletedCallback;
+  late final void Function() _onAnimationCompletedCallback;
 
   GameObjectsComposer(
     TiledComponent mapComponent,
     Stream<Iterable<UpdateGameEvent>> updateGameObjectScream,
     TextureAtlas spritesAtlas,
-    void Function() onMoveCompletedCallback, {
+    void Function() onAnimationCompletedCallback, {
     required Image animationAtlas,
   }) {
     _spritesAtlas = spritesAtlas;
@@ -40,7 +40,7 @@ class GameObjectsComposer implements Disposable {
     _updateGameObjectsSubscription = updateGameObjectScream.listen(_onUpdateGameEvent);
     _mapComponent = mapComponent;
 
-    _onMoveCompletedCallback = onMoveCompletedCallback;
+    _onAnimationCompletedCallback = onAnimationCompletedCallback;
   }
 
   void init(GameFieldRead gameField) {
@@ -85,8 +85,8 @@ class GameObjectsComposer implements Disposable {
           ):
           await _showDualDamage(cell1, damageType1, cell2, damageType2, time);
 
-        case MovementCompleted():
-          _onMoveCompletedCallback();
+        case AnimationCompleted():
+          _onAnimationCompletedCallback();
       }
     }
   }

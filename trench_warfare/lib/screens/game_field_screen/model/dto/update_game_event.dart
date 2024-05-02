@@ -89,4 +89,4 @@ class ShowDualDamage implements UpdateGameEvent {
   });
 }
 
-class MovementCompleted implements UpdateGameEvent {}
+class AnimationCompleted implements UpdateGameEvent {}

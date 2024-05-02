@@ -24,8 +24,6 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
     required MoneyUnit productionCost,
     required bool canPlaceNext,
     required SingleStream<GameFieldControlsState> controlsState,
-    required Nation myNation,
-    required MapMetadataRead mapMetadata,
     required MoneyStorage nationMoney,
   }) {
     _card = card;
@@ -34,7 +32,6 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
     _productionCost = productionCost;
     _canPlaceNext = canPlaceNext;
     _controlsState = controlsState;
-    _oldInactiveCells = oldInactiveCells;
     _nationMoney = nationMoney;
   }
 
