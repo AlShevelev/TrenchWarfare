@@ -1,5 +1,6 @@
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
+import 'package:tuple/tuple.dart';
 
 enum DamageType {
   explosion,
@@ -70,21 +71,14 @@ class ShowDamage implements UpdateGameEvent {
   ShowDamage({required this.cell, required this.damageType, required this.time});
 }
 
-class ShowDualDamage implements UpdateGameEvent {
-  final GameFieldCell cell1;
-  final DamageType damageType1;
-
-  final GameFieldCell cell2;
-  final DamageType damageType2;
+class ShowComplexDamage implements UpdateGameEvent {
+  final Iterable<Tuple2<GameFieldCellRead, DamageType>> cells;
 
   /// Animation time in [ms]
   final int time;
 
-  ShowDualDamage({
-    required this.cell1,
-    required this.damageType1,
-    required this.cell2,
-    required this.damageType2,
+  ShowComplexDamage({
+    required this.cells,
     required this.time,
   });
 }

@@ -83,19 +83,23 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           oldInactiveCells: cellsImpossibleToBuild,
         ),
       GameFieldControlsSpecialStrikesCard() => SpecialStrikesStartCalculator(
-        strategy: switch(card.type) {
-          SpecialStrikeType.airBombardment => AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
-          SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(_updateGameObjectsEvent, cell),
-          SpecialStrikeType.flameTroopers => FlameTroopersCardPlacingStrategy(_updateGameObjectsEvent, cell),
-          _ => throw UnsupportedError(''),
-        },
-        oldInactiveCells: cellsImpossibleToBuild,
-        gameField: _gameField,
-        myNation: _myNation,
-        mapMetadata: _mapMetadata,
-        nationMoney: _nationMoney,
-        card: card,
-      ),
+          strategy: switch (card.type) {
+            SpecialStrikeType.airBombardment =>
+              AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
+            SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(_updateGameObjectsEvent, cell),
+            SpecialStrikeType.flameTroopers =>
+              FlameTroopersCardPlacingStrategy(_updateGameObjectsEvent, cell),
+            SpecialStrikeType.gasAttack =>
+              GasAttackCardPlacingStrategy(_updateGameObjectsEvent, cell, _gameField),
+            SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(_updateGameObjectsEvent, cell),
+          },
+          oldInactiveCells: cellsImpossibleToBuild,
+          gameField: _gameField,
+          myNation: _myNation,
+          mapMetadata: _mapMetadata,
+          nationMoney: _nationMoney,
+          card: card,
+        ),
       _ => throw UnsupportedError(''),
     };
 

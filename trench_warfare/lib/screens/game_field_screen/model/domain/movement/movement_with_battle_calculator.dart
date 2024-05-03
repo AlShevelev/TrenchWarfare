@@ -188,11 +188,11 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     // Show damage - case 1 - simultaneously
     if (!attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
-      updateEvents.add(ShowDualDamage(
-        cell1: attackingCell,
-        damageType1: attackingDamageType,
-        cell2: defendingCell,
-        damageType2: defendingDamageType,
+      updateEvents.add(ShowComplexDamage(
+        cells: [
+          Tuple2(attackingCell, attackingDamageType),
+          Tuple2(defendingCell, defendingDamageType),
+        ],
         time: MovementConstants.damageAnimationTime,
       ));
     }

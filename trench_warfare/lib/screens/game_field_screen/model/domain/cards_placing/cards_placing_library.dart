@@ -22,6 +22,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_e
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
+import 'package:tuple/tuple.dart';
 
 part 'cards_placing_strategy.dart';
 part 'placing_calculator.dart';
