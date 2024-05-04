@@ -3,7 +3,9 @@ import 'dart:math';
 class RandomGen {
   static final Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
-  static double random(double min, double max) => _random.nextDouble() * (max - min) + min;
+  static double randomDouble(double min, double max) => _random.nextDouble() * (max - min) + min;
+
+  static int randomInt(int max) => _random.nextInt(max);
 
   static String generateId() {
     const String hexDigits = "0123456789abcdef";

@@ -81,7 +81,7 @@ class UnitsBattleCalculator {
       };
 
   static double _calculateDamage(UnitInBattle attacking, UnitInBattle defending) {
-    final startDamage = RandomGen.random(attacking.damage.min, attacking.damage.max);
+    final startDamage = RandomGen.randomDouble(attacking.damage.min, attacking.damage.max);
 
     final damageBase = startDamage + startDamage * 0.15 * (attacking.attack - defending.defence);
 

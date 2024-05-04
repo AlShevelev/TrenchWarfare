@@ -91,7 +91,12 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
               FlameTroopersCardPlacingStrategy(_updateGameObjectsEvent, cell),
             SpecialStrikeType.gasAttack =>
               GasAttackCardPlacingStrategy(_updateGameObjectsEvent, cell, _gameField),
-            SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(_updateGameObjectsEvent, cell),
+            SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(
+                _updateGameObjectsEvent,
+                cell,
+                _gameField,
+                _myNation,
+              ),
           },
           oldInactiveCells: cellsImpossibleToBuild,
           gameField: _gameField,

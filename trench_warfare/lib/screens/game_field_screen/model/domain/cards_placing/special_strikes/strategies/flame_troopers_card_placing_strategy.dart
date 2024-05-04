@@ -13,7 +13,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
       _ => 0
     };
 
-    final random = RandomGen.random(0, 1);
+    final random = RandomGen.randomDouble(0, 1);
     if (random <= chanceToDevastate) {
       _cell.removeActiveUnit();
     }

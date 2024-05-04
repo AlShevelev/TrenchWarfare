@@ -12,7 +12,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         continue;
       }
 
-      final damage = RandomGen.random(unit.maxHealth  * 0.25, unit.maxHealth  * 0.5) * (hasAntiAir ? 0.5 : 1);
+      final damage = RandomGen.randomDouble(unit.maxHealth  * 0.25, unit.maxHealth  * 0.5) * (hasAntiAir ? 0.5 : 1);
       unit.setHealth(unit.health - damage);
     }
 

@@ -100,10 +100,10 @@ class BattleResultCalculator {
 
   int? _getCellToWithdraw(UnitInBattle unit, GameFieldCell cell) {
     final willTryToWithdraw = switch (unit.experienceRank) {
-      UnitExperienceRank.rookies => RandomGen.random(0, 1) >= 0.2,
-      UnitExperienceRank.fighters => RandomGen.random(0, 1) >= 0.4,
-      UnitExperienceRank.proficients => RandomGen.random(0, 1) >= 0.6,
-      UnitExperienceRank.veterans => RandomGen.random(0, 1) >= 0.8,
+      UnitExperienceRank.rookies => RandomGen.randomDouble(0, 1) >= 0.2,
+      UnitExperienceRank.fighters => RandomGen.randomDouble(0, 1) >= 0.4,
+      UnitExperienceRank.proficients => RandomGen.randomDouble(0, 1) >= 0.6,
+      UnitExperienceRank.veterans => RandomGen.randomDouble(0, 1) >= 0.8,
       UnitExperienceRank.elite => false,
     };
 

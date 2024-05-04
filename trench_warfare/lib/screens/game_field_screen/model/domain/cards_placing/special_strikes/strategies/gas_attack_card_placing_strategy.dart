@@ -19,7 +19,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         .toList(growable: false);
 
     for (var cell in allCellsAround) {
-      if (RandomGen.random(0, 1) <= 0.25) {
+      if (RandomGen.randomDouble(0, 1) <= 0.25) {
         updateCell(cell, chanceToKill: 0.225, chanceToReduceHealth: 0.45);
       }
     }
@@ -42,7 +42,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   void updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
     for (var unit in cell.units) {
-      final random = RandomGen.random(0, 1);
+      final random = RandomGen.randomDouble(0, 1);
 
       if (random <= chanceToKill) {
         unit.setHealth(0);

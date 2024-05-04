@@ -8,7 +8,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     final hasAntiAir = _cell.terrainModifier?.type == TerrainModifierType.antiAirGun;
 
     for (var unit in _cell.units) {
-      final damage = RandomGen.random(unit.maxHealth * 0.5, unit.maxHealth) * (hasAntiAir ? 0.5 : 1);
+      final damage = RandomGen.randomDouble(unit.maxHealth * 0.5, unit.maxHealth) * (hasAntiAir ? 0.5 : 1);
       unit.setHealth(unit.health - damage);
     }
 

@@ -56,7 +56,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final min = unit.maxHealth * minPossibleDamage;
     final max = unit.maxHealth * maxPossibleDamage;
 
-    return RandomGen.random(min, max);
+    return RandomGen.randomDouble(min, max);
   }
 
   void _updateUI({

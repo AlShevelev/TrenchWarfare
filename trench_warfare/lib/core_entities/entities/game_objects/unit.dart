@@ -30,7 +30,9 @@ class Unit extends GameObject {
   double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
 
   double get attack => _getAttack();
-  double get defence => _getDefence();
+
+  double _defence = 0;
+  double get defence => _defence;
 
   Range<double> get damage => _getDamage();
 
@@ -91,6 +93,8 @@ class Unit extends GameObject {
     _health = _getMaxHealth(type) * health;
     _fatigue = fatigue;
 
+    _defence = _getDefence();
+
     this.movementPoints = movementPoints * _getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
 
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
@@ -113,6 +117,8 @@ class Unit extends GameObject {
   void setHealth(double health) => _health = health;
 
   void setFatigue(double fatigue) => _fatigue = fatigue;
+
+  void setDefence(double defence) => _defence = defence;
 
   void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
 
