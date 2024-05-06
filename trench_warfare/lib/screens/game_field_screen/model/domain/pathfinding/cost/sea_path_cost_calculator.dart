@@ -4,7 +4,7 @@ class SeaPathCostCalculator {
   late final Iterable<GameFieldCell> _sourcePath;
 
   @protected
-  Unit get activeUnit => _sourcePath.first.activeUnit!;
+  Unit get _activeUnit => _sourcePath.first.activeUnit!;
 
   @protected
   Nation get nation => _sourcePath.first.nation!;
@@ -14,7 +14,7 @@ class SeaPathCostCalculator {
   }
 
   Iterable<GameFieldCell> calculate() {
-    var movementPointsLeft = activeUnit.movementPoints;
+    var movementPointsLeft = _activeUnit.movementPoints;
 
     var pathIsActive = true;
 
@@ -49,7 +49,7 @@ class SeaPathCostCalculator {
   }
 
   bool isEndOfPathReachable() {
-    var movementPointsLeft = activeUnit.movementPoints;
+    var movementPointsLeft = _activeUnit.movementPoints;
 
     for (var cell in _sourcePath) {
       if (cell == _sourcePath.first) {
@@ -93,7 +93,8 @@ class SeaPathCostCalculator {
   double getMoveToCellCost(GameFieldCell nextCell) => 1;
 
   @protected
-  bool isBattleCell(GameFieldCell cell) => cell.activeUnit != null && cell.nation != nation;
+  bool isBattleCell(GameFieldCell cell) =>
+      _activeUnit.type != UnitType.carrier && cell.activeUnit != null && cell.nation != nation;
 
   @protected
   bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.seaMine;

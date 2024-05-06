@@ -32,7 +32,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
         return true;
       }
       
-      if (nextCell.terrainModifier?.type == TerrainModifierType.barbedWire && activeUnit.type != UnitType.tank) {
+      if (nextCell.terrainModifier?.type == TerrainModifierType.barbedWire && _activeUnit.type != UnitType.tank) {
         return true;
       }
     }
@@ -56,7 +56,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
 
     return switch (nextCell.terrain) {
       CellTerrain.plain => 1,
-      CellTerrain.wood => switch (activeUnit.type) {
+      CellTerrain.wood => switch (_activeUnit.type) {
         UnitType.infantry => 1.25,
         UnitType.machineGuns => 2,
         UnitType.cavalry => 1.4,
@@ -66,13 +66,13 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
         UnitType.tank => 2,
         _ => double.maxFinite,
       },
-      CellTerrain.marsh => switch (activeUnit.type) {
+      CellTerrain.marsh => switch (_activeUnit.type) {
         UnitType.infantry => 2,
         UnitType.machineGuns => 2,
         UnitType.cavalry => 2,
         _ => double.maxFinite,
       },
-      CellTerrain.sand => switch (activeUnit.type) {
+      CellTerrain.sand => switch (_activeUnit.type) {
         UnitType.infantry => 1.4,
         UnitType.machineGuns => 1.7,
         UnitType.cavalry => 1.4,
@@ -82,7 +82,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
         UnitType.tank => 1.25,
         _ => double.maxFinite,
       },
-      CellTerrain.hills => switch (activeUnit.type) {
+      CellTerrain.hills => switch (_activeUnit.type) {
         UnitType.infantry => 1.4,
         UnitType.machineGuns => 1.7,
         UnitType.cavalry => 1.25,
@@ -92,8 +92,8 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
         UnitType.tank => 1.25,
         _ => double.maxFinite,
       },
-      CellTerrain.mountains => switch (activeUnit.type) { UnitType.infantry => 2, _ => double.maxFinite },
-      CellTerrain.snow => switch (activeUnit.type) {
+      CellTerrain.mountains => switch (_activeUnit.type) { UnitType.infantry => 2, _ => double.maxFinite },
+      CellTerrain.snow => switch (_activeUnit.type) {
         UnitType.infantry => 1.4,
         UnitType.machineGuns => 1.7,
         UnitType.cavalry => 1.25,

@@ -85,7 +85,6 @@ class GameFieldAssembler {
           boost1: raw.boost1,
           boost2: raw.boost2,
           boost3: raw.boost3,
-          experienceRank: raw.experienceRank,
           fatigue: raw.fatigue,
           health: raw.health,
           movementPoints: raw.movementPoints,

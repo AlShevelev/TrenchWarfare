@@ -7,23 +7,33 @@ class Carrier extends Unit {
   /// [health] - from 0 to 1
   /// [movementPoints] - from 0 to 1
   Carrier({
-    required super.boost1,
-    required super.boost2,
-    required super.boost3,
-    required super.experienceRank,
-    required super.fatigue,
-    required super.health,
-    required super.movementPoints,
-    required super.type,
+    required boost1,
+    required boost2,
+    required boost3,
+    required fatigue,
+    required health,
+    required movementPoints,
+    required type,
     required this.units,
-  });
+  }) : super(
+    boost1: boost1,
+    boost2: boost2,
+    boost3: boost3,
+    experienceRank: UnitExperienceRank.rookies,
+    fatigue: fatigue,
+    health: health,
+    movementPoints: movementPoints,
+    type: type,
+  );
+
+  @override
+  void setTookPartInBattles(int tookPartInBattles) => super.setTookPartInBattles(0);
 
   static Unit create() =>
       Carrier(
         boost1: null,
         boost2: null,
         boost3: null,
-        experienceRank: UnitExperienceRank.rookies,
         fatigue: 1, // well rested
         health: 1,  // max health
         movementPoints: 1, // max movement points

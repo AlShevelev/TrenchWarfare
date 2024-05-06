@@ -3,6 +3,9 @@ part of pathfinding;
 class SeaFindPathSettings implements FindPathSettings {
   late final GameFieldCell _startCell;
 
+  @protected
+  Unit get _activeUnit => _startCell.activeUnit!;
+
   SeaFindPathSettings({required GameFieldCell startCell}) {
     _startCell = startCell;
   }
@@ -33,6 +36,10 @@ class SeaFindPathSettings implements FindPathSettings {
     }
 
     if (cell.nation == _startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
+      return false;
+    }
+
+    if (_activeUnit.type == UnitType.carrier && cell.activeUnit != null && _startCell.nation != cell.nation) {
       return false;
     }
 
