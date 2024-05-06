@@ -21,6 +21,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     final unit = firstCell.activeUnit!;
 
     if (cell == path.first) {
+      _hideArmyPanel();
       return _resetPathAndEnableUnit(path, unit);
     }
 
@@ -68,4 +69,11 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     _resetPath(path);
     return ReadyForInput();
   }
+
+  void _hideArmyPanel() =>
+      _controlsState.update(MainControls(
+        money: _nationMoney,
+        cellInfo: null,
+        armyInfo: null,
+      ));
 }
