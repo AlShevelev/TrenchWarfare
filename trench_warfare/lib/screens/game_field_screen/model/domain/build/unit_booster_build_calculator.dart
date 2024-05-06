@@ -42,6 +42,10 @@ class UnitBoosterBuildCalculator {
       return false;
     }
 
+    if (type == UnitBoost.attack && activeUnit.type == UnitType.carrier) {
+      return false;
+    }
+
     return true;
   }
 

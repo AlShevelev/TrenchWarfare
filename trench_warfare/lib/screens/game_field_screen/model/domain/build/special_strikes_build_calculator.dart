@@ -52,7 +52,9 @@ class SpecialStrikesBuildCalculator {
       };
 
   bool canBuildOnCell(GameFieldCellRead cell, SpecialStrikeType type) {
-    if (cell.activeUnit == null) {
+    final activeUnit = cell.activeUnit;
+
+    if (activeUnit == null) {
       return false;
     }
 
@@ -93,7 +95,7 @@ class SpecialStrikesBuildCalculator {
         }
       case SpecialStrikeType.propaganda:
         {
-          return true;
+          return activeUnit.type != UnitType.carrier;
         }
     }
   }

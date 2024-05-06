@@ -119,7 +119,7 @@ class GameFieldStateMachine implements Disposable {
           OnCellClick(cell: var cell) => FromCardPlacingOnCellClicked(
               _updateGameObjectsEvent,
               _gameField,
-              nationMoney: _money as MoneyStorage,
+              nationMoney: _money,
               controlsState: _controlsState,
               myNation: _nation,
               mapMetadata: _mapMetadata,
