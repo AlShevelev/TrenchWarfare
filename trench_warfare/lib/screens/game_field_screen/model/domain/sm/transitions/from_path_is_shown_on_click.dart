@@ -26,11 +26,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     }
 
     if (cell == path.last) {
-      _controlsState.update(MainControls(
-        money: _nationMoney,
-        cellInfo: null,
-        armyInfo: null,
-      ));
+      _hideArmyPanel();
 
       return MovementFacade(
         nation: _nation,
@@ -75,5 +71,6 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
         money: _nationMoney,
         cellInfo: null,
         armyInfo: null,
+        carrierInfo: null,
       ));
 }

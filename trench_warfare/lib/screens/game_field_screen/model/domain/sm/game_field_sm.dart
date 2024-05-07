@@ -46,10 +46,12 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromReadyForInputOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
+            FromReadyForInputOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
-            ).process(cellId, unitsId),
+              _controlsState,
+            ).process(cellId, unitsId, isCarrier: isCarrier),
           OnCardsButtonClick() => FromReadyForInputOnCardsButtonClick(
               _money.actual,
               _controlsState,
@@ -66,10 +68,12 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(startPathCell, cell),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromWaitingForEndOfPathOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
+            FromWaitingForEndOfPathOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
-            ).process(cellId, unitsId),
+              _controlsState,
+            ).process(startPathCell, cellId, unitsId, isCarrier: isCarrier),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -80,10 +84,12 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(path, cell),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId) => FromPathIsShownOnResortUnit(
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
+            FromPathIsShownOnResortUnit(
               _updateGameObjectsEvent,
               _gameField,
-            ).process(path, cellId, unitsId),
+              _controlsState,
+            ).process(path, cellId, unitsId, isCarrier: isCarrier),
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {

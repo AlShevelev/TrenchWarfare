@@ -11,10 +11,13 @@ class MainControls extends GameFieldControlsState {
 
   final GameFieldControlsArmyInfo? armyInfo;
 
+  final GameFieldControlsArmyInfo? carrierInfo;
+
   MainControls({
     required this.money,
     required this.cellInfo,
     required this.armyInfo,
+    required this.carrierInfo,
   });
 }
 

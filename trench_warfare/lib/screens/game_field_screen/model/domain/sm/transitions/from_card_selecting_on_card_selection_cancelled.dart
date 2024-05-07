@@ -18,6 +18,7 @@ class FromCardSelectingOnCardsSelectionCancelled {
       money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
+      carrierInfo: null,
     ));
 
     return ReadyForInput();

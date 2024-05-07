@@ -1,26 +1,47 @@
 part of game_field_sm;
 
 class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
+  late final SingleStream<GameFieldControlsState> _controlsState;
+
   FromPathIsShownOnResortUnit(
     super.updateGameObjectsEvent,
     super.gameField,
-  );
+    SingleStream<GameFieldControlsState> controlsState,
+  ) {
+    _controlsState = controlsState;
+  }
 
-  State process(Iterable<GameFieldCell> path, int cellId, Iterable<String> unitsId) {
+  State process(Iterable<GameFieldCell> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
     final cell = _gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit;
-    if (activeUnit != null && activeUnit.state == UnitState.active) {
-      activeUnit.setState(UnitState.enabled);
+
+    if (isCarrier) {
+      (activeUnit! as Carrier).resortUnits(unitsId);
+      return PathIsShown(path);
+    } else {
+      if (activeUnit != null && activeUnit.state == UnitState.active) {
+        activeUnit.setState(UnitState.enabled);
+      }
+
+      cell.resortUnits(unitsId);
+
+      final newActiveUnit = cell.activeUnit!;
+
+      for (var pathCell in path) {
+        pathCell.setPathItem(null);
+      }
+
+      CarrierPanelCalculator.updateCarrierPanel(
+        cellId,
+        _controlsState,
+        oldActiveUnit: activeUnit!,
+        newActiveUnit: newActiveUnit,
+      );
+
+      _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+
+      return ReadyForInput();
     }
-
-    cell.resortUnits(unitsId);
-
-    for (var pathCell in path) {
-      pathCell.setPathItem(null);
-    }
-    _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
-
-    return ReadyForInput();
   }
 }

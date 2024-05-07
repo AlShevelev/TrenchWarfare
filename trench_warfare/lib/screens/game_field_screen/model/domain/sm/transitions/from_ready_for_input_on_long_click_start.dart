@@ -20,6 +20,7 @@ class FromReadyForInputOnLongClickStart {
         productionCenter: cell.productionCenter,
       ),
       armyInfo: null,
+      carrierInfo: null,
     ));
 
     return ReadyForInput();

@@ -18,22 +18,26 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
   State process(GameFieldCell cell) {
     final unit = cell.activeUnit;
 
-    if (cell.nation == _nation && cell.units.length > 1) {
-      _controlsState.update(MainControls(
-        money: _nationMoney,
-        cellInfo: null,
-        armyInfo: GameFieldControlsArmyInfo(
-          cellId: cell.id,
-          units: cell.units.toList(growable: true),
-        ),
-      ));
-    } else {
-      _controlsState.update(MainControls(
-        money: _nationMoney,
-        cellInfo: null,
-        armyInfo: null,
-      ));
-    }
+    final armyInfo = cell.nation == _nation && cell.units.length > 1
+        ? GameFieldControlsArmyInfo(
+            cellId: cell.id,
+            units: cell.units.toList(growable: true),
+          )
+        : null;
+
+    final carrierInfo = cell.nation == _nation &&
+            unit != null &&
+            unit.type == UnitType.carrier &&
+            (unit as Carrier).units.isNotEmpty
+        ? CarrierPanelCalculator.calculatePanel(unit, cell)
+        : null;
+
+    _controlsState.update(MainControls(
+      money: _nationMoney,
+      cellInfo: null,
+      armyInfo: armyInfo,
+      carrierInfo: carrierInfo,
+    ));
 
     if (cell.nation != _nation) {
       return ReadyForInput();

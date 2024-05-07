@@ -40,7 +40,8 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onAnimationComplete() => _model.onAnimationComplete();
 
-  void onResortUnits(int cellId, Iterable<String> unitsId) => _model.onResortUnits(cellId, unitsId);
+  void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
+      _model.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
 
   void onCardsButtonClick() => _model.onCardsButtonClick();
 

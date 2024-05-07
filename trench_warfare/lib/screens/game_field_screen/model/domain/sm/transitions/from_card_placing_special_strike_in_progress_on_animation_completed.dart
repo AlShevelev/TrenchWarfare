@@ -58,6 +58,7 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
         money: _nationMoney.actual,
         cellInfo: null,
         armyInfo: null,
+        carrierInfo: null,
       ));
 
       _updateGameObjectsEvent.update([

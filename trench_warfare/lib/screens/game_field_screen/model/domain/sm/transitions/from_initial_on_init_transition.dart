@@ -17,6 +17,7 @@ class FromInitialOnInitTransition extends GameObjectTransitionBase {
       money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
+      carrierInfo: null,
     ));
 
     final cellsToAdd = _gameField.cells.where((c) => c.nation != null);

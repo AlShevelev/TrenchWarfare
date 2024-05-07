@@ -32,7 +32,8 @@ class GameFieldModel implements Disposable {
 
   Future<void> init(RenderableTiledMap tileMap) async {
     _metadata = await compute(MetadataReader.read, tileMap.map);
-    _gameField = await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
+    _gameField =
+        await compute(GameFieldReader.read, Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map));
 
     _money = MoneyStorage(_gameField, _playerNation);
 
@@ -55,7 +56,8 @@ class GameFieldModel implements Disposable {
 
   void onAnimationComplete() => _stateMachine.process(OnAnimationCompleted());
 
-  void onResortUnits(int cellId, Iterable<String> unitsId) => _stateMachine.process(OnUnitsResorted(cellId, unitsId));
+  void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
+      _stateMachine.process(OnUnitsResorted(cellId, unitsId, isCarrier: isCarrier));
 
   void onCardsButtonClick() => _stateMachine.process(OnCardsButtonClick());
 

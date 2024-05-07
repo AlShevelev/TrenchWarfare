@@ -20,6 +20,7 @@ class FromCardPlacingOnCardPlacingCancelled extends GameObjectTransitionBase {
       money: _nationMoney,
       cellInfo: null,
       armyInfo: null,
+      carrierInfo: null,
     ));
 
     _updateGameObjectsEvent.update([

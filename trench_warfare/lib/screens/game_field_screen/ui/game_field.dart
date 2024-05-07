@@ -19,7 +19,7 @@ abstract interface class GameFieldForControls {
 
   TextureAtlas get spritesAtlas;
 
-  void onResortUnits(int cellId, Iterable<String> unitsId);
+  void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier});
 
   void onCardsButtonClick();
 
@@ -112,7 +112,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   void onTapCancel() => _gameGesturesComposer.onTapEnd();
 
   @override
-  void onResortUnits(int cellId, Iterable<String> unitsId) => _viewModel.onResortUnits(cellId, unitsId);
+  void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
+      _viewModel.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
 
   @override
   void onDispose() {

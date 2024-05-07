@@ -15,6 +15,8 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 
   late final GameFieldForControls _gameField;
 
+  late final bool _isCarrier;
+
   GameFieldArmyInfoPanel({
     super.key,
     required int cellId,
@@ -23,17 +25,20 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
     required this.top,
     required TextureAtlas spritesAtlas,
     required GameFieldForControls gameField,
+    required bool isCarrier,
   }) {
     _cellId = cellId;
     _spritesAtlas = spritesAtlas;
     _gameField = gameField;
+    _isCarrier = isCarrier;
   }
 
   @override
   State<GameFieldArmyInfoPanel> createState() => _GameFieldArmyInfoPanelState();
 }
 
-class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> implements GameFieldArmyInfoUnitsCache {
+class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel>
+    implements GameFieldArmyInfoUnitsCache {
   final Map<String, Picture> _cachedUnitPictures = {};
 
   @override
@@ -81,7 +86,11 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel> impleme
                   final Unit item = widget.armyInfo.units.removeAt(oldIndex);
                   widget.armyInfo.units.insert(newIndex, item);
 
-                  widget._gameField.onResortUnits(widget._cellId, widget.armyInfo.units.map((u) => u.id).toList(growable: false));
+                  widget._gameField.onResortUnits(
+                    widget._cellId,
+                    widget.armyInfo.units.map((u) => u.id).toList(growable: false),
+                    isCarrier: widget._isCarrier,
+                  );
                 });
               },
             ),

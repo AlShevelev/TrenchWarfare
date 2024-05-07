@@ -15,7 +15,8 @@ class GameFieldAssembler {
     final lastCell = allCells.last;
     final gameField = GameField(rows: lastCell.row + 1, cols: lastCell.col + 1);
 
-    final ownershipPolygons = allGameObjects.entries.map((e) => e.value).whereType<RegionOwnershipRaw>().toList();
+    final ownershipPolygons =
+        allGameObjects.entries.map((e) => e.value).whereType<RegionOwnershipRaw>().toList();
 
     for (var cell in allCells) {
       final ownership = cellOwnership[cell];
@@ -24,14 +25,17 @@ class GameFieldAssembler {
         cell.setNation(ownership.nation);
 
         if (ownership.productionCenterId != null) {
-          cell.setProductionCenter(_mapProductionCenter(allGameObjects[ownership.productionCenterId]! as ProductionCenterRaw));
+          cell.setProductionCenter(
+              _mapProductionCenter(allGameObjects[ownership.productionCenterId]! as ProductionCenterRaw));
         }
 
         if (ownership.terrainModifierId != null) {
-          cell.setTerrainModifier(_mapTerrainModifier(allGameObjects[ownership.terrainModifierId]! as TerrainModifierRaw));
+          cell.setTerrainModifier(
+              _mapTerrainModifier(allGameObjects[ownership.terrainModifierId]! as TerrainModifierRaw));
         }
 
-        cell.addUnits(_getUnits(allGameObjects, [ownership.unit1Id, ownership.unit2Id, ownership.unit3Id, ownership.unit4Id]));
+        cell.addUnits(_getUnits(
+            allGameObjects, [ownership.unit1Id, ownership.unit2Id, ownership.unit3Id, ownership.unit4Id]));
       } else {
         final nation = _tryToFindOwnership(cell, ownershipPolygons);
 
@@ -48,10 +52,12 @@ class GameFieldAssembler {
 
   static Nation? _tryToFindOwnership(GameFieldCell cell, List<RegionOwnershipRaw> ownerships) {
     for (var ownership in ownerships) {
-      if (isPointInsideRect(cell.center, ownership.bounds)) {         // fast check
-       if (isPointInsidePolygon(cell.center, ownership.vertices)) {   // exact check
-         return ownership.nation;
-       }
+      if (isPointInsideRect(cell.center, ownership.bounds)) {
+        // fast check
+        if (isPointInsidePolygon(cell.center, ownership.vertices)) {
+          // exact check
+          return ownership.nation;
+        }
       }
     }
 
@@ -89,10 +95,13 @@ class GameFieldAssembler {
           health: raw.health,
           movementPoints: raw.movementPoints,
           type: raw.unit,
-          units: _getUnits(allGameObjects, [carrierRaw.unit1Id, carrierRaw.unit2Id, carrierRaw.unit3Id, carrierRaw.unit4Id]));
+          units: _getUnits(allGameObjects,
+              [carrierRaw.unit1Id, carrierRaw.unit2Id, carrierRaw.unit3Id, carrierRaw.unit4Id]));
     }
   }
 
-  static Iterable<Unit> _getUnits(Map<int, GameObjectRaw> allGameObjects, Iterable<int?> unitIds) =>
-      unitIds.where((e) => e != null).map((e) => _mapUnit(allGameObjects, allGameObjects[e]! as UnitRaw));
+  static List<Unit> _getUnits(Map<int, GameObjectRaw> allGameObjects, Iterable<int?> unitIds) => unitIds
+      .where((e) => e != null)
+      .map((e) => _mapUnit(allGameObjects, allGameObjects[e]! as UnitRaw))
+      .toList(growable: true);
 }

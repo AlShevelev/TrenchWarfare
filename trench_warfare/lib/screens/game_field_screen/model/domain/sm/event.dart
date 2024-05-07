@@ -35,7 +35,9 @@ class OnUnitsResorted implements Event {
 
   final Iterable<String> unitsId;
 
-  OnUnitsResorted(this.cellId, this.unitsId);
+  final bool isCarrier;
+
+  OnUnitsResorted(this.cellId, this.unitsId, {required this.isCarrier});
 }
 
 class OnCardsButtonClick implements Event { }

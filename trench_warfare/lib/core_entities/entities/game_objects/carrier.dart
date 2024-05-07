@@ -1,7 +1,7 @@
 part of game_objects;
 
 class Carrier extends Unit {
-  final Iterable<Unit> units;
+  final List<Unit> units;
 
   /// [fatigue] - from 0 to 1 (where 1 is well rested)
   /// [health] - from 0 to 1
@@ -28,6 +28,17 @@ class Carrier extends Unit {
 
   @override
   void setTookPartInBattles(int tookPartInBattles) => super.setTookPartInBattles(0);
+
+  void resortUnits(Iterable<String> unitsId) {
+    final result = List<Unit>.empty(growable: true);
+
+    for (var unitId in unitsId) {
+      result.add(units.singleWhere((u) => u.id == unitId));
+    }
+
+    units.clear();
+    units.addAll(result);
+  }
 
   static Unit create() =>
       Carrier(

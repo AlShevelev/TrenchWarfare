@@ -60,6 +60,7 @@ class CardPlacingCalculator implements PlacingCalculator {
         money: _strategy.nationMoney.actual,
         cellInfo: null,
         armyInfo: null,
+        carrierInfo: null,
       ));
 
       _updateGameObjectsEvent.update([
