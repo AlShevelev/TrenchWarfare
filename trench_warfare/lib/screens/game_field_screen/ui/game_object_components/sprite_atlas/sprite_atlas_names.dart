@@ -186,6 +186,8 @@ class SpriteAtlasNames {
     PathItemType.explosion => 'Path-Explosion',
     PathItemType.battle => 'Path-Battle',
     PathItemType.end => 'Path-End',
+    PathItemType.loadUnit => 'Path-Load-Unit',
+    PathItemType.unloadUnit => 'Path-Unload-Unit',
   };
 
   static String _getProductionCenterLevelDigit(ProductionCenter productionCenter) => switch (productionCenter.level) {

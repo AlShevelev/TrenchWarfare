@@ -3,4 +3,6 @@ enum PathItemType {
   explosion,
   battle,
   end,
+  loadUnit,
+  unloadUnit,
 }
