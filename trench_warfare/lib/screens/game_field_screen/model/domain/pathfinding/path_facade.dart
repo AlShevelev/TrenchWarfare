@@ -6,7 +6,9 @@ class PathFacade {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
   }) {
-    final settings = startCell.isLand ? LandFindPathSettings(startCell: startCell) : SeaFindPathSettings(startCell: startCell);
+    final settings = startCell.isLand
+        ? LandFindPathSettings(startCell: startCell)
+        : SeaFindPathSettings(startCell: startCell);
 
     final pathFinder = FindPath(gameField, settings);
     return pathFinder.find(startCell, endCell);
@@ -24,7 +26,8 @@ class PathFacade {
     final allCellsAround = gameField.findCellsAround(cell);
 
     for (var cellAround in allCellsAround) {
-      final settings = cell.isLand ? LandFindPathSettings(startCell: cell) : SeaFindPathSettings(startCell: cell);
+      final settings =
+          cell.isLand ? LandFindPathSettings(startCell: cell) : SeaFindPathSettings(startCell: cell);
       final path = FindPath(gameField, settings).find(cell, cellAround);
 
       if (path.isEmpty) {
