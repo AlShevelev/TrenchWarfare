@@ -19,7 +19,13 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       cell.setNation(_nation);
     }
 
-    lastReachableCell.addUnitAsActive(unit);
+
+    if (lastReachableCell.activeUnit is Carrier && unit.isLand) {
+      (lastReachableCell.activeUnit as Carrier).addUnitAsActive(unit);
+    } else {
+      lastReachableCell.addUnitAsActive(unit);
+    }
+
     unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
 
     if (unit.movementPoints > 0) {

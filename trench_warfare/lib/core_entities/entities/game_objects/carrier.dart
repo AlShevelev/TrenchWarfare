@@ -1,7 +1,8 @@
 part of game_objects;
 
 class Carrier extends Unit {
-  final List<Unit> units;
+  late final List<Unit> _units;
+  Iterable<Unit> get units => _units;
 
   /// [fatigue] - from 0 to 1 (where 1 is well rested)
   /// [health] - from 0 to 1
@@ -14,7 +15,7 @@ class Carrier extends Unit {
     required health,
     required movementPoints,
     required type,
-    required this.units,
+    required List<Unit> units,
   }) : super(
     boost1: boost1,
     boost2: boost2,
@@ -24,7 +25,13 @@ class Carrier extends Unit {
     health: health,
     movementPoints: movementPoints,
     type: type,
-  );
+  ) {
+    _units = units;
+  }
+
+  bool get hasUnits => _units.isNotEmpty;
+
+  bool get hasPlaceForUnit => _units.length < GameConstants.maxUnitsInCarrier;
 
   @override
   void setTookPartInBattles(int tookPartInBattles) => super.setTookPartInBattles(0);
@@ -33,11 +40,15 @@ class Carrier extends Unit {
     final result = List<Unit>.empty(growable: true);
 
     for (var unitId in unitsId) {
-      result.add(units.singleWhere((u) => u.id == unitId));
+      result.add(_units.singleWhere((u) => u.id == unitId));
     }
 
-    units.clear();
-    units.addAll(result);
+    _units.clear();
+    _units.addAll(result);
+  }
+
+  void addUnitAsActive(Unit unit) {
+    _units.insert(0, unit);
   }
 
   static Unit create() =>
@@ -45,9 +56,9 @@ class Carrier extends Unit {
         boost1: null,
         boost2: null,
         boost3: null,
-        fatigue: 1, // well rested
-        health: 1,  // max health
-        movementPoints: 1, // max movement points
+        fatigue: 1.0, // well rested
+        health: 1.0,  // max health
+        movementPoints: 1.0, // max movement points
         type: UnitType.carrier,
         units: [],
       );

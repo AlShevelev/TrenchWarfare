@@ -19,14 +19,10 @@ abstract class GameObjectTransitionBase {
   Iterable<GameFieldCell> _calculatePath({
     required GameFieldCell startCell,
     required GameFieldCell endCell,
-    required bool isLandUnit,
   }) =>
       PathFacade.calculatePath(gameField: _gameField, startCell: startCell, endCell: endCell);
 
   @protected
-  Iterable<GameFieldCell> _estimatePath({
-    required Iterable<GameFieldCell> path,
-    required bool isLandUnit,
-  }) =>
+  Iterable<GameFieldCell> _estimatePath({required Iterable<GameFieldCell> path}) =>
       PathFacade.estimatePath(path: path);
 }

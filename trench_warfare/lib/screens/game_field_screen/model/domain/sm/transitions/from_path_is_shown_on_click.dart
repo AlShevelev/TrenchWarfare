@@ -20,11 +20,13 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
 
     final unit = firstCell.activeUnit!;
 
+    // Click to the unit cell - reset the selection
     if (cell == path.first) {
       _hideArmyPanel();
       return _resetPathAndEnableUnit(path, unit);
     }
 
+    // Click to the last cell of the path - move the unit
     if (cell == path.last) {
       _hideArmyPanel();
 
@@ -36,7 +38,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     }
 
     // calculate a path
-    Iterable<GameFieldCell> newPath = _calculatePath(startCell: firstCell, endCell: cell, isLandUnit: unit.isLand);
+    Iterable<GameFieldCell> newPath = _calculatePath(startCell: firstCell, endCell: cell);
 
     if (newPath.isEmpty) {
       return _resetPathAndEnableUnit(path, unit);
@@ -45,7 +47,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     _resetPath(path);
 
     // show the new path
-    final estimatedPath = _estimatePath(path: newPath, isLandUnit: unit.isLand);
+    final estimatedPath = _estimatePath(path: newPath);
     _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return PathIsShown(newPath);

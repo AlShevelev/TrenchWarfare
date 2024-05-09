@@ -33,8 +33,9 @@ class CarrierPanelCalculator {
     } else if (newActiveUnit.type == UnitType.carrier) {
       final carrier = (newActiveUnit as Carrier);
 
-      final carrierInfo =
-          carrier.units.isNotEmpty ? GameFieldControlsArmyInfo(cellId: cellId, units: carrier.units) : null;
+      final carrierInfo = carrier.hasUnits
+          ? GameFieldControlsArmyInfo(cellId: cellId, units: carrier.units.toList(growable: true))
+          : null;
 
       controlsState.update(MainControls(
         money: state.money,

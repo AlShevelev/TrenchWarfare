@@ -24,7 +24,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
     }
 
     // calculate a path
-    Iterable<GameFieldCell> path = _calculatePath(startCell: startCell, endCell: endCell, isLandUnit: unit.isLand);
+    Iterable<GameFieldCell> path = _calculatePath(startCell: startCell, endCell: endCell);
 
     if (path.isEmpty) {
       // reset the unit active state
@@ -34,7 +34,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
       return ReadyForInput();
     }
 
-    final estimatedPath = _estimatePath(path: path, isLandUnit: unit.isLand);
+    final estimatedPath = _estimatePath(path: path);
     _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return PathIsShown(estimatedPath);

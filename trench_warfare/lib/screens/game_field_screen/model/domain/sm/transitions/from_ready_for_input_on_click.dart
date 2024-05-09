@@ -28,7 +28,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
     final carrierInfo = cell.nation == _nation &&
             unit != null &&
             unit.type == UnitType.carrier &&
-            (unit as Carrier).units.isNotEmpty
+            (unit as Carrier).hasUnits
         ? CarrierPanelCalculator.calculatePanel(unit, cell)
         : null;
 

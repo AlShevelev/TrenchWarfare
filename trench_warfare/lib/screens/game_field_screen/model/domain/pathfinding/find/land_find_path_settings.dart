@@ -15,6 +15,17 @@ class LandFindPathSettings implements FindPathSettings {
       return null;
     }
 
+    // Can't move from a carrier to a carrier
+    if (priorCell.activeUnit is Carrier && nextCell.activeUnit is Carrier && priorCell.id != nextCell.id) {
+      if (_isCellReachableCarrier(priorCell) && _isCellReachableCarrier(nextCell)) {
+        return null;
+      }
+    }
+
+    if (nextCell.activeUnit is Carrier) {
+      return 1;
+    }
+
     // Try to avoid mine fields
     final terrainModifier = nextCell.terrainModifier?.type;
     if (terrainModifier == TerrainModifierType.landMine) {
@@ -58,6 +69,14 @@ class LandFindPathSettings implements FindPathSettings {
 
   @override
   bool isCellReachable(GameFieldCell cell) {
+    if (cell.activeUnit is Carrier) {
+      return _isCellReachableCarrier(cell);
+    } else {
+      return _isCellReachableLand(cell);
+    }
+  }
+
+  bool _isCellReachableLand(GameFieldCell cell) {
     if (!cell.isLand) {
       return false;
     }
@@ -88,6 +107,16 @@ class LandFindPathSettings implements FindPathSettings {
     }
 
     return true;
+  }
+
+  bool _isCellReachableCarrier(GameFieldCell cell) {
+    final carrier = cell.activeUnit as Carrier;
+
+    if (cell.nation != _startCell.nation!) {
+      return false;
+    }
+
+    return carrier.hasPlaceForUnit;
   }
 
   double? _calculateForTerrain(GameFieldCell nextCell) {
