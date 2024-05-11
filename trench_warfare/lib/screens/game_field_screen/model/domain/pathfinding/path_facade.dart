@@ -39,9 +39,9 @@ class PathFacade {
       gameField.findCellsAround(cell);
 
   static FindPathSettings _getFindPathSettings(GameFieldCell startCell, GameFieldCell endCell) {
-    final calculatedUnit = startCell.activeUnit;
+    final calculatedUnit = startCell.activeUnit!;
 
-    if (startCell.isLand) {
+    if (calculatedUnit.isLand) {
       return LandFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit);
     }
 
@@ -59,7 +59,7 @@ class PathFacade {
   }) {
     final calculatedUnit = startCell.activeUnit!;
 
-    if (startCell.isLand) {
+    if (calculatedUnit.isLand) {
       return LandPathCostCalculator(path, calculatedUnit);
     }
 
