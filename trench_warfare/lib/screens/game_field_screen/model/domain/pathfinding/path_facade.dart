@@ -6,11 +6,7 @@ class PathFacade {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
   }) {
-    final settings = startCell.isLand
-        ? LandFindPathSettings(startCell: startCell)
-        : SeaFindPathSettings(startCell: startCell);
-
-    final pathFinder = FindPath(gameField, settings);
+    final pathFinder = FindPath(gameField, _getFindPathSettings(startCell, endCell));
     return pathFinder.find(startCell, endCell);
   }
 
@@ -18,23 +14,20 @@ class PathFacade {
     if (path.isEmpty) {
       return path;
     }
-
-    return (path.first.isLand ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).calculate();
+    return _getPathCostCalculator(path, startCell: path.first, endCell: path.last).calculate();
   }
 
-  static bool canMove(GameFieldRead gameField, GameFieldCell cell) {
-    final allCellsAround = gameField.findCellsAround(cell);
+  static bool canMove(GameFieldRead gameField, GameFieldCell startCell) {
+    final allCellsAround = gameField.findCellsAround(startCell);
 
-    for (var cellAround in allCellsAround) {
-      final settings =
-          cell.isLand ? LandFindPathSettings(startCell: cell) : SeaFindPathSettings(startCell: cell);
-      final path = FindPath(gameField, settings).find(cell, cellAround);
+    for (var endCell in allCellsAround) {
+      final path = FindPath(gameField, _getFindPathSettings(startCell, endCell)).find(startCell, endCell);
 
       if (path.isEmpty) {
         continue;
       }
 
-      if ((cell.isLand ? LandPathCostCalculator(path) : SeaPathCostCalculator(path)).isEndOfPathReachable()) {
+      if (_getPathCostCalculator(path, startCell: startCell,  endCell: endCell).isEndOfPathReachable()) {
         return true;
       }
     }
@@ -44,4 +37,36 @@ class PathFacade {
 
   static Iterable<GameFieldCell> getCellsAround(GameFieldRead gameField, GameFieldCell cell) =>
       gameField.findCellsAround(cell);
+
+  static FindPathSettings _getFindPathSettings(GameFieldCell startCell, GameFieldCell endCell) {
+    final calculatedUnit = startCell.activeUnit;
+
+    if (startCell.isLand) {
+      return LandFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit);
+    }
+
+    if (calculatedUnit is Carrier && calculatedUnit.units.isNotEmpty && endCell.isLand && !endCell.hasRiver) {
+      return LandFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit.activeUnit);
+    }
+
+    return SeaFindPathSettings(startCell: startCell);
+  }
+
+  static PathCostCalculator _getPathCostCalculator(
+    Iterable<GameFieldCell> path, {
+    required GameFieldCell startCell,
+    required GameFieldCellRead endCell,
+  }) {
+    final calculatedUnit = startCell.activeUnit!;
+
+    if (startCell.isLand) {
+      return LandPathCostCalculator(path, calculatedUnit);
+    }
+
+    if (calculatedUnit is Carrier && calculatedUnit.units.isNotEmpty && endCell.isLand && !endCell.hasRiver) {
+      return LandPathCostCalculator(path, calculatedUnit.activeUnit!);
+    }
+
+    return SeaPathCostCalculator(path, calculatedUnit);
+  }
 }

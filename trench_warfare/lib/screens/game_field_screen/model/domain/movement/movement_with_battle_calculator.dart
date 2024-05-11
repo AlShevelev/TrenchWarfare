@@ -9,7 +9,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
-    final attackingUnit = path.first.removeActiveUnit();
+    final attackingUnit = _detachActiveUnit(path);
 
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
 

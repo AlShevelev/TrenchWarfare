@@ -4,6 +4,12 @@ class Carrier extends Unit {
   late final List<Unit> _units;
   Iterable<Unit> get units => _units;
 
+  bool get hasUnits => _units.isNotEmpty;
+
+  bool get hasPlaceForUnit => _units.length < GameConstants.maxUnitsInCarrier;
+
+  Unit? get activeUnit => _units.firstOrNull;
+
   /// [fatigue] - from 0 to 1 (where 1 is well rested)
   /// [health] - from 0 to 1
   /// [movementPoints] - from 0 to 1
@@ -29,10 +35,6 @@ class Carrier extends Unit {
     _units = units;
   }
 
-  bool get hasUnits => _units.isNotEmpty;
-
-  bool get hasPlaceForUnit => _units.length < GameConstants.maxUnitsInCarrier;
-
   @override
   void setTookPartInBattles(int tookPartInBattles) => super.setTookPartInBattles(0);
 
@@ -50,6 +52,8 @@ class Carrier extends Unit {
   void addUnitAsActive(Unit unit) {
     _units.insert(0, unit);
   }
+
+  Unit removeActiveUnit() =>  _units.removeAt(0);
 
   static Unit create() =>
       Carrier(

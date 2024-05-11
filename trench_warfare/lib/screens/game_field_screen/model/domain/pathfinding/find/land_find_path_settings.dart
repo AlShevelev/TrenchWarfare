@@ -3,10 +3,11 @@ part of pathfinding;
 class LandFindPathSettings implements FindPathSettings {
   late final GameFieldCell _startCell;
 
-  UnitType? get _unit => _startCell.activeUnit?.type;
+  late final UnitType? _unit;
 
-  LandFindPathSettings({required GameFieldCell startCell}) {
+  LandFindPathSettings({required GameFieldCell startCell, required Unit? calculatedUnit}) {
     _startCell = startCell;
+    _unit = calculatedUnit?.type;
   }
 
   @override
@@ -17,9 +18,9 @@ class LandFindPathSettings implements FindPathSettings {
 
     // Can't move from a carrier to a carrier
     if (priorCell.activeUnit is Carrier && nextCell.activeUnit is Carrier && priorCell.id != nextCell.id) {
-      if (_isCellReachableCarrier(priorCell) && _isCellReachableCarrier(nextCell)) {
+      //if (_isCellReachableCarrier(priorCell) && _isCellReachableCarrier(nextCell)) {
         return null;
-      }
+      //}
     }
 
     if (nextCell.activeUnit is Carrier) {

@@ -1,7 +1,9 @@
 part of pathfinding;
 
 class LandPathCostCalculator extends SeaPathCostCalculator {
-  LandPathCostCalculator(super.sourcePath);
+  bool unloadUnitPathItemExists = false;
+
+  LandPathCostCalculator(super.sourcePath, super.activeUnit);
 
   @override
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
@@ -15,6 +17,11 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
 
     if (isBattleCell(nextCell)) {
       return PathItemType.battle;
+    }
+
+    if (_isMyCarrier(_sourcePath.first) && !unloadUnitPathItemExists) {
+      unloadUnitPathItemExists = true;
+      return PathItemType.unloadUnit;
     }
 
     if (isLast) {

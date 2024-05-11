@@ -28,4 +28,17 @@ abstract class MovementCalculator {
     required bool isLandUnit,
   }) =>
       PathFacade.canMove(_gameField, startCell);
+
+  @protected
+  Unit _detachActiveUnit(Iterable<GameFieldCell> path) {
+    final activeUnit = path.first.activeUnit!;
+    final secondPathCell = path.elementAt(1);
+
+    if (activeUnit is Carrier && secondPathCell.isLand && !secondPathCell.hasRiver) {
+      activeUnit.setState(UnitState.enabled);
+      return activeUnit.removeActiveUnit();
+    } else {
+      return path.first.removeActiveUnit();
+    }
+  }
 }

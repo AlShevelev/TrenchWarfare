@@ -10,7 +10,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
-    final unit = path.first.removeActiveUnit();
+    final unit = _detachActiveUnit(path);
 
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
     final lastReachableCell = reachableCells.last;
@@ -18,7 +18,6 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     for (var cell in reachableCells) {
       cell.setNation(_nation);
     }
-
 
     if (lastReachableCell.activeUnit is Carrier && unit.isLand) {
       (lastReachableCell.activeUnit as Carrier).addUnitAsActive(unit);

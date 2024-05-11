@@ -1,18 +1,26 @@
 part of pathfinding;
 
-class SeaPathCostCalculator {
+abstract interface class PathCostCalculator {
+  Iterable<GameFieldCell> calculate();
+
+  bool isEndOfPathReachable();
+}
+
+class SeaPathCostCalculator implements PathCostCalculator {
   late final Iterable<GameFieldCell> _sourcePath;
 
   @protected
-  Unit get _activeUnit => _sourcePath.first.activeUnit!;
+  late final Unit _activeUnit;
 
   @protected
   Nation get nation => _sourcePath.first.nation!;
 
-  SeaPathCostCalculator(Iterable<GameFieldCell> sourcePath) {
+  SeaPathCostCalculator(Iterable<GameFieldCell> sourcePath, Unit activeUnit) {
     _sourcePath = sourcePath;
+    _activeUnit = activeUnit;
   }
 
+  @override
   Iterable<GameFieldCell> calculate() {
     var movementPointsLeft = _activeUnit.movementPoints;
 
@@ -48,6 +56,7 @@ class SeaPathCostCalculator {
     return _sourcePath;
   }
 
+  @override
   bool isEndOfPathReachable() {
     var movementPointsLeft = _activeUnit.movementPoints;
 
