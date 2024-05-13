@@ -1,17 +1,17 @@
 part of pathfinding;
 
 class LandFindPathSettings implements FindPathSettings {
-  late final GameFieldCell _startCell;
+  late final GameFieldCellRead _startCell;
 
-  late final UnitType? _unit;
+  late final UnitType _unit;
 
-  LandFindPathSettings({required GameFieldCell startCell, required Unit? calculatedUnit}) {
+  LandFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit}) {
     _startCell = startCell;
-    _unit = calculatedUnit?.type;
+    _unit = calculatedUnit.type;
   }
 
   @override
-  double? calculateGFactorHeuristic(GameFieldCell priorCell, GameFieldCell nextCell) {
+  double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
     if (!isCellReachable(nextCell)) {
       return null;
     }
@@ -19,7 +19,7 @@ class LandFindPathSettings implements FindPathSettings {
     // Can't move from a carrier to a carrier
     if (priorCell.activeUnit is Carrier && nextCell.activeUnit is Carrier && priorCell.id != nextCell.id) {
       //if (_isCellReachableCarrier(priorCell) && _isCellReachableCarrier(nextCell)) {
-        return null;
+      return null;
       //}
     }
 
@@ -69,20 +69,34 @@ class LandFindPathSettings implements FindPathSettings {
   }
 
   @override
-  bool isCellReachable(GameFieldCell cell) {
+  bool isCellReachable(GameFieldCellRead cell) => LandFindPathSettings.isCellReachableStatic(
+        _unit,
+        startCell: _startCell,
+        cell: cell,
+      );
+
+  static bool isCellReachableStatic(
+    UnitType unit, {
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead cell,
+  }) {
     if (cell.activeUnit is Carrier) {
-      return _isCellReachableCarrier(cell);
+      return _isCellReachableCarrier(cell: cell, startCell: startCell);
     } else {
-      return _isCellReachableLand(cell);
+      return _isCellReachableLand(unit, startCell: startCell, cell: cell);
     }
   }
 
-  bool _isCellReachableLand(GameFieldCell cell) {
+  static bool _isCellReachableLand(
+    UnitType unit, {
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead cell,
+  }) {
     if (!cell.isLand) {
       return false;
     }
 
-    if (cell.nation == _startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
+    if (cell.nation == startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
       return false;
     }
 
@@ -90,37 +104,40 @@ class LandFindPathSettings implements FindPathSettings {
     final terrain = cell.terrain;
 
     if (terrain == CellTerrain.marsh &&
-        (_unit == UnitType.machineGunnersCart ||
-            _unit == UnitType.artillery ||
-            _unit == UnitType.armoredCar ||
-            _unit == UnitType.tank)) {
+        (unit == UnitType.machineGunnersCart ||
+            unit == UnitType.artillery ||
+            unit == UnitType.armoredCar ||
+            unit == UnitType.tank)) {
       return false;
     }
 
     if (terrain == CellTerrain.mountains &&
-        (_unit == UnitType.machineGuns ||
-            _unit == UnitType.cavalry ||
-            _unit == UnitType.machineGunnersCart ||
-            _unit == UnitType.artillery ||
-            _unit == UnitType.armoredCar ||
-            _unit == UnitType.tank)) {
+        (unit == UnitType.machineGuns ||
+            unit == UnitType.cavalry ||
+            unit == UnitType.machineGunnersCart ||
+            unit == UnitType.artillery ||
+            unit == UnitType.armoredCar ||
+            unit == UnitType.tank)) {
       return false;
     }
 
     return true;
   }
 
-  bool _isCellReachableCarrier(GameFieldCell cell) {
+  static bool _isCellReachableCarrier({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead cell,
+  }) {
     final carrier = cell.activeUnit as Carrier;
 
-    if (cell.nation != _startCell.nation!) {
+    if (cell.nation != startCell.nation!) {
       return false;
     }
 
     return carrier.hasPlaceForUnit;
   }
 
-  double? _calculateForTerrain(GameFieldCell nextCell) {
+  double? _calculateForTerrain(GameFieldCellRead nextCell) {
     return switch (nextCell.terrain) {
       CellTerrain.plain => 1,
       CellTerrain.wood => switch (_unit) {

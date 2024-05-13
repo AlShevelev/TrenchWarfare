@@ -14,8 +14,10 @@ import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/game_constants.dart';
 
 part 'cost/land_path_cost_calculator.dart';
+part 'cost/next_cell_path_cost_calculator.dart';
 part 'cost/sea_path_cost_calculator.dart';
 part 'find/find_path.dart';
 part 'find/land_find_path_settings.dart';
+part 'find/next_cell_path_settings.dart';
 part 'find/sea_find_path_settings.dart';
 part 'path_facade.dart';

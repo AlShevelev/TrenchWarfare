@@ -1,10 +1,10 @@
 part of battle;
 
 class BattleResultCalculator {
-  late final GameFieldRead _gameField;
+  late final PathFacade _pathFacade;
 
   BattleResultCalculator(GameFieldRead gameField) {
-    _gameField = gameField;
+    _pathFacade = PathFacade(gameField);
   }
 
   BattleResult calculateBattle({
@@ -111,7 +111,7 @@ class BattleResultCalculator {
       return null;
     }
 
-    final allCellsAround = PathFacade.getCellsAround(_gameField, cell);
+    final allCellsAround = _pathFacade.getCellsAround(cell);
 
     return allCellsAround
         .where((c) => c.nation == cell.nation)

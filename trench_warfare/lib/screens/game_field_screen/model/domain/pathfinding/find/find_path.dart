@@ -3,9 +3,9 @@ part of pathfinding;
 /// Calculations for the G part of the F factor
 abstract class FindPathSettings {
   /// Null value means the [nextCell] is unreachable
-  double? calculateGFactorHeuristic(GameFieldCell priorCell, GameFieldCell nextCell);
+  double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell);
 
-  bool isCellReachable(GameFieldCell cell);
+  bool isCellReachable(GameFieldCellRead cell);
 }
 
 /// Looks for a path from one cell to another

@@ -19,5 +19,6 @@ part 'movement_calculator.dart';
 part 'movement_constants.dart';
 part 'movement_facade.dart';
 part 'movement_with_battle_calculator.dart';
+part 'movement_with_battle_next_unreachable_cell_calculator.dart';
 part 'movement_with_mine_field_calculator.dart';
 part 'movement_without_obstacles_calculator.dart';

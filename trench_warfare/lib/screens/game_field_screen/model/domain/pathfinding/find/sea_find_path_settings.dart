@@ -1,17 +1,14 @@
 part of pathfinding;
 
 class SeaFindPathSettings implements FindPathSettings {
-  late final GameFieldCell _startCell;
+  late final GameFieldCellRead _startCell;
 
-  @protected
-  Unit get _activeUnit => _startCell.activeUnit!;
-
-  SeaFindPathSettings({required GameFieldCell startCell}) {
+  SeaFindPathSettings({required GameFieldCellRead startCell}) {
     _startCell = startCell;
   }
 
   @override
-  double? calculateGFactorHeuristic(GameFieldCell priorCell, GameFieldCell nextCell) {
+  double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
     if (!isCellReachable(nextCell)) {
       return null;
     }
@@ -30,16 +27,23 @@ class SeaFindPathSettings implements FindPathSettings {
   }
 
   @override
-  bool isCellReachable(GameFieldCell cell) {
+  bool isCellReachable(GameFieldCellRead cell) =>
+      SeaFindPathSettings.isCellReachableStatic(cell: cell, startCell: _startCell);
+
+  static bool isCellReachableStatic({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead cell,
+  }) {
     if (cell.isLand && !cell.hasRiver) {
       return false;
     }
 
-    if (cell.nation == _startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
+    if (cell.nation == startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
       return false;
     }
 
-    if (_activeUnit.type == UnitType.carrier && cell.activeUnit != null && _startCell.nation != cell.nation) {
+    final activeUnit = startCell.activeUnit!;
+    if (activeUnit.type == UnitType.carrier && cell.activeUnit != null && startCell.nation != cell.nation) {
       return false;
     }
 

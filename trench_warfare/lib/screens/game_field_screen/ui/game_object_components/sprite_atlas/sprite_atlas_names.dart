@@ -184,7 +184,8 @@ class SpriteAtlasNames {
   static String getPath(PathItemType type) => switch (type) {
     PathItemType.normal => 'Path-Normal',
     PathItemType.explosion => 'Path-Explosion',
-    PathItemType.battle => 'Path-Battle',
+    PathItemType.battle ||
+    PathItemType.battleNextUnreachableCell => 'Path-Battle',
     PathItemType.end => 'Path-End',
     PathItemType.loadUnit => 'Path-Load-Unit',
     PathItemType.unloadUnit => 'Path-Unload-Unit',

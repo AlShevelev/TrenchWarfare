@@ -7,12 +7,16 @@ abstract class GameObjectTransitionBase {
   @protected
   late final GameFieldRead _gameField;
 
+  @protected
+  late final PathFacade _pathFacade;
+
   GameObjectTransitionBase(
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     GameFieldRead gameField,
   ) {
     _updateGameObjectsEvent = updateGameObjectsEvent;
     _gameField = gameField;
+    _pathFacade = PathFacade(_gameField);
   }
 
   @protected
@@ -20,9 +24,9 @@ abstract class GameObjectTransitionBase {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
   }) =>
-      PathFacade.calculatePath(gameField: _gameField, startCell: startCell, endCell: endCell);
+      _pathFacade.calculatePath(startCell: startCell, endCell: endCell);
 
   @protected
   Iterable<GameFieldCell> _estimatePath({required Iterable<GameFieldCell> path}) =>
-      PathFacade.estimatePath(path: path);
+      _pathFacade.estimatePath(path: path);
 }

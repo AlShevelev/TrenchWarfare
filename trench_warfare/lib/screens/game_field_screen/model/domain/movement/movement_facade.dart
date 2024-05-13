@@ -30,11 +30,17 @@ class MovementFacade {
                 gameField: _gameField,
                 updateGameObjectsEvent: _updateGameObjectsEvent,
               )
-            : MovementWithoutObstaclesCalculator(
-                nation: _nation,
-                gameField: _gameField,
-                updateGameObjectsEvent: _updateGameObjectsEvent,
-              );
+            : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
+                ? MovementWithBattleNextUnreachableCell(
+                    nation: _nation,
+                    gameField: _gameField,
+                    updateGameObjectsEvent: _updateGameObjectsEvent,
+                  )
+                : MovementWithoutObstaclesCalculator(
+                    nation: _nation,
+                    gameField: _gameField,
+                    updateGameObjectsEvent: _updateGameObjectsEvent,
+                  );
 
     return calculator.startMovement(path);
   }

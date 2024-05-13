@@ -10,6 +10,9 @@ abstract class MovementCalculator {
   @protected
   late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
+  @protected
+  late final PathFacade _pathFacade;
+
   MovementCalculator({
     required GameFieldRead gameField,
     required Nation nation,
@@ -18,6 +21,7 @@ abstract class MovementCalculator {
     _gameField = gameField;
     _nation = nation;
     _updateGameObjectsEvent = updateGameObjectsEvent;
+    _pathFacade = PathFacade(_gameField);
   }
 
   State startMovement(Iterable<GameFieldCell> path);
@@ -27,7 +31,7 @@ abstract class MovementCalculator {
     required GameFieldCell startCell,
     required bool isLandUnit,
   }) =>
-      PathFacade.canMove(_gameField, startCell);
+      _pathFacade.canMove(startCell);
 
   @protected
   Unit _detachActiveUnit(Iterable<GameFieldCell> path) {
