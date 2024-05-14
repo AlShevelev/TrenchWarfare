@@ -12,7 +12,59 @@ class TerrainModifierBuildCalculator {
 
   BuildRestriction getError() => AppropriateCell();
 
+  bool canBuildOnCellByTerrainType(GameFieldCellRead cell, TerrainModifierType type) {
+    if (cell.hasRoad) {
+      return false;
+    }
+
+    if (cell.hasRiver) {
+      if (type == TerrainModifierType.antiAirGun ||
+          type == TerrainModifierType.barbedWire ||
+          type == TerrainModifierType.landFort ||
+          type == TerrainModifierType.trench) {
+        return false;
+      }
+    }
+
+    switch (cell.terrain) {
+      case CellTerrain.plain:
+        {
+          if (type == TerrainModifierType.seaMine && !cell.hasRiver) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      case CellTerrain.wood:
+        return type == TerrainModifierType.trench;
+      case CellTerrain.marsh:
+        return type == TerrainModifierType.antiAirGun || type == TerrainModifierType.landMine;
+      case CellTerrain.sand:
+        return type == TerrainModifierType.barbedWire ||
+            type == TerrainModifierType.antiAirGun ||
+            type == TerrainModifierType.landMine;
+      case CellTerrain.hills:
+        return type == TerrainModifierType.trench ||
+            type == TerrainModifierType.barbedWire ||
+            type == TerrainModifierType.landFort ||
+            type == TerrainModifierType.antiAirGun;
+      case CellTerrain.mountains:
+        return type == TerrainModifierType.landFort || type == TerrainModifierType.antiAirGun;
+      case CellTerrain.snow:
+        return type == TerrainModifierType.trench ||
+            type == TerrainModifierType.barbedWire ||
+            type == TerrainModifierType.landFort ||
+            type == TerrainModifierType.antiAirGun;
+      case CellTerrain.water:
+        return type == TerrainModifierType.seaMine;
+    }
+  }
+
   bool canBuildOnCell(GameFieldCellRead cell, TerrainModifierType type) {
+    if (!canBuildOnCellByTerrainType(cell, type)) {
+      return false;
+    }
+
     switch (type) {
       case TerrainModifierType.trench:
       case TerrainModifierType.landFort:
@@ -38,7 +90,10 @@ class TerrainModifierBuildCalculator {
         }
       case TerrainModifierType.landMine:
         {
-          if (cell.nation != _myNation || !cell.isLand || cell.terrainModifier != null || cell.productionCenter != null) {
+          if (cell.nation != _myNation ||
+              !cell.isLand ||
+              cell.terrainModifier != null ||
+              cell.productionCenter != null) {
             return false;
           }
 
@@ -88,7 +143,9 @@ class TerrainModifierBuildCalculator {
       if (buildCost == null) {
         return cantBuild;
       } else {
-        return nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints || cantBuild;
+        return nationMoney.currency < buildCost.currency ||
+            nationMoney.industryPoints < buildCost.industryPoints ||
+            cantBuild;
       }
     }).toList(growable: false);
   }

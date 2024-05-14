@@ -5,26 +5,21 @@ class MoneyTerrainModifierCalculator {
   static const _baseIndustryPoints = 5;
 
   static MoneyUnit? calculateBuildCost(CellTerrain terrain, TerrainModifierType type) => switch (terrain) {
-        CellTerrain.plain => switch (type) {
-            TerrainModifierType.antiAirGun ||
-            TerrainModifierType.barbedWire ||
-            TerrainModifierType.landFort ||
-            TerrainModifierType.landMine ||
-            TerrainModifierType.trench =>
-              _calculateBaseCost(type),
-            _ => null,
-          },
+        CellTerrain.plain => _calculateBaseCost(type),
         CellTerrain.wood => switch (type) {
             TerrainModifierType.trench => _calculateBaseCost(type).multiplyBy(1.2),
             _ => null,
           },
         CellTerrain.marsh => switch (type) {
-            TerrainModifierType.antiAirGun || TerrainModifierType.landMine => _calculateBaseCost(type),
+            TerrainModifierType.antiAirGun ||
+            TerrainModifierType.landMine =>
+              _calculateBaseCost(type).multiplyBy(1.2),
             _ => null,
-          }
-              ?.multiplyBy(1.2),
+          },
         CellTerrain.sand => switch (type) {
-            TerrainModifierType.antiAirGun || TerrainModifierType.barbedWire => _calculateBaseCost(type).multiplyBy(1.2),
+            TerrainModifierType.antiAirGun ||
+            TerrainModifierType.barbedWire =>
+              _calculateBaseCost(type).multiplyBy(1.2),
             TerrainModifierType.landMine => _calculateBaseCost(type),
             _ => null,
           },
