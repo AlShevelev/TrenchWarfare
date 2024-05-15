@@ -37,7 +37,9 @@ class MainControlsWidget extends StatelessWidget {
         right: 15,
         bottom: 15,
         image: const AssetImage('assets/images/game_field_overlays/main/button_next_turn.webp'),
-        onPress: () {},
+        onPress: () {
+          _gameField.onEndOfTurnButtonClick();
+        },
       ),
       // Menu button
       GameFieldCornerButton(

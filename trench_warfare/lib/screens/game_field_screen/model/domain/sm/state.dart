@@ -49,3 +49,8 @@ class CardPlacingSpecialStrikeInProgress implements State {
     required this.productionCost,
   });
 }
+
+class TurnIsEnded implements State {
+  // todo Maybe whenever in a future we'll store some useful information here
+  // (camera position etc.) - to continue our game seamless
+}

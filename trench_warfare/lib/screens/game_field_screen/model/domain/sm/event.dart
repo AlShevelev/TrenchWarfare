@@ -42,6 +42,8 @@ class OnUnitsResorted implements Event {
 
 class OnCardsButtonClick implements Event { }
 
+class OnEndOfTurnButtonClick implements Event { }
+
 class OnCancelled implements Event { }
 
 class OnCardSelected implements Event {

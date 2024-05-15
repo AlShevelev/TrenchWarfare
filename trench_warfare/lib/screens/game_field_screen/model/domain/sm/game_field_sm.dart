@@ -59,6 +59,7 @@ class GameFieldStateMachine implements Disposable {
               _nation,
               _mapMetadata,
             ).process(),
+          OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick().process(),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
@@ -68,6 +69,12 @@ class GameFieldStateMachine implements Disposable {
               _money.actual,
               _controlsState,
             ).process(startPathCell, cell),
+          OnEndOfTurnButtonClick() => FromWaitingForEndOfPathOnEndOfTurnButtonClick(
+            _updateGameObjectsEvent,
+            _gameField,
+            _money.actual,
+            _controlsState,
+          ).process(startPathCell),
           OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
             FromWaitingForEndOfPathOnResortUnit(
               _updateGameObjectsEvent,
@@ -90,6 +97,12 @@ class GameFieldStateMachine implements Disposable {
               _gameField,
               _controlsState,
             ).process(path, cellId, unitsId, isCarrier: isCarrier),
+          OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(
+            _updateGameObjectsEvent,
+            _gameField,
+            _money.actual,
+            _controlsState,
+          ).process(path),
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {
@@ -152,10 +165,15 @@ class GameFieldStateMachine implements Disposable {
               nationMoney: _money,
             ).process(),
           _ => _currentState,
-        }
+        },
+      TurnIsEnded() => _currentState    // todo OnStarTurnEvent will be processed here
     };
 
     _currentState = newState;
+
+    if (_currentState is TurnIsEnded) {
+      // todo switch the model here
+    }
   }
 
   @override

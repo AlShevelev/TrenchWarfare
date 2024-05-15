@@ -45,6 +45,8 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onCardsButtonClick() => _model.onCardsButtonClick();
 
+  void onEndOfTurnButtonClick() => _model.onEndOfTurnButtonClick();
+
   void onCardsSelectionCancelled() => _model.onCardsSelectionCancelled();
 
   void onCardSelected(GameFieldControlsCard? card) => _model.onCardSelected(card);
