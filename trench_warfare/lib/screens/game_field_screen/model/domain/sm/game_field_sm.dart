@@ -166,7 +166,16 @@ class GameFieldStateMachine implements Disposable {
             ).process(),
           _ => _currentState,
         },
-      TurnIsEnded() => _currentState    // todo OnStarTurnEvent will be processed here
+      TurnIsEnded() => switch (event) {
+        OnStarTurn() => FromTurnIsEndedOnStartTurn(
+          _updateGameObjectsEvent,
+          _gameField,
+          _nation,
+          _money,
+          _controlsState
+        ).process(),
+        _ => _currentState,
+      }
     };
 
     _currentState = newState;

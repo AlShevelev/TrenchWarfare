@@ -21,6 +21,8 @@ class Unit extends GameObject {
   late double _fatigue;
   double get fatigue => _fatigue;
 
+  double get maxFatigue => 1;
+
   late double _health;
   double get health => _health;
 
@@ -55,6 +57,12 @@ class Unit extends GameObject {
       type == UnitType.armoredCar ||
       type == UnitType.artillery ||
       type == UnitType.tank ||
+      type == UnitType.destroyer ||
+      type == UnitType.cruiser ||
+      type == UnitType.battleship ||
+      type == UnitType.carrier;
+
+  bool get isShip =>
       type == UnitType.destroyer ||
       type == UnitType.cruiser ||
       type == UnitType.battleship ||
@@ -171,8 +179,6 @@ class Unit extends GameObject {
 
     return UnitExperienceRank.elite;
   }
-
-  static double _getMaxFatigue() => 1;
 
   static double _getMaxHealth(UnitType type) {
     switch (type) {

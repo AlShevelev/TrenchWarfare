@@ -57,3 +57,5 @@ class OnCardPlaced implements Event {
 
   OnCardPlaced(this.cell);
 }
+
+class OnStarTurn implements Event {}

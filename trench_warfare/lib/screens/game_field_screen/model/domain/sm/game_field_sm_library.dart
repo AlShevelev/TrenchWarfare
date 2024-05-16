@@ -1,5 +1,6 @@
 library game_field_sm;
 
+import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
@@ -50,3 +51,4 @@ part 'transitions/from_path_is_shown_on_click.dart';
 part 'transitions/from_path_is_shown_on_end_of_turn_button_click.dart';
 part 'transitions/from_path_is_shown_on_resort_unit.dart';
 part 'transitions/from_card_placing_special_strike_in_progress_on_animation_completed.dart';
+part 'transitions/from_turn_is_ended_on_start_turn.dart';
