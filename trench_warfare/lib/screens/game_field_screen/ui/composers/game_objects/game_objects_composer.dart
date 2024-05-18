@@ -10,17 +10,14 @@ import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
-import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
-class GameObjectsComposer implements Disposable {
+class GameObjectsComposer {
   late final GameFieldRead _gameField;
 
   late final TextureAtlas _spritesAtlas;
   late final Image _animationAtlas;
-
-  StreamSubscription? _updateGameObjectsSubscription;
 
   late final TiledComponent _mapComponent;
 
@@ -30,7 +27,6 @@ class GameObjectsComposer implements Disposable {
 
   GameObjectsComposer(
     TiledComponent mapComponent,
-    Stream<Iterable<UpdateGameEvent>> updateGameObjectScream,
     TextureAtlas spritesAtlas,
     void Function() onAnimationCompletedCallback, {
     required Image animationAtlas,
@@ -38,7 +34,6 @@ class GameObjectsComposer implements Disposable {
     _spritesAtlas = spritesAtlas;
     _animationAtlas = animationAtlas;
 
-    _updateGameObjectsSubscription = updateGameObjectScream.listen(_onUpdateGameEvent);
     _mapComponent = mapComponent;
 
     _onAnimationCompletedCallback = onAnimationCompletedCallback;
@@ -48,47 +43,42 @@ class GameObjectsComposer implements Disposable {
     _gameField = gameField;
   }
 
-  @override
-  void dispose() {
-    _updateGameObjectsSubscription?.cancel();
-  }
+  Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
+    switch (event) {
+      case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
+        _updateCell(cell, updateBorderCells);
 
-  void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
-    for (var event in events) {
-      switch (event) {
-        case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
-          _updateCell(cell, updateBorderCells);
+      case UpdateCellInactivity(
+          oldInactiveCells: var oldInactiveCells,
+          newInactiveCells: var newInactiveCells
+        ):
+        _updateCellInactivity(oldInactiveCells, newInactiveCells);
 
-        case UpdateCellInactivity(
-            oldInactiveCells: var oldInactiveCells,
-            newInactiveCells: var newInactiveCells
-          ):
-          _updateCellInactivity(oldInactiveCells, newInactiveCells);
+      case CreateUntiedUnit(cell: var cell, unit: var unit):
+        _createUntiedUnit(cell, unit);
 
-        case CreateUntiedUnit(cell: var cell, unit: var unit):
-          _createUntiedUnit(cell, unit);
+      case RemoveUntiedUnit(unit: var unit):
+        _removeUntiedUnit(unit);
 
-        case RemoveUntiedUnit(unit: var unit):
-          _removeUntiedUnit(unit);
+      case MoveUntiedUnit(startCell: var startCell, endCell: var endCell, unit: var unit, time: var time):
+        await _moveUntiedUnit(startCell, endCell, unit, time);
 
-        case MoveUntiedUnit(startCell: var startCell, endCell: var endCell, unit: var unit, time: var time):
-          await _moveUntiedUnit(startCell, endCell, unit, time);
+      case Pause(time: var time):
+        await _pause(time);
 
-        case Pause(time: var time):
-          await _pause(time);
+      case ShowDamage(cell: var cell, damageType: var damageType, time: var time):
+        await _showDamage(cell, damageType, time);
 
-        case ShowDamage(cell: var cell, damageType: var damageType, time: var time):
-          await _showDamage(cell, damageType, time);
+      case ShowComplexDamage(
+          cells: var cells,
+          time: var time,
+        ):
+        await _showComplexDamage(cells, time);
 
-        case ShowComplexDamage(
-            cells: var cells,
-            time: var time,
-          ):
-          await _showComplexDamage(cells, time);
+      case AnimationCompleted():
+        _onAnimationCompletedCallback();
 
-        case AnimationCompleted():
-          _onAnimationCompletedCallback();
-      }
+      default: {}
     }
   }
 

@@ -14,3 +14,11 @@ class LongTap implements GestureEvent {
 }
 
 class LongTapCompleted implements GestureEvent {}
+
+class CameraUpdated implements GestureEvent {
+  final double zoom;
+
+  final Vector2 position;
+
+  CameraUpdated(this.zoom, this.position);
+}

@@ -53,6 +53,8 @@ class GameFieldViewModel extends ViewModelBase {
 
   void onCardsPlacingCancelled() => _model.onCardsPlacingCancelled();
 
+  void onCameraUpdated(double zoom, Vector2 position) => _model.onCameraUpdated(zoom, position);
+
   @override
   void dispose() {
     // _audioController.stopSound();

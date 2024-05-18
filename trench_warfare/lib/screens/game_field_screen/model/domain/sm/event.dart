@@ -11,7 +11,9 @@ class OnInit implements Event {
 
   final MapMetadataRead metadata;
 
-  OnInit(this.gameField, this.nation, this.money, this.metadata);
+  final GameFieldSettingsStorageRead gameFieldSettingsStorage;
+
+  OnInit(this.gameField, this.nation, this.money, this.metadata, this.gameFieldSettingsStorage);
 }
 
 class OnCellClick implements Event {

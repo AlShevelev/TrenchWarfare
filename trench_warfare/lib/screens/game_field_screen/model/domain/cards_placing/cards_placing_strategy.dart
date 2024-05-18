@@ -158,7 +158,7 @@ class ProductionCenterCardsPlacingStrategy
       return ProductionCenter(type: type, level: ProductionCenterLevel.level1, name: '');
     } else {
       return productionCenter.nextLevel
-          .let((l) => ProductionCenter(type: type, level: l, name: productionCenter.name));
+          ?.let((l) => ProductionCenter(type: type, level: l, name: productionCenter.name));
     }
   }
 }

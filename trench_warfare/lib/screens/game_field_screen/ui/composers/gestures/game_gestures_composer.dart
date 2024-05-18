@@ -1,13 +1,13 @@
 part of game_gesture_composer;
 
 class GameGesturesComposer {
-  static const double minZoom = 0.5;
-  static const double maxZoom = 2.0;
+  static const double _minZoom = 0.5;
+  static const double _maxZoom = 2.0;
+  static const double startZoom = (_minZoom + _maxZoom) / 2.0;
 
   static const int longTapDuration = 700; // ms
 
-  double _zoom = minZoom;
-  double get zoom => _zoom;
+  double _zoom = startZoom;
 
   late final GesturesCamera _camera;
 
@@ -43,7 +43,10 @@ class GameGesturesComposer {
     }
   }
 
-  void onScaleEnd() => _checkBorders();
+  void onScaleEnd() {
+    _checkBorders();
+    _onGestureEvent(CameraUpdated(_zoom, _camera.position));
+  }
 
   Future<void> onTapStart(Vector2 position) async {
     if (_tapPosition != null) {
@@ -78,6 +81,23 @@ class GameGesturesComposer {
     _longTapStarted = false;
   }
 
+  Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
+    switch (event) {
+      case SetCamera(zoom: var zoom, position: var position): {
+        zoom?.let((z) => _camera.updateZoom(z));
+        position?.let((p) => _camera.updatePosition(p));
+        _checkBorders();
+      }
+
+      case MoveCameraToCell(cell: var cell): {
+        _camera.updatePosition(cell.center);
+        _checkBorders();
+      }
+
+      default: {}
+    }
+  }
+
   void _checkBorders() {
     _checkScaleBorders(_camera.zoom);
     _checkDragBorders(_camera.visibleRect, _camera.position);
@@ -94,10 +114,10 @@ class GameGesturesComposer {
 
   void _processScale(Vector2 currentScale) {
     final newZoom = _zoom * ((currentScale.y + currentScale.x) / 2.0);
-    _camera.updateZoom(newZoom.clamp(minZoom, maxZoom));
+    _camera.updateZoom(newZoom.clamp(_minZoom, _maxZoom));
   }
 
-  void _checkScaleBorders(double currentZoom) => _camera.updateZoom(currentZoom.clamp(minZoom, maxZoom));
+  void _checkScaleBorders(double currentZoom) => _camera.updateZoom(currentZoom.clamp(_minZoom, _maxZoom));
 
   void _checkDragBorders(Rect visibleWorldRect, Vector2 cameraPosition) {
     final worldRect = visibleWorldRect;

@@ -9,6 +9,8 @@ class GameFieldStateMachine implements Disposable {
 
   late final MapMetadataRead _mapMetadata;
 
+  late final GameFieldSettingsStorageRead _gameFieldSettingsStorage;
+
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent =
       SingleStream<Iterable<UpdateGameEvent>>();
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
@@ -26,8 +28,9 @@ class GameFieldStateMachine implements Disposable {
             nation: var nation,
             money: var money,
             metadata: var metadata,
+            gameFieldSettingsStorage: var gameFieldSettingsStorage,
           ) =>
-            _processInit(gameField, nation, money, metadata),
+            _processInit(gameField, nation, money, metadata, gameFieldSettingsStorage),
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
@@ -70,11 +73,11 @@ class GameFieldStateMachine implements Disposable {
               _controlsState,
             ).process(startPathCell, cell),
           OnEndOfTurnButtonClick() => FromWaitingForEndOfPathOnEndOfTurnButtonClick(
-            _updateGameObjectsEvent,
-            _gameField,
-            _money.actual,
-            _controlsState,
-          ).process(startPathCell),
+              _updateGameObjectsEvent,
+              _gameField,
+              _money.actual,
+              _controlsState,
+            ).process(startPathCell),
           OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
             FromWaitingForEndOfPathOnResortUnit(
               _updateGameObjectsEvent,
@@ -98,11 +101,11 @@ class GameFieldStateMachine implements Disposable {
               _controlsState,
             ).process(path, cellId, unitsId, isCarrier: isCarrier),
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(
-            _updateGameObjectsEvent,
-            _gameField,
-            _money.actual,
-            _controlsState,
-          ).process(path),
+              _updateGameObjectsEvent,
+              _gameField,
+              _money.actual,
+              _controlsState,
+            ).process(path),
           _ => _currentState,
         },
       MovingInProgress() => switch (event) {
@@ -167,15 +170,16 @@ class GameFieldStateMachine implements Disposable {
           _ => _currentState,
         },
       TurnIsEnded() => switch (event) {
-        OnStarTurn() => FromTurnIsEndedOnStartTurn(
-          _updateGameObjectsEvent,
-          _gameField,
-          _nation,
-          _money,
-          _controlsState
-        ).process(),
-        _ => _currentState,
-      }
+          OnStarTurn() => FromTurnIsEndedOnStartTurn(
+              _updateGameObjectsEvent,
+              _gameField,
+              _nation,
+              _money,
+              _controlsState,
+              _gameFieldSettingsStorage,
+            ).process(),
+          _ => _currentState,
+        }
     };
 
     _currentState = newState;
@@ -192,15 +196,22 @@ class GameFieldStateMachine implements Disposable {
   }
 
   State _processInit(
-      GameFieldRead gameField, Nation nation, MoneyStorage money, MapMetadataRead mapMetadata) {
+    GameFieldRead gameField,
+    Nation nation,
+    MoneyStorage money,
+    MapMetadataRead mapMetadata,
+    GameFieldSettingsStorageRead gameFieldSettingsStorage,
+  ) {
     _gameField = gameField;
     _nation = nation;
     _money = money;
     _mapMetadata = mapMetadata;
+    _gameFieldSettingsStorage = gameFieldSettingsStorage;
 
     return FromInitialOnInitTransition(
       _updateGameObjectsEvent,
       _gameField,
+      _nation,
       _controlsState,
       _money.actual,
     ).process();

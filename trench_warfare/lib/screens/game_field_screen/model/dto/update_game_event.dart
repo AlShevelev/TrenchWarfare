@@ -1,3 +1,4 @@
+import 'package:flame/game.dart';
 import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:tuple/tuple.dart';
@@ -84,3 +85,17 @@ class ShowComplexDamage implements UpdateGameEvent {
 }
 
 class AnimationCompleted implements UpdateGameEvent {}
+
+class SetCamera implements UpdateGameEvent {
+  final double? zoom;
+
+  final Vector2? position;
+
+  SetCamera(this.zoom, this.position);
+}
+
+class MoveCameraToCell implements UpdateGameEvent {
+  final GameFieldCellRead cell;
+
+  MoveCameraToCell(this.cell);
+}

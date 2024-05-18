@@ -4,11 +4,13 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
   static const partOfHealthRestoredWithoutProductionCenter = 0.2;
   static const partOfHealthRestoredWithProductionCenter = 0.4;
 
-  late final MoneyStorage _money;
+  final MoneyStorage _money;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  final SingleStream<GameFieldControlsState> _controlsState;
 
-  late final Nation _nation;
+  final Nation _nation;
+
+  final GameFieldSettingsStorageRead _gameFieldSettingsStorage;
 
   FromTurnIsEndedOnStartTurn(
     super.updateGameObjectsEvent,
@@ -16,12 +18,13 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
     this._nation,
     this._money,
     this._controlsState,
+    this._gameFieldSettingsStorage,
   );
 
   State process() {
     _money.recalculate();
 
-    final List<UpdateGameEvent> updateCells = [];
+    final List<UpdateGameEvent> events = [];
 
     for (var cell in _gameField.cells) {
       if (cell.nation != _nation || cell.units.isEmpty) {
@@ -38,10 +41,12 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
         }
       }
 
-      updateCells.add(UpdateCell(cell, updateBorderCells: []));
+      events.add(UpdateCell(cell, updateBorderCells: []));
     }
 
-    _updateGameObjectsEvent.update(updateCells);
+    events.add(SetCamera(_gameFieldSettingsStorage.zoom, _gameFieldSettingsStorage.cameraPosition));
+
+    _updateGameObjectsEvent.update(events);
 
     _controlsState.update(MainControls(
       money: _money.actual,

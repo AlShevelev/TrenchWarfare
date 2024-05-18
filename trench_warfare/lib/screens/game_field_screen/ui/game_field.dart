@@ -7,6 +7,7 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
@@ -42,6 +43,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
+  StreamSubscription? _updateGameObjectsSubscription;
+
   @override
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
 
@@ -60,7 +63,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   @override
   Future<void> onLoad() async {
     camera.viewfinder
-      ..zoom = GameGesturesComposer.minZoom
+      ..zoom = GameGesturesComposer.startZoom
       ..anchor = Anchor.center;
 
     _mapComponent = await TiledComponent.load(
@@ -68,6 +71,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
       ComponentConstants.cellRealSize,
     );
     world.add(_mapComponent);
+
+    _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(_onUpdateGameEvent);
 
     _gameGesturesComposer = GameGesturesComposer(
       mapSize: Offset(_mapComponent.width, _mapComponent.height),
@@ -79,7 +84,6 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
 
     _gameObjectsComposer = GameObjectsComposer(
       _mapComponent,
-      _viewModel.updateGameObjectsEvent,
       _spritesAtlas,
       _viewModel.onAnimationComplete,
       animationAtlas: await images.load('sprites/animation.webp'),
@@ -119,9 +123,16 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
 
   @override
   void onDispose() {
-    _gameObjectsComposer.dispose();
+    _updateGameObjectsSubscription?.cancel();
     _viewModel.dispose();
     super.onDispose();
+  }
+
+  void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
+    for (var event in events) {
+      await _gameObjectsComposer.onUpdateGameEvent(event);
+      await _gameGesturesComposer.onUpdateGameEvent(event);
+    }
   }
 
   void _onGestureEvent(GestureEvent event) {
@@ -132,6 +143,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
         _viewModel.onLongClickStart(position);
       case LongTapCompleted():
         _viewModel.onLongClickEnd();
+      case CameraUpdated(zoom: var zoom, position: var position):
+        _viewModel.onCameraUpdated(zoom, position);
     }
   }
 

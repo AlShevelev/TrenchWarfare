@@ -122,3 +122,13 @@ List<Tuple2<Offset, Offset>> splitLine(List<double> parts, {required Offset star
 }
 
 int multiplyBy(int value, double factor) => (value * factor).round();
+
+/// Inscribes the [value] in interval [0, 1] (both included)
+/// Where 0 means [min] and 1 means [max]
+double normalize({required double value, required double min, required double max}) {
+  if (min >= max || value < min || value > max) {
+    throw ArgumentError('The value [$value] must be in a range [$min, $max]');
+  }
+
+  return value - min / max - min;
+}
