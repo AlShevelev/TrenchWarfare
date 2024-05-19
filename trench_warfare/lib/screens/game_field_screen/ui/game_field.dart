@@ -85,13 +85,12 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     _gameObjectsComposer = GameObjectsComposer(
       _mapComponent,
       _spritesAtlas,
-      _viewModel.onAnimationComplete,
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 
     await _viewModel.init(_mapComponent.tileMap);
 
-    _gameObjectsComposer.init(_viewModel.gameField);
+    _gameObjectsComposer.init(_viewModel.gameField, _viewModel.input.onAnimationComplete);
 
     overlays.add(GameFieldControls.overlayKey);
   }
@@ -119,7 +118,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
-      _viewModel.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
+      _viewModel.input.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
 
   @override
   void onDispose() {
@@ -138,28 +137,28 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   void _onGestureEvent(GestureEvent event) {
     switch (event) {
       case Tap(position: var position):
-        _viewModel.onClick(position);
+        _viewModel.input.onClick(position);
       case LongTap(position: var position):
-        _viewModel.onLongClickStart(position);
+        _viewModel.input.onLongClickStart(position);
       case LongTapCompleted():
-        _viewModel.onLongClickEnd();
+        _viewModel.input.onLongClickEnd();
       case CameraUpdated(zoom: var zoom, position: var position):
-        _viewModel.onCameraUpdated(zoom, position);
+        _viewModel.input.onCameraUpdated(zoom, position);
     }
   }
 
   @override
-  void onCardsButtonClick() => _viewModel.onCardsButtonClick();
+  void onCardsButtonClick() => _viewModel.input.onCardsButtonClick();
 
   @override
-  void onCardsSelectionCancelled() => _viewModel.onCardsSelectionCancelled();
+  void onCardsSelectionCancelled() => _viewModel.input.onCardsSelectionCancelled();
 
   @override
-  void onCardSelected(GameFieldControlsCard? card) => _viewModel.onCardSelected(card);
+  void onCardSelected(GameFieldControlsCard? card) => _viewModel.input.onCardSelected(card);
 
   @override
-  void onCardsPlacingCancelled() => _viewModel.onCardsPlacingCancelled();
+  void onCardsPlacingCancelled() => _viewModel.input.onCardsPlacingCancelled();
 
   @override
-  void onEndOfTurnButtonClick() => _viewModel.onEndOfTurnButtonClick();
+  void onEndOfTurnButtonClick() => _viewModel.input.onEndOfTurnButtonClick();
 }

@@ -3,17 +3,9 @@ part of game_field_sm;
 sealed class Event {}
 
 class OnInit implements Event {
-  final GameFieldRead gameField;
+  final bool updateGameField;
 
-  final Nation nation;
-
-  final MoneyStorage money;
-
-  final MapMetadataRead metadata;
-
-  final GameFieldSettingsStorageRead gameFieldSettingsStorage;
-
-  OnInit(this.gameField, this.nation, this.money, this.metadata, this.gameFieldSettingsStorage);
+  OnInit({required this.updateGameField});
 }
 
 class OnCellClick implements Event {

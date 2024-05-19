@@ -1,6 +1,6 @@
 part of game_field_sm;
 
-class GameFieldStateMachine implements Disposable {
+class GameFieldStateMachine {
   late final GameFieldRead _gameField;
 
   late final Nation _nation;
@@ -11,26 +11,32 @@ class GameFieldStateMachine implements Disposable {
 
   late final GameFieldSettingsStorageRead _gameFieldSettingsStorage;
 
-  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent =
-      SingleStream<Iterable<UpdateGameEvent>>();
-  Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
-  final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState => _controlsState.output;
+  final SingleStream<GameFieldControlsState> _controlsState;
 
   State _currentState = Initial();
+
+  GameFieldStateMachine(
+    this._gameField,
+    this._nation,
+    this._money,
+    this._mapMetadata,
+    this._gameFieldSettingsStorage,
+    this._updateGameObjectsEvent,
+    this._controlsState,
+  );
 
   void process(Event event) {
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          OnInit(
-            gameField: var gameField,
-            nation: var nation,
-            money: var money,
-            metadata: var metadata,
-            gameFieldSettingsStorage: var gameFieldSettingsStorage,
-          ) =>
-            _processInit(gameField, nation, money, metadata, gameFieldSettingsStorage),
+          OnInit(updateGameField: var updateGameField) => FromInitialOnInitTransition(
+              _updateGameObjectsEvent,
+              _gameField,
+              _nation,
+              _controlsState,
+              _money.actual,
+            ).process(updateGameField),
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {
@@ -187,33 +193,5 @@ class GameFieldStateMachine implements Disposable {
     if (_currentState is TurnIsEnded) {
       // todo switch the model here
     }
-  }
-
-  @override
-  void dispose() {
-    _updateGameObjectsEvent.close();
-    _controlsState.close();
-  }
-
-  State _processInit(
-    GameFieldRead gameField,
-    Nation nation,
-    MoneyStorage money,
-    MapMetadataRead mapMetadata,
-    GameFieldSettingsStorageRead gameFieldSettingsStorage,
-  ) {
-    _gameField = gameField;
-    _nation = nation;
-    _money = money;
-    _mapMetadata = mapMetadata;
-    _gameFieldSettingsStorage = gameFieldSettingsStorage;
-
-    return FromInitialOnInitTransition(
-      _updateGameObjectsEvent,
-      _gameField,
-      _nation,
-      _controlsState,
-      _money.actual,
-    ).process();
   }
 }

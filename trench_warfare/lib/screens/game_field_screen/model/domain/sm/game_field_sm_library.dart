@@ -26,7 +26,6 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calc
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
-import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 

@@ -13,6 +13,8 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_object_componen
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
+typedef OnAnimationCompletedCallback = void Function();
+
 class GameObjectsComposer {
   late final GameFieldRead _gameField;
 
@@ -23,24 +25,22 @@ class GameObjectsComposer {
 
   final Map<String, PositionComponent> _gameObjects = {};
 
-  late final void Function() _onAnimationCompletedCallback;
+  late final OnAnimationCompletedCallback _onAnimationCompletedCallback;
 
   GameObjectsComposer(
     TiledComponent mapComponent,
-    TextureAtlas spritesAtlas,
-    void Function() onAnimationCompletedCallback, {
+    TextureAtlas spritesAtlas, {
     required Image animationAtlas,
   }) {
     _spritesAtlas = spritesAtlas;
     _animationAtlas = animationAtlas;
 
     _mapComponent = mapComponent;
-
-    _onAnimationCompletedCallback = onAnimationCompletedCallback;
   }
 
-  void init(GameFieldRead gameField) {
+  void init(GameFieldRead gameField, OnAnimationCompletedCallback onAnimationCompletedCallback) {
     _gameField = gameField;
+    _onAnimationCompletedCallback = onAnimationCompletedCallback;
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {

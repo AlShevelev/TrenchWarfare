@@ -1,6 +1,6 @@
-import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core_entities/entities/game_field.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -17,6 +17,7 @@ class GameFieldViewModel extends ViewModelBase {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
   late final GameFieldModel _model;
+  PlayerInput get input => _model.input;
 
   GameFieldRead get gameField => _model.gameField;
 
@@ -31,29 +32,6 @@ class GameFieldViewModel extends ViewModelBase {
 
     _state.update(Playing());
   }
-
-  void onClick(Vector2 position) => _model.onClick(position);
-
-  void onLongClickStart(Vector2 position) => _model.onLongClickStart(position);
-
-  void onLongClickEnd() => _model.onLongClickEnd();
-
-  void onAnimationComplete() => _model.onAnimationComplete();
-
-  void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
-      _model.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
-
-  void onCardsButtonClick() => _model.onCardsButtonClick();
-
-  void onEndOfTurnButtonClick() => _model.onEndOfTurnButtonClick();
-
-  void onCardsSelectionCancelled() => _model.onCardsSelectionCancelled();
-
-  void onCardSelected(GameFieldControlsCard? card) => _model.onCardSelected(card);
-
-  void onCardsPlacingCancelled() => _model.onCardsPlacingCancelled();
-
-  void onCameraUpdated(double zoom, Vector2 position) => _model.onCameraUpdated(zoom, position);
 
   @override
   void dispose() {
