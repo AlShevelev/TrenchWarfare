@@ -15,6 +15,8 @@ class GameFieldStateMachine {
 
   final SingleStream<GameFieldControlsState> _controlsState;
 
+  final GameFieldModelCallback _modelCallback;
+
   State _currentState = Initial();
 
   GameFieldStateMachine(
@@ -25,6 +27,7 @@ class GameFieldStateMachine {
     this._gameFieldSettingsStorage,
     this._updateGameObjectsEvent,
     this._controlsState,
+    this._modelCallback,
   );
 
   void process(Event event) {
@@ -191,7 +194,7 @@ class GameFieldStateMachine {
     _currentState = newState;
 
     if (_currentState is TurnIsEnded) {
-      // todo switch the model here
+      _modelCallback.onTurnCompleted();
     }
   }
 }

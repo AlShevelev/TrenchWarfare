@@ -5,6 +5,7 @@ import 'package:trench_warfare/core_entities/entities/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -12,12 +13,20 @@ import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:tuple/tuple.dart';
 
-class GameFieldModel implements Disposable {
-  late final List<PlayerCore> _players;
+abstract interface class GameFieldModelCallback {
+  void onTurnCompleted();
+}
+
+class GameFieldModel implements GameFieldModelCallback, Disposable {
+  static const _startIndex = 0;
+
+  int _currentPlayerIndex = _startIndex;
+
+  final List<PlayerCore> _players = [];
+
+  final List<PlayerAi?> _playersAi = [];
 
   PlayerInput get input => _players[_currentPlayerIndex];
-
-  int _currentPlayerIndex = 0;
 
   late final MapMetadata _metadata;
 
@@ -38,13 +47,39 @@ class GameFieldModel implements Disposable {
       Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map),
     );
 
-    _players = _metadata.nations
-        .map((n) => PlayerCore(_gameField, n, _metadata, _updateGameObjectsEvent, _controlsState))
-        .toList(growable: false);
+    for (var i = 0; i < _metadata.nations.length; i++) {
+      final core = PlayerCore(
+        _gameField,
+        _metadata.nations[i],
+        _metadata,
+        _updateGameObjectsEvent,
+        _controlsState,
+        this,
+      );
 
-    for (var i = 0 ; i< _players.length; i++) {
-      _players[i].init(updateGameField: i == 0);
+      _players.add(core);
+
+      _playersAi.add(i == _startIndex ? null : PassivePlayerAi(core));
+
+      core.init(updateGameField: i == _startIndex);
     }
+
+    _players[_startIndex].setInputBlock(blocked: false);
+  }
+
+  @override
+  void onTurnCompleted() {
+    _players[_currentPlayerIndex].setInputBlock(blocked: true);
+
+    _currentPlayerIndex++;
+    if (_currentPlayerIndex == _players.length) {
+      _currentPlayerIndex = 0;
+    }
+
+    _players[_currentPlayerIndex].setInputBlock(blocked: false);
+    _players[_currentPlayerIndex].onStartTurn();
+
+    _playersAi[_currentPlayerIndex]?.start();
   }
 
   @override

@@ -11,29 +11,37 @@ class GameGesturesComposer {
 
   late final GesturesCamera _camera;
 
-  late final void Function(GestureEvent) _onGestureEvent;
-
   late final Offset _mapSize;
 
   Vector2? _tapPosition;
   bool _longTapStarted = false;
 
+  late final PlayerInput _playerInput;
+
   GameGesturesComposer({
     required Offset mapSize,
     required GesturesCamera camera,
-    required void Function(GestureEvent) onGestureEvent,
   }) {
     _mapSize = mapSize;
     _camera = camera;
 
-    _onGestureEvent = onGestureEvent;
-
     _checkBorders();
   }
 
-  void onScaleStart() => _zoom = _camera.zoom;
+  void init(PlayerInput playerInput) => _playerInput = playerInput;
 
+  void onScaleStart() {
+    if (_playerInput.inputIsBlocked) {
+      return;
+    }
+
+    _zoom = _camera.zoom;
+  }
   void onScaleUpdate({required Vector2 currentScale, required Vector2 scaleDelta}) {
+    if (_playerInput.inputIsBlocked) {
+      return;
+    }
+
     if (currentScale.isIdentity()) {
       // One-finger gesture
       _processDrag(scaleDelta: scaleDelta, cameraPosition: _camera.position);
@@ -44,11 +52,19 @@ class GameGesturesComposer {
   }
 
   void onScaleEnd() {
+    if (_playerInput.inputIsBlocked) {
+      return;
+    }
+
     _checkBorders();
-    _onGestureEvent(CameraUpdated(_zoom, _camera.position));
+    _playerInput.onCameraUpdated(_zoom, _camera.position);
   }
 
   Future<void> onTapStart(Vector2 position) async {
+    if (_playerInput.inputIsBlocked) {
+      return;
+    }
+
     if (_tapPosition != null) {
       return;
     }
@@ -61,19 +77,23 @@ class GameGesturesComposer {
     final tapPosition = _tapPosition;
     if (tapPosition != null) {
       _longTapStarted = true;
-      _onGestureEvent(LongTap(tapPosition));
+      _playerInput.onLongClickStart(tapPosition);
     }
   }
 
   void onTapEnd() {
+    if (_playerInput.inputIsBlocked) {
+      return;
+    }
+
     final position = _tapPosition;
     _tapPosition = null;
 
     if (position != null) {
       if (_longTapStarted) {
-        _onGestureEvent(LongTapCompleted());
+        _playerInput.onLongClickEnd();
       } else {
-        _onGestureEvent(Tap(position));
+        _playerInput.onClick(position);
       }
     }
 
@@ -83,18 +103,21 @@ class GameGesturesComposer {
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
     switch (event) {
-      case SetCamera(zoom: var zoom, position: var position): {
-        zoom?.let((z) => _camera.updateZoom(z));
-        position?.let((p) => _camera.updatePosition(p));
-        _checkBorders();
-      }
+      case SetCamera(zoom: var zoom, position: var position):
+        {
+          zoom?.let((z) => _camera.updateZoom(z));
+          position?.let((p) => _camera.updatePosition(p));
+          _checkBorders();
+        }
 
-      case MoveCameraToCell(cell: var cell): {
-        _camera.updatePosition(cell.center);
-        _checkBorders();
-      }
+      case MoveCameraToCell(cell: var cell):
+        {
+          _camera.updatePosition(cell.center);
+          _checkBorders();
+        }
 
-      default: {}
+      default:
+        {}
     }
   }
 

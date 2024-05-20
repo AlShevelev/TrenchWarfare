@@ -77,7 +77,6 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     _gameGesturesComposer = GameGesturesComposer(
       mapSize: Offset(_mapComponent.width, _mapComponent.height),
       camera: GesturesCamera(camera),
-      onGestureEvent: _onGestureEvent,
     );
 
     _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
@@ -91,6 +90,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     await _viewModel.init(_mapComponent.tileMap);
 
     _gameObjectsComposer.init(_viewModel.gameField, _viewModel.input.onAnimationComplete);
+    _gameGesturesComposer.init(_viewModel.input);
 
     overlays.add(GameFieldControls.overlayKey);
   }
@@ -131,19 +131,6 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     for (var event in events) {
       await _gameObjectsComposer.onUpdateGameEvent(event);
       await _gameGesturesComposer.onUpdateGameEvent(event);
-    }
-  }
-
-  void _onGestureEvent(GestureEvent event) {
-    switch (event) {
-      case Tap(position: var position):
-        _viewModel.input.onClick(position);
-      case LongTap(position: var position):
-        _viewModel.input.onLongClickStart(position);
-      case LongTapCompleted():
-        _viewModel.input.onLongClickEnd();
-      case CameraUpdated(zoom: var zoom, position: var position):
-        _viewModel.input.onCameraUpdated(zoom, position);
     }
   }
 
