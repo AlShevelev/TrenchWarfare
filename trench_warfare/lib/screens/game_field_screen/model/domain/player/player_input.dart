@@ -1,15 +1,15 @@
 part of player;
 
-abstract interface class PlayerInput {
-  bool get inputIsBlocked;
+abstract interface class PlayerGameObjectCallback {
+  void onAnimationComplete();
+}
 
+abstract interface class PlayerInput {
   void onClick(Vector2 position);
 
   void onLongClickStart(Vector2 position);
 
   void onLongClickEnd();
-
-  void onAnimationComplete();
 
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier});
 

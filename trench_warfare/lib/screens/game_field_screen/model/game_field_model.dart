@@ -26,7 +26,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final List<PlayerAi?> _playersAi = [];
 
-  PlayerInput get input => _players[_currentPlayerIndex];
+  bool get _isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
+
+  PlayerInput? get input => _isHumanPlayer ? _players[_currentPlayerIndex] : null;
+
+  PlayerGameObjectCallback get gameObjectCallback => _players[_currentPlayerIndex];
 
   late final MapMetadata _metadata;
 
@@ -63,20 +67,15 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
       core.init(updateGameField: i == _startIndex);
     }
-
-    _players[_startIndex].setInputBlock(blocked: false);
   }
 
   @override
   void onTurnCompleted() {
-    _players[_currentPlayerIndex].setInputBlock(blocked: true);
-
     _currentPlayerIndex++;
     if (_currentPlayerIndex == _players.length) {
       _currentPlayerIndex = 0;
     }
 
-    _players[_currentPlayerIndex].setInputBlock(blocked: false);
     _players[_currentPlayerIndex].onStartTurn();
 
     _playersAi[_currentPlayerIndex]?.start();

@@ -89,8 +89,8 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
 
     await _viewModel.init(_mapComponent.tileMap);
 
-    _gameObjectsComposer.init(_viewModel.gameField, _viewModel.input.onAnimationComplete);
-    _gameGesturesComposer.init(_viewModel.input);
+    _gameObjectsComposer.init(_viewModel.gameField, _viewModel);
+    _gameGesturesComposer.init(_viewModel);
 
     overlays.add(GameFieldControls.overlayKey);
   }
@@ -118,7 +118,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
-      _viewModel.input.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
+      _viewModel.humanInput?.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
 
   @override
   void onDispose() {
@@ -135,17 +135,17 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   }
 
   @override
-  void onCardsButtonClick() => _viewModel.input.onCardsButtonClick();
+  void onCardsButtonClick() => _viewModel.humanInput?.onCardsButtonClick();
 
   @override
-  void onCardsSelectionCancelled() => _viewModel.input.onCardsSelectionCancelled();
+  void onCardsSelectionCancelled() => _viewModel.humanInput?.onCardsSelectionCancelled();
 
   @override
-  void onCardSelected(GameFieldControlsCard? card) => _viewModel.input.onCardSelected(card);
+  void onCardSelected(GameFieldControlsCard? card) => _viewModel.humanInput?.onCardSelected(card);
 
   @override
-  void onCardsPlacingCancelled() => _viewModel.input.onCardsPlacingCancelled();
+  void onCardsPlacingCancelled() => _viewModel.humanInput?.onCardsPlacingCancelled();
 
   @override
-  void onEndOfTurnButtonClick() => _viewModel.input.onEndOfTurnButtonClick();
+  void onEndOfTurnButtonClick() => _viewModel.humanInput?.onEndOfTurnButtonClick();
 }

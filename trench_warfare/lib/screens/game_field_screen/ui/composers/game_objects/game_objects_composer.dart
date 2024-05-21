@@ -10,6 +10,7 @@ import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
@@ -25,7 +26,7 @@ class GameObjectsComposer {
 
   final Map<String, PositionComponent> _gameObjects = {};
 
-  late final OnAnimationCompletedCallback _onAnimationCompletedCallback;
+  late final GameFieldViewModelInput _viewModelInput;
 
   GameObjectsComposer(
     TiledComponent mapComponent,
@@ -38,9 +39,9 @@ class GameObjectsComposer {
     _mapComponent = mapComponent;
   }
 
-  void init(GameFieldRead gameField, OnAnimationCompletedCallback onAnimationCompletedCallback) {
+  void init(GameFieldRead gameField, GameFieldViewModelInput viewModelInput) {
     _gameField = gameField;
-    _onAnimationCompletedCallback = onAnimationCompletedCallback;
+    _viewModelInput = viewModelInput;
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
@@ -76,9 +77,10 @@ class GameObjectsComposer {
         await _showComplexDamage(cells, time);
 
       case AnimationCompleted():
-        _onAnimationCompletedCallback();
+        _viewModelInput.gameObjectCallback.onAnimationComplete();
 
-      default: {}
+      default:
+        {}
     }
   }
 

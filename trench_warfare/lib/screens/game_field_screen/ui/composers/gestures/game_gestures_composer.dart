@@ -16,7 +16,7 @@ class GameGesturesComposer {
   Vector2? _tapPosition;
   bool _longTapStarted = false;
 
-  late final PlayerInput _playerInput;
+  late final GameFieldViewModelInput _viewModelInput;
 
   GameGesturesComposer({
     required Offset mapSize,
@@ -28,17 +28,17 @@ class GameGesturesComposer {
     _checkBorders();
   }
 
-  void init(PlayerInput playerInput) => _playerInput = playerInput;
+  void init(GameFieldViewModelInput viewModelInput) => _viewModelInput = viewModelInput;
 
   void onScaleStart() {
-    if (_playerInput.inputIsBlocked) {
+    if (_viewModelInput.humanInput == null) {
       return;
     }
 
     _zoom = _camera.zoom;
   }
   void onScaleUpdate({required Vector2 currentScale, required Vector2 scaleDelta}) {
-    if (_playerInput.inputIsBlocked) {
+    if (_viewModelInput.humanInput == null) {
       return;
     }
 
@@ -52,16 +52,16 @@ class GameGesturesComposer {
   }
 
   void onScaleEnd() {
-    if (_playerInput.inputIsBlocked) {
+    if (_viewModelInput.humanInput == null) {
       return;
     }
 
     _checkBorders();
-    _playerInput.onCameraUpdated(_zoom, _camera.position);
+    _viewModelInput.humanInput?.onCameraUpdated(_zoom, _camera.position);
   }
 
   Future<void> onTapStart(Vector2 position) async {
-    if (_playerInput.inputIsBlocked) {
+    if (_viewModelInput.humanInput == null) {
       return;
     }
 
@@ -77,12 +77,12 @@ class GameGesturesComposer {
     final tapPosition = _tapPosition;
     if (tapPosition != null) {
       _longTapStarted = true;
-      _playerInput.onLongClickStart(tapPosition);
+      _viewModelInput.humanInput?.onLongClickStart(tapPosition);
     }
   }
 
   void onTapEnd() {
-    if (_playerInput.inputIsBlocked) {
+    if (_viewModelInput.humanInput == null) {
       return;
     }
 
@@ -91,9 +91,9 @@ class GameGesturesComposer {
 
     if (position != null) {
       if (_longTapStarted) {
-        _playerInput.onLongClickEnd();
+        _viewModelInput.humanInput?.onLongClickEnd();
       } else {
-        _playerInput.onClick(position);
+        _viewModelInput.humanInput?.onClick(position);
       }
     }
 

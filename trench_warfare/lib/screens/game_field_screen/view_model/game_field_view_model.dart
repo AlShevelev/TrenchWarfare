@@ -8,7 +8,13 @@ import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_s
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
 
-class GameFieldViewModel extends ViewModelBase {
+abstract interface class GameFieldViewModelInput {
+  PlayerInput? get humanInput;
+
+  PlayerGameObjectCallback get gameObjectCallback;
+}
+
+class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInput {
   final SingleStream<GameFieldState> _state = SingleStream<GameFieldState>();
   Stream<GameFieldState> get state => _state.output;
 
@@ -17,7 +23,12 @@ class GameFieldViewModel extends ViewModelBase {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
   late final GameFieldModel _model;
-  PlayerInput get input => _model.input;
+
+  @override
+  PlayerInput? get humanInput => _model.input;
+
+  @override
+  PlayerGameObjectCallback get gameObjectCallback => _model.gameObjectCallback;
 
   GameFieldRead get gameField => _model.gameField;
 
