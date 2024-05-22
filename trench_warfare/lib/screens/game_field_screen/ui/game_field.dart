@@ -9,6 +9,7 @@ import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objects/game_objects_composer.dart';
@@ -63,7 +64,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   @override
   Future<void> onLoad() async {
     camera.viewfinder
-      ..zoom = GameGesturesComposer.startZoom
+      ..zoom = ZoomConstants.startZoom
       ..anchor = Anchor.center;
 
     _mapComponent = await TiledComponent.load(

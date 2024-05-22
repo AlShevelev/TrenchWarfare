@@ -33,13 +33,13 @@ class GameFieldStateMachine {
   void process(Event event) {
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          OnInit(updateGameField: var updateGameField) => FromInitialOnInitTransition(
+        OnStarTurn() => FromInitialOnOnStarTurnTransition(
               _updateGameObjectsEvent,
               _gameField,
               _nation,
               _controlsState,
               _money.actual,
-            ).process(updateGameField),
+            ).process(),
           _ => _currentState,
         },
       ReadyForInput() => switch (event) {

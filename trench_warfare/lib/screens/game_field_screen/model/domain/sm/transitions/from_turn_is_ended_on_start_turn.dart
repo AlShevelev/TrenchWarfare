@@ -44,7 +44,14 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
       events.add(UpdateCell(cell, updateBorderCells: []));
     }
 
-    events.add(SetCamera(_gameFieldSettingsStorage.zoom, _gameFieldSettingsStorage.cameraPosition));
+    final cameraPosition = _gameFieldSettingsStorage.cameraPosition;
+    events.add(SetCamera(
+      _gameFieldSettingsStorage.zoom ?? ZoomConstants.startZoom,
+      cameraPosition,
+    ));
+    if (cameraPosition == null) {
+      events.add(MoveCameraToCell(_gameField.cells.firstWhere((c) => c.nation == _nation)));
+    }
 
     _updateGameObjectsEvent.update(events);
 

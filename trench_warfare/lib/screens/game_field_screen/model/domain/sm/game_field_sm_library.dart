@@ -27,6 +27,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calc
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
@@ -34,7 +35,7 @@ part 'game_field_sm.dart';
 part 'event.dart';
 part 'state.dart';
 part 'transitions/game_object_transition_base.dart';
-part 'transitions/from_initial_on_init_transition.dart';
+part 'transitions/from_initial_on_start_turn_transition.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_cards_button_click.dart';
 part 'transitions/from_card_placing_on_card_placing_cancelled.dart';

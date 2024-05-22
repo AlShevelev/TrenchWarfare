@@ -1,13 +1,9 @@
 part of game_gesture_composer;
 
 class GameGesturesComposer {
-  static const double _minZoom = 0.5;
-  static const double _maxZoom = 2.0;
-  static const double startZoom = (_minZoom + _maxZoom) / 2.0;
-
   static const int longTapDuration = 700; // ms
 
-  double _zoom = startZoom;
+  double _zoom = ZoomConstants.startZoom;
 
   late final GesturesCamera _camera;
 
@@ -37,6 +33,7 @@ class GameGesturesComposer {
 
     _zoom = _camera.zoom;
   }
+
   void onScaleUpdate({required Vector2 currentScale, required Vector2 scaleDelta}) {
     if (_viewModelInput.humanInput == null) {
       return;
@@ -137,10 +134,11 @@ class GameGesturesComposer {
 
   void _processScale(Vector2 currentScale) {
     final newZoom = _zoom * ((currentScale.y + currentScale.x) / 2.0);
-    _camera.updateZoom(newZoom.clamp(_minZoom, _maxZoom));
+    _camera.updateZoom(newZoom.clamp(ZoomConstants.minZoom, ZoomConstants.maxZoom));
   }
 
-  void _checkScaleBorders(double currentZoom) => _camera.updateZoom(currentZoom.clamp(_minZoom, _maxZoom));
+  void _checkScaleBorders(double currentZoom) =>
+      _camera.updateZoom(currentZoom.clamp(ZoomConstants.minZoom, ZoomConstants.maxZoom));
 
   void _checkDragBorders(Rect visibleWorldRect, Vector2 cameraPosition) {
     final worldRect = visibleWorldRect;

@@ -42,7 +42,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState => _controlsState.output;
+  Stream<GameFieldControlsState> get controlsState => _controlsState.output
+      .map((event) => _isHumanPlayer ? event : Invisible());    // Hides controls for AI players
 
   Future<void> init(RenderableTiledMap tileMap) async {
     _metadata = await compute(MetadataReader.read, tileMap.map);
@@ -64,9 +65,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       _players.add(core);
 
       _playersAi.add(i == _startIndex ? null : PassivePlayerAi(core));
-
-      core.init(updateGameField: i == _startIndex);
     }
+
+    _players[_currentPlayerIndex].onStartTurn();
   }
 
   @override

@@ -29,9 +29,6 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     );
   }
 
-  void init({required bool updateGameField}) =>
-      _stateMachine.process(OnInit(updateGameField: updateGameField));
-
   @override
   void onClick(Vector2 position) {
     final clickedCell = _gameField.findCellByPosition(position);
@@ -78,6 +75,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     _gameFieldSettingsStorage.cameraPosition = position;
   }
 
+  /// Starts a turn. Must not be called from the AI - it's called from the model
   @override
   void onStartTurn() => _stateMachine.process(OnStarTurn());
 

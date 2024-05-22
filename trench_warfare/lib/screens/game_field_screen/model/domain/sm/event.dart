@@ -2,12 +2,6 @@ part of game_field_sm;
 
 sealed class Event {}
 
-class OnInit implements Event {
-  final bool updateGameField;
-
-  OnInit({required this.updateGameField});
-}
-
 class OnCellClick implements Event {
   final GameFieldCell cell;
 

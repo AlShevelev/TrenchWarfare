@@ -25,6 +25,6 @@ abstract interface class PlayerInput {
 
   void onCameraUpdated(double zoom, Vector2 position);
 
-  // Starts a turn. Must not be called from the AI - it's called from the model
+  /// Starts a turn. Must not be called from the AI - it's called from the model
   void onStartTurn();
 }
