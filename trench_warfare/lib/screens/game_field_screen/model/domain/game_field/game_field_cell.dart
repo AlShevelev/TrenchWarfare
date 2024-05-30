@@ -1,11 +1,6 @@
-import 'package:flame/components.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/entities/path_item.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/shared/utils/math.dart';
+part of game_field;
 
-abstract interface  class GameFieldCellRead {
+abstract interface class GameFieldCellRead {
   /// Center of the cell in map coordinates
   final Vector2 center = Vector2.zero();
 
@@ -36,18 +31,10 @@ abstract interface  class GameFieldCellRead {
   bool get isEmpty;
 }
 
-class GameFieldCell implements GameFieldCellRead {
+class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
   /// Center of the cell in map coordinates
   @override
   final Vector2 center;
-
-  @override
-  final int row;
-  @override
-  final int col;
-
-  @override
-  late final int id;
 
   @override
   final CellTerrain terrain;
@@ -91,10 +78,9 @@ class GameFieldCell implements GameFieldCellRead {
     required this.hasRiver,
     required this.hasRoad,
     required this.center,
-    required this.row,
-    required this.col,
+    required super.row,
+    required super.col,
   }) {
-    id = pair(row, col);
     _units = [];
   }
 

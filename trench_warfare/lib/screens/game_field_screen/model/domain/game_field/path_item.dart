@@ -1,4 +1,4 @@
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
+part of game_field;
 
 class PathItem {
   final PathItemType type;

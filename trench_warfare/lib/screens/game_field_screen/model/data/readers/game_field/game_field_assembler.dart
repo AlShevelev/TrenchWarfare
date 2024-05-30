@@ -1,5 +1,4 @@
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
-import 'package:trench_warfare/core_entities/entities/game_field_cell.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
@@ -13,7 +12,6 @@ class GameFieldAssembler {
     Map<GameFieldCell, CellOwnershipRaw> cellOwnership,
   ) {
     final lastCell = allCells.last;
-    final gameField = GameField(rows: lastCell.row + 1, cols: lastCell.col + 1);
 
     final ownershipPolygons =
         allGameObjects.entries.map((e) => e.value).whereType<RegionOwnershipRaw>().toList();
@@ -45,9 +43,7 @@ class GameFieldAssembler {
       }
     }
 
-    gameField.setCells(allCells);
-
-    return gameField;
+    return GameField(allCells, rows: lastCell.row + 1, cols: lastCell.col + 1);
   }
 
   static Nation? _tryToFindOwnership(GameFieldCell cell, List<RegionOwnershipRaw> ownerships) {

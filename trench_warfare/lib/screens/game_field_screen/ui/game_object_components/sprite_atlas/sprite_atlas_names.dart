@@ -1,6 +1,6 @@
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/path_item_type.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';

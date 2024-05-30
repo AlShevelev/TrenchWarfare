@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
-import 'package:trench_warfare/core_entities/entities/game_field.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';

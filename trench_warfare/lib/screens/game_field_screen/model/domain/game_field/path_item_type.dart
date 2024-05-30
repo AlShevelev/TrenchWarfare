@@ -1,3 +1,5 @@
+part of game_field;
+
 enum PathItemType {
   normal,
   explosion,
