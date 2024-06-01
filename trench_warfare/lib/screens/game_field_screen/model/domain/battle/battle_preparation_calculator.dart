@@ -26,17 +26,9 @@ class UnitInBattlePreparationCalculator {
       hasProductionCenter: _defendingCell.productionCenter != null,
     ));
 
-    base.updateAttack(_getBoostAttackFactor(
-      boost1: _attacking.boost1,
-      boost2: _attacking.boost2,
-      boost3: _attacking.boost3,
-    ));
+    base.updateAttack(_getBoostAttackFactor(_attacking));
 
-    base.updateDefence(_getBoostDefenceFactor(
-      boost1: _attacking.boost1,
-      boost2: _attacking.boost2,
-      boost3: _attacking.boost3,
-    ));
+    base.updateDefence(_getBoostDefenceFactor(_attacking));
 
     base.updateDefence(_getProductionCenterDefenceFactor(_defendingCell.productionCenter));
 
@@ -62,17 +54,9 @@ class UnitInBattlePreparationCalculator {
       hasProductionCenter: _defendingCell.productionCenter != null,
     ));
 
-    base.updateAttack(_getBoostAttackFactor(
-      boost1: _defending.boost1,
-      boost2: _defending.boost2,
-      boost3: _defending.boost3,
-    ));
+    base.updateAttack(_getBoostAttackFactor(_defending));
 
-    base.updateDefence(_getBoostDefenceFactor(
-      boost1: _defending.boost1,
-      boost2: _defending.boost2,
-      boost3: _defending.boost3,
-    ));
+    base.updateDefence(_getBoostDefenceFactor(_defending));
 
     base.updateDefence(_getProductionCenterDefenceFactor(_defendingCell.productionCenter));
 
@@ -220,28 +204,28 @@ class UnitInBattlePreparationCalculator {
     };
   }
 
-  double _getBoostAttackFactor({UnitBoost? boost1, UnitBoost? boost2, UnitBoost? boost3}) {
+  double _getBoostAttackFactor(Unit unit) {
     var base = 1.0;
 
-    if (boost1 == UnitBoost.attack || boost2 == UnitBoost.attack || boost3 == UnitBoost.attack) {
+    if (unit.hasBoost(UnitBoost.attack)) {
       base *= 1.2;
     }
 
-    if (boost1 == UnitBoost.commander || boost2 == UnitBoost.commander || boost3 == UnitBoost.commander) {
+    if (unit.hasBoost(UnitBoost.commander)) {
       base *= 1.4;
     }
 
     return base;
   }
 
-  double _getBoostDefenceFactor({UnitBoost? boost1, UnitBoost? boost2, UnitBoost? boost3}) {
+  double _getBoostDefenceFactor(Unit unit) {
     var base = 1.0;
 
-    if (boost1 == UnitBoost.defence || boost2 == UnitBoost.defence || boost3 == UnitBoost.defence) {
+    if (unit.hasBoost(UnitBoost.defence)) {
       base *= 1.2;
     }
 
-    if (boost1 == UnitBoost.commander || boost2 == UnitBoost.commander || boost3 == UnitBoost.commander) {
+    if (unit.hasBoost(UnitBoost.commander)) {
       base *= 1.4;
     }
 

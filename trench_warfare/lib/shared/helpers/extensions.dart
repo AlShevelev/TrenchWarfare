@@ -7,3 +7,11 @@ extension ComponMethods<T> on T {
     return action(this);
   }
 }
+
+extension ListsInt on Iterable<int> {
+  int sum() => fold(0, (p, c) => p + c);
+}
+
+extension ListsDouble on Iterable<double> {
+  double sum() => fold(0.0, (p, c) => p + c);
+}

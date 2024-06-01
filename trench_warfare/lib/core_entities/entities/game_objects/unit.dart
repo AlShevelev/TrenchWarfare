@@ -29,7 +29,7 @@ class Unit extends GameObject {
   double get maxHealth => Unit._getMaxHealth(type);
 
   late double movementPoints;
-  double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
+  double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
 
   double get attack => _getAttack();
 
@@ -69,7 +69,10 @@ class Unit extends GameObject {
       type == UnitType.carrier;
 
   bool get hasMachineGun =>
-      type == UnitType.armoredCar || type == UnitType.machineGunnersCart || type == UnitType.machineGuns || type == UnitType.tank;
+      type == UnitType.armoredCar ||
+      type == UnitType.machineGunnersCart ||
+      type == UnitType.machineGuns ||
+      type == UnitType.tank;
 
   bool get hasArtillery =>
       type == UnitType.artillery ||
@@ -103,7 +106,7 @@ class Unit extends GameObject {
 
     _defence = _getDefence();
 
-    this.movementPoints = movementPoints * _getMaxMovementPoints(type) * (_hasTransportBoost() ? 2 : 1);
+    this.movementPoints = movementPoints * _getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
 
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
@@ -132,18 +135,20 @@ class Unit extends GameObject {
 
   void setBoost1(UnitBoost boost) {
     _boost1 = boost;
-    movementPoints *= _hasTransportBoost() ? 2 : 1;
+    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
 
   void setBoost2(UnitBoost boost) {
     _boost2 = boost;
-    movementPoints *= _hasTransportBoost() ? 2 : 1;
+    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
 
   void setBoost3(UnitBoost boost) {
     _boost3 = boost;
-    movementPoints *= _hasTransportBoost() ? 2 : 1;
+    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
+
+  bool hasBoost(UnitBoost boost) => _boost1 == boost || _boost2 == boost || _boost3 == boost;
 
   int _calculateStartTookPartInBattlesValue(UnitExperienceRank experienceRank) {
     switch (experienceRank) {
@@ -314,6 +319,4 @@ class Unit extends GameObject {
         return Range(0, 0);
     }
   }
-
-  bool _hasTransportBoost() => _boost1 == UnitBoost.transport || _boost2 == UnitBoost.transport || _boost3 == UnitBoost.transport;
 }
