@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:test/test.dart';
 
 class Assert {
@@ -19,5 +21,9 @@ class Assert {
 
   static void equals<T>(T actual, T expected) {
     expect(actual, expected);
+  }
+
+  static void equalsDouble(double actual, double expected) {
+    isTrue((actual - expected).abs() < 0.0001);
   }
 }

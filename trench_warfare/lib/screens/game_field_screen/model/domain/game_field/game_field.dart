@@ -19,6 +19,8 @@ abstract interface class GameFieldRead {
   /// Returns all cells except out of the field
   Iterable<GameFieldCell> findCellsAround(GameFieldCellRead centralCell);
 
+  Iterable<GameFieldCell> findCellsAroundR(GameFieldCellRead centralCell, {required int radius});
+
   /// Looks for a cell by some position on a map
   GameFieldCell findCellByPosition(Vector2 position);
 
@@ -42,6 +44,13 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
   @override
   Iterable<GameFieldCell> findCellsAround(GameFieldCellRead centralCell) =>
       super.findCellsAround(centralCell as GameFieldCell);
+
+  /// Returns all cells (except the cells out of the field)
+  /// around started from top-right in the radius, clockwise
+  /// [radius] is in interval [1, N]
+  @override
+  Iterable<GameFieldCell> findCellsAroundR(GameFieldCellRead centralCell, {required int radius}) =>
+      super.findCellsAroundR(centralCell as GameFieldCell, radius: radius);
 
   /// Looks for a cell by some position on a map
   @override

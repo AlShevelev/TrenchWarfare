@@ -63,7 +63,7 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsUn
 
   @override
   void updateCell() {
-    final unit = _type == UnitType.carrier ? Carrier.create() : Unit.create(_type);
+    final unit = _type == UnitType.carrier ? Carrier.create() : Unit.byType(_type);
     _cell.addUnitAsActive(unit);
   }
 }

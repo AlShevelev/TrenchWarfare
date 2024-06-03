@@ -17,7 +17,7 @@ class Unit extends GameObject {
   late int _tookPartInBattles;
   int get tookPartInBattles => _tookPartInBattles;
 
-  /// [0, 1]
+  /// [0, 1], where 1 is well rested
   late double _fatigue;
   double get fatigue => _fatigue;
 
@@ -28,17 +28,20 @@ class Unit extends GameObject {
 
   double get maxHealth => Unit._getMaxHealth(type);
 
-  late double movementPoints;
+  late double _movementPoints;
+  double get movementPoints => _movementPoints;
+
   double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
 
   double get attack => _getAttack();
 
-  double _defence = 0;
+  late double _defence;
   double get defence => _defence;
 
   Range<double> get damage => _getDamage();
 
-  final UnitType type;
+  late final UnitType _type;
+  UnitType get type => _type;
 
   UnitState _state = UnitState.enabled;
   UnitState get state => _state;
@@ -92,8 +95,10 @@ class Unit extends GameObject {
     required double fatigue,
     required double health,
     required double movementPoints,
-    required this.type,
+    required UnitType type,
   }) {
+    _type = type;
+
     id = RandomGen.generateId();
 
     _boost1 = _boost1;
@@ -106,24 +111,47 @@ class Unit extends GameObject {
 
     _defence = _getDefence();
 
-    this.movementPoints = movementPoints * _getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
+    _movementPoints = movementPoints * _getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
 
     _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
-  static Unit create(UnitType type) => Unit(
-      boost1: null,
-      boost2: null,
-      boost3: null,
-      experienceRank: UnitExperienceRank.rookies,
-      fatigue: 1, // well rested
-      health: 1, // max health
-      movementPoints: 1, // max movement points
-      type: type);
+  Unit.byType(UnitType type) {
+    _type = type;
+
+    id = RandomGen.generateId();
+
+    _boost1 = null;
+    _boost2 = null;
+    _boost3 = null;
+
+    _tookPartInBattles = _calculateStartTookPartInBattlesValue(UnitExperienceRank.rookies);
+    _health = _getMaxHealth(type);
+    _fatigue = 1;   // well rested
+
+    _defence = _getDefence();
+
+    _movementPoints = _getMaxMovementPoints(type);
+
+    _state = UnitState.enabled;
+  }
+
+  Unit.copy(Unit unit) {
+    _boost1 = unit.boost1;
+    _boost2 = unit.boost2;
+    _boost3 = unit.boost3;
+    _tookPartInBattles = unit._tookPartInBattles;
+    _health = unit._health;
+    _fatigue = unit._fatigue;
+    _defence = unit._defence;
+    _movementPoints = unit._movementPoints;
+    _state = unit._state;
+    _type = unit.type;
+  }
 
   void setState(UnitState state) => _state = state;
 
-  void setMovementPoints(double movementPoints) => this.movementPoints = movementPoints;
+  void setMovementPoints(double movementPoints) => _movementPoints = movementPoints;
 
   void setHealth(double health) => _health = health;
 
@@ -135,17 +163,17 @@ class Unit extends GameObject {
 
   void setBoost1(UnitBoost boost) {
     _boost1 = boost;
-    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
+    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
 
   void setBoost2(UnitBoost boost) {
     _boost2 = boost;
-    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
+    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
 
   void setBoost3(UnitBoost boost) {
     _boost3 = boost;
-    movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
+    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
   }
 
   bool hasBoost(UnitBoost boost) => _boost1 == boost || _boost2 == boost || _boost3 == boost;
@@ -202,13 +230,13 @@ class Unit extends GameObject {
       case UnitType.tank:
         return 10;
       case UnitType.destroyer:
-        return 15;
+        return 10;
       case UnitType.cruiser:
-        return 25;
+        return 15;
       case UnitType.battleship:
-        return 50;
+        return 25;
       case UnitType.carrier:
-        return 50;
+        return 25;
     }
   }
 
@@ -254,7 +282,7 @@ class Unit extends GameObject {
       case UnitType.machineGuns:
         return 3;
       case UnitType.tank:
-        return 4;
+        return 5;
       case UnitType.destroyer:
         return 5;
       case UnitType.cruiser:

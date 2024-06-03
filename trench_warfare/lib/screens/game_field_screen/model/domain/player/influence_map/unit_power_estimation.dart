@@ -33,6 +33,14 @@ class UnitPowerEstimation {
       result += boostFactor;
     }
 
+    if (unit.hasArtillery) {
+      result += boostFactor;
+    }
+
+    if (unit.hasMachineGun) {
+      result += boostFactor;
+    }
+
     result += boostFactor * switch(unit.experienceRank) {
       UnitExperienceRank.rookies => 0,
       UnitExperienceRank.fighters => 0.5,

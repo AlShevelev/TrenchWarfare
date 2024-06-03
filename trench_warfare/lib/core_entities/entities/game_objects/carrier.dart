@@ -35,6 +35,25 @@ class Carrier extends Unit {
     _units = units;
   }
 
+  Carrier.copy(Carrier carrier) : super(
+    boost1: carrier.boost1,
+    boost2: carrier.boost2,
+    boost3: carrier.boost3,
+    experienceRank: carrier.experienceRank,
+    fatigue: carrier.fatigue,
+    health: carrier.health,
+    movementPoints: carrier.movementPoints,
+    type: carrier.type,
+  ) {
+    _tookPartInBattles = carrier._tookPartInBattles;
+    _health = carrier._health;
+    _fatigue = carrier._fatigue;
+    _movementPoints = carrier.movementPoints;
+    _state = carrier._state;
+
+    _units = carrier._units.map((u) => Unit.copy(u)).toList(growable: true);
+  }
+
   @override
   void setTookPartInBattles(int tookPartInBattles) => super.setTookPartInBattles(0);
 
@@ -55,7 +74,7 @@ class Carrier extends Unit {
 
   Unit removeActiveUnit() =>  _units.removeAt(0);
 
-  static Unit create() =>
+  static Carrier create() =>
       Carrier(
         boost1: null,
         boost2: null,

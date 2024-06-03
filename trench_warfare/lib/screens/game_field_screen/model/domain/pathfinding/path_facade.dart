@@ -11,7 +11,13 @@ class PathFacade {
     required GameFieldCell startCell,
     required GameFieldCell endCell,
   }) {
-    final pathFinder = FindPath(_gameField, _getFindPathSettings(startCell, endCell));
+    final pathFinder = FindPath(
+        _gameField,
+        _getFindPathSettings(
+          startCell.activeUnit!,
+          startCell: startCell,
+          endCell: endCell,
+        ));
     return pathFinder.find(startCell, endCell);
   }
 
@@ -19,20 +25,40 @@ class PathFacade {
     if (path.isEmpty) {
       return path;
     }
-    return _getPathCostCalculator(path, startCell: path.first, endCell: path.last).calculate();
+
+    final startCell = path.first;
+    return _getPathCostCalculator(
+      startCell.activeUnit!,
+      path,
+      startCell: startCell,
+      endCell: path.last,
+    ).calculate();
   }
 
   bool canMove(GameFieldCell startCell) {
     final allCellsAround = _gameField.findCellsAround(startCell);
 
+    final unit = startCell.activeUnit!;
+
     for (var endCell in allCellsAround) {
-      final path = FindPath(_gameField, _getFindPathSettings(startCell, endCell)).find(startCell, endCell);
+      final path = FindPath(
+          _gameField,
+          _getFindPathSettings(
+            unit,
+            startCell: startCell,
+            endCell: endCell,
+          )).find(startCell, endCell);
 
       if (path.isEmpty) {
         continue;
       }
 
-      if (_getPathCostCalculator(path, startCell: startCell, endCell: endCell).isEndOfPathReachable()) {
+      if (_getPathCostCalculator(
+        unit,
+        path,
+        startCell: startCell,
+        endCell: endCell,
+      ).isEndOfPathReachable()) {
         return true;
       }
     }
@@ -40,11 +66,38 @@ class PathFacade {
     return false;
   }
 
+  int? canReach(Unit unit, {required GameFieldCell startCell, required GameFieldCell endCell}) {
+    final path = FindPath(
+        _gameField,
+        _getFindPathSettings(
+          unit,
+          startCell: startCell,
+          endCell: endCell,
+        )).find(startCell, endCell);
+
+    if (path.isEmpty) {
+      return null;
+    }
+
+    if (_getPathCostCalculator(
+      unit,
+      path,
+      startCell: startCell,
+      endCell: endCell,
+    ).isEndOfPathReachable()) {
+      return path.length;
+    }
+
+    return null;
+  }
+
   Iterable<GameFieldCell> getCellsAround(GameFieldCell cell) => _gameField.findCellsAround(cell);
 
-  FindPathSettings _getFindPathSettings(GameFieldCell startCell, GameFieldCell endCell) {
-    final calculatedUnit = startCell.activeUnit!;
-
+  FindPathSettings _getFindPathSettings(
+    Unit calculatedUnit, {
+    required GameFieldCell startCell,
+    required GameFieldCell endCell,
+  }) {
     if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
       return NextCellPathSettings();
     }
@@ -64,12 +117,11 @@ class PathFacade {
   }
 
   PathCostCalculator _getPathCostCalculator(
+    Unit calculatedUnit,
     Iterable<GameFieldCell> path, {
     required GameFieldCell startCell,
     required GameFieldCellRead endCell,
   }) {
-    final calculatedUnit = startCell.activeUnit!;
-
     if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
       return NextCellPathCostCalculator(path);
     }
