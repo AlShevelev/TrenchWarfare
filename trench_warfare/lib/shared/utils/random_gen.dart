@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:trench_warfare/shared/helpers/extensions.dart';
+
 class RandomGen {
   static final Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
@@ -28,5 +30,41 @@ class RandomGen {
     final StringBuffer buffer = StringBuffer();
     buffer.writeAll(uuid);
     return buffer.toString();
+  }
+
+  /// Returns an index of a cell in the [weights] list.
+  /// The probability is in direct ratio with a weight value
+  /// If the result is null - the selection is impossible
+  static int? randomWeight(List<double> weights) {
+    if (weights.isEmpty) {
+      return null;
+    }
+
+    if (weights.length == 1) {
+      return 0;
+    }
+
+    final sum = weights.sum();
+
+    if (sum == 0) {
+      return null;
+    }
+
+    final randomValue = _random.nextDouble();
+
+    var from = 0.0;
+    var to = 0.0;
+
+    for (var i = 0; i < weights.length; i++) {
+      to += weights[i] / sum;
+
+      if (randomValue >= from && randomValue < to) {
+        return i;
+      }
+
+      from  = to;
+    }
+
+    return weights.length - 1;
   }
 }

@@ -40,7 +40,7 @@ void assertLand(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getSea(nation));
 
   if (power != null) {
-    Assert.equalsDouble(item.getLand(nation)!, power);
+    Assert.equalsDouble(expected: item.getLand(nation)!, actual: power);
   } else {
     Assert.isNull(item.getLand(nation));
   }
@@ -51,7 +51,7 @@ void assertSea(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getLand(nation));
 
   if (power != null) {
-    Assert.equalsDouble(item.getSea(nation)!, power);
+    Assert.equalsDouble(expected: item.getSea(nation)!, actual: power);
   } else {
     Assert.isNull(item.getSea(nation));
   }
@@ -62,7 +62,7 @@ void assertCarrier(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getSea(nation));
 
   if (power != null) {
-    Assert.equalsDouble(item.getCarrier(nation)!, power);
+    Assert.equalsDouble(expected: item.getCarrier(nation)!, actual: power);
   } else {
     Assert.isNull(item.getCarrier(nation));
   }
