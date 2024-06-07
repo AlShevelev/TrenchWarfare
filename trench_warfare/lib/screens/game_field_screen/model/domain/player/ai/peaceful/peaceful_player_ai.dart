@@ -1,10 +1,12 @@
 part of player_ai;
 
 class PeacefulPlayerAi extends PlayerAi {
-  PeacefulPlayerAi(super.player);
+  final GameFieldRead _gameField;
+
+  PeacefulPlayerAi(this._gameField, super.player);
 
   @override
   void start() {
-    // do nothing so far
+    final influences = InfluenceMapRepresentation()..calculate(_gameField);
   }
 }

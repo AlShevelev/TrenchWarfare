@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="hexagonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="9" nextobjectid="538">
+<map version="1.10" tiledversion="1.10.2" orientation="hexagonal" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="9" nextobjectid="539">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;First Battle of the Marne (1914)&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;First Battle of the Marne, (September 6–12, 1914), an offensive during World War I by the French army and the British Expeditionary Force (BEF) against the advancing Germans who had invaded Belgium and northeastern France and were within 30 miles (48 km) of Paris. The French threw back the massive German advance and thwarted German plans for a quick and total victory on the Western Front.&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 42, &quot;startIndustryPoints&quot;: 43 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;greece&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;belgium&quot;, &quot;aggressiveness&quot;: &quot;passive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;greece&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;greece&quot;, &quot;relationship&quot;: &quot;allied&quot; }, { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;greece&quot;, &quot;secondNation&quot;: &quot;belgium&quot;, &quot;relationship&quot;: &quot;neutral&quot; } ] }"/>
  </properties>
@@ -17,14 +17,14 @@
 1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,8,8,4,4,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,8,4,8,4,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,8,8,4,4,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,4,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,6,6,4,1,1,1,1,4,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,6,4,6,4,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,6,6,4,1,1,4,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,4,1,1,1,1,
-1,4,4,1,4,4,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,8,8,4,4,4,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,4,4,4,4,1,1,4,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,6,6,4,4,4,4,4,4,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,6,4,6,4,4,4,4,4,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,6,6,4,4,4,4,4,4,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,4,4,4,4,1,4,1,1,1,1,
+1,4,4,1,4,4,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,4,1,1,1,1,1,
 1,4,4,1,4,4,1,1,1,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,4,4,4,2,4,3,4,5,4,6,4,7,4,8,4,4,4,4,4,4,4,1,1,1,1,1,1,1,4,1,1,
@@ -1580,7 +1580,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="536" name="france" type="ownership" gid="127" x="2013.93" y="787.259" width="64" height="64">
+  <object id="537" name="belgium" type="ownership" gid="130" x="2366.52" y="1059.85" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1590,15 +1590,8 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="537" name="belgium" type="ownership" gid="130" x="2236.15" y="843.556" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
+  <object id="538" name="france" type="ownershipRegion" x="1982.22" y="306.667">
+   <polygon points="0,0 -167.407,165.926 -244.444,400 -125.926,576.296 240,648.889 376.296,534.815 426.667,336.296 426.667,109.63 272.593,-10.3704"/>
   </object>
  </objectgroup>
 </map>

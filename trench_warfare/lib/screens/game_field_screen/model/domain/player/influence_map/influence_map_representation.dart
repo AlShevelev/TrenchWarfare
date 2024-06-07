@@ -7,15 +7,13 @@ abstract interface class InfluenceMapRepresentationRead {
 class InfluenceMapRepresentation implements InfluenceMapRepresentationRead {
   late final InfluenceMap _map;
 
-  InfluenceMapRepresentation(GameFieldRead gameField) {
+  void calculate(GameFieldRead gameField) {
     _map = InfluenceMap(
       gameField.cells.map((e) => InfluenceMapItem(row: e.row, col: e.col)).toList(),
       rows: gameField.rows,
       cols: gameField.cols,
     );
-  }
 
-  void calculate(GameFieldRead gameField) {
     final pathFacade = PathFacade(gameField);
 
     for (var i = 0; i < gameField.rows; i++) {

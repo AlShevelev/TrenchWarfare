@@ -32,8 +32,7 @@ GameField _createEmptyGameField(CellTerrain Function(int, int) terrainAction) {
   return GameField(cells, rows: rows, cols: cols);
 }
 
-InfluenceMapRepresentation _createEmptyInfluenceMap(GameField gameField) =>
-    InfluenceMapRepresentation(gameField);
+InfluenceMapRepresentation _createEmptyInfluenceMap() => InfluenceMapRepresentation();
 
 void assertLand(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getCarrier(nation));
@@ -73,7 +72,7 @@ void main() {
     test('one land unit', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 
@@ -106,7 +105,7 @@ void main() {
     test('two land units on the same cell', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 
@@ -140,7 +139,7 @@ void main() {
     test('two land units on different cells', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 
@@ -168,7 +167,7 @@ void main() {
     test('two land units of different nations', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation1 = Nation.usNorth;
       final unit1Cell = gameField.getCell(3, 2);
@@ -223,7 +222,7 @@ void main() {
     test('one sea unit', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 
@@ -256,7 +255,7 @@ void main() {
     test('one empty carrier', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 
@@ -294,7 +293,7 @@ void main() {
     test('two carriers with units', () {
       // Arrange
       final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap(gameField);
+      final map = _createEmptyInfluenceMap();
 
       const nation = Nation.usa;
 

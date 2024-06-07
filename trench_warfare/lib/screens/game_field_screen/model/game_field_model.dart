@@ -64,7 +64,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
       _players.add(core);
 
-      _playersAi.add(i == _startIndex ? null : PassivePlayerAi(core));
+      switch(i) {
+        case _startIndex: _playersAi.add(null);   // Austria-Hungary
+        case 1: _playersAi.add(PeacefulPlayerAi(_gameField, core));   // France
+        default: _playersAi.add(PassivePlayerAi(core));   // Greece & Belgium
+      }
     }
 
     _players[_currentPlayerIndex].onStartTurn();

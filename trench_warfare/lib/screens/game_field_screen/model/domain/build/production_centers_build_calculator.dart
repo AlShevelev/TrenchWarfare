@@ -1,18 +1,48 @@
 part of build_calculators;
 
 class ProductionCentersBuildCalculator {
-  late final GameFieldRead _gameField;
+  final GameFieldRead _gameField;
 
-  late final Nation _myNation;
+  final Nation _myNation;
 
-  ProductionCentersBuildCalculator(GameFieldRead gameField, Nation myNation) {
-    _gameField = gameField;
-    _myNation = myNation;
-  }
+  ProductionCentersBuildCalculator(this._gameField, this._myNation);
 
   BuildRestriction getError() => AppropriateCell();
 
-  bool canBuildOnCell(GameFieldCellRead cell, ProductionCenterType type) {
+  /// Returns all the cells where we can build or upgrade a production center
+  /// (excluding money calculations)
+  List<GameFieldCellRead> getAllCellsToBuild(ProductionCenterType type) =>
+      _gameField.cells.where((c) => _canBuildOnCell(c, type)).toList(growable: false);
+
+  /// Returns all the cells where we can build or upgrade a production center
+  /// (including money calculations)
+  List<GameFieldCellRead> getAllCellsPossibleToBuild(ProductionCenterType type, MoneyUnit nationMoney) {
+    final allImpossibleIds = getAllCellsImpossibleToBuild(type, nationMoney).map((c) => c.id).toSet();
+    return _gameField.cells.where((c) => !allImpossibleIds.contains(c.id)).toList(growable: false);
+  }
+
+  /// Returns all the cells where we can't build or upgrade a production center
+  /// (including money calculations)
+  List<GameFieldCellRead> getAllCellsImpossibleToBuild(ProductionCenterType type, MoneyUnit nationMoney) {
+    return _gameField.cells.where((c) {
+      final nextLevel = ProductionCenter.getNextLevel(type, c.productionCenter?.level);
+
+      MoneyUnit? buildCost;
+      if (nextLevel != null) {
+        buildCost = MoneyProductionCenterCalculator.calculateBuildCost(c.terrain, type, nextLevel);
+      }
+
+      final cantBuild = !_canBuildOnCell(c, type);
+
+      if (buildCost == null) {
+        return cantBuild;
+      } else {
+        return nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints || cantBuild;
+      }
+    }).toList(growable: false);
+  }
+
+  bool _canBuildOnCell(GameFieldCellRead cell, ProductionCenterType type) {
     if (cell.nation == null || cell.nation != _myNation) {
       return false;
     }
@@ -100,37 +130,5 @@ class ProductionCentersBuildCalculator {
           return _gameField.findCellsAround(cell).any((c) => c.isLand);
         }
     }
-  }
-
-  bool canBuildOnGameField(ProductionCenterType type) {
-    for (var cell in _gameField.cells) {
-      if (canBuildOnCell(cell, type)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  List<GameFieldCellRead> getAllCellsToBuild(ProductionCenterType type) =>
-      _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
-
-  List<GameFieldCellRead> getAllCellsImpossibleToBuild(ProductionCenterType type, MoneyUnit nationMoney) {
-    return _gameField.cells.where((c) {
-      final nextLevel = ProductionCenter.getNextLevel(type, c.productionCenter?.level);
-
-      MoneyUnit? buildCost;
-      if (nextLevel != null) {
-        buildCost = MoneyProductionCenterCalculator.calculateBuildCost(c.terrain, type, nextLevel);
-      }
-
-      final cantBuild = !canBuildOnCell(c, type);
-
-      if (buildCost == null) {
-        return cantBuild;
-      } else {
-        return nationMoney.currency < buildCost.currency || nationMoney.industryPoints < buildCost.industryPoints || cantBuild;
-      }
-    }).toList(growable: false);
   }
 }

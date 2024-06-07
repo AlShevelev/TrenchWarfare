@@ -1,4 +1,4 @@
-part of  influence_map;
+part of influence_map;
 
 abstract interface class InfluenceMapItemRead {
   double? getLand(Nation nation);
@@ -6,6 +6,8 @@ abstract interface class InfluenceMapItemRead {
   double? getSea(Nation nation);
 
   double? getCarrier(Nation nation);
+
+  bool hasAny(Nation nation);
 }
 
 class InfluenceMapItem extends HexMatrixItem implements InfluenceMapItemRead {
@@ -36,4 +38,8 @@ class InfluenceMapItem extends HexMatrixItem implements InfluenceMapItemRead {
     final currentValue = map[nation];
     map[nation] = currentValue == null ? value : currentValue + value;
   }
+
+  @override
+  bool hasAny(Nation nation) =>
+      getLand(nation) != null || getSea(nation) != null || getCarrier(nation) != null;
 }

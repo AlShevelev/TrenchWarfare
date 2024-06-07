@@ -5,6 +5,8 @@ import 'package:trench_warfare/core_entities/enums/relationship.dart';
 
 abstract interface class MapMetadataRead {
   bool isInWar(Nation? nation1, Nation? nation2);
+
+  List<Nation> getAllAggressive();
 }
 
 class MapMetadata implements MapMetadataRead {
@@ -33,9 +35,18 @@ class MapMetadata implements MapMetadataRead {
     }
 
     return diplomacy
-        .singleWhere((e) => (e.firstNation == nation1 && e.secondNation == nation2) || (e.firstNation == nation2 && e.secondNation == nation1))
-        .relationship == Relationship.war;
+            .singleWhere((e) =>
+                (e.firstNation == nation1 && e.secondNation == nation2) ||
+                (e.firstNation == nation2 && e.secondNation == nation1))
+            .relationship ==
+        Relationship.war;
   }
+
+  @override
+  List<Nation> getAllAggressive() => nations
+      .where((n) => n.aggressiveness == Aggressiveness.aggressive)
+      .map((n) => n.code)
+      .toList(growable: false);
 }
 
 class NationRecord {
