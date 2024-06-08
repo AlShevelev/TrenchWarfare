@@ -46,14 +46,7 @@ class Unit extends GameObject {
   UnitState _state = UnitState.enabled;
   UnitState get state => _state;
 
-  bool get isLand =>
-      type == UnitType.armoredCar ||
-      type == UnitType.artillery ||
-      type == UnitType.infantry ||
-      type == UnitType.cavalry ||
-      type == UnitType.machineGunnersCart ||
-      type == UnitType.machineGuns ||
-      type == UnitType.tank;
+  bool get isLand => type.isLand;
 
   /// Non flash & blood unit
   bool get isMechanical =>

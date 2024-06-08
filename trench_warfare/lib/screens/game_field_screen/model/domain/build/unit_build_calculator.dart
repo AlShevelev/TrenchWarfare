@@ -99,9 +99,20 @@ class UnitBuildCalculator {
     return false;
   }
 
+  /// Returns all the cells where we can hire a unit
+  /// (excluding money calculations)
   List<GameFieldCellRead> getAllCellsToBuild(UnitType unitType) =>
     _gameField.cells.where((c) => canBuildOnCell(c, unitType)).toList(growable: false);
 
+  /// Returns all the cells where we can hire a unit
+  /// (including money calculations)
+  List<GameFieldCellRead> getAllCellsPossibleToBuild(UnitType type, MoneyUnit nationMoney) {
+    final allImpossibleIds = getAllCellsImpossibleToBuild(type, nationMoney).map((c) => c.id).toSet();
+    return _gameField.cells.where((c) => !allImpossibleIds.contains(c.id)).toList(growable: false);
+  }
+
+  /// Returns all the cells where we can't hire a unit
+  /// (including money calculations)
   List<GameFieldCellRead> getAllCellsImpossibleToBuild(UnitType unitType, MoneyUnit nationMoney) {
     final buildCost = MoneyUnitsCalculator.calculateProductionCost(unitType);
 
