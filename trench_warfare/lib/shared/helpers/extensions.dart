@@ -15,3 +15,17 @@ extension ListsInt on Iterable<int> {
 extension ListsDouble on Iterable<double> {
   double sum() => fold(0.0, (p, c) => p + c);
 }
+
+extension ListsGeneral<T> on Iterable<T> {
+  int count(bool Function(T) condition) {
+    var counter = 0;
+
+    for (final item in this) {
+      if (condition(item)) {
+        counter++;
+      }
+    }
+
+    return counter;
+  }
+}
