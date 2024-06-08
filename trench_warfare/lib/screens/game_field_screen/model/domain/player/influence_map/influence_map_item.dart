@@ -8,6 +8,8 @@ abstract interface class InfluenceMapItemRead {
   double? getCarrier(Nation nation);
 
   bool hasAny(Nation nation);
+
+  double getCombined(Nation nation);
 }
 
 class InfluenceMapItem extends HexMatrixItem implements InfluenceMapItemRead {
@@ -42,4 +44,27 @@ class InfluenceMapItem extends HexMatrixItem implements InfluenceMapItemRead {
   @override
   bool hasAny(Nation nation) =>
       getLand(nation) != null || getSea(nation) != null || getCarrier(nation) != null;
+
+  @override
+  double getCombined(Nation nation) {
+    int total = 0;
+
+    final land = getLand(nation) ?? 0;
+    final sea = getSea(nation) ?? 0;
+    final carrier = getCarrier(nation) ?? 0;
+
+    if (land != 0) {
+      total++;
+    }
+
+    if (sea != 0) {
+      total++;
+    }
+
+    if (carrier != 0) {
+      total++;
+    }
+
+    return total == 0 ? 0 : (land + sea + carrier) / total;
+  }
 }
