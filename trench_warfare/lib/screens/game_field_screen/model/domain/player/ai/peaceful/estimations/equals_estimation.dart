@@ -1,4 +1,4 @@
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimator.dart';
+part of estimations;
 
 class EqualsEstimationResult extends EstimationResult {
   EqualsEstimationResult(super.weight);

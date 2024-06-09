@@ -52,6 +52,18 @@ class GameFieldControlsUnitCard extends GameFieldControlsCard<UnitType> {
   });
 }
 
+class GameFieldControlsUnitCardBrief extends GameFieldControlsCard<UnitType> {
+  @override
+  final UnitType type;
+
+  GameFieldControlsUnitCardBrief({
+    required this.type,
+  });
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<ProductionCenterType> {
   final MoneyUnit cost;
 
@@ -78,6 +90,18 @@ class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<Produ
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+}
+
+class GameFieldControlsProductionCentersCardBrief extends GameFieldControlsCard<ProductionCenterType> {
+  @override
+  final ProductionCenterType type;
+
+  GameFieldControlsProductionCentersCardBrief({
+    required this.type,
+  });
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
 class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<TerrainModifierType> {
@@ -108,6 +132,18 @@ class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<Terrai
   });
 }
 
+class GameFieldControlsTerrainModifiersCardBrief extends GameFieldControlsCard<TerrainModifierType> {
+  @override
+  final TerrainModifierType type;
+
+  GameFieldControlsTerrainModifiersCardBrief({
+    required this.type,
+  });
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost> {
   final MoneyUnit cost;
 
@@ -136,6 +172,18 @@ class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost>
   });
 }
 
+class GameFieldControlsUnitBoostersCardBrief extends GameFieldControlsCard<UnitBoost> {
+  @override
+  final UnitBoost type;
+
+  GameFieldControlsUnitBoostersCardBrief({
+    required this.type,
+  });
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard {
   final MoneyUnit cost;
 
@@ -162,4 +210,16 @@ class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard {
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+}
+
+class GameFieldControlsSpecialStrikesCardBrief extends GameFieldControlsCard {
+  @override
+  final SpecialStrikeType type;
+
+  GameFieldControlsSpecialStrikesCardBrief({
+    required this.type,
+  });
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

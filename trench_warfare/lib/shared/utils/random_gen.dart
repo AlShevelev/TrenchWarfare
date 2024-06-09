@@ -35,7 +35,7 @@ class RandomGen {
   /// Returns an index of a cell in the [weights] list.
   /// The probability is in direct ratio with a weight value
   /// If the result is null - the selection is impossible
-  static int? randomWeight(List<double> weights) {
+  static int? randomWeight(Iterable<double> weights) {
     if (weights.isEmpty) {
       return null;
     }
@@ -56,7 +56,7 @@ class RandomGen {
     var to = 0.0;
 
     for (var i = 0; i < weights.length; i++) {
-      to += weights[i] / sum;
+      to += weights.elementAt(i) / sum;
 
       if (randomValue >= from && randomValue < to) {
         return i;
