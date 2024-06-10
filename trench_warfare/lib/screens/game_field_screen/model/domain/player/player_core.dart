@@ -7,6 +7,9 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
 
   final _gameFieldSettingsStorage = GameFieldSettingsStorage();
 
+  late final MoneyStorage _money;
+  MoneyStorageRead get money => _money;
+
   PlayerCore(
     this._gameField,
     NationRecord playerNation,
@@ -15,12 +18,12 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     SingleStream<GameFieldControlsState> controlsState,
     GameFieldModelCallback modelCallback,
   ) {
-    final money = MoneyStorage(_gameField, playerNation);
+    _money = MoneyStorage(_gameField, playerNation);
 
     _stateMachine = GameFieldStateMachine(
       _gameField,
       playerNation.code,
-      money,
+      _money,
       mapMetadata,
       _gameFieldSettingsStorage,
       updateGameObjectsEvent,

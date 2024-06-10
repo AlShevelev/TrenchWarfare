@@ -43,16 +43,24 @@ class InfluenceMapRepresentation implements InfluenceMapRepresentationRead {
 
           // All possible paths calculation
           while (cellsAround.isNotEmpty) {
+            var anyCellReached = false;
+
             for (final cellAround in cellsAround) {
               final pathLen = pathFacade.canReach(processedUnit, startCell: gameCell, endCell: cellAround);
 
               if (pathLen != null) {
+                anyCellReached = true;
+
                 if (pathLen > maxPathLen) {
                   maxPathLen = pathLen;
                 }
 
                 mapItemsForUnit.add(Tuple2(pathLen, _map.getCell(cellAround.row, cellAround.col)));
               }
+            }
+
+            if (!anyCellReached) {
+              break;
             }
 
             cellsAround = gameField.findCellsAroundR(gameCell, radius: ++radius);

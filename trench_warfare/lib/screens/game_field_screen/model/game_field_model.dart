@@ -43,7 +43,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
   Stream<GameFieldControlsState> get controlsState => _controlsState.output
-      .map((event) => _isHumanPlayer ? event : Invisible());    // Hides controls for AI players
+      .map((event) => _isHumanPlayer ? event : Invisible()); // Hides controls for AI players
 
   Future<void> init(RenderableTiledMap tileMap) async {
     _metadata = await compute(MetadataReader.read, tileMap.map);
@@ -64,10 +64,19 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
       _players.add(core);
 
-      switch(i) {
-        case _startIndex: _playersAi.add(null);   // Austria-Hungary
-        case 1: _playersAi.add(PeacefulPlayerAi(_gameField, core));   // France
-        default: _playersAi.add(PassivePlayerAi(core));   // Greece & Belgium
+      switch (i) {
+        case _startIndex:
+          _playersAi.add(null); // Austria-Hungary
+        case 1:
+          _playersAi.add(PeacefulPlayerAi(
+            _gameField,
+            core,
+            _metadata.nations[i].code,
+            core.money,
+            _metadata,
+          )); // France
+        default:
+          _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium
       }
     }
 

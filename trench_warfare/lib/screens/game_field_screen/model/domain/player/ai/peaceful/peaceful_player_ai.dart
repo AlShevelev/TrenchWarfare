@@ -5,7 +5,7 @@ class PeacefulPlayerAi extends PlayerAi {
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final MapMetadataRead _metadata;
 
@@ -20,8 +20,7 @@ class PeacefulPlayerAi extends PlayerAi {
   @override
   void start() async {
     while(true) {
-      final influences = InfluenceMapRepresentation()
-        ..calculate(_gameField);
+      final influences = InfluenceMapRepresentation()..calculate(_gameField);
 
       final pcGeneralEstimationResult = _estimateProductionCentersInGeneral(influences);
       final minesGeneralEstimationResult = _estimateMineFieldsInGeneral(influences);
@@ -64,7 +63,7 @@ class PeacefulPlayerAi extends PlayerAi {
       final estimator = ProductionCenterInGeneralEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney,
+        nationMoney: _nationMoney.actual,
         type: type,
         influenceMap: influenceMap,
         metadata: _metadata,
@@ -88,7 +87,7 @@ class PeacefulPlayerAi extends PlayerAi {
           gameField: _gameField,
           myNation: _myNation,
           type: type,
-          nationMoney: _nationMoney,
+          nationMoney: _nationMoney.actual,
           influenceMap: influenceMap,
           metadata: _metadata);
 
@@ -121,7 +120,7 @@ class PeacefulPlayerAi extends PlayerAi {
           gameField: _gameField,
           myNation: _myNation,
           type: type,
-          nationMoney: _nationMoney,
+          nationMoney: _nationMoney.actual,
           influenceMap: influenceMap,
           metadata: _metadata);
 
