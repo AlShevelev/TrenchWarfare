@@ -1,5 +1,6 @@
 library player_ai;
 
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
@@ -12,7 +13,6 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/inf
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
-import 'package:trench_warfare/shared/utils/performance.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 part 'player_ai.dart';
