@@ -15,7 +15,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     NationRecord playerNation,
     MapMetadataRead mapMetadata,
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-    SingleStream<GameFieldControlsState> controlsState,
+    SimpleStream<GameFieldControlsState> controlsState,
     GameFieldModelCallback modelCallback,
   ) {
     _money = MoneyStorage(_gameField, playerNation);
