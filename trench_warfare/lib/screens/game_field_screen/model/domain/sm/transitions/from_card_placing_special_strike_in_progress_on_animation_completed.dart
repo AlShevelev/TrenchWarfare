@@ -11,7 +11,7 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
 
   late final bool _canPlaceNext;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   late final MoneyStorage _nationMoney;
 
@@ -23,7 +23,7 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
     required Map<int, GameFieldCellRead> oldInactiveCells,
     required MoneyUnit productionCost,
     required bool canPlaceNext,
-    required SingleStream<GameFieldControlsState> controlsState,
+    required SimpleStream<GameFieldControlsState> controlsState,
     required MoneyStorage nationMoney,
   }) {
     _card = card;

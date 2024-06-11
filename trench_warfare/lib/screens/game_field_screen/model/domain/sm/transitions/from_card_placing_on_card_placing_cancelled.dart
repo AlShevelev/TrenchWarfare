@@ -3,13 +3,13 @@ part of game_field_sm;
 class FromCardPlacingOnCardPlacingCancelled extends GameObjectTransitionBase {
   late final MoneyUnit _nationMoney;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   FromCardPlacingOnCardPlacingCancelled(
     super.updateGameObjectsEvent,
     super.gameField, {
     required MoneyUnit nationMoney,
-    required SingleStream<GameFieldControlsState> controlsState,
+    required SimpleStream<GameFieldControlsState> controlsState,
   }) {
     _nationMoney = nationMoney;
     _controlsState = controlsState;

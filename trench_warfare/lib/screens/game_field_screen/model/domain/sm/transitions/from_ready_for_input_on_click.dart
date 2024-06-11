@@ -5,7 +5,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
 
   late final MoneyUnit _nationMoney;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   FromReadyForInputOnClick(
     super.updateGameObjectsEvent,

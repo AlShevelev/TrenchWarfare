@@ -13,7 +13,7 @@ class CarrierPanelCalculator {
 
   static void updateCarrierPanel(
     int cellId,
-    SingleStream<GameFieldControlsState> controlsState, {
+    SimpleStream<GameFieldControlsState> controlsState, {
     required Unit oldActiveUnit,
     required Unit newActiveUnit,
   }) {

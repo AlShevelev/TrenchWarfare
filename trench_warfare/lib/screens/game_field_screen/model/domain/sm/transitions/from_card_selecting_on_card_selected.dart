@@ -5,7 +5,7 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
 
   late final Nation _nation;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   late final MapMetadataRead _mapMetadata;
 
@@ -14,7 +14,7 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
     super.gameField, {
     required MoneyUnit nationMoney,
     required Nation nation,
-    required SingleStream<GameFieldControlsState> controlsState,
+    required SimpleStream<GameFieldControlsState> controlsState,
     required MapMetadataRead mapMetadata,
   }) {
     _nationMoney = nationMoney;

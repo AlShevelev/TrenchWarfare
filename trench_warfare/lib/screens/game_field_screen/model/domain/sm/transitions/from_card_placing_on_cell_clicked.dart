@@ -3,7 +3,7 @@ part of game_field_sm;
 class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
   late final MoneyStorage _nationMoney;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   late final Nation _myNation;
 
@@ -13,7 +13,7 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
     super.updateGameObjectsEvent,
     super.gameField, {
     required MoneyStorage nationMoney,
-    required SingleStream<GameFieldControlsState> controlsState,
+    required SimpleStream<GameFieldControlsState> controlsState,
     required Nation myNation,
     required MapMetadataRead mapMetadata,
   }) {

@@ -3,7 +3,7 @@ part of game_field_sm;
 class FromInitialOnOnStarTurnTransition extends GameObjectTransitionBase {
   final MoneyUnit _nationMoney;
 
-  final SingleStream<GameFieldControlsState> _controlsState;
+  final SimpleStream<GameFieldControlsState> _controlsState;
 
   final Nation _nation;
 

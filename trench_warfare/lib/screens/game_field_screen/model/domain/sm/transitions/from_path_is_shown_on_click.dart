@@ -5,7 +5,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
 
   late final MoneyUnit _nationMoney;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   FromPathIsShownOnClick(
     super.updateGameObjectsEvent,

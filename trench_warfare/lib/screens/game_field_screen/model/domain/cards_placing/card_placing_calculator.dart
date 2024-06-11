@@ -3,7 +3,7 @@ part of cards_placing;
 class CardPlacingCalculator implements PlacingCalculator {
   late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   late final Map<int, GameFieldCellRead> _oldInactiveCells;
 
@@ -12,7 +12,7 @@ class CardPlacingCalculator implements PlacingCalculator {
   CardPlacingCalculator({
     required CardsPlacingStrategy strategy,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-    required SingleStream<GameFieldControlsState> controlsState,
+    required SimpleStream<GameFieldControlsState> controlsState,
     required Map<int, GameFieldCellRead> oldInactiveCells,
   }) {
     _strategy = strategy;

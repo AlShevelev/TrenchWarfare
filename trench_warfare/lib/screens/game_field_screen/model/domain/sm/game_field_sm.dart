@@ -13,7 +13,7 @@ class GameFieldStateMachine {
 
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
-  final SingleStream<GameFieldControlsState> _controlsState;
+  final SimpleStream<GameFieldControlsState> _controlsState;
 
   final GameFieldModelCallback _modelCallback;
 

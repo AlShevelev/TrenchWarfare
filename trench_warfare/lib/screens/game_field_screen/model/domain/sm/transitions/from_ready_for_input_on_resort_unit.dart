@@ -1,12 +1,12 @@
 part of game_field_sm;
 
 class FromReadyForInputOnResortUnit extends GameObjectTransitionBase {
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   FromReadyForInputOnResortUnit(
     super.updateGameObjectsEvent,
     super.gameField,
-    SingleStream<GameFieldControlsState> controlsState,
+    SimpleStream<GameFieldControlsState> controlsState,
   ) {
     _controlsState = controlsState;
   }

@@ -6,7 +6,7 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
 
   final MoneyStorage _money;
 
-  final SingleStream<GameFieldControlsState> _controlsState;
+  final SimpleStream<GameFieldControlsState> _controlsState;
 
   final Nation _nation;
 

@@ -3,7 +3,7 @@ part of game_field_sm;
 class FromReadyForInputOnLongClickStart {
   late final MoneyUnit _nationMoney;
 
-  late final SingleStream<GameFieldControlsState> _controlsState;
+  late final SimpleStream<GameFieldControlsState> _controlsState;
 
   FromReadyForInputOnLongClickStart(
     this._nationMoney,
