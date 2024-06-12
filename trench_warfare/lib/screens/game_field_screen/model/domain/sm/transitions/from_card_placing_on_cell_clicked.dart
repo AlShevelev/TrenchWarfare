@@ -1,27 +1,7 @@
 part of game_field_sm;
 
 class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
-  late final MoneyStorage _nationMoney;
-
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  late final Nation _myNation;
-
-  late final MapMetadataRead _mapMetadata;
-
-  FromCardPlacingOnCellClicked(
-    super.updateGameObjectsEvent,
-    super.gameField, {
-    required MoneyStorage nationMoney,
-    required SimpleStream<GameFieldControlsState> controlsState,
-    required Nation myNation,
-    required MapMetadataRead mapMetadata,
-  }) {
-    _nationMoney = nationMoney;
-    _controlsState = controlsState;
-    _myNation = myNation;
-    _mapMetadata = mapMetadata;
-  }
+  FromCardPlacingOnCellClicked(super.context);
 
   State process(
     Map<int, GameFieldCellRead> cellsImpossibleToBuild,
@@ -38,76 +18,98 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           strategy: UnitsCardsPlacingStrategy(
             card: card as GameFieldControlsCard<UnitType>,
             cell: cell,
-            nationMoney: _nationMoney,
-            gameField: _gameField,
-            myNation: _myNation,
+            nationMoney: _context.money,
+            gameField: _context.gameField,
+            myNation: _context.nation,
           ),
-          updateGameObjectsEvent: _updateGameObjectsEvent,
-          controlsState: _controlsState,
+          updateGameObjectsEvent: _context.updateGameObjectsEvent,
+          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
+          isAI: _context.isAI,
         ),
-
-
-      GameFieldControlsUnitBoostersCard() || GameFieldControlsUnitBoostersCardBrief() => CardPlacingCalculator(
+      GameFieldControlsUnitBoostersCard() ||
+      GameFieldControlsUnitBoostersCardBrief() =>
+        CardPlacingCalculator(
           strategy: UnitBoostCardsPlacingStrategy(
             card: card as GameFieldControlsCard<UnitBoost>,
             cell: cell,
-            nationMoney: _nationMoney,
-            gameField: _gameField,
-            myNation: _myNation,
+            nationMoney: _context.money,
+            gameField: _context.gameField,
+            myNation: _context.nation,
           ),
-          updateGameObjectsEvent: _updateGameObjectsEvent,
-          controlsState: _controlsState,
+          updateGameObjectsEvent: _context.updateGameObjectsEvent,
+          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
+          isAI: _context.isAI,
         ),
-
-      GameFieldControlsTerrainModifiersCard() || GameFieldControlsTerrainModifiersCardBrief() => CardPlacingCalculator(
+      GameFieldControlsTerrainModifiersCard() ||
+      GameFieldControlsTerrainModifiersCardBrief() =>
+        CardPlacingCalculator(
           strategy: TerrainModifierCardsPlacingStrategy(
             card: card as GameFieldControlsCard<TerrainModifierType>,
             cell: cell,
-            nationMoney: _nationMoney,
-            gameField: _gameField,
-            myNation: _myNation,
+            nationMoney: _context.money,
+            gameField: _context.gameField,
+            myNation: _context.nation,
           ),
-          updateGameObjectsEvent: _updateGameObjectsEvent,
-          controlsState: _controlsState,
+          updateGameObjectsEvent: _context.updateGameObjectsEvent,
+          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
+          isAI: _context.isAI,
         ),
-
-      GameFieldControlsProductionCentersCard() || GameFieldControlsProductionCentersCardBrief() => CardPlacingCalculator(
+      GameFieldControlsProductionCentersCard() ||
+      GameFieldControlsProductionCentersCardBrief() =>
+        CardPlacingCalculator(
           strategy: ProductionCenterCardsPlacingStrategy(
             card: card as GameFieldControlsCard<ProductionCenterType>,
             cell: cell,
-            nationMoney: _nationMoney,
-            gameField: _gameField,
-            myNation: _myNation,
+            nationMoney: _context.money,
+            gameField: _context.gameField,
+            myNation: _context.nation,
           ),
-          updateGameObjectsEvent: _updateGameObjectsEvent,
-          controlsState: _controlsState,
+          updateGameObjectsEvent: _context.updateGameObjectsEvent,
+          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
+          isAI: _context.isAI,
         ),
-
-      GameFieldControlsSpecialStrikesCard() || GameFieldControlsSpecialStrikesCardBrief() => SpecialStrikesStartCalculator(
+      GameFieldControlsSpecialStrikesCard() ||
+      GameFieldControlsSpecialStrikesCardBrief() =>
+        SpecialStrikesStartCalculator(
           strategy: switch ((card as GameFieldControlsCard<SpecialStrikeType>).type) {
-            SpecialStrikeType.airBombardment =>
-              AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
-            SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(_updateGameObjectsEvent, cell),
-            SpecialStrikeType.flameTroopers =>
-              FlameTroopersCardPlacingStrategy(_updateGameObjectsEvent, cell),
-            SpecialStrikeType.gasAttack =>
-              GasAttackCardPlacingStrategy(_updateGameObjectsEvent, cell, _gameField),
-            SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(
-                _updateGameObjectsEvent,
+            SpecialStrikeType.airBombardment => AirBombardmentCardPlacingStrategy(
+                _context.updateGameObjectsEvent,
                 cell,
-                _gameField,
-                _myNation,
+                _context.isAI,
+              ),
+            SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(
+                _context.updateGameObjectsEvent,
+                cell,
+                _context.isAI,
+              ),
+            SpecialStrikeType.flameTroopers => FlameTroopersCardPlacingStrategy(
+                _context.updateGameObjectsEvent,
+                cell,
+                _context.isAI,
+              ),
+            SpecialStrikeType.gasAttack => GasAttackCardPlacingStrategy(
+                _context.updateGameObjectsEvent,
+                cell,
+                _context.gameField,
+                _context.isAI,
+              ),
+            SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(
+                _context.updateGameObjectsEvent,
+                cell,
+                _context.gameField,
+                _context.nation,
+                _context.isAI,
               ),
           },
           oldInactiveCells: cellsImpossibleToBuild,
-          gameField: _gameField,
-          myNation: _myNation,
-          mapMetadata: _mapMetadata,
-          nationMoney: _nationMoney,
+          gameField: _context.gameField,
+          myNation: _context.nation,
+          mapMetadata: _context.mapMetadata,
+          nationMoney: _context.money,
           card: card,
         ),
       _ => throw UnsupportedError(''),

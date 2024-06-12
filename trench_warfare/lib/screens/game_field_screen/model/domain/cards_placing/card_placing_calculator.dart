@@ -9,28 +9,39 @@ class CardPlacingCalculator implements PlacingCalculator {
 
   late final CardsPlacingStrategy _strategy;
 
+  late final bool _isAI;
+
   CardPlacingCalculator({
     required CardsPlacingStrategy strategy,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required SimpleStream<GameFieldControlsState> controlsState,
     required Map<int, GameFieldCellRead> oldInactiveCells,
+    required bool isAI,
   }) {
     _strategy = strategy;
     _updateGameObjectsEvent = updateGameObjectsEvent;
     _controlsState = controlsState;
     _oldInactiveCells = oldInactiveCells;
+    _isAI = isAI;
   }
 
   @override
   State place() {
     _strategy.updateCell();
 
-    _updateGameObjectsEvent.update([
-      UpdateCell(
-        _strategy.cell,
-        updateBorderCells: [],
-      )
-    ]);
+    final List<UpdateGameEvent> events = [];
+    if (_isAI) {
+      events.add(
+        MoveCameraToCell(_strategy.cell),
+      );
+    }
+    events.add(
+        UpdateCell(
+          _strategy.cell,
+          updateBorderCells: [],
+        )
+    );
+    _updateGameObjectsEvent.update(events);
 
     // Update the money
     final productionCost = _strategy.calculateProductionCost();

@@ -31,6 +31,7 @@ import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
 part 'game_field_sm.dart';
+part 'game_field_sm_context.dart';
 part 'event.dart';
 part 'state.dart';
 part 'transitions/game_object_transition_base.dart';

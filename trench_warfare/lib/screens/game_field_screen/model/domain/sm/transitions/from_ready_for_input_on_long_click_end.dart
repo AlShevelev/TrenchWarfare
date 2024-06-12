@@ -1,18 +1,13 @@
 part of game_field_sm;
 
 class FromReadyForInputOnLongClickEnd {
-  late final MoneyUnit _nationMoney;
+  late final GameFieldStateMachineContext _context;
 
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromReadyForInputOnLongClickEnd(
-    this._nationMoney,
-    this._controlsState,
-  );
+  FromReadyForInputOnLongClickEnd(this._context);
 
   State process() {
-    _controlsState.update(MainControls(
-      money: _nationMoney,
+    _context.controlsState.update(MainControls(
+      money: _context.money.actual,
       cellInfo: null,
       armyInfo: null,
       carrierInfo: null,

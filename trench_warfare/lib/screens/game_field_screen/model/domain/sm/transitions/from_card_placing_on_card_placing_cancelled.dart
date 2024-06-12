@@ -1,29 +1,17 @@
 part of game_field_sm;
 
 class FromCardPlacingOnCardPlacingCancelled extends GameObjectTransitionBase {
-  late final MoneyUnit _nationMoney;
-
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromCardPlacingOnCardPlacingCancelled(
-    super.updateGameObjectsEvent,
-    super.gameField, {
-    required MoneyUnit nationMoney,
-    required SimpleStream<GameFieldControlsState> controlsState,
-  }) {
-    _nationMoney = nationMoney;
-    _controlsState = controlsState;
-  }
+  FromCardPlacingOnCardPlacingCancelled(super.context);
 
   State process(Map<int, GameFieldCellRead> cellsImpossibleToBuild) {
-    _controlsState.update(MainControls(
-      money: _nationMoney,
+    _context.controlsState.update(MainControls(
+      money: _context.money.actual,
       cellInfo: null,
       armyInfo: null,
       carrierInfo: null,
     ));
 
-    _updateGameObjectsEvent.update([
+    _context.updateGameObjectsEvent.update([
       UpdateCellInactivity(
         newInactiveCells: {},
         oldInactiveCells: cellsImpossibleToBuild,

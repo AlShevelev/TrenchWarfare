@@ -60,6 +60,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         _updateGameObjectsEvent,
         _controlsState,
         this,
+        isAI: i != _startIndex,
       );
 
       _players.add(core);

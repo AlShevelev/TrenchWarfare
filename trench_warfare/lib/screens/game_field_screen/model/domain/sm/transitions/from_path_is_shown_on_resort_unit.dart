@@ -1,18 +1,10 @@
 part of game_field_sm;
 
 class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromPathIsShownOnResortUnit(
-    super.updateGameObjectsEvent,
-    super.gameField,
-    SimpleStream<GameFieldControlsState> controlsState,
-  ) {
-    _controlsState = controlsState;
-  }
+  FromPathIsShownOnResortUnit(super.context);
 
   State process(Iterable<GameFieldCell> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
-    final cell = _gameField.getCellById(cellId);
+    final cell = _context.gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit!;
 
@@ -29,7 +21,7 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
 
       CarrierPanelCalculator.updateCarrierPanel(
         cellId,
-        _controlsState,
+        _context.controlsState,
         oldActiveUnit: activeUnit,
         newActiveUnit: newActiveUnit,
       );
@@ -39,7 +31,7 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
       pathCell.setPathItem(null);
     }
 
-    _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return ReadyForInput();
   }

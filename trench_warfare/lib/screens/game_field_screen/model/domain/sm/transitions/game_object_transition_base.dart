@@ -2,21 +2,16 @@ part of game_field_sm;
 
 abstract class GameObjectTransitionBase {
   @protected
-  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
-
-  @protected
-  late final GameFieldRead _gameField;
+  late final GameFieldStateMachineContext _context;
 
   @protected
   late final PathFacade _pathFacade;
 
   GameObjectTransitionBase(
-    SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-    GameFieldRead gameField,
+    GameFieldStateMachineContext context,
   ) {
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-    _gameField = gameField;
-    _pathFacade = PathFacade(_gameField);
+    _context = context;
+    _pathFacade = PathFacade(context.gameField);
   }
 
   @protected

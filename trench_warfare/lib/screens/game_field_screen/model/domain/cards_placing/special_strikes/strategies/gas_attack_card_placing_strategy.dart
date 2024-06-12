@@ -5,7 +5,12 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   final List<GameFieldCell> _updatedCells = [];
 
-  GasAttackCardPlacingStrategy(super.updateGameObjectsEvent, super.cell, GameFieldRead gameField) {
+  GasAttackCardPlacingStrategy(
+    super.updateGameObjectsEvent,
+    super.cell,
+    GameFieldRead gameField,
+    super.isAI,
+  ) {
     _gameField = gameField;
   }
 
@@ -25,21 +30,6 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     }
   }
 
-  @override
-  void showUpdate() {
-    final List<UpdateGameEvent> updateEvents = [];
-
-    updateEvents.add(ShowComplexDamage(
-      cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
-      time: MovementConstants.damageAnimationTime,
-    ));
-
-    updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));
-    updateEvents.add(AnimationCompleted());
-
-    _updateGameObjectsEvent.update(updateEvents);
-  }
-
   void updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
     for (var unit in cell.units) {
       final random = RandomGen.randomDouble(0, 1);
@@ -54,5 +44,20 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     cell.units.where((u) => u.health <= 0).toList(growable: false).forEach((u) => cell.removeUnit(u));
 
     _updatedCells.add(cell);
+  }
+
+  @override
+  Iterable<UpdateGameEvent> _getUpdateEvents() {
+    final List<UpdateGameEvent> updateEvents = [];
+
+    updateEvents.add(ShowComplexDamage(
+      cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
+      time: MovementConstants.damageAnimationTime,
+    ));
+
+    updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));
+    updateEvents.add(AnimationCompleted());
+
+    return updateEvents;
   }
 }

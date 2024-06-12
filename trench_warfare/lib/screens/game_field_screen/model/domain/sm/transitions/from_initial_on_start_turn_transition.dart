@@ -1,23 +1,11 @@
 part of game_field_sm;
 
 class FromInitialOnOnStarTurnTransition extends GameObjectTransitionBase {
-  final MoneyUnit _nationMoney;
-
-  final SimpleStream<GameFieldControlsState> _controlsState;
-
-  final Nation _nation;
-
-  FromInitialOnOnStarTurnTransition(
-    super.updateGameObjectsEvent,
-    super.gameField,
-    this._nation,
-    this._controlsState,
-    this._nationMoney,
-  );
+  FromInitialOnOnStarTurnTransition(super.context);
 
   State process() {
-    _controlsState.update(MainControls(
-      money: _nationMoney,
+    _context.controlsState.update(MainControls(
+      money: _context.money.actual,
       cellInfo: null,
       armyInfo: null,
       carrierInfo: null,
@@ -25,11 +13,11 @@ class FromInitialOnOnStarTurnTransition extends GameObjectTransitionBase {
 
     List<UpdateGameEvent> events = [];
 
-    final cellsToAdd = _gameField.cells.where((c) => c.nation != null);
+    final cellsToAdd = _context.gameField.cells.where((c) => c.nation != null);
     events.addAll(cellsToAdd.map((c) => UpdateCell(c, updateBorderCells: [])));
-    events.add(MoveCameraToCell(_gameField.cells.firstWhere((c) => c.nation == _nation)));
+    events.add(MoveCameraToCell(_context.gameField.cells.firstWhere((c) => c.nation == _context.nation)));
 
-    _updateGameObjectsEvent.update(events);
+    _context.updateGameObjectsEvent.update(events);
 
     return ReadyForInput();
   }

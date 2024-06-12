@@ -16,8 +16,9 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     MapMetadataRead mapMetadata,
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
-    GameFieldModelCallback modelCallback,
-  ) {
+    GameFieldModelCallback modelCallback, {
+    required bool isAI,
+  }) {
     _money = MoneyStorage(_gameField, playerNation);
 
     _stateMachine = GameFieldStateMachine(
@@ -29,6 +30,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
       updateGameObjectsEvent,
       controlsState,
       modelCallback,
+      isAI: isAI,
     );
   }
 

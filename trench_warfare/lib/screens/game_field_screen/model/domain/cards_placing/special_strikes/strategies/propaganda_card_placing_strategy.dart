@@ -27,6 +27,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     super.cell,
     GameFieldRead gameField,
     Nation myNation,
+    super.isAI,
   ) {
     _gameField = gameField;
     _myNation = myNation;
@@ -65,8 +66,39 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     }
   }
 
+  double _calculateChanceToSuccess(Unit unit) {
+    final experienceFactor = switch (unit.experienceRank) {
+      UnitExperienceRank.rookies => 1,
+      UnitExperienceRank.fighters => 2,
+      UnitExperienceRank.proficients => 3,
+      UnitExperienceRank.veterans => 4,
+      UnitExperienceRank.elite => 5,
+    };
+
+    return ((1 - experienceFactor * 0.2) + (1 - unit.health / unit.maxHealth)) / 2;
+  }
+
+  List<_PropagandaEffect> _calculatePossibleEffects() {
+    final possibleEffects = [_DecreaseDefense(), _Deserting()];
+
+    if (_cell.units.length == 1) {
+      possibleEffects.add(_Convert());
+    }
+
+    final cellToRunAway = _gameField
+        .findCellsAround(_cell)
+        .where((c) => c.nation == _cell.nation && c.units.isEmpty && c.isLand == _cell.isLand)
+        .firstOrNull;
+
+    if (cellToRunAway != null) {
+      possibleEffects.add(_RunAway(cellToRunAway, _cell.activeUnit!));
+    }
+
+    return possibleEffects;
+  }
+
   @override
-  void showUpdate() {
+  Iterable<UpdateGameEvent> _getUpdateEvents() {
     final List<UpdateGameEvent> updateEvents = [];
 
     updateEvents.add(ShowDamage(
@@ -106,37 +138,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     }
 
     updateEvents.add(AnimationCompleted());
-    _updateGameObjectsEvent.update(updateEvents);
-  }
 
-  double _calculateChanceToSuccess(Unit unit) {
-    final experienceFactor = switch (unit.experienceRank) {
-      UnitExperienceRank.rookies => 1,
-      UnitExperienceRank.fighters => 2,
-      UnitExperienceRank.proficients => 3,
-      UnitExperienceRank.veterans => 4,
-      UnitExperienceRank.elite => 5,
-    };
-
-    return ((1 - experienceFactor * 0.2) + (1 - unit.health / unit.maxHealth)) / 2;
-  }
-
-  List<_PropagandaEffect> _calculatePossibleEffects() {
-    final possibleEffects = [_DecreaseDefense(), _Deserting()];
-
-    if (_cell.units.length == 1) {
-      possibleEffects.add(_Convert());
-    }
-
-    final cellToRunAway = _gameField
-        .findCellsAround(_cell)
-        .where((c) => c.nation == _cell.nation && c.units.isEmpty && c.isLand == _cell.isLand)
-        .firstOrNull;
-
-    if (cellToRunAway != null) {
-      possibleEffects.add(_RunAway(cellToRunAway, _cell.activeUnit!));
-    }
-
-    return possibleEffects;
+    return updateEvents;
   }
 }

@@ -11,41 +11,32 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
 
   late final bool _canPlaceNext;
 
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  late final MoneyStorage _nationMoney;
-
   FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted(
-    super.updateGameObjectsEvent,
-    super.gameField, {
+    super.context, {
     required GameFieldControlsCard card,
     required Map<int, GameFieldCellRead> newInactiveCells,
     required Map<int, GameFieldCellRead> oldInactiveCells,
     required MoneyUnit productionCost,
     required bool canPlaceNext,
-    required SimpleStream<GameFieldControlsState> controlsState,
-    required MoneyStorage nationMoney,
   }) {
     _card = card;
     _newInactiveCells = newInactiveCells;
     _oldInactiveCells = oldInactiveCells;
     _productionCost = productionCost;
     _canPlaceNext = canPlaceNext;
-    _controlsState = controlsState;
-    _nationMoney = nationMoney;
   }
 
   State process() {
     // Update the money
-    _nationMoney.withdraw(_productionCost);
+    _context.money.withdraw(_productionCost);
 
     if (_canPlaceNext) {
-      _controlsState.update(CardsPlacingControls(
-        totalMoney: _nationMoney.actual,
+      _context.controlsState.update(CardsPlacingControls(
+        totalMoney: _context.money.actual,
         card: _card,
       ));
 
-      _updateGameObjectsEvent.update([
+      _context.updateGameObjectsEvent.update([
         UpdateCellInactivity(
           newInactiveCells: _newInactiveCells,
           oldInactiveCells: _oldInactiveCells,
@@ -54,14 +45,14 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
 
       return CardPlacing(_card, _newInactiveCells);
     } else {
-      _controlsState.update(MainControls(
-        money: _nationMoney.actual,
+      _context.controlsState.update(MainControls(
+        money: _context.money.actual,
         cellInfo: null,
         armyInfo: null,
         carrierInfo: null,
       ));
 
-      _updateGameObjectsEvent.update([
+      _context.updateGameObjectsEvent.update([
         UpdateCellInactivity(
           newInactiveCells: {},
           oldInactiveCells: _oldInactiveCells,

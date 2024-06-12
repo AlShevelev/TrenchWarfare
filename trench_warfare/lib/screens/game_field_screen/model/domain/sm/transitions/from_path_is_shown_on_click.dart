@@ -1,19 +1,7 @@
 part of game_field_sm;
 
 class FromPathIsShownOnClick extends GameObjectTransitionBase {
-  late final Nation _nation;
-
-  late final MoneyUnit _nationMoney;
-
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromPathIsShownOnClick(
-    super.updateGameObjectsEvent,
-    super.gameField,
-    this._nation,
-    this._nationMoney,
-    this._controlsState,
-  );
+  FromPathIsShownOnClick(super.context);
 
   State process(Iterable<GameFieldCell> path, GameFieldCell cell) {
     final firstCell = path.first;
@@ -31,9 +19,9 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
       _hideArmyPanel();
 
       return MovementFacade(
-        nation: _nation,
-        gameField: _gameField,
-        updateGameObjectsEvent: _updateGameObjectsEvent,
+        nation: _context.nation,
+        gameField: _context.gameField,
+        updateGameObjectsEvent: _context.updateGameObjectsEvent,
       ).startMovement(path);
     }
 
@@ -48,7 +36,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
 
     // show the new path
     final estimatedPath = _estimatePath(path: newPath);
-    _updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return PathIsShown(newPath);
   }
@@ -58,7 +46,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     for (var pathCell in path) {
       pathCell.setPathItem(null);
     }
-    _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
   }
 
   /// Clear the path and make the unit enabled
@@ -69,8 +57,8 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
   }
 
   void _hideArmyPanel() =>
-      _controlsState.update(MainControls(
-        money: _nationMoney,
+      _context.controlsState.update(MainControls(
+        money: _context.money.actual,
         cellInfo: null,
         armyInfo: null,
         carrierInfo: null,

@@ -1,7 +1,11 @@
 part of cards_placing;
 
 class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
-  AirBombardmentCardPlacingStrategy(super.updateGameObjectsEvent, super.cell);
+  AirBombardmentCardPlacingStrategy(
+    super.updateGameObjectsEvent,
+    super.cell,
+    super.isAI,
+  );
 
   @override
   void updateGameField() {
@@ -16,18 +20,16 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
   }
 
   @override
-  void showUpdate() {
-    _updateGameObjectsEvent.update([
-      ShowDamage(
-        cell: _cell,
-        damageType: DamageType.explosion,
-        time: MovementConstants.damageAnimationTime,
-      ),
-      UpdateCell(
-        _cell,
-        updateBorderCells: [],
-      ),
-      AnimationCompleted(),
-    ]);
-  }
+  Iterable<UpdateGameEvent> _getUpdateEvents() => [
+    ShowDamage(
+      cell: _cell,
+      damageType: DamageType.explosion,
+      time: MovementConstants.damageAnimationTime,
+    ),
+    UpdateCell(
+      _cell,
+      updateBorderCells: [],
+    ),
+    AnimationCompleted(),
+  ];
 }

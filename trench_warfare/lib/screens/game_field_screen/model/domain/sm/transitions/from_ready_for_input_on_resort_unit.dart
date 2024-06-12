@@ -1,18 +1,10 @@
 part of game_field_sm;
 
 class FromReadyForInputOnResortUnit extends GameObjectTransitionBase {
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromReadyForInputOnResortUnit(
-    super.updateGameObjectsEvent,
-    super.gameField,
-    SimpleStream<GameFieldControlsState> controlsState,
-  ) {
-    _controlsState = controlsState;
-  }
+  FromReadyForInputOnResortUnit(super.context);
 
   State process(int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
-    final cell = _gameField.getCellById(cellId);
+    final cell = _context.gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit!;
 
@@ -25,12 +17,12 @@ class FromReadyForInputOnResortUnit extends GameObjectTransitionBase {
 
       CarrierPanelCalculator.updateCarrierPanel(
         cellId,
-        _controlsState,
+        _context.controlsState,
         oldActiveUnit: activeUnit,
         newActiveUnit: newActiveUnit,
       );
 
-      _updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
+      _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
     }
 
     return ReadyForInput();

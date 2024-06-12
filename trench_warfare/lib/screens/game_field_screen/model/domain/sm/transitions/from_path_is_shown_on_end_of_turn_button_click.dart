@@ -1,16 +1,7 @@
 part of game_field_sm;
 
 class FromPathIsShownOnEndOfTurnButtonClick extends GameObjectTransitionBase {
-  late final MoneyUnit _nationMoney;
-
-  late final SimpleStream<GameFieldControlsState> _controlsState;
-
-  FromPathIsShownOnEndOfTurnButtonClick(
-      super.updateGameObjectsEvent,
-      super.gameField,
-      this._nationMoney,
-      this._controlsState,
-      );
+  FromPathIsShownOnEndOfTurnButtonClick(super.context);
 
   State process(Iterable<GameFieldCell> path) {
     final unit = path.first.activeUnit!;
@@ -30,12 +21,12 @@ class FromPathIsShownOnEndOfTurnButtonClick extends GameObjectTransitionBase {
     for (var pathCell in path) {
       pathCell.setPathItem(null);
     }
-    _updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
   }
 
   void _hideArmyPanel() =>
-      _controlsState.update(MainControls(
-        money: _nationMoney,
+      _context.controlsState.update(MainControls(
+        money: _context.money.actual,
         cellInfo: null,
         armyInfo: null,
         carrierInfo: null,
