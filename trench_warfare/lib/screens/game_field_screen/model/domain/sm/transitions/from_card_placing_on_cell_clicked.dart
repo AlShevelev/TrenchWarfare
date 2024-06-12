@@ -34,9 +34,9 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
     }
 
     final PlacingCalculator calculator = switch (card) {
-      GameFieldControlsUnitCard() => CardPlacingCalculator(
+      GameFieldControlsUnitCard() || GameFieldControlsUnitCardBrief() => CardPlacingCalculator(
           strategy: UnitsCardsPlacingStrategy(
-            card: card,
+            card: card as GameFieldControlsCard<UnitType>,
             cell: cell,
             nationMoney: _nationMoney,
             gameField: _gameField,
@@ -46,9 +46,11 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           controlsState: _controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
         ),
-      GameFieldControlsUnitBoostersCard() => CardPlacingCalculator(
+
+
+      GameFieldControlsUnitBoostersCard() || GameFieldControlsUnitBoostersCardBrief() => CardPlacingCalculator(
           strategy: UnitBoostCardsPlacingStrategy(
-            card: card,
+            card: card as GameFieldControlsCard<UnitBoost>,
             cell: cell,
             nationMoney: _nationMoney,
             gameField: _gameField,
@@ -58,9 +60,10 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           controlsState: _controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
         ),
-      GameFieldControlsTerrainModifiersCard() => CardPlacingCalculator(
+
+      GameFieldControlsTerrainModifiersCard() || GameFieldControlsTerrainModifiersCardBrief() => CardPlacingCalculator(
           strategy: TerrainModifierCardsPlacingStrategy(
-            card: card,
+            card: card as GameFieldControlsCard<TerrainModifierType>,
             cell: cell,
             nationMoney: _nationMoney,
             gameField: _gameField,
@@ -70,9 +73,10 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           controlsState: _controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
         ),
-      GameFieldControlsProductionCentersCard() => CardPlacingCalculator(
+
+      GameFieldControlsProductionCentersCard() || GameFieldControlsProductionCentersCardBrief() => CardPlacingCalculator(
           strategy: ProductionCenterCardsPlacingStrategy(
-            card: card,
+            card: card as GameFieldControlsCard<ProductionCenterType>,
             cell: cell,
             nationMoney: _nationMoney,
             gameField: _gameField,
@@ -82,8 +86,9 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
           controlsState: _controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
         ),
-      GameFieldControlsSpecialStrikesCard() => SpecialStrikesStartCalculator(
-          strategy: switch (card.type) {
+
+      GameFieldControlsSpecialStrikesCard() || GameFieldControlsSpecialStrikesCardBrief() => SpecialStrikesStartCalculator(
+          strategy: switch ((card as GameFieldControlsCard<SpecialStrikeType>).type) {
             SpecialStrikeType.airBombardment =>
               AirBombardmentCardPlacingStrategy(_updateGameObjectsEvent, cell),
             SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(_updateGameObjectsEvent, cell),

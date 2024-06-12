@@ -184,7 +184,7 @@ class GameFieldControlsUnitBoostersCardBrief extends GameFieldControlsCard<UnitB
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard {
+class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard<SpecialStrikeType> {
   final MoneyUnit cost;
 
   @override

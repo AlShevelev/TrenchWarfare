@@ -19,9 +19,9 @@ class PeacefulPlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    while(true) {
-      final influences = InfluenceMapRepresentation();
-      await compute(influences.calculate, _gameField);
+    while (true) {
+      final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
+          (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
       final pcGeneralEstimationResult = _estimateProductionCentersInGeneral(influences);
       final minesGeneralEstimationResult = _estimateMineFieldsInGeneral(influences);

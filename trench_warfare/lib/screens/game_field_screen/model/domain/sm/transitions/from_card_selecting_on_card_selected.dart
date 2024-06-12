@@ -30,15 +30,24 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
     ));
 
     final cellsImpossibleToBuild = switch (card) {
-      GameFieldControlsUnitCard() => UnitBuildCalculator(_gameField, _nation).getAllCellsImpossibleToBuild(card.type, _nationMoney),
-      GameFieldControlsProductionCentersCard() =>
-        ProductionCentersBuildCalculator(_gameField, _nation).getAllCellsImpossibleToBuild(card.type, _nationMoney),
-      GameFieldControlsTerrainModifiersCard() =>
-        TerrainModifierBuildCalculator(_gameField, _nation).getAllCellsImpossibleToBuild(card.type, _nationMoney),
-      GameFieldControlsUnitBoostersCard() =>
+      GameFieldControlsUnitCard() ||
+      GameFieldControlsUnitCardBrief() =>
+        UnitBuildCalculator(_gameField, _nation).getAllCellsImpossibleToBuild(card.type, _nationMoney),
+      GameFieldControlsProductionCentersCard() ||
+      GameFieldControlsProductionCentersCardBrief() =>
+        ProductionCentersBuildCalculator(_gameField, _nation)
+            .getAllCellsImpossibleToBuild(card.type, _nationMoney),
+      GameFieldControlsTerrainModifiersCard() ||
+      GameFieldControlsTerrainModifiersCardBrief() =>
+        TerrainModifierBuildCalculator(_gameField, _nation)
+            .getAllCellsImpossibleToBuild(card.type, _nationMoney),
+      GameFieldControlsUnitBoostersCard() ||
+      GameFieldControlsUnitBoostersCardBrief() =>
         UnitBoosterBuildCalculator(_gameField, _nation).getAllCellsImpossibleToBuild(card.type, _nationMoney),
-      GameFieldControlsSpecialStrikesCard() =>
-        SpecialStrikesBuildCalculator(_gameField, _nation, _mapMetadata).getAllCellsImpossibleToBuild(card.type, _nationMoney),
+      GameFieldControlsSpecialStrikesCard() ||
+      GameFieldControlsSpecialStrikesCardBrief() =>
+        SpecialStrikesBuildCalculator(_gameField, _nation, _mapMetadata)
+            .getAllCellsImpossibleToBuild(card.type, _nationMoney),
       _ => throw UnsupportedError(''),
     };
 

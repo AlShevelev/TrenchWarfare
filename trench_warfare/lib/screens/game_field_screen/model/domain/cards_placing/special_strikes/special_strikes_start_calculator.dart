@@ -13,7 +13,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
 
   late final MoneyStorageRead _nationMoney;
 
-  late final GameFieldControlsSpecialStrikesCard _card;
+  late final GameFieldControlsCard<SpecialStrikeType> _card;
 
   SpecialStrikesStartCalculator({
     required SpecialStrikesCardsPlacingStrategy strategy,
@@ -22,7 +22,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
     required Nation myNation,
     required MapMetadataRead mapMetadata,
     required MoneyStorageRead nationMoney,
-    required GameFieldControlsSpecialStrikesCard card,
+    required GameFieldControlsCard<SpecialStrikeType> card,
   }) {
     _strategy = strategy;
     _oldInactiveCells = oldInactiveCells;

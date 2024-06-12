@@ -45,7 +45,7 @@ abstract interface class CardsPlacingStrategy<C extends GameFieldControlsCard<T>
   List<GameFieldCellRead> getAllCellsImpossibleToBuild();
 }
 
-class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsUnitCard, UnitType> {
+class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsCard<UnitType>, UnitType> {
   UnitsCardsPlacingStrategy({
     required super.card,
     required super.cell,
@@ -69,7 +69,7 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsUn
 }
 
 class UnitBoostCardsPlacingStrategy
-    extends CardsPlacingStrategy<GameFieldControlsUnitBoostersCard, UnitBoost> {
+    extends CardsPlacingStrategy<GameFieldControlsCard<UnitBoost>, UnitBoost> {
   UnitBoostCardsPlacingStrategy({
     required super.card,
     required super.cell,
@@ -101,7 +101,7 @@ class UnitBoostCardsPlacingStrategy
 }
 
 class TerrainModifierCardsPlacingStrategy
-    extends CardsPlacingStrategy<GameFieldControlsTerrainModifiersCard, TerrainModifierType> {
+    extends CardsPlacingStrategy<GameFieldControlsCard<TerrainModifierType>, TerrainModifierType> {
   TerrainModifierCardsPlacingStrategy({
     required super.card,
     required super.cell,
@@ -124,7 +124,7 @@ class TerrainModifierCardsPlacingStrategy
 }
 
 class ProductionCenterCardsPlacingStrategy
-    extends CardsPlacingStrategy<GameFieldControlsProductionCentersCard, ProductionCenterType> {
+    extends CardsPlacingStrategy<GameFieldControlsCard<ProductionCenterType>, ProductionCenterType> {
   ProductionCenterCardsPlacingStrategy({
     required super.card,
     required super.cell,

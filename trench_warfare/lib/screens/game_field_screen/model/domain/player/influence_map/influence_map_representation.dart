@@ -87,20 +87,20 @@ class InfluenceMapRepresentation implements InfluenceMapRepresentationRead {
   @override
   InfluenceMapItemRead getItem(int row, int col) => _map.getCell(row, col);
 
-  void _updateMapItem(
-      {required InfluenceMapItem mapItem,
-      required Unit unit,
-      required double power,
-      required Nation nation}) {
-    if (unit is Carrier) {
-      mapItem.updateCarrier(power, nation);
-    } else if (unit.isShip) {
-      mapItem.updateSea(power, nation);
-    } else {
-      mapItem.updateLand(power, nation);
+    void _updateMapItem(
+        {required InfluenceMapItem mapItem,
+          required Unit unit,
+          required double power,
+          required Nation nation}) {
+      if (unit is Carrier) {
+        mapItem.updateCarrier(power, nation);
+      } else if (unit.isShip) {
+        mapItem.updateSea(power, nation);
+      } else {
+        mapItem.updateLand(power, nation);
+      }
     }
-  }
 
-  double _calculateEstimation({required double maxPower, required int pathLen, required int maxPathLen}) =>
-      maxPower - (maxPower / maxPathLen) * (pathLen - 1); // A simple linear
+    double _calculateEstimation({required double maxPower, required int pathLen, required int maxPathLen}) =>
+        maxPower - (maxPower / maxPathLen) * (pathLen - 1);   // A simple linear
 }
