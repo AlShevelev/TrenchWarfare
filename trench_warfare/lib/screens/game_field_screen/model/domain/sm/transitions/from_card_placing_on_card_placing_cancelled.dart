@@ -11,12 +11,14 @@ class FromCardPlacingOnCardPlacingCancelled extends GameObjectTransitionBase {
       carrierInfo: null,
     ));
 
-    _context.updateGameObjectsEvent.update([
-      UpdateCellInactivity(
-        newInactiveCells: {},
-        oldInactiveCells: cellsImpossibleToBuild,
-      )
-    ]);
+    if (!_context.isAI) {
+      _context.updateGameObjectsEvent.update([
+        UpdateCellInactivity(
+          newInactiveCells: {},
+          oldInactiveCells: cellsImpossibleToBuild,
+        )
+      ]);
+    }
 
     return ReadyForInput();
   }

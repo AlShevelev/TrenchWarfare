@@ -42,12 +42,14 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
 
     final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
 
-    _context.updateGameObjectsEvent.update([
-      UpdateCellInactivity(
-        newInactiveCells: cellsImpossibleToBuildMap,
-        oldInactiveCells: {},
-      )
-    ]);
+    if (!_context.isAI) {
+      _context.updateGameObjectsEvent.update([
+        UpdateCellInactivity(
+          newInactiveCells: cellsImpossibleToBuildMap,
+          oldInactiveCells: {},
+        )
+      ]);
+    }
 
     return CardPlacing(card, cellsImpossibleToBuildMap);
   }

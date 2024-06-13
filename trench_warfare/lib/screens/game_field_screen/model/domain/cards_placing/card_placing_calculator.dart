@@ -58,12 +58,14 @@ class CardPlacingCalculator implements PlacingCalculator {
 
       final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
 
-      _updateGameObjectsEvent.update([
-        UpdateCellInactivity(
-          newInactiveCells: cellsImpossibleToBuildMap,
-          oldInactiveCells: _oldInactiveCells,
-        )
-      ]);
+      if (!_isAI) {
+        _updateGameObjectsEvent.update([
+          UpdateCellInactivity(
+            newInactiveCells: cellsImpossibleToBuildMap,
+            oldInactiveCells: _oldInactiveCells,
+          )
+        ]);
+      }
 
       return CardPlacing(_strategy.card, cellsImpossibleToBuildMap);
     } else {
@@ -74,12 +76,14 @@ class CardPlacingCalculator implements PlacingCalculator {
         carrierInfo: null,
       ));
 
-      _updateGameObjectsEvent.update([
-        UpdateCellInactivity(
-          newInactiveCells: {},
-          oldInactiveCells: _oldInactiveCells,
-        )
-      ]);
+      if (!_isAI) {
+        _updateGameObjectsEvent.update([
+          UpdateCellInactivity(
+            newInactiveCells: {},
+            oldInactiveCells: _oldInactiveCells,
+          )
+        ]);
+      }
 
       return ReadyForInput();
     }

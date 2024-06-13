@@ -36,12 +36,14 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
         card: _card,
       ));
 
-      _context.updateGameObjectsEvent.update([
-        UpdateCellInactivity(
-          newInactiveCells: _newInactiveCells,
-          oldInactiveCells: _oldInactiveCells,
-        )
-      ]);
+      if (!_context.isAI) {
+        _context.updateGameObjectsEvent.update([
+          UpdateCellInactivity(
+            newInactiveCells: _newInactiveCells,
+            oldInactiveCells: _oldInactiveCells,
+          )
+        ]);
+      }
 
       return CardPlacing(_card, _newInactiveCells);
     } else {
@@ -52,12 +54,14 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
         carrierInfo: null,
       ));
 
-      _context.updateGameObjectsEvent.update([
-        UpdateCellInactivity(
-          newInactiveCells: {},
-          oldInactiveCells: _oldInactiveCells,
-        )
-      ]);
+      if (!_context.isAI) {
+        _context.updateGameObjectsEvent.update([
+          UpdateCellInactivity(
+            newInactiveCells: {},
+            oldInactiveCells: _oldInactiveCells,
+          )
+        ]);
+      }
 
       return ReadyForInput();
     }
