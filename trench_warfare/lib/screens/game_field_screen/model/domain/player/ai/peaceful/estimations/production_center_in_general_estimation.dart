@@ -27,6 +27,8 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
 
   double get _correctionFactor => _isLand ? 2.0 : 4.0;
 
+  double get _maxFractionCellWithPCs => _isLand ? 0.1 : 0.05;
+
   ProductionCenterInGeneralEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
@@ -46,6 +48,18 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
     if (_type == ProductionCenterType.airField) {
       throw ArgumentError("Can't make an estimation for an air field");
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Turned off for debug purpose only - the naval base calculates too slow - it must be optimized
+    if (_type == ProductionCenterType.navalBase) {
+      return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
     final allCells = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
@@ -84,15 +98,24 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       if (cell.nation == _myNation) {
         allOurCells++;
 
-        if (cell.productionCenter?.type == _type) {
+        if (cell.productionCenter?.type != null) {
           allOurCellsWithPC++;
         }
       }
     }
 
+    // We don't need too many production centers.
+    log('--------------------------------------------');
+    log('type: $_type; allOurCellsWithPC: $allOurCellsWithPC; allOurCells: $allOurCells; allOurCellsWithPC / allOurCells: ${allOurCellsWithPC.toDouble() / allOurCells}');
+    if (allOurCellsWithPC.toDouble() / allOurCells > _maxFractionCellWithPCs) {
+      log('return 0 -----------------------------------');
+      return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+    }
+
     final resultWeight = allOurCellsWithPC == 0
         ? 10.0
         : (math.sqrt(allOurCells.toDouble() / allOurCellsWithPC) - 1) / _correctionFactor;
+    log('return $resultWeight ---------------------------------');
     return ProductionCenterInGeneralEstimationResult(resultWeight, cellsPossibleToBuild: allSafeCells);
   }
 }

@@ -28,13 +28,14 @@ class PeacefulPlayerAi extends PlayerAi {
       final unitsGeneralEstimationResult = _estimateUnitsInGeneral(influences);
 
       final generalActionIndex = RandomGen.randomWeight([
-        pcGeneralEstimationResult.entries.map((e) => e.value.weight).average(),
-        minesGeneralEstimationResult.entries.map((e) => e.value.weight).average(),
-        unitsGeneralEstimationResult.entries.map((e) => e.value.weight).average(),
+        pcGeneralEstimationResult.map((e) => e.result.weight).average(),
+        minesGeneralEstimationResult.map((e) => e.result.weight).average(),
+        unitsGeneralEstimationResult.map((e) => e.result.weight).average(),
       ]);
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can
+      log('AI generalActionIndex: $generalActionIndex');
       if (generalActionIndex == null) {
         break;
       }
@@ -53,10 +54,10 @@ class PeacefulPlayerAi extends PlayerAi {
     _player.onEndOfTurnButtonClick();
   }
 
-  Map<ProductionCenterType, ProductionCenterInGeneralEstimationResult> _estimateProductionCentersInGeneral(
+  List<ProductionCenterEstimationRecord> _estimateProductionCentersInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final Map<ProductionCenterType, ProductionCenterInGeneralEstimationResult> result = {};
+    final List<ProductionCenterEstimationRecord> result = [];
 
     final types = [ProductionCenterType.navalBase, ProductionCenterType.city, ProductionCenterType.factory];
 
@@ -70,16 +71,16 @@ class PeacefulPlayerAi extends PlayerAi {
         metadata: _metadata,
       );
 
-      result[type] = estimator.estimate();
+      result.add(ProductionCenterEstimationRecord(type: type, result: estimator.estimate()));
     }
 
     return result;
   }
 
-  Map<TerrainModifierType, MineFieldsInGeneralEstimationResult> _estimateMineFieldsInGeneral(
+  List<TerrainModifierEstimationRecord> _estimateMineFieldsInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final Map<TerrainModifierType, MineFieldsInGeneralEstimationResult> result = {};
+    final List<TerrainModifierEstimationRecord> result = [];
 
     final types = [TerrainModifierType.landMine, TerrainModifierType.seaMine];
 
@@ -92,16 +93,16 @@ class PeacefulPlayerAi extends PlayerAi {
           influenceMap: influenceMap,
           metadata: _metadata);
 
-      result[type] = estimator.estimate();
+      result.add(TerrainModifierEstimationRecord(type: type, result: estimator.estimate()));
     }
 
     return result;
   }
 
-  Map<UnitType, UnitsInGeneralEstimationResult> _estimateUnitsInGeneral(
+  List<UnitsEstimationRecord> _estimateUnitsInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final Map<UnitType, UnitsInGeneralEstimationResult> result = {};
+    final List<UnitsEstimationRecord> result = [];
 
     final types = [
       UnitType.armoredCar,
@@ -125,25 +126,29 @@ class PeacefulPlayerAi extends PlayerAi {
           influenceMap: influenceMap,
           metadata: _metadata);
 
-      result[type] = estimator.estimate();
+      result.add(UnitsEstimationRecord(type: type, result: estimator.estimate()));
     }
 
     return result;
   }
 
-  void _processProductionCenter(Map<ProductionCenterType, ProductionCenterInGeneralEstimationResult> source) {
+  void _processProductionCenter(List<ProductionCenterEstimationRecord> source) {
     // Selecting a type of production center
-    final allWeights = source.entries.map((e) => e.value.weight).toList(growable: false);
+    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
+    log('_processProductionCenter allWeights: [${allWeights.map((e) => e.toString()).join(', ')}]');
     final caseIndex = RandomGen.randomWeight(allWeights);
+
+    log('_processProductionCenter caseIndex: $caseIndex');
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.entries.elementAt(caseIndex).key;
+    final selectedType = source.elementAt(caseIndex).type;
+    log('_processProductionCenter selectedType: $selectedType');
 
     // Selecting a specific cell
-    final cellsToBuild = source.entries.elementAt(caseIndex).value.cellsPossibleToBuild;
+    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToBuild;
     final cellToBuildIndex =
         RandomGen.randomWeight(cellsToBuild.map((c) => EqualsEstimator().estimate().weight));
 
@@ -159,21 +164,21 @@ class PeacefulPlayerAi extends PlayerAi {
   }
 
   void _processMines(
-    Map<TerrainModifierType, MineFieldsInGeneralEstimationResult> source,
+    List<TerrainModifierEstimationRecord> source,
     InfluenceMapRepresentationRead influenceMap,
   ) {
     // Selecting a type of mine field
-    final allWeights = source.entries.map((e) => e.value.weight).toList(growable: false);
+    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.entries.elementAt(caseIndex).key;
+    final selectedType = source.elementAt(caseIndex).type;
 
     // Selecting a specific cell
-    final cellsToBuild = source.entries.elementAt(caseIndex).value.cellsPossibleToPlace;
+    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToPlace;
     final cellToBuildIndex = RandomGen.randomWeight(cellsToBuild.map((c) =>
         DangerousEstimator(cell: c, influenceMap: influenceMap, metadata: _metadata).estimate().weight));
 
@@ -189,21 +194,21 @@ class PeacefulPlayerAi extends PlayerAi {
   }
 
   void _processUnits(
-    Map<UnitType, UnitsInGeneralEstimationResult> source,
+    List<UnitsEstimationRecord> source,
     InfluenceMapRepresentationRead influenceMap,
   ) {
     // Selecting a type of mine field
-    final allWeights = source.entries.map((e) => e.value.weight).toList(growable: false);
+    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.entries.elementAt(caseIndex).key;
+    final selectedType = source.elementAt(caseIndex).type;
 
     // Selecting a specific cell
-    final cellsToBuild = source.entries.elementAt(caseIndex).value.cellsPossibleToHire;
+    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToHire;
     final cellToBuildIndex = RandomGen.randomWeight(cellsToBuild.map((c) =>
         DangerousEstimator(cell: c, influenceMap: influenceMap, metadata: _metadata).estimate().weight));
 

@@ -147,6 +147,7 @@ class ProductionCenterCardsPlacingStrategy
   @override
   void updateCell() {
     productionCenter = _calculateProductionCenter(_cell.productionCenter, _type)!;
+    log('ProductionCenterCardsPlacingStrategy _type: $_type');
     _cell.setProductionCenter(productionCenter);
   }
 

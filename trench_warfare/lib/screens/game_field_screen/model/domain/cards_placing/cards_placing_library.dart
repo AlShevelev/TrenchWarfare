@@ -1,5 +1,7 @@
 library cards_placing;
 
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
