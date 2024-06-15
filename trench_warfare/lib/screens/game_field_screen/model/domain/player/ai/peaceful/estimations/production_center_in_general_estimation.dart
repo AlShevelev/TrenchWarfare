@@ -49,7 +49,6 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       throw ArgumentError("Can't make an estimation for an air field");
     }
 
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +69,7 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
     }
 
     final allAggressors = _metadata.getAllAggressive();
-    final allSafeCells = allCells.where((c) {
+    var allSafeCells = allCells.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
       for (final aggressor in allAggressors) {
@@ -87,8 +86,8 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
     }
 
-    var allOurCells = 0;
-    var allOurCellsWithPC = 0;
+    var allOurCellsCount = 0;
+    final List<GameFieldCellRead> allOurCellsWithPC = [];
 
     for (final cell in _gameField.cells) {
       if ((cell.isLand && !_isLand) || (!cell.isLand && _isLand)) {
@@ -96,22 +95,30 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       }
 
       if (cell.nation == _myNation) {
-        allOurCells++;
+        allOurCellsCount++;
 
         if (cell.productionCenter?.type == _type) {
-          allOurCellsWithPC++;
+          allOurCellsWithPC.add(cell);
         }
       }
     }
 
     // We don't need too many production centers.
-    if (allOurCellsWithPC.toDouble() / allOurCells > _maxFractionCellWithPCs) {
-      return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+    if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
+      final pcWithoutMaxLevel = allOurCellsWithPC
+          .where((c) => c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type));
+
+      // All production centers are upgraded - that's all
+      if (pcWithoutMaxLevel.isEmpty) {
+        return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+      } else {
+        allSafeCells = pcWithoutMaxLevel;
+      }
     }
 
-    final resultWeight = allOurCellsWithPC == 0
+    final resultWeight = allOurCellsWithPC.isEmpty
         ? 10.0
-        : (math.sqrt(allOurCells.toDouble() / allOurCellsWithPC) - 1) / _correctionFactor;
+        : (math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor;
     return ProductionCenterInGeneralEstimationResult(resultWeight, cellsPossibleToBuild: allSafeCells);
   }
 }
