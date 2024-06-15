@@ -31,6 +31,8 @@ class GameFieldStateMachine {
   }
 
   void process(Event event) {
+    log('SM start. Event is: $event; state is: $_currentState');
+
     final newState = switch (_currentState) {
       Initial() => switch (event) {
           OnStarTurn() => FromInitialOnOnStarTurnTransition(_context).process(),
@@ -107,6 +109,8 @@ class GameFieldStateMachine {
     };
 
     _currentState = newState;
+
+    log('SM finish. New state is: $newState');
 
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();

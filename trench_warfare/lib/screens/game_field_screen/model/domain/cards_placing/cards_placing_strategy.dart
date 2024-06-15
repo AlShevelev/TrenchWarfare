@@ -146,8 +146,9 @@ class ProductionCenterCardsPlacingStrategy
 
   @override
   void updateCell() {
+    log('AI_PEACEFUL 6. ProductionCenterCardsPlacingStrategy updateCell _type: $_type');
     productionCenter = _calculateProductionCenter(_cell.productionCenter, _type)!;
-    log('ProductionCenterCardsPlacingStrategy _type: $_type');
+    log('AI_PEACEFUL 7. ProductionCenterCardsPlacingStrategy updateCell setProductionCenter type: ${productionCenter.type}');
     _cell.setProductionCenter(productionCenter);
   }
 

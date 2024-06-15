@@ -8,6 +8,8 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
     GameFieldCell cell,
     GameFieldControlsCard card,
   ) {
+    log('AI_PEACEFUL 5. FromCardPlacingOnCellClicked process(${card.type})');
+
     // do noting if a user clicked an invalid cell
     if (cellsImpossibleToBuild.containsKey(cell.id)) {
       return CardPlacing(card, cellsImpossibleToBuild);

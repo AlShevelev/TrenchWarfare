@@ -98,24 +98,20 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       if (cell.nation == _myNation) {
         allOurCells++;
 
-        if (cell.productionCenter?.type != null) {
+        if (cell.productionCenter?.type == _type) {
           allOurCellsWithPC++;
         }
       }
     }
 
     // We don't need too many production centers.
-    log('--------------------------------------------');
-    log('type: $_type; allOurCellsWithPC: $allOurCellsWithPC; allOurCells: $allOurCells; allOurCellsWithPC / allOurCells: ${allOurCellsWithPC.toDouble() / allOurCells}');
     if (allOurCellsWithPC.toDouble() / allOurCells > _maxFractionCellWithPCs) {
-      log('return 0 -----------------------------------');
       return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
     }
 
     final resultWeight = allOurCellsWithPC == 0
         ? 10.0
         : (math.sqrt(allOurCells.toDouble() / allOurCellsWithPC) - 1) / _correctionFactor;
-    log('return $resultWeight ---------------------------------');
     return ProductionCenterInGeneralEstimationResult(resultWeight, cellsPossibleToBuild: allSafeCells);
   }
 }

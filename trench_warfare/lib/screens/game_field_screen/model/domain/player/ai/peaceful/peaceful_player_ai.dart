@@ -135,17 +135,17 @@ class PeacefulPlayerAi extends PlayerAi {
   void _processProductionCenter(List<ProductionCenterEstimationRecord> source) {
     // Selecting a type of production center
     final allWeights = source.map((e) => e.result.weight).toList(growable: false);
-    log('_processProductionCenter allWeights: [${allWeights.map((e) => e.toString()).join(', ')}]');
+    log('AI_PEACEFUL 1. PeacefulPlayerAi allWeights: [${allWeights.map((e) => e.toString()).join(', ')}]');
     final caseIndex = RandomGen.randomWeight(allWeights);
 
-    log('_processProductionCenter caseIndex: $caseIndex');
+    log('AI_PEACEFUL 2. PeacefulPlayerAi caseIndex: $caseIndex');
 
     if (caseIndex == null) {
       return;
     }
 
     final selectedType = source.elementAt(caseIndex).type;
-    log('_processProductionCenter selectedType: $selectedType');
+    log('AI_PEACEFUL 3. PeacefulPlayerAi selectedType: $selectedType');
 
     // Selecting a specific cell
     final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToBuild;
@@ -225,7 +225,9 @@ class PeacefulPlayerAi extends PlayerAi {
 
   void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) {
     _player.onCardsButtonClick();
+    log('AI_PEACEFUL 3. PeacefulPlayerAi onCardSelected(${card.type})');
     _player.onCardSelected(card);
     _player.onClick(cell.center);
+    _player.onCardsPlacingCancelled();
   }
 }
