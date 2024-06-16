@@ -17,11 +17,11 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
       }
 
       for (var unit in cell.units) {
-        updateUnit(unit, cell.productionCenter?.type);
+        _updateUnit(unit, cell.productionCenter?.type);
 
         if (unit is Carrier) {
           for (var unit in unit.units) {
-            updateUnit(unit, null);
+            _updateUnit(unit, null);
           }
         }
       }
@@ -29,14 +29,7 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
       events.add(UpdateCell(cell, updateBorderCells: []));
     }
 
-    final cameraPosition = _context.gameFieldSettingsStorage.cameraPosition;
-    events.add(SetCamera(
-      _context.gameFieldSettingsStorage.zoom ?? ZoomConstants.startZoom,
-      cameraPosition,
-    ));
-    if (cameraPosition == null) {
-      events.add(MoveCameraToCell(_context.gameField.cells.firstWhere((c) => c.nation == _context.nation)));
-    }
+    _setCameraPosition(events);
 
     _context.updateGameObjectsEvent.update(events);
 
@@ -50,7 +43,7 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
     return ReadyForInput();
   }
 
-  void updateUnit(Unit unit, ProductionCenterType? cellProductionCenter) {
+  void _updateUnit(Unit unit, ProductionCenterType? cellProductionCenter) {
     unit.setFatigue(unit.maxFatigue);
     unit.setMovementPoints(unit.maxMovementPoints);
 

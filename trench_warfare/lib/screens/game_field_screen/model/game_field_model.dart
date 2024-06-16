@@ -3,12 +3,12 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:tuple/tuple.dart';
@@ -32,8 +32,6 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   PlayerGameObjectCallback get gameObjectCallback => _players[_currentPlayerIndex];
 
-  late final MapMetadata _metadata;
-
   late final GameFieldRead _gameField;
   GameFieldRead get gameField => _gameField;
 
@@ -46,17 +44,21 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       .map((event) => _isHumanPlayer ? event : Invisible()); // Hides controls for AI players
 
   Future<void> init(RenderableTiledMap tileMap) async {
-    _metadata = await compute(MetadataReader.read, tileMap.map);
+    final metadata = await compute(MetadataReader.read, tileMap.map);
+
     _gameField = await compute(
       GameFieldReader.read,
       Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map),
     );
 
-    for (var i = 0; i < _metadata.nations.length; i++) {
+    final gameFieldSettingsStorage = GameFieldSettingsStorage();
+
+    for (var i = 0; i < metadata.nations.length; i++) {
       final core = PlayerCore(
         _gameField,
-        _metadata.nations[i],
-        _metadata,
+        gameFieldSettingsStorage,
+        metadata.nations[i],
+        metadata,
         _updateGameObjectsEvent,
         _controlsState,
         this,
@@ -72,9 +74,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
           _playersAi.add(PeacefulPlayerAi(
             _gameField,
             core,
-            _metadata.nations[i].code,
+            metadata.nations[i].code,
             core.money,
-            _metadata,
+            metadata,
           )); // France
         default:
           _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium

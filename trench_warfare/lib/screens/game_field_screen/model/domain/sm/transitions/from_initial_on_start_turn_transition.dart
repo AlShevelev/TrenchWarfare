@@ -15,7 +15,8 @@ class FromInitialOnOnStarTurnTransition extends GameObjectTransitionBase {
 
     final cellsToAdd = _context.gameField.cells.where((c) => c.nation != null);
     events.addAll(cellsToAdd.map((c) => UpdateCell(c, updateBorderCells: [])));
-    events.add(MoveCameraToCell(_context.gameField.cells.firstWhere((c) => c.nation == _context.nation)));
+
+    _setCameraPosition(events);
 
     _context.updateGameObjectsEvent.update(events);
 

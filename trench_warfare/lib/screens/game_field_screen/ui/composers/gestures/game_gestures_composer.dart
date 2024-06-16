@@ -54,7 +54,7 @@ class GameGesturesComposer {
     }
 
     _checkBorders();
-    _viewModelInput.humanInput?.onCameraUpdated(_zoom, _camera.position);
+    _viewModelInput.humanInput?.onCameraUpdated(_camera.zoom, _camera.position);
   }
 
   Future<void> onTapStart(Vector2 position) async {

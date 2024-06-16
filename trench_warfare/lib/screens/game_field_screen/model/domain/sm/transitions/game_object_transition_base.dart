@@ -24,4 +24,19 @@ abstract class GameObjectTransitionBase {
   @protected
   Iterable<GameFieldCell> _estimatePath({required Iterable<GameFieldCell> path}) =>
       _pathFacade.estimatePath(path: path);
+
+  @protected
+  void _setCameraPosition(List<UpdateGameEvent> events) {
+    final cameraPosition = _context.isAI ? null : _context.gameFieldSettingsStorage.cameraPosition;
+    final zoomLevel = _context.gameFieldSettingsStorage.zoom ?? ZoomConstants.startZoom;
+
+    events.add(SetCamera(
+      zoomLevel,
+      cameraPosition,
+    ));
+
+    if (cameraPosition == null) {
+      events.add(MoveCameraToCell(_context.gameField.cells.firstWhere((c) => c.nation == _context.nation)));
+    }
+  }
 }
