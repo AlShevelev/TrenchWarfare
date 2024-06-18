@@ -12,6 +12,7 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
 
     // do noting if a user clicked an invalid cell
     if (cellsImpossibleToBuild.containsKey(cell.id)) {
+      log('AI_PEACEFUL 51. return CardPlacing in FromCardPlacingOnCellClicked');
       return CardPlacing(card, cellsImpossibleToBuild);
     }
 

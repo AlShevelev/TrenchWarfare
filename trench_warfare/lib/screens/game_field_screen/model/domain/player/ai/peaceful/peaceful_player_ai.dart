@@ -19,7 +19,10 @@ class PeacefulPlayerAi extends PlayerAi {
 
   @override
   void start() async {
+    log('--------------------- AI start the turn ---------------------');
     while (true) {
+      log('------- AI the loop iteration -------');
+
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
@@ -27,11 +30,15 @@ class PeacefulPlayerAi extends PlayerAi {
       final minesGeneralEstimationResult = _estimateMineFieldsInGeneral(influences);
       final unitsGeneralEstimationResult = _estimateUnitsInGeneral(influences);
 
-      final generalActionIndex = RandomGen.randomWeight([
+      final averageWeights = [
         pcGeneralEstimationResult.map((e) => e.result.weight).average(),
         minesGeneralEstimationResult.map((e) => e.result.weight).average(),
         unitsGeneralEstimationResult.map((e) => e.result.weight).average(),
-      ]);
+      ];
+
+      log('AI averageWeights (PC, mines, units): [${averageWeights[0]}, ${averageWeights[1]}, ${averageWeights[2]}]');
+
+      final generalActionIndex = RandomGen.randomWeight(averageWeights);
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can
@@ -49,6 +56,8 @@ class PeacefulPlayerAi extends PlayerAi {
           _processUnits(unitsGeneralEstimationResult, influences);
       }
     }
+
+    log('--------------------- AI the loop is finished ---------------------');
 
     await Future.delayed(const Duration(seconds: 1));
     _player.onEndOfTurnButtonClick();

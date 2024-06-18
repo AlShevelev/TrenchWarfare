@@ -68,7 +68,7 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
       }
 
       return true;
-    });
+    }).toList(growable: false);
 
     // It's a dangerous time, we shouldn't build production centers in a moment
     if (allSafeCells.isEmpty) {
@@ -95,7 +95,10 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
     // We don't need too many production centers.
     if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
       final pcWithoutMaxLevel = allOurCellsWithPC
-          .where((c) => c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type));
+          .where((c) =>
+              c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type) &&
+              allSafeCells.contains(c))
+          .toList(growable: false);
 
       // All production centers are upgraded - that's all
       if (pcWithoutMaxLevel.isEmpty) {

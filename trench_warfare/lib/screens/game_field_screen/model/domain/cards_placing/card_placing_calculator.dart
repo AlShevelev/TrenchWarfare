@@ -67,6 +67,7 @@ class CardPlacingCalculator implements PlacingCalculator {
         ]);
       }
 
+      log('AI_PEACEFUL 51_alt. return CardPlacing in CardPlacingCalculator');
       return CardPlacing(_strategy.card, cellsImpossibleToBuildMap);
     } else {
       _controlsState.update(MainControls(

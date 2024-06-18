@@ -46,6 +46,7 @@ class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
   void _updateUnit(Unit unit, ProductionCenterType? cellProductionCenter) {
     unit.setFatigue(unit.maxFatigue);
     unit.setMovementPoints(unit.maxMovementPoints);
+    unit.setState(UnitState.enabled);
 
     final healthFactor = (unit.isMechanical && cellProductionCenter == ProductionCenterType.factory) ||
             (!unit.isMechanical && cellProductionCenter == ProductionCenterType.city) ||
