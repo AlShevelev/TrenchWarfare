@@ -239,17 +239,17 @@ class UnitInBattlePreparationCalculator {
 
     return switch (productionCenter.type) {
       ProductionCenterType.city => switch (productionCenter.level) {
-          ProductionCenterLevel.level1 => 1.05,
-          ProductionCenterLevel.level2 => 1.1,
-          ProductionCenterLevel.level3 => 1.15,
-          ProductionCenterLevel.level4 => 1.2,
-          ProductionCenterLevel.capital => 1.25,
+          ProductionCenterLevel.level1 => 1.15,
+          ProductionCenterLevel.level2 => 1.3,
+          ProductionCenterLevel.level3 => 1.45,
+          ProductionCenterLevel.level4 => 1.6,
+          ProductionCenterLevel.capital => 1.75,
         },
       ProductionCenterType.factory => switch (productionCenter.level) {
-          ProductionCenterLevel.level1 => 1.1,
-          ProductionCenterLevel.level2 => 1.2,
-          ProductionCenterLevel.level3 => 1.3,
-          ProductionCenterLevel.level4 => 1.4,
+          ProductionCenterLevel.level1 => 1.2,
+          ProductionCenterLevel.level2 => 1.4,
+          ProductionCenterLevel.level3 => 1.6,
+          ProductionCenterLevel.level4 => 1.8,
           _ => 1,
         },
       _ => 1,
