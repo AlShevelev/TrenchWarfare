@@ -51,7 +51,6 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
       ]);
     }
 
-    log('AI_PEACEFUL 45. FromCardSelectingOnCardsSelected process(${card.type})');
     return CardPlacing(card, cellsImpossibleToBuildMap);
   }
 }

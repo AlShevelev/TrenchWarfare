@@ -19,10 +19,7 @@ class PeacefulPlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    log('--------------------- AI start the turn ---------------------');
     while (true) {
-      log('------- AI the loop iteration -------');
-
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
@@ -36,13 +33,10 @@ class PeacefulPlayerAi extends PlayerAi {
         unitsGeneralEstimationResult.map((e) => e.result.weight).average(),
       ];
 
-      log('AI averageWeights (PC, mines, units): [${averageWeights[0]}, ${averageWeights[1]}, ${averageWeights[2]}]');
-
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can
-      log('AI generalActionIndex: $generalActionIndex');
       if (generalActionIndex == null) {
         break;
       }
@@ -56,8 +50,6 @@ class PeacefulPlayerAi extends PlayerAi {
           _processUnits(unitsGeneralEstimationResult, influences);
       }
     }
-
-    log('--------------------- AI the loop is finished ---------------------');
 
     await Future.delayed(const Duration(seconds: 1));
     _player.onEndOfTurnButtonClick();
@@ -144,17 +136,13 @@ class PeacefulPlayerAi extends PlayerAi {
   void _processProductionCenter(List<ProductionCenterEstimationRecord> source) {
     // Selecting a type of production center
     final allWeights = source.map((e) => e.result.weight).toList(growable: false);
-    log('AI_PEACEFUL 1. PeacefulPlayerAi allWeights: [${allWeights.map((e) => e.toString()).join(', ')}]');
     final caseIndex = RandomGen.randomWeight(allWeights);
-
-    log('AI_PEACEFUL 2. PeacefulPlayerAi caseIndex: $caseIndex');
 
     if (caseIndex == null) {
       return;
     }
 
     final selectedType = source.elementAt(caseIndex).type;
-    log('AI_PEACEFUL 3. PeacefulPlayerAi selectedType: $selectedType');
 
     // Selecting a specific cell
     final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToBuild;
@@ -234,7 +222,6 @@ class PeacefulPlayerAi extends PlayerAi {
 
   void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) {
     _player.onCardsButtonClick();
-    log('AI_PEACEFUL 3. PeacefulPlayerAi onCardSelected(${card.type})');
     _player.onCardSelected(card);
     _player.onClick(cell.center);
     _player.onCardsPlacingCancelled();
