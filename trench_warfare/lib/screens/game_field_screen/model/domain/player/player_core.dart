@@ -68,7 +68,6 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     if (card == null) {
       _stateMachine.process(OnCancelled());
     } else {
-      log('AI_PEACEFUL 4. PlayerCore onCardSelected(${card.type})');
       _stateMachine.process(OnCardSelected(card));
     }
   }
