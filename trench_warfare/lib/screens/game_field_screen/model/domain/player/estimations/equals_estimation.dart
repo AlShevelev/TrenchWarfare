@@ -1,4 +1,4 @@
-part of estimations;
+part of estimaitons_general;
 
 class EqualsEstimationResult extends EstimationResult {
   EqualsEstimationResult(super.weight);

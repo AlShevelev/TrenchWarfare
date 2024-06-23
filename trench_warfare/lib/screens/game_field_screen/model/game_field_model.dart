@@ -4,7 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/peaceful/peaceful_player_ai_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -78,8 +81,16 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             core.money,
             metadata,
           )); // France
+        case 2:
+          _playersAi.add(AggressivePlayerAi(
+            _gameField,
+            core,
+            metadata.nations[i].code,
+            core.money,
+            metadata,
+          )); // Greece
         default:
-          _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium
+          _playersAi.add(PassivePlayerAi(core)); // Belgium
       }
     }
 

@@ -1,4 +1,4 @@
-part of player_ai;
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 
 class PassivePlayerAi extends PlayerAi {
   PassivePlayerAi(super.player);
@@ -6,6 +6,6 @@ class PassivePlayerAi extends PlayerAi {
   @override
   void start() async {
     await Future.delayed(const Duration(seconds: 1));
-    _player.onEndOfTurnButtonClick();
+    player.onEndOfTurnButtonClick();
   }
 }

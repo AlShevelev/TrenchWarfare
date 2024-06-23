@@ -1,3 +1,5 @@
+part of estimaitons_general;
+
 abstract class EstimationResult {
   final double weight;
 

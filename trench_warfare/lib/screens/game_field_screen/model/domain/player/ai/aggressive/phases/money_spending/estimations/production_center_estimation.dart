@@ -1,16 +1,16 @@
-part of estimations;
+part of aggressive_player_ai;
 
-class ProductionCenterInGeneralEstimationResult extends EstimationResult {
+class ProductionCenterEstimationResult extends EstimationResult {
   final Iterable<GameFieldCellRead> cellsPossibleToBuild;
 
-  ProductionCenterInGeneralEstimationResult(
-    super.weight, {
-    required this.cellsPossibleToBuild,
-  });
+  ProductionCenterEstimationResult(
+      super.weight, {
+        required this.cellsPossibleToBuild,
+      });
 }
 
 /// Should we build production center on not in general?
-class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterInGeneralEstimationResult> {
+class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationResult> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -25,11 +25,21 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
 
   bool get _isLand => _type != ProductionCenterType.navalBase;
 
-  double get _correctionFactor => _isLand ? 2.0 : 4.0;
+  double get _correctionFactor => switch(_type) {
+    ProductionCenterType.navalBase =>  4.0,
+    ProductionCenterType.city =>  2.0,
+    ProductionCenterType.factory =>  2.0,
+    ProductionCenterType.airField =>  3.0,
+  };
 
-  double get _maxFractionCellWithPCs => _isLand ? 0.1 : 0.05;
+  double get _maxFractionCellWithPCs => switch(_type) {
+    ProductionCenterType.navalBase =>  0.05,
+    ProductionCenterType.city =>  0.1,
+    ProductionCenterType.factory =>  0.1,
+    ProductionCenterType.airField =>  0.075,
+  };
 
-  ProductionCenterInGeneralEstimator({
+  ProductionCenterEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -44,25 +54,21 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
         _metadata = metadata;
 
   @override
-  ProductionCenterInGeneralEstimationResult estimate() {
-    if (_type == ProductionCenterType.airField) {
-      throw ArgumentError("Can't make an estimation for an air field");
-    }
-
+  ProductionCenterEstimationResult estimate() {
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
-    final allCells = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
-    if (allCells.isEmpty) {
-      return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+    if (allCellsPossibleToBuild.isEmpty) {
+      return ProductionCenterEstimationResult(0, cellsPossibleToBuild: []);
     }
 
-    final allAggressors = _metadata.getAllAggressive();
-    var allSafeCells = allCells.where((c) {
+    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    var allSafeCells = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
       for (final aggressor in allAggressors) {
-        if (cellFromMap.hasAny(aggressor)) {
+        if (cellFromMap.getCombined(aggressor) >  cellFromMap.getCombined(_myNation)) {
           return false;
         }
       }
@@ -72,7 +78,7 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
 
     // It's a dangerous time, we shouldn't build production centers in a moment
     if (allSafeCells.isEmpty) {
-      return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+      return ProductionCenterEstimationResult(0, cellsPossibleToBuild: []);
     }
 
     var allOurCellsCount = 0;
@@ -96,13 +102,13 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
     if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
       final pcWithoutMaxLevel = allOurCellsWithPC
           .where((c) =>
-              c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type) &&
-              allSafeCells.contains(c))
+      c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type) &&
+          allSafeCells.contains(c))
           .toList(growable: false);
 
       // All production centers are upgraded - that's all
       if (pcWithoutMaxLevel.isEmpty) {
-        return ProductionCenterInGeneralEstimationResult(0, cellsPossibleToBuild: []);
+        return ProductionCenterEstimationResult(0, cellsPossibleToBuild: []);
       } else {
         allSafeCells = pcWithoutMaxLevel;
       }
@@ -111,6 +117,6 @@ class ProductionCenterInGeneralEstimator implements Estimator<ProductionCenterIn
     final resultWeight = allOurCellsWithPC.isEmpty
         ? 10.0
         : (math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor;
-    return ProductionCenterInGeneralEstimationResult(resultWeight, cellsPossibleToBuild: allSafeCells);
+    return ProductionCenterEstimationResult(resultWeight, cellsPossibleToBuild: allSafeCells);
   }
 }

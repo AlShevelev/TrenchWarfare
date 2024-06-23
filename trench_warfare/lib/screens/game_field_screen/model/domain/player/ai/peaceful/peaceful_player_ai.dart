@@ -1,4 +1,4 @@
-part of player_ai;
+part of peaceful_player_ai;
 
 class PeacefulPlayerAi extends PlayerAi {
   final GameFieldRead _gameField;
@@ -52,7 +52,7 @@ class PeacefulPlayerAi extends PlayerAi {
     }
 
     await Future.delayed(const Duration(seconds: 1));
-    _player.onEndOfTurnButtonClick();
+    player.onEndOfTurnButtonClick();
   }
 
   List<ProductionCenterEstimationRecord> _estimateProductionCentersInGeneral(
@@ -63,7 +63,7 @@ class PeacefulPlayerAi extends PlayerAi {
     final types = [ProductionCenterType.navalBase, ProductionCenterType.city, ProductionCenterType.factory];
 
     for (final type in types) {
-      final estimator = ProductionCenterInGeneralEstimator(
+      final estimator = ProductionCenterEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -86,7 +86,7 @@ class PeacefulPlayerAi extends PlayerAi {
     final types = [TerrainModifierType.landMine, TerrainModifierType.seaMine];
 
     for (final type in types) {
-      final estimator = MineFieldsInGeneralEstimator(
+      final estimator = MineFieldsEstimator(
           gameField: _gameField,
           myNation: _myNation,
           type: type,
@@ -119,7 +119,7 @@ class PeacefulPlayerAi extends PlayerAi {
     ];
 
     for (final type in types) {
-      final estimator = UnitsInGeneralEstimator(
+      final estimator = UnitsEstimator(
           gameField: _gameField,
           myNation: _myNation,
           type: type,
@@ -221,9 +221,9 @@ class PeacefulPlayerAi extends PlayerAi {
   }
 
   void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) {
-    _player.onCardsButtonClick();
-    _player.onCardSelected(card);
-    _player.onClick(cell.center);
-    _player.onCardsPlacingCancelled();
+    player.onCardsButtonClick();
+    player.onCardSelected(card);
+    player.onClick(cell.center);
+    player.onCardsPlacingCancelled();
   }
 }

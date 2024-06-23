@@ -1,16 +1,16 @@
-part of estimations;
+part of peaceful_player_ai;
 
-class UnitsInGeneralEstimationResult extends EstimationResult {
+class UnitsEstimationResult extends EstimationResult {
   final Iterable<GameFieldCellRead> cellsPossibleToHire;
 
-  UnitsInGeneralEstimationResult(
+  UnitsEstimationResult(
       super.weight, {
         required this.cellsPossibleToHire,
       });
 }
 
-/// Should we place mine fields in general?
-class UnitsInGeneralEstimator implements Estimator<UnitsInGeneralEstimationResult> {
+/// Should we hire a unit in general?
+class UnitsEstimator implements Estimator<UnitsEstimationResult> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -27,7 +27,7 @@ class UnitsInGeneralEstimator implements Estimator<UnitsInGeneralEstimationResul
 
   double get _correctionFactor => _isLand ? 1.0 : 2.0;
 
-  UnitsInGeneralEstimator({
+  UnitsEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required UnitType type,
@@ -42,21 +42,21 @@ class UnitsInGeneralEstimator implements Estimator<UnitsInGeneralEstimationResul
         _metadata = metadata;
 
   @override
-  UnitsInGeneralEstimationResult estimate() {
+  UnitsEstimationResult estimate() {
     if (_type == UnitType.carrier) {
       throw ArgumentError("Can't make an estimation for this type of unit: $_type");
     }
 
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
-    final allCells = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
-    if (allCells.isEmpty) {
-      return UnitsInGeneralEstimationResult(0, cellsPossibleToHire: []);
+    if (allCellsPossibleToBuild.isEmpty) {
+      return UnitsEstimationResult(0, cellsPossibleToHire: []);
     }
 
     final allAggressors = _metadata.getAllAggressive();
-    final allCellsInDanger = allCells.where((c) {
+    final allCellsInDanger = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
       for (final aggressor in allAggressors) {
@@ -70,7 +70,7 @@ class UnitsInGeneralEstimator implements Estimator<UnitsInGeneralEstimationResul
 
     // We are not in danger right now? - do nothing
     if (allCellsInDanger.isEmpty) {
-      return UnitsInGeneralEstimationResult(0, cellsPossibleToHire: []);
+      return UnitsEstimationResult(0, cellsPossibleToHire: []);
     }
 
     var allOurCells = _gameField.cells.count((c) {
@@ -86,6 +86,6 @@ class UnitsInGeneralEstimator implements Estimator<UnitsInGeneralEstimationResul
     });
 
     final resultWeight = (allCellsInDanger.length.toDouble() / allOurCells) * 15.0 / _correctionFactor;
-    return UnitsInGeneralEstimationResult(resultWeight, cellsPossibleToHire: allCellsInDanger);
+    return UnitsEstimationResult(resultWeight, cellsPossibleToHire: allCellsInDanger);
   }
 }

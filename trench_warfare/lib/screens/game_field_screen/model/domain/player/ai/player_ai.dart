@@ -1,10 +1,9 @@
-part of player_ai;
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 
 abstract class PlayerAi {
-  @protected
-  final PlayerInput _player;
+  final PlayerInput player;
 
-  PlayerAi(this._player);
+  PlayerAi(this.player);
 
   void start();
 }

@@ -1,16 +1,16 @@
-part of estimations;
+part of peaceful_player_ai;
 
-class MineFieldsInGeneralEstimationResult extends EstimationResult {
+class MineFieldsEstimationResult extends EstimationResult {
   final Iterable<GameFieldCellRead> cellsPossibleToPlace;
 
-  MineFieldsInGeneralEstimationResult(
+  MineFieldsEstimationResult(
     super.weight, {
     required this.cellsPossibleToPlace,
   });
 }
 
 /// Should we place mine fields in general?
-class MineFieldsInGeneralEstimator implements Estimator<MineFieldsInGeneralEstimationResult> {
+class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -27,7 +27,7 @@ class MineFieldsInGeneralEstimator implements Estimator<MineFieldsInGeneralEstim
 
   double get _correctionFactor => _isLand ? 1.0 : 2.0;
 
-  MineFieldsInGeneralEstimator({
+  MineFieldsEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required TerrainModifierType type,
@@ -42,21 +42,21 @@ class MineFieldsInGeneralEstimator implements Estimator<MineFieldsInGeneralEstim
         _metadata = metadata;
 
   @override
-  MineFieldsInGeneralEstimationResult estimate() {
+  MineFieldsEstimationResult estimate() {
     if (_type != TerrainModifierType.landMine && _type != TerrainModifierType.seaMine) {
       throw ArgumentError("Can't make an estimation for this terrain type: $_type");
     }
 
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
-    final allCells = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
-    if (allCells.isEmpty) {
-      return MineFieldsInGeneralEstimationResult(0, cellsPossibleToPlace: []);
+    if (allCellsPossibleToBuild.isEmpty) {
+      return MineFieldsEstimationResult(0, cellsPossibleToPlace: []);
     }
 
     final allAggressors = _metadata.getAllAggressive();
-    final allCellsInDanger = allCells.where((c) {
+    final allCellsInDanger = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
       for (final aggressor in allAggressors) {
@@ -70,7 +70,7 @@ class MineFieldsInGeneralEstimator implements Estimator<MineFieldsInGeneralEstim
 
     // We are not in danger right now? - do nothing
     if (allCellsInDanger.isEmpty) {
-      return MineFieldsInGeneralEstimationResult(0, cellsPossibleToPlace: []);
+      return MineFieldsEstimationResult(0, cellsPossibleToPlace: []);
     }
 
     var allOurCells = _gameField.cells.count((c) {
@@ -86,6 +86,6 @@ class MineFieldsInGeneralEstimator implements Estimator<MineFieldsInGeneralEstim
     });
 
     final resultWeight = (allCellsInDanger.length.toDouble() / allOurCells) * 10.0 / _correctionFactor;
-    return MineFieldsInGeneralEstimationResult(resultWeight, cellsPossibleToPlace: allCellsInDanger);
+    return MineFieldsEstimationResult(resultWeight, cellsPossibleToPlace: allCellsInDanger);
   }
 }

@@ -1,4 +1,4 @@
-part of estimations;
+part of estimaitons_general;
 
 class DangerousEstimationResult extends EstimationResult {
   DangerousEstimationResult(super.weight);
