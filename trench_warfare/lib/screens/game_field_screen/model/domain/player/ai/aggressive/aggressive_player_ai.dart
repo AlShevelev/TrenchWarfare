@@ -19,13 +19,13 @@ class AggressivePlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    await MoneySpendingPhase(
-      player,
-      _gameField,
-      _myNation,
-      _nationMoney,
-      _metadata,
-    ).start();
+    // await MoneySpendingPhase(
+    //   player,
+    //   _gameField,
+    //   _myNation,
+    //   _nationMoney,
+    //   _metadata,
+    // ).start();
 
     await Future.delayed(const Duration(seconds: 1));
     player.onEndOfTurnButtonClick();

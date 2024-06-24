@@ -23,14 +23,20 @@ class PeacefulPlayerAi extends PlayerAi {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
-      final pcGeneralEstimationResult = _estimateProductionCentersInGeneral(influences);
-      final minesGeneralEstimationResult = _estimateMineFieldsInGeneral(influences);
-      final unitsGeneralEstimationResult = _estimateUnitsInGeneral(influences);
+      final pcEstimationResult = _estimateProductionCentersInGeneral(influences);
+      final minesEstimationResult = _estimateMineFieldsInGeneral(influences);
+      final unitsEstimationResult = _estimateUnitsInGeneral(influences);
 
       final averageWeights = [
-        pcGeneralEstimationResult.map((e) => e.result.weight).average(),
-        minesGeneralEstimationResult.map((e) => e.result.weight).average(),
-        unitsGeneralEstimationResult.map((e) => e.result.weight).average(),
+        pcEstimationResult.isEmpty
+            ? 0.0
+            : pcEstimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!,
+        minesEstimationResult.isEmpty
+            ? 0.0
+            : minesEstimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!,
+        unitsEstimationResult.isEmpty
+            ? 0.0
+            : unitsEstimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!,
       ];
 
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
@@ -43,11 +49,11 @@ class PeacefulPlayerAi extends PlayerAi {
 
       switch (generalActionIndex) {
         case 0:
-          _processProductionCenter(pcGeneralEstimationResult);
+          _processProductionCenter(pcEstimationResult);
         case 1:
-          _processMines(minesGeneralEstimationResult, influences);
+          _processMines(minesEstimationResult, influences);
         case 2:
-          _processUnits(unitsGeneralEstimationResult, influences);
+          _processUnits(unitsEstimationResult, influences);
       }
     }
 
@@ -55,10 +61,10 @@ class PeacefulPlayerAi extends PlayerAi {
     player.onEndOfTurnButtonClick();
   }
 
-  List<ProductionCenterEstimationRecord> _estimateProductionCentersInGeneral(
+  Iterable<EstimationResult<ProductionCenterEstimationData>> _estimateProductionCentersInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final List<ProductionCenterEstimationRecord> result = [];
+    final List<EstimationResult<ProductionCenterEstimationData>> result = [];
 
     final types = [ProductionCenterType.navalBase, ProductionCenterType.city, ProductionCenterType.factory];
 
@@ -72,16 +78,16 @@ class PeacefulPlayerAi extends PlayerAi {
         metadata: _metadata,
       );
 
-      result.add(ProductionCenterEstimationRecord(type: type, result: estimator.estimate()));
+      result.addAll(estimator.estimate());
     }
 
     return result;
   }
 
-  List<TerrainModifierEstimationRecord> _estimateMineFieldsInGeneral(
+  Iterable<EstimationResult<MineFieldsEstimationData>> _estimateMineFieldsInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final List<TerrainModifierEstimationRecord> result = [];
+    final List<EstimationResult<MineFieldsEstimationData>> result = [];
 
     final types = [TerrainModifierType.landMine, TerrainModifierType.seaMine];
 
@@ -94,16 +100,16 @@ class PeacefulPlayerAi extends PlayerAi {
           influenceMap: influenceMap,
           metadata: _metadata);
 
-      result.add(TerrainModifierEstimationRecord(type: type, result: estimator.estimate()));
+      result.addAll(estimator.estimate());
     }
 
     return result;
   }
 
-  List<UnitsEstimationRecord> _estimateUnitsInGeneral(
+  Iterable<EstimationResult<UnitsEstimationData>> _estimateUnitsInGeneral(
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    final List<UnitsEstimationRecord> result = [];
+    final List<EstimationResult<UnitsEstimationData>> result = [];
 
     final types = [
       UnitType.armoredCar,
@@ -127,96 +133,63 @@ class PeacefulPlayerAi extends PlayerAi {
           influenceMap: influenceMap,
           metadata: _metadata);
 
-      result.add(UnitsEstimationRecord(type: type, result: estimator.estimate()));
+      result.addAll(estimator.estimate());
     }
 
     return result;
   }
 
-  void _processProductionCenter(List<ProductionCenterEstimationRecord> source) {
-    // Selecting a type of production center
-    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
+  void _processProductionCenter(Iterable<EstimationResult<ProductionCenterEstimationData>> source) {
+    final allWeights = source.map((e) => 1.0).toList(growable: false);
+
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.elementAt(caseIndex).type;
-
-    // Selecting a specific cell
-    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToBuild;
-    final cellToBuildIndex =
-        RandomGen.randomWeight(cellsToBuild.map((c) => EqualsEstimator().estimate().weight));
-
-    if (cellToBuildIndex == null) {
-      return;
-    }
-
     // User action simulation
     _simulateCardSelection(
-      card: GameFieldControlsProductionCentersCardBrief(type: selectedType),
-      cell: cellsToBuild.elementAt(cellToBuildIndex),
+      card: GameFieldControlsProductionCentersCardBrief(type: source.elementAt(caseIndex).data.type),
+      cell: source.elementAt(caseIndex).data.cell,
     );
   }
 
   void _processMines(
-    List<TerrainModifierEstimationRecord> source,
+    Iterable<EstimationResult<MineFieldsEstimationData>> source,
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    // Selecting a type of mine field
-    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
+    final allWeights = source.map((e) => e.data.dangerousFactor).toList(growable: false);
+
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.elementAt(caseIndex).type;
-
-    // Selecting a specific cell
-    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToPlace;
-    final cellToBuildIndex = RandomGen.randomWeight(cellsToBuild.map((c) =>
-        DangerousEstimator(cell: c, influenceMap: influenceMap, metadata: _metadata).estimate().weight));
-
-    if (cellToBuildIndex == null) {
-      return;
-    }
-
     // User action simulation
     _simulateCardSelection(
-      card: GameFieldControlsTerrainModifiersCardBrief(type: selectedType),
-      cell: cellsToBuild.elementAt(cellToBuildIndex),
+      card: GameFieldControlsTerrainModifiersCardBrief(type: source.elementAt(caseIndex).data.type),
+      cell: source.elementAt(caseIndex).data.cell,
     );
   }
 
   void _processUnits(
-    List<UnitsEstimationRecord> source,
+    Iterable<EstimationResult<UnitsEstimationData>> source,
     InfluenceMapRepresentationRead influenceMap,
   ) {
-    // Selecting a type of mine field
-    final allWeights = source.map((e) => e.result.weight).toList(growable: false);
+    final allWeights = source.map((e) => e.data.dangerousFactor).toList(growable: false);
+
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
       return;
     }
 
-    final selectedType = source.elementAt(caseIndex).type;
-
-    // Selecting a specific cell
-    final cellsToBuild = source.elementAt(caseIndex).result.cellsPossibleToHire;
-    final cellToBuildIndex = RandomGen.randomWeight(cellsToBuild.map((c) =>
-        DangerousEstimator(cell: c, influenceMap: influenceMap, metadata: _metadata).estimate().weight));
-
-    if (cellToBuildIndex == null) {
-      return;
-    }
-
     // User action simulation
     _simulateCardSelection(
-      card: GameFieldControlsUnitCardBrief(type: selectedType),
-      cell: cellsToBuild.elementAt(cellToBuildIndex),
+      card: GameFieldControlsUnitCardBrief(type: source.elementAt(caseIndex).data.type),
+      cell: source.elementAt(caseIndex).data.cell,
     );
   }
 

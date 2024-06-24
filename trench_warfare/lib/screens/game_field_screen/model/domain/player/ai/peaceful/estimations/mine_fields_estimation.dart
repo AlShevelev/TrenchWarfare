@@ -1,16 +1,17 @@
 part of peaceful_player_ai;
 
-class MineFieldsEstimationResult extends EstimationResult {
-  final Iterable<GameFieldCellRead> cellsPossibleToPlace;
+class MineFieldsEstimationData {
+  final GameFieldCellRead cell;
 
-  MineFieldsEstimationResult(
-    super.weight, {
-    required this.cellsPossibleToPlace,
-  });
+  final TerrainModifierType type;
+
+  final double dangerousFactor;
+
+  MineFieldsEstimationData({required this.cell, required this.type, required this.dangerousFactor});
 }
 
 /// Should we place mine fields in general?
-class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
+class MineFieldsEstimator implements Estimator<MineFieldsEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -42,7 +43,7 @@ class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
         _metadata = metadata;
 
   @override
-  MineFieldsEstimationResult estimate() {
+  Iterable<EstimationResult<MineFieldsEstimationData>> estimate() {
     if (_type != TerrainModifierType.landMine && _type != TerrainModifierType.seaMine) {
       throw ArgumentError("Can't make an estimation for this terrain type: $_type");
     }
@@ -52,7 +53,7 @@ class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
-      return MineFieldsEstimationResult(0, cellsPossibleToPlace: []);
+      return [];
     }
 
     final allAggressors = _metadata.getAllAggressive();
@@ -70,7 +71,7 @@ class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
 
     // We are not in danger right now? - do nothing
     if (allCellsInDanger.isEmpty) {
-      return MineFieldsEstimationResult(0, cellsPossibleToPlace: []);
+      return [];
     }
 
     var allOurCells = _gameField.cells.count((c) {
@@ -86,6 +87,20 @@ class MineFieldsEstimator implements Estimator<MineFieldsEstimationResult> {
     });
 
     final resultWeight = (allCellsInDanger.length.toDouble() / allOurCells) * 10.0 / _correctionFactor;
-    return MineFieldsEstimationResult(resultWeight, cellsPossibleToPlace: allCellsInDanger);
+    return allCellsInDanger
+        .map((c) => EstimationResult<MineFieldsEstimationData>(
+              weight: resultWeight,
+              data: MineFieldsEstimationData(
+                cell: c,
+                type: _type,
+                dangerousFactor: _calculateDangerousFactor(c, allAggressors),
+              ),
+            ))
+        .toList(growable: false);
+  }
+
+  double _calculateDangerousFactor(GameFieldCellRead cell, List<Nation> allAggressors) {
+    final mapCell = _influenceMap.getItem(cell.row, cell.col);
+    return allAggressors.map((a) => mapCell.getCombined(a)).sum();
   }
 }

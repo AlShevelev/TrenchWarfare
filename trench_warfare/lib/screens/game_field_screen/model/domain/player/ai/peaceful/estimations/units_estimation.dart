@@ -1,16 +1,17 @@
 part of peaceful_player_ai;
 
-class UnitsEstimationResult extends EstimationResult {
-  final Iterable<GameFieldCellRead> cellsPossibleToHire;
+class UnitsEstimationData {
+  final GameFieldCellRead cell;
 
-  UnitsEstimationResult(
-      super.weight, {
-        required this.cellsPossibleToHire,
-      });
+  final UnitType type;
+
+  final double dangerousFactor;
+
+  UnitsEstimationData({required this.cell, required this.type, required this.dangerousFactor});
 }
 
 /// Should we hire a unit in general?
-class UnitsEstimator implements Estimator<UnitsEstimationResult> {
+class UnitsEstimator implements Estimator<UnitsEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -42,7 +43,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
         _metadata = metadata;
 
   @override
-  UnitsEstimationResult estimate() {
+  Iterable<EstimationResult<UnitsEstimationData>> estimate() {
     if (_type == UnitType.carrier) {
       throw ArgumentError("Can't make an estimation for this type of unit: $_type");
     }
@@ -52,7 +53,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
-      return UnitsEstimationResult(0, cellsPossibleToHire: []);
+      return [];
     }
 
     final allAggressors = _metadata.getAllAggressive();
@@ -70,7 +71,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
 
     // We are not in danger right now? - do nothing
     if (allCellsInDanger.isEmpty) {
-      return UnitsEstimationResult(0, cellsPossibleToHire: []);
+      return [];
     }
 
     var allOurCells = _gameField.cells.count((c) {
@@ -86,6 +87,21 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
     });
 
     final resultWeight = (allCellsInDanger.length.toDouble() / allOurCells) * 15.0 / _correctionFactor;
-    return UnitsEstimationResult(resultWeight, cellsPossibleToHire: allCellsInDanger);
+
+    return allCellsInDanger
+        .map((c) => EstimationResult<UnitsEstimationData>(
+              weight: resultWeight,
+              data: UnitsEstimationData(
+                cell: c,
+                type: _type,
+                dangerousFactor: _calculateDangerousFactor(c, allAggressors),
+              ),
+            ))
+        .toList(growable: false);
+  }
+
+  double _calculateDangerousFactor(GameFieldCellRead cell, List<Nation> allAggressors) {
+    final mapCell = _influenceMap.getItem(cell.row, cell.col);
+    return allAggressors.map((a) => mapCell.getCombined(a)).sum();
   }
 }

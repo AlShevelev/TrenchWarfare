@@ -1,5 +1,6 @@
 part of aggressive_player_ai;
 
+/*
 class UnitsEstimationResult extends EstimationResult {
   final Iterable<GameFieldCellRead> cellsPossibleToHire;
 
@@ -8,8 +9,10 @@ class UnitsEstimationResult extends EstimationResult {
         required this.cellsPossibleToHire,
       });
 }
+*/
 
 /// Should we hire a unit in general?
+/*
 class UnitsEstimator implements Estimator<UnitsEstimationResult> {
   final GameFieldRead _gameField;
 
@@ -89,6 +92,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
     return UnitsEstimationResult(resultWeight, cellsPossibleToHire: allCellsInDanger);
   }
 }
+*/
 
 /*
 Must not be so depend on dangerous factor (but the dungerous cells must have priority).

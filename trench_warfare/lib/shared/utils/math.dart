@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:math' as math;
 
 import 'package:flame/components.dart';
 import 'package:tuple/tuple.dart';
@@ -132,3 +133,6 @@ double normalize({required double value, required double min, required double ma
 
   return value - min / max - min;
 }
+
+/// returns the common logarithm of the given value
+double log10(double n) => math.log(n) / math.ln10;
