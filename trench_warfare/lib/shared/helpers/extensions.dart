@@ -30,4 +30,16 @@ extension ListsGeneral<T> on Iterable<T> {
 
     return counter;
   }
+
+  bool all(bool Function(T) condition) {
+    var counter = 0;
+
+    for (final item in this) {
+      if (condition(item)) {
+        counter++;
+      }
+    }
+
+    return counter == length;
+  }
 }

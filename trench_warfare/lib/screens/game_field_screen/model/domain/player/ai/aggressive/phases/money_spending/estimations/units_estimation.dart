@@ -1,19 +1,29 @@
 part of aggressive_player_ai;
 
-/*
-class UnitsEstimationResult extends EstimationResult {
-  final Iterable<GameFieldCellRead> cellsPossibleToHire;
+class UnitEstimationData {
+  final GameFieldCellRead cell;
 
-  UnitsEstimationResult(
-      super.weight, {
-        required this.cellsPossibleToHire,
-      });
+  final UnitType type;
+
+  UnitEstimationData({required this.cell, required this.type});
 }
-*/
+
+class _CellWithDangerFactor {
+  final GameFieldCellRead cell;
+
+  final double dangerFactor;
+
+  final double? minDistanceToEnemyUnit;
+
+  _CellWithDangerFactor({
+    required this.cell,
+    required this.dangerFactor,
+    required this.minDistanceToEnemyUnit,
+  });
+}
 
 /// Should we hire a unit in general?
-/*
-class UnitsEstimator implements Estimator<UnitsEstimationResult> {
+class UnitsEstimator implements Estimator<UnitEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -28,7 +38,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
 
   bool get _isLand => _type.isLand;
 
-  double get _correctionFactor => _isLand ? 1.0 : 2.0;
+  double get _correctionFactor => _isLand ? 1.0 : 0.5;
 
   UnitsEstimator({
     required GameFieldRead gameField,
@@ -45,57 +55,79 @@ class UnitsEstimator implements Estimator<UnitsEstimationResult> {
         _metadata = metadata;
 
   @override
-  UnitsEstimationResult estimate() {
+  Iterable<EstimationResult<UnitEstimationData>> estimate() {
     if (_type == UnitType.carrier) {
       throw ArgumentError("Can't make an estimation for this type of unit: $_type");
     }
 
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
-    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
-    if (allCellsPossibleToBuild.isEmpty) {
-      return UnitsEstimationResult(0, cellsPossibleToHire: []);
+    if (cellsPossibleToBuild.isEmpty) {
+      return [];
     }
 
     final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
-    final allCellsInDanger = allCellsPossibleToBuild.where((c) {
-      final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
+    final allCellsWithEnemies = _getAllCellsWithEnemies(allAggressors);
+
+    final cellsPossibleToBuildExt = cellsPossibleToBuild.map((cell) {
+      final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
+
+      // Calculates total danger level
+      double totalDanger = 0;
       for (final aggressor in allAggressors) {
-        if (cellFromMap.hasAny(aggressor)) {
-          return true;
+        totalDanger += cellFromMap.getCombined(aggressor);
+      }
+
+      // Calculate min distance to enemy
+      var minDistance = allCellsWithEnemies.isEmpty ? null : _gameField.cells.length.toDouble();
+      for (final cellWithEnemy in allCellsWithEnemies) {
+        final distance = _gameField.calculateDistance(cell, cellWithEnemy);
+        if (distance < minDistance!) {
+          minDistance = distance;
         }
       }
 
-      return false;
-    });
+      return _CellWithDangerFactor(
+        cell: cell,
+        dangerFactor: totalDanger,
+        minDistanceToEnemyUnit: minDistance,
+      );
+    }).toList(growable: false);
 
-    // We are not in danger right now? - do nothing
-    if (allCellsInDanger.isEmpty) {
-      return UnitsEstimationResult(0, cellsPossibleToHire: []);
-    }
+    final unitPower = UnitPowerEstimation.estimate(Unit.byType(_type));
 
-    var allOurCells = _gameField.cells.count((c) {
-      if (c.nation != _myNation) {
-        return false;
-      }
+    final maxDistance = math.sqrt(math.pow(_gameField.rows, 2) + math.pow(_gameField.cols, 2));
 
-      if ((c.isLand && !_isLand) || (!c.isLand && _isLand)) {
-        return false;
-      }
+    return cellsPossibleToBuildExt.map((cell) {
+      final weight = log10(unitPower) *
+          log10(cell.dangerFactor, errorValue: 1) *
+          log10(maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance), errorValue: 1);
 
-      return true;
-    });
-
-    final resultWeight = (allCellsInDanger.length.toDouble() / allOurCells) * 15.0 / _correctionFactor;
-    return UnitsEstimationResult(resultWeight, cellsPossibleToHire: allCellsInDanger);
+      return EstimationResult<UnitEstimationData>(
+        weight: weight * _correctionFactor,
+        data: UnitEstimationData(
+          cell: cell.cell,
+          type: _type,
+        ),
+      );
+    }).toList(growable: false);
   }
-}
-*/
 
-/*
-Must not be so depend on dangerous factor (but the dungerous cells must have priority).
-The closer to the front the better
-The stronger the better
-*/
+  Iterable<GameFieldCellRead> _getAllCellsWithEnemies(Iterable<Nation> allAggressors) =>
+      _gameField.cells.where((gameFieldCell) {
+        if (gameFieldCell.units.isEmpty) {
+          return false;
+        }
+
+        if (gameFieldCell.nation == null ||
+            gameFieldCell.nation == _myNation ||
+            !allAggressors.contains(gameFieldCell.nation)) {
+          return false;
+        }
+
+        return gameFieldCell.units.any((u) => u.type != UnitType.carrier && u.type.isLand == _type.isLand);
+      }).toList(growable: false);
+}

@@ -135,4 +135,4 @@ double normalize({required double value, required double min, required double ma
 }
 
 /// returns the common logarithm of the given value
-double log10(double n) => math.log(n) / math.ln10;
+double log10(double n, {double errorValue = 0.0}) => n <= 0 ? errorValue : math.log(n) / math.ln10;
