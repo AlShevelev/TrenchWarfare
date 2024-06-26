@@ -115,7 +115,7 @@ class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationD
 
     final resultWeight = allOurCellsWithPC.isEmpty
         ? 100.0
-        : (math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor;
+        : 1 + ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
     return allSafeCells
         .map((c) => EstimationResult<ProductionCenterEstimationData>(
               weight: resultWeight,

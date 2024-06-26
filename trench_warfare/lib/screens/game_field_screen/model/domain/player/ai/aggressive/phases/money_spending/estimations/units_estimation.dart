@@ -102,12 +102,13 @@ class UnitsEstimator implements Estimator<UnitEstimationData> {
     final maxDistance = math.sqrt(math.pow(_gameField.rows, 2) + math.pow(_gameField.cols, 2));
 
     return cellsPossibleToBuildExt.map((cell) {
-      final weight = log10(unitPower) *
+      final weight = 1 + log10(unitPower) *
           log10(cell.dangerFactor, errorValue: 1) *
-          log10(maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance), errorValue: 1);
+          log10(maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance), errorValue: 1) *
+          _correctionFactor;
 
       return EstimationResult<UnitEstimationData>(
-        weight: weight * _correctionFactor,
+        weight: weight,
         data: UnitEstimationData(
           cell: cell.cell,
           type: _type,
