@@ -17,11 +17,13 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
+import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 
 part 'aggressive_player_ai.dart';
 part 'phases/turn_phase.dart';
 part 'phases/money_spending/money_spending_phase.dart';
-part 'phases/money_spending/estimations/mine_field_estimation.dart';
+part 'phases/money_spending/estimations/terrain_modifier/mine_field_estimation.dart';
+part 'phases/money_spending/estimations/terrain_modifier/trench_estimation.dart';
 part 'phases/money_spending/estimations/production_center_estimation.dart';
 part 'phases/money_spending/estimations/units_estimation.dart';
