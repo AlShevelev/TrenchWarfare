@@ -17,6 +17,20 @@ class TerrainModifierBuildCalculator {
       return false;
     }
 
+    // bridge
+    if (cell.hasRoad && cell.hasRiver) {
+      return false;
+    }
+
+    if (cell.hasRiver) {
+      if (type == TerrainModifierType.antiAirGun ||
+          type == TerrainModifierType.barbedWire ||
+          type == TerrainModifierType.landFort ||
+          type == TerrainModifierType.trench) {
+        return false;
+      }
+    }
+
     switch (type) {
       case TerrainModifierType.trench:
       case TerrainModifierType.landFort:
@@ -24,17 +38,8 @@ class TerrainModifierBuildCalculator {
       case TerrainModifierType.antiAirGun:
         {
           if (cell.nation != _myNation ||
-              !cell.isLand ||
-              cell.hasRiver ||
               cell.terrainModifier != null ||
               cell.productionCenter != null) {
-            return false;
-          }
-
-          final activeUnit = cell.activeUnit;
-          if (activeUnit == null ||
-              activeUnit.type != UnitType.infantry ||
-              activeUnit.movementPoints != activeUnit.maxMovementPoints) {
             return false;
           }
 
@@ -114,19 +119,6 @@ class TerrainModifierBuildCalculator {
   }
 
   bool _canBuildOnCellByTerrainType(GameFieldCellRead cell, TerrainModifierType type) {
-    if (cell.hasRoad) {
-      return false;
-    }
-
-    if (cell.hasRiver) {
-      if (type == TerrainModifierType.antiAirGun ||
-          type == TerrainModifierType.barbedWire ||
-          type == TerrainModifierType.landFort ||
-          type == TerrainModifierType.trench) {
-        return false;
-      }
-    }
-
     switch (cell.terrain) {
       case CellTerrain.plain:
         {
