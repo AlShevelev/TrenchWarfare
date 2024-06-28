@@ -23,6 +23,7 @@ import 'package:trench_warfare/shared/utils/math.dart';
 part 'aggressive_player_ai.dart';
 part 'phases/turn_phase.dart';
 part 'phases/money_spending/money_spending_phase.dart';
+part 'phases/money_spending/estimations/terrain_modifier/barbed_wire_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/mine_field_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/trench_estimation.dart';
 part 'phases/money_spending/estimations/production_center_estimation.dart';
