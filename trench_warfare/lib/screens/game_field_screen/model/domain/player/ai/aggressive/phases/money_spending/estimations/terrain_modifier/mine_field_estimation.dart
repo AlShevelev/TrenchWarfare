@@ -22,6 +22,8 @@ class MineFieldsEstimator implements Estimator<MineFieldEstimationData> {
 
   final MapMetadataRead _metadata;
 
+  static const _weight = 2.0;
+
   MineFieldsEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
@@ -68,7 +70,7 @@ class MineFieldsEstimator implements Estimator<MineFieldEstimationData> {
     }
 
     return cellsPossibleToBuildExt.map((c) => EstimationResult<MineFieldEstimationData>(
-          weight: 2,
+          weight: _weight,
           data: MineFieldEstimationData(
             cell: c,
             type: _type,

@@ -9,9 +9,6 @@ class SpecialStrikesBuildCalculator {
 
   late final List<GameFieldCellRead> _allCellsWithMyAirFields;
 
-  static const int _flechettesRadius = 5;
-  static const int _airBombardmentRadius = 7;
-
   SpecialStrikesBuildCalculator(GameFieldRead gameField, Nation myNation, MapMetadataRead mapMetadata) {
     _gameField = gameField;
     _myNation = myNation;
@@ -23,7 +20,10 @@ class SpecialStrikesBuildCalculator {
   }
 
   BuildRestriction? getDisplayRestriction(SpecialStrikeType type) => switch (type) {
-        SpecialStrikeType.propaganda || SpecialStrikeType.flameTroopers || SpecialStrikeType.gasAttack => null,
+        SpecialStrikeType.propaganda ||
+        SpecialStrikeType.flameTroopers ||
+        SpecialStrikeType.gasAttack =>
+          null,
         SpecialStrikeType.airBombardment => ProductionCenterBuildRestriction(
             productionCenterType: ProductionCenterType.airField,
             productionCenterLevel: ProductionCenterLevel.level2,
@@ -35,7 +35,10 @@ class SpecialStrikesBuildCalculator {
       };
 
   BuildRestriction getError(SpecialStrikeType type) => switch (type) {
-        SpecialStrikeType.propaganda || SpecialStrikeType.flameTroopers || SpecialStrikeType.gasAttack => AppropriateUnit(),
+        SpecialStrikeType.propaganda ||
+        SpecialStrikeType.flameTroopers ||
+        SpecialStrikeType.gasAttack =>
+          AppropriateUnit(),
         SpecialStrikeType.airBombardment =>
           _allCellsWithMyAirFields.any((c) => c.productionCenter?.level == ProductionCenterLevel.level2)
               ? AppropriateUnit()
@@ -77,13 +80,14 @@ class SpecialStrikesBuildCalculator {
             return false;
           }
 
-          return _allCellsWithMyAirFields.any((afc) => _gameField.calculateDistance(afc, cell) <= _flechettesRadius);
+          return _allCellsWithMyAirFields
+              .any((afc) => _gameField.calculateDistance(afc, cell) <= GameConstants.flechettesRadius);
         }
       case SpecialStrikeType.airBombardment:
         {
           return _allCellsWithMyAirFields
               .where((c) => c.productionCenter?.level == ProductionCenterLevel.level2)
-              .any((afc) => _gameField.calculateDistance(afc, cell) <= _airBombardmentRadius);
+              .any((afc) => _gameField.calculateDistance(afc, cell) <= GameConstants.airBombardmentRadius);
         }
       case SpecialStrikeType.flameTroopers:
         {
