@@ -27,6 +27,7 @@ part 'phases/turn_phase.dart';
 part 'phases/money_spending/money_spending_phase.dart';
 part 'phases/money_spending/estimations/terrain_modifier/anti_air_gun_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/barbed_wire_estimation.dart';
+part 'phases/money_spending/estimations/terrain_modifier/land_fort_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/mine_field_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/trench_estimation.dart';
 part 'phases/money_spending/estimations/production_center_estimation.dart';

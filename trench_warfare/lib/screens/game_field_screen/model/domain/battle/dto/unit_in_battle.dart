@@ -60,6 +60,8 @@ class UnitInBattle {
 
   void reduceHealth(double valueToReduce) => _health -= valueToReduce;
 
+  void increaseHealth(double valueToIncrease) => _health += valueToIncrease;
+
   void reduceFatigue(double valueToReduce) {
     _fatigue -= valueToReduce;
 

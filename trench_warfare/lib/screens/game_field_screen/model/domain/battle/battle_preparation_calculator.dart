@@ -277,6 +277,7 @@ class UnitInBattlePreparationCalculator {
       defending.updateAttack(1.2);
       defending.updateDefence(1.2);
       defending.updateHasArtillery(true);
+      defending.increaseHealth(defending.health);
     }
 
     return defending;
