@@ -120,7 +120,7 @@ class Unit extends GameObject {
 
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(UnitExperienceRank.rookies);
     _health = _getMaxHealth(type);
-    _fatigue = 1;   // well rested
+    _fatigue = 1; // well rested
 
     _defence = _getDefence();
 
@@ -232,6 +232,8 @@ class Unit extends GameObject {
         return 25;
     }
   }
+
+  static const double absoluteMaxMovementPoints = 4.0;
 
   static double _getMaxMovementPoints(UnitType type) {
     switch (type) {

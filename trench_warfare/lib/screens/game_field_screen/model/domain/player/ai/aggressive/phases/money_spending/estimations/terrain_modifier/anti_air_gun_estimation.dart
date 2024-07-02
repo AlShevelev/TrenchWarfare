@@ -1,13 +1,5 @@
 part of aggressive_player_ai;
 
-class AntiAirGunEstimationData {
-  final GameFieldCellRead cell;
-
-  final TerrainModifierType type;
-
-  AntiAirGunEstimationData({required this.cell, required this.type});
-}
-
 class _AntiAirGunCellWithFactors {
   final GameFieldCellRead cell;
 
@@ -23,7 +15,7 @@ class _AntiAirGunCellWithFactors {
 }
 
 /// Should we place an anti air gun in general?
-class AntiAirGunEstimator implements Estimator<AntiAirGunEstimationData> {
+class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -43,7 +35,7 @@ class AntiAirGunEstimator implements Estimator<AntiAirGunEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<AntiAirGunEstimationData>> estimate() {
+  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.antiAirGun,
@@ -105,11 +97,11 @@ class AntiAirGunEstimator implements Estimator<AntiAirGunEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<AntiAirGunEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<TerrainModifierEstimationData>(
           weight: 1.0 +
               _calculateWeight(c!.cell, ProductionCenterLevel.level1) * c.level1EnemyAirFieldsTotal +
               _calculateWeight(c.cell, ProductionCenterLevel.level2) * c.level2EnemyAirFieldsTotal,
-          data: AntiAirGunEstimationData(
+          data: TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.antiAirGun,
           ),

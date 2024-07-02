@@ -1,13 +1,5 @@
 part of aggressive_player_ai;
 
-class LandFortEstimationData {
-  final GameFieldCellRead cell;
-
-  final TerrainModifierType type;
-
-  LandFortEstimationData({required this.cell, required this.type});
-}
-
 class _LandFortCellWithFactors {
   final GameFieldCellRead cell;
 
@@ -26,7 +18,7 @@ class _LandFortCellWithFactors {
 }
 
 /// Should we place a land fort in general?
-class LandFortEstimator implements Estimator<LandFortEstimationData> {
+class LandFortEstimator implements Estimator<TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -52,7 +44,7 @@ class LandFortEstimator implements Estimator<LandFortEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<LandFortEstimationData>> estimate() {
+  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.landFort,
@@ -96,12 +88,12 @@ class LandFortEstimator implements Estimator<LandFortEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<LandFortEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<TerrainModifierEstimationData>(
           weight: 1.0 +
               (c!.onRoad ? _weightFactor : 0) +
               (c.blockBridge ? _weightFactor : 0) +
               c.pcNearbyCount * _weightFactor,
-          data: LandFortEstimationData(
+          data: TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.landFort,
           ),

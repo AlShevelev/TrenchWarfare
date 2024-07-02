@@ -12,7 +12,34 @@ class UnitBoosterBuildCalculator {
 
   BuildRestriction getError() => AppropriateUnit();
 
-  bool canBuildOnCell(GameFieldCellRead cell, UnitBoost type) {
+  bool canBuildForUnit(Unit unit, UnitBoost type) {
+    if (unit.boost1 != null && unit.boost2 != null && unit.boost3 != null) {
+      return false;
+    }
+
+    if (unit.boost1 == type || unit.boost2 == type || unit.boost3 == type) {
+      return false;
+    }
+
+    if (type == UnitBoost.transport && !unit.isLand) {
+      return false;
+    }
+
+    if (type == UnitBoost.transport &&
+        unit.type != UnitType.infantry &&
+        unit.type != UnitType.artillery &&
+        unit.type != UnitType.machineGuns) {
+      return false;
+    }
+
+    if ((type == UnitBoost.attack || type == UnitBoost.commander) && unit.type == UnitType.carrier) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool _canBuildOnCell(GameFieldCellRead cell, UnitBoost type) {
     if (cell.nation != _myNation) {
       return false;
     }
@@ -23,35 +50,12 @@ class UnitBoosterBuildCalculator {
       return false;
     }
 
-    if (activeUnit.boost1 != null && activeUnit.boost2 != null && activeUnit.boost3 != null) {
-      return false;
-    }
-
-    if (activeUnit.boost1 == type || activeUnit.boost2 == type || activeUnit.boost3 == type) {
-      return false;
-    }
-
-    if (type == UnitBoost.transport && !activeUnit.isLand) {
-      return false;
-    }
-
-    if (type == UnitBoost.transport &&
-        activeUnit.type != UnitType.infantry &&
-        activeUnit.type != UnitType.artillery &&
-        activeUnit.type != UnitType.machineGuns) {
-      return false;
-    }
-
-    if (type == UnitBoost.attack && activeUnit.type == UnitType.carrier) {
-      return false;
-    }
-
-    return true;
+    return canBuildForUnit(activeUnit, type);
   }
 
   bool canBuildOnGameField(UnitBoost type) {
     for (var cell in _gameField.cells) {
-      if (canBuildOnCell(cell, type)) {
+      if (_canBuildOnCell(cell, type)) {
         return true;
       }
     }
@@ -60,8 +64,17 @@ class UnitBoosterBuildCalculator {
   }
 
   List<GameFieldCellRead> getAllCellsToBuild(UnitBoost type) =>
-      _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
+      _gameField.cells.where((c) => _canBuildOnCell(c, type)).toList(growable: false);
 
+  /// Returns all the cells where we can place the booster
+  /// (including money calculations)
+  List<GameFieldCellRead> getAllCellsPossibleToBuild(UnitBoost type, MoneyUnit nationMoney) {
+    final allImpossibleIds = getAllCellsImpossibleToBuild(type, nationMoney).map((c) => c.id).toSet();
+    return _gameField.cells.where((c) => !allImpossibleIds.contains(c.id)).toList(growable: false);
+  }
+
+  /// Returns all the cells where we can't place the booster
+  /// (including money calculations)
   List<GameFieldCellRead> getAllCellsImpossibleToBuild(UnitBoost type, MoneyUnit nationMoney) {
     final buildCost = MoneyUnitBoostCalculator.calculateCost(type);
 
@@ -69,6 +82,6 @@ class UnitBoosterBuildCalculator {
       return _gameField.cells.toList(growable: false);
     }
 
-    return _gameField.cells.where((c) => !canBuildOnCell(c, type)).toList(growable: false);
+    return _gameField.cells.where((c) => !_canBuildOnCell(c, type)).toList(growable: false);
   }
 }

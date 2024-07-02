@@ -94,14 +94,14 @@ class TerrainModifierBuildCalculator {
   List<GameFieldCellRead> getAllCellsToBuild(TerrainModifierType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 
-  /// Returns all the cells where we can build or upgrade a production center
+  /// Returns all the cells where we can build or upgrade the terrain modifier
   /// (including money calculations)
   List<GameFieldCellRead> getAllCellsPossibleToBuild(TerrainModifierType type, MoneyUnit nationMoney) {
     final allImpossibleIds = getAllCellsImpossibleToBuild(type, nationMoney).map((c) => c.id).toSet();
     return _gameField.cells.where((c) => !allImpossibleIds.contains(c.id)).toList(growable: false);
   }
 
-  /// Returns all the cells where we can't build a terrain modifier
+  /// Returns all the cells where we can't build the terrain modifier
   /// (including money calculations)
   List<GameFieldCellRead> getAllCellsImpossibleToBuild(TerrainModifierType type, MoneyUnit nationMoney) {
     return _gameField.cells.where((c) {

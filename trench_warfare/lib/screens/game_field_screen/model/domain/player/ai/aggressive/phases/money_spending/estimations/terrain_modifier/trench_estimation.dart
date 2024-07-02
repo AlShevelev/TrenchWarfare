@@ -1,15 +1,7 @@
 part of aggressive_player_ai;
 
-class TrenchEstimationData {
-  final GameFieldCellRead cell;
-
-  final TerrainModifierType type;
-
-  TrenchEstimationData({required this.cell, required this.type});
-}
-
 /// Should we place a trench in general?
-class TrenchEstimator implements Estimator<TrenchEstimationData> {
+class TrenchEstimator implements Estimator<TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -33,7 +25,7 @@ class TrenchEstimator implements Estimator<TrenchEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<TrenchEstimationData>> estimate() {
+  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.trench,
@@ -61,9 +53,9 @@ class TrenchEstimator implements Estimator<TrenchEstimationData> {
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<TrenchEstimationData>(
+    return cellsPossibleToBuildExt.map((c) => EstimationResult<TerrainModifierEstimationData>(
           weight: 1.0 + c.units.count((u) => u.type == UnitType.infantry || u.type == UnitType.machineGuns),
-          data: TrenchEstimationData(
+          data: TerrainModifierEstimationData(
             cell: c,
             type: TerrainModifierType.trench,
           ),

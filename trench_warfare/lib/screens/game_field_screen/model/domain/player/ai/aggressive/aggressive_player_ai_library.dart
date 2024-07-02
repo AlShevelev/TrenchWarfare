@@ -1,5 +1,6 @@
 library aggressive_player_ai;
 
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -9,6 +10,8 @@ import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
+import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
+import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/core_entities/game_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
@@ -29,6 +32,11 @@ part 'phases/money_spending/estimations/terrain_modifier/anti_air_gun_estimation
 part 'phases/money_spending/estimations/terrain_modifier/barbed_wire_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/land_fort_estimation.dart';
 part 'phases/money_spending/estimations/terrain_modifier/mine_field_estimation.dart';
+part 'phases/money_spending/estimations/terrain_modifier/terrain_modifier_estimation_data.dart';
 part 'phases/money_spending/estimations/terrain_modifier/trench_estimation.dart';
+part 'phases/money_spending/estimations/unit_booster/attack_defence_estimator.dart';
+part 'phases/money_spending/estimations/unit_booster/commander_estimator.dart';
+part 'phases/money_spending/estimations/unit_booster/transport_estimation.dart';
+part 'phases/money_spending/estimations/unit_booster/unit_booster_estimation_data.dart';
 part 'phases/money_spending/estimations/production_center_estimation.dart';
 part 'phases/money_spending/estimations/units_estimation.dart';
