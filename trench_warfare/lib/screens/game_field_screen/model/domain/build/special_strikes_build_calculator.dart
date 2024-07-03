@@ -117,6 +117,15 @@ class SpecialStrikesBuildCalculator {
   List<GameFieldCellRead> getAllCellsToBuild(SpecialStrikeType type) =>
       _gameField.cells.where((c) => canBuildOnCell(c, type)).toList(growable: false);
 
+  /// Returns all the cells where we can use the special strike
+  /// (including money calculations)
+  List<GameFieldCellRead> getAllCellsPossibleToBuild(SpecialStrikeType type, MoneyUnit nationMoney) {
+    final allImpossibleIds = getAllCellsImpossibleToBuild(type, nationMoney).map((c) => c.id).toSet();
+    return _gameField.cells.where((c) => !allImpossibleIds.contains(c.id)).toList(growable: false);
+  }
+
+  /// Returns all the cells where we can't use the special strike
+  /// (including money calculations)
   List<GameFieldCellRead> getAllCellsImpossibleToBuild(SpecialStrikeType type, MoneyUnit nationMoney) {
     final buildCost = MoneySpecialStrikeCalculator.calculateCost(type);
 

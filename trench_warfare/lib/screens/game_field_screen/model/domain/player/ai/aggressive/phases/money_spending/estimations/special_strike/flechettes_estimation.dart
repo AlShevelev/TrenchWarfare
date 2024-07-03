@@ -1,0 +1,83 @@
+part of aggressive_player_ai;
+
+class _FlechettesCellWithFactors {
+  final GameFieldCellRead cell;
+
+  final double unitsSumPower;
+
+  final int unitsQuantity;
+
+  _FlechettesCellWithFactors({
+    required this.cell,
+    required this.unitsSumPower,
+    required this.unitsQuantity,
+  });
+}
+
+class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
+  final GameFieldRead _gameField;
+
+  final Nation _myNation;
+
+  final MoneyUnit _nationMoney;
+
+  final InfluenceMapRepresentationRead _influenceMap;
+
+  final MapMetadataRead _metadata;
+
+  FlechettesEstimator({
+    required GameFieldRead gameField,
+    required Nation myNation,
+    required MoneyUnit nationMoney,
+    required InfluenceMapRepresentationRead influenceMap,
+    required MapMetadataRead metadata,
+  })  : _gameField = gameField,
+        _myNation = myNation,
+        _nationMoney = nationMoney,
+        _influenceMap = influenceMap,
+        _metadata = metadata;
+
+  @override
+  Iterable<EstimationResult<SpecialStrikeEstimationData>> estimate() {
+    final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
+    final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
+      SpecialStrikeType.flechettes,
+      _nationMoney,
+    );
+
+    // We can't build shit
+    if (cellsPossibleToBuild.isEmpty) {
+      return [];
+    }
+
+    final cellsWithFactors = cellsPossibleToBuild
+        .map((cell) {
+          final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
+
+          if (!cellFromMap.hasAny(_myNation)) {
+            return null;
+          }
+
+          return _FlechettesCellWithFactors(
+            cell: cell,
+            unitsQuantity: cell.units.where((u) => !u.isMechanical).length,
+            unitsSumPower:
+                cell.units.where((u) => !u.isMechanical).map((u) => UnitPowerEstimation.estimate(u)).sum(),
+          );
+        })
+        .where((e) => e != null)
+        .toList(growable: false);
+
+    if (cellsWithFactors.isEmpty) {
+      return [];
+    }
+
+    return cellsWithFactors.map((c) => EstimationResult<SpecialStrikeEstimationData>(
+          weight: 1.0 + c!.unitsQuantity * c.unitsSumPower,
+          data: SpecialStrikeEstimationData(
+            cell: c.cell,
+            type: SpecialStrikeType.flechettes,
+          ),
+        ));
+  }
+}
