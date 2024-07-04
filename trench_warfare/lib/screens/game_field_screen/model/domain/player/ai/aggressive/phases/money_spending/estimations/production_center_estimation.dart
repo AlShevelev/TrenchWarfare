@@ -1,6 +1,6 @@
 part of aggressive_player_ai;
 
-class ProductionCenterEstimationData {
+class ProductionCenterEstimationData implements EstimationData {
   final GameFieldCellRead cell;
 
   final ProductionCenterType type;

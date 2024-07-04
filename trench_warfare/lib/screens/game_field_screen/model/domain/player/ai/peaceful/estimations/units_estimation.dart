@@ -1,6 +1,6 @@
 part of peaceful_player_ai;
 
-class UnitsEstimationData {
+class UnitsEstimationData implements EstimationData {
   final GameFieldCellRead cell;
 
   final UnitType type;

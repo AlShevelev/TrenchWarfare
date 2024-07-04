@@ -15,6 +15,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/money/mone
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
@@ -24,3 +25,7 @@ part 'peaceful_player_ai.dart';
 part 'estimations/mine_fields_estimation.dart';
 part 'estimations/production_center_estimation.dart';
 part 'estimations/units_estimation.dart';
+part 'processing/estimation_processor_base.dart';
+part 'processing/mine_fields_center_estimation_processor.dart';
+part 'processing/production_center_estimation_processor.dart';
+part 'processing/units_estimation_processor.dart';

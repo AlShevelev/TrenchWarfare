@@ -1,6 +1,6 @@
 part of peaceful_player_ai;
 
-class MineFieldsEstimationData {
+class MineFieldsEstimationData implements EstimationData {
   final GameFieldCellRead cell;
 
   final TerrainModifierType type;
