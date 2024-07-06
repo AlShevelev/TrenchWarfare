@@ -69,9 +69,11 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     return result;
   }
 
-
   @override
-  void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) async {
+  Future<void> _simulateCardSelection({
+    required GameFieldControlsCard card,
+    required GameFieldCellRead cell,
+  }) async {
     super._simulateCardSelection(card: card, cell: cell);
     await _signal.wait();
   }

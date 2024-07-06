@@ -1,6 +1,6 @@
 part of aggressive_player_ai;
 
-class MoneySpendingPhase {
+class MoneySpendingPhase implements TurnPhase {
   final PlayerInput _player;
 
   final GameFieldRead _gameField;
@@ -19,75 +19,77 @@ class MoneySpendingPhase {
     this._metadata,
   );
 
+  @override
   Future<void> start() async {
     while (true) {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+
+      final List<EstimationProcessor> processors = [
+        ProductionCenterEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
+        SpecialStrikeEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
+        TerrainModifierEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
+        UnitBoosterEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
+        UnitsEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
+      ];
+
+      final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
+
+      final generalActionIndex = RandomGen.randomWeight(averageWeights);
+
+      // We can't make a general decision. The presumable reason - we're short of money, or build
+      // everything we can
+      if (generalActionIndex == null) {
+        break;
+      }
+
+      final selectedProcessor = processors[generalActionIndex];
+
+      // It's a dirty, but necessary hack
+      final playerCore = _player as PlayerCore;
+      playerCore.registerOnAnimationCompleted(() {
+        selectedProcessor.onAnimationCompleted();
+      });
+      try {
+        await selectedProcessor.process();
+      } finally {
+        playerCore.registerOnAnimationCompleted(null);
+      }
     }
-  }
-
-  Iterable<EstimationResult<ProductionCenterEstimationData>> _estimateProductionCentersInGeneral(
-    InfluenceMapRepresentationRead influenceMap,
-  ) {
-    final List<EstimationResult<ProductionCenterEstimationData>> result = [];
-
-    final types = [
-      ProductionCenterType.navalBase,
-      ProductionCenterType.city,
-      ProductionCenterType.factory,
-      ProductionCenterType.airField
-    ];
-
-    for (final type in types) {
-      final estimator = ProductionCenterEstimator(
-        gameField: _gameField,
-        myNation: _myNation,
-        nationMoney: _nationMoney.actual,
-        type: type,
-        influenceMap: influenceMap,
-        metadata: _metadata,
-      );
-
-      result.addAll(estimator.estimate());
-    }
-
-    return result;
-  }
-
-  Iterable<EstimationResult<UnitEstimationData>> _estimateUnitsInGeneral(
-    InfluenceMapRepresentationRead influenceMap,
-  ) {
-    final List<EstimationResult<UnitEstimationData>> result = [];
-
-    final types = [
-      UnitType.armoredCar,
-      UnitType.artillery,
-      UnitType.infantry,
-      UnitType.cavalry,
-      UnitType.machineGunnersCart,
-      UnitType.machineGuns,
-      UnitType.tank,
-      UnitType.destroyer,
-      UnitType.cruiser,
-      UnitType.battleship,
-    ];
-
-    for (final type in types) {
-      final estimator = UnitsEstimator(
-        gameField: _gameField,
-        myNation: _myNation,
-        nationMoney: _nationMoney.actual,
-        type: type,
-        influenceMap: influenceMap,
-        metadata: _metadata,
-      );
-
-      result.addAll(estimator.estimate());
-    }
-
-    return result;
   }
 }
-
-
-// refactoring - divide on phases

@@ -10,6 +10,8 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
   late final MoneyStorage _money;
   MoneyStorageRead get money => _money;
 
+  void Function()? _onAnimationCompleted;
+
   PlayerCore(
     this._gameField,
     this._gameFieldSettingsStorage,
@@ -86,5 +88,16 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
   void onStartTurn() => _stateMachine.process(OnStarTurn());
 
   @override
-  void onAnimationComplete() => _stateMachine.process(OnAnimationCompleted());
+  void onAnimationComplete() {
+    _stateMachine.process(OnAnimationCompleted());
+
+    final onAnimationCompleted = _onAnimationCompleted;
+    if (onAnimationCompleted != null) {
+      onAnimationCompleted();
+    }
+  }
+
+  void registerOnAnimationCompleted(void Function()? onAnimationCompleted) {
+    _onAnimationCompleted = onAnimationCompleted;
+  }
 }

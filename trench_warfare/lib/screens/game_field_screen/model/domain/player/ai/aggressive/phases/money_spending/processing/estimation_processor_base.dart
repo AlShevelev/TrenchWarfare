@@ -6,7 +6,7 @@ abstract interface class EstimationProcessor {
   double estimate();
 
   /// Process estimation result
-  void process();
+  Future<void> process();
 
   /// Called when animation is completed
   void onAnimationCompleted();
@@ -57,7 +57,7 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
 
   /// Process estimation result
   @override
-  void process() {
+  Future<void> process() async {
     final allWeights = _estimationResult.map((e) => e.weight).toList(growable: false);
 
     final caseIndex = RandomGen.randomWeight(allWeights);
@@ -67,7 +67,7 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
     }
 
     // User action simulation
-    _simulateCardSelection(
+    await _simulateCardSelection(
       card: _toCard(_estimationResult.elementAt(caseIndex)),
       cell: _estimationResult.elementAt(caseIndex).data.cell,
     );
@@ -81,7 +81,10 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
       : estimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!;
 
   @protected
-  void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) {
+  Future<void> _simulateCardSelection({
+    required GameFieldControlsCard card,
+    required GameFieldCellRead cell,
+  }) async {
     _player.onCardsButtonClick();
     _player.onCardSelected(card);
     _player.onClick(cell.center);

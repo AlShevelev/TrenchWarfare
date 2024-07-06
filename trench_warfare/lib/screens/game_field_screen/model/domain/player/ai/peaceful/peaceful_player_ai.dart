@@ -50,11 +50,7 @@ class PeacefulPlayerAi extends PlayerAi {
         ),
       ];
 
-      final averageWeights = [
-        processors[0].estimate(),
-        processors[1].estimate(),
-        processors[2].estimate(),
-      ];
+      final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
 
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
 
