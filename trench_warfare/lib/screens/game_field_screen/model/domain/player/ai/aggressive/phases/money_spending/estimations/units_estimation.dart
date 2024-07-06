@@ -1,6 +1,7 @@
 part of aggressive_player_ai;
 
 class UnitEstimationData implements EstimationData {
+  @override
   final GameFieldCellRead cell;
 
   final UnitType type;

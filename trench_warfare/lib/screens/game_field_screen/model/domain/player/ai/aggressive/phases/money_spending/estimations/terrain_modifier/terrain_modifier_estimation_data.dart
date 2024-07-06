@@ -1,6 +1,7 @@
 part of aggressive_player_ai;
 
 class TerrainModifierEstimationData implements EstimationData {
+  @override
   final GameFieldCellRead cell;
 
   final TerrainModifierType type;

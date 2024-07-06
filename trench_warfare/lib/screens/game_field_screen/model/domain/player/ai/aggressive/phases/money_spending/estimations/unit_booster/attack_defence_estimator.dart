@@ -18,7 +18,7 @@ class _AttackDefenceCellWithFactors {
 }
 
 /// Should we add an attack or defence booster in general?
-class AttackEstimator implements Estimator<UnitBoosterEstimationData> {
+class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -33,7 +33,7 @@ class AttackEstimator implements Estimator<UnitBoosterEstimationData> {
 
   static const _weight = 2.0;
 
-  AttackEstimator({
+  AttackDefenceEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,

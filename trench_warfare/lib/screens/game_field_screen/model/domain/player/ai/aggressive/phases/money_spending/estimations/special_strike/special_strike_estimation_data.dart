@@ -1,6 +1,7 @@
 part of aggressive_player_ai;
 
 class SpecialStrikeEstimationData implements EstimationData {
+  @override
   final GameFieldCellRead cell;
 
   final SpecialStrikeType type;

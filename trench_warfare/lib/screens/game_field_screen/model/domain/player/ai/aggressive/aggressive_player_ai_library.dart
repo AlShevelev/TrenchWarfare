@@ -23,8 +23,11 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
+import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
+import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 part 'aggressive_player_ai.dart';
 part 'phases/turn_phase.dart';
@@ -47,3 +50,9 @@ part 'phases/money_spending/estimations/unit_booster/transport_estimation.dart';
 part 'phases/money_spending/estimations/unit_booster/unit_booster_estimation_data.dart';
 part 'phases/money_spending/estimations/production_center_estimation.dart';
 part 'phases/money_spending/estimations/units_estimation.dart';
+part 'phases/money_spending/processing/estimation_processor_base.dart';
+part 'phases/money_spending/processing/production_center_estimation_processor.dart';
+part 'phases/money_spending/processing/special_strike_estimation_processor.dart';
+part 'phases/money_spending/processing/terrain_modifier_estimation_processor.dart';
+part 'phases/money_spending/processing/unit_booster_estimation_processor.dart';
+part 'phases/money_spending/processing/units_estimation_processor.dart';

@@ -1,4 +1,8 @@
-abstract interface class EstimationData {}
+import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
+
+abstract interface class EstimationData {
+  GameFieldCellRead get cell;
+}
 
 class EstimationResult<D extends EstimationData> {
   final double weight;
