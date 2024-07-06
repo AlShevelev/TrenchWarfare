@@ -14,7 +14,12 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
   Iterable<EstimationResult<ProductionCenterEstimationData>> _makeEstimations() {
     final List<EstimationResult<ProductionCenterEstimationData>> result = [];
 
-    final types = [ProductionCenterType.navalBase, ProductionCenterType.city, ProductionCenterType.factory];
+    final types = [
+      ProductionCenterType.navalBase,
+      ProductionCenterType.city,
+      ProductionCenterType.factory,
+      ProductionCenterType.airField,
+    ];
 
     for (final type in types) {
       final estimator = ProductionCenterEstimator(

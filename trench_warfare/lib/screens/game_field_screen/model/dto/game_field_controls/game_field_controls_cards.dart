@@ -212,7 +212,7 @@ class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard<SpecialS
   });
 }
 
-class GameFieldControlsSpecialStrikesCardBrief extends GameFieldControlsCard {
+class GameFieldControlsSpecialStrikesCardBrief extends GameFieldControlsCard<SpecialStrikeType> {
   @override
   final SpecialStrikeType type;
 

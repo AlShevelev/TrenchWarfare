@@ -74,7 +74,9 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     required GameFieldControlsCard card,
     required GameFieldCellRead cell,
   }) async {
-    super._simulateCardSelection(card: card, cell: cell);
+    _player.onCardsButtonClick();
+    _player.onCardSelected(card);
+    _player.onClick(cell.center);
     await _signal.wait();
   }
 
@@ -82,6 +84,7 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
   void onAnimationCompleted() {
     _signal.unlock();
     _signal.close();
+    _player.onCardsPlacingCancelled();
   }
 
   @override
