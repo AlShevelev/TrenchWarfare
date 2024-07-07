@@ -33,6 +33,9 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
   @protected
   late final Iterable<EstimationResult<D>> _estimationResult;
 
+  /// Allows you to increase the probability of a particular processor triggering
+  double get _averageWeightBalanceFactor;
+
   EstimationProcessorBase({
     required PlayerInput player,
     required GameFieldRead gameField,
@@ -78,7 +81,10 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
 
   double _calculateAverageWeight(Iterable<EstimationResult<D>> estimationResult) => estimationResult.isEmpty
       ? 0.0
-      : estimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!;
+      : estimationResult
+          .map((e) => e.weight)
+          .average()
+          .let((v) => v == 0 ? 0.0 : _averageWeightBalanceFactor * log10(v))!;
 
   @protected
   Future<void> _simulateCardSelection({

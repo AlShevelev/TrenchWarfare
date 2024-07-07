@@ -1,6 +1,9 @@
 part of aggressive_player_ai;
 
 class TerrainModifierEstimationProcessor extends EstimationProcessorBase<TerrainModifierEstimationData> {
+  @override
+  double get _averageWeightBalanceFactor => 1.0;
+
   TerrainModifierEstimationProcessor({
     required super.player,
     required super.gameField,

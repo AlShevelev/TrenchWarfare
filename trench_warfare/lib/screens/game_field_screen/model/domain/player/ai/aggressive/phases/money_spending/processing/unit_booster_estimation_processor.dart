@@ -1,6 +1,9 @@
 part of aggressive_player_ai;
 
 class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBoosterEstimationData> {
+  @override
+  double get _averageWeightBalanceFactor => 1.0;
+
   UnitBoosterEstimationProcessor({
     required super.player,
     required super.gameField,

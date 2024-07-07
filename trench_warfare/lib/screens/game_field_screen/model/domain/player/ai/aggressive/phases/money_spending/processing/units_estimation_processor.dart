@@ -1,6 +1,9 @@
 part of aggressive_player_ai;
 
 class UnitsEstimationProcessor extends EstimationProcessorBase<UnitEstimationData> {
+  @override
+  double get _averageWeightBalanceFactor => 1.5;
+
   UnitsEstimationProcessor({
     required super.player,
     required super.gameField,

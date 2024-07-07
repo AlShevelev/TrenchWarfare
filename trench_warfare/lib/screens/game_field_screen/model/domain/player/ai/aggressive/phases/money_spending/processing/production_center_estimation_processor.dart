@@ -1,6 +1,9 @@
 part of aggressive_player_ai;
 
 class ProductionCenterEstimationProcessor extends EstimationProcessorBase<ProductionCenterEstimationData> {
+  @override
+  double get _averageWeightBalanceFactor => 1.0;
+
   ProductionCenterEstimationProcessor({
     required super.player,
     required super.gameField,

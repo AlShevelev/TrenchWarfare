@@ -1,6 +1,9 @@
 part of aggressive_player_ai;
 
 class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialStrikeEstimationData> {
+  @override
+  double get _averageWeightBalanceFactor => 1.0;
+
   final _signal = AsyncSignal(locked: true);
 
   SpecialStrikeEstimationProcessor({
