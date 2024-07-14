@@ -1,10 +1,10 @@
 enum CellTerrain {
+  water,
+  snow,
+  sand,
   plain,
   wood,
   marsh,
-  sand,
   hills,
   mountains,
-  snow,
-  water,
 }

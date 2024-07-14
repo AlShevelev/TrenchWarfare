@@ -58,9 +58,10 @@ class CellsReader {
     }
   }
 
-  static bool _hasRiver(int terrainTileIndex) => _inRange(terrainTileIndex, 9, 26) || _inRange(terrainTileIndex, 64, 71);
+  static bool _hasRiver(int terrainTileIndex) => _inRange(terrainTileIndex, 59, 114);
 
-  static bool _hasRoad(int terrainTileIndex) => _inRange(terrainTileIndex, 27, 69) || _inRange(terrainTileIndex, 72, 73);
+  static bool _hasRoad(int terrainTileIndex) =>
+      _inRange(terrainTileIndex, 9, 58) || _inRange(terrainTileIndex, 109, 114);
 
   static bool _inRange(int value, int start, int end) => value >= start && value <= end;
 }

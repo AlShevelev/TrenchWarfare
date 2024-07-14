@@ -70,19 +70,12 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
       _players.add(core);
 
+      // The new map
       switch (i) {
-        case _startIndex:
-          _playersAi.add(null); // Austria-Hungary
+        case 0:
+          _playersAi.add(null); // Germany
         case 1:
-          _playersAi.add(PeacefulPlayerAi(
-            _gameField,
-            core,
-            metadata.nations[i].code,
-            core.money,
-            metadata,
-          )); // France
-        case 2:
-          _playersAi.add(AggressivePlayerAi(
+          _playersAi.add(AggressivePlayerAi(    // Russia
             _gameField,
             core,
             metadata.nations[i].code,
@@ -90,8 +83,32 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             metadata,
           )); // Greece
         default:
-          _playersAi.add(PassivePlayerAi(core)); // Belgium
+          _playersAi.add(PassivePlayerAi(core));
       }
+
+      // The old map
+      // switch (i) {
+      //   case _startIndex:
+      //     _playersAi.add(null); // Austria-Hungary
+      //   case 1:
+      //     _playersAi.add(PeacefulPlayerAi(
+      //       _gameField,
+      //       core,
+      //       metadata.nations[i].code,
+      //       core.money,
+      //       metadata,
+      //     )); // France
+      //   case 2:
+      //     _playersAi.add(AggressivePlayerAi(
+      //       _gameField,
+      //       core,
+      //       metadata.nations[i].code,
+      //       core.money,
+      //       metadata,
+      //     )); // Greece
+      //   default:
+      //     _playersAi.add(PassivePlayerAi(core)); // Belgium
+      // }
     }
 
     _players[_currentPlayerIndex].onStartTurn();
