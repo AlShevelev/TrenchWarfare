@@ -31,6 +31,7 @@ class AggressivePlayerAi extends PlayerAi {
       player: player,
       gameField: _gameField,
       myNation: _myNation,
+      metadata: _metadata,
     ).start();
 
     await Future.delayed(const Duration(seconds: 1));

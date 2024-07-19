@@ -11,13 +11,17 @@ class UnitsMovingPhase implements TurnPhase {
 
   final PlayerActions _actions;
 
+  final MapMetadataRead _metadata;
+
   UnitsMovingPhase({
     required PlayerInput player,
     required GameFieldRead gameField,
     required Nation myNation,
+    required MapMetadataRead metadata
   })  : _player = player,
         _gameField = gameField,
         _myNation = myNation,
+        _metadata = metadata,
         _movementRegistry = MovementRegistryImpl(),
         _actions = PlayerActions(player: player) {
     // It's a dirty, but necessary hack
@@ -34,14 +38,24 @@ class UnitsMovingPhase implements TurnPhase {
       final unit = iterator.current.unit;
       GameFieldCellRead? cellWithUnit = iterator.current.cell;
 
+      bool needRecalculateInfluences = true;
+      late InfluenceMapRepresentationRead influences;
+
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled) {
+        if (needRecalculateInfluences) {
+          influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
+              (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+          needRecalculateInfluences = false;
+        }
+
         final goal = _movementRegistry.getGoal(unit.id);
 
         if (goal != null) {
           if (goal.isReachable()) {
             final cellTo = goal.getGoalCell();
             await _actions.move(unit, from: cellWithUnit, to: cellTo);
+            needRecalculateInfluences = true;
 
             // check where the unit is located in a moment
             cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
@@ -54,7 +68,11 @@ class UnitsMovingPhase implements TurnPhase {
             _movementRegistry.removeGoal(unit.id);
           }
         } else {
-          final estimators = _createEstimators();
+          final estimators = _createEstimators(
+            influences: influences,
+            unit: unit,
+            cell: cellWithUnit,
+          );
 
           final List<Tuple2<int, double>> indexedWeights = estimators
               .mapIndexed((i, e) => Tuple2<int, double>(i, e.estimate()))
@@ -69,8 +87,9 @@ class UnitsMovingPhase implements TurnPhase {
             break;
           }
 
-          final  selectedEstimator = estimators[indexedWeights[weightIndex].item1];
+          final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
           final targetCell = await selectedEstimator.processAction();
+          needRecalculateInfluences = true;
 
           cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
 
@@ -96,16 +115,101 @@ class UnitsMovingPhase implements TurnPhase {
     _movementRegistry.exclude(usedUnitIds);
   }
 
-  List<UnitEstimationProcessorBase> _createEstimators() => [
-        AttackEstimationProcessor(actions: _actions),
-        DoNothingEstimationProcessor(actions: _actions),
-        MoveToAttackEstimationProcessor(actions: _actions),
-        MoveToEnemyPcEstimationProcessor(actions: _actions),
-        MoveToEnemyUnitOnUnreachableCellEstimationProcessor(actions: _actions),
-        MoveToMineFieldEstimationProcessor(actions: _actions),
-        MoveToMyArmyEstimationProcessor(actions: _actions),
-        MoveToMyPcEstimationProcessor(actions: _actions),
-        MoveToTerrainModifierEstimationProcessor(actions: _actions),
-        ResortEstimationProcessor(actions: _actions),
+  List<UnitEstimationProcessorBase> _createEstimators({
+    required InfluenceMapRepresentationRead influences,
+    required Unit unit,
+    required GameFieldCellRead cell,
+  }) =>
+      [
+        AttackEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        DoNothingEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToAttackEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToEnemyPcEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToEnemyUnitOnUnreachableCellEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToMineFieldEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToMyArmyEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToMyPcEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        MoveToTerrainModifierEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
+        ResortEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
       ];
 }

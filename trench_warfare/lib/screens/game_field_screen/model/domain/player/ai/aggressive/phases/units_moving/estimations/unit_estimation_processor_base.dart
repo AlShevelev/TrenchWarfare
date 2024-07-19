@@ -4,7 +4,42 @@ abstract class UnitEstimationProcessorBase {
   @protected
   final PlayerActions _actions;
 
-  UnitEstimationProcessorBase({required PlayerActions actions}) : _actions = actions;
+  @protected
+  final InfluenceMapRepresentationRead _influences;
+
+  @protected
+  final Unit _unit;
+
+  @protected
+  final GameFieldCellRead _cell;
+
+  @protected
+  final Nation _myNation;
+
+  @protected
+  final MapMetadataRead _metadata;
+
+  @protected
+  final GameFieldRead _gameField;
+
+  @protected
+  late final _allOpponents = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+
+  UnitEstimationProcessorBase({
+    required PlayerActions actions,
+    required InfluenceMapRepresentationRead influences,
+    required Unit unit,
+    required GameFieldCellRead cell,
+    required Nation myNation,
+    required MapMetadataRead metadata,
+    required GameFieldRead gameField,
+  })  : _actions = actions,
+        _influences = influences,
+        _unit = unit,
+        _cell = cell,
+        _myNation = myNation,
+        _metadata = metadata,
+        _gameField = gameField;
 
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
   double estimate();
