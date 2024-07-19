@@ -1,9 +1,8 @@
 library aggressive_player_ai;
 
-import 'dart:developer';
-import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
@@ -14,6 +13,7 @@ import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
+import 'package:trench_warfare/core_entities/enums/unit_state.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/core_entities/game_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
@@ -29,6 +29,7 @@ import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
+import 'package:tuple/tuple.dart';
 
 part 'aggressive_player_ai.dart';
 part 'phases/turn_phase.dart';
@@ -57,3 +58,21 @@ part 'phases/money_spending/processing/special_strike_estimation_processor.dart'
 part 'phases/money_spending/processing/terrain_modifier_estimation_processor.dart';
 part 'phases/money_spending/processing/unit_booster_estimation_processor.dart';
 part 'phases/money_spending/processing/units_estimation_processor.dart';
+part 'phases/units_moving/units_moving_phase.dart';
+part 'phases/units_moving/actions/player_actions.dart';
+part 'phases/units_moving/estimations/attack_estimation_processor.dart';
+part 'phases/units_moving/estimations/do_noting_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_attack_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_enemy_pc_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_enemy_unit_on_unreachable_cell_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_mine_field_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_my_army_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_my_pc_estimation_processor.dart';
+part 'phases/units_moving/estimations/move_to_terrain_modifier_estimation_processor.dart';
+part 'phases/units_moving/estimations/resort_estimation_processor.dart';
+part 'phases/units_moving/estimations/unit_estimation_processor_base.dart';
+part 'phases/units_moving/movement_registry/movement_registry.dart';
+part 'phases/units_moving/movement_registry/goals/goal.dart';
+part 'phases/units_moving/movement_registry/goals/move_to_the_cell_goal.dart';
+part 'phases/units_moving/units_iterator/stable_units_iterator.dart';
+part 'phases/units_moving/units_iterator/unit_on_cell.dart';

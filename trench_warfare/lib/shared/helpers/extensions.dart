@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 extension ComponMethods<T> on T {
   R? let<R>(R Function(T) action) {
     if (this == null) {
@@ -13,9 +15,7 @@ extension ListsInt on Iterable<int> {
 }
 
 extension ListsDouble on Iterable<double> {
-  double sum() => fold(0.0, (p, c) => p + c);
-
-  double average() => sum() / length;
+  double average() => sum / length;
 }
 
 extension ListsGeneral<T> on Iterable<T> {

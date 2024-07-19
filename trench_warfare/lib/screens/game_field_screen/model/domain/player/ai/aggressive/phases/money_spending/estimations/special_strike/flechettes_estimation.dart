@@ -62,7 +62,7 @@ class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
             cell: cell,
             unitsQuantity: cell.units.where((u) => !u.isMechanical).length,
             unitsSumPower:
-                cell.units.where((u) => !u.isMechanical).map((u) => UnitPowerEstimation.estimate(u)).sum(),
+                cell.units.where((u) => !u.isMechanical).map((u) => UnitPowerEstimation.estimate(u)).sum,
           );
         })
         .where((e) => e != null)

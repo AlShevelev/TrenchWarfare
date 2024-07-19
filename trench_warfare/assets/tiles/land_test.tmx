@@ -1573,7 +1573,7 @@
   <object id="534" name="austriaHungary" type="ownershipRegion" x="2118.52" y="1616.3">
    <polygon points="0,0 139.259,8.88889 103.704,93.3333 57.7778,154.074 -17.7778,311.111 -176.296,303.704 -99.2593,124.444"/>
   </object>
-  <object id="535" name="austriaHungary" type="ownership" gid="172" x="2042.53" y="1721.16" width="64" height="64">
+  <object id="535" name="austriaHungary" type="ownership" gid="172" x="2112.03" y="1720.09" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>

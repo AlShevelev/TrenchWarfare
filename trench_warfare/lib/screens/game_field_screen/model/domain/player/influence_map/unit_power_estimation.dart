@@ -10,7 +10,7 @@ class UnitPowerEstimation {
   }
 
   static double _estimateCarrier(Carrier carrier) =>
-      carrier.hasUnits ? carrier.units.map((u) => _estimateUnit(u)).sum() : 1;
+      carrier.hasUnits ? carrier.units.map((u) => _estimateUnit(u)).sum : 1;
 
   static double _estimateUnit(Unit unit) {
     final boostFactor = 0.05 * unit.maxHealth;

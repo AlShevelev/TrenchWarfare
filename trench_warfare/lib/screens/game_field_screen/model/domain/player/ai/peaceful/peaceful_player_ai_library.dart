@@ -1,6 +1,7 @@
 library peaceful_player_ai;
 
 import 'dart:math' as math;
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';

@@ -103,6 +103,6 @@ class UnitsEstimator implements Estimator<UnitsEstimationData> {
 
   double _calculateDangerousFactor(GameFieldCellRead cell, List<Nation> allAggressors) {
     final mapCell = _influenceMap.getItem(cell.row, cell.col);
-    return allAggressors.map((a) => mapCell.getCombined(a)).sum();
+    return allAggressors.map((a) => mapCell.getCombined(a)).sum;
   }
 }

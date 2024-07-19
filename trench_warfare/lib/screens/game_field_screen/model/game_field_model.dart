@@ -87,28 +87,30 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       }
 
       // The old map
-      // switch (i) {
-      //   case _startIndex:
-      //     _playersAi.add(null); // Austria-Hungary
-      //   case 1:
-      //     _playersAi.add(PeacefulPlayerAi(
-      //       _gameField,
-      //       core,
-      //       metadata.nations[i].code,
-      //       core.money,
-      //       metadata,
-      //     )); // France
-      //   case 2:
-      //     _playersAi.add(AggressivePlayerAi(
-      //       _gameField,
-      //       core,
-      //       metadata.nations[i].code,
-      //       core.money,
-      //       metadata,
-      //     )); // Greece
-      //   default:
-      //     _playersAi.add(PassivePlayerAi(core)); // Belgium
-      // }
+/*
+      switch (i) {
+        case _startIndex:
+          _playersAi.add(null); // Austria-Hungary
+        case 1:
+          _playersAi.add(PeacefulPlayerAi(
+            _gameField,
+            core,
+            metadata.nations[i].code,
+            core.money,
+            metadata,
+          )); // France
+        case 2:
+          _playersAi.add(AggressivePlayerAi(
+            _gameField,
+            core,
+            metadata.nations[i].code,
+            core.money,
+            metadata,
+          )); // Greece
+        default:
+          _playersAi.add(PassivePlayerAi(core)); // Belgium
+      }
+*/
     }
 
     _players[_currentPlayerIndex].onStartTurn();

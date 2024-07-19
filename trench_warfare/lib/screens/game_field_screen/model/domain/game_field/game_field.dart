@@ -26,6 +26,8 @@ abstract interface class GameFieldRead {
 
   /// Calculates a logical (in terms of rows and cols) distance between the cells
   double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2);
+
+  GameFieldCellRead? getCellWithUnit(Unit unit, Nation nation);
 }
 
 class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
@@ -74,4 +76,8 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
   @override
   double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2) =>
       super.calculateDistance(cell1 as GameFieldCell, cell2  as GameFieldCell);
+
+  @override
+  GameFieldCellRead? getCellWithUnit(Unit unit, Nation nation) =>
+    cells.firstWhereOrNull((c) => c.nation == nation && c.units.isNotEmpty && c.units.contains(unit));
 }

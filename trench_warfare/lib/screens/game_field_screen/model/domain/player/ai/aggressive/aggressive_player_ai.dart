@@ -10,11 +10,11 @@ class AggressivePlayerAi extends PlayerAi {
   final MapMetadataRead _metadata;
 
   AggressivePlayerAi(
-      this._gameField,
-      super.player,
-      this._myNation,
-      this._nationMoney,
-      this._metadata,
+    this._gameField,
+    super.player,
+    this._myNation,
+    this._nationMoney,
+    this._metadata,
   );
 
   @override
@@ -25,6 +25,12 @@ class AggressivePlayerAi extends PlayerAi {
       _myNation,
       _nationMoney,
       _metadata,
+    ).start();
+
+    await UnitsMovingPhase(
+      player: player,
+      gameField: _gameField,
+      myNation: _myNation,
     ).start();
 
     await Future.delayed(const Duration(seconds: 1));

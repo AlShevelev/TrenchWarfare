@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:collection/collection.dart';
 
 class RandomGen {
   static final Random _random = Random(DateTime.now().millisecondsSinceEpoch);
@@ -44,7 +44,7 @@ class RandomGen {
       return 0;
     }
 
-    final sum = weights.sum();
+    final sum = weights.sum;
 
     if (sum == 0) {
       return null;

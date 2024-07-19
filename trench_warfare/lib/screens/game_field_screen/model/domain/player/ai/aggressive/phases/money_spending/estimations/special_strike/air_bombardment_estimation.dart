@@ -61,7 +61,7 @@ class AirBombardmentEstimator implements Estimator<SpecialStrikeEstimationData> 
           return _AirBombardmentCellWithFactors(
             cell: cell,
             unitsQuantity: cell.units.length,
-            unitsSumPower: cell.units.map((u) => UnitPowerEstimation.estimate(u)).sum(),
+            unitsSumPower: cell.units.map((u) => UnitPowerEstimation.estimate(u)).sum,
           );
         })
         .where((e) => e != null)
