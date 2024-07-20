@@ -65,7 +65,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
     // The weight is a quantity of an enemy artillery units
     return IterableIntegerExtension(cellsAround
         .where((c) => c.nation != _myNation && c.units.isNotEmpty && allOpponents.contains(c.nation))
-        .map((c) => c.units.count((u) => u.hasArtillery))).sum.toDouble();
+        .map((c) => c.units.count((u) => u.hasArtillery))).sum.toDouble() + 1;
   }
 
   double _getWeightForLive() {
@@ -89,6 +89,6 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
     // The weight is a quantity of an enemy machine gunners
     return IterableIntegerExtension(cellsAround
         .where((c) => c.nation != _myNation && c.units.isNotEmpty && allOpponents.contains(c.nation))
-        .map((c) => c.units.count((u) => u.hasMachineGun))).sum.toDouble();
+        .map((c) => c.units.count((u) => u.hasMachineGun))).sum.toDouble() + 1;
   }
 }
