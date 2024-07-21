@@ -30,9 +30,7 @@ class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() async {
+  Future<void> processAction() async {
     _unit.setState(UnitState.disabled);
-
-    return Future.value(_cell);
   }
 }

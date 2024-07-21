@@ -7,8 +7,6 @@ class UnitsMovingPhase implements TurnPhase {
 
   final Nation _myNation;
 
-  final MovementRegistry _movementRegistry;
-
   final PlayerActions _actions;
 
   final MapMetadataRead _metadata;
@@ -22,7 +20,6 @@ class UnitsMovingPhase implements TurnPhase {
         _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
-        _movementRegistry = MovementRegistryImpl(),
         _actions = PlayerActions(player: player) {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
@@ -31,9 +28,8 @@ class UnitsMovingPhase implements TurnPhase {
 
   @override
   Future<void> start() async {
-    _removeDeadFromMovementRegistry();
-
     final iterator = StableUnitsIterator(gameField: _gameField, myNation: _myNation);
+    
     while (iterator.moveNext()) {
       final unit = iterator.current.unit;
       GameFieldCellRead? cellWithUnit = iterator.current.cell;
@@ -49,72 +45,40 @@ class UnitsMovingPhase implements TurnPhase {
           needRecalculateInfluences = false;
         }
 
-        final goal = _movementRegistry.getGoal(unit.id);
+        final estimators = _createEstimators(
+          influences: influences,
+          unit: unit,
+          cell: cellWithUnit,
+        );
 
-        if (goal != null) {
-          if (goal.isReachable()) {
-            final cellTo = goal.getGoalCell();
-            await _actions.move(unit, from: cellWithUnit, to: cellTo);
-            needRecalculateInfluences = true;
+        final List<Tuple2<int, double>> indexedWeights = estimators
+            .mapIndexed((i, e) => Tuple2<int, double>(i, e.estimate()))
+            .where((i) => i.item2 != 0)
+            .map((i) => Tuple2<int, double>(i.item1, log10(i.item2)))
+            .toList(growable: false);
 
-            // check where the unit is located in a moment
-            cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
+        final weightIndex =
+            RandomGen.randomWeight(indexedWeights.map((e) => e.item2).toList(growable: false));
 
-            // the unit is dead or the goal is reached
-            if (cellWithUnit == null || cellWithUnit == cellTo) {
-              _movementRegistry.removeGoal(unit.id);
-            }
-          } else {
-            _movementRegistry.removeGoal(unit.id);
-          }
-        } else {
-          final estimators = _createEstimators(
-            influences: influences,
-            unit: unit,
-            cell: cellWithUnit,
-          );
+        // Skip this unit
+        if (weightIndex == null) {
+          break;
+        }
 
-          final List<Tuple2<int, double>> indexedWeights = estimators
-              .mapIndexed((i, e) => Tuple2<int, double>(i, e.estimate()))
-              .where((i) => i.item2 != 0)
-              .map((i) => Tuple2<int, double>(i.item1, log10(i.item2)))
-              .toList(growable: false);
+        final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
+        await selectedEstimator.processAction();
 
-          final weightIndex =
-              RandomGen.randomWeight(indexedWeights.map((e) => e.item2).toList(growable: false));
+        // check the unit is dead or not (cellWithUnit == null - is dead)
+        cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
+        if (cellWithUnit == null) {
+          break;
+        }
 
-          // Skip this unit
-          if (weightIndex == null) {
-            break;
-          }
-
-          final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
-          final targetCell = await selectedEstimator.processAction();
+        if (cellWithUnit != iterator.current.cell) {
           needRecalculateInfluences = true;
-
-          // check the unit is dead or not (cellWithUnit == null - is dead)
-          cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
-
-          if (cellWithUnit != null && cellWithUnit != targetCell) {
-            _movementRegistry.addGoal(unit.id, MoveToTheCellGoal(cellToMove: targetCell));
-          }
         }
       }
     }
-  }
-
-  void _removeDeadFromMovementRegistry() {
-    final iterator = StableUnitsIterator(gameField: _gameField, myNation: _myNation);
-
-    final usedUnitIds = <String>[];
-    while (iterator.moveNext()) {
-      final unitId = iterator.current.unit.id;
-      if (_movementRegistry.getGoal(unitId) != null) {
-        usedUnitIds.add(unitId);
-      }
-    }
-
-    _movementRegistry.exclude(usedUnitIds);
   }
 
   List<UnitEstimationProcessorBase> _createEstimators({
@@ -141,15 +105,6 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        MoveToAttackEstimationProcessor(
-          actions: _actions,
-          influences: influences,
-          unit: unit,
-          cell: cell,
-          myNation: _myNation,
-          metadata: _metadata,
-          gameField: _gameField,
-        ),
         MoveToEnemyPcEstimationProcessor(
           actions: _actions,
           influences: influences,
@@ -159,43 +114,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        MoveToEnemyUnitOnUnreachableCellEstimationProcessor(
-          actions: _actions,
-          influences: influences,
-          unit: unit,
-          cell: cell,
-          myNation: _myNation,
-          metadata: _metadata,
-          gameField: _gameField,
-        ),
-        MoveToMineFieldEstimationProcessor(
-          actions: _actions,
-          influences: influences,
-          unit: unit,
-          cell: cell,
-          myNation: _myNation,
-          metadata: _metadata,
-          gameField: _gameField,
-        ),
-        MoveToMyArmyEstimationProcessor(
-          actions: _actions,
-          influences: influences,
-          unit: unit,
-          cell: cell,
-          myNation: _myNation,
-          metadata: _metadata,
-          gameField: _gameField,
-        ),
         MoveToMyPcEstimationProcessor(
-          actions: _actions,
-          influences: influences,
-          unit: unit,
-          cell: cell,
-          myNation: _myNation,
-          metadata: _metadata,
-          gameField: _gameField,
-        ),
-        MoveToTerrainModifierEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,

@@ -18,7 +18,7 @@ class MoveToMyPcEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() async {
+  Future<void> processAction() async {
     // TODO: implement processAction
     throw UnimplementedError();
   }

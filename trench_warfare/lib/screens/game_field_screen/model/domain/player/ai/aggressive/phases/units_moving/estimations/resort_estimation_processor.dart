@@ -30,7 +30,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() async {
+  Future<void> processAction() async {
     final firstId = _cell.activeUnit!.id;
 
     final cellUnitsIds = _cell.units.map((u) => u.id).toList(growable: true)
@@ -40,8 +40,6 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
     _actions.resort(_cell, cellUnitsIds);
 
     _unit.setState(UnitState.disabled);
-
-    return Future.value(_cell);
   }
 
   double _getWeightForArtillery() {

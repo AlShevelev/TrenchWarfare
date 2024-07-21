@@ -39,14 +39,12 @@ class AttackEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() async {
+  Future<void> processAction() async {
     final weightIndex =
         RandomGen.randomWeight(_estimationResult.map((i) => i.weight).toList(growable: false));
     final target = _estimationResult[weightIndex!];
 
     await _actions.move(_unit, from: _cell, to: target.cell);
-
-    return Future.value(target.cell);
   }
 
   Iterable<GameFieldCellRead> _getAllVictimCells() {
