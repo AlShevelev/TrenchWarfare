@@ -13,7 +13,7 @@ class WaitingForEndOfPath implements State {
 }
 
 class PathIsShown implements State {
-  final Iterable<GameFieldCell> path;
+  final Iterable<GameFieldCellRead> path;
 
   PathIsShown(this.path);
 }

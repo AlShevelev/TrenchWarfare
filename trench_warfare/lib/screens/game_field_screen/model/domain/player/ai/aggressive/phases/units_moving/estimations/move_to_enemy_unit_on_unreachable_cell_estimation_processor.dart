@@ -18,7 +18,7 @@ class MoveToEnemyUnitOnUnreachableCellEstimationProcessor extends UnitEstimation
   }
 
   @override
-  Future<GameFieldCellRead> processAction() {
+  Future<GameFieldCellRead> processAction() async {
     // TODO: implement processAction
     throw UnimplementedError();
   }

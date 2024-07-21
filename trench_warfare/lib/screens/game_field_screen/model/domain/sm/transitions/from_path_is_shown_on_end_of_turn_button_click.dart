@@ -3,15 +3,17 @@ part of game_field_sm;
 class FromPathIsShownOnEndOfTurnButtonClick extends GameObjectTransitionBase {
   FromPathIsShownOnEndOfTurnButtonClick(super.context);
 
-  State process(Iterable<GameFieldCell> path) {
-    final unit = path.first.activeUnit!;
+  State process(Iterable<GameFieldCellRead> path) {
+    final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
+
+    final unit = pathToProcess.first.activeUnit!;
 
     // Click to the unit cell - reset the selection
     _hideArmyPanel();
 
     unit.setState(UnitState.enabled);
 
-    _resetPath(path);
+    _resetPath(pathToProcess);
 
     return TurnIsEnded();
   }

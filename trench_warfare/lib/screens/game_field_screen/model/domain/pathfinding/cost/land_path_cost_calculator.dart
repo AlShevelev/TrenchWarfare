@@ -19,7 +19,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
       return PathItemType.battle;
     }
 
-    if (_isMyCarrier(_sourcePath.first) && !unloadUnitPathItemExists) {
+    if (_isMyCarrier(_calculatedPath.first) && !unloadUnitPathItemExists) {
       unloadUnitPathItemExists = true;
       return PathItemType.unloadUnit;
     }

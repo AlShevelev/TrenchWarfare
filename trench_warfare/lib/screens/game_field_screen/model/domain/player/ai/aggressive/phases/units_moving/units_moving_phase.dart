@@ -13,12 +13,12 @@ class UnitsMovingPhase implements TurnPhase {
 
   final MapMetadataRead _metadata;
 
-  UnitsMovingPhase({
-    required PlayerInput player,
-    required GameFieldRead gameField,
-    required Nation myNation,
-    required MapMetadataRead metadata
-  })  : _player = player,
+  UnitsMovingPhase(
+      {required PlayerInput player,
+      required GameFieldRead gameField,
+      required Nation myNation,
+      required MapMetadataRead metadata})
+      : _player = player,
         _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
@@ -80,7 +80,8 @@ class UnitsMovingPhase implements TurnPhase {
               .map((i) => Tuple2<int, double>(i.item1, log10(i.item2)))
               .toList(growable: false);
 
-          final weightIndex = RandomGen.randomWeight(indexedWeights.map((e) => e.item2));
+          final weightIndex =
+              RandomGen.randomWeight(indexedWeights.map((e) => e.item2).toList(growable: false));
 
           // Skip this unit
           if (weightIndex == null) {
@@ -91,6 +92,7 @@ class UnitsMovingPhase implements TurnPhase {
           final targetCell = await selectedEstimator.processAction();
           needRecalculateInfluences = true;
 
+          // check the unit is dead or not (cellWithUnit == null - is dead)
           cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
 
           if (cellWithUnit != null && cellWithUnit != targetCell) {

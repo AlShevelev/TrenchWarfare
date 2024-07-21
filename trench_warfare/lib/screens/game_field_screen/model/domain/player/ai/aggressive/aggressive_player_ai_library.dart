@@ -21,6 +21,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/meta
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';

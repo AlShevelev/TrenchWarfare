@@ -14,10 +14,9 @@ class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
   @override
   double _estimateInternal() {
     if (_cell.productionCenter != null) {
-      final allOpponents = _allOpponents;
       final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-      final sumDanger = allOpponents.map((o) => influenceCell.getCombined(o)).sum;
+      final sumDanger = _allOpponents.map((o) => influenceCell.getCombined(o)).sum;
       if (sumDanger > 0) {
         return (sumDanger / influenceCell.getCombined(_myNation)) + 1;
       }
@@ -31,7 +30,7 @@ class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() {
+  Future<GameFieldCellRead> processAction() async {
     _unit.setState(UnitState.disabled);
 
     return Future.value(_cell);

@@ -52,4 +52,7 @@ abstract class UnitEstimationProcessorBase {
 
   @protected
   double _estimateInternal();
+
+  @protected
+  bool _isEnemyCell(GameFieldCellRead cell) => _allOpponents.contains(cell.nation);
 }

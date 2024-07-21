@@ -7,7 +7,10 @@ abstract interface class PathCostCalculator {
 }
 
 class SeaPathCostCalculator implements PathCostCalculator {
-  late final Iterable<GameFieldCell> _sourcePath;
+  late final Iterable<GameFieldCellRead> _sourcePath;
+
+  @protected
+  late final _calculatedPath = _sourcePath.map((c) => c as GameFieldCell).toList(growable: false);
 
   @protected
   late final Unit _activeUnit;
@@ -15,7 +18,7 @@ class SeaPathCostCalculator implements PathCostCalculator {
   @protected
   Nation get nation => _sourcePath.first.nation!;
 
-  SeaPathCostCalculator(Iterable<GameFieldCell> sourcePath, Unit activeUnit) {
+  SeaPathCostCalculator(Iterable<GameFieldCellRead> sourcePath, Unit activeUnit) {
     _sourcePath = sourcePath;
     _activeUnit = activeUnit;
   }
@@ -26,8 +29,8 @@ class SeaPathCostCalculator implements PathCostCalculator {
 
     var pathIsActive = true;
 
-    for (var cell in _sourcePath) {
-      if (cell == _sourcePath.first) {
+    for (var cell in _calculatedPath) {
+      if (cell == _calculatedPath.first) {
         cell.setPathItem(PathItem(
           type: PathItemType.normal,
           isActive: movementPointsLeft >= 0 && pathIsActive,
@@ -53,15 +56,15 @@ class SeaPathCostCalculator implements PathCostCalculator {
       pathIsActive = pathIsActive && !mustDeactivateNextPath(cell);
     }
 
-    return _sourcePath;
+    return _calculatedPath;
   }
 
   @override
   bool isEndOfPathReachable() {
     var movementPointsLeft = _activeUnit.movementPoints;
 
-    for (var cell in _sourcePath) {
-      if (cell == _sourcePath.first) {
+    for (var cell in _calculatedPath) {
+      if (cell == _calculatedPath.first) {
         continue;
       }
 

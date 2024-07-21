@@ -11,12 +11,12 @@ abstract class FindPathSettings {
 /// Looks for a path from one cell to another
 /// A* is used https://en.wikipedia.org/wiki/A*_search_algorithm
 class FindPath {
-  final List<GameFieldCell> _open = [];
+  final List<GameFieldCellRead> _open = [];
 
-  final Map<GameFieldCell, GameFieldCell> _cameFrom = <GameFieldCell, GameFieldCell>{};
+  final Map<GameFieldCell, GameFieldCellRead> _cameFrom = <GameFieldCell, GameFieldCell>{};
 
-  final Map<GameFieldCell, double> _gScore = <GameFieldCell, double>{};
-  final Map<GameFieldCell, double> _fScore = <GameFieldCell, double>{};
+  final Map<GameFieldCellRead, double> _gScore = <GameFieldCell, double>{};
+  final Map<GameFieldCellRead, double> _fScore = <GameFieldCell, double>{};
 
   late final GameFieldRead _gameField;
 
@@ -27,7 +27,7 @@ class FindPath {
     _settings = findPathGFactorHeuristic;
   }
 
-  Iterable<GameFieldCell> find(GameFieldCell startCell, GameFieldCell endCell) {
+  Iterable<GameFieldCellRead> find(GameFieldCellRead startCell, GameFieldCellRead endCell) {
     _open.clear();
     _cameFrom.clear();
     _gScore.clear();
@@ -83,7 +83,7 @@ class FindPath {
 
   /// Calculates the H part of the F factor
   /// In our case it is a Euclidean distance between the cells
-  double _calculateHFactor(GameFieldCell givenCell, GameFieldCell finalCell) =>
+  double _calculateHFactor(GameFieldCellRead givenCell, GameFieldCellRead finalCell) =>
     _gameField.calculateDistance(givenCell, finalCell);
 
   int _getOpenCellWithMinFIndex() {
@@ -101,7 +101,7 @@ class FindPath {
     return index;
   }
 
-  Iterable<GameFieldCell> _reconstructPath(GameFieldCell end) {
+  Iterable<GameFieldCellRead> _reconstructPath(GameFieldCellRead end) {
     final totalPath = [end];
 
     var current = end;

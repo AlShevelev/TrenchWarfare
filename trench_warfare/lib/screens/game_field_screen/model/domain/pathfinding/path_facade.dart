@@ -7,9 +7,10 @@ class PathFacade {
     _gameField = gameField;
   }
 
-  Iterable<GameFieldCell> calculatePath({
-    required GameFieldCell startCell,
-    required GameFieldCell endCell,
+  /// Calculates a path without estimation
+  Iterable<GameFieldCellRead> calculatePath({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
   }) {
     final pathFinder = FindPath(
         _gameField,
@@ -21,9 +22,10 @@ class PathFacade {
     return pathFinder.find(startCell, endCell);
   }
 
-  Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCell> path}) {
+  /// Estimates a path cost
+  Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCellRead> path}) {
     if (path.isEmpty) {
-      return path;
+      return path.map((i) => i as GameFieldCell).toList(growable: false);
     }
 
     final startCell = path.first;
@@ -35,6 +37,7 @@ class PathFacade {
     ).calculate();
   }
 
+  /// Can we move to any cell from a current one?
   bool canMove(GameFieldCell startCell) {
     final allCellsAround = _gameField.findCellsAround(startCell);
 
@@ -66,7 +69,9 @@ class PathFacade {
     return false;
   }
 
-  int? canReach(Unit unit, {required GameFieldCell startCell, required GameFieldCell endCell}) {
+  /// Can we reach some cell by a unit?
+  /// Returns a length of the path or null if the end cell is unreachable
+  int? canReach(Unit unit, {required GameFieldCellRead startCell, required GameFieldCellRead endCell}) {
     final path = FindPath(
         _gameField,
         _getFindPathSettings(
@@ -95,8 +100,8 @@ class PathFacade {
 
   FindPathSettings _getFindPathSettings(
     Unit calculatedUnit, {
-    required GameFieldCell startCell,
-    required GameFieldCell endCell,
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
   }) {
     if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
       return NextCellPathSettings();
@@ -118,8 +123,8 @@ class PathFacade {
 
   PathCostCalculator _getPathCostCalculator(
     Unit calculatedUnit,
-    Iterable<GameFieldCell> path, {
-    required GameFieldCell startCell,
+    Iterable<GameFieldCellRead> path, {
+    required GameFieldCellRead startCell,
     required GameFieldCellRead endCell,
   }) {
     if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {

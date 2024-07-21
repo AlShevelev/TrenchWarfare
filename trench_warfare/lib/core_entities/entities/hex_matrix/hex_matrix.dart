@@ -97,6 +97,10 @@ abstract class HexMatrix<T extends HexMatrixItem> {
       return result;
     }
 
+    if (radius == 1) {
+      return findCellsAround(centralCell);
+    }
+
     // the top-right cell
     var baseRow = centralCell.row - radius;
     var baseCol = centralCell.col + (centralCell.row % 2 == 1 ? (radius / 2).ceil() : (radius / 2).floor());

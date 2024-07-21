@@ -3,7 +3,9 @@ part of game_field_sm;
 class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
   FromPathIsShownOnResortUnit(super.context);
 
-  State process(Iterable<GameFieldCell> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
+  State process(Iterable<GameFieldCellRead> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
+    final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
+
     final cell = _context.gameField.getCellById(cellId);
 
     final activeUnit = cell.activeUnit!;
@@ -27,11 +29,11 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
       );
     }
 
-    for (var pathCell in path) {
+    for (var pathCell in pathToProcess) {
       pathCell.setPathItem(null);
     }
 
-    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(pathToProcess.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     return ReadyForInput();
   }

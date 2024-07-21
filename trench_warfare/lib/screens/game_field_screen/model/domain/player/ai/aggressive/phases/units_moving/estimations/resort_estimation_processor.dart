@@ -30,7 +30,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
   }
 
   @override
-  Future<GameFieldCellRead> processAction() {
+  Future<GameFieldCellRead> processAction() async {
     final firstId = _cell.activeUnit!.id;
 
     final cellUnitsIds = _cell.units.map((u) => u.id).toList(growable: true)
@@ -49,10 +49,9 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
       return 0;
     }
 
-    final allOpponents = _allOpponents;
     final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-    if (!allOpponents.any((o) => influenceCell.hasAny(o))) {
+    if (!_allOpponents.any((o) => influenceCell.hasAny(o))) {
       return 0;
     }
 
@@ -64,7 +63,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
 
     // The weight is a quantity of an enemy artillery units
     return IterableIntegerExtension(cellsAround
-        .where((c) => c.nation != _myNation && c.units.isNotEmpty && allOpponents.contains(c.nation))
+        .where((c) => c.nation != _myNation && c.units.isNotEmpty && _isEnemyCell(c))
         .map((c) => c.units.count((u) => u.hasArtillery))).sum.toDouble() + 1;
   }
 
@@ -73,10 +72,9 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
       return 0;
     }
 
-    final allOpponents = _allOpponents;
     final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-    if (!allOpponents.any((o) => influenceCell.hasAny(o))) {
+    if (!_allOpponents.any((o) => influenceCell.hasAny(o))) {
       return 0;
     }
 
@@ -88,7 +86,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
 
     // The weight is a quantity of an enemy machine gunners
     return IterableIntegerExtension(cellsAround
-        .where((c) => c.nation != _myNation && c.units.isNotEmpty && allOpponents.contains(c.nation))
+        .where((c) => c.nation != _myNation && c.units.isNotEmpty && _isEnemyCell(c))
         .map((c) => c.units.count((u) => u.hasMachineGun))).sum.toDouble() + 1;
   }
 }

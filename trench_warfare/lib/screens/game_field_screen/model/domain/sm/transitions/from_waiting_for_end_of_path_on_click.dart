@@ -15,7 +15,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
     }
 
     // calculate a path
-    Iterable<GameFieldCell> path = _calculatePath(startCell: startCell, endCell: endCell);
+    Iterable<GameFieldCellRead> path = _calculatePath(startCell: startCell, endCell: endCell);
 
     if (path.isEmpty) {
       // reset the unit active state

@@ -1,31 +1,31 @@
 part of pathfinding;
 
 class NextCellPathCostCalculator implements PathCostCalculator {
-  late final Iterable<GameFieldCell> _sourcePath;
+  late final Iterable<GameFieldCellRead> _sourcePath;
 
-  NextCellPathCostCalculator(Iterable<GameFieldCell> sourcePath) {
+  late final _calculatedPath = _sourcePath.map((c) => c as GameFieldCell).toList(growable: false);
+
+  NextCellPathCostCalculator(Iterable<GameFieldCellRead> sourcePath) {
     _sourcePath = sourcePath;
   }
 
   @override
   Iterable<GameFieldCell> calculate() {
-    _sourcePath.first.setPathItem(
-        PathItem(
-          type: PathItemType.normal,
-          isActive: true,
-          movementPointsLeft: 0,    // It doesn't matter in this scenario
-        )
+    _calculatedPath.first.setPathItem(
+      PathItem(
+        type: PathItemType.normal,
+        isActive: true,
+        movementPointsLeft: 0, // It doesn't matter in this scenario
+      ),
     );
 
-    _sourcePath.last.setPathItem(
-        PathItem(
-          type: PathItemType.battleNextUnreachableCell,
-          isActive: true,
-          movementPointsLeft: 0,    // It doesn't matter in this scenario
-        )
-    );
+    _calculatedPath.last.setPathItem(PathItem(
+      type: PathItemType.battleNextUnreachableCell,
+      isActive: true,
+      movementPointsLeft: 0, // It doesn't matter in this scenario
+    ));
 
-    return _sourcePath;
+    return _calculatedPath;
   }
 
   @override

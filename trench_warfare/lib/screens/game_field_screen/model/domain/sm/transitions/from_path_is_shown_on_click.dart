@@ -3,36 +3,38 @@ part of game_field_sm;
 class FromPathIsShownOnClick extends GameObjectTransitionBase {
   FromPathIsShownOnClick(super.context);
 
-  State process(Iterable<GameFieldCell> path, GameFieldCell cell) {
-    final firstCell = path.first;
+  State process(Iterable<GameFieldCellRead> path, GameFieldCell cell) {
+    final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
+
+    final firstCell = pathToProcess.first;
 
     final unit = firstCell.activeUnit!;
 
     // Click to the unit cell - reset the selection
-    if (cell == path.first) {
+    if (cell == pathToProcess.first) {
       _hideArmyPanel();
-      return _resetPathAndEnableUnit(path, unit);
+      return _resetPathAndEnableUnit(pathToProcess, unit);
     }
 
     // Click to the last cell of the path - move the unit
-    if (cell == path.last) {
+    if (cell == pathToProcess.last) {
       _hideArmyPanel();
 
       return MovementFacade(
         nation: _context.nation,
         gameField: _context.gameField,
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
-      ).startMovement(path);
+      ).startMovement(pathToProcess);
     }
 
     // calculate a path
-    Iterable<GameFieldCell> newPath = _calculatePath(startCell: firstCell, endCell: cell);
+    Iterable<GameFieldCellRead> newPath = _calculatePath(startCell: firstCell, endCell: cell);
 
     if (newPath.isEmpty) {
-      return _resetPathAndEnableUnit(path, unit);
+      return _resetPathAndEnableUnit(pathToProcess, unit);
     }
 
-    _resetPath(path);
+    _resetPath(pathToProcess);
 
     // show the new path
     final estimatedPath = _estimatePath(path: newPath);
