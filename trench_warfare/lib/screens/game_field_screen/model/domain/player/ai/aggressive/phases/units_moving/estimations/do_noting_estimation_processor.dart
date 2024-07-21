@@ -12,7 +12,7 @@ class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
   });
 
   @override
-  double estimate() {
+  double _estimateInternal() {
     if (_cell.productionCenter != null) {
       final allOpponents = _allOpponents;
       final influenceCell = _influences.getItem(_cell.row, _cell.col);

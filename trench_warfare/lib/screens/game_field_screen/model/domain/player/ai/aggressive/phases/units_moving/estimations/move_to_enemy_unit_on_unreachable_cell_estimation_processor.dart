@@ -12,7 +12,7 @@ class MoveToEnemyUnitOnUnreachableCellEstimationProcessor extends UnitEstimation
   });
 
   @override
-  double estimate() {
+  double _estimateInternal() {
     // TODO: implement estimate
     throw UnimplementedError();
   }

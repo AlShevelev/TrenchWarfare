@@ -12,7 +12,7 @@ class MoveToMyArmyEstimationProcessor extends UnitEstimationProcessorBase {
   });
 
   @override
-  double estimate() {
+  double _estimateInternal() {
     // TODO: implement estimate
     throw UnimplementedError();
   }

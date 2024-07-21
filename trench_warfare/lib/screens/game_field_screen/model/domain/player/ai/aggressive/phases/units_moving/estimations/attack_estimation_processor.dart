@@ -12,7 +12,7 @@ class AttackEstimationProcessor extends UnitEstimationProcessorBase {
   });
 
   @override
-  double estimate() {
+  double _estimateInternal() {
     // TODO: implement estimate
     // attack a unit on unreachable cell included
     throw UnimplementedError();

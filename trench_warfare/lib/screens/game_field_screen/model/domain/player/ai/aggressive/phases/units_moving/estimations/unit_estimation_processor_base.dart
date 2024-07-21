@@ -25,6 +25,9 @@ abstract class UnitEstimationProcessorBase {
   @protected
   late final _allOpponents = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
 
+  @protected
+  double get _balanceFactor => 1.0;
+
   UnitEstimationProcessorBase({
     required PlayerActions actions,
     required InfluenceMapRepresentationRead influences,
@@ -42,8 +45,11 @@ abstract class UnitEstimationProcessorBase {
         _gameField = gameField;
 
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
-  double estimate();
+  double estimate() => _balanceFactor * _estimateInternal();
 
   /// Returns a target cell for the action
   Future<GameFieldCellRead> processAction();
+
+  @protected
+  double _estimateInternal();
 }

@@ -13,7 +13,7 @@ class ResortEstimationProcessor extends UnitEstimationProcessorBase {
 
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
   @override
-  double estimate() {
+  double _estimateInternal() {
     if (_cell.units.length <= 1 || _cell.activeUnit != _unit) {
       return 0;
     }

@@ -12,7 +12,7 @@ class MoveToTerrainModifierEstimationProcessor extends UnitEstimationProcessorBa
   });
 
   @override
-  double estimate() {
+  double _estimateInternal() {
     // TODO: implement estimate
     throw UnimplementedError();
   }
