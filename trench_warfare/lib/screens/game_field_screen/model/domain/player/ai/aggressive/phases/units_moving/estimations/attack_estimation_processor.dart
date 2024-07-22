@@ -22,6 +22,10 @@ class AttackEstimationProcessor extends UnitEstimationProcessorBase {
 
   @override
   double _estimateInternal() {
+    if (_unit.type == UnitType.carrier) {
+      return 0;
+    }
+
     final allVictimCells = _getAllVictimCells();
 
     if (allVictimCells.isEmpty) {

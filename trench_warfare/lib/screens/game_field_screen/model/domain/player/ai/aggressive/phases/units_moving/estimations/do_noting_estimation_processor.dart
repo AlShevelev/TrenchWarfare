@@ -13,6 +13,10 @@ class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
 
   @override
   double _estimateInternal() {
+    if (_unit.type == UnitType.carrier) {
+      return 0;
+    }
+
     if (_cell.productionCenter != null) {
       final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
