@@ -99,7 +99,7 @@ final class GameObjectCell extends GameObjectComponentBase {
       textRenderer: regular,
     )
       ..anchor = Anchor.topCenter
-      ..position = _position.translated(0, _baseSize.y * 0.2)
+      ..position = Vector2(0, ComponentConstants.cellRealSize.y * 0.3)
       ..priority = 2;
 
     add(textComponent);
