@@ -1,6 +1,8 @@
 part of aggressive_player_ai;
 
 class MoveToEnemyPcEstimationProcessor extends UnitEstimationProcessorBase {
+  GameFieldCellRead? _nearestEnemyPc;
+
   MoveToEnemyPcEstimationProcessor({
     required super.actions,
     required super.influences,
@@ -17,13 +19,49 @@ class MoveToEnemyPcEstimationProcessor extends UnitEstimationProcessorBase {
       return 0;
     }
 
-    // TODO: implement estimate
-    throw UnimplementedError();
+    final allEnemyReachablePCs = _gameField.cells.where(
+        (c) => c.productionCenter != null && _unit.isLand == c.isLand && _allOpponents.contains(c.nation));
+
+    if (allEnemyReachablePCs.isEmpty) {
+      return 0;
+    }
+
+    final pathFacade = PathFacade(_gameField);
+
+    final nearestEnemyPc = allEnemyReachablePCs
+        .map((c) => Tuple2(c, pathFacade.calculatePath(startCell: _cell, endCell: c).length))
+        .where((i) => i.item2 > 0)
+        .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
+        .firstOrNull
+        ?.item1;
+
+    if (nearestEnemyPc == null) {
+      return 0;
+    }
+
+    _nearestEnemyPc = nearestEnemyPc;
+
+    return _calculateWeight(nearestEnemyPc);
   }
 
   @override
   Future<void> processAction() async {
-    // TODO: implement processAction
-    throw UnimplementedError();
+    await _actions.move(_unit, from: _cell, to: _nearestEnemyPc!);
+  }
+
+  double _calculateWeight(GameFieldCellRead cell) {
+    var weight = switch(cell.productionCenter!.level) {
+      ProductionCenterLevel.level1 => 2.0,
+      ProductionCenterLevel.level2 => 4.0,
+      ProductionCenterLevel.level3 => 6.0,
+      ProductionCenterLevel.level4 => 8.0,
+      ProductionCenterLevel.capital => 10.0,
+    };
+
+    if (cell.productionCenter!.type == ProductionCenterType.airField) {
+      weight /= 2.0;
+    }
+
+    return weight;
   }
 }
