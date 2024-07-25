@@ -53,7 +53,7 @@ class BarbedWireEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    final allAggressors = _metadata.getMyEnemies(_myNation);
 
     final cellsWithFactors = cellsPossibleToBuild
         .map((cell) {

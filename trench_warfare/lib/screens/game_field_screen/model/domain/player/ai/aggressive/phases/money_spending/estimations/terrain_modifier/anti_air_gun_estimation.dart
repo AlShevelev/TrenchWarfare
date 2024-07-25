@@ -47,7 +47,7 @@ class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    final allAggressors = _metadata.getMyEnemies(_myNation);
 
     final allAirfieldCells = _gameField.cells.where((c) {
       if (c.nation == null || !allAggressors.contains(c.nation)) {

@@ -37,7 +37,7 @@ class TrenchEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    final allAggressors = _metadata.getMyEnemies(_myNation);
 
     final cellsPossibleToBuildExt = cellsPossibleToBuild.where((cell) {
       final cellFromMap = _influenceMap.getItem(cell.row, cell.col);

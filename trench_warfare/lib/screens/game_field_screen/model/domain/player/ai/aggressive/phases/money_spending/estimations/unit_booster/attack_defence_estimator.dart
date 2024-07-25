@@ -61,7 +61,7 @@ class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    final allAggressors = _metadata.getMyEnemies(_myNation);
 
     final List<_AttackDefenceCellWithFactors> cellsPossibleToBuildExt = [];
 

@@ -63,7 +63,7 @@ class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationD
       return [];
     }
 
-    final allAggressors = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+    final allAggressors = _metadata.getMyEnemies(_myNation);
     var allSafeCells = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 

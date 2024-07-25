@@ -23,7 +23,7 @@ abstract class UnitEstimationProcessorBase {
   final GameFieldRead _gameField;
 
   @protected
-  late final _allOpponents = _metadata.getAllAggressive().where((a) => a != _myNation).toList(growable: true);
+  late final _allOpponents = _metadata.getMyEnemies(_myNation);
 
   @protected
   double get _balanceFactor => 1.0;
