@@ -19,7 +19,10 @@ class PeacefulPlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    while (true) {
+    final iLost = LoseCalculator.didILose(_gameField, myNation: _myNation);
+
+    // If I lost - do nothing
+    while (!iLost) {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 

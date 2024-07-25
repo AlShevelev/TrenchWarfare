@@ -19,20 +19,25 @@ class AggressivePlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    await MoneySpendingPhase(
-      player,
-      _gameField,
-      _myNation,
-      _nationMoney,
-      _metadata,
-    ).start();
+    final iLost = LoseCalculator.didILose(_gameField, myNation: _myNation);
 
-    await UnitsMovingPhase(
-      player: player,
-      gameField: _gameField,
-      myNation: _myNation,
-      metadata: _metadata,
-    ).start();
+    // If I lost - do nothing
+    if (!iLost) {
+      await MoneySpendingPhase(
+        player,
+        _gameField,
+        _myNation,
+        _nationMoney,
+        _metadata,
+      ).start();
+
+      await UnitsMovingPhase(
+        player: player,
+        gameField: _gameField,
+        myNation: _myNation,
+        metadata: _metadata,
+      ).start();
+    }
 
     await Future.delayed(const Duration(seconds: 1));
     player.onEndOfTurnButtonClick();
