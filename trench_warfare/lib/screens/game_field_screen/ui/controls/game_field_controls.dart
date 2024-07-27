@@ -30,6 +30,11 @@ class _GameFieldControlsState extends State<GameFieldControls> {
 
           return switch (value.data) {
             Invisible() => const SizedBox.shrink(),
+            // MainControls() => const WinDefeatTurnDialog(
+            //     type: WinDefeatTurnDialogType.turn,
+            //     nation: Nation.usa,
+            //     day: 1,
+            //   ),
             MainControls() => MainControlsWidget(
                 state: value.data as MainControls,
                 gameField: widget._gameField,

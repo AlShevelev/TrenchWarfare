@@ -45,6 +45,9 @@ flutter:
     - assets/images/game_field_overlays/cards/terrain_modifiers/
     - assets/images/game_field_overlays/cards/troop_boosters/
     - assets/images/game_field_overlays/cards/units/
+    - assets/images/game_field_overlays/dialogs/win_defeat_turn/
+    - assets/images/game_field_overlays/dialogs/win_defeat_turn/banners/
+    - assets/images/game_field_overlays/dialogs/win_defeat_turn/photos/
 
     # localisation
     - assets/translations/

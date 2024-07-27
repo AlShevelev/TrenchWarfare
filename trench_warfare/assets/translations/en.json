@@ -81,5 +81,9 @@
   "defence_card_name": "Defence booster",
   "defence_card_description": "[proper description needed, proper description needed]",
   "transport_card_name": "Truck",
-  "transport_card_description": "[proper description needed, proper description needed]"
+  "transport_card_description": "[proper description needed, proper description needed]",
+
+  "victory_dialog": "Victory!",
+  "defeat_dialog": "Defeat...",
+  "day_dialog": "Day"
 }
