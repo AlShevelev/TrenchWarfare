@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placing/cards_placing_widget.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/win_defeat_turn_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
@@ -30,11 +31,6 @@ class _GameFieldControlsState extends State<GameFieldControls> {
 
           return switch (value.data) {
             Invisible() => const SizedBox.shrink(),
-            // MainControls() => const WinDefeatTurnDialog(
-            //     type: WinDefeatTurnDialogType.turn,
-            //     nation: Nation.usa,
-            //     day: 1,
-            //   ),
             MainControls() => MainControlsWidget(
                 state: value.data as MainControls,
                 gameField: widget._gameField,
@@ -45,6 +41,22 @@ class _GameFieldControlsState extends State<GameFieldControls> {
               ),
             CardsPlacingControls() => CardPlacingWidget(
                 state: value.data as CardsPlacingControls,
+                gameField: widget._gameField,
+              ),
+            StartTurnControls(nation: final nation, day: final day) => WinDefeatTurnDialog(
+                type: WinDefeatTurnDialogType.turn,
+                nation: nation,
+                day: day,
+                gameField: widget._gameField,
+              ),
+            WinControls(nation: final nation) => WinDefeatTurnDialog(
+                type: WinDefeatTurnDialogType.win,
+                nation: nation,
+                gameField: widget._gameField,
+              ),
+            DefeatControls(nation: final nation) => WinDefeatTurnDialog(
+                type: WinDefeatTurnDialogType.defeat,
+                nation: nation,
                 gameField: widget._gameField,
               ),
             _ => const SizedBox.shrink(),

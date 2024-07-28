@@ -19,7 +19,8 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     MapMetadataRead mapMetadata,
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
-    GameFieldModelCallback modelCallback, {
+    GameFieldModelCallback modelCallback,
+    DayStorage dayStorage, {
     required bool isAI,
   }) {
     _money = MoneyStorage(_gameField, playerNation);
@@ -32,6 +33,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
       _gameFieldSettingsStorage,
       updateGameObjectsEvent,
       controlsState,
+      dayStorage,
       modelCallback,
       isAI: isAI,
     );
@@ -100,4 +102,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
   void registerOnAnimationCompleted(void Function()? onAnimationCompleted) {
     _onAnimationCompleted = onAnimationCompleted;
   }
+
+  @override
+  void onStarTurnConfirmed() => _stateMachine.process(OnStarTurnConfirmed());
 }

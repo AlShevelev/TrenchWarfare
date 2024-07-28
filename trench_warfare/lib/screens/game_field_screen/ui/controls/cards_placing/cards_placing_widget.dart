@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/card_photos.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
@@ -10,11 +8,13 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 class CardPlacingWidget extends StatelessWidget {
   final CardsPlacingControls state;
 
-  late final GameFieldForControls _gameField;
+  final GameFieldForControls _gameField;
 
-  CardPlacingWidget({required this.state, required GameFieldForControls gameField, super.key}) {
-    _gameField = gameField;
-  }
+  const CardPlacingWidget({
+    required this.state,
+    required GameFieldForControls gameField,
+    super.key,
+  }) : _gameField = gameField;
 
   @override
   Widget build(BuildContext context) {

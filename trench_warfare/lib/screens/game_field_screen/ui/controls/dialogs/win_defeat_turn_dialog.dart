@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 enum WinDefeatTurnDialogType { win, defeat, turn }
@@ -11,6 +12,8 @@ class WinDefeatTurnDialog extends StatelessWidget {
   final Nation nation;
   final int? day;
 
+  final GameFieldForControls _gameField;
+
   static const _imagesPath = 'assets/images/game_field_overlays/dialogs/win_defeat_turn/';
   static const _background = '${_imagesPath}card_background.webp';
 
@@ -19,13 +22,14 @@ class WinDefeatTurnDialog extends StatelessWidget {
     required this.type,
     required this.nation,
     this.day,
-  });
+    required GameFieldForControls gameField,
+  }) : _gameField = gameField;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // do nothing so far
+        _gameField.onStarTurnConfirmed();
       },
       child: Container(
         color: Colors.black.withOpacity(0.5),

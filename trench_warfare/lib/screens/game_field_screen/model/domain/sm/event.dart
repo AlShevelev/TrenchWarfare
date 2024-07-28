@@ -47,3 +47,5 @@ class OnCardPlaced implements Event {
 }
 
 class OnStarTurn implements Event {}
+
+class OnStarTurnConfirmed implements Event {}

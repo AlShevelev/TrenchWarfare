@@ -4,6 +4,10 @@ sealed class State {}
 
 class Initial implements State {}
 
+class StartTurnInitialConfirmation implements State {}
+
+class StartTurnConfirmation implements State {}
+
 class ReadyForInput implements State {}
 
 class WaitingForEndOfPath implements State {

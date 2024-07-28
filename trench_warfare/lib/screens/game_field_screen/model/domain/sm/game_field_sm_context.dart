@@ -17,13 +17,17 @@ class GameFieldStateMachineContext {
 
   final bool isAI;
 
-  GameFieldStateMachineContext(
-      {required this.gameField,
-      required this.nation,
-      required this.money,
-      required this.mapMetadata,
-      required this.gameFieldSettingsStorage,
-      required this.updateGameObjectsEvent,
-      required this.controlsState,
-      required this.isAI});
+  final DayStorage dayStorage;
+
+  GameFieldStateMachineContext({
+    required this.gameField,
+    required this.nation,
+    required this.money,
+    required this.mapMetadata,
+    required this.gameFieldSettingsStorage,
+    required this.updateGameObjectsEvent,
+    required this.controlsState,
+    required this.isAI,
+    required this.dayStorage,
+  });
 }

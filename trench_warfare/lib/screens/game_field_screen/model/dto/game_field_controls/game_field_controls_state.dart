@@ -51,3 +51,26 @@ class CardsPlacingControls extends GameFieldControlsState {
 
   CardsPlacingControls({required this.totalMoney, required this.card});
 }
+
+class StartTurnControls extends GameFieldControlsState {
+  final Nation nation;
+
+  final int day;
+
+  StartTurnControls({
+    required this.nation,
+    required this.day,
+  });
+}
+
+class WinControls extends GameFieldControlsState {
+  final Nation nation;
+
+  WinControls({required this.nation});
+}
+
+class DefeatControls extends GameFieldControlsState {
+  final Nation nation;
+
+  DefeatControls({required this.nation});
+}

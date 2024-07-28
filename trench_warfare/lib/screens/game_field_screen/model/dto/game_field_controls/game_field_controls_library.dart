@@ -3,6 +3,7 @@ library game_field_controls;
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';

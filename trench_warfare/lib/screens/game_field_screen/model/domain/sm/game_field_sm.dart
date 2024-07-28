@@ -15,6 +15,7 @@ class GameFieldStateMachine {
     GameFieldSettingsStorageRead gameFieldSettingsStorage,
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
+    DayStorage dayStorage,
     this._modelCallback, {
     required bool isAI,
   }) {
@@ -27,17 +28,22 @@ class GameFieldStateMachine {
       updateGameObjectsEvent: updateGameObjectsEvent,
       controlsState: controlsState,
       isAI: isAI,
+      dayStorage: dayStorage,
     );
   }
 
   void process(Event event) {
-    log('SM start. Event is: $event; state is: $_currentState');
+    log('SM start. Nation is: ${_context.nation}; Event is: $event; State is: $_currentState');
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          OnStarTurn() => FromInitialOnOnStarTurnTransition(_context).process(),
+          OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(),
           _ => _currentState,
         },
+      StartTurnInitialConfirmation() => switch(event) {
+        OnStarTurnConfirmed() => FromStartTurnInitialConfirmationOnStarTurnConfirmed(_context).process(),
+        _ => _currentState,
+      },
       ReadyForInput() => switch (event) {
           OnCellClick(cell: var cell) => FromReadyForInputOnClick(_context).process(cell),
           OnLongCellClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(_context).process(cell),
@@ -105,12 +111,16 @@ class GameFieldStateMachine {
       TurnIsEnded() => switch (event) {
           OnStarTurn() => FromTurnIsEndedOnStartTurn(_context).process(),
           _ => _currentState,
-        }
+        },
+      StartTurnConfirmation() => switch(event) {
+        OnStarTurnConfirmed() => FromStartTurnConfirmationOnStarTurnConfirmed(_context).process(),
+        _ => _currentState,
+      }
     };
 
     _currentState = newState;
 
-    log('SM finish. New state is: $newState');
+    log('SM finish. Nation is: ${_context.nation}; New state is: $newState');
 
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();

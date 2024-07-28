@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
@@ -21,9 +22,9 @@ abstract interface class GameFieldModelCallback {
 }
 
 class GameFieldModel implements GameFieldModelCallback, Disposable {
-  static const _startIndex = 0;
+  static const _humanIndex = 0;
 
-  int _currentPlayerIndex = _startIndex;
+  int _currentPlayerIndex = _humanIndex;
 
   final List<PlayerCore> _players = [];
 
@@ -44,7 +45,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
   Stream<GameFieldControlsState> get controlsState => _controlsState.output
-      .map((event) => _isHumanPlayer ? event : Invisible()); // Hides controls for AI players
+      .map((event) => _isHumanPlayer ? event : Invisible() );
 
   Future<void> init(RenderableTiledMap tileMap) async {
     final metadata = await compute(MetadataReader.read, tileMap.map);
@@ -57,6 +58,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     final gameFieldSettingsStorage = GameFieldSettingsStorage();
 
     for (var i = 0; i < metadata.nations.length; i++) {
+      final dayStorage = DayStorage(0);
+
       final core = PlayerCore(
         _gameField,
         gameFieldSettingsStorage,
@@ -65,12 +68,14 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         _updateGameObjectsEvent,
         _controlsState,
         this,
-        isAI: i != _startIndex,
+        dayStorage,
+        isAI: i != _humanIndex,
       );
 
       _players.add(core);
 
       // The new map
+/*
       switch (i) {
         case 0:
           _playersAi.add(null); // Germany
@@ -85,11 +90,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         default:
           _playersAi.add(PassivePlayerAi(core));
       }
+*/
 
       // The old map
-/*
       switch (i) {
-        case _startIndex:
+        case _humanIndex:
           _playersAi.add(null); // Austria-Hungary
         case 1:
           _playersAi.add(PeacefulPlayerAi(
@@ -99,18 +104,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             core.money,
             metadata,
           )); // France
-        case 2:
-          _playersAi.add(AggressivePlayerAi(
-            _gameField,
-            core,
-            metadata.nations[i].code,
-            core.money,
-            metadata,
-          )); // Greece
         default:
-          _playersAi.add(PassivePlayerAi(core)); // Belgium
+          _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium
       }
-*/
     }
 
     _players[_currentPlayerIndex].onStartTurn();
@@ -125,6 +121,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
     _players[_currentPlayerIndex].onStartTurn();
 
+    if (_currentPlayerIndex != _humanIndex) {
+      _players[_currentPlayerIndex].onStarTurnConfirmed();
+    }
     _playersAi[_currentPlayerIndex]?.start();
   }
 

@@ -12,8 +12,8 @@ class StartScreen extends StatelessWidget {
       child: Center(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'the_battle_of_tannenburg.tmx');
-              //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'land_test.tmx');
+              //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'the_battle_of_tannenburg.tmx');
+              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'land_test.tmx');
             },
             child: const Text(
               "Start",
