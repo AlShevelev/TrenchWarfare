@@ -9,6 +9,10 @@ abstract interface class MapMetadataRead {
   List<Nation> getAllAggressive();
 
   List<Nation> getMyEnemies(Nation myNation);
+
+  List<Nation> getMyNotEnemies(Nation myNation);
+
+  List<Nation> getAll();
 }
 
 class MapMetadata implements MapMetadataRead {
@@ -55,6 +59,19 @@ class MapMetadata implements MapMetadataRead {
       .where((n) => n.code != myNation && isInWar(myNation, n.code))
       .map((n) => n.code)
       .toList(growable: false);
+
+  @override
+  List<Nation> getMyNotEnemies(Nation myNation) {
+    final allEnemies = getMyEnemies(myNation);
+
+    return nations
+        .where((n) => n.code != myNation && !allEnemies.contains(n.code))
+        .map((n) => n.code)
+        .toList(growable: false);
+  }
+
+  @override
+  List<Nation> getAll() => nations.map((n) => n.code).toList(growable: false);
 }
 
 class NationRecord {

@@ -1,4 +1,6 @@
 import 'package:flame/components.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
@@ -6,10 +8,12 @@ import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
-import 'game_field_for_tests.dart';
 
-import '../assert.dart';
+import 'assert.dart';
 
+import 'stable_units_interator_test.mocks.dart';
+
+@GenerateMocks([GameFieldRead])
 void main() {
   group('StableUnitsIterator - shifted', () {
     test('shifted', () {
@@ -30,11 +34,13 @@ void main() {
               ..addUnit(Unit.byType(UnitType.infantry)),
           )
           .toList(growable: false);
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -61,11 +67,12 @@ void main() {
     test('an empty list', () {
       // Arrange
       final cells = <GameFieldCell>[];
-      final gameField = GameFieldForTests(cells: cells);
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: false,
       );
@@ -95,11 +102,13 @@ void main() {
           ..setNation(Nation.usa),
       )
           .toList(growable: false);
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -130,11 +139,13 @@ void main() {
               ..addUnit(Unit.byType(UnitType.infantry)),
       )
           .toList(growable: false);
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -162,11 +173,13 @@ void main() {
           ..addUnit(Unit.byType(UnitType.infantry))
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -204,11 +217,13 @@ void main() {
           ..addUnits(units)
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -254,11 +269,13 @@ void main() {
           ..addUnit(unit2)
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -308,11 +325,13 @@ void main() {
           ..addUnits(units2)
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -370,11 +389,13 @@ void main() {
           ..addUnits(units2)
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );
@@ -436,11 +457,13 @@ void main() {
           ..addUnits(units2)
           ..setNation(Nation.usa),
       ];
-      final gameField = GameFieldForTests(cells: cells);
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
 
       // Act
       final iterator = StableUnitsIterator(
-        gameField: gameField,
+        gameField: mockGameField,
         myNation: Nation.usa,
         shifted: true,
       );

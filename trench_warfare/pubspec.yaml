@@ -17,6 +17,7 @@ dependencies:
   flame_gdx_texture_packer: ^0.6.1
   easy_localization: ^3.0.7
   provider: ^6.1.2
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
@@ -24,6 +25,8 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   flame_lint: ^1.1.2
   test: ^1.25.2
+  mockito: ^5.4.4
+  build_runner: ^2.4.11
 
 flutter:
   uses-material-design: true
