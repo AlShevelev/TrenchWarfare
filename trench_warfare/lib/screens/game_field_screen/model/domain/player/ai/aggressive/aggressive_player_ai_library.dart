@@ -25,7 +25,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/lose_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';

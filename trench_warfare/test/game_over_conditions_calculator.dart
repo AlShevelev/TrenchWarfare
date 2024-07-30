@@ -9,17 +9,17 @@ import 'package:trench_warfare/core_entities/enums/production_center_level.dart'
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/victory_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/victory_type.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions.dart';
 
 import 'assert.dart';
 
-import 'victory_calculator_test.mocks.dart';
+import 'game_over_conditions_calculator.mocks.dart';
 
 @GenerateMocks([GameFieldRead])
 @GenerateMocks([MapMetadataRead])
 void main() {
-  group('VictoryCalculator', () {
+  group('GameOverConditionsCalculator', () {
     test('game field is empty', () {
       // Arrange
       const nation = Nation.usa;
@@ -33,18 +33,16 @@ void main() {
       when(mockMetadata.getMyEnemies(nation)).thenReturn([]);
       when(mockMetadata.getMyNotEnemies(nation)).thenReturn([]);
 
-      final calculator = VictoryCalculator(
+      final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
-        myNation: nation,
       );
 
       // Act
-      final result = calculator.calculateVictory();
+      final result = calculator.calculate(nation);
 
       // Assert
-      Assert.isNotNull(result);
-      Assert.isTrue(result is GlobalVictory);
+      Assert.isNull(result);
     });
 
     test('Global victory', () {
@@ -200,14 +198,13 @@ void main() {
       when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy1, enemy2]);
       when(mockMetadata.getMyNotEnemies(myNation)).thenReturn([peaceful]);
 
-      final calculator = VictoryCalculator(
+      final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
-        myNation: myNation,
       );
 
       // Act
-      final result = calculator.calculateVictory();
+      final result = calculator.calculate(myNation);
 
       // Assert
       Assert.isNotNull(result);
@@ -344,14 +341,13 @@ void main() {
       when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
       when(mockMetadata.getMyNotEnemies(myNation)).thenReturn([peaceful]);
 
-      final calculator = VictoryCalculator(
+      final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
-        myNation: myNation,
       );
 
       // Act
-      final result = calculator.calculateVictory();
+      final result = calculator.calculate(myNation);
 
       // Assert
       Assert.isNotNull(result);
@@ -489,15 +485,14 @@ void main() {
       when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
       when(mockMetadata.getMyNotEnemies(myNation)).thenReturn([peaceful]);
 
-      final calculator = VictoryCalculator(
+      final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
-        myNation: myNation,
       );
 
       // Act
-      calculator.calculateVictory();
-      final result = calculator.calculateVictory();
+      calculator.calculate(myNation);
+      final result = calculator.calculate(myNation);
 
       // Assert
       Assert.isNull(result);
@@ -564,14 +559,13 @@ void main() {
       when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
       when(mockMetadata.getMyNotEnemies(myNation)).thenReturn([peaceful]);
 
-      final calculator = VictoryCalculator(
+      final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
-        myNation: myNation,
       );
 
       // Act
-      final result = calculator.calculateVictory();
+      final result = calculator.calculate(myNation);
 
       // Assert
       Assert.isNull(result);

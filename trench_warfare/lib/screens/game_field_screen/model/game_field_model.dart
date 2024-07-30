@@ -5,11 +5,11 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_st
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/peaceful/peaceful_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
@@ -44,8 +44,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState => _controlsState.output
-      .map((event) => _isHumanPlayer ? event : Invisible() );
+  Stream<GameFieldControlsState> get controlsState =>
+      _controlsState.output.map((event) => _isHumanPlayer ? event : Invisible());
 
   Future<void> init(RenderableTiledMap tileMap) async {
     final metadata = await compute(MetadataReader.read, tileMap.map);
@@ -56,6 +56,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     );
 
     final gameFieldSettingsStorage = GameFieldSettingsStorage();
+
+    final gameOverConditionsCalculator = GameOverConditionsCalculator(
+      gameField: _gameField,
+      metadata: metadata,
+    );
 
     for (var i = 0; i < metadata.nations.length; i++) {
       final dayStorage = DayStorage(0);
@@ -103,6 +108,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             metadata.nations[i].code,
             core.money,
             metadata,
+            gameOverConditionsCalculator,
           )); // France
         default:
           _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium

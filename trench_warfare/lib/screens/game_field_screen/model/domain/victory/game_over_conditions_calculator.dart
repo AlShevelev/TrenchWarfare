@@ -3,30 +3,30 @@ import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/victory_type.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 
-class VictoryCalculator {
+class GameOverConditionsCalculator {
   final GameFieldRead _gameField;
 
   final MapMetadataRead _metadata;
 
-  final Nation _myNation;
-
   final defeated = <Nation>{};
 
-  VictoryCalculator({
+  GameOverConditionsCalculator({
     required GameFieldRead gameField,
     required MapMetadataRead metadata,
-    required Nation myNation,
   })  : _gameField = gameField,
-        _metadata = metadata,
-        _myNation = myNation;
+        _metadata = metadata;
 
-  VictoryType? calculateVictory() {
+  GameOverConditions? calculate(Nation nation) {
+    if (_gameField.cells.isEmpty) {
+      return null;
+    }
+
     final pcTotal = <Nation, int>{};
     pcTotal.addEntries(
-      _metadata.getAll().where((it) => it != _myNation).map((it) => MapEntry(it, 0)),
+      _metadata.getAll().map((it) => MapEntry(it, 0)),
     );
 
     for (final cell in _gameField.cells) {
@@ -42,13 +42,13 @@ class VictoryCalculator {
 
     final defeatedNow = pcTotal.entries.where((e) => e.value == 0).map((e) => e.key).toSet();
 
-    final allEnemies = _metadata.getMyEnemies(_myNation);
+    final allEnemies = _metadata.getMyEnemies(nation);
 
     if (defeatedNow.containsAll(allEnemies)) {
-      return GlobalVictory(nation: _myNation);
+      return GlobalVictory(nation: nation);
     }
 
-    final allNotEnemies = _metadata.getMyNotEnemies(_myNation);
+    final allNotEnemies = _metadata.getMyNotEnemies(nation);
 
     final firstNotEnemyDefeatedNow =
         allNotEnemies.firstWhereOrNull((a) => defeatedNow.contains(a) && !defeated.contains(a));

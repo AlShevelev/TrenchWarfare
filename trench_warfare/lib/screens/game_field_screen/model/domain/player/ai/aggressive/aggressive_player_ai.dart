@@ -9,20 +9,25 @@ class AggressivePlayerAi extends PlayerAi {
 
   final MapMetadataRead _metadata;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   AggressivePlayerAi(
-    this._gameField,
+    GameFieldRead gameField,
     super.player,
-    this._myNation,
-    this._nationMoney,
-    this._metadata,
-  );
+    Nation myNation,
+    MoneyStorageRead nationMoney,
+    MapMetadataRead metadata,
+    GameOverConditionsCalculator gameOverConditionsCalculator,
+  )   : _gameField = gameField,
+        _myNation = myNation,
+        _nationMoney = nationMoney,
+        _metadata = metadata,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   @override
   void start() async {
-    final iLost = LoseCalculator.didILose(_gameField, myNation: _myNation);
-
     // If I lost - do nothing
-    if (!iLost) {
+    if (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       await MoneySpendingPhase(
         player,
         _gameField,
