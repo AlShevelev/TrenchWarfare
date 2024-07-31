@@ -1,10 +1,13 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
+import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/peaceful/peaceful_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
@@ -72,58 +75,15 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       metadata: metadata,
     );
 
-    for (var i = 0; i < metadata.nations.length; i++) {
-      final dayStorage = DayStorage(0);
-
-      final core = PlayerCore(
-        _gameField,
-        gameFieldSettingsStorage,
-        metadata.nations[i],
-        metadata,
-        _updateGameObjectsEvent,
-        _controlsState,
-        this,
-        dayStorage,
-        gameOverConditionsCalculator,
-        isAI: i != _humanIndex,
+    final players = _sortPlayers(metadata.nations);
+    for (var i = 0; i < players.length; i++) {
+      _createPlayer(
+        index: i,
+        gameFieldSettingsStorage: gameFieldSettingsStorage,
+        gameOverConditionsCalculator: gameOverConditionsCalculator,
+        metadata: metadata,
+        nationRecord: players[i],
       );
-
-      _players.add(core);
-
-      // The new map
-/*
-      switch (i) {
-        case 0:
-          _playersAi.add(null); // Germany
-        case 1:
-          _playersAi.add(AggressivePlayerAi(    // Russia
-            _gameField,
-            core,
-            metadata.nations[i].code,
-            core.money,
-            metadata,
-          )); // Greece
-        default:
-          _playersAi.add(PassivePlayerAi(core));
-      }
-*/
-
-      // The old map
-      switch (i) {
-        case _humanIndex:
-          _playersAi.add(null); // Austria-Hungary
-        case 1:
-          _playersAi.add(PeacefulPlayerAi(
-            _gameField,
-            core,
-            metadata.nations[i].code,
-            core.money,
-            metadata,
-            gameOverConditionsCalculator,
-          )); // France
-        default:
-          _playersAi.add(PassivePlayerAi(core)); // Greece & Belgium
-      }
     }
 
     _players[_currentPlayerIndex].onStartTurn();
@@ -156,5 +116,68 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   @override
   void onGameIsOver() {
     _gameFieldState.update(Completed());
+  }
+
+  List<NationRecord> _sortPlayers(Iterable<NationRecord> players) {
+    final result = <NationRecord>[...players];
+
+    final firstAggressive = result.indexWhere((it) => it.aggressiveness == Aggressiveness.aggressive);
+
+    if (firstAggressive != _humanIndex) {
+      result.insert(_humanIndex, result.removeAt(firstAggressive));
+    }
+
+    return result;
+  }
+
+  void _createPlayer({
+    required int index,
+    required GameFieldSettingsStorage gameFieldSettingsStorage,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
+    required MapMetadata metadata,
+    required NationRecord nationRecord,
+  }) {
+    final dayStorage = DayStorage(0);
+
+    final core = PlayerCore(
+      _gameField,
+      gameFieldSettingsStorage,
+      nationRecord,
+      metadata,
+      _updateGameObjectsEvent,
+      _controlsState,
+      this,
+      dayStorage,
+      gameOverConditionsCalculator,
+      isAI: index != _humanIndex,
+    );
+
+    _players.add(core);
+
+    if (index == _humanIndex) {
+      _playersAi.add(null);
+    } else {
+      final ai = switch (nationRecord.aggressiveness) {
+        Aggressiveness.passive => PassivePlayerAi(core),
+        Aggressiveness.peaceful => PeacefulPlayerAi(
+            _gameField,
+            core,
+            nationRecord.code,
+            core.money,
+            metadata,
+            gameOverConditionsCalculator,
+          ),
+        Aggressiveness.aggressive => AggressivePlayerAi(
+            gameField,
+            core,
+            nationRecord.code,
+            core.money,
+            metadata,
+            gameOverConditionsCalculator,
+          )
+      };
+
+      _playersAi.add(ai);
+    }
   }
 }
