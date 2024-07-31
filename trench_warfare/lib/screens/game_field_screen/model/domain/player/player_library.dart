@@ -13,5 +13,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 
+part 'player_ai_input_proxy.dart';
 part 'player_input.dart';
+part 'player_input_proxy.dart';
 part 'player_core.dart';

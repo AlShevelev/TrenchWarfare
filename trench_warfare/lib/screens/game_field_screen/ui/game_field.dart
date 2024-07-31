@@ -35,7 +35,7 @@ abstract interface class GameFieldForControls {
 
   void onCardsPlacingCancelled();
 
-  void onStarTurnConfirmed();
+  void onPopupDialogClosed();
 }
 
 class GameField extends FlameGame
@@ -127,7 +127,7 @@ class GameField extends FlameGame
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
-      _viewModel.humanInput?.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
+      _viewModel.input.onResortUnits(cellId, unitsId, isCarrier: isCarrier);
 
   @override
   void onDispose() {
@@ -151,20 +151,20 @@ class GameField extends FlameGame
   }
 
   @override
-  void onCardsButtonClick() => _viewModel.humanInput?.onCardsButtonClick();
+  void onCardsButtonClick() => _viewModel.input.onCardsButtonClick();
 
   @override
-  void onCardsSelectionCancelled() => _viewModel.humanInput?.onCardsSelectionCancelled();
+  void onCardsSelectionCancelled() => _viewModel.input.onCardsSelectionCancelled();
 
   @override
-  void onCardSelected(GameFieldControlsCard? card) => _viewModel.humanInput?.onCardSelected(card);
+  void onCardSelected(GameFieldControlsCard? card) => _viewModel.input.onCardSelected(card);
 
   @override
-  void onCardsPlacingCancelled() => _viewModel.humanInput?.onCardsPlacingCancelled();
+  void onCardsPlacingCancelled() => _viewModel.input.onCardsPlacingCancelled();
 
   @override
-  void onEndOfTurnButtonClick() => _viewModel.humanInput?.onEndOfTurnButtonClick();
+  void onEndOfTurnButtonClick() => _viewModel.input.onEndOfTurnButtonClick();
 
   @override
-  void onStarTurnConfirmed() => _viewModel.humanInput?.onStarTurnConfirmed();
+  void onPopupDialogClosed() => _viewModel.input.onPopupDialogClosed();
 }

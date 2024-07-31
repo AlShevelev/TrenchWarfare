@@ -29,5 +29,5 @@ abstract interface class PlayerInput {
   void onStartTurn();
 
   /// Confirms that a turn is started. Must not be called from the AI - it's called from the model
-  void onStarTurnConfirmed();
+  void onPopupDialogClosed();
 }

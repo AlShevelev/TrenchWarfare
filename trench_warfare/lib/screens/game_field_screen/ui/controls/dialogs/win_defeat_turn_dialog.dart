@@ -29,7 +29,7 @@ class WinDefeatTurnDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _gameField.onStarTurnConfirmed();
+        _gameField.onPopupDialogClosed();
       },
       child: Container(
         color: Colors.black.withOpacity(0.5),

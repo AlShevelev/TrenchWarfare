@@ -32,13 +32,13 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   int _currentPlayerIndex = _humanIndex;
 
-  final List<PlayerCore> _players = [];
+  final List<PlayerInputProxy> _players = [];
 
   final List<PlayerAi?> _playersAi = [];
 
   bool get _isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
 
-  PlayerInput? get input => _isHumanPlayer ? _players[_currentPlayerIndex] : null;
+  PlayerInput get uiInput => _players[_currentPlayerIndex];
 
   PlayerGameObjectCallback get gameObjectCallback => _players[_currentPlayerIndex];
 
@@ -51,7 +51,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
   Stream<GameFieldControlsState> get controlsState =>
-      _controlsState.output.map((event) => _isHumanPlayer ? event : Invisible());
+      _controlsState.output.map((event) => _isHumanPlayer || event is DefeatControls ? event : Invisible());
 
   final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
   Stream<GameFieldState> get gameFieldState => _gameFieldState.output;
@@ -101,7 +101,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _players[_currentPlayerIndex].onStartTurn();
 
     if (_currentPlayerIndex != _humanIndex) {
-      _players[_currentPlayerIndex].onStarTurnConfirmed();
+      _players[_currentPlayerIndex].onPopupDialogClosed();
     }
     _playersAi[_currentPlayerIndex]?.start();
   }
@@ -137,6 +137,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required MapMetadata metadata,
     required NationRecord nationRecord,
   }) {
+    final isHuman = index == _humanIndex; 
+    
     final dayStorage = DayStorage(0);
 
     final core = PlayerCore(
@@ -149,12 +151,12 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       this,
       dayStorage,
       gameOverConditionsCalculator,
-      isAI: index != _humanIndex,
+      isAI: !isHuman,
     );
+    
+    _players.add(isHuman ? core : PlayerAiInputProxy(playerCore: core));
 
-    _players.add(core);
-
-    if (index == _humanIndex) {
+    if (isHuman) {
       _playersAi.add(null);
     } else {
       final ai = switch (nationRecord.aggressiveness) {

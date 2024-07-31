@@ -1,6 +1,6 @@
 part of player;
 
-class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
+class PlayerCore extends PlayerInputProxy {
   final GameFieldRead _gameField;
 
   late final GameFieldStateMachine _stateMachine;
@@ -106,5 +106,5 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
   }
 
   @override
-  void onStarTurnConfirmed() => _stateMachine.process(OnPopupDialogClosed());
+  void onPopupDialogClosed() => _stateMachine.process(OnPopupDialogClosed());
 }
