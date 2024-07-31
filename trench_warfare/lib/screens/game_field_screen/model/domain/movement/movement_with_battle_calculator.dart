@@ -5,6 +5,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required super.gameField,
     required super.nation,
     required super.updateGameObjectsEvent,
+    required super.gameOverConditionsCalculator,
   });
 
   @override
@@ -107,7 +108,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       newDefendingUnitCell: newDefendingUnitCell,
     );
 
-    return MovingInProgress();
+    return _getNextState();
   }
 
   BattleResult _calculateBattleResult(

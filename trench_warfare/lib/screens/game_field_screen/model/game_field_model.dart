@@ -10,6 +10,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
@@ -19,6 +20,8 @@ import 'package:tuple/tuple.dart';
 
 abstract interface class GameFieldModelCallback {
   void onTurnCompleted();
+
+  void onGameIsOver();
 }
 
 class GameFieldModel implements GameFieldModelCallback, Disposable {
@@ -47,6 +50,13 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   Stream<GameFieldControlsState> get controlsState =>
       _controlsState.output.map((event) => _isHumanPlayer ? event : Invisible());
 
+  final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
+  Stream<GameFieldState> get gameFieldState => _gameFieldState.output;
+
+  GameFieldModel() {
+    _gameFieldState.update(Loading());
+  }
+
   Future<void> init(RenderableTiledMap tileMap) async {
     final metadata = await compute(MetadataReader.read, tileMap.map);
 
@@ -74,6 +84,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         _controlsState,
         this,
         dayStorage,
+        gameOverConditionsCalculator,
         isAI: i != _humanIndex,
       );
 
@@ -116,6 +127,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     }
 
     _players[_currentPlayerIndex].onStartTurn();
+
+    _gameFieldState.update(Playing());
   }
 
   @override
@@ -137,5 +150,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   void dispose() {
     _updateGameObjectsEvent.close();
     _controlsState.close();
+    _gameFieldState.close();
+  }
+
+  @override
+  void onGameIsOver() {
+    _gameFieldState.update(Completed());
   }
 }

@@ -20,6 +20,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/meta
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/cards_placing/cards_placing_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/carriers/carrier_panel_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/movement_library.dart';
@@ -43,6 +44,7 @@ part 'transitions/from_card_placing_special_strike_in_progress_on_animation_comp
 part 'transitions/from_card_selecting_on_card_selected.dart';
 part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
 part 'transitions/from_initial_on_start_turn_transition.dart';
+part 'transitions/from_moving_in_progress_on_animation_completed.dart';
 part 'transitions/from_path_is_shown_on_click.dart';
 part 'transitions/from_path_is_shown_on_end_of_turn_button_click.dart';
 part 'transitions/from_path_is_shown_on_resort_unit.dart';
@@ -55,6 +57,7 @@ part 'transitions/from_ready_for_input_on_resort_unit.dart';
 part 'transitions/from_start_turn_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_start_turn_initial_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_turn_is_ended_on_start_turn.dart';
+part 'transitions/from_victory_defeat_confirmation_on_popup_dialog_closed.dart';
 part 'transitions/from_waiting_for_end_of_path_on_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_end_of_turn_button_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_resort_unit.dart';

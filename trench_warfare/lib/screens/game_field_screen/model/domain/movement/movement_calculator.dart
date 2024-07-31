@@ -2,27 +2,30 @@ part of movement;
 
 abstract class MovementCalculator {
   @protected
-  late final GameFieldRead _gameField;
+  final GameFieldRead _gameField;
 
   @protected
-  late final Nation _nation;
+  final Nation _nation;
 
   @protected
-  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   @protected
-  late final PathFacade _pathFacade;
+  final PathFacade _pathFacade;
+
+  @protected
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
   MovementCalculator({
     required GameFieldRead gameField,
     required Nation nation,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
-  }) {
-    _gameField = gameField;
-    _nation = nation;
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-    _pathFacade = PathFacade(_gameField);
-  }
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
+  })  : _gameField = gameField,
+        _nation = nation,
+        _updateGameObjectsEvent = updateGameObjectsEvent,
+        _pathFacade = PathFacade(gameField),
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   State startMovement(Iterable<GameFieldCell> path);
 
@@ -44,5 +47,15 @@ abstract class MovementCalculator {
     } else {
       return path.first.removeActiveUnit();
     }
+  }
+
+  State _getNextState() {
+    final gameOverConditions = _gameOverConditionsCalculator.calculate(_nation);
+
+    return switch(gameOverConditions) {
+      GlobalVictory() => MovingInProgress(isVictory: true, defeated: null),
+      Defeat(nation: var nation) => MovingInProgress(isVictory: false, defeated: nation),
+      null => MovingInProgress(isVictory: false, defeated: null)
+    };
   }
 }

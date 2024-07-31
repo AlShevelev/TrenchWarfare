@@ -83,7 +83,8 @@
   "transport_card_name": "Truck",
   "transport_card_description": "[proper description needed, proper description needed]",
 
-  "victory_dialog": "Victory!",
-  "defeat_dialog": "Defeat...",
+  "victory_dialog": "The victory is yours!",
+  "defeat_dialog_global": "You have been defeated...",
+  "defeat_dialog": "This country has been defeated...",
   "day_dialog": "Day"
 }

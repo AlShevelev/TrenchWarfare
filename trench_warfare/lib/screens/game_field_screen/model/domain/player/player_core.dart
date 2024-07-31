@@ -20,7 +20,8 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
     GameFieldModelCallback modelCallback,
-    DayStorage dayStorage, {
+    DayStorage dayStorage,
+    GameOverConditionsCalculator gameOverConditionsCalculator, {
     required bool isAI,
   }) {
     _money = MoneyStorage(_gameField, playerNation);
@@ -34,6 +35,7 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
       updateGameObjectsEvent,
       controlsState,
       dayStorage,
+      gameOverConditionsCalculator,
       modelCallback,
       isAI: isAI,
     );
@@ -104,5 +106,5 @@ class PlayerCore implements PlayerInput, PlayerGameObjectCallback {
   }
 
   @override
-  void onStarTurnConfirmed() => _stateMachine.process(OnStarTurnConfirmed());
+  void onStarTurnConfirmed() => _stateMachine.process(OnPopupDialogClosed());
 }

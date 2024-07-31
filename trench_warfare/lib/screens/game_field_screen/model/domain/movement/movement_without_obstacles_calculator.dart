@@ -6,6 +6,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     required super.nation,
     required super.gameField,
     required super.updateGameObjectsEvent,
+    required super.gameOverConditionsCalculator,
   });
 
   @override
@@ -40,7 +41,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
 
     _updateUI(path: path, reachableCells: reachableCells, unit: unit);
 
-    return MovingInProgress();
+    return _getNextState();
   }
 
   void _updateUI({

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -7,6 +6,8 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:flutter/widgets.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
@@ -15,6 +16,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objects/game_objects_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
+import 'package:trench_warfare/shared/helpers/extensions.dart';
 
 abstract interface class GameFieldForControls {
   Stream<GameFieldControlsState> get controlsState;
@@ -36,7 +38,9 @@ abstract interface class GameFieldForControls {
   void onStarTurnConfirmed();
 }
 
-class GameField extends FlameGame with ScaleDetector, TapDetector implements GameFieldForControls {
+class GameField extends FlameGame
+    with ScaleDetector, TapDetector, HasGameRef
+    implements GameFieldForControls {
   late final GameFieldViewModel _viewModel;
 
   late TiledComponent _mapComponent;
@@ -47,6 +51,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   late final GameGesturesComposer _gameGesturesComposer;
 
   StreamSubscription? _updateGameObjectsSubscription;
+  StreamSubscription? _gameFieldStateSubscription;
 
   @override
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
@@ -76,6 +81,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     world.add(_mapComponent);
 
     _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(_onUpdateGameEvent);
+    _gameFieldStateSubscription = _viewModel.gameFieldState.listen(_onGameFieldStateUpdate);
 
     _gameGesturesComposer = GameGesturesComposer(
       mapSize: Offset(_mapComponent.width, _mapComponent.height),
@@ -126,6 +132,7 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
   @override
   void onDispose() {
     _updateGameObjectsSubscription?.cancel();
+    _gameFieldStateSubscription?.cancel();
     _viewModel.dispose();
     super.onDispose();
   }
@@ -134,6 +141,12 @@ class GameField extends FlameGame with ScaleDetector, TapDetector implements Gam
     for (var event in events) {
       await _gameObjectsComposer.onUpdateGameEvent(event);
       await _gameGesturesComposer.onUpdateGameEvent(event);
+    }
+  }
+
+  void _onGameFieldStateUpdate(GameFieldState state) async {
+    if (state is Completed) {
+      gameRef.buildContext?.let((context) => Navigator.of(context).pop());
     }
   }
 

@@ -72,5 +72,7 @@ class WinControls extends GameFieldControlsState {
 class DefeatControls extends GameFieldControlsState {
   final Nation nation;
 
-  DefeatControls({required this.nation});
+  final bool isGlobal;
+
+  DefeatControls({required this.nation, required this.isGlobal});
 }

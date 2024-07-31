@@ -22,7 +22,15 @@ class PathIsShown implements State {
   PathIsShown(this.path);
 }
 
-class MovingInProgress implements State {}
+class MovingInProgress implements State {
+  /// The player is win and game must be over
+  final bool isVictory;
+
+  /// This player has been defeated but the game is not over
+  final Nation? defeated;
+
+  MovingInProgress({required this.isVictory, required this.defeated});
+}
 
 class CardSelecting implements State {}
 
@@ -58,3 +66,12 @@ class TurnIsEnded implements State {
   // todo Maybe whenever in a future we'll store some useful information here
   // (camera position etc.) - to continue our game seamless
 }
+
+class VictoryDefeatConfirmation implements State {
+  /// The player is win and game must be over
+  final bool isVictory;
+
+  VictoryDefeatConfirmation({required this.isVictory});
+}
+
+class GameIsOver implements State {}

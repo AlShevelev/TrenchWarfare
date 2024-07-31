@@ -54,8 +54,8 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 nation: nation,
                 gameField: widget._gameField,
               ),
-            DefeatControls(nation: final nation) => WinDefeatTurnDialog(
-                type: WinDefeatTurnDialogType.defeat,
+            DefeatControls(nation: final nation, isGlobal: var isGlobal) => WinDefeatTurnDialog(
+                type: isGlobal ? WinDefeatTurnDialogType.defeatGlobal : WinDefeatTurnDialogType.defeat,
                 nation: nation,
                 gameField: widget._gameField,
               ),

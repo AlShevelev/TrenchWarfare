@@ -24,6 +24,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
         nation: _context.nation,
         gameField: _context.gameField,
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
+        gameOverConditionsCalculator: _context.gameOverConditionsCalculator,
       ).startMovement(pathToProcess);
     }
 

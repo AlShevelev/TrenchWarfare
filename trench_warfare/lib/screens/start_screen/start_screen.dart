@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/navigation/routes.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({Key? key}) : super(key: key);
+  const StartScreen({super.key});
 
   // This widget is the root of your application.
   @override

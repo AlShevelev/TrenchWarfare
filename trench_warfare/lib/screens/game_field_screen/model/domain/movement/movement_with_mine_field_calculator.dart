@@ -9,6 +9,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required super.nation,
     required super.gameField,
     required super.updateGameObjectsEvent,
+    required super.gameOverConditionsCalculator,
   });
 
   @override
@@ -49,7 +50,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
 
     _updateUI(path: path, reachableCells: reachableCells, unit: unit);
 
-    return MovingInProgress();
+    return _getNextState();
   }
 
   double _calculateExplosionDamage(Unit unit) {

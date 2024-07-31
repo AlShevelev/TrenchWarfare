@@ -19,6 +19,8 @@ class GameFieldStateMachineContext {
 
   final DayStorage dayStorage;
 
+  final GameOverConditionsCalculator gameOverConditionsCalculator;
+
   GameFieldStateMachineContext({
     required this.gameField,
     required this.nation,
@@ -29,5 +31,6 @@ class GameFieldStateMachineContext {
     required this.controlsState,
     required this.isAI,
     required this.dayStorage,
+    required this.gameOverConditionsCalculator,
   });
 }

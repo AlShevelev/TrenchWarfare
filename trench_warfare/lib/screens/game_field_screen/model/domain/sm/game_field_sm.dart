@@ -16,6 +16,7 @@ class GameFieldStateMachine {
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
     DayStorage dayStorage,
+    GameOverConditionsCalculator gameOverConditionsCalculator,
     this._modelCallback, {
     required bool isAI,
   }) {
@@ -29,6 +30,7 @@ class GameFieldStateMachine {
       controlsState: controlsState,
       isAI: isAI,
       dayStorage: dayStorage,
+      gameOverConditionsCalculator: gameOverConditionsCalculator,
     );
   }
 
@@ -40,10 +42,10 @@ class GameFieldStateMachine {
           OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(),
           _ => _currentState,
         },
-      StartTurnInitialConfirmation() => switch(event) {
-        OnStarTurnConfirmed() => FromStartTurnInitialConfirmationOnStarTurnConfirmed(_context).process(),
-        _ => _currentState,
-      },
+      StartTurnInitialConfirmation() => switch (event) {
+          OnPopupDialogClosed() => FromStartTurnInitialConfirmationOnStarTurnConfirmed(_context).process(),
+          _ => _currentState,
+        },
       ReadyForInput() => switch (event) {
           OnCellClick(cell: var cell) => FromReadyForInputOnClick(_context).process(cell),
           OnLongCellClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(_context).process(cell),
@@ -71,8 +73,16 @@ class GameFieldStateMachine {
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(_context).process(path),
           _ => _currentState,
         },
-      MovingInProgress() => switch (event) {
-          OnAnimationCompleted() => ReadyForInput(),
+      MovingInProgress(isVictory: var isVictory, defeated: var defeated) => switch (event) {
+          OnAnimationCompleted() => FromMovingInProgressOnAnimationCompleted(_context).process(
+              isVictory,
+              defeated,
+            ),
+          _ => _currentState,
+        },
+      VictoryDefeatConfirmation(isVictory: var isVictory) => switch (event) {
+          OnPopupDialogClosed() =>
+            FromVictoryDefeatConfirmationOnPopupDialogClosed(_context).process(isVictory),
           _ => _currentState,
         },
       CardSelecting() => switch (event) {
@@ -112,8 +122,11 @@ class GameFieldStateMachine {
           OnStarTurn() => FromTurnIsEndedOnStartTurn(_context).process(),
           _ => _currentState,
         },
-      StartTurnConfirmation() => switch(event) {
-        OnStarTurnConfirmed() => FromStartTurnConfirmationOnStarTurnConfirmed(_context).process(),
+      StartTurnConfirmation() => switch (event) {
+          OnPopupDialogClosed() => FromStartTurnConfirmationOnStarTurnConfirmed(_context).process(),
+          _ => _currentState,
+        },
+      GameIsOver() => switch (event) {
         _ => _currentState,
       }
     };
@@ -124,6 +137,8 @@ class GameFieldStateMachine {
 
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();
+    } else if (_currentState is GameIsOver) {
+      _modelCallback.onGameIsOver();
     }
   }
 }

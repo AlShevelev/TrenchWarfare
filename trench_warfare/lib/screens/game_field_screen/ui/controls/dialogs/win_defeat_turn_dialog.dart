@@ -5,7 +5,7 @@ import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 
-enum WinDefeatTurnDialogType { win, defeat, turn }
+enum WinDefeatTurnDialogType { win, defeat, defeatGlobal, turn }
 
 class WinDefeatTurnDialog extends StatelessWidget {
   final WinDefeatTurnDialogType type;
@@ -87,7 +87,9 @@ class WinDefeatTurnDialog extends StatelessWidget {
 
   String _getPhoto() => switch (type) {
         WinDefeatTurnDialogType.win => '${_imagesPath}photos/photo_victory.webp',
-        WinDefeatTurnDialogType.defeat => '${_imagesPath}photos/photo_defeat.webp',
+        WinDefeatTurnDialogType.defeat ||
+        WinDefeatTurnDialogType.defeatGlobal =>
+          '${_imagesPath}photos/photo_defeat.webp',
         WinDefeatTurnDialogType.turn =>
           '${_imagesPath}photos/photo_new_turn_${RandomGen.randomInt(4) + 1}.webp',
       };
@@ -97,6 +99,7 @@ class WinDefeatTurnDialog extends StatelessWidget {
   String _getTitle() => switch (type) {
         WinDefeatTurnDialogType.win => tr('victory_dialog'),
         WinDefeatTurnDialogType.defeat => tr('defeat_dialog'),
+        WinDefeatTurnDialogType.defeatGlobal => tr('defeat_dialog_global'),
         WinDefeatTurnDialogType.turn => '${tr('day_dialog')} ${day!}',
       };
 }
