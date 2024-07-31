@@ -60,9 +60,16 @@ class WinDefeatTurnDialog extends StatelessWidget {
                             //mainAxisSize: MainAxisSize.min,
                             children: [
                               Image.asset(_getBanner()),
-                              Text(
-                                _getTitle(),
-                                style: AppTypography.s20w600,
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  child: Text(
+                                    _getTitle(),
+                                    style: AppTypography.s18w600,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
                               Image.asset(_getBanner()),
                             ],
