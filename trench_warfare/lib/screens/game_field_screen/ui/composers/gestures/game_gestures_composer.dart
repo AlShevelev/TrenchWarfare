@@ -27,7 +27,7 @@ class GameGesturesComposer {
   void init(GameFieldViewModelInput viewModelInput) => _viewModelInput = viewModelInput;
 
   void onScaleStart() {
-    if (_viewModelInput.input == null) {
+    if (!_viewModelInput.isHumanPlayer) {
       return;
     }
 
@@ -35,7 +35,7 @@ class GameGesturesComposer {
   }
 
   void onScaleUpdate({required Vector2 currentScale, required Vector2 scaleDelta}) {
-    if (_viewModelInput.input == null) {
+    if (!_viewModelInput.isHumanPlayer) {
       return;
     }
 
@@ -49,16 +49,16 @@ class GameGesturesComposer {
   }
 
   void onScaleEnd() {
-    if (_viewModelInput.input == null) {
+    if (!_viewModelInput.isHumanPlayer) {
       return;
     }
 
     _checkBorders();
-    _viewModelInput.input?.onCameraUpdated(_camera.zoom, _camera.position);
+    _viewModelInput.input.onCameraUpdated(_camera.zoom, _camera.position);
   }
 
   Future<void> onTapStart(Vector2 position) async {
-    if (_viewModelInput.input == null) {
+    if (!_viewModelInput.isHumanPlayer) {
       return;
     }
 
@@ -74,12 +74,12 @@ class GameGesturesComposer {
     final tapPosition = _tapPosition;
     if (tapPosition != null) {
       _longTapStarted = true;
-      _viewModelInput.input?.onLongClickStart(tapPosition);
+      _viewModelInput.input.onLongClickStart(tapPosition);
     }
   }
 
   void onTapEnd() {
-    if (_viewModelInput.input == null) {
+    if (!_viewModelInput.isHumanPlayer) {
       return;
     }
 
@@ -88,9 +88,9 @@ class GameGesturesComposer {
 
     if (position != null) {
       if (_longTapStarted) {
-        _viewModelInput.input?.onLongClickEnd();
+        _viewModelInput.input.onLongClickEnd();
       } else {
-        _viewModelInput.input?.onClick(position);
+        _viewModelInput.input.onClick(position);
       }
     }
 

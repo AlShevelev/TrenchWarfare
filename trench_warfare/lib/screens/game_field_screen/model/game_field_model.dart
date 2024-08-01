@@ -36,7 +36,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final List<PlayerAi?> _playersAi = [];
 
-  bool get _isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
+  bool get isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
 
   PlayerInput get uiInput => _players[_currentPlayerIndex];
 
@@ -51,7 +51,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
   Stream<GameFieldControlsState> get controlsState =>
-      _controlsState.output.map((event) => _isHumanPlayer || event is DefeatControls ? event : Invisible());
+      _controlsState.output.map((event) => isHumanPlayer || event is DefeatControls ? event : Invisible());
 
   final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
   Stream<GameFieldState> get gameFieldState => _gameFieldState.output;

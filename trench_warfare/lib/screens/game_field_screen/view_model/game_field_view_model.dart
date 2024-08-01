@@ -8,7 +8,9 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_st
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
 
 abstract interface class GameFieldViewModelInput {
-  PlayerInput? get input;
+  PlayerInput get input;
+
+  bool get isHumanPlayer;
 
   PlayerGameObjectCallback get gameObjectCallback;
 }
@@ -24,6 +26,9 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
 
   @override
   PlayerInput get input => _model.uiInput;
+
+  @override
+  bool get isHumanPlayer => _model.isHumanPlayer;
 
   @override
   PlayerGameObjectCallback get gameObjectCallback => _model.gameObjectCallback;
