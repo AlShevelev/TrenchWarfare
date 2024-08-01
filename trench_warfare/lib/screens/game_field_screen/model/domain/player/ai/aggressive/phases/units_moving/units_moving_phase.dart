@@ -23,27 +23,26 @@ class UnitsMovingPhase implements TurnPhase {
         _actions = PlayerActions(player: player) {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
-    playerCore.registerOnAnimationCompleted(() => _actions.onAnimationCompleted);
+    playerCore.registerOnAnimationCompleted(() {
+      _actions.onAnimationCompleted();
+    });
   }
 
   @override
   Future<void> start() async {
     final iterator = StableUnitsIterator(gameField: _gameField, myNation: _myNation);
-    
+
     while (iterator.moveNext()) {
       final unit = iterator.current.unit;
+
       GameFieldCellRead? cellWithUnit = iterator.current.cell;
 
-      bool needRecalculateInfluences = true;
       late InfluenceMapRepresentationRead influences;
 
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled) {
-        if (needRecalculateInfluences) {
-          influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
-              (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
-          needRecalculateInfluences = false;
-        }
+        influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
+            (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
         final estimators = _createEstimators(
           influences: influences,
@@ -72,10 +71,6 @@ class UnitsMovingPhase implements TurnPhase {
         cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
         if (cellWithUnit == null) {
           break;
-        }
-
-        if (cellWithUnit != iterator.current.cell) {
-          needRecalculateInfluences = true;
         }
       }
     }
