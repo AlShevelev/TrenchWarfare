@@ -20,7 +20,7 @@ import 'game_over_conditions_calculator.mocks.dart';
 @GenerateMocks([MapMetadataRead])
 void main() {
   group('GameOverConditionsCalculator', () {
-    test('game field is empty', () {
+    test('Game field is empty', () {
       // Arrange
       const nation = Nation.usa;
 
@@ -211,7 +211,7 @@ void main() {
       Assert.isTrue(result is GlobalVictory);
     });
 
-    test('Defeat', () {
+    test('Defeat for non-aggressive nation', () {
       // Arrange
       const myNation = Nation.usa;
       const enemy = Nation.russia;
@@ -288,7 +288,8 @@ void main() {
           center: Vector2.zero(),
           row: 0,
           col: 0,
-        )..setNation(peaceful)
+        )
+          ..setNation(peaceful)
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
@@ -325,7 +326,8 @@ void main() {
           center: Vector2.zero(),
           row: 0,
           col: 0,
-        )..setNation(peaceful)
+        )
+          ..setNation(peaceful)
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
@@ -353,6 +355,98 @@ void main() {
       Assert.isNotNull(result);
       Assert.isTrue(result is Defeat);
       Assert.equals((result as Defeat).nation, peaceful);
+    });
+
+    test('Defeat for aggressive nation', () {
+      // Arrange
+      const myNation = Nation.usa;
+      const enemy1 = Nation.russia;
+      const enemy2 = Nation.romania;
+      const peaceful = Nation.italy;
+
+      final cells = <GameFieldCell>[
+        // I've got a PC
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..setNation(myNation)
+          ..setProductionCenter(ProductionCenter(
+            type: ProductionCenterType.city,
+            level: ProductionCenterLevel.level1,
+            name: '',
+          )),
+        // But my enemy hasn't
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..setNation(enemy1)
+          ..setProductionCenter(ProductionCenter(
+            type: ProductionCenterType.city,
+            level: ProductionCenterLevel.level1,
+            name: '',
+          )),
+        // As well as this one
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..setNation(myNation)
+          ..setProductionCenter(ProductionCenter(
+            type: ProductionCenterType.city,
+            level: ProductionCenterLevel.level1,
+            name: '',
+          )),
+        // And this one
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..setNation(peaceful)
+          ..setProductionCenter(ProductionCenter(
+            type: ProductionCenterType.city,
+            level: ProductionCenterLevel.level1,
+            name: '',
+          )),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      final mockMetadata = MockMapMetadataRead();
+      when(mockMetadata.getAll()).thenReturn([myNation, enemy1, enemy2, peaceful]);
+      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy1, enemy2]);
+      when(mockMetadata.getMyNotEnemies(myNation)).thenReturn([peaceful]);
+
+      final calculator = GameOverConditionsCalculator(
+        gameField: mockGameField,
+        metadata: mockMetadata,
+      );
+
+      // Act
+      final result = calculator.calculate(myNation);
+
+      // Assert
+      Assert.isNotNull(result);
+      Assert.isTrue(result is Defeat);
+      Assert.equals((result as Defeat).nation, enemy2);
     });
 
     test('Defeat is not returned for a second time', () {
@@ -432,7 +526,8 @@ void main() {
           center: Vector2.zero(),
           row: 0,
           col: 0,
-        )..setNation(peaceful)
+        )
+          ..setNation(peaceful)
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
@@ -469,7 +564,8 @@ void main() {
           center: Vector2.zero(),
           row: 0,
           col: 0,
-        )..setNation(peaceful)
+        )
+          ..setNation(peaceful)
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
@@ -543,7 +639,8 @@ void main() {
           center: Vector2.zero(),
           row: 0,
           col: 0,
-        )..setNation(peaceful)
+        )
+          ..setNation(peaceful)
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,

@@ -48,15 +48,15 @@ class GameOverConditionsCalculator {
       return GlobalVictory(nation: nation);
     }
 
-    final allNotEnemies = _metadata.getMyNotEnemies(nation);
+    final allOpposite = _metadata.getMyNotEnemies(nation) + allEnemies;
 
-    final firstNotEnemyDefeatedNow =
-        allNotEnemies.firstWhereOrNull((a) => defeatedNow.contains(a) && !defeated.contains(a));
+    final firstOppositeDefeatedNow =
+        allOpposite.firstWhereOrNull((a) => defeatedNow.contains(a) && !defeated.contains(a));
 
     defeated.clear();
     defeated.addAll(defeatedNow);
 
-    return firstNotEnemyDefeatedNow?.let((e) => Defeat(nation: e));
+    return firstOppositeDefeatedNow?.let((e) => Defeat(nation: e));
   }
 
   bool isDefeated(Nation nation) => defeated.contains(nation);
