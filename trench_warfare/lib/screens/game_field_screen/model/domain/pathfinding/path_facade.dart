@@ -11,11 +11,23 @@ class PathFacade {
   Iterable<GameFieldCellRead> calculatePath({
     required GameFieldCellRead startCell,
     required GameFieldCellRead endCell,
+  }) =>
+      calculatePathForUnit(
+        startCell: startCell,
+        endCell: endCell,
+        calculatedUnit: startCell.activeUnit!,
+      );
+
+  /// Calculates a path without estimation for some unit
+  Iterable<GameFieldCellRead> calculatePathForUnit({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
+    required Unit calculatedUnit,
   }) {
     final pathFinder = FindPath(
         _gameField,
         _getFindPathSettings(
-          startCell.activeUnit!,
+          calculatedUnit,
           startCell: startCell,
           endCell: endCell,
         ));

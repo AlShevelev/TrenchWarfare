@@ -10,10 +10,6 @@ extension ComponMethods<T> on T {
   }
 }
 
-extension ListsInt on Iterable<int> {
-  int sum() => fold(0, (p, c) => p + c);
-}
-
 extension ListsDouble on Iterable<double> {
   double average() => sum / length;
 }

@@ -66,6 +66,14 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
+        CarriersEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
       ];
 
       final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
