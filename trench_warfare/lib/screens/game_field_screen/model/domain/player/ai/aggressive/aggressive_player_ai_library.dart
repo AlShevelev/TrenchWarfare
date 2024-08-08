@@ -65,6 +65,7 @@ part 'phases/money_spending/processing/units_estimation_processor.dart';
 part 'phases/units_moving/units_moving_phase.dart';
 part 'phases/units_moving/actions/player_actions.dart';
 part 'phases/units_moving/estimations/attack_estimation_processor.dart';
+part 'phases/units_moving/estimations/carrier_interception_estimation_processor.dart';
 part 'phases/units_moving/estimations/do_noting_estimation_processor.dart';
 part 'phases/units_moving/estimations/move_to_enemy_pc_estimation_processor.dart';
 part 'phases/units_moving/estimations/move_to_my_pc_estimation_processor.dart';

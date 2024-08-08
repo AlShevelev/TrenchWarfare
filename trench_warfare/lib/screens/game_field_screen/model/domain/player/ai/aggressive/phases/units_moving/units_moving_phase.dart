@@ -91,6 +91,15 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
+        CarrierInterceptionEstimationProcessor(
+          actions: _actions,
+          influences: influences,
+          unit: unit,
+          cell: cell,
+          myNation: _myNation,
+          metadata: _metadata,
+          gameField: _gameField,
+        ),
         DoNothingEstimationProcessor(
           actions: _actions,
           influences: influences,
