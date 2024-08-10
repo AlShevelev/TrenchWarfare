@@ -11,6 +11,8 @@ class AggressivePlayerAi extends PlayerAi {
 
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
+  final ActiveCarrierTroopTransfers _activeCarrierTroopTransfers;
+
   AggressivePlayerAi(
     GameFieldRead gameField,
     super.player,
@@ -22,7 +24,8 @@ class AggressivePlayerAi extends PlayerAi {
         _myNation = myNation,
         _nationMoney = nationMoney,
         _metadata = metadata,
-        _gameOverConditionsCalculator = gameOverConditionsCalculator;
+        _gameOverConditionsCalculator = gameOverConditionsCalculator,
+        _activeCarrierTroopTransfers = ActiveCarrierTroopTransfers();
 
   @override
   void start() async {
@@ -41,6 +44,13 @@ class AggressivePlayerAi extends PlayerAi {
         gameField: _gameField,
         myNation: _myNation,
         metadata: _metadata,
+      ).start();
+
+      await CarriersPhase(
+        gameField: _gameField,
+        myNation: _myNation,
+        metadata: _metadata,
+        activeCarrierTroopTransfers: _activeCarrierTroopTransfers,
       ).start();
     }
 

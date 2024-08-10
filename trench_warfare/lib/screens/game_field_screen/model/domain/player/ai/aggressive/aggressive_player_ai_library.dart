@@ -35,6 +35,11 @@ import 'package:tuple/tuple.dart';
 
 part 'aggressive_player_ai.dart';
 part 'phases/turn_phase.dart';
+part 'phases/carriers/active_carrier_troop_transfers.dart';
+part 'phases/carriers/carriers_phase.dart';
+part 'phases/carriers/transfers/troop_transfer.dart';
+part 'phases/carriers/transfers/troop_transfer_state.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_transition.dart';
 part 'phases/money_spending/money_spending_phase.dart';
 part 'phases/money_spending/estimations/special_strike/air_bombardment_estimator.dart';
 part 'phases/money_spending/estimations/special_strike/flame_troopers_estimator.dart';
@@ -73,3 +78,4 @@ part 'phases/units_moving/estimations/resort_estimation_processor.dart';
 part 'phases/units_moving/estimations/unit_estimation_processor_base.dart';
 part 'phases/units_moving/units_iterator/stable_units_iterator.dart';
 part 'phases/units_moving/units_iterator/unit_on_cell.dart';
+part 'utils/carriers_target_calculator.dart';
