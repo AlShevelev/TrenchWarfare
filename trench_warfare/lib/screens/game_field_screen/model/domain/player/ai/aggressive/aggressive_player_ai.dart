@@ -25,7 +25,10 @@ class AggressivePlayerAi extends PlayerAi {
         _nationMoney = nationMoney,
         _metadata = metadata,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
-        _activeCarrierTroopTransfers = ActiveCarrierTroopTransfers();
+        _activeCarrierTroopTransfers = ActiveCarrierTroopTransfers(
+          gameField: gameField,
+          myNation: myNation,
+        );
 
   @override
   void start() async {

@@ -11,6 +11,16 @@ class TroopTransferTransitionResult {
   });
 }
 
+class TroopTransferTransitionResultPayload<T> extends TroopTransferTransitionResult {
+  final T payload;
+
+  TroopTransferTransitionResultPayload({
+    required super.processed,
+    required super.newState,
+    required this.payload,
+  });
+}
+
 abstract interface class TroopTransferTransition {
   Future<TroopTransferTransitionResult> process();
 }

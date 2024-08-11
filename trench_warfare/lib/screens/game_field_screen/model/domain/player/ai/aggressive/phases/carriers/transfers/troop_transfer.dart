@@ -1,22 +1,44 @@
 part of aggressive_player_ai;
 
-class TroopTransfer {
+abstract interface class TroopTransferRead {
+  String get id;
+
+  bool get isCompleted;
+
+  String? get selectedCarrierId;
+}
+
+class TroopTransfer implements TroopTransferRead {
   final GameFieldCellRead _targetCell;
 
-  final ActiveCarrierTroopTransfersRequests _otherTransferRequests;
+  final ActiveCarrierTroopTransfersRead _allTransfers;
+
+  final GameFieldRead _gameField;
+
+  final Nation _myNation;
 
   TroopTransferState _currentState = TroopTransferStateInit();
 
   final String _id;
+  @override
   String get id => _id;
 
+  _CarrierOnCell? _selectedCarrier;
+  @override
+  String? get selectedCarrierId => _selectedCarrier?.carrier.id;
+
+  @override
   bool get isCompleted => _currentState is TroopTransferStateCompleted;
 
   TroopTransfer({
     required GameFieldCellRead targetCell,
-    required ActiveCarrierTroopTransfersRequests otherTransferRequests,
+    required ActiveCarrierTroopTransfersRead allTransfers,
+    required GameFieldRead gameField,
+    required  Nation myNation,
   })  : _targetCell = targetCell,
-        _otherTransferRequests = otherTransferRequests,
+        _allTransfers = allTransfers,
+        _gameField = gameField,
+        _myNation = myNation,
         _id = RandomGen.generateId();
 
   Future<void> process() async {
@@ -31,6 +53,7 @@ class TroopTransfer {
         transitionResult = await transition.process();
 
         _currentState = transitionResult.newState;
+        _processTransitionResult(transitionResult);
       } while (!transitionResult.processed);
     }
 
@@ -39,15 +62,30 @@ class TroopTransfer {
     }
   }
 
-  TroopTransferTransition _getTransition() {
-    throw UnimplementedError(); init transition must be first
-  }
-
   bool _isGoalReachable() {
     if (_currentState is TroopTransferStateInit || _currentState is TroopTransferStateCompleted) {
       return true;
     }
 
+    throw UnimplementedError();
+  }
+
+  TroopTransferTransition _getTransition() => switch (_currentState) {
+        TroopTransferStateInit() => TroopTransferInitTransition(
+            targetCell: _targetCell,
+            gameField: _gameField,
+            myNation: _myNation,
+            allTransfers: _allTransfers,
+            myTransferId: _id,
+          ),
+        TroopTransferStateGathering() => TroopTransferGatheringTransition(),
+        TroopTransferStateTransporting() => TroopTransferTransportingTransition(),
+        TroopTransferStateLanding() => TroopTransferLandingTransition(),
+        TroopTransferStateMovementAfterLanding() => TroopTransferMovementAfterLadingTransition(),
+        TroopTransferStateCompleted() => throw UnsupportedError('This state is not supported'),
+      };
+
+  void _processTransitionResult(TroopTransferTransitionResult transitionResult) {
     throw UnimplementedError();
   }
 

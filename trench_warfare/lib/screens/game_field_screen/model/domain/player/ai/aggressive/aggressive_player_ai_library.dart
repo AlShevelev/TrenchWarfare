@@ -3,6 +3,7 @@ library aggressive_player_ai;
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
@@ -34,12 +35,21 @@ import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
 part 'aggressive_player_ai.dart';
+
 part 'phases/turn_phase.dart';
+
 part 'phases/carriers/active_carrier_troop_transfers.dart';
 part 'phases/carriers/carriers_phase.dart';
 part 'phases/carriers/transfers/troop_transfer.dart';
+part 'phases/carriers/transfers/dto/carrier_on_cell.dart';
 part 'phases/carriers/transfers/troop_transfer_state.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_gathering_transition.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_init_transition.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_landing_transition.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_movement_after_lading_transition.dart';
+part 'phases/carriers/transfers/transitions/troop_transfer_transporting_transition.dart';
 part 'phases/carriers/transfers/transitions/troop_transfer_transition.dart';
+
 part 'phases/money_spending/money_spending_phase.dart';
 part 'phases/money_spending/estimations/special_strike/air_bombardment_estimator.dart';
 part 'phases/money_spending/estimations/special_strike/flame_troopers_estimator.dart';
@@ -67,6 +77,7 @@ part 'phases/money_spending/processing/special_strike_estimation_processor.dart'
 part 'phases/money_spending/processing/terrain_modifier_estimation_processor.dart';
 part 'phases/money_spending/processing/unit_booster_estimation_processor.dart';
 part 'phases/money_spending/processing/units_estimation_processor.dart';
+
 part 'phases/units_moving/units_moving_phase.dart';
 part 'phases/units_moving/actions/player_actions.dart';
 part 'phases/units_moving/estimations/attack_estimation_processor.dart';
@@ -78,4 +89,5 @@ part 'phases/units_moving/estimations/resort_estimation_processor.dart';
 part 'phases/units_moving/estimations/unit_estimation_processor_base.dart';
 part 'phases/units_moving/units_iterator/stable_units_iterator.dart';
 part 'phases/units_moving/units_iterator/unit_on_cell.dart';
+
 part 'utils/carriers_target_calculator.dart';
