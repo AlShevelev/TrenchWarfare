@@ -11,8 +11,6 @@ class _InitTransition extends _TroopTransferTransition {
 
   final String _myTransferId;
 
-  List<_CarrierOnCell> _freeCarriers = [];
-
   _InitTransition({
     required GameFieldCellRead targetCell,
     required GameFieldRead gameField,
@@ -27,15 +25,14 @@ class _InitTransition extends _TroopTransferTransition {
 
   @override
   Future<_TransitionResult> process() async {
-    _freeCarriers = _getFreeCarriers();
+    final freeCarriers = _getFreeCarriers();
 
     // If we haven't got a free carrier - we are powerless to do anything
-    if (_freeCarriers.isEmpty) {
-      return _TransitionResult(
-        processed: true,
-        newState: _TroopTransferStateCompleted(),
-      );
+    if (freeCarriers.isEmpty) {
+      return _TransitionResult.completed();
     }
+
+    final selectedCarrier = _selectCarrier(freeCarriers);
 
     throw UnimplementedError();
   }
@@ -64,4 +61,14 @@ class _InitTransition extends _TroopTransferTransition {
 
     return allMyCarries;
   }
+
+  _CarrierOnCell _selectCarrier(List<_CarrierOnCell> freeCarriers) =>
+    freeCarriers.map(
+      (c) => Tuple2(
+        c,
+        UnitPowerEstimation.estimate(c.carrier) * (1.0 / _gameField.calculateDistance(_targetCell, c.cell)),
+      ),
+    )
+    .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
+    .last.item1;
 }

@@ -9,6 +9,10 @@ class _TransitionResult {
     required this.processed,
     required this.newState,
   });
+
+  _TransitionResult.completed():
+      processed = true,
+      newState = _TroopTransferStateCompleted();
 }
 
 class _TransitionResultPayload<T> extends _TransitionResult {
