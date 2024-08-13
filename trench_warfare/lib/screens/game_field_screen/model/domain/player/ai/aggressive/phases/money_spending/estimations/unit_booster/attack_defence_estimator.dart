@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _AttackDefenceCellWithFactors {
   final GameFieldCellRead cell;
@@ -18,7 +18,7 @@ class _AttackDefenceCellWithFactors {
 }
 
 /// Should we add an attack or defence booster in general?
-class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
+class _AttackDefenceEstimator implements Estimator<_UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -33,7 +33,7 @@ class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
 
   static const _weight = 2.0;
 
-  AttackDefenceEstimator({
+  _AttackDefenceEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -48,7 +48,7 @@ class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
         _type = type;
 
   @override
-  Iterable<EstimationResult<UnitBoosterEstimationData>> estimate() {
+  Iterable<EstimationResult<_UnitBoosterEstimationData>> estimate() {
     if (_type != UnitBoost.attack && _type != UnitBoost.defence) {
       throw UnsupportedError('This type of booster is not supported: $_type');
     }
@@ -89,9 +89,9 @@ class AttackDefenceEstimator implements Estimator<UnitBoosterEstimationData> {
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<UnitBoosterEstimationData>(
+    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: _weight + (c.hasArtillery ? _weight / 2 : 0) + (c.hasMachineGun ? _weight / 2 : 0),
-          data: UnitBoosterEstimationData(
+          data: _UnitBoosterEstimationData(
             cell: c.cell,
             type: _type,
             unitIndex: c.unitIndex,

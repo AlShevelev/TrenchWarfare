@@ -1,16 +1,16 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class ProductionCenterEstimationData implements EstimationData {
+class _ProductionCenterEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
   final ProductionCenterType type;
 
-  ProductionCenterEstimationData({required this.cell, required this.type});
+  _ProductionCenterEstimationData({required this.cell, required this.type});
 }
 
 /// Should we build production center on not in general?
-class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationData> {
+class _ProductionCenterEstimator implements Estimator<_ProductionCenterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -39,7 +39,7 @@ class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationD
         ProductionCenterType.airField => 0.075,
       };
 
-  ProductionCenterEstimator({
+  _ProductionCenterEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -54,7 +54,7 @@ class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationD
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<ProductionCenterEstimationData>> estimate() {
+  Iterable<EstimationResult<_ProductionCenterEstimationData>> estimate() {
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
     final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
@@ -118,9 +118,9 @@ class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationD
         ? 100.0
         : 1 + ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
     return allSafeCells
-        .map((c) => EstimationResult<ProductionCenterEstimationData>(
+        .map((c) => EstimationResult<_ProductionCenterEstimationData>(
               weight: resultWeight,
-              data: ProductionCenterEstimationData(
+              data: _ProductionCenterEstimationData(
                 cell: c,
                 type: _type,
               ),

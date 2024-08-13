@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class TerrainModifierEstimationProcessor extends EstimationProcessorBase<TerrainModifierEstimationData> {
+class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_TerrainModifierEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.0;
 
-  TerrainModifierEstimationProcessor({
+  _TerrainModifierEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -14,11 +14,11 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
   });
 
   @override
-  Iterable<EstimationResult<TerrainModifierEstimationData>> _makeEstimations() {
-    final List<EstimationResult<TerrainModifierEstimationData>> result = [];
+  Iterable<EstimationResult<_TerrainModifierEstimationData>> _makeEstimations() {
+    final List<EstimationResult<_TerrainModifierEstimationData>> result = [];
 
     result.addAll(
-      AntiAirGunEstimator(
+      _AntiAirGunEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -27,17 +27,7 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
     );
 
     result.addAll(
-      BarbedWireEstimator(
-        gameField: _gameField,
-        myNation: _myNation,
-        nationMoney: _nationMoney.actual,
-        influenceMap: _influenceMap,
-        metadata: _metadata,
-      ).estimate(),
-    );
-
-    result.addAll(
-      LandFortEstimator(
+      _BarbedWireEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -47,7 +37,17 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
     );
 
     result.addAll(
-      MineFieldsEstimator(
+      _LandFortEstimator(
+        gameField: _gameField,
+        myNation: _myNation,
+        nationMoney: _nationMoney.actual,
+        influenceMap: _influenceMap,
+        metadata: _metadata,
+      ).estimate(),
+    );
+
+    result.addAll(
+      _MineFieldsEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -58,7 +58,7 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
     );
 
     result.addAll(
-      MineFieldsEstimator(
+      _MineFieldsEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -69,7 +69,7 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
     );
 
     result.addAll(
-      TrenchEstimator(
+      _TrenchEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -82,6 +82,6 @@ class TerrainModifierEstimationProcessor extends EstimationProcessorBase<Terrain
   }
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<TerrainModifierEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_TerrainModifierEstimationData> estimationItem) =>
       GameFieldControlsTerrainModifiersCardBrief(type: estimationItem.data.type);
 }

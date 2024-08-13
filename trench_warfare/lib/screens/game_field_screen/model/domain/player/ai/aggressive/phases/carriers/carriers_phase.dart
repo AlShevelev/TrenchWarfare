@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of carriers_phase_library;
 
 class CarriersPhase implements TurnPhase {
   final GameFieldRead _gameField;

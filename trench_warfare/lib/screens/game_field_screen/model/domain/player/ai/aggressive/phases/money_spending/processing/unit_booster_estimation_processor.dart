@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBoosterEstimationData> {
+class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoosterEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.0;
 
-  UnitBoosterEstimationProcessor({
+  _UnitBoosterEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -14,11 +14,11 @@ class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBooster
   });
 
   @override
-  Iterable<EstimationResult<UnitBoosterEstimationData>> _makeEstimations() {
-    final List<EstimationResult<UnitBoosterEstimationData>> result = [];
+  Iterable<EstimationResult<_UnitBoosterEstimationData>> _makeEstimations() {
+    final List<EstimationResult<_UnitBoosterEstimationData>> result = [];
 
     result.addAll(
-      AttackDefenceEstimator(
+      _AttackDefenceEstimator(
         gameField: _gameField,
         myNation: _myNation,
         type: UnitBoost.attack,
@@ -29,7 +29,7 @@ class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBooster
     );
 
     result.addAll(
-      AttackDefenceEstimator(
+      _AttackDefenceEstimator(
         gameField: _gameField,
         myNation: _myNation,
         type: UnitBoost.defence,
@@ -40,7 +40,7 @@ class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBooster
     );
 
     result.addAll(
-      CommanderEstimator(
+      _CommanderEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -50,7 +50,7 @@ class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBooster
     );
 
     result.addAll(
-      TransportEstimator(
+      _TransportEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -61,6 +61,6 @@ class UnitBoosterEstimationProcessor extends EstimationProcessorBase<UnitBooster
   }
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<UnitBoosterEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_UnitBoosterEstimationData> estimationItem) =>
       GameFieldControlsUnitBoostersCardBrief(type: estimationItem.data.type);
 }

@@ -1,8 +1,8 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
-abstract class UnitEstimationProcessorBase {
+abstract class _UnitEstimationProcessorBase {
   @protected
-  final PlayerActions _actions;
+  final _PlayerActions _actions;
 
   @protected
   final InfluenceMapRepresentationRead _influences;
@@ -28,8 +28,8 @@ abstract class UnitEstimationProcessorBase {
   @protected
   double get _balanceFactor => 1.0;
 
-  UnitEstimationProcessorBase({
-    required PlayerActions actions,
+  _UnitEstimationProcessorBase({
+    required _PlayerActions actions,
     required InfluenceMapRepresentationRead influences,
     required Unit unit,
     required GameFieldCellRead cell,

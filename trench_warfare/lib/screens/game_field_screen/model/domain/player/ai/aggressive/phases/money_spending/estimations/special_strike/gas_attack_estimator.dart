@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _GasAttackCellWithFactors {
   final GameFieldCellRead cell;
@@ -14,7 +14,7 @@ class _GasAttackCellWithFactors {
   });
 }
 
-class GasAttackEstimator implements Estimator<SpecialStrikeEstimationData> {
+class _GasAttackEstimator implements Estimator<_SpecialStrikeEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -25,7 +25,7 @@ class GasAttackEstimator implements Estimator<SpecialStrikeEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  GasAttackEstimator({
+  _GasAttackEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -38,7 +38,7 @@ class GasAttackEstimator implements Estimator<SpecialStrikeEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<SpecialStrikeEstimationData>> estimate() {
+  Iterable<EstimationResult<_SpecialStrikeEstimationData>> estimate() {
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.gasAttack,
@@ -71,9 +71,9 @@ class GasAttackEstimator implements Estimator<SpecialStrikeEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<SpecialStrikeEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
       weight: 1.0 + c!.unitsQuantity * c.unitsSumPower,
-      data: SpecialStrikeEstimationData(
+      data: _SpecialStrikeEstimationData(
         cell: c.cell,
         type: SpecialStrikeType.gasAttack,
       ),

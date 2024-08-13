@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class MoneySpendingPhase implements TurnPhase {
   final PlayerInput _player;
@@ -25,8 +25,8 @@ class MoneySpendingPhase implements TurnPhase {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
 
-      final List<EstimationProcessor> processors = [
-        ProductionCenterEstimationProcessor(
+      final List<_EstimationProcessor> processors = [
+        _ProductionCenterEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,
@@ -34,7 +34,7 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
-        SpecialStrikeEstimationProcessor(
+        _SpecialStrikeEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,
@@ -42,7 +42,7 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
-        TerrainModifierEstimationProcessor(
+        _TerrainModifierEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,
@@ -50,7 +50,7 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
-        UnitBoosterEstimationProcessor(
+        _UnitBoosterEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,
@@ -58,7 +58,7 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
-        UnitsEstimationProcessor(
+        _UnitsEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,
@@ -66,7 +66,7 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
-        CarriersEstimationProcessor(
+        _CarriersEstimationProcessor(
           player: _player,
           gameField: _gameField,
           myNation: _myNation,

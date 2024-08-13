@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _LandFortCellWithFactors {
   final GameFieldCellRead cell;
@@ -18,7 +18,7 @@ class _LandFortCellWithFactors {
 }
 
 /// Should we place a land fort in general?
-class LandFortEstimator implements Estimator<TerrainModifierEstimationData> {
+class _LandFortEstimator implements Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -31,7 +31,7 @@ class LandFortEstimator implements Estimator<TerrainModifierEstimationData> {
 
   static const _weightFactor = 2.0;
 
-  LandFortEstimator({
+  _LandFortEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -44,7 +44,7 @@ class LandFortEstimator implements Estimator<TerrainModifierEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
+  Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.landFort,
@@ -88,12 +88,12 @@ class LandFortEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<TerrainModifierEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 +
               (c!.onRoad ? _weightFactor : 0) +
               (c.blockBridge ? _weightFactor : 0) +
               c.pcNearbyCount * _weightFactor,
-          data: TerrainModifierEstimationData(
+          data: _TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.landFort,
           ),

@@ -1,12 +1,12 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class UnitsBuildingEstimationData implements EstimationData {
+class _UnitsBuildingEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
   final UnitType type;
 
-  UnitsBuildingEstimationData({required this.cell, required this.type});
+  _UnitsBuildingEstimationData({required this.cell, required this.type});
 }
 
 class _CellWithDangerFactor {
@@ -24,7 +24,7 @@ class _CellWithDangerFactor {
 }
 
 /// Should we hire a unit in general?
-class UnitsBuildingEstimator implements Estimator<UnitsBuildingEstimationData> {
+class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -41,7 +41,7 @@ class UnitsBuildingEstimator implements Estimator<UnitsBuildingEstimationData> {
 
   double get _correctionFactor => _isLand ? 1.0 : 0.5;
 
-  UnitsBuildingEstimator({
+  _UnitsBuildingEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required UnitType type,
@@ -56,7 +56,7 @@ class UnitsBuildingEstimator implements Estimator<UnitsBuildingEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<UnitsBuildingEstimationData>> estimate() {
+  Iterable<EstimationResult<_UnitsBuildingEstimationData>> estimate() {
     if (_type == UnitType.carrier) {
       throw ArgumentError("Can't make an estimation for this type of unit: $_type");
     }
@@ -111,9 +111,9 @@ class UnitsBuildingEstimator implements Estimator<UnitsBuildingEstimationData> {
                 _correctionFactor,
           );
 
-      return EstimationResult<UnitsBuildingEstimationData>(
+      return EstimationResult<_UnitsBuildingEstimationData>(
         weight: weight,
-        data: UnitsBuildingEstimationData(
+        data: _UnitsBuildingEstimationData(
           cell: cell.cell,
           type: _type,
         ),

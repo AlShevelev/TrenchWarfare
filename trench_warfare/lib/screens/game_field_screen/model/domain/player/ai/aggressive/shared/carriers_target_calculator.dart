@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of aggressive_ai_shared_library;
 
 class CarriersTargetCalculator {
   final GameFieldRead _gameField;

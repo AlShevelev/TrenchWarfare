@@ -1,6 +1,6 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-abstract interface class EstimationProcessor {
+abstract interface class _EstimationProcessor {
   /// Makes estimation
   /// [result] average weight of the estimated factors
   double estimate();
@@ -12,7 +12,7 @@ abstract interface class EstimationProcessor {
   void onAnimationCompleted();
 }
 
-abstract class EstimationProcessorBase<D extends EstimationData> implements EstimationProcessor {
+abstract class _EstimationProcessorBase<D extends EstimationData> implements _EstimationProcessor {
   final PlayerInput _player;
 
   @protected
@@ -36,7 +36,7 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
   /// Allows you to increase the probability of a particular processor triggering
   double get _averageWeightBalanceFactor;
 
-  EstimationProcessorBase({
+  _EstimationProcessorBase({
     required PlayerInput player,
     required GameFieldRead gameField,
     required Nation myNation,

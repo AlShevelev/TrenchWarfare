@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _FlechettesCellWithFactors {
   final GameFieldCellRead cell;
@@ -14,7 +14,7 @@ class _FlechettesCellWithFactors {
   });
 }
 
-class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
+class _FlechettesEstimator implements Estimator<_SpecialStrikeEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -25,7 +25,7 @@ class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  FlechettesEstimator({
+  _FlechettesEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -38,7 +38,7 @@ class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<SpecialStrikeEstimationData>> estimate() {
+  Iterable<EstimationResult<_SpecialStrikeEstimationData>> estimate() {
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.flechettes,
@@ -72,9 +72,9 @@ class FlechettesEstimator implements Estimator<SpecialStrikeEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<SpecialStrikeEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
           weight: 1.0 + c!.unitsQuantity * c.unitsSumPower,
-          data: SpecialStrikeEstimationData(
+          data: _SpecialStrikeEstimationData(
             cell: c.cell,
             type: SpecialStrikeType.flechettes,
           ),

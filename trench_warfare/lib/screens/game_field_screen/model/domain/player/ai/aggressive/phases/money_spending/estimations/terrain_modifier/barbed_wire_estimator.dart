@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _BarbedWireCellWithFactors {
   final GameFieldCellRead cell;
@@ -15,7 +15,7 @@ class _BarbedWireCellWithFactors {
 }
 
 /// Should we place a barbed wire in general?
-class BarbedWireEstimator implements Estimator<TerrainModifierEstimationData> {
+class _BarbedWireEstimator implements Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -28,7 +28,7 @@ class BarbedWireEstimator implements Estimator<TerrainModifierEstimationData> {
 
   static const _weightCorrectionFactor = 4.0;
 
-  BarbedWireEstimator({
+  _BarbedWireEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -41,7 +41,7 @@ class BarbedWireEstimator implements Estimator<TerrainModifierEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
+  Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.barbedWire,
@@ -90,9 +90,9 @@ class BarbedWireEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<TerrainModifierEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 + (c!.properCellAroundTotal / c.cellAroundTotal) * _weightCorrectionFactor,
-          data: TerrainModifierEstimationData(
+          data: _TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.barbedWire,
           ),

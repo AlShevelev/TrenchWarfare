@@ -1,7 +1,7 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
 /// Interacts through my units, taking into account their removing, resorting etc.
-class StableUnitsIterator implements Iterator<UnitOnCell> {
+class StableUnitsIterator implements Iterator<_UnitOnCell> {
   late final List<GameFieldCellRead> _gameFieldCells;
 
   var _currentCellIndex = -1;
@@ -35,13 +35,13 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
   /// A unit can be removed (destroyed in a battle) or resorted.
   /// So, we must find it by its Id, and not by an index in the cell.units list
   @override
-  UnitOnCell get current {
+  _UnitOnCell get current {
     final cell = _gameFieldCells[_currentCellIndex];
     final unit = cell
         .units
         .singleWhere((u) => u.id == _unitIdsInTheCurrentCell[_currentUnitIndex]);
 
-    return UnitOnCell(cell: cell, unit: unit);
+    return _UnitOnCell(cell: cell, unit: unit);
   }
 
   @override

@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _CommanderCellWithFactors {
   final GameFieldCellRead cell;
@@ -22,7 +22,7 @@ class _CommanderCellWithFactors {
 }
 
 /// Should we add a commander booster in general?
-class CommanderEstimator implements Estimator<UnitBoosterEstimationData> {
+class _CommanderEstimator implements Estimator<_UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -35,7 +35,7 @@ class CommanderEstimator implements Estimator<UnitBoosterEstimationData> {
 
   static const _type = UnitBoost.commander;
 
-  CommanderEstimator({
+  _CommanderEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -48,7 +48,7 @@ class CommanderEstimator implements Estimator<UnitBoosterEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<UnitBoosterEstimationData>> estimate() {
+  Iterable<EstimationResult<_UnitBoosterEstimationData>> estimate() {
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
@@ -86,12 +86,12 @@ class CommanderEstimator implements Estimator<UnitBoosterEstimationData> {
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<UnitBoosterEstimationData>(
+    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: 1.0 +
               c.unitPower +
               _experienceToWeight(c.unitExperienceRank) +
               2 * log10(1 / c.unitHealthRelative),
-          data: UnitBoosterEstimationData(
+          data: _UnitBoosterEstimationData(
             cell: c.cell,
             type: _type,
             unitIndex: c.unitIndex,

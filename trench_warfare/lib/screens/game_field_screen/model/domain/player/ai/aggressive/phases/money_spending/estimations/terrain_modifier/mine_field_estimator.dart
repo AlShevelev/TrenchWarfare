@@ -1,7 +1,7 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 /// Should we place a mine field in general?
-class MineFieldsEstimator implements Estimator<TerrainModifierEstimationData> {
+class _MineFieldsEstimator implements Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -16,7 +16,7 @@ class MineFieldsEstimator implements Estimator<TerrainModifierEstimationData> {
 
   static const _weight = 2.0;
 
-  MineFieldsEstimator({
+  _MineFieldsEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required TerrainModifierType type,
@@ -31,7 +31,7 @@ class MineFieldsEstimator implements Estimator<TerrainModifierEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
+  Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
     if (_type != TerrainModifierType.landMine && _type != TerrainModifierType.seaMine) {
       throw ArgumentError("Can't make an estimation for this type of terrain modifier: $_type");
     }
@@ -61,9 +61,9 @@ class MineFieldsEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<TerrainModifierEstimationData>(
+    return cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: _weight,
-          data: TerrainModifierEstimationData(
+          data: _TerrainModifierEstimationData(
             cell: c,
             type: _type,
           ),

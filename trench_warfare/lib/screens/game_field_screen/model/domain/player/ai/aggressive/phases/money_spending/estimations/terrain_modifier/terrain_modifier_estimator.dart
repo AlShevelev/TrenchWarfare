@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class TerrainModifierEstimationData implements EstimationData {
+class _TerrainModifierEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
   final TerrainModifierType type;
 
-  TerrainModifierEstimationData({required this.cell, required this.type});
+  _TerrainModifierEstimationData({required this.cell, required this.type});
 }

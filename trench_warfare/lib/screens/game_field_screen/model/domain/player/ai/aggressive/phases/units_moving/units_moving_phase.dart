@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
 class UnitsMovingPhase implements TurnPhase {
   final PlayerInput _player;
@@ -7,7 +7,7 @@ class UnitsMovingPhase implements TurnPhase {
 
   final Nation _myNation;
 
-  final PlayerActions _actions;
+  final _PlayerActions _actions;
 
   final MapMetadataRead _metadata;
 
@@ -20,7 +20,7 @@ class UnitsMovingPhase implements TurnPhase {
         _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
-        _actions = PlayerActions(player: player) {
+        _actions = _PlayerActions(player: player) {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {
@@ -76,13 +76,13 @@ class UnitsMovingPhase implements TurnPhase {
     }
   }
 
-  List<UnitEstimationProcessorBase> _createEstimators({
+  List<_UnitEstimationProcessorBase> _createEstimators({
     required InfluenceMapRepresentationRead influences,
     required Unit unit,
     required GameFieldCellRead cell,
   }) =>
       [
-        AttackEstimationProcessor(
+        _AttackEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,
@@ -91,7 +91,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        CarrierInterceptionEstimationProcessor(
+        _CarrierInterceptionEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,
@@ -100,7 +100,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        DoNothingEstimationProcessor(
+        _DoNothingEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,
@@ -109,7 +109,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        MoveToEnemyPcEstimationProcessor(
+        _MoveToEnemyPcEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,
@@ -118,7 +118,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        MoveToMyPcEstimationProcessor(
+        _MoveToMyPcEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,
@@ -127,7 +127,7 @@ class UnitsMovingPhase implements TurnPhase {
           metadata: _metadata,
           gameField: _gameField,
         ),
-        ResortEstimationProcessor(
+        _ResortEstimationProcessor(
           actions: _actions,
           influences: influences,
           unit: unit,

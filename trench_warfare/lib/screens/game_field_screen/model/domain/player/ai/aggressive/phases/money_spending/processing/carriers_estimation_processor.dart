@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class CarriersEstimationProcessor extends EstimationProcessorBase<CarriersBuildingEstimationData> {
+class _CarriersEstimationProcessor extends _EstimationProcessorBase<_CarriersBuildingEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.5;
 
-  CarriersEstimationProcessor({
+  _CarriersEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -14,7 +14,7 @@ class CarriersEstimationProcessor extends EstimationProcessorBase<CarriersBuildi
   });
 
   @override
-  Iterable<EstimationResult<CarriersBuildingEstimationData>> _makeEstimations() => CarriersBuildingEstimator(
+  Iterable<EstimationResult<_CarriersBuildingEstimationData>> _makeEstimations() => _CarriersBuildingEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -22,6 +22,6 @@ class CarriersEstimationProcessor extends EstimationProcessorBase<CarriersBuildi
       ).estimate();
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<CarriersBuildingEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_CarriersBuildingEstimationData> estimationItem) =>
       GameFieldControlsUnitCardBrief(type: UnitType.carrier);
 }

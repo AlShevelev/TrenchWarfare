@@ -1,14 +1,14 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class CarriersBuildingEstimationData implements EstimationData {
+class _CarriersBuildingEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
-  CarriersBuildingEstimationData({required this.cell});
+  _CarriersBuildingEstimationData({required this.cell});
 }
 
 /// Should we hire a unit in general?
-class CarriersBuildingEstimator implements Estimator<CarriersBuildingEstimationData> {
+class _CarriersBuildingEstimator implements Estimator<_CarriersBuildingEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -22,7 +22,7 @@ class CarriersBuildingEstimator implements Estimator<CarriersBuildingEstimationD
 
   static const _defaultWeight = 100.0;
 
-  CarriersBuildingEstimator({
+  _CarriersBuildingEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -33,7 +33,7 @@ class CarriersBuildingEstimator implements Estimator<CarriersBuildingEstimationD
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<CarriersBuildingEstimationData>> estimate() {
+  Iterable<EstimationResult<_CarriersBuildingEstimationData>> estimate() {
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(UnitType.carrier, _nationMoney);
 
@@ -70,7 +70,7 @@ class CarriersBuildingEstimator implements Estimator<CarriersBuildingEstimationD
     return cellsPossibleToBuild
         .map((cell) => EstimationResult(
               weight: _defaultWeight,
-              data: CarriersBuildingEstimationData(cell: cell),
+              data: _CarriersBuildingEstimationData(cell: cell),
             ))
         .toList(growable: false);
   }

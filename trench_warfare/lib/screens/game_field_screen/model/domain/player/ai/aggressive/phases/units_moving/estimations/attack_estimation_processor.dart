@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
 class _AttackEstimationUnit {
   final GameFieldCellRead cell;
@@ -7,10 +7,10 @@ class _AttackEstimationUnit {
   _AttackEstimationUnit({required this.cell, required this.weight});
 }
 
-class AttackEstimationProcessor extends UnitEstimationProcessorBase {
+class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
   late final List<_AttackEstimationUnit> _estimationResult;
 
-  AttackEstimationProcessor({
+  _AttackEstimationProcessor({
     required super.actions,
     required super.influences,
     required super.unit,

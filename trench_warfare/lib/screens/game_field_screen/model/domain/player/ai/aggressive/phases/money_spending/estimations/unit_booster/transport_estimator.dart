@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _TransportCellWithFactors {
   final GameFieldCellRead cell;
@@ -18,7 +18,7 @@ class _TransportCellWithFactors {
 }
 
 /// Should we add a transport booster in general?
-class TransportEstimator implements Estimator<UnitBoosterEstimationData> {
+class _TransportEstimator implements Estimator<_UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -27,7 +27,7 @@ class TransportEstimator implements Estimator<UnitBoosterEstimationData> {
 
   static const _type = UnitBoost.transport;
 
-  TransportEstimator({
+  _TransportEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -36,7 +36,7 @@ class TransportEstimator implements Estimator<UnitBoosterEstimationData> {
         _nationMoney = nationMoney;
 
   @override
-  Iterable<EstimationResult<UnitBoosterEstimationData>> estimate() {
+  Iterable<EstimationResult<_UnitBoosterEstimationData>> estimate() {
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
@@ -65,9 +65,9 @@ class TransportEstimator implements Estimator<UnitBoosterEstimationData> {
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<UnitBoosterEstimationData>(
+    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: 1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints),
-          data: UnitBoosterEstimationData(
+          data: _UnitBoosterEstimationData(
             cell: c.cell,
             type: _type,
             unitIndex: c.unitIndex,

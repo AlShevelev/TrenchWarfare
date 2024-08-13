@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
 class _CarrierInterceptionEstimationUnit {
   final GameFieldCellRead cell;
@@ -7,10 +7,10 @@ class _CarrierInterceptionEstimationUnit {
   _CarrierInterceptionEstimationUnit({required this.cell, required this.weight});
 }
 
-class CarrierInterceptionEstimationProcessor extends UnitEstimationProcessorBase {
+class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBase {
   late final List<_CarrierInterceptionEstimationUnit> _estimationResult;
 
-  CarrierInterceptionEstimationProcessor({
+  _CarrierInterceptionEstimationProcessor({
     required super.actions,
     required super.influences,
     required super.unit,

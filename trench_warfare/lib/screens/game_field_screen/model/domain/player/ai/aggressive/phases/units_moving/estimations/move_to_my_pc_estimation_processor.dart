@@ -1,9 +1,9 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
-class MoveToMyPcEstimationProcessor extends UnitEstimationProcessorBase {
+class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   GameFieldCellRead? _nearestPcInDanger;
 
-  MoveToMyPcEstimationProcessor({
+  _MoveToMyPcEstimationProcessor({
     required super.actions,
     required super.influences,
     required super.unit,

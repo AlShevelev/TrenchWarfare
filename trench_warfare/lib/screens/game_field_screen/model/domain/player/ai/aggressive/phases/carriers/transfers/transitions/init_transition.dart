@@ -1,6 +1,6 @@
-part of aggressive_player_ai;
+part of carriers_phase_library;
 
-class TroopTransferInitTransition extends TroopTransferTransition {
+class _InitTransition extends _TroopTransferTransition {
   final GameFieldCellRead _targetCell;
 
   final GameFieldRead _gameField;
@@ -13,7 +13,7 @@ class TroopTransferInitTransition extends TroopTransferTransition {
 
   List<_CarrierOnCell> _freeCarriers = [];
 
-  TroopTransferInitTransition({
+  _InitTransition({
     required GameFieldCellRead targetCell,
     required GameFieldRead gameField,
     required Nation myNation,
@@ -26,14 +26,14 @@ class TroopTransferInitTransition extends TroopTransferTransition {
         _myTransferId = myTransferId;
 
   @override
-  Future<TroopTransferTransitionResult> process() async {
+  Future<_TransitionResult> process() async {
     _freeCarriers = _getFreeCarriers();
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (_freeCarriers.isEmpty) {
-      return TroopTransferTransitionResult(
+      return _TransitionResult(
         processed: true,
-        newState: TroopTransferStateCompleted(),
+        newState: _TroopTransferStateCompleted(),
       );
     }
 

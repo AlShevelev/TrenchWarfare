@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class SpecialStrikeEstimationData implements EstimationData {
+class _SpecialStrikeEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
   final SpecialStrikeType type;
 
-  SpecialStrikeEstimationData({required this.cell, required this.type});
+  _SpecialStrikeEstimationData({required this.cell, required this.type});
 }

@@ -1,6 +1,6 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class UnitBoosterEstimationData implements EstimationData {
+class _UnitBoosterEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
@@ -8,7 +8,7 @@ class UnitBoosterEstimationData implements EstimationData {
 
   final int unitIndex;
 
-  UnitBoosterEstimationData({
+  _UnitBoosterEstimationData({
     required this.cell,
     required this.type,
     required this.unitIndex,

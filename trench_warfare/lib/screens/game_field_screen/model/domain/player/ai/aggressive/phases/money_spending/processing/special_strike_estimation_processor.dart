@@ -1,12 +1,12 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialStrikeEstimationData> {
+class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_SpecialStrikeEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.0;
 
   final _signal = AsyncSignal(locked: true);
 
-  SpecialStrikeEstimationProcessor({
+  _SpecialStrikeEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -16,11 +16,11 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
   });
 
   @override
-  Iterable<EstimationResult<SpecialStrikeEstimationData>> _makeEstimations() {
-    final List<EstimationResult<SpecialStrikeEstimationData>> result = [];
+  Iterable<EstimationResult<_SpecialStrikeEstimationData>> _makeEstimations() {
+    final List<EstimationResult<_SpecialStrikeEstimationData>> result = [];
 
     result.addAll(
-      AirBombardmentEstimator(
+      _AirBombardmentEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -30,7 +30,7 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     );
 
     result.addAll(
-      FlameTroopersEstimator(
+      _FlameTroopersEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -40,7 +40,7 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     );
 
     result.addAll(
-      FlechettesEstimator(
+      _FlechettesEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -50,7 +50,7 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     );
 
     result.addAll(
-      GasAttackEstimator(
+      _GasAttackEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -60,7 +60,7 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
     );
 
     result.addAll(
-      PropagandaEstimator(
+      _PropagandaEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -91,6 +91,6 @@ class SpecialStrikeEstimationProcessor extends EstimationProcessorBase<SpecialSt
   }
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<SpecialStrikeEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_SpecialStrikeEstimationData> estimationItem) =>
       GameFieldControlsSpecialStrikesCardBrief(type: estimationItem.data.type);
 }

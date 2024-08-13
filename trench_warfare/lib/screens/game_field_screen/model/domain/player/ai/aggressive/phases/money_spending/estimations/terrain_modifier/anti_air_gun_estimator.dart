@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _AntiAirGunCellWithFactors {
   final GameFieldCellRead cell;
@@ -15,7 +15,7 @@ class _AntiAirGunCellWithFactors {
 }
 
 /// Should we place an anti air gun in general?
-class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
+class _AntiAirGunEstimator implements Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -24,7 +24,7 @@ class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  AntiAirGunEstimator({
+  _AntiAirGunEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -35,7 +35,7 @@ class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<TerrainModifierEstimationData>> estimate() {
+  Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.antiAirGun,
@@ -97,11 +97,11 @@ class AntiAirGunEstimator implements Estimator<TerrainModifierEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<TerrainModifierEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 +
               _calculateWeight(c!.cell, ProductionCenterLevel.level1) * c.level1EnemyAirFieldsTotal +
               _calculateWeight(c.cell, ProductionCenterLevel.level2) * c.level2EnemyAirFieldsTotal,
-          data: TerrainModifierEstimationData(
+          data: _TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.antiAirGun,
           ),

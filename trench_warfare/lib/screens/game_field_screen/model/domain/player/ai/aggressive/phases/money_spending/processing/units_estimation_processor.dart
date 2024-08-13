@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsBuildingEstimationData> {
+class _UnitsEstimationProcessor extends _EstimationProcessorBase<_UnitsBuildingEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.5;
 
-  UnitsEstimationProcessor({
+  _UnitsEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -14,8 +14,8 @@ class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsBuildingEsti
   });
 
   @override
-  Iterable<EstimationResult<UnitsBuildingEstimationData>> _makeEstimations() {
-    final List<EstimationResult<UnitsBuildingEstimationData>> result = [];
+  Iterable<EstimationResult<_UnitsBuildingEstimationData>> _makeEstimations() {
+    final List<EstimationResult<_UnitsBuildingEstimationData>> result = [];
 
     final types = [
       UnitType.armoredCar,
@@ -31,7 +31,7 @@ class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsBuildingEsti
     ];
 
     for (final type in types) {
-      final estimator = UnitsBuildingEstimator(
+      final estimator = _UnitsBuildingEstimator(
           gameField: _gameField,
           myNation: _myNation,
           type: type,
@@ -46,6 +46,6 @@ class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsBuildingEsti
   }
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<UnitsBuildingEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_UnitsBuildingEstimationData> estimationItem) =>
       GameFieldControlsUnitCardBrief(type: estimationItem.data.type);
 }

@@ -1,93 +1,13 @@
 library aggressive_player_ai;
 
-import 'dart:math' as math;
-
-import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
-import 'package:trench_warfare/core_entities/enums/unit_state.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/core_entities/game_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/money_spending/money_spending_phase_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/units_moving/units_moving_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/estimations/estimations.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
-import 'package:trench_warfare/shared/architecture/async_signal.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
-import 'package:trench_warfare/shared/utils/math.dart';
-import 'package:trench_warfare/shared/utils/random_gen.dart';
-import 'package:tuple/tuple.dart';
 
 part 'aggressive_player_ai.dart';
-
-part 'phases/turn_phase.dart';
-
-part 'phases/carriers/active_carrier_troop_transfers.dart';
-part 'phases/carriers/carriers_phase.dart';
-part 'phases/carriers/transfers/troop_transfer.dart';
-part 'phases/carriers/transfers/dto/carrier_on_cell.dart';
-part 'phases/carriers/transfers/troop_transfer_state.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_gathering_transition.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_init_transition.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_landing_transition.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_movement_after_lading_transition.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_transporting_transition.dart';
-part 'phases/carriers/transfers/transitions/troop_transfer_transition.dart';
-
-part 'phases/money_spending/money_spending_phase.dart';
-part 'phases/money_spending/estimations/special_strike/air_bombardment_estimator.dart';
-part 'phases/money_spending/estimations/special_strike/flame_troopers_estimator.dart';
-part 'phases/money_spending/estimations/special_strike/flechettes_estimator.dart';
-part 'phases/money_spending/estimations/special_strike/gas_attack_estimator.dart';
-part 'phases/money_spending/estimations/special_strike/propaganda_estimator.dart';
-part 'phases/money_spending/estimations/special_strike/special_strike_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/anti_air_gun_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/barbed_wire_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/land_fort_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/mine_field_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/terrain_modifier_estimator.dart';
-part 'phases/money_spending/estimations/terrain_modifier/trench_estimator.dart';
-part 'phases/money_spending/estimations/unit_booster/attack_defence_estimator.dart';
-part 'phases/money_spending/estimations/unit_booster/commander_estimator.dart';
-part 'phases/money_spending/estimations/unit_booster/transport_estimator.dart';
-part 'phases/money_spending/estimations/unit_booster/unit_booster_estimation_data.dart';
-part 'phases/money_spending/estimations/carriers_building_estimator.dart';
-part 'phases/money_spending/estimations/production_center_estimator.dart';
-part 'phases/money_spending/estimations/units_building_estimator.dart';
-part 'phases/money_spending/processing/carriers_estimation_processor.dart';
-part 'phases/money_spending/processing/estimation_processor_base.dart';
-part 'phases/money_spending/processing/production_center_estimation_processor.dart';
-part 'phases/money_spending/processing/special_strike_estimation_processor.dart';
-part 'phases/money_spending/processing/terrain_modifier_estimation_processor.dart';
-part 'phases/money_spending/processing/unit_booster_estimation_processor.dart';
-part 'phases/money_spending/processing/units_estimation_processor.dart';
-
-part 'phases/units_moving/units_moving_phase.dart';
-part 'phases/units_moving/actions/player_actions.dart';
-part 'phases/units_moving/estimations/attack_estimation_processor.dart';
-part 'phases/units_moving/estimations/carrier_interception_estimation_processor.dart';
-part 'phases/units_moving/estimations/do_noting_estimation_processor.dart';
-part 'phases/units_moving/estimations/move_to_enemy_pc_estimation_processor.dart';
-part 'phases/units_moving/estimations/move_to_my_pc_estimation_processor.dart';
-part 'phases/units_moving/estimations/resort_estimation_processor.dart';
-part 'phases/units_moving/estimations/unit_estimation_processor_base.dart';
-part 'phases/units_moving/units_iterator/stable_units_iterator.dart';
-part 'phases/units_moving/units_iterator/unit_on_cell.dart';
-
-part 'utils/carriers_target_calculator.dart';

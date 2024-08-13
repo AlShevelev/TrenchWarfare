@@ -1,7 +1,7 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
-class ResortEstimationProcessor extends UnitEstimationProcessorBase {
-  ResortEstimationProcessor({
+class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
+  _ResortEstimationProcessor({
     required super.actions,
     required super.influences,
     required super.unit,

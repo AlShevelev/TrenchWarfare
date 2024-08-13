@@ -1,9 +1,9 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
-class UnitOnCell {
+class _UnitOnCell {
   final GameFieldCellRead cell;
 
   final Unit unit;
 
-  UnitOnCell({required this.cell, required this.unit});
+  _UnitOnCell({required this.cell, required this.unit});
 }

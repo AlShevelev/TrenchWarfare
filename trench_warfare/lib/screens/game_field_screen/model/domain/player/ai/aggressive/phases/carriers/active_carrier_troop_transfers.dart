@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of carriers_phase_library;
 
 abstract interface class ActiveCarrierTroopTransfersRead {
   Iterable<TroopTransferRead> get allTransfers;
@@ -11,7 +11,7 @@ class ActiveCarrierTroopTransfers implements ActiveCarrierTroopTransfersRead {
 
   final Nation _myNation;
 
-  final List<TroopTransfer> _troopTransfers = [];
+  final List<_TroopTransfer> _troopTransfers = [];
 
   @override
   Iterable<TroopTransferRead> get allTransfers => _troopTransfers;
@@ -23,7 +23,7 @@ class ActiveCarrierTroopTransfers implements ActiveCarrierTroopTransfersRead {
         _myNation = myNation;
 
   void addNewTransfer({required GameFieldCellRead targetCell}) {
-    final transfer = TroopTransfer(
+    final transfer = _TroopTransfer(
       targetCell: targetCell,
       allTransfers: this,
       gameField: _gameField,

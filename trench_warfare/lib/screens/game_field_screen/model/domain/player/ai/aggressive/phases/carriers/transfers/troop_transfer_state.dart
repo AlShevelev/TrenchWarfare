@@ -1,15 +1,15 @@
-part of aggressive_player_ai;
+part of carriers_phase_library;
 
-sealed class TroopTransferState { }
+sealed class _TroopTransferState { }
 
-class TroopTransferStateInit extends TroopTransferState { }
+class _TroopTransferStateInit extends _TroopTransferState { }
 
-class TroopTransferStateGathering extends TroopTransferState { }
+class _TroopTransferStateGathering extends _TroopTransferState { }
 
-class TroopTransferStateTransporting extends TroopTransferState { }
+class _TroopTransferStateTransporting extends _TroopTransferState { }
 
-class TroopTransferStateLanding extends TroopTransferState { }
+class _TroopTransferStateLanding extends _TroopTransferState { }
 
-class TroopTransferStateMovementAfterLanding extends TroopTransferState { }
+class _TroopTransferStateMovementAfterLanding extends _TroopTransferState { }
 
-class TroopTransferStateCompleted extends TroopTransferState { }
+class _TroopTransferStateCompleted extends _TroopTransferState { }

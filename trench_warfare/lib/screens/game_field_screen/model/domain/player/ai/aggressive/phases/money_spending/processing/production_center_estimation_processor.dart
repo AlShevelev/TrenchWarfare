@@ -1,10 +1,10 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
-class ProductionCenterEstimationProcessor extends EstimationProcessorBase<ProductionCenterEstimationData> {
+class _ProductionCenterEstimationProcessor extends _EstimationProcessorBase<_ProductionCenterEstimationData> {
   @override
   double get _averageWeightBalanceFactor => 1.0;
 
-  ProductionCenterEstimationProcessor({
+  _ProductionCenterEstimationProcessor({
     required super.player,
     required super.gameField,
     required super.myNation,
@@ -14,8 +14,8 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
   });
 
   @override
-  Iterable<EstimationResult<ProductionCenterEstimationData>> _makeEstimations() {
-    final List<EstimationResult<ProductionCenterEstimationData>> result = [];
+  Iterable<EstimationResult<_ProductionCenterEstimationData>> _makeEstimations() {
+    final List<EstimationResult<_ProductionCenterEstimationData>> result = [];
 
     final types = [
       ProductionCenterType.navalBase,
@@ -25,7 +25,7 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
     ];
 
     for (final type in types) {
-      final estimator = ProductionCenterEstimator(
+      final estimator = _ProductionCenterEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.actual,
@@ -41,6 +41,6 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
   }
 
   @override
-  GameFieldControlsCard _toCard(EstimationResult<ProductionCenterEstimationData> estimationItem) =>
+  GameFieldControlsCard _toCard(EstimationResult<_ProductionCenterEstimationData> estimationItem) =>
       GameFieldControlsProductionCentersCardBrief(type: estimationItem.data.type);
 }

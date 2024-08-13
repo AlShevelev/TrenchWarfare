@@ -1,7 +1,7 @@
-part of aggressive_player_ai;
+part of units_moving_phase_library;
 
-class DoNothingEstimationProcessor extends UnitEstimationProcessorBase {
-  DoNothingEstimationProcessor({
+class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
+  _DoNothingEstimationProcessor({
     required super.actions,
     required super.influences,
     required super.unit,

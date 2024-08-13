@@ -1,4 +1,4 @@
-part of aggressive_player_ai;
+part of money_spending_phase_library;
 
 class _FlameTroopersCellWithFactors {
   final GameFieldCellRead cell;
@@ -11,7 +11,7 @@ class _FlameTroopersCellWithFactors {
   });
 }
 
-class FlameTroopersEstimator implements Estimator<SpecialStrikeEstimationData> {
+class _FlameTroopersEstimator implements Estimator<_SpecialStrikeEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -22,7 +22,7 @@ class FlameTroopersEstimator implements Estimator<SpecialStrikeEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  FlameTroopersEstimator({
+  _FlameTroopersEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyUnit nationMoney,
@@ -35,7 +35,7 @@ class FlameTroopersEstimator implements Estimator<SpecialStrikeEstimationData> {
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<SpecialStrikeEstimationData>> estimate() {
+  Iterable<EstimationResult<_SpecialStrikeEstimationData>> estimate() {
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.flameTroopers,
@@ -67,9 +67,9 @@ class FlameTroopersEstimator implements Estimator<SpecialStrikeEstimationData> {
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<SpecialStrikeEstimationData>(
+    return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
           weight: 1.0 + c!.unitPower,
-          data: SpecialStrikeEstimationData(
+          data: _SpecialStrikeEstimationData(
             cell: c.cell,
             type: SpecialStrikeType.flameTroopers,
           ),
