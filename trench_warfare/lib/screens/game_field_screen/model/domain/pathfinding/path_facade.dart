@@ -35,16 +35,22 @@ class PathFacade {
   }
 
   /// Estimates a path cost
-  Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCellRead> path}) {
+  Iterable<GameFieldCell> estimatePath({required Iterable<GameFieldCellRead> path}) =>
+      estimatePathForUnit(path: path, unit: path.first.activeUnit!);
+
+  /// Estimates a path cost for the specific unit
+  Iterable<GameFieldCell> estimatePathForUnit({
+    required Iterable<GameFieldCellRead> path,
+    required Unit unit,
+  }) {
     if (path.isEmpty) {
       return path.map((i) => i as GameFieldCell).toList(growable: false);
     }
 
-    final startCell = path.first;
     return _getPathCostCalculator(
-      startCell.activeUnit!,
+      unit,
       path,
-      startCell: startCell,
+      startCell: path.first,
       endCell: path.last,
     ).calculate();
   }
