@@ -16,6 +16,7 @@ part 'active_carrier_troop_transfers.dart';
 part 'carriers_phase.dart';
 part 'transfers/troop_transfer.dart';
 part 'transfers/dto/carrier_on_cell.dart';
+part 'transfers/dto/landing_point.dart';
 part 'transfers/troop_transfer_state.dart';
 part 'transfers/transitions/gathering_transition.dart';
 part 'transfers/transitions/init_transition.dart';

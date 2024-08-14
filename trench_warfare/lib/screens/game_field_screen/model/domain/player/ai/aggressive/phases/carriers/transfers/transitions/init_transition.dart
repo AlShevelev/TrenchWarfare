@@ -34,9 +34,9 @@ class _InitTransition extends _TroopTransferTransition {
 
     final selectedCarrier = _selectCarrier(freeCarriers);
 
-    // The landing cell calculation
-    final landingCell = _calculateLandingCell(selectedCarrier);
-    if (landingCell == null) {
+    // The landing point calculation
+    final landingPoint = _calculateLandingCell(selectedCarrier);
+    if (landingPoint == null) {
       return _TransitionResult.completed();
     }
 
@@ -79,7 +79,7 @@ class _InitTransition extends _TroopTransferTransition {
       .last
       .item1;
 
-  GameFieldCellRead? _calculateLandingCell(_CarrierOnCell selectedCarrier) {
+  _LandingPoint? _calculateLandingCell(_CarrierOnCell selectedCarrier) {
     var radius = 1;
     var cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: radius);
 
@@ -125,7 +125,7 @@ class _InitTransition extends _TroopTransferTransition {
 
           // The cell is reachable for the carrier as a landing point
           if (lastPathItem == PathItemType.unloadUnit) {
-            return landingCellCandidate;
+            return _LandingPoint(carrier: carrierLastCellCandidate, units: landingCellCandidate);
           }
         }
       }
