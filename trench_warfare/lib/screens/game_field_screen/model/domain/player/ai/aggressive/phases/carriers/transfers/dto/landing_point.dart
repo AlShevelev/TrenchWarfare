@@ -1,9 +1,9 @@
 part of carriers_phase_library;
 
-class _LandingPoint {
-  final GameFieldCellRead carrier;
+class LandingPoint {
+  final GameFieldCellRead carrierCell;
 
-  final GameFieldCellRead units;
+  final GameFieldCellRead unitsCell;
 
-  _LandingPoint({required this.carrier, required this.units});
+  LandingPoint({required this.carrierCell, required this.unitsCell});
 }

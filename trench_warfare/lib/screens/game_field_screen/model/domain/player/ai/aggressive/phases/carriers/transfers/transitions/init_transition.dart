@@ -1,5 +1,19 @@
 part of carriers_phase_library;
 
+class _InitTransitionResult {
+  final _CarrierOnCell selectedCarrier;
+
+  final LandingPoint? landingPoint;
+
+  final _GatheringPointAndUnits? gatheringPointAndUnits;
+
+  _InitTransitionResult({
+    required this.selectedCarrier,
+    required this.landingPoint,
+    required this.gatheringPointAndUnits,
+  });
+}
+
 class _InitTransition extends _TroopTransferTransition {
   final GameFieldCellRead _targetCell;
 
@@ -40,7 +54,32 @@ class _InitTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
-    throw UnimplementedError();
+    _GatheringPointAndUnits? gatheringPointAndUnits;
+    if (selectedCarrier.carrier.units.length < GameConstants.maxUnitsInCarrier) {
+      gatheringPointAndUnits = _GatheringPointCalculator(
+        gameField: _gameField,
+        selectedCarrier: selectedCarrier,
+        myNation: _myNation,
+        allTransfers: _allTransfers,
+        myTransferId: _myTransferId,
+      ).calculate();
+
+      // We didn't manage to find a gathering point of units
+      if (gatheringPointAndUnits == null) {
+        return _TransitionResult.completed();
+      }
+    }
+
+    return _TransitionResultPayload(
+      processed: false,
+      newState:
+          gatheringPointAndUnits == null ? _TroopTransferStateTransporting() : _TroopTransferStateGathering(),
+      payload: _InitTransitionResult(
+        selectedCarrier: selectedCarrier,
+        landingPoint: landingPoint,
+        gatheringPointAndUnits: gatheringPointAndUnits,
+      ),
+    );
   }
 
   /// return a list of free (unused in other transportations) carriers
@@ -60,7 +99,7 @@ class _InitTransition extends _TroopTransferTransition {
         allMyCarries.addAll(
           cell.units
               .where((u) => u.type == UnitType.carrier && !busyCarrierId.contains(u.id))
-              .map((u) => _CarrierOnCell(carrier: u, cell: cell)),
+              .map((u) => _CarrierOnCell(carrier: u as Carrier, cell: cell)),
         );
       }
     }
@@ -79,7 +118,7 @@ class _InitTransition extends _TroopTransferTransition {
       .last
       .item1;
 
-  _LandingPoint? _calculateLandingCell(_CarrierOnCell selectedCarrier) {
+  LandingPoint? _calculateLandingCell(_CarrierOnCell selectedCarrier) {
     var radius = 1;
     var cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: radius);
 
@@ -125,7 +164,7 @@ class _InitTransition extends _TroopTransferTransition {
 
           // The cell is reachable for the carrier as a landing point
           if (lastPathItem == PathItemType.unloadUnit) {
-            return _LandingPoint(carrier: carrierLastCellCandidate, units: landingCellCandidate);
+            return LandingPoint(carrierCell: carrierLastCellCandidate, unitsCell: landingCellCandidate);
           }
         }
       }

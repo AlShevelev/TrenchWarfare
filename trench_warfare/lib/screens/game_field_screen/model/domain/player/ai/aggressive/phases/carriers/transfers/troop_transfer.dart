@@ -6,6 +6,12 @@ abstract interface class TroopTransferRead {
   bool get isCompleted;
 
   String? get selectedCarrierId;
+
+  LandingPoint? get landingPoint;
+
+  LandingPoint? get gatheringPoint;
+
+  List<Unit> get gatheringUnits;
 }
 
 class _TroopTransfer implements TroopTransferRead {
@@ -30,11 +36,23 @@ class _TroopTransfer implements TroopTransferRead {
   @override
   bool get isCompleted => _currentState is _TroopTransferStateCompleted;
 
+  LandingPoint? _landingPoint;
+  @override
+  LandingPoint? get landingPoint => _landingPoint;
+
+  LandingPoint? _gatheringPoint;
+  @override
+  LandingPoint? get gatheringPoint => _gatheringPoint;
+
+  List<Unit> _gatheringUnits = [];
+  @override
+  List<Unit> get gatheringUnits => _gatheringUnits;
+
   _TroopTransfer({
     required GameFieldCellRead targetCell,
     required ActiveCarrierTroopTransfersRead allTransfers,
     required GameFieldRead gameField,
-    required  Nation myNation,
+    required Nation myNation,
   })  : _targetCell = targetCell,
         _allTransfers = allTransfers,
         _gameField = gameField,
@@ -49,7 +67,6 @@ class _TroopTransfer implements TroopTransferRead {
 
       do {
         var transition = _getTransition();
-
         transitionResult = await transition.process();
 
         _currentState = transitionResult.newState;
@@ -86,7 +103,24 @@ class _TroopTransfer implements TroopTransferRead {
       };
 
   void _processTransitionResult(_TransitionResult transitionResult) {
-    throw UnimplementedError();
+    if (transitionResult is _TransitionResultPayload) {
+      final payload = transitionResult.payload;
+
+      switch (payload) {
+        case _InitTransitionResult(
+            selectedCarrier: final selectedCarrier,
+            landingPoint: final landingPoint,
+            gatheringPointAndUnits: final gatheringPointAndUnits,
+          ):
+          {
+            _selectedCarrier = selectedCarrier;
+            _landingPoint = landingPoint;
+            _gatheringPoint = gatheringPointAndUnits?.gatheringPoint;
+            _gatheringUnits = gatheringPointAndUnits?.units ?? [];
+            break;
+          }
+      }
+    }
   }
 
   void _cleanUp() {

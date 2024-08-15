@@ -1,7 +1,7 @@
 part of carriers_phase_library;
 
 class _CarrierOnCell {
-  final Unit carrier;
+  final Carrier carrier;
 
   final GameFieldCellRead cell;
 
