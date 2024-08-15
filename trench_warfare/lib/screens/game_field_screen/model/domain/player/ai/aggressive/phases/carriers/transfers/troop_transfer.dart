@@ -11,7 +11,7 @@ abstract interface class TroopTransferRead {
 
   LandingPoint? get gatheringPoint;
 
-  List<Unit> get gatheringUnits;
+  List<UnitOnCell> get gatheringUnits;
 }
 
 class _TroopTransfer implements TroopTransferRead {
@@ -44,9 +44,9 @@ class _TroopTransfer implements TroopTransferRead {
   @override
   LandingPoint? get gatheringPoint => _gatheringPoint;
 
-  List<Unit> _gatheringUnits = [];
+  List<UnitOnCell> _gatheringUnits = [];
   @override
-  List<Unit> get gatheringUnits => _gatheringUnits;
+  List<UnitOnCell> get gatheringUnits => _gatheringUnits;
 
   _TroopTransfer({
     required GameFieldCellRead targetCell,

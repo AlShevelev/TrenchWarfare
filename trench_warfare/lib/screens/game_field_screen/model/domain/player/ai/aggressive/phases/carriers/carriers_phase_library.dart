@@ -19,6 +19,7 @@ part 'transfers/troop_transfer.dart';
 part 'transfers/dto/carrier_on_cell.dart';
 part 'transfers/dto/gathering_point_and_units.dart';
 part 'transfers/dto/landing_point.dart';
+part 'transfers/dto/unit_on_cell.dart';
 part 'transfers/troop_transfer_state.dart';
 part 'transfers/transitions/calculators/gathering_point_calculator.dart';
 part 'transfers/transitions/gathering_transition.dart';

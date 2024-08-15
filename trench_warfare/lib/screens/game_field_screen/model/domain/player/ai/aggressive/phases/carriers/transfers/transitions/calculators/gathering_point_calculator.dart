@@ -66,7 +66,7 @@ class _GatheringPointCalculator {
           .toList(growable: false);
 
       for (final landCellCandidate in allLandCellsAround) {
-        final selectedUnitCandidates = <Unit>[];
+        final selectedUnitCandidates = <UnitOnCell>[];
 
         final allMyCellWithUnitsSorted = allMyCellWithUnits
             .map((c) => Tuple2(c, _gameField.calculateDistance(c, landCellCandidate)))
@@ -87,7 +87,7 @@ class _GatheringPointCalculator {
             );
 
             if (path.isNotEmpty) {
-              selectedUnitCandidates.add(unitCandidate);
+              selectedUnitCandidates.add(UnitOnCell(unit: unitCandidate, cell: cellWithUnit));
             }
 
             if (selectedUnitCandidates.length == unitsNeeded) {
