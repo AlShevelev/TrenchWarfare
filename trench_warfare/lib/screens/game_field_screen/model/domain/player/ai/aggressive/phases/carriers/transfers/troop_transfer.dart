@@ -17,7 +17,7 @@ abstract interface class TroopTransferRead {
 class _TroopTransfer implements TroopTransferRead {
   final GameFieldCellRead _targetCell;
 
-  final ActiveCarrierTroopTransfersRead _allTransfers;
+  final CarrierTroopTransfersStorageRead _transfersStorage;
 
   final GameFieldRead _gameField;
 
@@ -29,32 +29,28 @@ class _TroopTransfer implements TroopTransferRead {
   @override
   String get id => _id;
 
-  _CarrierOnCell? _selectedCarrier;
   @override
-  String? get selectedCarrierId => _selectedCarrier?.carrier.id;
+  String? get selectedCarrierId => _getSelectedCarrierId();
 
   @override
   bool get isCompleted => _currentState is _TroopTransferStateCompleted;
 
-  LandingPoint? _landingPoint;
   @override
-  LandingPoint? get landingPoint => _landingPoint;
+  LandingPoint? get landingPoint => _getLandingPoint();
 
-  LandingPoint? _gatheringPoint;
   @override
-  LandingPoint? get gatheringPoint => _gatheringPoint;
+  LandingPoint? get gatheringPoint => _getGatheringPoint();
 
-  List<UnitOnCell> _gatheringUnits = [];
   @override
-  List<UnitOnCell> get gatheringUnits => _gatheringUnits;
+  List<UnitOnCell> get gatheringUnits => _getGatheringUnits();
 
   _TroopTransfer({
     required GameFieldCellRead targetCell,
-    required ActiveCarrierTroopTransfersRead allTransfers,
+    required CarrierTroopTransfersStorageRead transfersStorage,
     required GameFieldRead gameField,
     required Nation myNation,
   })  : _targetCell = targetCell,
-        _allTransfers = allTransfers,
+        _transfersStorage = transfersStorage,
         _gameField = gameField,
         _myNation = myNation,
         _id = RandomGen.generateId();
@@ -63,15 +59,8 @@ class _TroopTransfer implements TroopTransferRead {
     if (!_isGoalReachable()) {
       _currentState = _TroopTransferStateCompleted();
     } else {
-      _TransitionResult transitionResult;
-
-      do {
-        var transition = _getTransition();
-        transitionResult = await transition.process();
-
-        _currentState = transitionResult.newState;
-        _processTransitionResult(transitionResult);
-      } while (!transitionResult.processed);
+      var transition = _getTransition();
+      _currentState = await transition.process();
     }
 
     if (_currentState is _TroopTransferStateCompleted) {
@@ -92,35 +81,74 @@ class _TroopTransfer implements TroopTransferRead {
             targetCell: _targetCell,
             gameField: _gameField,
             myNation: _myNation,
-            allTransfers: _allTransfers,
+            transfersStorage: _transfersStorage,
             myTransferId: _id,
           ),
-        _TroopTransferStateGathering() => _GatheringTransition(),
-        _TroopTransferStateTransporting() => _TransportingTransition(),
-        _TroopTransferStateLanding() => _LandingTransition(),
-        _TroopTransferStateMovementAfterLanding() => _MovementAfterLadingTransition(),
+        _TroopTransferStateGathering() => _GatheringTransition(
+            state: _currentState as _TroopTransferStateGathering,
+          ),
+        _TroopTransferStateTransporting() => _TransportingTransition(
+            state: _currentState as _TroopTransferStateTransporting,
+          ),
+        _TroopTransferStateLanding() => _LandingTransition(
+            state: _currentState as _TroopTransferStateLanding,
+          ),
+        _TroopTransferStateMovementAfterLanding() => _MovementAfterLadingTransition(
+            state: _currentState as _TroopTransferStateMovementAfterLanding,
+          ),
         _TroopTransferStateCompleted() => throw UnsupportedError('This state is not supported'),
       };
 
-  void _processTransitionResult(_TransitionResult transitionResult) {
-    if (transitionResult is _TransitionResultPayload) {
-      final payload = transitionResult.payload;
+  String? _getSelectedCarrierId() {
+    final currentState = _currentState;
 
-      switch (payload) {
-        case _InitTransitionResult(
-            selectedCarrier: final selectedCarrier,
-            landingPoint: final landingPoint,
-            gatheringPointAndUnits: final gatheringPointAndUnits,
-          ):
-          {
-            _selectedCarrier = selectedCarrier;
-            _landingPoint = landingPoint;
-            _gatheringPoint = gatheringPointAndUnits?.gatheringPoint;
-            _gatheringUnits = gatheringPointAndUnits?.units ?? [];
-            break;
-          }
-      }
-    }
+    return switch (currentState) {
+      _TroopTransferStateInit() => null,
+      _TroopTransferStateGathering() => currentState.selectedCarrier.carrier.id,
+      _TroopTransferStateTransporting() => currentState.selectedCarrier.carrier.id,
+      _TroopTransferStateLanding() => null,
+      _TroopTransferStateMovementAfterLanding() => null,
+      _TroopTransferStateCompleted() => null,
+    };
+  }
+
+  LandingPoint? _getLandingPoint() {
+    final currentState = _currentState;
+
+    return switch (currentState) {
+      _TroopTransferStateInit() => null,
+      _TroopTransferStateGathering() => currentState.landingPoint,
+      _TroopTransferStateTransporting() => currentState.landingPoint,
+      _TroopTransferStateLanding() => null,
+      _TroopTransferStateMovementAfterLanding() => null,
+      _TroopTransferStateCompleted() => null,
+    };
+  }
+
+  LandingPoint? _getGatheringPoint() {
+    final currentState = _currentState;
+
+    return switch (currentState) {
+      _TroopTransferStateInit() => null,
+      _TroopTransferStateGathering() => currentState.gatheringPointAndUnits.gatheringPoint,
+      _TroopTransferStateTransporting() => null,
+      _TroopTransferStateLanding() => null,
+      _TroopTransferStateMovementAfterLanding() => null,
+      _TroopTransferStateCompleted() => null,
+    };
+  }
+
+  List<UnitOnCell> _getGatheringUnits() {
+    final currentState = _currentState;
+
+    return switch (currentState) {
+      _TroopTransferStateInit() => [],
+      _TroopTransferStateGathering() => currentState.gatheringPointAndUnits.units,
+      _TroopTransferStateTransporting() => [],
+      _TroopTransferStateLanding() => [],
+      _TroopTransferStateMovementAfterLanding() => [],
+      _TroopTransferStateCompleted() => [],
+    };
   }
 
   void _cleanUp() {

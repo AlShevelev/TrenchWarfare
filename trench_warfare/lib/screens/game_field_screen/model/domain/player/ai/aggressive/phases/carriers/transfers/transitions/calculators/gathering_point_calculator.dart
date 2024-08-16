@@ -13,7 +13,7 @@ class _GatheringPointCalculator {
     required GameFieldRead gameField,
     required _CarrierOnCell selectedCarrier,
     required Nation myNation,
-    required ActiveCarrierTroopTransfersRead allTransfers,
+    required CarrierTroopTransfersStorageRead allTransfers,
     required String myTransferId,
   })  : _gameField = gameField,
         _selectedCarrier = selectedCarrier,

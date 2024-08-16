@@ -11,7 +11,7 @@ class AggressivePlayerAi extends PlayerAi {
 
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
-  final ActiveCarrierTroopTransfers _activeCarrierTroopTransfers;
+  final CarrierTroopTransfersStorage _transfersStorage;
 
   AggressivePlayerAi(
     GameFieldRead gameField,
@@ -25,7 +25,7 @@ class AggressivePlayerAi extends PlayerAi {
         _nationMoney = nationMoney,
         _metadata = metadata,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
-        _activeCarrierTroopTransfers = ActiveCarrierTroopTransfers(
+        _transfersStorage = CarrierTroopTransfersStorage(
           gameField: gameField,
           myNation: myNation,
         );
@@ -53,7 +53,7 @@ class AggressivePlayerAi extends PlayerAi {
         gameField: _gameField,
         myNation: _myNation,
         metadata: _metadata,
-        activeCarrierTroopTransfers: _activeCarrierTroopTransfers,
+        transfersStorage: _transfersStorage,
       ).start();
     }
 

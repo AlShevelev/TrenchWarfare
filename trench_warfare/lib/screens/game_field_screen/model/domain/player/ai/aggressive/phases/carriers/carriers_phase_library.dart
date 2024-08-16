@@ -13,7 +13,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/inf
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
-part 'active_carrier_troop_transfers.dart';
+part 'carrier_troop_transfers_storage.dart';
 part 'carriers_phase.dart';
 part 'transfers/troop_transfer.dart';
 part 'transfers/dto/carrier_on_cell.dart';

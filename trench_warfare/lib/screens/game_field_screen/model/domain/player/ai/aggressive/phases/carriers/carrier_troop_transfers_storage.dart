@@ -1,12 +1,12 @@
 part of carriers_phase_library;
 
-abstract interface class ActiveCarrierTroopTransfersRead {
+abstract interface class CarrierTroopTransfersStorageRead {
   Iterable<TroopTransferRead> get allTransfers;
 
   Iterable<TroopTransferRead> getAllTransfersExcept(String exceptionTransferId);
 }
 
-class ActiveCarrierTroopTransfers implements ActiveCarrierTroopTransfersRead {
+class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -16,7 +16,7 @@ class ActiveCarrierTroopTransfers implements ActiveCarrierTroopTransfersRead {
   @override
   Iterable<TroopTransferRead> get allTransfers => _troopTransfers;
 
-  ActiveCarrierTroopTransfers({
+  CarrierTroopTransfersStorage({
     required GameFieldRead gameField,
     required Nation myNation,
   })  : _gameField = gameField,
@@ -25,7 +25,7 @@ class ActiveCarrierTroopTransfers implements ActiveCarrierTroopTransfersRead {
   void addNewTransfer({required GameFieldCellRead targetCell}) {
     final transfer = _TroopTransfer(
       targetCell: targetCell,
-      allTransfers: this,
+      transfersStorage: this,
       gameField: _gameField,
       myNation: _myNation,
     );

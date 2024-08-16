@@ -1,19 +1,5 @@
 part of carriers_phase_library;
 
-class _InitTransitionResult {
-  final _CarrierOnCell selectedCarrier;
-
-  final LandingPoint? landingPoint;
-
-  final _GatheringPointAndUnits? gatheringPointAndUnits;
-
-  _InitTransitionResult({
-    required this.selectedCarrier,
-    required this.landingPoint,
-    required this.gatheringPointAndUnits,
-  });
-}
-
 class _InitTransition extends _TroopTransferTransition {
   final GameFieldCellRead _targetCell;
 
@@ -21,7 +7,7 @@ class _InitTransition extends _TroopTransferTransition {
 
   final Nation _myNation;
 
-  final ActiveCarrierTroopTransfersRead _allTransfers;
+  final CarrierTroopTransfersStorageRead _transfersStorage;
 
   final String _myTransferId;
 
@@ -29,21 +15,21 @@ class _InitTransition extends _TroopTransferTransition {
     required GameFieldCellRead targetCell,
     required GameFieldRead gameField,
     required Nation myNation,
-    required ActiveCarrierTroopTransfersRead allTransfers,
+    required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
   })  : _targetCell = targetCell,
         _gameField = gameField,
         _myNation = myNation,
-        _allTransfers = allTransfers,
+        _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
 
   @override
-  Future<_TransitionResult> process() async {
+  Future<_TroopTransferState> process() async {
     final freeCarriers = _getFreeCarriers();
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
-      return _TransitionResult.completed();
+      return _TroopTransferStateCompleted();
     }
 
     final selectedCarrier = _selectCarrier(freeCarriers);
@@ -51,7 +37,7 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingCell(selectedCarrier);
     if (landingPoint == null) {
-      return _TransitionResult.completed();
+      return _TroopTransferStateCompleted();
     }
 
     _GatheringPointAndUnits? gatheringPointAndUnits;
@@ -60,26 +46,26 @@ class _InitTransition extends _TroopTransferTransition {
         gameField: _gameField,
         selectedCarrier: selectedCarrier,
         myNation: _myNation,
-        allTransfers: _allTransfers,
+        allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
       ).calculate();
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
-        return _TransitionResult.completed();
+        return _TroopTransferStateCompleted();
       }
     }
 
-    return _TransitionResultPayload(
-      processed: false,
-      newState:
-          gatheringPointAndUnits == null ? _TroopTransferStateTransporting() : _TroopTransferStateGathering(),
-      payload: _InitTransitionResult(
-        selectedCarrier: selectedCarrier,
-        landingPoint: landingPoint,
-        gatheringPointAndUnits: gatheringPointAndUnits,
-      ),
-    );
+    return gatheringPointAndUnits == null
+        ? _TroopTransferStateTransporting(
+            selectedCarrier: selectedCarrier,
+            landingPoint: landingPoint,
+          )
+        : _TroopTransferStateGathering(
+            selectedCarrier: selectedCarrier,
+            landingPoint: landingPoint,
+            gatheringPointAndUnits: gatheringPointAndUnits,
+          );
   }
 
   /// return a list of free (unused in other transportations) carriers
@@ -87,7 +73,7 @@ class _InitTransition extends _TroopTransferTransition {
   List<_CarrierOnCell> _getFreeCarriers() {
     List<_CarrierOnCell> allMyCarries = [];
 
-    final busyCarrierId = _allTransfers
+    final busyCarrierId = _transfersStorage
         .getAllTransfersExcept(_myTransferId)
         .where((t) => !t.isCompleted)
         .map((t) => t.selectedCarrierId)

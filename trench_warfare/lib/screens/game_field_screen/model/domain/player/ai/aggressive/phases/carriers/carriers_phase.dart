@@ -7,17 +7,17 @@ class CarriersPhase implements TurnPhase {
 
   final MapMetadataRead _metadata;
 
-  final ActiveCarrierTroopTransfers _activeCarrierTroopTransfers;
+  final CarrierTroopTransfersStorage _transfersStorage;
 
   CarriersPhase({
     required GameFieldRead gameField,
     required Nation myNation,
     required MapMetadataRead metadata,
-    required ActiveCarrierTroopTransfers activeCarrierTroopTransfers
+    required CarrierTroopTransfersStorage transfersStorage
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
-        _activeCarrierTroopTransfers = activeCarrierTroopTransfers;
+        _transfersStorage = transfersStorage;
 
   @override
   Future<void> start() async {
@@ -28,9 +28,9 @@ class CarriersPhase implements TurnPhase {
     ).getTarget();
 
     if (target != null) {
-      _activeCarrierTroopTransfers.addNewTransfer(targetCell: target);
+      _transfersStorage.addNewTransfer(targetCell: target);
     }
 
-    await _activeCarrierTroopTransfers.processAll();
+    await _transfersStorage.processAll();
   }
 }
