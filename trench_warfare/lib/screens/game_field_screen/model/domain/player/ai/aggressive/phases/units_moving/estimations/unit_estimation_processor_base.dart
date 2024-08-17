@@ -2,7 +2,7 @@ part of units_moving_phase_library;
 
 abstract class _UnitEstimationProcessorBase {
   @protected
-  final _PlayerActions _actions;
+  final PlayerActions _actions;
 
   @protected
   final InfluenceMapRepresentationRead _influences;
@@ -29,7 +29,7 @@ abstract class _UnitEstimationProcessorBase {
   double get _balanceFactor => 1.0;
 
   _UnitEstimationProcessorBase({
-    required _PlayerActions actions,
+    required PlayerActions actions,
     required InfluenceMapRepresentationRead influences,
     required Unit unit,
     required GameFieldCellRead cell,

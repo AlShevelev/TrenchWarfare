@@ -11,13 +11,17 @@ class MoneySpendingPhase implements TurnPhase {
 
   final MapMetadataRead _metadata;
 
-  MoneySpendingPhase(
-    this._player,
-    this._gameField,
-    this._myNation,
-    this._nationMoney,
-    this._metadata,
-  );
+  MoneySpendingPhase({
+    required PlayerInput player,
+    required GameFieldRead gameField,
+    required Nation myNation,
+    required MoneyStorageRead nationMoney,
+    required MapMetadataRead metadata,
+  })  : _player = player,
+        _gameField = gameField,
+        _myNation = myNation,
+        _nationMoney = nationMoney,
+        _metadata = metadata;
 
   @override
   Future<void> start() async {

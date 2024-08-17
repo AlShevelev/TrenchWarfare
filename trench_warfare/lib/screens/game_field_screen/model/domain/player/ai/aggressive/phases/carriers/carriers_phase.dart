@@ -1,6 +1,8 @@
 part of carriers_phase_library;
 
 class CarriersPhase implements TurnPhase {
+  final PlayerInput _player;
+
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -9,15 +11,28 @@ class CarriersPhase implements TurnPhase {
 
   final CarrierTroopTransfersStorage _transfersStorage;
 
-  CarriersPhase({
-    required GameFieldRead gameField,
-    required Nation myNation,
-    required MapMetadataRead metadata,
-    required CarrierTroopTransfersStorage transfersStorage
-  })  : _gameField = gameField,
+  final PlayerActions _actions;
+
+  CarriersPhase(
+      {required GameFieldRead gameField,
+      required PlayerInput player,
+      required Nation myNation,
+      required MapMetadataRead metadata,
+      required CarrierTroopTransfersStorage transfersStorage})
+      : _gameField = gameField,
+        _player = player,
         _myNation = myNation,
         _metadata = metadata,
-        _transfersStorage = transfersStorage;
+        _transfersStorage = transfersStorage,
+        _actions = PlayerActions(player: player) {
+    // It's a dirty, but necessary hack
+    final playerCore = _player as PlayerCore;
+    playerCore.registerOnAnimationCompleted(() {
+      _actions.onAnimationCompleted();
+    });
+
+    _transfersStorage.setPlayerActions(_actions);
+  }
 
   @override
   Future<void> start() async {

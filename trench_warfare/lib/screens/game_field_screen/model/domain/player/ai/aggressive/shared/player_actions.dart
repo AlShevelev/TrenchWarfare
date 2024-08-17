@@ -1,11 +1,11 @@
-part of units_moving_phase_library;
+part of aggressive_ai_shared_library;
 
-class _PlayerActions {
+class PlayerActions {
   final PlayerInput _player;
 
   late AsyncSignal _signal;
 
-  _PlayerActions({required PlayerInput player}) : _player = player;
+  PlayerActions({required PlayerInput player}) : _player = player;
 
   Future<void> move(Unit unit, {required GameFieldCellRead from, required GameFieldCellRead to}) async {
     if (from.activeUnit != unit) {

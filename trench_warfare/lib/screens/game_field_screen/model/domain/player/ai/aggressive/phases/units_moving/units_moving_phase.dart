@@ -7,7 +7,7 @@ class UnitsMovingPhase implements TurnPhase {
 
   final Nation _myNation;
 
-  final _PlayerActions _actions;
+  final PlayerActions _actions;
 
   final MapMetadataRead _metadata;
 
@@ -20,7 +20,7 @@ class UnitsMovingPhase implements TurnPhase {
         _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
-        _actions = _PlayerActions(player: player) {
+        _actions = PlayerActions(player: player) {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {

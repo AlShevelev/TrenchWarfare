@@ -35,11 +35,11 @@ class AggressivePlayerAi extends PlayerAi {
     // If I lost - do nothing
     if (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       await MoneySpendingPhase(
-        player,
-        _gameField,
-        _myNation,
-        _nationMoney,
-        _metadata,
+        player: player,
+        gameField: _gameField,
+        myNation: _myNation,
+        nationMoney: _nationMoney,
+        metadata: _metadata,
       ).start();
 
       await UnitsMovingPhase(
@@ -50,6 +50,7 @@ class AggressivePlayerAi extends PlayerAi {
       ).start();
 
       await CarriersPhase(
+        player: player,
         gameField: _gameField,
         myNation: _myNation,
         metadata: _metadata,

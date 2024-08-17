@@ -16,13 +16,11 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfindin
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/shared/aggressive_ai_shared_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
-import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
-part 'actions/player_actions.dart';
 part 'estimations/attack_estimation_processor.dart';
 part 'estimations/carrier_interception_estimation_processor.dart';
 part 'estimations/do_noting_estimation_processor.dart';

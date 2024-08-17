@@ -11,6 +11,8 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
 
   final Nation _myNation;
 
+  late final PlayerActions _actions;
+
   final List<_TroopTransfer> _troopTransfers = [];
 
   @override
@@ -22,12 +24,17 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   })  : _gameField = gameField,
         _myNation = myNation;
 
+  void setPlayerActions(PlayerActions actions) {
+    _actions = actions;
+  }
+
   void addNewTransfer({required GameFieldCellRead targetCell}) {
     final transfer = _TroopTransfer(
       targetCell: targetCell,
       transfersStorage: this,
       gameField: _gameField,
       myNation: _myNation,
+      actions: _actions,
     );
     _troopTransfers.add(transfer);
   }

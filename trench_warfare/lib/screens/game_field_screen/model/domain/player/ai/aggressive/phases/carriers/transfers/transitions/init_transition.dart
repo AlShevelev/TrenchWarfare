@@ -29,7 +29,7 @@ class _InitTransition extends _TroopTransferTransition {
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
-      return _TroopTransferStateCompleted();
+      return _StateCompleted();
     }
 
     final selectedCarrier = _selectCarrier(freeCarriers);
@@ -37,14 +37,14 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingCell(selectedCarrier);
     if (landingPoint == null) {
-      return _TroopTransferStateCompleted();
+      return _StateCompleted();
     }
 
-    _GatheringPointAndUnits? gatheringPointAndUnits;
-    if (selectedCarrier.carrier.units.length < GameConstants.maxUnitsInCarrier) {
+    Tuple2<LandingPoint, List<Unit>>? gatheringPointAndUnits;
+    if (selectedCarrier.item1.units.length < GameConstants.maxUnitsInCarrier) {
       gatheringPointAndUnits = _GatheringPointCalculator(
         gameField: _gameField,
-        selectedCarrier: selectedCarrier,
+        selectedCarrier: selectedCarrier.item1,
         myNation: _myNation,
         allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
@@ -52,26 +52,27 @@ class _InitTransition extends _TroopTransferTransition {
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
-        return _TroopTransferStateCompleted();
+        return _StateCompleted();
       }
     }
 
     return gatheringPointAndUnits == null
-        ? _TroopTransferStateTransporting(
-            selectedCarrier: selectedCarrier,
+        ? _StateTransporting(
+            selectedCarrier: selectedCarrier.item1,
             landingPoint: landingPoint,
           )
-        : _TroopTransferStateGathering(
-            selectedCarrier: selectedCarrier,
+        : _StateGathering(
+            selectedCarrier: selectedCarrier.item1,
             landingPoint: landingPoint,
-            gatheringPointAndUnits: gatheringPointAndUnits,
+            gatheringPoint: gatheringPointAndUnits.item1,
+            gatheringUnits: gatheringPointAndUnits.item2,
           );
   }
 
   /// return a list of free (unused in other transportations) carriers
   /// as a list of cells and values
-  List<_CarrierOnCell> _getFreeCarriers() {
-    List<_CarrierOnCell> allMyCarries = [];
+  List<Tuple2<Carrier, GameFieldCellRead>> _getFreeCarriers() {
+    var allMyCarries = <Tuple2<Carrier, GameFieldCellRead>>[];
 
     final busyCarrierId = _transfersStorage
         .getAllTransfersExcept(_myTransferId)
@@ -85,7 +86,7 @@ class _InitTransition extends _TroopTransferTransition {
         allMyCarries.addAll(
           cell.units
               .where((u) => u.type == UnitType.carrier && !busyCarrierId.contains(u.id))
-              .map((u) => _CarrierOnCell(carrier: u as Carrier, cell: cell)),
+              .map((u) => Tuple2(u as Carrier, cell)),
         );
       }
     }
@@ -93,18 +94,23 @@ class _InitTransition extends _TroopTransferTransition {
     return allMyCarries;
   }
 
-  _CarrierOnCell _selectCarrier(List<_CarrierOnCell> freeCarriers) => freeCarriers
-      .map(
-        (c) => Tuple2(
-          c,
-          UnitPowerEstimation.estimate(c.carrier) * (1.0 / _gameField.calculateDistance(_targetCell, c.cell)),
-        ),
-      )
-      .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
-      .last
-      .item1;
+  Tuple2<Carrier, GameFieldCellRead> _selectCarrier(List<Tuple2<Carrier, GameFieldCellRead>> freeCarriers) =>
+      freeCarriers
+          .map(
+            (c) => Tuple2(
+              c,
+              UnitPowerEstimation.estimate(c.item1) *
+                  (1.0 / _gameField.calculateDistance(_targetCell, c.item2)),
+            ),
+          )
+          .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
+          .last
+          .item1;
 
-  LandingPoint? _calculateLandingCell(_CarrierOnCell selectedCarrier) {
+  LandingPoint? _calculateLandingCell(Tuple2<Carrier, GameFieldCellRead> selectedCarrierOnCell) {
+    final selectedCarrier = selectedCarrierOnCell.item1;
+    final selectedCarrierCell = selectedCarrierOnCell.item2;
+
     var radius = 1;
     var cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: radius);
 
@@ -115,9 +121,9 @@ class _InitTransition extends _TroopTransferTransition {
       for (final carrierLastCellCandidate in cellsAroundTarget) {
         // We try to find a path for our carrier - from cell to cell
         final path = pathFacade.calculatePathForUnit(
-          startCell: selectedCarrier.cell,
+          startCell: selectedCarrierCell,
           endCell: carrierLastCellCandidate,
-          calculatedUnit: selectedCarrier.carrier,
+          calculatedUnit: selectedCarrier,
         );
 
         // We can't reach the cell by the carrier - skip this one
@@ -132,7 +138,7 @@ class _InitTransition extends _TroopTransferTransition {
           final path = pathFacade.calculatePathForUnit(
             startCell: carrierLastCellCandidate,
             endCell: landingCellCandidate,
-            calculatedUnit: selectedCarrier.carrier,
+            calculatedUnit: selectedCarrier,
           );
 
           if (path.isEmpty) {
@@ -142,7 +148,7 @@ class _InitTransition extends _TroopTransferTransition {
           final lastPathItem = pathFacade
               .estimatePathForUnit(
                 path: path,
-                unit: selectedCarrier.carrier,
+                unit: selectedCarrier,
               )
               .last
               .pathItem
