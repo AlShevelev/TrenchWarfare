@@ -63,8 +63,15 @@ class _TroopTransfer implements TroopTransferRead {
     if (!_isGoalReachable()) {
       _currentState = _StateCompleted();
     } else {
-      var transition = _getTransition();
-      _currentState = await transition.process();
+      var canContinue = true;
+      while (_currentState is! _StateCompleted && canContinue) {
+        var transition = _getTransition();
+
+        final transitionResult = await transition.process();
+
+        _currentState = transitionResult.newState;
+        canContinue = transitionResult.canContinue;
+      }
     }
 
     if (_currentState is _StateCompleted) {
@@ -98,6 +105,9 @@ class _TroopTransfer implements TroopTransferRead {
           ),
         _StateLoadingToCarrier() => _LoadingToCarrierTransition(
           state: _currentState as _StateLoadingToCarrier,
+          actions: _actions,
+          myNation: _myNation,
+          gameField: _gameField,
         ),
         _StateTransporting() => _TransportingTransition(
             state: _currentState as _StateTransporting,

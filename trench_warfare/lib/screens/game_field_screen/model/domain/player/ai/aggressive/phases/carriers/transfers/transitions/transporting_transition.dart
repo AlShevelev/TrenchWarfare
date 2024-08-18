@@ -6,7 +6,7 @@ class _TransportingTransition extends _TroopTransferTransition {
   _TransportingTransition({required _StateTransporting state}) : _state = state;
 
   @override
-  Future<_TroopTransferState> process() {
+  Future<_TransitionResult> process() {
     // TODO: implement process
     throw UnimplementedError();
   }

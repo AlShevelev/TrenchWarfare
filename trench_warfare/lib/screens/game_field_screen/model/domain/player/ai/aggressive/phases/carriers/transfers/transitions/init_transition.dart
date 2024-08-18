@@ -24,12 +24,12 @@ class _InitTransition extends _TroopTransferTransition {
         _myTransferId = myTransferId;
 
   @override
-  Future<_TroopTransferState> process() async {
+  Future<_TransitionResult> process() async {
     final freeCarriers = _getFreeCarriers();
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
-      return _StateCompleted();
+      return _TransitionResult.completed();
     }
 
     final selectedCarrier = _selectCarrier(freeCarriers);
@@ -37,7 +37,7 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingCell(selectedCarrier);
     if (landingPoint == null) {
-      return _StateCompleted();
+      return _TransitionResult.completed();
     }
 
     Tuple2<LandingPoint, List<Unit>>? gatheringPointAndUnits;
@@ -52,20 +52,26 @@ class _InitTransition extends _TroopTransferTransition {
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
-        return _StateCompleted();
+        return _TransitionResult.completed();
       }
     }
 
     return gatheringPointAndUnits == null
-        ? _StateTransporting(
-            selectedCarrier: selectedCarrier.item1,
-            landingPoint: landingPoint,
+        ? _TransitionResult(
+            newState: _StateTransporting(
+              selectedCarrier: selectedCarrier.item1,
+              landingPoint: landingPoint,
+            ),
+            canContinue: true,
           )
-        : _StateGathering(
-            selectedCarrier: selectedCarrier.item1,
-            landingPoint: landingPoint,
-            gatheringPoint: gatheringPointAndUnits.item1,
-            gatheringUnits: gatheringPointAndUnits.item2,
+        : _TransitionResult(
+            newState: _StateGathering(
+              selectedCarrier: selectedCarrier.item1,
+              landingPoint: landingPoint,
+              gatheringPoint: gatheringPointAndUnits.item1,
+              gatheringUnits: gatheringPointAndUnits.item2,
+            ),
+            canContinue: true,
           );
   }
 

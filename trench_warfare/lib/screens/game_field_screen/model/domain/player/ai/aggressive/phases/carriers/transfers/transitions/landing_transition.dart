@@ -6,7 +6,7 @@ class _LandingTransition extends _TroopTransferTransition {
   _LandingTransition({required _StateLanding state}) : _state = state;
 
   @override
-  Future<_TroopTransferState> process() {
+  Future<_TransitionResult> process() {
     // TODO: implement process
     throw UnimplementedError();
   }

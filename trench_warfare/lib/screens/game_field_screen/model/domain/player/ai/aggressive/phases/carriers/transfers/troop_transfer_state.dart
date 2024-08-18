@@ -46,6 +46,17 @@ class _StateLoadingToCarrier extends _TroopTransferState {
     required this.unitsToLoad,
     required this.landingPoint,
   });
+
+  _StateLoadingToCarrier copy({
+    Carrier? selectedCarrier,
+    List<Unit>? unitsToLoad,
+    LandingPoint? landingPoint,
+  }) =>
+      _StateLoadingToCarrier(
+        selectedCarrier: selectedCarrier ?? this.selectedCarrier,
+        unitsToLoad: unitsToLoad ?? this.unitsToLoad,
+        landingPoint: landingPoint ?? this.landingPoint,
+      );
 }
 
 class _StateTransporting extends _TroopTransferState {

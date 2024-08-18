@@ -12,6 +12,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfindin
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/shared/aggressive_ai_shared_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
+import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 

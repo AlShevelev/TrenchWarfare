@@ -28,14 +28,14 @@ class _GatheringTransition extends _TroopTransferTransition {
         _myTransferId = myTransferId;
 
   @override
-  Future<_TroopTransferState> process() async {
+  Future<_TransitionResult> process() async {
     var state = _state.copy();
 
     final cellWithSelectedCarrier = _gameField.getCellWithUnit(state.selectedCarrier, _myNation);
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
-      return _StateCompleted();
+      return _TransitionResult.completed();
     }
 
     var carrierReachedTargetCell = false;
@@ -50,7 +50,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // The carrier is dead - can't make the transition
       if (newCarrierCell == null) {
-        return _StateCompleted();
+        return _TransitionResult.completed();
       }
     } else {
       carrierReachedTargetCell = true;
@@ -72,7 +72,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // Can't find full pack of the new units - we should cancel the transportation
       if (newUnits.length < unitsNeeded) {
-        return _StateCompleted();
+        return _TransitionResult.completed();
       }
 
       // update the state
@@ -114,13 +114,19 @@ class _GatheringTransition extends _TroopTransferTransition {
     state = state.copy(gatheringUnits: gatheringUnitsCopy);
 
     if (carrierReachedTargetCell && unitsReachedTargetCellQuantity == GameConstants.maxUnitsInCarrier) {
-      return _StateLoadingToCarrier(
-        selectedCarrier: state.selectedCarrier,
-        unitsToLoad: state.gatheringUnits,
-        landingPoint: state.landingPoint,
+      return _TransitionResult(
+        newState: _StateLoadingToCarrier(
+          selectedCarrier: state.selectedCarrier,
+          unitsToLoad: state.gatheringUnits,
+          landingPoint: state.landingPoint,
+        ),
+        canContinue: true,
       );
     } else {
-      return state;
+      return _TransitionResult(
+        newState: state,
+        canContinue: false,
+      );
     }
   }
 
