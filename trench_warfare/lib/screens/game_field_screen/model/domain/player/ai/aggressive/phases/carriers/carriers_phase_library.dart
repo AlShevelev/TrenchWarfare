@@ -1,6 +1,7 @@
 library carriers_phase_library;
 
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/unit_state.dart';

@@ -3,27 +3,18 @@ part of carriers_phase_library;
 class _GatheringTransition extends _TroopTransferTransition {
   final _StateGathering _state;
 
-  final PlayerActions _actions;
-
-  final Nation _myNation;
-
-  final GameFieldRead _gameField;
-
   final CarrierTroopTransfersStorageRead _transfersStorage;
 
   final String _myTransferId;
 
   _GatheringTransition({
     required _StateGathering state,
-    required PlayerActions actions,
-    required Nation myNation,
-    required GameFieldRead gameField,
+    required super.actions,
+    required super.myNation,
+    required super.gameField,
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
   })  : _state = state,
-        _actions = actions,
-        _myNation = myNation,
-        _gameField = gameField,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
 
@@ -35,6 +26,23 @@ class _GatheringTransition extends _TroopTransferTransition {
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
+      return _TransitionResult.completed();
+    }
+
+    // The carrier can't move in this turn
+    if (_state.selectedCarrier.state == UnitState.disabled) {
+      return _TransitionResult(newState: _state, canContinue: false);
+    }
+
+    final pathFacade = PathFacade(_gameField);
+    final carrierPath = pathFacade.calculatePathForUnit(
+      startCell: cellWithSelectedCarrier,
+      endCell: state.gatheringPoint.carrierCell,
+      calculatedUnit: state.selectedCarrier,
+    );
+
+    // The carrier can't reach the target cell
+    if (carrierPath.isEmpty) {
       return _TransitionResult.completed();
     }
 
@@ -128,33 +136,6 @@ class _GatheringTransition extends _TroopTransferTransition {
         canContinue: false,
       );
     }
-  }
-
-  /// Returns a result cell if unit is alive
-  Future<GameFieldCellRead?> _moveUnit(
-    Unit unit, {
-    required GameFieldCellRead from,
-    required GameFieldCellRead to,
-  }) async {
-    GameFieldCellRead? unitCell = from;
-
-    do {
-      await _actions.move(unit, from: unitCell!, to: to);
-
-      unitCell = _gameField.getCellWithUnit(unit, _myNation);
-
-      // The unit is dead
-      if (unitCell == null) {
-        return null;
-      }
-
-      // The cell is reached
-      if (unitCell == to) {
-        return to;
-      }
-    } while (unit.state != UnitState.disabled);
-
-    return unitCell;
   }
 
   Iterable<Tuple2<Unit, GameFieldCellRead>> _findNewUnits(

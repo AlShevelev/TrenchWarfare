@@ -70,7 +70,16 @@ class _StateTransporting extends _TroopTransferState {
   });
 }
 
-class _StateLanding extends _TroopTransferState {}
+class _StateLanding extends _TroopTransferState {
+  final Carrier selectedCarrier;
+
+  final LandingPoint landingPoint;
+
+  _StateLanding({
+    required this.selectedCarrier,
+    required this.landingPoint,
+  });
+}
 
 class _StateMovementAfterLanding extends _TroopTransferState {}
 

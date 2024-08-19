@@ -3,23 +3,18 @@ part of carriers_phase_library;
 class _InitTransition extends _TroopTransferTransition {
   final GameFieldCellRead _targetCell;
 
-  final GameFieldRead _gameField;
-
-  final Nation _myNation;
-
   final CarrierTroopTransfersStorageRead _transfersStorage;
 
   final String _myTransferId;
 
   _InitTransition({
     required GameFieldCellRead targetCell,
-    required GameFieldRead gameField,
-    required Nation myNation,
+    required super.actions,
+    required super.gameField,
+    required super.myNation,
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
   })  : _targetCell = targetCell,
-        _gameField = gameField,
-        _myNation = myNation,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
 

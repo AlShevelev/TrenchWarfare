@@ -3,21 +3,13 @@ part of carriers_phase_library;
 class _LoadingToCarrierTransition extends _TroopTransferTransition {
   final _StateLoadingToCarrier _state;
 
-  final PlayerActions _actions;
-
-  final Nation _myNation;
-
-  final GameFieldRead _gameField;
 
   _LoadingToCarrierTransition({
     required _StateLoadingToCarrier state,
-    required PlayerActions actions,
-    required Nation myNation,
-    required GameFieldRead gameField,
-  })  : _state = state,
-        _actions = actions,
-        _myNation = myNation,
-        _gameField = gameField;
+    required super.actions,
+    required super.myNation,
+    required super.gameField,
+  })  : _state = state;
 
   @override
   Future<_TransitionResult> process() async {

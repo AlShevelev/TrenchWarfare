@@ -90,6 +90,7 @@ class _TroopTransfer implements TroopTransferRead {
   _TroopTransferTransition _getTransition() => switch (_currentState) {
         _StateInit() => _InitTransition(
             targetCell: _targetCell,
+            actions: _actions,
             gameField: _gameField,
             myNation: _myNation,
             transfersStorage: _transfersStorage,
@@ -111,12 +112,21 @@ class _TroopTransfer implements TroopTransferRead {
         ),
         _StateTransporting() => _TransportingTransition(
             state: _currentState as _StateTransporting,
+            actions: _actions,
+            gameField: _gameField,
+            myNation: _myNation,
           ),
         _StateLanding() => _LandingTransition(
             state: _currentState as _StateLanding,
+            actions: _actions,
+            gameField: _gameField,
+            myNation: _myNation,
           ),
         _StateMovementAfterLanding() => _MovementAfterLadingTransition(
             state: _currentState as _StateMovementAfterLanding,
+            actions: _actions,
+            gameField: _gameField,
+            myNation: _myNation,
           ),
         _StateCompleted() => throw UnsupportedError('This state is not supported'),
       };
