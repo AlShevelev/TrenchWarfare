@@ -25,6 +25,8 @@ class _TroopTransfer implements TroopTransferRead {
 
   final PlayerActions _actions;
 
+  final MapMetadataRead _metadata;
+
   _TroopTransferState _currentState = _StateInit();
 
   final String _id;
@@ -52,11 +54,13 @@ class _TroopTransfer implements TroopTransferRead {
     required GameFieldRead gameField,
     required Nation myNation,
     required PlayerActions actions,
+    required MapMetadataRead metadata,
   })  : _targetCell = targetCell,
         _transfersStorage = transfersStorage,
         _gameField = gameField,
         _myNation = myNation,
         _actions = actions,
+        _metadata = metadata,
         _id = RandomGen.generateId();
 
   Future<void> process() async {
@@ -122,11 +126,12 @@ class _TroopTransfer implements TroopTransferRead {
             gameField: _gameField,
             myNation: _myNation,
           ),
-        _StateMovementAfterLanding() => _MovementAfterLadingTransition(
-            state: _currentState as _StateMovementAfterLanding,
+          _StateMoveUnitsAfterLanding() => _MovementAfterLadingTransition(
+            state: _currentState as _StateMoveUnitsAfterLanding,
             actions: _actions,
             gameField: _gameField,
             myNation: _myNation,
+            metadata: _metadata,
           ),
         _StateCompleted() => throw UnsupportedError('This state is not supported'),
       };
@@ -140,7 +145,7 @@ class _TroopTransfer implements TroopTransferRead {
       _StateLoadingToCarrier() => currentState.selectedCarrier.id,
       _StateTransporting() => currentState.selectedCarrier.id,
       _StateLanding() => null,
-      _StateMovementAfterLanding() => null,
+      _StateMoveUnitsAfterLanding() => null,
       _StateCompleted() => null,
     };
   }
@@ -154,7 +159,7 @@ class _TroopTransfer implements TroopTransferRead {
       _StateLoadingToCarrier() => currentState.landingPoint,
       _StateTransporting() => currentState.landingPoint,
       _StateLanding() => null,
-      _StateMovementAfterLanding() => null,
+      _StateMoveUnitsAfterLanding() => null,
       _StateCompleted() => null,
     };
   }
@@ -168,7 +173,7 @@ class _TroopTransfer implements TroopTransferRead {
       _StateLoadingToCarrier() => null,
       _StateTransporting() => null,
       _StateLanding() => null,
-      _StateMovementAfterLanding() => null,
+      _StateMoveUnitsAfterLanding() => null,
       _StateCompleted() => null,
     };
   }
@@ -182,7 +187,7 @@ class _TroopTransfer implements TroopTransferRead {
       _StateLoadingToCarrier() => currentState.unitsToLoad,
       _StateTransporting() => [],
       _StateLanding() => [],
-      _StateMovementAfterLanding() => [],
+      _StateMoveUnitsAfterLanding() => [],
       _StateCompleted() => [],
     };
   }

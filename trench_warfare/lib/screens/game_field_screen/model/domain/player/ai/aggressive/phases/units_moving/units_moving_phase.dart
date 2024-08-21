@@ -1,8 +1,6 @@
 part of units_moving_phase_library;
 
 class UnitsMovingPhase implements TurnPhase {
-  final PlayerInput _player;
-
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -11,31 +9,44 @@ class UnitsMovingPhase implements TurnPhase {
 
   final MapMetadataRead _metadata;
 
-  UnitsMovingPhase(
-      {required PlayerInput player,
-      required GameFieldRead gameField,
-      required Nation myNation,
-      required MapMetadataRead metadata})
-      : _player = player,
-        _gameField = gameField,
+  final StableUnitsIterator _iterator;
+
+  UnitsMovingPhase({
+    required PlayerInput player,
+    required GameFieldRead gameField,
+    required Nation myNation,
+    required StableUnitsIterator iterator,
+    required MapMetadataRead metadata,
+  })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
+        _iterator = iterator,
         _actions = PlayerActions(player: player) {
     // It's a dirty, but necessary hack
-    final playerCore = _player as PlayerCore;
+    final playerCore = player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {
       _actions.onAnimationCompleted();
     });
   }
 
+  UnitsMovingPhase.withActions({
+    required GameFieldRead gameField,
+    required Nation myNation,
+    required StableUnitsIterator iterator,
+    required MapMetadataRead metadata,
+    required PlayerActions actions,
+  })  : _gameField = gameField,
+        _myNation = myNation,
+        _metadata = metadata,
+        _iterator = iterator,
+        _actions = actions;
+
   @override
   Future<void> start() async {
-    final iterator = StableUnitsIterator(gameField: _gameField, myNation: _myNation);
+    while (_iterator.moveNext()) {
+      final unit = _iterator.current.unit;
 
-    while (iterator.moveNext()) {
-      final unit = iterator.current.unit;
-
-      GameFieldCellRead? cellWithUnit = iterator.current.cell;
+      GameFieldCellRead? cellWithUnit = _iterator.current.cell;
 
       late InfluenceMapRepresentationRead influences;
 

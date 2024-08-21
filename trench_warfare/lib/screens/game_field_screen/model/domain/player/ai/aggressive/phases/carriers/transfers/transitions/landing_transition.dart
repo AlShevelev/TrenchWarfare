@@ -12,7 +12,35 @@ class _LandingTransition extends _TroopTransferTransition {
 
   @override
   Future<_TransitionResult> process() async {
-    // TODO: implement process
-    throw UnimplementedError();
+    final cellWithSelectedCarrier = _gameField.getCellWithUnit(_state.selectedCarrier, _myNation);
+
+    // The carrier is dead or out of the landing cell - the transfer doesn't make sense
+    if (cellWithSelectedCarrier == null || cellWithSelectedCarrier != _state.landingPoint.carrierCell) {
+      return _TransitionResult.completed();
+    }
+
+    final unitsTotal = _state.selectedCarrier.units.length;
+
+    // Landing
+    for (var i = 0; i < unitsTotal; i++) {
+      _moveUnit(
+        _state.selectedCarrier,
+        from: cellWithSelectedCarrier,
+        to: _state.landingPoint.unitsCell,
+      );
+    }
+
+    if (_state.selectedCarrier.units.isNotEmpty) {
+      // Some of the units are in a carrier
+      return _TransitionResult(newState: _state, canContinue: false);
+    } else {
+      return _TransitionResult(
+        newState: _StateMoveUnitsAfterLanding(
+          selectedCarrier: _state.selectedCarrier,
+          landedUnits: <Unit>[..._state.landingPoint.unitsCell.units],
+        ),
+        canContinue: true,
+      );
+    }
   }
 }

@@ -1,7 +1,7 @@
 part of units_moving_phase_library;
 
 /// Interacts through my units, taking into account their removing, resorting etc.
-class StableUnitsIterator implements Iterator<_UnitOnCell> {
+class StableUnitsIterator implements Iterator<UnitOnCell> {
   late final List<GameFieldCellRead> _gameFieldCells;
 
   var _currentCellIndex = -1;
@@ -9,6 +9,18 @@ class StableUnitsIterator implements Iterator<_UnitOnCell> {
   List<String> _unitIdsInTheCurrentCell = [];
 
   var _currentUnitIndex = -1;
+
+  /// A unit can be removed (destroyed in a battle) or resorted.
+  /// So, we must find it by its Id, and not by an index in the cell.units list
+  @override
+  UnitOnCell get current {
+    final cell = _gameFieldCells[_currentCellIndex];
+    final unit = cell
+        .units
+        .singleWhere((u) => u.id == _unitIdsInTheCurrentCell[_currentUnitIndex]);
+
+    return UnitOnCell(cell: cell, unit: unit);
+  }
 
   StableUnitsIterator({
     required GameFieldRead gameField,
@@ -20,28 +32,13 @@ class StableUnitsIterator implements Iterator<_UnitOnCell> {
       growable: false,
     );
 
-    if (_gameFieldCells.length > 2 && shifted) {
-      for (var i = 0; i < _gameFieldCells.length; i++) {
-        final index1 = RandomGen.randomInt(_gameFieldCells.length);
-        final index2 = RandomGen.randomInt(_gameFieldCells.length);
-
-        final a = _gameFieldCells[index1];
-        _gameFieldCells[index1] = _gameFieldCells[index2];
-        _gameFieldCells[index2] = a;
-      }
-    }
+    _shiftCells(shifted: shifted);
   }
 
-  /// A unit can be removed (destroyed in a battle) or resorted.
-  /// So, we must find it by its Id, and not by an index in the cell.units list
-  @override
-  _UnitOnCell get current {
-    final cell = _gameFieldCells[_currentCellIndex];
-    final unit = cell
-        .units
-        .singleWhere((u) => u.id == _unitIdsInTheCurrentCell[_currentUnitIndex]);
+  StableUnitsIterator.fromCell(List<GameFieldCellRead> cells, { bool shifted = true}) {
+    _gameFieldCells = cells;
 
-    return _UnitOnCell(cell: cell, unit: unit);
+    _shiftCells(shifted: shifted);
   }
 
   @override
@@ -66,5 +63,18 @@ class StableUnitsIterator implements Iterator<_UnitOnCell> {
     _currentUnitIndex++;
 
     return true;
+  }
+
+  void _shiftCells({required bool shifted}) {
+    if (_gameFieldCells.length > 2 && shifted) {
+      for (var i = 0; i < _gameFieldCells.length; i++) {
+        final index1 = RandomGen.randomInt(_gameFieldCells.length);
+        final index2 = RandomGen.randomInt(_gameFieldCells.length);
+
+        final a = _gameFieldCells[index1];
+        _gameFieldCells[index1] = _gameFieldCells[index2];
+        _gameFieldCells[index2] = a;
+      }
+    }
   }
 }

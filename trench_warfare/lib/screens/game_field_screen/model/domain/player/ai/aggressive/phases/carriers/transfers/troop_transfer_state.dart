@@ -81,6 +81,12 @@ class _StateLanding extends _TroopTransferState {
   });
 }
 
-class _StateMovementAfterLanding extends _TroopTransferState {}
+class _StateMoveUnitsAfterLanding extends _TroopTransferState {
+  final Carrier selectedCarrier;
+  
+  final Iterable<Unit> landedUnits;
+
+  _StateMoveUnitsAfterLanding({required this.selectedCarrier, required this.landedUnits});
+}
 
 class _StateCompleted extends _TroopTransferState {}

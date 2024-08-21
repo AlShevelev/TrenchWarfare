@@ -15,14 +15,18 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
 
   final List<_TroopTransfer> _troopTransfers = [];
 
+  final MapMetadataRead _metadata;
+
   @override
   Iterable<TroopTransferRead> get allTransfers => _troopTransfers;
 
   CarrierTroopTransfersStorage({
     required GameFieldRead gameField,
     required Nation myNation,
+    required MapMetadataRead metadata,
   })  : _gameField = gameField,
-        _myNation = myNation;
+        _myNation = myNation,
+        _metadata = metadata;
 
   void setPlayerActions(PlayerActions actions) {
     _actions = actions;
@@ -35,6 +39,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
       gameField: _gameField,
       myNation: _myNation,
       actions: _actions,
+      metadata: _metadata,
     );
     _troopTransfers.add(transfer);
   }

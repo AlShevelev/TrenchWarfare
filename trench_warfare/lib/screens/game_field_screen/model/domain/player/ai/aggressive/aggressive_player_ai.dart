@@ -28,6 +28,7 @@ class AggressivePlayerAi extends PlayerAi {
         _transfersStorage = CarrierTroopTransfersStorage(
           gameField: gameField,
           myNation: myNation,
+          metadata: metadata
         );
 
   @override
@@ -47,6 +48,7 @@ class AggressivePlayerAi extends PlayerAi {
         gameField: _gameField,
         myNation: _myNation,
         metadata: _metadata,
+        iterator: StableUnitsIterator(gameField: _gameField, myNation: _myNation),
       ).start();
 
       await CarriersPhase(
