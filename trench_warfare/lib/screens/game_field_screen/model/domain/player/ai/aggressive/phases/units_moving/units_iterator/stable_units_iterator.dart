@@ -8,6 +8,8 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
 
   List<String> _unitIdsInTheCurrentCell = [];
 
+  final List<Unit> _excludedUnits;
+
   var _currentUnitIndex = -1;
 
   /// A unit can be removed (destroyed in a battle) or resorted.
@@ -15,9 +17,7 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
   @override
   UnitOnCell get current {
     final cell = _gameFieldCells[_currentCellIndex];
-    final unit = cell
-        .units
-        .singleWhere((u) => u.id == _unitIdsInTheCurrentCell[_currentUnitIndex]);
+    final unit = cell.units.singleWhere((u) => u.id == _unitIdsInTheCurrentCell[_currentUnitIndex]);
 
     return UnitOnCell(cell: cell, unit: unit);
   }
@@ -25,8 +25,9 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
   StableUnitsIterator({
     required GameFieldRead gameField,
     required Nation myNation,
+    required List<Unit> excludedUnits,
     bool shifted = true,
-  }) {
+  }) : _excludedUnits = excludedUnits {
     _gameFieldCells = List<GameFieldCellRead>.from(
       gameField.cells.where((c) => c.nation == myNation && c.units.isNotEmpty),
       growable: false,
@@ -35,7 +36,7 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
     _shiftCells(shifted: shifted);
   }
 
-  StableUnitsIterator.fromCell(List<GameFieldCellRead> cells, { bool shifted = true}) {
+  StableUnitsIterator.fromCell(List<GameFieldCellRead> cells, {bool shifted = true}) : _excludedUnits = [] {
     _gameFieldCells = cells;
 
     _shiftCells(shifted: shifted);
@@ -57,12 +58,12 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
           _gameFieldCells[_currentCellIndex].units.map((u) => u.id).toList(growable: false);
       _currentUnitIndex = 0;
 
-      return true;
+      return _excludedUnits.contains(current.unit) ? moveNext() : true;
     }
 
     _currentUnitIndex++;
 
-    return true;
+    return _excludedUnits.contains(current.unit) ? moveNext() : true;
   }
 
   void _shiftCells({required bool shifted}) {

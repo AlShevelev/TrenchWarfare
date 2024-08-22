@@ -42,6 +42,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -74,6 +75,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: false,
       );
 
@@ -110,6 +112,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -147,6 +150,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -181,6 +185,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -225,6 +230,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -277,6 +283,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -333,6 +340,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -397,6 +405,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -465,6 +474,7 @@ void main() {
       final iterator = StableUnitsIterator(
         gameField: mockGameField,
         myNation: Nation.usa,
+        excludedUnits: [],
         shifted: true,
       );
 
@@ -489,6 +499,320 @@ void main() {
       Assert.equals(iterator.current.cell, cells[1]);
       Assert.equals(iterator.current.unit, units2[1]);
 
+      Assert.isFalse(iterator.moveNext());
+    });
+  });
+
+  group('StableUnitsIterator - with excluded', () {
+    test('1 cell with 1 unit - the unit is excluded', () {
+      // Arrange
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnit(Unit.byType(UnitType.infantry))
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [cells[0].units.first],
+        shifted: true,
+      );
+
+      // Assert
+      var counter = 0;
+      while (iterator.moveNext()) {
+        final item = iterator.current;
+
+        Assert.equals(item.cell, cells[0]);
+        Assert.equals(item.unit, cells[0].units.elementAt(0));
+
+        counter++;
+      }
+
+      Assert.equals(counter, 0);
+    });
+
+    test('1 cell with several units - the first one is excluded', () {
+      // Arrange
+      final units = [
+        Unit.byType(UnitType.infantry),
+        Unit.byType(UnitType.infantry),
+      ];
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnits(units)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [units[0]],
+        shifted: true,
+      );
+
+      // Assert
+      var counter = 0;
+      while (iterator.moveNext()) {
+        final item = iterator.current;
+
+        Assert.equals(item.cell, cells[0]);
+        Assert.equals(item.unit, cells[0].units.elementAt(1));
+
+        counter++;
+      }
+
+      Assert.equals(counter, 1);
+    });
+
+    test('1 cell with several units - the last one is excluded', () {
+      // Arrange
+      final units = [
+        Unit.byType(UnitType.infantry),
+        Unit.byType(UnitType.infantry),
+      ];
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnits(units)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [units[1]],
+        shifted: true,
+      );
+
+      // Assert
+      var counter = 0;
+      while (iterator.moveNext()) {
+        final item = iterator.current;
+
+        Assert.equals(item.cell, cells[0]);
+        Assert.equals(item.unit, cells[0].units.elementAt(0));
+
+        counter++;
+      }
+
+      Assert.equals(counter, 1);
+    });
+
+    test('1 cell with several units - all units are excluded', () {
+      // Arrange
+      final units = [
+        Unit.byType(UnitType.infantry),
+        Unit.byType(UnitType.infantry),
+      ];
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnits(units)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [units[0], units[1]],
+        shifted: true,
+      );
+
+      // Assert
+      var counter = 0;
+      while (iterator.moveNext()) {
+        final item = iterator.current;
+
+        Assert.equals(item.cell, cells[0]);
+        Assert.equals(item.unit, cells[0].units.elementAt(counter));
+
+        counter++;
+      }
+
+      Assert.equals(counter, 0);
+    });
+
+    test('2 cell with one unit - the first one is excluded', () {
+      // Arrange
+      final unit1 = Unit.byType(UnitType.infantry);
+      final unit2 = Unit.byType(UnitType.infantry);
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnit(unit1)
+          ..setNation(Nation.usa),
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 1,
+        )
+          ..addUnit(unit2)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [unit1],
+        shifted: true,
+      );
+
+      // Assert
+      Assert.isTrue(iterator.moveNext());
+      Assert.equals(iterator.current.cell, cells[1]);
+      Assert.equals(iterator.current.unit, unit2);
+
+      Assert.isFalse(iterator.moveNext());
+    });
+
+    test('2 cell with one unit - the last one is excluded', () {
+      // Arrange
+      final unit1 = Unit.byType(UnitType.infantry);
+      final unit2 = Unit.byType(UnitType.infantry);
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnit(unit1)
+          ..setNation(Nation.usa),
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 1,
+        )
+          ..addUnit(unit2)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [unit2],
+        shifted: true,
+      );
+
+      // Assert
+      Assert.isTrue(iterator.moveNext());
+      Assert.equals(iterator.current.cell, cells[0]);
+      Assert.equals(iterator.current.unit, unit1);
+
+      Assert.isFalse(iterator.moveNext());
+    });
+
+    test('2 cell with one unit - both are excluded', () {
+      // Arrange
+      final unit1 = Unit.byType(UnitType.infantry);
+      final unit2 = Unit.byType(UnitType.infantry);
+
+      final cells = [
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 0,
+        )
+          ..addUnit(unit1)
+          ..setNation(Nation.usa),
+        GameFieldCell(
+          terrain: CellTerrain.plain,
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: 0,
+          col: 1,
+        )
+          ..addUnit(unit2)
+          ..setNation(Nation.usa),
+      ];
+
+      final mockGameField = MockGameFieldRead();
+      when(mockGameField.cells).thenReturn(cells);
+
+      // Act
+      final iterator = StableUnitsIterator(
+        gameField: mockGameField,
+        myNation: Nation.usa,
+        excludedUnits: [unit1, unit2],
+        shifted: true,
+      );
+
+      // Assert
       Assert.isFalse(iterator.moveNext());
     });
   });

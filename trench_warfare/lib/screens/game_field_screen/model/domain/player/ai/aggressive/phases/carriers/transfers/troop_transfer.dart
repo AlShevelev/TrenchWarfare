@@ -183,8 +183,8 @@ class _TroopTransfer implements TroopTransferRead {
 
     return switch (currentState) {
       _StateInit() => [],
-      _StateGathering() => currentState.gatheringUnits,
-      _StateLoadingToCarrier() => currentState.unitsToLoad,
+      _StateGathering() => currentState.gatheringUnits, // +carrier
+      _StateLoadingToCarrier() => currentState.unitsToLoad, // +carrier
       _StateTransporting() => [],
       _StateLanding() => [],
       _StateMoveUnitsAfterLanding() => [],
