@@ -144,8 +144,8 @@ class _TroopTransfer implements TroopTransferRead {
       _StateGathering() => currentState.selectedCarrier.id,
       _StateLoadingToCarrier() => currentState.selectedCarrier.id,
       _StateTransporting() => currentState.selectedCarrier.id,
-      _StateLanding() => null,
-      _StateMoveUnitsAfterLanding() => null,
+      _StateLanding() => currentState.selectedCarrier.id,
+      _StateMoveUnitsAfterLanding() => currentState.selectedCarrier.id,
       _StateCompleted() => null,
     };
   }
@@ -158,7 +158,7 @@ class _TroopTransfer implements TroopTransferRead {
       _StateGathering() => currentState.landingPoint,
       _StateLoadingToCarrier() => currentState.landingPoint,
       _StateTransporting() => currentState.landingPoint,
-      _StateLanding() => null,
+      _StateLanding() => currentState.landingPoint,
       _StateMoveUnitsAfterLanding() => null,
       _StateCompleted() => null,
     };
@@ -183,11 +183,11 @@ class _TroopTransfer implements TroopTransferRead {
 
     return switch (currentState) {
       _StateInit() => [],
-      _StateGathering() => currentState.gatheringUnits, // +carrier
-      _StateLoadingToCarrier() => currentState.unitsToLoad, // +carrier
-      _StateTransporting() => [],
-      _StateLanding() => [],
-      _StateMoveUnitsAfterLanding() => [],
+      _StateGathering() => <Unit>[...currentState.gatheringUnits, currentState.selectedCarrier],
+      _StateLoadingToCarrier() => <Unit>[...currentState.unitsToLoad, currentState.selectedCarrier],
+      _StateTransporting() => <Unit>[currentState.selectedCarrier],
+      _StateLanding() => <Unit>[currentState.selectedCarrier],
+      _StateMoveUnitsAfterLanding() => <Unit>[...currentState.landedUnits, currentState.selectedCarrier],
       _StateCompleted() => [],
     };
   }
