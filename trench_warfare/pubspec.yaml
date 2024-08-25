@@ -33,6 +33,8 @@ flutter:
   assets:
     # maps
     - assets/tiles/
+    - assets/tiles/test/
+    - assets/tiles/real/europe/
     - assets/images/tiles/
 
     # sprites
