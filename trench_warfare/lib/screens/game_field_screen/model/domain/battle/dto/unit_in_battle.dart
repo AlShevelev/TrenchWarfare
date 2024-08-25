@@ -27,7 +27,9 @@ class UnitInBattle {
   final double maxHealth;
 
   final bool isMechanical;
-  final bool hasMachineGun;
+
+  bool _hasMachineGun;
+  bool get hasMachineGun => _hasMachineGun;
 
   bool _hasArtillery;
   bool get hasArtillery => _hasArtillery;
@@ -43,12 +45,13 @@ class UnitInBattle {
     required double health,
     required this.maxHealth,
     required this.isMechanical,
-    required this.hasMachineGun,
+    required bool hasMachineGun,
     required bool hasArtillery,
   })  : _tookPartInBattles = tookPartInBattles,
         _fatigue = fatigue,
         _health = health,
         _hasArtillery = hasArtillery,
+        _hasMachineGun = hasMachineGun,
         _defence = defence,
         _attack = attack;
 
@@ -57,6 +60,8 @@ class UnitInBattle {
   void updateDefence(double updateFactor) => _defence *= updateFactor;
 
   void updateHasArtillery(bool hasArtillery) => _hasArtillery = hasArtillery;
+
+  void updateHasMachineGun(bool hasMachineGun) => _hasMachineGun = hasMachineGun;
 
   void reduceHealth(double valueToReduce) => _health -= valueToReduce;
 
