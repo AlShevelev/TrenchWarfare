@@ -11,7 +11,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
 
   final Nation _myNation;
 
-  late final PlayerActions _actions;
+  late PlayerActions _actions;
 
   final List<_TroopTransfer> _troopTransfers = [];
 

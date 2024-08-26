@@ -36,7 +36,8 @@ abstract class GameObjectTransitionBase {
     ));
 
     if (cameraPosition == null) {
-      final cellToMove = _context.gameField.cells.firstWhereOrNull((c) => c.nation == _context.nation);
+      final cellToMove = _context.gameField.cells
+          .firstWhereOrNull((c) => c.nation == _context.nation && c.isLand && c.productionCenter != null);
       if (cellToMove != null) {
         events.add(MoveCameraToCell(cellToMove));
       }

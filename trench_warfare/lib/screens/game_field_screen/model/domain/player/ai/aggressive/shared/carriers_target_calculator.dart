@@ -72,12 +72,12 @@ class CarriersTargetCalculator {
 
     // The land path doesn't exist - we should build carriers
     if (path.isEmpty) {
-      return null;
+      return enemySelectedPcCell;
     }
 
     /// The land path is too long - we should build carriers
     if (path.length / minDistance >= _pathIsTooLongFactor) {
-      return null;
+      return enemySelectedPcCell;
     }
 
     final dangerousCellsQuantity = path.count((cell) =>
@@ -86,9 +86,9 @@ class CarriersTargetCalculator {
 
     /// The land path is too dangerous - we should build carriers
     if (dangerousCellsQuantity / path.length > _pathIsTooDangerousFactor) {
-      return null;
+      return enemySelectedPcCell;
     }
 
-    return enemySelectedPcCell;
+    return null;
   }
 }
