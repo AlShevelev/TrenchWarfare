@@ -136,7 +136,7 @@ class PathFacade {
       );
     }
 
-    return SeaFindPathSettings(startCell: startCell);
+    return SeaFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit);
   }
 
   PathCostCalculator _getPathCostCalculator(
@@ -161,7 +161,15 @@ class PathFacade {
   }
 
   bool _checkUnloadConditions(Unit calculatedUnit, GameFieldCellRead endCell) =>
-      calculatedUnit is Carrier && calculatedUnit.units.isNotEmpty && endCell.isLand && !endCell.hasRiver;
+      calculatedUnit is Carrier &&
+      calculatedUnit.units.isNotEmpty &&
+      endCell.isLand &&
+      !endCell.hasRiver &&
+      (endCell.terrain == CellTerrain.plain ||
+          endCell.terrain == CellTerrain.wood ||
+          endCell.terrain == CellTerrain.sand ||
+          endCell.terrain == CellTerrain.hills ||
+          endCell.terrain == CellTerrain.snow);
 
   bool _checkBattleNextUnreachableCellConditions(
     Unit calculatedUnit,
@@ -185,7 +193,11 @@ class PathFacade {
 
     if (!calculatedUnit.isLand) {
       if (!startCell.isLand || (startCell.isLand && startCell.hasRiver)) {
-        return !SeaFindPathSettings.isCellReachableStatic(startCell: startCell, cell: endCell);
+        return !SeaFindPathSettings.isCellReachableStatic(
+          calculatedUnit.type,
+          startCell: startCell,
+          cell: endCell,
+        );
       }
     }
 

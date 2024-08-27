@@ -1,11 +1,13 @@
 part of pathfinding;
 
 class SeaFindPathSettings implements FindPathSettings {
-  late final GameFieldCellRead _startCell;
+  final GameFieldCellRead _startCell;
 
-  SeaFindPathSettings({required GameFieldCellRead startCell}) {
-    _startCell = startCell;
-  }
+  final UnitType _unit;
+
+  SeaFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
+      : _startCell = startCell,
+        _unit = calculatedUnit.type;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
@@ -28,9 +30,10 @@ class SeaFindPathSettings implements FindPathSettings {
 
   @override
   bool isCellReachable(GameFieldCellRead cell) =>
-      SeaFindPathSettings.isCellReachableStatic(cell: cell, startCell: _startCell);
+      SeaFindPathSettings.isCellReachableStatic(_unit, cell: cell, startCell: _startCell);
 
-  static bool isCellReachableStatic({
+  static bool isCellReachableStatic(
+    UnitType calculatedUnitType, {
     required GameFieldCellRead startCell,
     required GameFieldCellRead cell,
   }) {
@@ -38,12 +41,13 @@ class SeaFindPathSettings implements FindPathSettings {
       return false;
     }
 
-    if (cell.nation == startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
+    if (cell.nation == startCell.nation && cell.units.length == GameConstants.maxUnitsInCell) {
       return false;
     }
 
-    final activeUnit = startCell.activeUnit!;
-    if (activeUnit.type == UnitType.carrier && cell.activeUnit != null && startCell.nation != cell.nation) {
+    if (calculatedUnitType == UnitType.carrier &&
+        cell.activeUnit != null &&
+        startCell.nation != cell.nation) {
       return false;
     }
 

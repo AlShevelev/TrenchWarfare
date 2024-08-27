@@ -34,6 +34,11 @@ class _GatheringTransition extends _TroopTransferTransition {
       return _TransitionResult(newState: _state, canContinue: false);
     }
 
+    // The target cells validation
+    if (!_isPointValid(state.gatheringPoint) || !_isPointValid(state.landingPoint)) {
+      return _TransitionResult.completed();
+    }
+
     final pathFacade = PathFacade(_gameField);
     final carrierPath = pathFacade.calculatePathForUnit(
       startCell: cellWithSelectedCarrier,

@@ -1,5 +1,7 @@
 library pathfinding;
 
+import 'dart:developer';
+
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
 import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';

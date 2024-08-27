@@ -3,13 +3,12 @@ part of carriers_phase_library;
 class _LoadingToCarrierTransition extends _TroopTransferTransition {
   final _StateLoadingToCarrier _state;
 
-
   _LoadingToCarrierTransition({
     required _StateLoadingToCarrier state,
     required super.actions,
     required super.myNation,
     required super.gameField,
-  })  : _state = state;
+  }) : _state = state;
 
   @override
   Future<_TransitionResult> process() async {
@@ -19,6 +18,11 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
+      return _TransitionResult.completed();
+    }
+
+    // Checking to mine fields
+    if (!_isPointValid(_state.landingPoint)) {
       return _TransitionResult.completed();
     }
 

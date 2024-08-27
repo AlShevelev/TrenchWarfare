@@ -64,31 +64,19 @@ class _TroopTransfer implements TroopTransferRead {
         _id = RandomGen.generateId();
 
   Future<void> process() async {
-    if (!_isGoalReachable()) {
-      _currentState = _StateCompleted();
-    } else {
-      var canContinue = true;
-      while (_currentState is! _StateCompleted && canContinue) {
-        var transition = _getTransition();
+    var canContinue = true;
+    while (_currentState is! _StateCompleted && canContinue) {
+      var transition = _getTransition();
 
-        final transitionResult = await transition.process();
+      final transitionResult = await transition.process();
 
-        _currentState = transitionResult.newState;
-        canContinue = transitionResult.canContinue;
-      }
+      _currentState = transitionResult.newState;
+      canContinue = transitionResult.canContinue;
     }
 
     if (_currentState is _StateCompleted) {
       _cleanUp();
     }
-  }
-
-  bool _isGoalReachable() {
-    if (_currentState is _StateInit || _currentState is _StateCompleted) {
-      return true;
-    }
-
-    throw UnimplementedError();
   }
 
   _TroopTransferTransition _getTransition() => switch (_currentState) {
@@ -193,7 +181,6 @@ class _TroopTransfer implements TroopTransferRead {
   }
 
   void _cleanUp() {
-    // clear state etc.
-    throw UnimplementedError();
+    // clear state etc. - do nothing so far
   }
 }

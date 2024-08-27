@@ -1,14 +1,13 @@
 part of pathfinding;
 
 class LandFindPathSettings implements FindPathSettings {
-  late final GameFieldCellRead _startCell;
+  final GameFieldCellRead _startCell;
 
-  late final UnitType _unit;
+  final UnitType _unit;
 
-  LandFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit}) {
-    _startCell = startCell;
-    _unit = calculatedUnit.type;
-  }
+  LandFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
+      : _startCell = startCell,
+        _unit = calculatedUnit.type;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {

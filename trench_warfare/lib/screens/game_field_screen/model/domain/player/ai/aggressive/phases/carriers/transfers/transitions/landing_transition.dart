@@ -19,6 +19,11 @@ class _LandingTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
+    // Checking to mine fields
+    if (!_isPointValid(_state.landingPoint)) {
+      return _TransitionResult.completed();
+    }
+
     final unitsTotal = _state.selectedCarrier.units.length;
 
     // Landing

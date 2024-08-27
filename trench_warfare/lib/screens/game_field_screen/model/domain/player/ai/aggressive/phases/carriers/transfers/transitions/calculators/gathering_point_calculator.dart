@@ -52,8 +52,8 @@ class _GatheringPointCalculator {
         .where((c) =>
             !c.isLand &&
             c.productionCenter == null &&
-            c.terrainModifier == null &&
             c.units.isEmpty &&
+            c.terrainModifier?.type != TerrainModifierType.seaMine &&
             !otherTransferCarrierPoints.contains(c) &&
             _gameField.findCellsAround(c).any((c) => c.isLand))
         .map((ca) => Tuple2(ca, _gameField.calculateDistance(ca, selectedCarrierCell)))
@@ -70,8 +70,8 @@ class _GatheringPointCalculator {
               c.isLand &&
               !c.hasRiver &&
               c.productionCenter == null &&
-              c.terrainModifier == null &&
               c.units.isEmpty &&
+              c.terrainModifier?.type != TerrainModifierType.landMine &&
               !otherTransferUnitsPoints.contains(c))
           .toList(growable: false);
 

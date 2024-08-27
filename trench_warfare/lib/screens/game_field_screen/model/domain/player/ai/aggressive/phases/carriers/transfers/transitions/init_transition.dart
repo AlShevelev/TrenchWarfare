@@ -136,10 +136,13 @@ class _InitTransition extends _TroopTransferTransition {
         // Now we are looking for a landing point
         final cellsAroundLastCarrierCell = _gameField.findCellsAround(carrierLastCellCandidate);
         for (final landingCellCandidate in cellsAroundLastCarrierCell) {
+          final selectedCarrierCopy = Carrier.copy(selectedCarrier)
+            ..addUnitAsActive(Unit.byType(UnitType.infantry));
+
           final path = pathFacade.calculatePathForUnit(
             startCell: carrierLastCellCandidate,
             endCell: landingCellCandidate,
-            calculatedUnit: selectedCarrier,
+            calculatedUnit: selectedCarrierCopy,
           );
 
           if (path.isEmpty) {
@@ -149,7 +152,7 @@ class _InitTransition extends _TroopTransferTransition {
           final lastPathItem = pathFacade
               .estimatePathForUnit(
                 path: path,
-                unit: selectedCarrier,
+                unit: selectedCarrierCopy,
               )
               .last
               .pathItem
