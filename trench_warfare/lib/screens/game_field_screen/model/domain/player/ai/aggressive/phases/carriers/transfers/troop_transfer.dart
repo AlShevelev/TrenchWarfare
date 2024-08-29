@@ -65,6 +65,8 @@ class _TroopTransfer implements TroopTransferRead {
 
   Future<void> process() async {
     var canContinue = true;
+    print('CARRIER ----------------------- ');
+    print('CARRIER start state: $_currentState');
     while (_currentState is! _StateCompleted && canContinue) {
       var transition = _getTransition();
 
@@ -73,6 +75,8 @@ class _TroopTransfer implements TroopTransferRead {
       _currentState = transitionResult.newState;
       canContinue = transitionResult.canContinue;
     }
+
+    print('CARRIER end state: $_currentState');
 
     if (_currentState is _StateCompleted) {
       _cleanUp();

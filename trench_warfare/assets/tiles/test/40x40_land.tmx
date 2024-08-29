@@ -1588,7 +1588,7 @@
   </object>
   <object id="537" name="belgium" type="ownership" gid="171" x="2366.52" y="1059.85" width="64" height="64">
    <properties>
-    <property name="productionCenter" type="object" value="0"/>
+    <property name="productionCenter" type="object" value="399"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="0"/>
     <property name="unit2" type="object" value="0"/>

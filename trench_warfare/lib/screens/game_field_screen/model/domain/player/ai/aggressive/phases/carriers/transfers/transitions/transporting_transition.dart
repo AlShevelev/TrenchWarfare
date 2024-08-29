@@ -23,7 +23,6 @@ class _TransportingTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
-
     // The carrier can't move in this turn
     if (_state.selectedCarrier.state == UnitState.disabled) {
       return _TransitionResult(newState: _state, canContinue: false);

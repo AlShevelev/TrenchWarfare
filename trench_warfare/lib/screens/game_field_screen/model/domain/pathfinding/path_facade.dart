@@ -150,14 +150,22 @@ class PathFacade {
     }
 
     if (calculatedUnit.isLand) {
-      return LandPathCostCalculator(path, calculatedUnit);
+      return LandPathCostCalculator(
+        path,
+        calculatedUnit: calculatedUnit,
+      );
     }
 
     if (_checkUnloadConditions(calculatedUnit, endCell)) {
-      return LandPathCostCalculator(path, (calculatedUnit as Carrier).activeUnit!);
+      final calculatedCarrier = (calculatedUnit as Carrier);
+      return LandPathCostCalculator(
+        path,
+        calculatedUnit: calculatedCarrier.activeUnit!,
+        calculatedCarrier: calculatedCarrier,
+      );
     }
 
-    return SeaPathCostCalculator(path, calculatedUnit);
+    return SeaPathCostCalculator(path, calculatedUnit: calculatedUnit);
   }
 
   bool _checkUnloadConditions(Unit calculatedUnit, GameFieldCellRead endCell) =>

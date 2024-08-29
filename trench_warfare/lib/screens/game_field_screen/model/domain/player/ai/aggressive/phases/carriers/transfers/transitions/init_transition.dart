@@ -24,6 +24,7 @@ class _InitTransition extends _TroopTransferTransition {
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
+      print('CARRIER Init. freeCarriers.isEmpty');
       return _TransitionResult.completed();
     }
 
@@ -32,6 +33,7 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingCell(selectedCarrier);
     if (landingPoint == null) {
+      print('CARRIER Init. landingPoint == null');
       return _TransitionResult.completed();
     }
 
@@ -47,6 +49,7 @@ class _InitTransition extends _TroopTransferTransition {
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
+        print('CARRIER Init. gatheringPointAndUnits == null');
         return _TransitionResult.completed();
       }
     }
@@ -117,6 +120,9 @@ class _InitTransition extends _TroopTransferTransition {
 
     final pathFacade = PathFacade(_gameField);
 
+    final selectedCarrierCopy = Carrier.copy(selectedCarrier)
+      ..addUnitAsActive(Unit.byType(UnitType.infantry));
+
     // If cellsAroundTarget is empty it means we've moved out of the game field borders
     while (cellsAroundTarget.isNotEmpty) {
       for (final carrierLastCellCandidate in cellsAroundTarget) {
@@ -124,21 +130,21 @@ class _InitTransition extends _TroopTransferTransition {
         final path = pathFacade.calculatePathForUnit(
           startCell: selectedCarrierCell,
           endCell: carrierLastCellCandidate,
-          calculatedUnit: selectedCarrier,
+          calculatedUnit: selectedCarrierCopy,
         );
 
         // We can't reach the cell by the carrier - skip this one
         if (path.isEmpty) {
+          //print('CARRIER Init. _calculateLandingCell. carrierLastCellCandidate path is empty');
           continue;
+        } else {
+          //print('CARRIER Init. _calculateLandingCell. carrierLastCellCandidate path is NOT empty');
         }
 
         // So, the cell if reachable by the carrier
         // Now we are looking for a landing point
         final cellsAroundLastCarrierCell = _gameField.findCellsAround(carrierLastCellCandidate);
         for (final landingCellCandidate in cellsAroundLastCarrierCell) {
-          final selectedCarrierCopy = Carrier.copy(selectedCarrier)
-            ..addUnitAsActive(Unit.byType(UnitType.infantry));
-
           final path = pathFacade.calculatePathForUnit(
             startCell: carrierLastCellCandidate,
             endCell: landingCellCandidate,
@@ -146,21 +152,24 @@ class _InitTransition extends _TroopTransferTransition {
           );
 
           if (path.isEmpty) {
+            //print('CARRIER Init. _calculateLandingCell. landingCellCandidate path is empty');
             continue;
+          } else {
+            //print('CARRIER Init. _calculateLandingCell. landingCellCandidate path is NOT empty');
           }
+          final estimatedPath = pathFacade.estimatePathForUnit(
+            path: path,
+            unit: selectedCarrierCopy,
+          );
 
-          final lastPathItem = pathFacade
-              .estimatePathForUnit(
-                path: path,
-                unit: selectedCarrierCopy,
-              )
-              .last
-              .pathItem
-              ?.type;
+          final lastPathItem = estimatedPath.last.pathItem?.type;
 
           // The cell is reachable for the carrier as a landing point
           if (lastPathItem == PathItemType.unloadUnit) {
+            print('CARRIER Init. _calculateLandingCell. lastPathItem == PathItemType.unloadUnit');
             return LandingPoint(carrierCell: carrierLastCellCandidate, unitsCell: landingCellCandidate);
+          } else {
+            print('CARRIER Init. _calculateLandingCell. lastPathItem != PathItemType.unloadUnit');
           }
         }
       }

@@ -1,13 +1,22 @@
 part of pathfinding;
 
 class LandPathCostCalculator extends SeaPathCostCalculator {
-  bool unloadUnitPathItemExists = false;
+  bool _unloadUnitPathItemExists = false;
 
-  LandPathCostCalculator(super.sourcePath, super.activeUnit);
+  bool _explosionOrBattlePathItemExists = false;
+
+  final Carrier? _calculatedCarrier;
+
+  LandPathCostCalculator(
+    super.sourcePath, {
+    required super.calculatedUnit,
+    Carrier? calculatedCarrier,
+  }) : _calculatedCarrier = calculatedCarrier;
 
   @override
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
     if (isMineField(nextCell)) {
+      _explosionOrBattlePathItemExists = true;
       return PathItemType.explosion;
     }
 
@@ -16,11 +25,12 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
     }
 
     if (isBattleCell(nextCell)) {
+      _explosionOrBattlePathItemExists = true;
       return PathItemType.battle;
     }
 
-    if (_isMyCarrier(_calculatedPath.first) && !unloadUnitPathItemExists) {
-      unloadUnitPathItemExists = true;
+    if (_calculatedCarrier != null && !_unloadUnitPathItemExists && !_explosionOrBattlePathItemExists) {
+      _unloadUnitPathItemExists = true;
       return PathItemType.unloadUnit;
     }
 
@@ -48,7 +58,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
       }
 
       if (nextCell.terrainModifier?.type == TerrainModifierType.barbedWire &&
-          _activeUnit.type != UnitType.tank) {
+          _calculatedUnit.type != UnitType.tank) {
         return true;
       }
     }
@@ -77,7 +87,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
 
     return switch (nextCell.terrain) {
       CellTerrain.plain => 1,
-      CellTerrain.wood => switch (_activeUnit.type) {
+      CellTerrain.wood => switch (_calculatedUnit.type) {
           UnitType.infantry => 1.25,
           UnitType.machineGuns => 2,
           UnitType.cavalry => 1.4,
@@ -87,13 +97,13 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
           UnitType.tank => 2,
           _ => double.maxFinite,
         },
-      CellTerrain.marsh => switch (_activeUnit.type) {
+      CellTerrain.marsh => switch (_calculatedUnit.type) {
           UnitType.infantry => 2,
           UnitType.machineGuns => 2,
           UnitType.cavalry => 2,
           _ => double.maxFinite,
         },
-      CellTerrain.sand => switch (_activeUnit.type) {
+      CellTerrain.sand => switch (_calculatedUnit.type) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.4,
@@ -103,7 +113,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
           UnitType.tank => 1.25,
           _ => double.maxFinite,
         },
-      CellTerrain.hills => switch (_activeUnit.type) {
+      CellTerrain.hills => switch (_calculatedUnit.type) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.25,
@@ -113,8 +123,11 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
           UnitType.tank => 1.25,
           _ => double.maxFinite,
         },
-      CellTerrain.mountains => switch (_activeUnit.type) { UnitType.infantry => 2, _ => double.maxFinite },
-      CellTerrain.snow => switch (_activeUnit.type) {
+      CellTerrain.mountains => switch (_calculatedUnit.type) {
+          UnitType.infantry => 2,
+          _ => double.maxFinite
+        },
+      CellTerrain.snow => switch (_calculatedUnit.type) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.25,
@@ -131,5 +144,6 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
   @override
   bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.landMine;
 
+  @protected
   bool _isMyCarrier(GameFieldCell cell) => cell.nation == nation && cell.activeUnit is Carrier;
 }
