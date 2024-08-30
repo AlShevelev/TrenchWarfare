@@ -36,7 +36,9 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
     }
 
     unit.setState(UnitState.active);
-    _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
+    if (!_context.isAI) {
+      _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
+    }
 
     return WaitingForEndOfPath(cell);
   }

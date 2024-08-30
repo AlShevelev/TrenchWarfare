@@ -74,6 +74,7 @@ class _TroopTransfer implements TroopTransferRead {
 
       _currentState = transitionResult.newState;
       canContinue = transitionResult.canContinue;
+      print('CARRIER new state: $_currentState; canContinue: $canContinue');
     }
 
     print('CARRIER end state: $_currentState');

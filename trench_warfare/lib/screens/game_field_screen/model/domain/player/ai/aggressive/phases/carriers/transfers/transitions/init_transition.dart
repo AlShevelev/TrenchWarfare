@@ -24,7 +24,6 @@ class _InitTransition extends _TroopTransferTransition {
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
-      print('CARRIER Init. freeCarriers.isEmpty');
       return _TransitionResult.completed();
     }
 
@@ -33,7 +32,6 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingCell(selectedCarrier);
     if (landingPoint == null) {
-      print('CARRIER Init. landingPoint == null');
       return _TransitionResult.completed();
     }
 
@@ -49,7 +47,6 @@ class _InitTransition extends _TroopTransferTransition {
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
-        print('CARRIER Init. gatheringPointAndUnits == null');
         return _TransitionResult.completed();
       }
     }
@@ -166,10 +163,8 @@ class _InitTransition extends _TroopTransferTransition {
 
           // The cell is reachable for the carrier as a landing point
           if (lastPathItem == PathItemType.unloadUnit) {
-            print('CARRIER Init. _calculateLandingCell. lastPathItem == PathItemType.unloadUnit');
             return LandingPoint(carrierCell: carrierLastCellCandidate, unitsCell: landingCellCandidate);
           } else {
-            print('CARRIER Init. _calculateLandingCell. lastPathItem != PathItemType.unloadUnit');
           }
         }
       }

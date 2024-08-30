@@ -1,6 +1,8 @@
 part of aggressive_ai_shared_library;
 
 class PlayerActions {
+  static const _pauseToRedraw = 100;
+
   final PlayerInput _player;
 
   late AsyncSignal _signal;
@@ -16,8 +18,19 @@ class PlayerActions {
     _signal = AsyncSignal(locked: true);
 
     _player.onClick(from.center);   // select a unit...
+
+    // We have to add a tiny pause here to let the updated cells to redraw.
+    // Without the pause we'll get some weird visual effects due to redraw
+    // race conditions
+    await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
+
     _player.onClick(to.center);     // make a path...
+
+    await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
+
     _player.onClick(to.center);     // go!
+
+    await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
 
     await _signal.wait();           // waiting for animation to complete
   }
