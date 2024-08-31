@@ -46,7 +46,7 @@ class CarriersTargetCalculator {
     }
 
     var minDistance = 1000000.0;
-    late GameFieldCellRead mySelectedPcCell, enemySelectedPcCell;
+    GameFieldCellRead? mySelectedPcCell, enemySelectedPcCell;
 
     // Calculates the nearest PCs
     for (final myPcCell in allMyPcCells) {
@@ -59,6 +59,10 @@ class CarriersTargetCalculator {
           enemySelectedPcCell = enemyPcCell;
         }
       }
+    }
+
+    if (mySelectedPcCell == null || enemySelectedPcCell == null) {
+      return null;
     }
 
     // Calculates a path between PCs by land for some infantry unit
