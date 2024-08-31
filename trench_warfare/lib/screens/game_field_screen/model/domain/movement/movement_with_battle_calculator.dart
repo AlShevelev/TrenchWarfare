@@ -172,6 +172,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     GameFieldCell? priorCell;
     for (var cell in pathBeforeBattle) {
       if (cell != pathBeforeBattle.first) {
+        updateEvents.add(MoveCameraToCell(cell));
         updateEvents.add(MoveUntiedUnit(
           startCell: priorCell!,
           endCell: cell,

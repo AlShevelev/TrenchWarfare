@@ -76,6 +76,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     GameFieldCell? priorCell;
     for (var cell in reachableCells) {
       if (cell != reachableCells.first) {
+        updateEvents.add(MoveCameraToCell(cell));
         updateEvents.add(MoveUntiedUnit(
           startCell: priorCell!,
           endCell: cell,

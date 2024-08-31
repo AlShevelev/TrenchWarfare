@@ -121,6 +121,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
           updateEvents.addAll([
             CreateUntiedUnit(_cell, unit),
             UpdateCell(_cell, updateBorderCells: []),
+            MoveCameraToCell(_cell),
             MoveUntiedUnit(
               startCell: _cell,
               endCell: newCell,
