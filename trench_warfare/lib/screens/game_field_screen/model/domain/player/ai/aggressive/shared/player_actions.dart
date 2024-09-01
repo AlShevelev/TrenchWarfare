@@ -10,6 +10,10 @@ class PlayerActions {
   PlayerActions({required PlayerInput player}) : _player = player;
 
   Future<void> move(Unit unit, {required GameFieldCellRead from, required GameFieldCellRead to}) async {
+    if (from.id == to.id) {
+      return;
+    }
+
     if (from.activeUnit != unit) {
       final resortedUnitIds = <String>[unit.id, ...from.units.where((u) => u != unit).map((u) => u.id)];
       resort(from, resortedUnitIds);
@@ -29,8 +33,6 @@ class PlayerActions {
     await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
 
     _player.onClick(to.center);     // go!
-
-    await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
 
     await _signal.wait();           // waiting for animation to complete
   }

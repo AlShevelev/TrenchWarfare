@@ -30,6 +30,10 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
 
   void setPlayerActions(PlayerActions actions) {
     _actions = actions;
+
+    for (final transfer in _troopTransfers) {
+      transfer.setPlayerActions(_actions);
+    }
   }
 
   void addNewTransfer({required GameFieldCellRead targetCell}) {

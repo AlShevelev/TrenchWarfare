@@ -23,7 +23,7 @@ class _TroopTransfer implements TroopTransferRead {
 
   final Nation _myNation;
 
-  final PlayerActions _actions;
+  late PlayerActions _actions;
 
   final MapMetadataRead _metadata;
 
@@ -62,6 +62,10 @@ class _TroopTransfer implements TroopTransferRead {
         _actions = actions,
         _metadata = metadata,
         _id = RandomGen.generateId();
+
+  void setPlayerActions(PlayerActions actions) {
+    _actions = actions;
+  }
 
   Future<void> process() async {
     var canContinue = true;

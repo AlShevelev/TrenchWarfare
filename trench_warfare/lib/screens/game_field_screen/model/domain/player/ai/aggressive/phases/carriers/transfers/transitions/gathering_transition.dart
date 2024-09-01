@@ -40,21 +40,23 @@ class _GatheringTransition extends _TroopTransferTransition {
     }
 
     final pathFacade = PathFacade(_gameField);
-    final carrierPath = pathFacade.calculatePathForUnit(
-      startCell: cellWithSelectedCarrier,
-      endCell: state.gatheringPoint.carrierCell,
-      calculatedUnit: state.selectedCarrier,
-    );
-
-    // The carrier can't reach the target cell
-    if (carrierPath.isEmpty) {
-      return _TransitionResult.completed();
-    }
 
     var carrierReachedTargetCell = false;
 
     // We are moving the carrier here
     if (cellWithSelectedCarrier != state.gatheringPoint.carrierCell) {
+      // Check - can the carrier reach the target cell?
+      final carrierPath = pathFacade.calculatePathForUnit(
+        startCell: cellWithSelectedCarrier,
+        endCell: state.gatheringPoint.carrierCell,
+        calculatedUnit: state.selectedCarrier,
+      );
+
+      // The carrier can't reach the target cell
+      if (carrierPath.isEmpty) {
+        return _TransitionResult.completed();
+      }
+
       final newCarrierCell = await _moveUnit(
         state.selectedCarrier,
         from: cellWithSelectedCarrier,

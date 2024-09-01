@@ -132,10 +132,7 @@ class _InitTransition extends _TroopTransferTransition {
 
         // We can't reach the cell by the carrier - skip this one
         if (path.isEmpty) {
-          //print('CARRIER Init. _calculateLandingCell. carrierLastCellCandidate path is empty');
           continue;
-        } else {
-          //print('CARRIER Init. _calculateLandingCell. carrierLastCellCandidate path is NOT empty');
         }
 
         // So, the cell if reachable by the carrier
@@ -149,11 +146,9 @@ class _InitTransition extends _TroopTransferTransition {
           );
 
           if (path.isEmpty) {
-            //print('CARRIER Init. _calculateLandingCell. landingCellCandidate path is empty');
             continue;
-          } else {
-            //print('CARRIER Init. _calculateLandingCell. landingCellCandidate path is NOT empty');
           }
+
           final estimatedPath = pathFacade.estimatePathForUnit(
             path: path,
             unit: selectedCarrierCopy,
