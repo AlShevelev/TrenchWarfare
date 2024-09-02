@@ -39,7 +39,9 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
 
     // show the new path
     final estimatedPath = _estimatePath(path: newPath);
-    _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+    if (!_context.isAI) {
+      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+    }
 
     return PathIsShown(newPath);
   }
@@ -49,7 +51,9 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     for (var pathCell in path) {
       pathCell.setPathItem(null);
     }
-    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    if (!_context.isAI) {
+      _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+    }
   }
 
   /// Clear the path and make the unit enabled

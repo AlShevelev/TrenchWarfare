@@ -9,6 +9,7 @@ final class GameObjectUntiedUnit extends GameObjectComponentBase {
     required super.position,
     required Unit unit,
     required Nation nation,
+    required super.isHuman,
   }) {
     _unit = unit;
     _nation = nation;

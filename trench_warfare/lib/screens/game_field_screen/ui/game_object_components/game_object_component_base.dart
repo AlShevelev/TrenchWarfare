@@ -6,27 +6,29 @@ enum _SpriteSize {
   large,
 }
 
-abstract base class GameObjectComponentBase  extends PositionComponent {
+abstract base class GameObjectComponentBase extends PositionComponent {
   @protected
   late final Vector2 _baseSize;
   @protected
-  late final TextureAtlas _spritesAtlas;
+  final TextureAtlas _spritesAtlas;
   @protected
-  late final Vector2 _position;
+  final Vector2 _position;
 
   @protected
   late final Vector2 _smallSize;
   @protected
   late final Vector2 _largeSize;
 
+  final bool _isHuman;
+
   GameObjectComponentBase({
     required TextureAtlas spritesAtlas,
     required Vector2 position,
-  }) {
-    _spritesAtlas = spritesAtlas;
-    _position = position;
+    required bool isHuman,
+  })  : _spritesAtlas = spritesAtlas,
+        _position = position,
+        _isHuman = isHuman {
     this.position = position;
-
     _baseSize = ComponentConstants.cellSize;
     _smallSize = _baseSize.scaled(0.85);
     _largeSize = _baseSize.scaled(1.15);
@@ -43,10 +45,15 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
   void _addSprites() {}
 
   @protected
-  void _addUnitSprites({required Unit unit, required Nation? nation, required int? unitsTotal, bool alwaysEnabled = false,}) {
+  void _addUnitSprites({
+    required Unit unit,
+    required Nation? nation,
+    required int? unitsTotal,
+    bool alwaysEnabled = false,
+  }) {
     final quantityName = SpriteAtlasNames.getUnitQuantity(unitsTotal);
 
-    final healthName =  SpriteAtlasNames.getUnitHealth(unit);
+    final healthName = SpriteAtlasNames.getUnitHealth(unit);
 
     final experienceRankName = SpriteAtlasNames.getUnitExperienceRank(unit);
 
@@ -62,7 +69,7 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
       _addSprite(primaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
       _addSprite(secondaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
     } else {
-      if (state == UnitState.active) {
+      if (state == UnitState.active && _isHuman) {
         _addSprite(SpriteAtlasNames.getSelectionFrame(), size: _SpriteSize.base);
       }
 
@@ -82,10 +89,10 @@ abstract base class GameObjectComponentBase  extends PositionComponent {
 
   @protected
   void _addSprite(
-      String? spriteName, {
-        _SpriteSize size = _SpriteSize.small,
-        Decorator? decorator,
-      }) {
+    String? spriteName, {
+    _SpriteSize size = _SpriteSize.small,
+    Decorator? decorator,
+  }) {
     if (spriteName == null) {
       return;
     }

@@ -90,7 +90,13 @@ class GameObjectsComposer {
     _removeGameObject(borderComponentKey);
 
     _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
-    _addGameObject(GameObjectCell(_spritesAtlas, cell), _getCellComponentKey(cell));
+    _addGameObject(
+        GameObjectCell(
+          _spritesAtlas,
+          cell,
+          _viewModelInput.isHumanPlayer,
+        ),
+        _getCellComponentKey(cell));
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
@@ -120,6 +126,7 @@ class GameObjectsComposer {
       position: cell.center,
       unit: unit,
       nation: cell.nation!,
+      isHuman: _viewModelInput.isHumanPlayer,
     );
 
     _addGameObject(gameObject, unit.id);

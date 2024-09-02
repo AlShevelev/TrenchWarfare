@@ -7,7 +7,8 @@ final class GameObjectCell extends GameObjectComponentBase {
   GameObjectCell(
     TextureAtlas spritesAtlas,
     GameFieldCell cell,
-  ) : super(spritesAtlas: spritesAtlas, position: cell.center) {
+    bool isHuman,
+  ) : super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman) {
     _cell = cell;
   }
 
@@ -17,7 +18,10 @@ final class GameObjectCell extends GameObjectComponentBase {
     _addProductionCenterSprites();
     _addUnitsSprites();
     _addNationBannerSprites();
-    _addPathSprites();
+
+    if (_isHuman) {
+      _addPathSprites();
+    }
   }
 
   void _addTerrainModifierSprites() {
