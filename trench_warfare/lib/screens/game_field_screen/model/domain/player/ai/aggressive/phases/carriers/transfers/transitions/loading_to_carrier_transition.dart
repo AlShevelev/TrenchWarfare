@@ -40,7 +40,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
     final pathFacade = PathFacade(_gameField);
     final paths = unitsOnCells.map((u) => pathFacade.calculatePathForUnit(
           startCell: u.item2!,
-          endCell: state.landingPoint.carrierCell,
+          endCell: cellWithSelectedCarrier,
           calculatedUnit: u.item1,
         ));
     if (paths.any((p) => p.isEmpty)) {
@@ -52,7 +52,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
       await _actions.move(
         unitOnCell.item1,
         from: unitOnCell.item2!,
-        to: state.landingPoint.carrierCell,
+        to: cellWithSelectedCarrier,
       );
     }
 

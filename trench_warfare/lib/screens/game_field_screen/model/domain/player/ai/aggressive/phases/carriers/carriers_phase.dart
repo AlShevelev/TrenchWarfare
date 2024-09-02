@@ -36,14 +36,23 @@ class CarriersPhase implements TurnPhase {
 
   @override
   Future<void> start() async {
-    final target = CarriersTargetCalculator(
-      gameField: _gameField,
-      myNation: _myNation,
-      metadata: _metadata,
-    ).getTarget();
+    final carriersCount = _gameField.cells
+        .where((c) => c.nation == _myNation && c.units.isNotEmpty)
+        .map((c) => c.units.count((u) => u.type == UnitType.carrier))
+        .sum;
 
-    if (target != null) {
-      _transfersStorage.addNewTransfer(targetCell: target);
+    // We've got free carriers
+    if (carriersCount > _transfersStorage.totalTransfers) {
+      final target = CarriersTargetCalculator(
+        gameField: _gameField,
+        myNation: _myNation,
+        metadata: _metadata,
+      ).getTarget();
+
+      // And have a target for them
+      if (target != null) {
+        _transfersStorage.addNewTransfer(targetCell: target);
+      }
     }
 
     await _transfersStorage.processAll();

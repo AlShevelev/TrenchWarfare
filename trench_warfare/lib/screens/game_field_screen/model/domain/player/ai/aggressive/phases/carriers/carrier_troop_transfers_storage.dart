@@ -14,6 +14,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   late PlayerActions _actions;
 
   final List<_TroopTransfer> _troopTransfers = [];
+  int get totalTransfers => _troopTransfers.length;
 
   final MapMetadataRead _metadata;
 
