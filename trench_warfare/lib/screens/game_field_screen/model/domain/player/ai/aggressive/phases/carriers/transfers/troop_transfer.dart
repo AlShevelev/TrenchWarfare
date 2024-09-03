@@ -69,7 +69,7 @@ class _TroopTransfer implements TroopTransferRead {
 
   Future<void> process() async {
     var canContinue = true;
-    print('CARRIER ----------------------- ');
+    print('CARRIER [${this.hashCode}]----------------------- ');
     print('CARRIER start state: $_currentState');
     while (_currentState is! _StateCompleted && canContinue) {
       var transition = _getTransition();
