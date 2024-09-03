@@ -28,7 +28,7 @@ class _LandingTransition extends _TroopTransferTransition {
 
     // Landing
     for (var i = 0; i < unitsTotal; i++) {
-      await _moveUnit(
+      await _actions.move(
         _state.selectedCarrier,
         from: cellWithSelectedCarrier,
         to: _state.landingPoint.unitsCell,
