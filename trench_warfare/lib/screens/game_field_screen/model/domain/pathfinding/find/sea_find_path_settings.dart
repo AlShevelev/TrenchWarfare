@@ -32,6 +32,8 @@ class SeaFindPathSettings implements FindPathSettings {
   bool isCellReachable(GameFieldCellRead cell) =>
       SeaFindPathSettings.isCellReachableStatic(_unit, cell: cell, startCell: _startCell);
 
+  static bool canContainSeaUnit(GameFieldCellRead cell) => !(cell.isLand && !cell.hasRiver);
+
   static bool isCellReachableStatic(
     UnitType calculatedUnitType, {
     required GameFieldCellRead startCell,

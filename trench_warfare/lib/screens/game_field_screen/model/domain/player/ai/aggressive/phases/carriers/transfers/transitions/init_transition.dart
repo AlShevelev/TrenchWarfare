@@ -123,6 +123,10 @@ class _InitTransition extends _TroopTransferTransition {
     // If cellsAroundTarget is empty it means we've moved out of the game field borders
     while (cellsAroundTarget.isNotEmpty) {
       for (final carrierLastCellCandidate in cellsAroundTarget) {
+        if (!SeaFindPathSettings.canContainSeaUnit(carrierLastCellCandidate)) {
+          continue;
+        }
+
         // We try to find a path for our carrier - from cell to cell
         final path = pathFacade.calculatePathForUnit(
           startCell: selectedCarrierCell,

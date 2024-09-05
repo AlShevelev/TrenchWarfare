@@ -43,6 +43,20 @@ class AggressivePlayerAi extends PlayerAi {
         metadata: _metadata,
       ).start();
 
+      await CarriersPhase(
+        player: player,
+        gameField: _gameField,
+        myNation: _myNation,
+        metadata: _metadata,
+        transfersStorage: _transfersStorage,
+      ).start();
+
+      final unitsExcludedToMove = _transfersStorage.allTransfers
+          .map((t) => t.transportingUnits)
+          .expand((i) => i)
+          .map((u) => u)
+          .toList(growable: false);
+
       await UnitsMovingPhase(
         player: player,
         gameField: _gameField,
@@ -51,20 +65,8 @@ class AggressivePlayerAi extends PlayerAi {
         iterator: StableUnitsIterator(
           gameField: _gameField,
           myNation: _myNation,
-          excludedUnits: _transfersStorage.allTransfers
-              .map((t) => t.transportingUnits)
-              .expand((i) => i)
-              .map((u) => u)
-              .toList(growable: false),
+          excludedUnits: unitsExcludedToMove,
         ),
-      ).start();
-
-      await CarriersPhase(
-        player: player,
-        gameField: _gameField,
-        myNation: _myNation,
-        metadata: _metadata,
-        transfersStorage: _transfersStorage,
       ).start();
     }
 

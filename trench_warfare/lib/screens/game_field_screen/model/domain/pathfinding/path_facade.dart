@@ -55,11 +55,11 @@ class PathFacade {
     ).calculate();
   }
 
-  /// Can we move to any cell from a current one?
-  bool canMove(GameFieldCell startCell) {
-    final allCellsAround = _gameField.findCellsAround(startCell);
+  bool canMove(GameFieldCellRead startCell) => canMoveForUnit(startCell, startCell.activeUnit!);
 
-    final unit = startCell.activeUnit!;
+  /// Can we move to any cell from a current one?
+  bool canMoveForUnit(GameFieldCellRead startCell, Unit unit) {
+    final allCellsAround = _gameField.findCellsAround(startCell);
 
     for (var endCell in allCellsAround) {
       final path = FindPath(

@@ -7,7 +7,7 @@ class CarriersTargetCalculator {
 
   final MapMetadataRead _metadata;
 
-  static const _pathIsTooLongFactor = 4;
+  static const _pathIsTooLongFactor = 2.0;
 
   static const _pathIsTooDangerousFactor = 0.2;
 

@@ -110,6 +110,12 @@ class _GatheringTransition extends _TroopTransferTransition {
         continue;
       }
 
+      // The unit can't move - skip it
+      if (unitToGather.state == UnitState.disabled ||
+          !pathFacade.canMoveForUnit(unitToGatherCell, unitToGather)) {
+        continue;
+      }
+
       final newUnitToGatherCell = await _moveUnit(
         unitToGather,
         from: unitToGatherCell,
