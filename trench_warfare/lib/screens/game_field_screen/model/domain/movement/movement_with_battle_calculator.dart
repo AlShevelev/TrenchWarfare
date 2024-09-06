@@ -10,6 +10,8 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
+    final movingUnit = path.first.activeUnit!;
+
     final attackingUnit = _detachActiveUnit(path);
 
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
@@ -20,7 +22,11 @@ class MovementWithBattleCalculator extends MovementCalculator {
     final defendingUnit = defendingCell.activeUnit!;
 
     // The battle calculation
-    final battleResult = _calculateBattleResult(attackingUnit, attackingCell: attackingCell, defendingCell: defendingCell);
+    final battleResult = _calculateBattleResult(
+      attackingUnit,
+      attackingCell: attackingCell,
+      defendingCell: defendingCell,
+    );
 
     // set nations to the cells up to the attacking cell
     for (var i = 0; i <= reachableCells.length - 2; i++) {
@@ -39,7 +45,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     // Update the units' state
-
     GameFieldCell? newDefendingUnitCell;
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is Died) {
       defendingCell.removeActiveUnit();
@@ -63,18 +68,31 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info);
 
-      final newAttackingUnitCell = battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
+      final newAttackingUnitCell =
+          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
 
       newAttackingUnitCell.setNation(_nation);
 
-      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: newAttackingUnitCell, defendingCell:  defendingCell);
+      _addAttackingUnitToCell(
+        attackingUnit: attackingUnit,
+        movingUnit: movingUnit,
+        newAttackingUnitCell: newAttackingUnitCell,
+        oldAttackingCell: attackingCell,
+        defendingCell: defendingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is Alive) {
       _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info);
       _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info);
 
-      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: attackingCell, defendingCell: defendingCell);
+      _addAttackingUnitToCell(
+        attackingUnit: attackingUnit,
+        movingUnit: movingUnit,
+        newAttackingUnitCell: attackingCell,
+        oldAttackingCell: attackingCell,
+        defendingCell: defendingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is InPanic) {
@@ -86,11 +104,18 @@ class MovementWithBattleCalculator extends MovementCalculator {
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
 
-      final newAttackingUnitCell = battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
+      final newAttackingUnitCell =
+          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
 
       newAttackingUnitCell.setNation(_nation);
 
-      _addAttackingUnitToCell(attackingUnit, newAttackingUnitCell: newAttackingUnitCell, defendingCell:  defendingCell);
+      _addAttackingUnitToCell(
+        attackingUnit: attackingUnit,
+        movingUnit: movingUnit,
+        newAttackingUnitCell: newAttackingUnitCell,
+        oldAttackingCell: attackingCell,
+        defendingCell: defendingCell,
+      );
     }
 
     // Remove calculated path
@@ -116,7 +141,8 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required GameFieldCell attackingCell,
     required GameFieldCell defendingCell,
   }) {
-    final rawBattleResult = UnitsBattleCalculator.calculateBattle(attacking: attackingUnit, defendingCell: defendingCell);
+    final rawBattleResult =
+        UnitsBattleCalculator.calculateBattle(attacking: attackingUnit, defendingCell: defendingCell);
 
     final battleResult = BattleResultCalculator(_gameField).calculateBattle(
       attackingCell: attackingCell,
@@ -133,22 +159,29 @@ class MovementWithBattleCalculator extends MovementCalculator {
     unitToUpdate.setFatigue(updateInfo.fatigue);
   }
 
-  void _addAttackingUnitToCell(
-    Unit attackingUnit, {
+  void _addAttackingUnitToCell({
+    required Unit attackingUnit,
+    required Unit movingUnit,
+    required GameFieldCell oldAttackingCell,
     required GameFieldCell newAttackingUnitCell,
     required GameFieldCell defendingCell,
   }) {
-    newAttackingUnitCell.addUnitAsActive(attackingUnit);
-
     // We must update the movement points based on defending cell - to reduce the movement points after every attack
     attackingUnit.setMovementPoints(defendingCell.pathItem!.movementPointsLeft);
 
     if (attackingUnit.movementPoints > 0) {
-      final state =
-          _canMove(startCell: newAttackingUnitCell, isLandUnit: attackingUnit.isLand) ? UnitState.enabled : UnitState.disabled;
+      final state = _canMoveForUnit(startCell: newAttackingUnitCell, unit: attackingUnit)
+          ? UnitState.enabled
+          : UnitState.disabled;
       attackingUnit.setState(state);
     } else {
       attackingUnit.setState(UnitState.disabled);
+    }
+
+    if (movingUnit is Carrier && oldAttackingCell.id == newAttackingUnitCell.id) {
+      movingUnit.addUnitAsActive(attackingUnit);
+    } else {
+      newAttackingUnitCell.addUnitAsActive(attackingUnit);
     }
   }
 
@@ -242,10 +275,12 @@ class MovementWithBattleCalculator extends MovementCalculator {
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
 
     // Update the defending cell
-    updateEvents.add(UpdateCell(reachableCells.last, updateBorderCells: _gameField.findCellsAround(reachableCells.last)));
+    updateEvents.add(
+        UpdateCell(reachableCells.last, updateBorderCells: _gameField.findCellsAround(reachableCells.last)));
 
     if (newDefendingUnitCell != null) {
-      updateEvents.add(UpdateCell(newDefendingUnitCell, updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell)));
+      updateEvents.add(UpdateCell(newDefendingUnitCell,
+          updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell)));
     }
 
     // Update cells in an inactive part of the path

@@ -30,11 +30,12 @@ abstract class MovementCalculator {
   State startMovement(Iterable<GameFieldCell> path);
 
   @protected
-  bool _canMove({
-    required GameFieldCell startCell,
-    required bool isLandUnit,
-  }) =>
+  bool _canMove({required GameFieldCell startCell}) =>
       _pathFacade.canMove(startCell);
+
+  @protected
+  bool _canMoveForUnit({required GameFieldCell startCell, required Unit unit,}) =>
+      _pathFacade.canMoveForUnit(startCell, unit);
 
   @protected
   Unit _detachActiveUnit(Iterable<GameFieldCell> path) {
