@@ -16,10 +16,16 @@ class _CellWithDangerFactor {
 
   final double? minDistanceToEnemyUnit;
 
+  final double nearestEnemyPcPower;
+
+  final double? minDistanceToEnemyPc;
+
   _CellWithDangerFactor({
     required this.cell,
     required this.dangerFactor,
     required this.minDistanceToEnemyUnit,
+    required this.nearestEnemyPcPower,
+    required this.minDistanceToEnemyPc,
   });
 }
 
@@ -71,7 +77,9 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
 
     final allAggressors = _metadata.getMyEnemies(_myNation);
 
-    final allCellsWithEnemies = _getAllCellsWithEnemies(allAggressors);
+    final allCellsWithEnemyUnits = _getAllCellsWithEnemyUnits(allAggressors);
+
+    final allCellsWithEnemyPc = _getAllCellsWithEnemyPc(allAggressors);
 
     final cellsPossibleToBuildExt = cellsPossibleToBuild.map((cell) {
       final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
@@ -83,18 +91,31 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
       }
 
       // Calculate min distance to enemy
-      var minDistance = allCellsWithEnemies.isEmpty ? null : _gameField.cells.length.toDouble();
-      for (final cellWithEnemy in allCellsWithEnemies) {
-        final distance = _gameField.calculateDistance(cell, cellWithEnemy);
-        if (distance < minDistance!) {
-          minDistance = distance;
+      var minDistanceUnit = allCellsWithEnemyUnits.isEmpty ? null : _gameField.cells.length.toDouble();
+      for (final cellWithEnemyUnit in allCellsWithEnemyUnits) {
+        final distance = _gameField.calculateDistance(cell, cellWithEnemyUnit);
+        if (distance < minDistanceUnit!) {
+          minDistanceUnit = distance;
+        }
+      }
+
+      // Calculate min distance and power of nearest PC
+      var minDistancePc = allCellsWithEnemyPc.isEmpty ? null : _gameField.cells.length.toDouble();
+      var nearestPcPower = 0.0;
+      for (final cellWithEnemyPc in allCellsWithEnemyPc) {
+        final distance = _gameField.calculateDistance(cell, cellWithEnemyPc);
+        if (distance < minDistancePc!) {
+          minDistancePc = distance;
+          nearestPcPower = _estimatePcPower(cellWithEnemyPc.productionCenter!);
         }
       }
 
       return _CellWithDangerFactor(
         cell: cell,
         dangerFactor: totalDanger,
-        minDistanceToEnemyUnit: minDistance,
+        minDistanceToEnemyUnit: minDistanceUnit,
+        minDistanceToEnemyPc: minDistancePc,
+        nearestEnemyPcPower: nearestPcPower,
       );
     }).toList(growable: false);
 
@@ -103,13 +124,18 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
     final maxDistance = math.sqrt(math.pow(_gameField.rows, 2) + math.pow(_gameField.cols, 2));
 
     return cellsPossibleToBuildExt.map((cell) {
-      final weight = 1 +
-          log10(
-            unitPower *
-                cell.dangerFactor *
-                (maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance)) *
-                _correctionFactor,
-          );
+      final enemyUnitsWeight = log10(
+        unitPower *
+            cell.dangerFactor *
+            (maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance)) *
+            _correctionFactor,
+      );
+
+      final nearestEnemyPcWeight = log10(
+        cell.nearestEnemyPcPower * (maxDistance - (cell.minDistanceToEnemyPc ?? maxDistance))
+      );
+
+      final weight = 1 + enemyUnitsWeight + nearestEnemyPcWeight;
 
       return EstimationResult<_UnitsBuildingEstimationData>(
         weight: weight,
@@ -121,7 +147,7 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
     }).toList(growable: false);
   }
 
-  Iterable<GameFieldCellRead> _getAllCellsWithEnemies(Iterable<Nation> allAggressors) =>
+  Iterable<GameFieldCellRead> _getAllCellsWithEnemyUnits(Iterable<Nation> allAggressors) =>
       _gameField.cells.where((gameFieldCell) {
         if (gameFieldCell.units.isEmpty) {
           return false;
@@ -133,6 +159,29 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
           return false;
         }
 
-        return gameFieldCell.units.any((u) => u.type != UnitType.carrier && u.type.isLand == _type.isLand);
+        return gameFieldCell.units.any((u) => u.type.isLand == _type.isLand);
       }).toList(growable: false);
+
+  Iterable<GameFieldCellRead> _getAllCellsWithEnemyPc(Iterable<Nation> allAggressors) =>
+      _gameField.cells.where((gameFieldCell) {
+        if (gameFieldCell.productionCenter == null) {
+          return false;
+        }
+
+        if (gameFieldCell.nation == null ||
+            gameFieldCell.nation == _myNation ||
+            !allAggressors.contains(gameFieldCell.nation)) {
+          return false;
+        }
+
+        return gameFieldCell.productionCenter?.isLand ==  _type.isLand;
+      }).toList(growable: false);
+
+  double _estimatePcPower(ProductionCenter productionCenter) =>
+      productionCenter.level.getWeight() * switch (productionCenter.type) {
+      ProductionCenterType.city => 2.0,
+      ProductionCenterType.factory => 2.0,
+      ProductionCenterType.navalBase => 1.0,
+      ProductionCenterType.airField => 1.0,
+    };
 }
