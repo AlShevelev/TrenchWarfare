@@ -35,7 +35,7 @@ class GameFieldStateMachine {
   }
 
   void process(Event event) {
-    log('SM start. Nation is: ${_context.nation}; Event is: $event; State is: $_currentState');
+    print('SM start. Nation is: ${_context.nation}; Event is: $event; State is: $_currentState');
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {
@@ -133,7 +133,7 @@ class GameFieldStateMachine {
 
     _currentState = newState;
 
-    log('SM finish. Nation is: ${_context.nation}; New state is: $newState');
+    print('SM finish. Nation is: ${_context.nation}; New state is: $newState');
 
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();

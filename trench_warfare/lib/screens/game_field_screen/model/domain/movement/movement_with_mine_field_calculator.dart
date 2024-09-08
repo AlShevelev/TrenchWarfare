@@ -19,36 +19,57 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
     final lastReachableCell = reachableCells.last;
 
-    for (var cell in reachableCells) {
-      cell.setNation(_nation);
-    }
+    if (lastReachableCell == path.first) {
+      _attachUnit(lastReachableCell, unit);
 
-    final damage = _calculateExplosionDamage(unit);
+      unit.setMovementPoints(0);
+      unit.setState(UnitState.disabled);
 
-    // the mine field is removed
-    lastReachableCell.setTerrainModifier(null);
-
-    final isUnitAlive = damage < unit.health;
-
-    if (isUnitAlive) {
-      lastReachableCell.addUnitAsActive(unit);
-
-      unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
-      unit.setHealth(unit.health - damage);
-
-      if (unit.movementPoints > 0) {
-        final state = _canMove(startCell: lastReachableCell) ? UnitState.enabled : UnitState.disabled;
-        unit.setState(state);
-      } else {
-        unit.setState(UnitState.disabled);
+      for (var cell in path) {
+        cell.setPathItem(null);
       }
-    }
 
-    for (var cell in path) {
-      cell.setPathItem(null);
-    }
+      _updateUIForStandingUnit(
+        path: path,
+        reachableCells: reachableCells,
+        unit: unit,
+      );
+    } else {
+      for (var cell in reachableCells) {
+        cell.setNation(_nation);
+      }
 
-    _updateUI(path: path, reachableCells: reachableCells, unit: unit);
+      final damage = _calculateExplosionDamage(unit);
+
+      // the mine field is removed
+      lastReachableCell.setTerrainModifier(null);
+
+      final isUnitAlive = damage < unit.health;
+
+      if (isUnitAlive) {
+        lastReachableCell.addUnitAsActive(unit);
+
+        unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
+        unit.setHealth(unit.health - damage);
+
+        if (unit.movementPoints > 0) {
+          final state = _canMove(startCell: lastReachableCell) ? UnitState.enabled : UnitState.disabled;
+          unit.setState(state);
+        } else {
+          unit.setState(UnitState.disabled);
+        }
+      }
+
+      for (var cell in path) {
+        cell.setPathItem(null);
+      }
+
+      _updateUIForMovingUnit(
+        path: path,
+        reachableCells: reachableCells,
+        unit: unit,
+      );
+    }
 
     return _getNextState();
   }
@@ -60,12 +81,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     return RandomGen.randomDouble(min, max);
   }
 
-  void _updateUI({
+  void _updateUIForMovingUnit({
     required Iterable<GameFieldCell> path,
     required Iterable<GameFieldCell> reachableCells,
     required Unit unit,
   }) {
-
     // setup untied unit
     var updateEvents = [
       CreateUntiedUnit(path.first, unit),
@@ -105,6 +125,30 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     }
 
     updateEvents.add(AnimationCompleted());
+    _updateGameObjectsEvent.update(updateEvents);
+  }
+
+  void _updateUIForStandingUnit({
+    required Iterable<GameFieldCell> path,
+    required Iterable<GameFieldCell> reachableCells,
+    required Unit unit,
+  }) {
+    // setup untied unit
+    final updateEvents = [
+      MoveCameraToCell(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
+    ];
+
+    // clear the rest of the path
+    for (var cell in path) {
+      if (!reachableCells.contains(cell)) {
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
+      }
+    }
+
+    updateEvents.add(Pause(MovementConstants.unitMovementPause));
+    updateEvents.add(AnimationCompleted());
+
     _updateGameObjectsEvent.update(updateEvents);
   }
 }

@@ -34,4 +34,12 @@ class AsyncSignal {
 
   /// Closing the signal will make it not signal any future waiting tasks.
   void close() => _controller.close();
+
+  void unlockAndClose() {
+    if (_locked) {
+      unlock();
+    }
+
+    close();
+  }
 }

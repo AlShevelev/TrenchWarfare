@@ -50,6 +50,15 @@ abstract class MovementCalculator {
     }
   }
 
+  @protected
+  void _attachUnit(GameFieldCell cell, Unit unit) {
+    if (cell.activeUnit is Carrier && unit.isLand) {
+      (cell.activeUnit as Carrier).addUnitAsActive(unit);
+    } else {
+      cell.addUnitAsActive(unit);
+    }
+  }
+
   State _getNextState() {
     final gameOverConditions = _gameOverConditionsCalculator.calculate(_nation);
 

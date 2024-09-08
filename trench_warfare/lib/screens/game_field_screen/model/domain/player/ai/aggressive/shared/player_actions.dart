@@ -5,11 +5,14 @@ class PlayerActions {
 
   final PlayerInput _player;
 
-  late AsyncSignal _signal;
+  AsyncSignal? _signal;
 
   PlayerActions({required PlayerInput player}) : _player = player;
 
   Future<void> move(Unit unit, {required GameFieldCellRead from, required GameFieldCellRead to}) async {
+    _signal?.unlockAndClose();
+    _signal = AsyncSignal(locked: true);
+
     if (from.id == to.id) {
       return;
     }
@@ -18,8 +21,6 @@ class PlayerActions {
       final resortedUnitIds = <String>[unit.id, ...from.units.where((u) => u != unit).map((u) => u.id)];
       resort(from, resortedUnitIds);
     }
-
-    _signal = AsyncSignal(locked: true);
 
     _player.onClick(from.center);   // select a unit...
 
@@ -34,14 +35,14 @@ class PlayerActions {
 
     _player.onClick(to.center);     // go!
 
-    await _signal.wait();           // waiting for animation to complete
+    await _signal?.wait();           // waiting for animation to complete
   }
 
   void resort(GameFieldCellRead cell, Iterable<String> unitIds) =>
       _player.onResortUnits(cell.id, unitIds, isCarrier: false);
 
   void onAnimationCompleted() {
-    _signal.unlock();
-    _signal.close();
+    _signal?.unlockAndClose();
+    _signal = null;
   }
 }
