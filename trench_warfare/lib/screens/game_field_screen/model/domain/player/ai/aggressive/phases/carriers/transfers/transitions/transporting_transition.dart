@@ -57,7 +57,7 @@ class _TransportingTransition extends _TroopTransferTransition {
           selectedCarrier: _state.selectedCarrier,
           landingPoint: _state.landingPoint,
         ),
-        canContinue: true,
+        canContinue: _state.selectedCarrier.state != UnitState.disabled,
       );
     } else {
       return _TransitionResult(newState: _state, canContinue: false);
