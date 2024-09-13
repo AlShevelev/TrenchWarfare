@@ -142,6 +142,7 @@ class _InitTransition extends _TroopTransferTransition {
         // So, the cell if reachable by the carrier
         // Now we are looking for a landing point
         final cellsAroundLastCarrierCell = _gameField.findCellsAround(carrierLastCellCandidate);
+        final ladingPointCandidates = <LandingPoint>[];
         for (final landingCellCandidate in cellsAroundLastCarrierCell) {
           final path = pathFacade.calculatePathForUnit(
             startCell: carrierLastCellCandidate,
@@ -162,12 +163,33 @@ class _InitTransition extends _TroopTransferTransition {
 
           // The cell is reachable for the carrier as a landing point
           if (lastPathItem == PathItemType.unloadUnit) {
-            return LandingPoint(carrierCell: carrierLastCellCandidate, unitsCell: landingCellCandidate);
-          } else {
+            ladingPointCandidates.add(LandingPoint(
+              carrierCell: carrierLastCellCandidate,
+              unitsCell: landingCellCandidate,
+            ));
           }
         }
-      }
 
+        // Calculates a landing point with minimum distance to a target cell
+        if (ladingPointCandidates.isNotEmpty) {
+          if (ladingPointCandidates.length == 1) {
+            return ladingPointCandidates.first;
+          }
+
+          double minDistanceToTargetCell = _gameField.cols.toDouble() * _gameField.rows;
+          LandingPoint? ladingPoint;
+
+          for(final ladingPointCandidate in ladingPointCandidates) {
+            final distance = _gameField.calculateDistance(_targetCell, ladingPointCandidate.unitsCell);
+            if (distance < minDistanceToTargetCell) {
+              minDistanceToTargetCell = distance;
+              ladingPoint = ladingPointCandidate;
+            }
+          }
+
+          return ladingPoint;
+        }
+      }
       cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: ++radius);
     }
 
