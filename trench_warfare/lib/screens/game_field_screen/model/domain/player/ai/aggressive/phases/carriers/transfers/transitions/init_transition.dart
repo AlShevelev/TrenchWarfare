@@ -168,6 +168,8 @@ class _InitTransition extends _TroopTransferTransition {
               unitsCell: landingCellCandidate,
             ));
           }
+
+          estimatedPath.last.setPathItem(null);
         }
 
         // Calculates a landing point with minimum distance to a target cell
