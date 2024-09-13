@@ -41,7 +41,7 @@ class _GatheringPointCalculator {
 
     // Looking for all my land cells with units
     final allMyCellWithUnits = _gameField.cells
-        .where((c) => c.nation == _myNation && c.isLand && c.units.isNotEmpty && c.productionCenter == null)
+        .where((c) => c.nation == _myNation && c.isLand && c.units.isNotEmpty)
         .toList(growable: false);
 
     final selectedCarrierCell = _gameField.getCellWithUnit(_selectedCarrier, _myNation)!;
