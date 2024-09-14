@@ -87,6 +87,6 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
       weight *= 1.5;
     }
 
-    return weight;
+    return weight++;
   }
 }

@@ -56,6 +56,12 @@ class RandomGen {
     var to = 0.0;
 
     for (var i = 0; i < weights.length; i++) {
+      final currentWeight = weights.elementAt(i);
+
+      if (currentWeight < 0) {
+        return null;
+      }
+
       to += weights.elementAt(i) / sum;
 
       if (randomValue >= from && randomValue < to) {

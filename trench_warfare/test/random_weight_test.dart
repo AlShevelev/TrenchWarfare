@@ -39,6 +39,17 @@ void main() {
       Assert.isNull(result);
     });
 
+    test('weights list has a negative item', () {
+      // Arrange
+      final List<double> weights = [0, -42.0, 0];
+
+      // Act
+      final result = RandomGen.randomWeight(weights);
+
+      // Assert
+      Assert.isNull(result);
+    });
+
     test('weights have two equals values', () {
       // Arrange
       final List<double> weights = [13, 13];
