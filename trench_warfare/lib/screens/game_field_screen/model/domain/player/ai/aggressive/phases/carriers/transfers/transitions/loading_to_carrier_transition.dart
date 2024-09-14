@@ -49,11 +49,13 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     // Moves the units
     for (final unitOnCell in unitsOnCells) {
-      await _actions.move(
-        unitOnCell.item1,
-        from: unitOnCell.item2!,
-        to: cellWithSelectedCarrier,
-      );
+      if (unitOnCell.item1.state != UnitState.disabled) {
+        await _actions.move(
+          unitOnCell.item1,
+          from: unitOnCell.item2!,
+          to: cellWithSelectedCarrier,
+        );
+      }
     }
 
     if (state.selectedCarrier.units.length == state.unitsToLoad.length) {
