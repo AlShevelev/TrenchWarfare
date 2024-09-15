@@ -100,12 +100,14 @@ class _GatheringPointCalculator {
               selectedUnitCandidates.add(unitCandidate);
             }
 
-            if (selectedUnitCandidates.length == unitsNeeded) {
+            final landingPoint = LandingPoint(
+              carrierCell: carrierCellCandidate,
+              unitsCell: landCellCandidate,
+            );
+
+            if (selectedUnitCandidates.length == unitsNeeded && isPointValid(landingPoint)) {
               return Tuple2(
-                LandingPoint(
-                  carrierCell: carrierCellCandidate,
-                  unitsCell: landCellCandidate,
-                ),
+                landingPoint,
                 selectedUnitCandidates,
               );
             }
@@ -159,6 +161,12 @@ class _GatheringPointCalculator {
 
     return result;
   }
+
+  static bool isPointValid(LandingPoint point) =>
+      point.carrierCell.terrainModifier?.type != TerrainModifierType.seaMine &&
+          point.unitsCell.terrainModifier?.type != TerrainModifierType.landMine &&
+          point.carrierCell.productionCenter == null &&
+          point.unitsCell.productionCenter == null;
 
   Iterable<Unit> _getAllTransportingUnits(Iterable<TroopTransferRead> transfers) =>
       transfers.map((t) => t.transportingUnits).expand((i) => i).map((u) => u).toList(growable: false);

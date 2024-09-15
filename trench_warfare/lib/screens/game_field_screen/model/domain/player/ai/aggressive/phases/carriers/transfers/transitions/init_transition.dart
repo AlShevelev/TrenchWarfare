@@ -30,7 +30,7 @@ class _InitTransition extends _TroopTransferTransition {
     final selectedCarrier = _selectCarrier(freeCarriers);
 
     // The landing point calculation
-    final landingPoint = _calculateLandingCell(selectedCarrier);
+    final landingPoint = _calculateLandingPoint(selectedCarrier);
     if (landingPoint == null) {
       return _TransitionResult.completed();
     }
@@ -108,7 +108,7 @@ class _InitTransition extends _TroopTransferTransition {
           .last
           .item1;
 
-  LandingPoint? _calculateLandingCell(Tuple2<Carrier, GameFieldCellRead> selectedCarrierOnCell) {
+  LandingPoint? _calculateLandingPoint(Tuple2<Carrier, GameFieldCellRead> selectedCarrierOnCell) {
     final selectedCarrier = selectedCarrierOnCell.item1;
     final selectedCarrierCell = selectedCarrierOnCell.item2;
 
@@ -162,11 +162,14 @@ class _InitTransition extends _TroopTransferTransition {
           final lastPathItem = estimatedPath.last.pathItem?.type;
 
           // The cell is reachable for the carrier as a landing point
-          if (lastPathItem == PathItemType.unloadUnit) {
-            ladingPointCandidates.add(LandingPoint(
-              carrierCell: carrierLastCellCandidate,
-              unitsCell: landingCellCandidate,
-            ));
+
+          final landingPoint = LandingPoint(
+            carrierCell: carrierLastCellCandidate,
+            unitsCell: landingCellCandidate,
+          );
+
+          if (lastPathItem == PathItemType.unloadUnit && _GatheringPointCalculator.isPointValid(landingPoint)) {
+            ladingPointCandidates.add(landingPoint);
           }
 
           estimatedPath.last.setPathItem(null);

@@ -59,11 +59,4 @@ abstract interface class _TroopTransferTransition {
 
     return unitCell;
   }
-
-  @protected
-  bool _isPointValid(LandingPoint point) =>
-      point.carrierCell.terrainModifier?.type != TerrainModifierType.seaMine &&
-      point.unitsCell.terrainModifier?.type != TerrainModifierType.landMine &&
-      point.carrierCell.productionCenter == null &&
-      point.unitsCell.productionCenter == null;
 }

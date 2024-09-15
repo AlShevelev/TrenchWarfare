@@ -20,7 +20,7 @@ class _LandingTransition extends _TroopTransferTransition {
     }
 
     // Checking to mine fields
-    if (!_isPointValid(_state.landingPoint)) {
+    if (!_GatheringPointCalculator.isPointValid(_state.landingPoint)) {
       return _TransitionResult.completed();
     }
 

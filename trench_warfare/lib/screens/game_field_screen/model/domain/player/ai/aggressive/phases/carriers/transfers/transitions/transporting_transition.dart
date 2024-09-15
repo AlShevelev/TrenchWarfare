@@ -19,7 +19,7 @@ class _TransportingTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
-    if (!_isPointValid(_state.landingPoint)) {
+    if (!_GatheringPointCalculator.isPointValid(_state.landingPoint)) {
       return _TransitionResult.completed();
     }
 
