@@ -11,17 +11,21 @@ class _GatheringPointCalculator {
 
   final String _myTransferId;
 
+  final GameFieldCellRead _transferTargetCell;
+
   _GatheringPointCalculator({
     required GameFieldRead gameField,
     required Carrier selectedCarrier,
     required Nation myNation,
     required CarrierTroopTransfersStorageRead allTransfers,
     required String myTransferId,
+    required GameFieldCellRead transferTargetCell,
   })  : _gameField = gameField,
         _selectedCarrier = selectedCarrier,
         _myNation = myNation,
         _allTransfers = allTransfers,
-        _myTransferId = myTransferId;
+        _myTransferId = myTransferId,
+        _transferTargetCell = transferTargetCell;
 
   /// Returns gathering point and units
   Tuple2<LandingPoint, List<Unit>>? calculate() {
@@ -90,14 +94,26 @@ class _GatheringPointCalculator {
               continue;
             }
 
-            final path = pathFacade.calculatePathForUnit(
+            // Check a path to the landing cell
+            final pathToLandCell = pathFacade.calculatePathForUnit(
               startCell: cellWithUnit,
               endCell: landCellCandidate,
               calculatedUnit: unitCandidate,
             );
 
-            if (path.isNotEmpty && !allTransportingUnis.contains(unitCandidate)) {
-              selectedUnitCandidates.add(unitCandidate);
+            if (pathToLandCell.isNotEmpty && !allTransportingUnis.contains(unitCandidate)) {
+              // Check a path to the target cell
+              final pathToTargetCell = pathFacade.calculatePathForUnit(
+                startCell: cellWithUnit,
+                endCell: _transferTargetCell,
+                calculatedUnit: unitCandidate,
+              );
+
+              // If the unit has a path to the target cell we should exclude it -
+              // it can reach the target cell without a carrier
+              if (pathToTargetCell.isEmpty && selectedUnitCandidates.length < unitsNeeded) {
+                selectedUnitCandidates.add(unitCandidate);
+              }
             }
 
             final landingPoint = LandingPoint(
@@ -119,7 +135,7 @@ class _GatheringPointCalculator {
   }
 
   /// Calculate units only (without the result key)
-  Iterable<Tuple2<Unit, GameFieldCellRead>> calculateUnits(int quantity, GameFieldCellRead targetCell) {
+  Iterable<Tuple2<Unit, GameFieldCellRead>> calculateUnits(int quantity, GameFieldCellRead gatheringCell) {
     final allTransportingUnis = _getAllTransportingUnits(_allTransfers.allTransfers);
 
     final result = <Tuple2<Unit, GameFieldCellRead>>[];
@@ -130,7 +146,7 @@ class _GatheringPointCalculator {
         .toList(growable: false);
 
     final allMyCellWithUnitsSorted = allMyCellWithUnits
-        .map((c) => Tuple2(c, _gameField.calculateDistance(c, targetCell)))
+        .map((c) => Tuple2(c, _gameField.calculateDistance(c, gatheringCell)))
         .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
         .map((i) => i.item1)
         .toList(growable: false);
@@ -143,14 +159,26 @@ class _GatheringPointCalculator {
           continue;
         }
 
+        // Check a path to the gathering cell
         final path = pathFacade.calculatePathForUnit(
           startCell: cellWithUnit,
-          endCell: targetCell,
+          endCell: gatheringCell,
           calculatedUnit: unitCandidate,
         );
 
         if (path.isNotEmpty && !allTransportingUnis.contains(unitCandidate)) {
-          result.add(Tuple2(unitCandidate, cellWithUnit));
+          // Check a path to the target cell
+          final pathToTargetCell = pathFacade.calculatePathForUnit(
+            startCell: cellWithUnit,
+            endCell: _transferTargetCell,
+            calculatedUnit: unitCandidate,
+          );
+
+          // If the unit has a path to the target cell we should exclude it -
+          // it can reach the target cell without a carrier
+          if (pathToTargetCell.isEmpty && result.length < quantity) {
+            result.add(Tuple2(unitCandidate, cellWithUnit));
+          }
         }
 
         if (result.length == quantity) {

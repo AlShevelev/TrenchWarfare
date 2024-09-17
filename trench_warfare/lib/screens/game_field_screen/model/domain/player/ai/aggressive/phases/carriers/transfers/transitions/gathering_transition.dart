@@ -68,6 +68,8 @@ class _GatheringTransition extends _TroopTransferTransition {
       if (newCarrierCell == null) {
         return _TransitionResult.completed();
       }
+
+      carrierReachedTargetCell = state.gatheringPoint.carrierCell == newCarrierCell;
     } else {
       carrierReachedTargetCell = true;
     }
@@ -78,12 +80,13 @@ class _GatheringTransition extends _TroopTransferTransition {
         .toList(growable: false);
 
     // Some units are dead and we have to fine new ones
-    if (aliveGatheringUnits.length < GameConstants.maxUnitsInCarrier) {
-      final unitsNeeded = GameConstants.maxUnitsInCarrier - aliveGatheringUnits.length;
+    if (aliveGatheringUnits.length < state.gatheringUnits.length) {
+      final unitsNeeded = state.gatheringUnits.length - aliveGatheringUnits.length;
       final newUnits = _findNewUnits(
-        unitsNeeded,
-        state.gatheringPoint.unitsCell,
-        state.selectedCarrier,
+        quantity: unitsNeeded,
+        gatheringCell:  state.gatheringPoint.unitsCell,
+        selectedCarrier:  state.selectedCarrier,
+        transferTargetCell: state.transferTargetCell,
       ).map((u) => u.item1);
 
       // Can't find full pack of the new units - we should cancel the transportation
@@ -135,7 +138,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
     state = state.copy(gatheringUnits: gatheringUnitsCopy);
 
-    if (carrierReachedTargetCell && unitsReachedTargetCellQuantity == GameConstants.maxUnitsInCarrier) {
+    if (carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length) {
       return _TransitionResult(
         newState: _StateLoadingToCarrier(
           selectedCarrier: state.selectedCarrier,
@@ -152,16 +155,18 @@ class _GatheringTransition extends _TroopTransferTransition {
     }
   }
 
-  Iterable<Tuple2<Unit, GameFieldCellRead>> _findNewUnits(
-    int quantity,
-    GameFieldCellRead targetCell,
-    Carrier selectedCarrier,
-  ) =>
+  Iterable<Tuple2<Unit, GameFieldCellRead>> _findNewUnits({
+    required int quantity,
+    required GameFieldCellRead gatheringCell,
+    required Carrier selectedCarrier,
+    required GameFieldCellRead transferTargetCell,
+  }) =>
       _GatheringPointCalculator(
         gameField: _gameField,
         selectedCarrier: selectedCarrier,
         myNation: _myNation,
         allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
-      ).calculateUnits(quantity, targetCell);
+        transferTargetCell: transferTargetCell,
+      ).calculateUnits(quantity, gatheringCell);
 }

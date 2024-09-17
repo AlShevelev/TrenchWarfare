@@ -24,25 +24,31 @@ class _LandingTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
-    final unitsTotal = _state.selectedCarrier.units.length;
+    final unitsCell = _state.landingPoint.unitsCell;
+
+    var unitsToLandTotal = unitsCell.nation == _myNation
+        ? GameConstants.maxUnitsInCell - unitsCell.units.length // If a target cell has several my units
+        : _state.selectedCarrier.units.length;
 
     // Landing
-    for (var i = 0; i < unitsTotal; i++) {
+    for (var i = 0; i < unitsToLandTotal; i++) {
       await _actions.move(
         _state.selectedCarrier,
         from: cellWithSelectedCarrier,
-        to: _state.landingPoint.unitsCell,
+        to: unitsCell,
       );
     }
 
-    if (_state.selectedCarrier.units.isNotEmpty) {
+    if (_state.selectedCarrier.units.isNotEmpty && unitsCell.units.length < GameConstants.maxUnitsInCell) {
       // Some of the units are in a carrier
       return _TransitionResult(newState: _state, canContinue: false);
     } else {
       return _TransitionResult(
         newState: _StateMoveUnitsAfterLanding(
           selectedCarrier: _state.selectedCarrier,
-          landedUnits: <Unit>[..._state.landingPoint.unitsCell.units],
+          landedUnits: <Unit>[
+            ..._state.landingPoint.unitsCell.units.where((u) => u.state != UnitState.disabled)
+          ],
         ),
         canContinue: true,
       );

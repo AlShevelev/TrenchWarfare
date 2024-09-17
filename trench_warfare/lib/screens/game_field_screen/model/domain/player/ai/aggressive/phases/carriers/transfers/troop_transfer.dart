@@ -90,7 +90,7 @@ class _TroopTransfer implements TroopTransferRead {
 
   _TroopTransferTransition _getTransition() => switch (_currentState) {
         _StateInit() => _InitTransition(
-            targetCell: _targetCell,
+            transferTargetCell: _targetCell,
             actions: _actions,
             gameField: _gameField,
             myNation: _myNation,

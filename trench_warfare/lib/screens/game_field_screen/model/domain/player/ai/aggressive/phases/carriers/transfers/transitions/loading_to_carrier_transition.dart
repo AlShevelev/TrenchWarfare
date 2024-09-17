@@ -58,7 +58,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
       }
     }
 
-    if (state.selectedCarrier.units.length == state.unitsToLoad.length) {
+    if (state.unitsToLoad.all((unit) => state.selectedCarrier.units.contains(unit))) {
       // All the units have been loaded - we can transport them now
       return _TransitionResult(
         newState: _StateTransporting(

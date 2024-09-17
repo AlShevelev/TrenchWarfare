@@ -1,20 +1,20 @@
 part of carriers_phase_library;
 
 class _InitTransition extends _TroopTransferTransition {
-  final GameFieldCellRead _targetCell;
+  final GameFieldCellRead _transferTargetCell;
 
   final CarrierTroopTransfersStorageRead _transfersStorage;
 
   final String _myTransferId;
 
   _InitTransition({
-    required GameFieldCellRead targetCell,
+    required GameFieldCellRead transferTargetCell,
     required super.actions,
     required super.gameField,
     required super.myNation,
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
-  })  : _targetCell = targetCell,
+  })  : _transferTargetCell = transferTargetCell,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
 
@@ -43,6 +43,7 @@ class _InitTransition extends _TroopTransferTransition {
         myNation: _myNation,
         allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
+        transferTargetCell: _transferTargetCell,
       ).calculate();
 
       // We didn't manage to find a gathering point of units
@@ -65,6 +66,7 @@ class _InitTransition extends _TroopTransferTransition {
               landingPoint: landingPoint,
               gatheringPoint: gatheringPointAndUnits.item1,
               gatheringUnits: gatheringPointAndUnits.item2,
+              transferTargetCell: _transferTargetCell,
             ),
             canContinue: true,
           );
@@ -95,13 +97,15 @@ class _InitTransition extends _TroopTransferTransition {
     return allMyCarries;
   }
 
-  Tuple2<Carrier, GameFieldCellRead> _selectCarrier(List<Tuple2<Carrier, GameFieldCellRead>> freeCarriers) =>
+  Tuple2<Carrier, GameFieldCellRead> _selectCarrier(
+    List<Tuple2<Carrier, GameFieldCellRead>> freeCarriers,
+  ) =>
       freeCarriers
           .map(
             (c) => Tuple2(
               c,
               UnitPowerEstimation.estimate(c.item1) *
-                  (1.0 / _gameField.calculateDistance(_targetCell, c.item2)),
+                  (1.0 / _gameField.calculateDistance(_transferTargetCell, c.item2)),
             ),
           )
           .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
@@ -113,7 +117,7 @@ class _InitTransition extends _TroopTransferTransition {
     final selectedCarrierCell = selectedCarrierOnCell.item2;
 
     var radius = 1;
-    var cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: radius);
+    var cellsAroundTarget = _gameField.findCellsAroundR(_transferTargetCell, radius: radius);
 
     final pathFacade = PathFacade(_gameField);
 
@@ -168,7 +172,8 @@ class _InitTransition extends _TroopTransferTransition {
             unitsCell: landingCellCandidate,
           );
 
-          if (lastPathItem == PathItemType.unloadUnit && _GatheringPointCalculator.isPointValid(landingPoint)) {
+          if (lastPathItem == PathItemType.unloadUnit &&
+              _GatheringPointCalculator.isPointValid(landingPoint)) {
             ladingPointCandidates.add(landingPoint);
           }
 
@@ -184,8 +189,9 @@ class _InitTransition extends _TroopTransferTransition {
           double minDistanceToTargetCell = _gameField.cols.toDouble() * _gameField.rows;
           LandingPoint? ladingPoint;
 
-          for(final ladingPointCandidate in ladingPointCandidates) {
-            final distance = _gameField.calculateDistance(_targetCell, ladingPointCandidate.unitsCell);
+          for (final ladingPointCandidate in ladingPointCandidates) {
+            final distance =
+                _gameField.calculateDistance(_transferTargetCell, ladingPointCandidate.unitsCell);
             if (distance < minDistanceToTargetCell) {
               minDistanceToTargetCell = distance;
               ladingPoint = ladingPointCandidate;
@@ -195,7 +201,7 @@ class _InitTransition extends _TroopTransferTransition {
           return ladingPoint;
         }
       }
-      cellsAroundTarget = _gameField.findCellsAroundR(_targetCell, radius: ++radius);
+      cellsAroundTarget = _gameField.findCellsAroundR(_transferTargetCell, radius: ++radius);
     }
 
     return null;
