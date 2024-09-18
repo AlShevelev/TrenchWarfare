@@ -12,8 +12,7 @@ class StartScreen extends StatelessWidget {
       child: Center(
           child: ElevatedButton(
             onPressed: () {
-              //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/15x15_carriers_has_one_partly_full_carrier.tmx');
-              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/15x15_carriers_has_carriers.tmx');
+              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/15x15_carriers_enemy_pc_and_air_field.tmx');
               //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/40x40_land.tmx');
               //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
             },
