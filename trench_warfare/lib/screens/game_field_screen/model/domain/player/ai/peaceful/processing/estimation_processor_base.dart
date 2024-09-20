@@ -6,7 +6,10 @@ abstract interface class EstimationProcessor {
   double estimate();
 
   /// Process estimation result
-  void process();
+  Future<void> process();
+
+  /// Called when animation is completed
+  void onAnimationCompleted();
 }
 
 abstract class EstimationProcessorBase<D extends EstimationData> implements EstimationProcessor {
@@ -29,6 +32,8 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
 
   @protected
   late final Iterable<EstimationResult<D>> _estimationResult;
+
+  final _signal = AsyncSignal(locked: true);
 
   EstimationProcessorBase({
     required PlayerInput player,
@@ -54,7 +59,7 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
 
   /// Process estimation result
   @override
-  void process();
+  Future<void> process();
 
   @protected
   Iterable<EstimationResult<D>> _makeEstimations();
@@ -64,10 +69,20 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
       : estimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!;
 
   @protected
-  void _simulateCardSelection({required GameFieldControlsCard card, required GameFieldCellRead cell}) {
+  Future<void> _simulateCardSelection({
+    required GameFieldControlsCard card,
+    required GameFieldCellRead cell,
+  }) async {
     _player.onCardsButtonClick();
     _player.onCardSelected(card);
     _player.onClick(cell.center);
+    await _signal.wait();
+  }
+
+  @override
+  void onAnimationCompleted() {
+    _signal.unlock();
+    _signal.close();
     _player.onCardsPlacingCancelled();
   }
 }

@@ -4,8 +4,6 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
   @override
   double get _averageWeightBalanceFactor => 1.0;
 
-  final _signal = AsyncSignal(locked: true);
-
   _SpecialStrikeEstimationProcessor({
     required super.player,
     required super.gameField,
@@ -70,24 +68,6 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
     );
 
     return result;
-  }
-
-  @override
-  Future<void> _simulateCardSelection({
-    required GameFieldControlsCard card,
-    required GameFieldCellRead cell,
-  }) async {
-    _player.onCardsButtonClick();
-    _player.onCardSelected(card);
-    _player.onClick(cell.center);
-    await _signal.wait();
-  }
-
-  @override
-  void onAnimationCompleted() {
-    _signal.unlock();
-    _signal.close();
-    _player.onCardsPlacingCancelled();
   }
 
   @override

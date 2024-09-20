@@ -37,32 +37,24 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
   State place() {
     _strategy.updateGameField();
 
-    // calculate the money
+    // Calculate the money
     final productionCost = MoneySpecialStrikeCalculator.calculateCost(_card.type);
 
     // Calculate inactive cells
     final cellsImpossibleToBuild = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata)
         .getAllCellsImpossibleToBuild(_card.type, _nationMoney.actual);
 
-    final cellsImpossibleToBuildMap = {for (var e in cellsImpossibleToBuild) e.id: e};
-
     _strategy.showUpdate();
 
-    if (_canPlaceNext(cellsImpossibleToBuild.length, productionCost)) {
-      return CardPlacingSpecialStrikeInProgress(
-          card: _card,
-          productionCost: productionCost,
-          newInactiveCells: cellsImpossibleToBuildMap,
-          oldInactiveCells: _oldInactiveCells,
-          canPlaceNext: true);
-    } else {
-      return CardPlacingSpecialStrikeInProgress(
-          card: _card,
-          productionCost: productionCost,
-          newInactiveCells: {},
-          oldInactiveCells: _oldInactiveCells,
-          canPlaceNext: false);
-    }
+    final canPlaceNext = _canPlaceNext(cellsImpossibleToBuild.length, productionCost);
+
+    return CardPlacingInProgress(
+        card: _card,
+        productionCost: productionCost,
+        newInactiveCells: canPlaceNext ? {for (var e in cellsImpossibleToBuild) e.id: e} : {},
+        oldInactiveCells: _oldInactiveCells,
+        canPlaceNext: canPlaceNext,
+    );
   }
 
   bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) {

@@ -36,6 +36,8 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
   /// Allows you to increase the probability of a particular processor triggering
   double get _averageWeightBalanceFactor;
 
+  final _signal = AsyncSignal(locked: true);
+
   _EstimationProcessorBase({
     required PlayerInput player,
     required GameFieldRead gameField,
@@ -94,7 +96,7 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
     _player.onCardsButtonClick();
     _player.onCardSelected(card);
     _player.onClick(cell.center);
-    _player.onCardsPlacingCancelled();
+    await _signal.wait();
   }
 
   @protected
@@ -102,6 +104,8 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
 
   @override
   void onAnimationCompleted() {
-    // do noting
+    _signal.unlock();
+    _signal.close();
+    _player.onCardsPlacingCancelled();
   }
 }

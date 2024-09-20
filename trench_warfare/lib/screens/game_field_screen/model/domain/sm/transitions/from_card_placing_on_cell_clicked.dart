@@ -8,7 +8,6 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
     GameFieldCell cell,
     GameFieldControlsCard card,
   ) {
-
     // do noting if a user clicked an invalid cell
     if (cellsImpossibleToBuild.containsKey(cell.id)) {
       return CardPlacing(card, cellsImpossibleToBuild);
@@ -24,7 +23,6 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
             myNation: _context.nation,
           ),
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
-          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
         ),
@@ -39,7 +37,6 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
             myNation: _context.nation,
           ),
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
-          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
         ),
@@ -54,7 +51,6 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
             myNation: _context.nation,
           ),
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
-          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
         ),
@@ -69,7 +65,6 @@ class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
             myNation: _context.nation,
           ),
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
-          controlsState: _context.controlsState,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
         ),

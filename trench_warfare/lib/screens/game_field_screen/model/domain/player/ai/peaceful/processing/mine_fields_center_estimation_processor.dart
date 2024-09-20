@@ -32,7 +32,7 @@ class MineFieldEstimationProcessor extends EstimationProcessorBase<MineFieldsEst
   }
 
   @override
-  void process() {
+  Future<void> process() async {
     final allWeights = _estimationResult.map((e) => e.data.dangerousFactor).toList(growable: false);
 
     final caseIndex = RandomGen.randomWeight(allWeights);
@@ -42,7 +42,7 @@ class MineFieldEstimationProcessor extends EstimationProcessorBase<MineFieldsEst
     }
 
     // User action simulation
-    _simulateCardSelection(
+    await _simulateCardSelection(
       card: GameFieldControlsTerrainModifiersCardBrief(
         type: _estimationResult.elementAt(caseIndex).data.type,
       ),

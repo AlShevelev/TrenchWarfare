@@ -153,7 +153,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 
@@ -162,13 +162,13 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 

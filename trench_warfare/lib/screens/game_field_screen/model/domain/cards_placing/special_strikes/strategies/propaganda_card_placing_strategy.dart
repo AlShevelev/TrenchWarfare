@@ -104,7 +104,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     updateEvents.add(ShowDamage(
       cell: _cell,
       damageType: DamageType.propaganda,
-      time: MovementConstants.damageAnimationTime,
+      time: AnimationConstants.damageAnimationTime,
     ));
 
     switch (_effect) {
@@ -126,7 +126,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
               startCell: _cell,
               endCell: newCell,
               unit: unit,
-              time: MovementConstants.unitMovementTime,
+              time: AnimationConstants.unitMovementTime,
             ),
             UpdateCell(newCell, updateBorderCells: []),
             RemoveUntiedUnit(unit),

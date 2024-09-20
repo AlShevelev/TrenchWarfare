@@ -52,7 +52,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     updateEvents.add(ShowComplexDamage(
       cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
-      time: MovementConstants.damageAnimationTime,
+      time: AnimationConstants.damageAnimationTime,
     ));
 
     updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));

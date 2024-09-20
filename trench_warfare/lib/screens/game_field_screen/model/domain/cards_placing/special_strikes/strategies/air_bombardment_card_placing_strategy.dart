@@ -24,7 +24,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     ShowDamage(
       cell: _cell,
       damageType: DamageType.explosion,
-      time: MovementConstants.damageAnimationTime,
+      time: AnimationConstants.damageAnimationTime,
     ),
     UpdateCell(
       _cell,

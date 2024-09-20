@@ -210,10 +210,10 @@ class MovementWithBattleCalculator extends MovementCalculator {
           startCell: priorCell!,
           endCell: cell,
           unit: attackingUnit,
-          time: MovementConstants.unitMovementTime,
+          time: AnimationConstants.unitMovementTime,
         ));
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
-        updateEvents.add(Pause(MovementConstants.unitMovementPause));
+        updateEvents.add(Pause(AnimationConstants.unitMovementPause));
       }
       priorCell = cell;
     }
@@ -228,7 +228,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
           Tuple2(attackingCell, attackingDamageType),
           Tuple2(defendingCell, defendingDamageType),
         ],
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 
@@ -237,7 +237,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 
@@ -246,13 +246,13 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 
@@ -261,13 +261,13 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: MovementConstants.damageAnimationTime,
+        time: AnimationConstants.damageAnimationTime,
       ));
     }
 

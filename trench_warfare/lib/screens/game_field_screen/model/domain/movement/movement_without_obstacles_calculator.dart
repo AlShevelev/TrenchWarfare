@@ -73,10 +73,10 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
           startCell: priorCell!,
           endCell: cell,
           unit: unit,
-          time: MovementConstants.unitMovementTime,
+          time: AnimationConstants.unitMovementTime,
         ));
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
-        updateEvents.add(Pause(MovementConstants.unitMovementPause));
+        updateEvents.add(Pause(AnimationConstants.unitMovementPause));
       }
       priorCell = cell;
     }
@@ -112,7 +112,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       }
     }
 
-    updateEvents.add(Pause(MovementConstants.unitMovementPause));
+    updateEvents.add(Pause(AnimationConstants.unitMovementPause));
     updateEvents.add(AnimationCompleted());
 
     _updateGameObjectsEvent.update(updateEvents);

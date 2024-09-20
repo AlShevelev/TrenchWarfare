@@ -29,7 +29,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     ShowDamage(
       cell: _cell,
       damageType: DamageType.bloodSplash,
-      time: MovementConstants.damageAnimationTime,
+      time: AnimationConstants.damageAnimationTime,
     ),
     UpdateCell(
       _cell,

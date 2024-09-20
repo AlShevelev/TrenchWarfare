@@ -33,7 +33,7 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
   }
 
   @override
-  void process() {
+  Future<void> process() async {
     final allWeights = _estimationResult.map((e) => 1.0).toList(growable: false);
 
     final caseIndex = RandomGen.randomWeight(allWeights);
@@ -43,7 +43,7 @@ class ProductionCenterEstimationProcessor extends EstimationProcessorBase<Produc
     }
 
     // User action simulation
-    _simulateCardSelection(
+    await _simulateCardSelection(
       card: GameFieldControlsProductionCentersCardBrief(
         type: _estimationResult.elementAt(caseIndex).data.type,
       ),

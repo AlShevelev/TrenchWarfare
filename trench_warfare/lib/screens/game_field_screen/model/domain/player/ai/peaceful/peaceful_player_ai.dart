@@ -25,7 +25,7 @@ class PeacefulPlayerAi extends PlayerAi {
         _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   @override
-  void start() async {
+  Future<void> start() async {
     // If I lost - do nothing
     while (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
@@ -68,7 +68,18 @@ class PeacefulPlayerAi extends PlayerAi {
         break;
       }
 
-      processors[generalActionIndex].process();
+      final selectedProcessor = processors[generalActionIndex];
+
+      // It's a dirty, but necessary hack
+      final playerCore = player as PlayerCore;
+      playerCore.registerOnAnimationCompleted(() {
+        selectedProcessor.onAnimationCompleted();
+      });
+      try {
+        await selectedProcessor.process();
+      } finally {
+        playerCore.registerOnAnimationCompleted(null);
+      }
     }
 
     await Future.delayed(const Duration(seconds: 1));

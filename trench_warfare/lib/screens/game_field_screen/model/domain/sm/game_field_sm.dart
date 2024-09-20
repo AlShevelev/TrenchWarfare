@@ -100,7 +100,7 @@ class GameFieldStateMachine {
             FromCardPlacingOnCellClicked(_context).process(cellsImpossibleToBuild, cell, card),
           _ => _currentState,
         },
-      CardPlacingSpecialStrikeInProgress(
+      CardPlacingInProgress(
         card: var card,
         newInactiveCells: var newInactiveCells,
         oldInactiveCells: var oldInactiveCells,
@@ -108,7 +108,7 @@ class GameFieldStateMachine {
         canPlaceNext: var canPlaceNext,
       ) =>
         switch (event) {
-          OnAnimationCompleted() => FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted(
+          OnAnimationCompleted() => FromCardPlacingInProgressOnAnimationCompleted(
               _context,
               card: card,
               newInactiveCells: newInactiveCells,

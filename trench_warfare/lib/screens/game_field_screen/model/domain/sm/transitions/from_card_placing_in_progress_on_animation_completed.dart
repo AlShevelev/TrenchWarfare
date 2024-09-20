@@ -1,6 +1,6 @@
 part of game_field_sm;
 
-class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObjectTransitionBase {
+class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransitionBase {
   late final GameFieldControlsCard _card;
 
   late final Map<int, GameFieldCellRead> _newInactiveCells;
@@ -11,7 +11,7 @@ class FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted extends GameObj
 
   late final bool _canPlaceNext;
 
-  FromCardPlacingSpecialStrikeInProgressOnAnimationCompleted(
+  FromCardPlacingInProgressOnAnimationCompleted(
     super.context, {
     required GameFieldControlsCard card,
     required Map<int, GameFieldCellRead> newInactiveCells,

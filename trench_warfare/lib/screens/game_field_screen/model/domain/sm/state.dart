@@ -42,7 +42,7 @@ class CardPlacing implements State {
   CardPlacing(this.card, this.cellsImpossibleToBuild);
 }
 
-class CardPlacingSpecialStrikeInProgress implements State {
+class CardPlacingInProgress implements State {
   final GameFieldControlsCard card;
 
   final Map<int, GameFieldCellRead> newInactiveCells;
@@ -53,7 +53,7 @@ class CardPlacingSpecialStrikeInProgress implements State {
 
   final bool canPlaceNext;
 
-  CardPlacingSpecialStrikeInProgress({
+  CardPlacingInProgress({
     required this.card,
     required this.newInactiveCells,
     required this.oldInactiveCells,

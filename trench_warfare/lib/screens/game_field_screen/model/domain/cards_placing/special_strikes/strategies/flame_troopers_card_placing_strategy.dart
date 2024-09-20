@@ -24,7 +24,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     ShowDamage(
       cell: _cell,
       damageType: DamageType.flame,
-      time: MovementConstants.damageAnimationTime,
+      time: AnimationConstants.damageAnimationTime,
     ),
     UpdateCell(
       _cell,

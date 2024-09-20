@@ -1,6 +1,7 @@
 library movement;
 
 import 'package:flutter/foundation.dart';
+import 'package:trench_warfare/core_entities/animaition_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
@@ -16,7 +17,6 @@ import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
 part 'movement_calculator.dart';
-part 'movement_constants.dart';
 part 'movement_facade.dart';
 part 'movement_with_battle_calculator.dart';
 part 'movement_with_battle_next_unreachable_cell_calculator.dart';

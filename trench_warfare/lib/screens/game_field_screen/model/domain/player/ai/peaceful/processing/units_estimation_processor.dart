@@ -43,7 +43,7 @@ class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsEstimationDa
   }
 
   @override
-  void process() {
+  Future<void> process() async {
     final allWeights = _estimationResult.map((e) => e.data.dangerousFactor).toList(growable: false);
 
     final caseIndex = RandomGen.randomWeight(allWeights);
@@ -53,7 +53,7 @@ class UnitsEstimationProcessor extends EstimationProcessorBase<UnitsEstimationDa
     }
 
     // User action simulation
-    _simulateCardSelection(
+    await _simulateCardSelection(
       card: GameFieldControlsUnitCardBrief(type: _estimationResult.elementAt(caseIndex).data.type),
       cell: _estimationResult.elementAt(caseIndex).data.cell,
     );
