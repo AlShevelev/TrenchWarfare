@@ -72,14 +72,6 @@ class UnitsBattleCalculator {
     return _calculateUltimateResult(attackingUnit, defendingUnit);
   }
 
-  static double _getExperienceAsNumber(UnitExperienceRank rank) => switch (rank) {
-        UnitExperienceRank.rookies => 1,
-        UnitExperienceRank.fighters => 2,
-        UnitExperienceRank.proficients => 3,
-        UnitExperienceRank.veterans => 4,
-        UnitExperienceRank.elite => 5,
-      };
-
   static double _calculateDamage(UnitInBattle attacking, UnitInBattle defending) {
     final startDamage = RandomGen.randomDouble(attacking.damage.min, attacking.damage.max);
 
@@ -88,7 +80,8 @@ class UnitsBattleCalculator {
     final damageExp = startDamage +
         startDamage *
             0.125 *
-            (_getExperienceAsNumber(attacking.experienceRank) - _getExperienceAsNumber(defending.experienceRank));
+            (UnitExperienceRank.asNumber(attacking.experienceRank) -
+                UnitExperienceRank.asNumber(defending.experienceRank));
 
     final damageFatigue = startDamage + startDamage * attacking._fatigue;
 

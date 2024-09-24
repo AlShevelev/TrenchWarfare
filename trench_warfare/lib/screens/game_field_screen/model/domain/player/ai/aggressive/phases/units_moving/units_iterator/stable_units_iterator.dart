@@ -33,13 +33,17 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
       growable: false,
     );
 
-    _shiftCells(shifted: shifted);
+    if (shifted) {
+      _shiftCells();
+    }
   }
 
   StableUnitsIterator.fromCell(List<GameFieldCellRead> cells, {bool shifted = true}) : _excludedUnits = [] {
     _gameFieldCells = cells;
 
-    _shiftCells(shifted: shifted);
+    if (shifted) {
+      _shiftCells();
+    }
   }
 
   @override
@@ -66,16 +70,5 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
     return _excludedUnits.contains(current.unit) ? moveNext() : true;
   }
 
-  void _shiftCells({required bool shifted}) {
-    if (_gameFieldCells.length > 2 && shifted) {
-      for (var i = 0; i < _gameFieldCells.length; i++) {
-        final index1 = RandomGen.randomInt(_gameFieldCells.length);
-        final index2 = RandomGen.randomInt(_gameFieldCells.length);
-
-        final a = _gameFieldCells[index1];
-        _gameFieldCells[index1] = _gameFieldCells[index2];
-        _gameFieldCells[index2] = a;
-      }
-    }
-  }
+  void _shiftCells() => RandomGen.shiftItems(_gameFieldCells);
 }

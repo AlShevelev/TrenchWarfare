@@ -18,7 +18,7 @@ class _LandFortCellWithFactors {
 }
 
 /// Should we place a land fort in general?
-class _LandFortEstimator implements Estimator<_TerrainModifierEstimationData> {
+class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

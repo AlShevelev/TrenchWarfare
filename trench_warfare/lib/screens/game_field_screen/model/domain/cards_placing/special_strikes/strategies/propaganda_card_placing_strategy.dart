@@ -67,13 +67,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   }
 
   double _calculateChanceToSuccess(Unit unit) {
-    final experienceFactor = switch (unit.experienceRank) {
-      UnitExperienceRank.rookies => 1,
-      UnitExperienceRank.fighters => 2,
-      UnitExperienceRank.proficients => 3,
-      UnitExperienceRank.veterans => 4,
-      UnitExperienceRank.elite => 5,
-    };
+    final experienceFactor = UnitExperienceRank.asNumber(unit.experienceRank);
 
     return ((1 - experienceFactor * 0.2) + (1 - unit.health / unit.maxHealth)) / 2;
   }

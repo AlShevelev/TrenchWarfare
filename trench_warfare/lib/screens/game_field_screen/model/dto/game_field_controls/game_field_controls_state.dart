@@ -5,20 +5,26 @@ sealed class GameFieldControlsState {}
 class Invisible extends GameFieldControlsState {}
 
 class MainControls extends GameFieldControlsState {
-  final MoneyUnit money;
+  final MoneyUnit totalSum;
 
   final GameFieldControlsCellInfo? cellInfo;
-
   final GameFieldControlsArmyInfo? armyInfo;
-
   final GameFieldControlsArmyInfo? carrierInfo;
 
   MainControls({
-    required this.money,
+    required this.totalSum,
     required this.cellInfo,
     required this.armyInfo,
     required this.carrierInfo,
   });
+
+  MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) =>
+      MainControls(
+        totalSum: totalSum,
+        cellInfo: cellInfo,
+        armyInfo: armyInfo,
+        carrierInfo: carrierInfo,
+      );
 }
 
 class CardsSelectionControls extends GameFieldControlsState {

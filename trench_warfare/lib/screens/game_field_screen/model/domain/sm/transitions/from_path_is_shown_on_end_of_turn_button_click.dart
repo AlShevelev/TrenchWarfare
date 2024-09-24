@@ -26,11 +26,12 @@ class FromPathIsShownOnEndOfTurnButtonClick extends GameObjectTransitionBase {
     _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
   }
 
-  void _hideArmyPanel() =>
-      _context.controlsState.update(MainControls(
-        money: _context.money.actual,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-      ));
+  void _hideArmyPanel() => _context.controlsState.update(
+        MainControls(
+          totalSum: _context.money.totalSum,
+          cellInfo: null,
+          armyInfo: null,
+          carrierInfo: null,
+        ),
+      );
 }

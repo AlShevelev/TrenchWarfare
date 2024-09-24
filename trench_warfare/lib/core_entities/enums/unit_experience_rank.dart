@@ -3,5 +3,13 @@ enum UnitExperienceRank {
   fighters,
   proficients,
   veterans,
-  elite,
+  elite;
+
+  static double asNumber(UnitExperienceRank rank) => switch (rank) {
+    UnitExperienceRank.rookies => 1,
+    UnitExperienceRank.fighters => 2,
+    UnitExperienceRank.proficients => 3,
+    UnitExperienceRank.veterans => 4,
+    UnitExperienceRank.elite => 5,
+  };
 }

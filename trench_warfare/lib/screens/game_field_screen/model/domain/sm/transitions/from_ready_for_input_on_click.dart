@@ -20,12 +20,14 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
         ? CarrierPanelCalculator.calculatePanel(unit, cell)
         : null;
 
-    _context.controlsState.update(MainControls(
-      money: _context.money.actual,
-      cellInfo: null,
-      armyInfo: armyInfo,
-      carrierInfo: carrierInfo,
-    ));
+    _context.controlsState.update(
+      MainControls(
+        totalSum: _context.money.totalSum,
+        cellInfo: null,
+        armyInfo: armyInfo,
+        carrierInfo: carrierInfo,
+      ),
+    );
 
     if (cell.nation != _context.nation) {
       return ReadyForInput();

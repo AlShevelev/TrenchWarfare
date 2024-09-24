@@ -7,42 +7,57 @@ class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionB
   FromStartTurnConfirmationOnStarTurnConfirmed(super.context);
 
   State process() {
-    _context.money.recalculate();
+    _context.money.recalculateIncomeAndSum();
 
     final List<UpdateGameEvent> events = [];
 
-    for (var cell in _context.gameField.cells) {
-      if (cell.nation != _context.nation || cell.units.isEmpty) {
-        continue;
-      }
+    final cellsToIterate = _context.gameField.cells
+        .where((c) => c.nation == _context.nation && c.units.isNotEmpty)
+        .toList(growable: false);
 
+    RandomGen.shiftItems(cellsToIterate);
+
+    for (var cell in cellsToIterate) {
       for (var unit in cell.units) {
         _updateUnit(unit, cell.productionCenter?.type);
 
         if (unit is Carrier) {
-          for (var unit in unit.units) {
-            _updateUnit(unit, null);
+          for (var unitInCarrier in unit.units) {
+            _updateUnit(unitInCarrier, null);
           }
         }
+
+        final totalSum = _context.money.totalSum;
+        final unitExpense = MoneyUnitsCalculator.calculateExpense(unit);
+
+        // We haven't got enough money to support a unit - let's dismiss it
+        if (unitExpense.currency > totalSum.currency ||
+            unitExpense.industryPoints > totalSum.industryPoints) {
+          cell.removeUnit(unit);
+        }
+        _context.money.reduceTotalSum(unitExpense);
       }
 
       events.add(UpdateCell(cell, updateBorderCells: []));
     }
 
+    _context.money.recalculateExpenses();
+
     _setCameraPosition(events);
 
     _context.updateGameObjectsEvent.update(events);
 
-    _context.controlsState.update(MainControls(
-      money: _context.money.actual,
-      cellInfo: null,
-      armyInfo: null,
-      carrierInfo: null,
-    ));
+    _context.controlsState.update(
+      MainControls(
+        totalSum: _context.money.totalSum,
+        cellInfo: null,
+        armyInfo: null,
+        carrierInfo: null,
+      ),
+    );
 
     return ReadyForInput();
   }
-
 
   void _updateUnit(Unit unit, ProductionCenterType? cellProductionCenter) {
     unit.setFatigue(unit.maxFatigue);
@@ -50,8 +65,8 @@ class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionB
     unit.setState(UnitState.enabled);
 
     final healthFactor = (unit.isMechanical && cellProductionCenter == ProductionCenterType.factory) ||
-        (!unit.isMechanical && cellProductionCenter == ProductionCenterType.city) ||
-        (unit.isShip && cellProductionCenter == ProductionCenterType.navalBase)
+            (!unit.isMechanical && cellProductionCenter == ProductionCenterType.city) ||
+            (unit.isShip && cellProductionCenter == ProductionCenterType.navalBase)
         ? partOfHealthRestoredWithProductionCenter
         : partOfHealthRestoredWithoutProductionCenter;
 

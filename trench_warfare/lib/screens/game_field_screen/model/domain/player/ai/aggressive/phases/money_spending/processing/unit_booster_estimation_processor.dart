@@ -22,7 +22,7 @@ class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoos
         gameField: _gameField,
         myNation: _myNation,
         type: UnitBoost.attack,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -33,7 +33,7 @@ class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoos
         gameField: _gameField,
         myNation: _myNation,
         type: UnitBoost.defence,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -43,7 +43,7 @@ class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoos
       _CommanderEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -53,7 +53,7 @@ class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoos
       _TransportEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
       ).estimate(),
     );
 

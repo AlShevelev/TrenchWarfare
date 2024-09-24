@@ -17,7 +17,7 @@ class _CarriersEstimationProcessor extends _EstimationProcessorBase<_CarriersBui
   Iterable<EstimationResult<_CarriersBuildingEstimationData>> _makeEstimations() => _CarriersBuildingEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         metadata: _metadata,
       ).estimate();
 

@@ -59,7 +59,7 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsCa
 
   @override
   List<GameFieldCellRead> getAllCellsImpossibleToBuild() =>
-      UnitBuildCalculator(_gameField, _myNation).getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
+      UnitBuildCalculator(_gameField, _myNation).getAllCellsImpossibleToBuild(_type, _nationMoney.totalSum);
 
   @override
   void updateCell() {
@@ -83,7 +83,7 @@ class UnitBoostCardsPlacingStrategy
 
   @override
   List<GameFieldCellRead> getAllCellsImpossibleToBuild() => UnitBoosterBuildCalculator(_gameField, _myNation)
-      .getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
+      .getAllCellsImpossibleToBuild(_type, _nationMoney.totalSum);
 
   @override
   void updateCell() {
@@ -117,7 +117,7 @@ class TerrainModifierCardsPlacingStrategy
   @override
   List<GameFieldCellRead> getAllCellsImpossibleToBuild() =>
       TerrainModifierBuildCalculator(_gameField, _myNation)
-          .getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
+          .getAllCellsImpossibleToBuild(_type, _nationMoney.totalSum);
 
   @override
   void updateCell() => _cell.setTerrainModifier(TerrainModifier(type: _type));
@@ -142,7 +142,7 @@ class ProductionCenterCardsPlacingStrategy
   @override
   List<GameFieldCellRead> getAllCellsImpossibleToBuild() =>
       ProductionCentersBuildCalculator(_gameField, _myNation)
-          .getAllCellsImpossibleToBuild(_type, _nationMoney.actual);
+          .getAllCellsImpossibleToBuild(_type, _nationMoney.totalSum);
 
   @override
   void updateCell() {

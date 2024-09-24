@@ -16,7 +16,7 @@ class FromReadyForInputOnCardsButtonClick {
         ProductionCentersBuildCalculator(_context.gameField, _context.nation);
 
     final cards = CardsSelectionControls(
-      totalMoney: _context.money.actual,
+      totalMoney: _context.money.totalSum,
       units: [
         _mapUnit(Unit.byType(UnitType.infantry), unitBuildCalculator),
         _mapUnit(Unit.byType(UnitType.cavalry), unitBuildCalculator),
@@ -77,8 +77,8 @@ class FromReadyForInputOnCardsButtonClick {
       defence: unit.defence.toInt(),
       damage: Range<int>(unit.damage.min.toInt(), unit.damage.max.toInt()),
       movementPoints: unit.maxMovementPoints,
-      canBuildByCurrency: _context.money.actual.currency >= cost.currency,
-      canBuildByIndustryPoint: _context.money.actual.industryPoints >= cost.industryPoints,
+      canBuildByCurrency: _context.money.totalSum.currency >= cost.currency,
+      canBuildByIndustryPoint: _context.money.totalSum.industryPoints >= cost.industryPoints,
       buildDisplayRestriction: canBuildOnGameField ? buildCalculator.getRestriction(unit.type) : null,
       buildError: canBuildOnGameField ? null : buildCalculator.getError(unit.type),
     );
@@ -111,8 +111,8 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsTerrainModifiersCard(
       cost: cost,
       type: type,
-      canBuildByCurrency: _context.money.actual.currency >= cost.currency,
-      canBuildByIndustryPoint: _context.money.actual.industryPoints >= cost.industryPoints,
+      canBuildByCurrency: _context.money.totalSum.currency >= cost.currency,
+      canBuildByIndustryPoint: _context.money.totalSum.industryPoints >= cost.industryPoints,
       buildDisplayRestriction: null,
       buildError: allCells.isEmpty ? buildCalculator.getError() : null,
     );
@@ -127,8 +127,8 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsUnitBoostersCard(
       cost: cost,
       type: boost,
-      canBuildByCurrency: _context.money.actual.currency >= cost.currency,
-      canBuildByIndustryPoint: _context.money.actual.industryPoints >= cost.industryPoints,
+      canBuildByCurrency: _context.money.totalSum.currency >= cost.currency,
+      canBuildByIndustryPoint: _context.money.totalSum.industryPoints >= cost.industryPoints,
       buildDisplayRestriction: null,
       buildError: buildCalculator.canBuildOnGameField(boost) ? null : buildCalculator.getError(),
     );
@@ -145,8 +145,8 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsSpecialStrikesCard(
       cost: cost,
       type: type,
-      canBuildByCurrency: _context.money.actual.currency >= cost.currency,
-      canBuildByIndustryPoint: _context.money.actual.industryPoints >= cost.industryPoints,
+      canBuildByCurrency: _context.money.totalSum.currency >= cost.currency,
+      canBuildByIndustryPoint: _context.money.totalSum.industryPoints >= cost.industryPoints,
       buildDisplayRestriction: canBuildOnGameField ? buildCalculator.getDisplayRestriction(type) : null,
       buildError: canBuildOnGameField ? null : buildCalculator.getError(type),
     );
@@ -187,8 +187,8 @@ class FromReadyForInputOnCardsButtonClick {
     return GameFieldControlsProductionCentersCard(
       cost: cost,
       type: type,
-      canBuildByCurrency: _context.money.actual.currency >= cost.currency,
-      canBuildByIndustryPoint: _context.money.actual.industryPoints >= cost.industryPoints,
+      canBuildByCurrency: _context.money.totalSum.currency >= cost.currency,
+      canBuildByIndustryPoint: _context.money.totalSum.industryPoints >= cost.industryPoints,
       buildDisplayRestriction: null,
       buildError: allCells.isEmpty ? buildCalculator.getError() : null,
     );

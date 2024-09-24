@@ -5,7 +5,7 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
 
   State process(GameFieldControlsCard card) {
     _context.controlsState.update(CardsPlacingControls(
-      totalMoney: _context.money.actual,
+      totalMoney: _context.money.totalSum,
       card: card,
     ));
 
@@ -14,21 +14,21 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
       GameFieldControlsUnitCardBrief() =>
         UnitBuildCalculator(_context.gameField, _context.nation).getAllCellsImpossibleToBuild(
           card.type,
-          _context.money.actual,
+          _context.money.totalSum,
         ),
       GameFieldControlsProductionCentersCard() ||
       GameFieldControlsProductionCentersCardBrief() =>
         ProductionCentersBuildCalculator(_context.gameField, _context.nation)
-            .getAllCellsImpossibleToBuild(card.type, _context.money.actual),
+            .getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       GameFieldControlsTerrainModifiersCard() ||
       GameFieldControlsTerrainModifiersCardBrief() =>
         TerrainModifierBuildCalculator(_context.gameField, _context.nation)
-            .getAllCellsImpossibleToBuild(card.type, _context.money.actual),
+            .getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       GameFieldControlsUnitBoostersCard() ||
       GameFieldControlsUnitBoostersCardBrief() =>
         UnitBoosterBuildCalculator(_context.gameField, _context.nation).getAllCellsImpossibleToBuild(
           card.type,
-          _context.money.actual,
+          _context.money.totalSum,
         ),
       GameFieldControlsSpecialStrikesCard() ||
       GameFieldControlsSpecialStrikesCardBrief() =>
@@ -36,7 +36,7 @@ class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
           _context.gameField,
           _context.nation,
           _context.mapMetadata,
-        ).getAllCellsImpossibleToBuild(card.type, _context.money.actual),
+        ).getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       _ => throw UnsupportedError(''),
     };
 

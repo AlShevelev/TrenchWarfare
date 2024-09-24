@@ -21,7 +21,7 @@ class MineFieldEstimationProcessor extends EstimationProcessorBase<MineFieldsEst
           gameField: _gameField,
           myNation: _myNation,
           type: type,
-          nationMoney: _nationMoney.actual,
+          nationMoney: _nationMoney.totalSum,
           influenceMap: _influenceMap,
           metadata: _metadata);
 

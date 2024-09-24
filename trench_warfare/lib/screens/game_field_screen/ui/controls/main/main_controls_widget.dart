@@ -49,7 +49,7 @@ class MainControlsWidget extends StatelessWidget {
         onPress: () {},
       ),
       GameFieldGeneralPanel(
-        money: state.money,
+        money: state.totalSum,
         left: 15,
         top: 0,
       ),

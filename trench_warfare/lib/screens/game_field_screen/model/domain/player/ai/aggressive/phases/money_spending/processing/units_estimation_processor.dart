@@ -35,7 +35,7 @@ class _UnitsEstimationProcessor extends _EstimationProcessorBase<_UnitsBuildingE
           gameField: _gameField,
           myNation: _myNation,
           type: type,
-          nationMoney: _nationMoney.actual,
+          nationMoney: _nationMoney,
           influenceMap: _influenceMap,
           metadata: _metadata);
 

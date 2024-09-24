@@ -21,7 +21,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _AntiAirGunEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         metadata: _metadata,
       ).estimate(),
     );
@@ -30,7 +30,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _BarbedWireEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -40,7 +40,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _LandFortEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -50,7 +50,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _MineFieldsEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
         type: TerrainModifierType.landMine,
@@ -61,7 +61,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _MineFieldsEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
         type: TerrainModifierType.seaMine,
@@ -72,7 +72,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       _TrenchEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),

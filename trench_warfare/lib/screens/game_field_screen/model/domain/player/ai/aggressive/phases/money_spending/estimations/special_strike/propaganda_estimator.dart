@@ -11,12 +11,12 @@ class _PropagandaCellWithFactors {
   });
 }
 
-class _PropagandaEstimator implements Estimator<_SpecialStrikeEstimationData> {
+class _PropagandaEstimator extends Estimator<_SpecialStrikeEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final InfluenceMapRepresentationRead _influenceMap;
 
@@ -25,7 +25,7 @@ class _PropagandaEstimator implements Estimator<_SpecialStrikeEstimationData> {
   _PropagandaEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
   })  : _gameField = gameField,
@@ -39,7 +39,7 @@ class _PropagandaEstimator implements Estimator<_SpecialStrikeEstimationData> {
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.propaganda,
-      _nationMoney,
+      _nationMoney.totalSum,
     );
 
     // We can't build shit
@@ -68,7 +68,7 @@ class _PropagandaEstimator implements Estimator<_SpecialStrikeEstimationData> {
     }
 
     return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
-      weight: 1.0 + c!.unitPower,
+      weight: 1.0 + c!.unitPower * getMoneyWeightFactor(_nationMoney),
       data: _SpecialStrikeEstimationData(
         cell: c.cell,
         type: SpecialStrikeType.propaganda,

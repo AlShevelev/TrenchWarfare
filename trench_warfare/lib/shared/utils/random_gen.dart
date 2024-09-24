@@ -73,4 +73,17 @@ class RandomGen {
 
     return weights.length - 1;
   }
+
+  static void shiftItems<T>(List<T> itemsToShift) {
+    if (itemsToShift.length > 2) {
+      for (var i = 0; i < itemsToShift.length; i++) {
+        final index1 = randomInt(itemsToShift.length);
+        final index2 = randomInt(itemsToShift.length);
+
+        final a = itemsToShift[index1];
+        itemsToShift[index1] = itemsToShift[index2];
+        itemsToShift[index2] = a;
+      }
+    }
+  }
 }

@@ -24,12 +24,9 @@ class CarrierPanelCalculator {
     final state = (controlsState.current as MainControls);
 
     if (newActiveUnit.type != UnitType.carrier && state.carrierInfo != null) {
-      controlsState.update(MainControls(
-        money: state.money,
-        cellInfo: state.cellInfo,
-        armyInfo: state.armyInfo,
-        carrierInfo: null,
-      ));
+      controlsState.update(
+        state.copyCarrierInfo(null)
+      );
     } else if (newActiveUnit.type == UnitType.carrier) {
       final carrier = (newActiveUnit as Carrier);
 
@@ -37,12 +34,7 @@ class CarrierPanelCalculator {
           ? GameFieldControlsArmyInfo(cellId: cellId, units: carrier.units.toList(growable: true))
           : null;
 
-      controlsState.update(MainControls(
-        money: state.money,
-        cellInfo: state.cellInfo,
-        armyInfo: state.armyInfo,
-        carrierInfo: carrierInfo,
-      ));
+      controlsState.update(state.copyCarrierInfo(carrierInfo));
     }
   }
 }

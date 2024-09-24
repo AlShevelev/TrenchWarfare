@@ -30,12 +30,12 @@ class _CellWithDangerFactor {
 }
 
 /// Should we hire a unit in general?
-class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData> {
+class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final UnitType _type;
 
@@ -51,7 +51,7 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
     required GameFieldRead gameField,
     required Nation myNation,
     required UnitType type,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
   })  : _gameField = gameField,
@@ -68,7 +68,7 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
     }
 
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
-    final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
@@ -135,7 +135,7 @@ class _UnitsBuildingEstimator implements Estimator<_UnitsBuildingEstimationData>
         cell.nearestEnemyPcPower * (maxDistance - (cell.minDistanceToEnemyPc ?? maxDistance))
       );
 
-      final weight = 1 + enemyUnitsWeight + nearestEnemyPcWeight;
+      final weight = 1 + (enemyUnitsWeight + nearestEnemyPcWeight) * getMoneyWeightFactor(_nationMoney);
 
       return EstimationResult<_UnitsBuildingEstimationData>(
         weight: weight,

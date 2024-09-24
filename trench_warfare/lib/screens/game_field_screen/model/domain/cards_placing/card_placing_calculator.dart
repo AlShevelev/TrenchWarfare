@@ -65,6 +65,6 @@ class CardPlacingCalculator implements PlacingCalculator {
 
   bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
       totalCellsImpossibleToBuild < _strategy.gameField.cells.length &&
-      _strategy.nationMoney.actual.currency >= productionCost.currency &&
-      _strategy.nationMoney.actual.industryPoints >= productionCost.industryPoints;
+      _strategy.nationMoney.totalSum.currency >= productionCost.currency &&
+      _strategy.nationMoney.totalSum.industryPoints >= productionCost.industryPoints;
 }

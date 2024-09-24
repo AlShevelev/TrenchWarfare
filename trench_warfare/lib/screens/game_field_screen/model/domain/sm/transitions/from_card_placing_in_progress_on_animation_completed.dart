@@ -28,11 +28,11 @@ class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransition
 
   State process() {
     // Update the money
-    _context.money.withdraw(_productionCost);
+    _context.money.reduceTotalSum(_productionCost);
 
     if (_canPlaceNext) {
       _context.controlsState.update(CardsPlacingControls(
-        totalMoney: _context.money.actual,
+        totalMoney: _context.money.totalSum,
         card: _card,
       ));
 
@@ -47,12 +47,14 @@ class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransition
 
       return CardPlacing(_card, _newInactiveCells);
     } else {
-      _context.controlsState.update(MainControls(
-        money: _context.money.actual,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-      ));
+      _context.controlsState.update(
+        MainControls(
+          totalSum: _context.money.totalSum,
+          cellInfo: null,
+          armyInfo: null,
+          carrierInfo: null,
+        ),
+      );
 
       if (!_context.isAI) {
         _context.updateGameObjectsEvent.update([
@@ -63,6 +65,7 @@ class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransition
         ]);
       }
 
+      _context.money.recalculateIncomeAndExpenses();
       return ReadyForInput();
     }
   }

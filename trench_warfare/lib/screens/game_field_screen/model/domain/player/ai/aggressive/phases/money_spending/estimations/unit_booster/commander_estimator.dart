@@ -22,7 +22,7 @@ class _CommanderCellWithFactors {
 }
 
 /// Should we add a commander booster in general?
-class _CommanderEstimator implements Estimator<_UnitBoosterEstimationData> {
+class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

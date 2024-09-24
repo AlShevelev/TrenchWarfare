@@ -1,7 +1,7 @@
 part of money_spending_phase_library;
 
 /// Should we place a trench in general?
-class _TrenchEstimator implements Estimator<_TerrainModifierEstimationData> {
+class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

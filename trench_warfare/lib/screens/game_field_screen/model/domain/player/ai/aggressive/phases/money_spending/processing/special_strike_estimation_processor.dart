@@ -21,7 +21,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
       _AirBombardmentEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney,
         metadata: _metadata,
         influenceMap: _influenceMap,
       ).estimate(),
@@ -31,7 +31,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
       _FlameTroopersEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -41,7 +41,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
       _FlechettesEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -51,7 +51,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
       _GasAttackEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),
@@ -61,7 +61,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
       _PropagandaEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney,
         influenceMap: _influenceMap,
         metadata: _metadata,
       ).estimate(),

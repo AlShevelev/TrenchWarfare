@@ -18,7 +18,7 @@ class _TransportCellWithFactors {
 }
 
 /// Should we add a transport booster in general?
-class _TransportEstimator implements Estimator<_UnitBoosterEstimationData> {
+class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

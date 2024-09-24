@@ -6,12 +6,14 @@ class FromCardSelectingOnCardsSelectionCancelled {
   FromCardSelectingOnCardsSelectionCancelled(this._context);
 
   State process() {
-    _context.controlsState.update(MainControls(
-      money: _context.money.actual,
-      cellInfo: null,
-      armyInfo: null,
-      carrierInfo: null,
-    ));
+    _context.controlsState.update(
+      MainControls(
+        totalSum: _context.money.totalSum,
+        cellInfo: null,
+        armyInfo: null,
+        carrierInfo: null,
+      ),
+    );
 
     return ReadyForInput();
   }

@@ -10,7 +10,7 @@ class ProductionCenterEstimationData implements EstimationData {
 }
 
 /// Should we build production center on not in general?
-class ProductionCenterEstimator implements Estimator<ProductionCenterEstimationData> {
+class ProductionCenterEstimator extends Estimator<ProductionCenterEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

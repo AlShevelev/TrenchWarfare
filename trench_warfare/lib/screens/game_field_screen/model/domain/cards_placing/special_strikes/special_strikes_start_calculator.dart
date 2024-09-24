@@ -42,7 +42,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
 
     // Calculate inactive cells
     final cellsImpossibleToBuild = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata)
-        .getAllCellsImpossibleToBuild(_card.type, _nationMoney.actual);
+        .getAllCellsImpossibleToBuild(_card.type, _nationMoney.totalSum);
 
     _strategy.showUpdate();
 
@@ -58,7 +58,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
   }
 
   bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) {
-    final recalculatedNationMoney = _nationMoney.actual - productionCost;
+    final recalculatedNationMoney = _nationMoney.totalSum - productionCost;
     return totalCellsImpossibleToBuild < _gameField.cells.length && recalculatedNationMoney >= productionCost;
   }
 }

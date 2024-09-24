@@ -6,17 +6,19 @@ class FromReadyForInputOnLongClickStart {
   FromReadyForInputOnLongClickStart(this._context);
 
   State process(GameFieldCell cell) {
-    _context.controlsState.update(MainControls(
-      money: _context.money.actual,
-      cellInfo: GameFieldControlsCellInfo(
-        income: MoneyCellCalculator.calculateCellIncome(cell),
-        terrain: cell.terrain,
-        terrainModifier: cell.terrainModifier?.type,
-        productionCenter: cell.productionCenter,
+    _context.controlsState.update(
+      MainControls(
+        totalSum: _context.money.totalSum,
+        cellInfo: GameFieldControlsCellInfo(
+          income: MoneyCellCalculator.calculateCellIncome(cell),
+          terrain: cell.terrain,
+          terrainModifier: cell.terrainModifier?.type,
+          productionCenter: cell.productionCenter,
+        ),
+        armyInfo: null,
+        carrierInfo: null,
       ),
-      armyInfo: null,
-      carrierInfo: null,
-    ));
+    );
 
     return ReadyForInput();
   }

@@ -1,7 +1,7 @@
 part of money_spending_phase_library;
 
 /// Should we place a mine field in general?
-class _MineFieldsEstimator implements Estimator<_TerrainModifierEstimationData> {
+class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

@@ -12,7 +12,7 @@ class MineFieldsEstimationData implements EstimationData {
 }
 
 /// Should we place mine fields in general?
-class MineFieldsEstimator implements Estimator<MineFieldsEstimationData> {
+class MineFieldsEstimator extends Estimator<MineFieldsEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

@@ -15,7 +15,7 @@ class _BarbedWireCellWithFactors {
 }
 
 /// Should we place a barbed wire in general?
-class _BarbedWireEstimator implements Estimator<_TerrainModifierEstimationData> {
+class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

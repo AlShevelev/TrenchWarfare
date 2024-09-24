@@ -8,7 +8,7 @@ class _CarriersBuildingEstimationData implements EstimationData {
 }
 
 /// Should we hire a unit in general?
-class _CarriersBuildingEstimator implements Estimator<_CarriersBuildingEstimationData> {
+class _CarriersBuildingEstimator extends Estimator<_CarriersBuildingEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

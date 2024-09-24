@@ -15,7 +15,7 @@ class _AntiAirGunCellWithFactors {
 }
 
 /// Should we place an anti air gun in general?
-class _AntiAirGunEstimator implements Estimator<_TerrainModifierEstimationData> {
+class _AntiAirGunEstimator extends Estimator<_TerrainModifierEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;

@@ -28,7 +28,7 @@ class _ProductionCenterEstimationProcessor extends _EstimationProcessorBase<_Pro
       final estimator = _ProductionCenterEstimator(
         gameField: _gameField,
         myNation: _myNation,
-        nationMoney: _nationMoney.actual,
+        nationMoney: _nationMoney.totalSum,
         type: type,
         influenceMap: _influenceMap,
         metadata: _metadata,

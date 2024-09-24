@@ -12,12 +12,12 @@ class UnitsEstimationData implements EstimationData {
 }
 
 /// Should we hire a unit in general?
-class UnitsEstimator implements Estimator<UnitsEstimationData> {
+class UnitsEstimator extends Estimator<UnitsEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final UnitType _type;
 
@@ -33,7 +33,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationData> {
     required GameFieldRead gameField,
     required Nation myNation,
     required UnitType type,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
   })  : _gameField = gameField,
@@ -50,7 +50,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationData> {
     }
 
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
-    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
@@ -91,7 +91,7 @@ class UnitsEstimator implements Estimator<UnitsEstimationData> {
 
     return allCellsInDanger
         .map((c) => EstimationResult<UnitsEstimationData>(
-              weight: resultWeight,
+              weight: resultWeight * getMoneyWeightFactor(_nationMoney),
               data: UnitsEstimationData(
                 cell: c,
                 type: _type,

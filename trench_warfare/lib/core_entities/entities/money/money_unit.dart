@@ -13,18 +13,25 @@ class MoneyUnit {
   MoneyUnit({required this.currency, required this.industryPoints});
 
   @override
-  bool operator == (covariant MoneyUnit other) => other.currency == currency && other.industryPoints == industryPoints;
+  bool operator ==(covariant MoneyUnit other) =>
+      other.currency == currency && other.industryPoints == industryPoints;
 
-  MoneyUnit operator + (covariant MoneyUnit other) =>
+  MoneyUnit operator +(covariant MoneyUnit other) =>
       MoneyUnit(currency: currency + other.currency, industryPoints: industryPoints + other.industryPoints);
 
-  MoneyUnit operator - (covariant MoneyUnit other) =>
+  MoneyUnit operator -(covariant MoneyUnit other) =>
       MoneyUnit(currency: currency - other.currency, industryPoints: industryPoints - other.industryPoints);
 
-  bool operator >= (covariant MoneyUnit other) => currency >= other.currency && industryPoints >= other.industryPoints;
+  bool operator >=(covariant MoneyUnit other) =>
+      currency >= other.currency && industryPoints >= other.industryPoints;
 
   MoneyUnit multiplyBy(double factor) => MoneyUnit(
         currency: math.multiplyBy(currency, factor),
         industryPoints: math.multiplyBy(industryPoints, factor),
+      );
+
+  MoneyUnit copy({int? currency, int? industryPoints}) => MoneyUnit(
+        currency: currency ?? this.currency,
+        industryPoints: industryPoints ?? this.industryPoints,
       );
 }

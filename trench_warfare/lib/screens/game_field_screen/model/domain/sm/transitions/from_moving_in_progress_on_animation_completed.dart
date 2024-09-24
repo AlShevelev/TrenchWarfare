@@ -28,6 +28,7 @@ class FromMovingInProgressOnAnimationCompleted extends GameObjectTransitionBase 
       return VictoryDefeatConfirmation(isVictory: isVictory);
     }
 
+    _context.money.recalculateIncomeAndExpenses();
     return ReadyForInput();
   }
 }

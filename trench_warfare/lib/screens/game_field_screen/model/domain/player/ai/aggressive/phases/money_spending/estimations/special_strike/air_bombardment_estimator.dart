@@ -14,12 +14,12 @@ class _AirBombardmentCellWithFactors {
   });
 }
 
-class _AirBombardmentEstimator implements Estimator<_SpecialStrikeEstimationData> {
+class _AirBombardmentEstimator extends Estimator<_SpecialStrikeEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final InfluenceMapRepresentationRead _influenceMap;
 
@@ -28,7 +28,7 @@ class _AirBombardmentEstimator implements Estimator<_SpecialStrikeEstimationData
   _AirBombardmentEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
   })  : _gameField = gameField,
@@ -42,7 +42,7 @@ class _AirBombardmentEstimator implements Estimator<_SpecialStrikeEstimationData
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.airBombardment,
-      _nationMoney,
+      _nationMoney.totalSum,
     );
 
     // We can't build shit
@@ -72,7 +72,7 @@ class _AirBombardmentEstimator implements Estimator<_SpecialStrikeEstimationData
     }
 
     return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
-          weight: 1.0 + c!.unitsQuantity * c.unitsSumPower,
+          weight: 1.0 + c!.unitsQuantity * c.unitsSumPower * getMoneyWeightFactor(_nationMoney),
           data: _SpecialStrikeEstimationData(
             cell: c.cell,
             type: SpecialStrikeType.airBombardment,
