@@ -18,6 +18,8 @@ class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionB
     RandomGen.shiftItems(cellsToIterate);
 
     for (var cell in cellsToIterate) {
+      final unitsToRemove = <Unit>[];
+
       for (var unit in cell.units) {
         _updateUnit(unit, cell.productionCenter?.type);
 
@@ -33,10 +35,12 @@ class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionB
         // We haven't got enough money to support a unit - let's dismiss it
         if (unitExpense.currency > totalSum.currency ||
             unitExpense.industryPoints > totalSum.industryPoints) {
-          cell.removeUnit(unit);
+          unitsToRemove.add(unit);
         }
         _context.money.reduceTotalSum(unitExpense);
       }
+
+      cell.removeUnits(unitsToRemove);
 
       events.add(UpdateCell(cell, updateBorderCells: []));
     }

@@ -116,6 +116,12 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
 
   void removeUnit(Unit unit) =>  _units.remove(unit);
 
+  void removeUnits(Iterable<Unit> units) {
+    for (final unit in units) {
+      removeUnit(unit);
+    }
+  }
+
   void resortUnits(Iterable<String> unitsId) {
     final result = List<Unit>.empty(growable: true);
 

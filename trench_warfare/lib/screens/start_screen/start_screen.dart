@@ -14,7 +14,7 @@ class StartScreen extends StatelessWidget {
             onPressed: () {
               //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/15x15_carriers_enemy_pc_reachable_by_water_only.tmx');
               //Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/40x40_land.tmx');
-              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/7x7_peaceful_animation.tmx');
+              Navigator.of(context).pushNamed(Routes.gameField, arguments: 'test/7x7_expenses_test_1.tmx');
             },
             child: const Text(
               "Start",

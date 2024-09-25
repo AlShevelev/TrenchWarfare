@@ -39,7 +39,8 @@ class MoneyStorage implements MoneyStorageRead {
   late final Nation _nation;
 
   MoneyStorage(GameFieldRead gameField, NationRecord nation)
-      : _nation = nation.code,
+      : _gameField = gameField,
+        _nation = nation.code,
         _totalSum = MoneyUnit(currency: nation.startMoney, industryPoints: nation.startIndustryPoints) {
     recalculateIncomeAndExpenses();
   }
