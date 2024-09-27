@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart' hide Animation, Image;
+import 'package:trench_warfare/shared/utils/logger/logger.dart';
 
 import 'app/app.dart';
 
@@ -9,6 +10,8 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   //debugPaintSizeEnabled=true;
+
+  Logger.init();
 
   runApp(
       EasyLocalization(
