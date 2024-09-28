@@ -5,6 +5,7 @@ import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class MoneyStorageRead {
   MoneyUnit get totalSum;
@@ -14,7 +15,7 @@ abstract interface class MoneyStorageRead {
   MoneyUnit get totalExpenses;
 }
 
-class _IncomeAndExpenses{
+class _IncomeAndExpenses {
   final MoneyUnit income;
   final MoneyUnit expenses;
 
@@ -43,21 +44,37 @@ class MoneyStorage implements MoneyStorageRead {
         _nation = nation.code,
         _totalSum = MoneyUnit(currency: nation.startMoney, industryPoints: nation.startIndustryPoints) {
     recalculateIncomeAndExpenses();
+
+    Logger.info(
+      'Created. nation: $_nation; totalSum: $_totalSum; income: $_totalIncome; expenses: $_totalExpenses',
+      tag: 'MONEY_STORAGE',
+    );
   }
 
   void recalculateIncomeAndSum() {
     _totalIncome = _calculateIncomeAndExpenses(income: true).income;
     _totalSum = _totalSum + _totalIncome;
+
+    Logger.info(
+      'Income and sum recalculated. nation: $_nation; totalSum: $_totalSum; income: $_totalIncome',
+      tag: 'MONEY_STORAGE',
+    );
   }
 
   void recalculateExpenses() {
     _totalExpenses = _calculateIncomeAndExpenses(expenses: true).expenses;
+    Logger.info('Expenses recalculated. nation: $_nation; expenses: $_totalExpenses', tag: 'MONEY_STORAGE');
   }
 
   void recalculateIncomeAndExpenses() {
     final incomeAndExpenses = _calculateIncomeAndExpenses(income: true, expenses: true);
     _totalIncome = incomeAndExpenses.income;
     _totalExpenses = incomeAndExpenses.expenses;
+
+    Logger.info(
+      'Income and expenses recalculated. nation: $_nation; income: $_totalIncome; expenses: $_totalExpenses',
+      tag: 'MONEY_STORAGE',
+    );
   }
 
   void reduceTotalSum(MoneyUnit toReduce) {
@@ -71,11 +88,21 @@ class MoneyStorage implements MoneyStorageRead {
     } else {
       _totalSum = newSum;
     }
+
+    Logger.info(
+      'Total sum reduced. nation: $_nation; totalSum: $_totalSum',
+      tag: 'MONEY_STORAGE',
+    );
   }
 
   void updateExpenses({required MoneyUnit oldValue, required MoneyUnit newValue}) {
     _totalExpenses -= oldValue;
     _totalExpenses += newValue;
+
+    Logger.info(
+      'Expenses updated. nation: $_nation; expenses: $_totalExpenses',
+      tag: 'MONEY_STORAGE',
+    );
   }
 
   _IncomeAndExpenses _calculateIncomeAndExpenses({bool income = false, bool expenses = false}) {
