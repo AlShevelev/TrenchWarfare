@@ -16,11 +16,13 @@ class _LandingTransition extends _TroopTransferTransition {
 
     // The carrier is dead or out of the landing cell - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null || cellWithSelectedCarrier != _state.landingPoint.carrierCell) {
+      Logger.info('LANDING_TRANSITION: return. cellWithSelectedCarrier == null || cellWithSelectedCarrier != _state.landingPoint.carrierCell', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     // Checking to mine fields
     if (!_GatheringPointCalculator.isPointValid(_state.landingPoint)) {
+      Logger.info('LANDING_TRANSITION: return. !_GatheringPointCalculator.isPointValid(_state.landingPoint)', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -40,9 +42,11 @@ class _LandingTransition extends _TroopTransferTransition {
     }
 
     if (_state.selectedCarrier.units.isNotEmpty && unitsCell.units.length < GameConstants.maxUnitsInCell) {
+      Logger.info('LANDING_TRANSITION: return final. _state.selectedCarrier.units.isNotEmpty && unitsCell.units.length < GameConstants.maxUnitsInCell', tag: 'CARRIER');
       // Some of the units are in a carrier
       return _TransitionResult(newState: _state, canContinue: false);
     } else {
+      Logger.info('LANDING_TRANSITION: return final. else branch', tag: 'CARRIER');
       return _TransitionResult(
         newState: _StateMoveUnitsAfterLanding(
           selectedCarrier: _state.selectedCarrier,

@@ -18,11 +18,13 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return. cellWithSelectedCarrier == null', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     // Checking to mine fields
     if (!_GatheringPointCalculator.isPointValid(_state.landingPoint)) {
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return. !_GatheringPointCalculator.isPointValid(_state.landingPoint)', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -32,6 +34,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     // Some units was killed - the transfer doesn't make sense
     if (unitsOnCells.any((u) => u.item2 == null)) {
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return. unitsOnCells.any((u) => u.item2 == null)', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -44,6 +47,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
           calculatedUnit: u.item1,
         ));
     if (paths.any((p) => p.isEmpty)) {
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return. paths.any((p) => p.isEmpty)', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -60,6 +64,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     if (state.unitsToLoad.all((unit) => state.selectedCarrier.units.contains(unit))) {
       // All the units have been loaded - we can transport them now
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return final. state.unitsToLoad.all((unit) => state.selectedCarrier.units.contains(unit))', tag: 'CARRIER');
       return _TransitionResult(
         newState: _StateTransporting(
           selectedCarrier: state.selectedCarrier,
@@ -68,6 +73,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
         canContinue: true,
       );
     } else {
+      Logger.info('LOADING_TO_CARRIER_TRANSITION: return final. else branch', tag: 'CARRIER');
       // Some units hava not been loaded - we can do it in the next turn
       final newUnitsToLoad = <Unit>[...state.unitsToLoad];
       final loadedUnitsId = state.selectedCarrier.units.map((u) => u.id).toList(growable: false);

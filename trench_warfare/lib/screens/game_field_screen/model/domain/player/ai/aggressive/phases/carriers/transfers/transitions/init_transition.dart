@@ -24,6 +24,7 @@ class _InitTransition extends _TroopTransferTransition {
 
     // If we haven't got a free carrier - we are powerless to do anything
     if (freeCarriers.isEmpty) {
+      Logger.info('INIT_TRANSITION: return. carrierPath.isEmpty', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -32,6 +33,7 @@ class _InitTransition extends _TroopTransferTransition {
     // The landing point calculation
     final landingPoint = _calculateLandingPoint(selectedCarrier);
     if (landingPoint == null) {
+      Logger.info('INIT_TRANSITION: return. landingPoint == null', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -48,10 +50,12 @@ class _InitTransition extends _TroopTransferTransition {
 
       // We didn't manage to find a gathering point of units
       if (gatheringPointAndUnits == null) {
+        Logger.info('INIT_TRANSITION: return. [selectedCarrier.item1.units.length < GameConstants.maxUnitsInCarrier] gatheringPointAndUnits == null', tag: 'CARRIER');
         return _TransitionResult.completed();
       }
     }
 
+    Logger.info('INIT_TRANSITION: return final. [gatheringPointAndUnits == null]: ${gatheringPointAndUnits == null}', tag: 'CARRIER');
     return gatheringPointAndUnits == null
         ? _TransitionResult(
             newState: _StateTransporting(

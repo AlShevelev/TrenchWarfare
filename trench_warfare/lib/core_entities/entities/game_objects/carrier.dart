@@ -85,4 +85,8 @@ class Carrier extends Unit {
         type: UnitType.carrier,
         units: [],
       );
+
+  @override
+  String toString() => 'CARRIER: {state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
+      'level: $experienceRank; health: $health; movementPoints: $movementPoints; units: ${units.length}}';
 }

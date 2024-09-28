@@ -41,21 +41,27 @@ abstract interface class _TroopTransferTransition {
   }) async {
     GameFieldCellRead? unitCell = from;
 
+    Logger.info('MOVE_UNIT: Start. unit: $unit; from: $from; To: $to', tag: 'CARRIER');
     do {
       await _actions.move(unit, from: unitCell!, to: to);
+      Logger.info('MOVE_UNIT: movements completed', tag: 'CARRIER');
 
       unitCell = _gameField.getCellWithUnit(unit, _myNation);
 
       // The unit is dead
       if (unitCell == null) {
+        Logger.info('MOVE_UNIT: the unit is dead', tag: 'CARRIER');
         return null;
       }
 
       // The cell is reached
       if (unitCell == to) {
+        Logger.info('MOVE_UNIT: the cell is reached', tag: 'CARRIER');
         return to;
       }
     } while (unit.state != UnitState.disabled);
+
+    Logger.info('MOVE_UNIT: End. result cell is: $unitCell', tag: 'CARRIER');
 
     return unitCell;
   }

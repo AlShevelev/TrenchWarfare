@@ -6,4 +6,7 @@ class LandingPoint {
   final GameFieldCellRead unitsCell;
 
   LandingPoint({required this.carrierCell, required this.unitsCell});
+
+  @override
+  String toString() => 'LANDING POINT: {carrier: $carrierCell; units: $unitsCell}';
 }

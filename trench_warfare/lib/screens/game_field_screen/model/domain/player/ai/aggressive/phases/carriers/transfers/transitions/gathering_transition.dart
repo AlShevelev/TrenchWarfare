@@ -26,17 +26,20 @@ class _GatheringTransition extends _TroopTransferTransition {
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
+      Logger.info('GATHERING_TRANSITION: return. cellWithSelectedCarrier == null', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     // The carrier can't move in this turn
     if (_state.selectedCarrier.state == UnitState.disabled) {
+      Logger.info('GATHERING_TRANSITION: return. _state.selectedCarrier.state == UnitState.disabled', tag: 'CARRIER');
       return _TransitionResult(newState: _state, canContinue: false);
     }
 
     // The target cells validation
     if (!_GatheringPointCalculator.isPointValid(state.gatheringPoint) ||
         !_GatheringPointCalculator.isPointValid(state.landingPoint)) {
+      Logger.info('GATHERING_TRANSITION: return. The target cells validation fail', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -55,6 +58,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // The carrier can't reach the target cell
       if (carrierPath.isEmpty) {
+        Logger.info('GATHERING_TRANSITION: return. carrierPath.isEmpty', tag: 'CARRIER');
         return _TransitionResult.completed();
       }
 
@@ -66,6 +70,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // The carrier is dead - can't make the transition
       if (newCarrierCell == null) {
+        Logger.info('GATHERING_TRANSITION: return. newCarrierCell == null', tag: 'CARRIER');
         return _TransitionResult.completed();
       }
 
@@ -91,6 +96,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // Can't find full pack of the new units - we should cancel the transportation
       if (newUnits.length < unitsNeeded) {
+        Logger.info('GATHERING_TRANSITION: return. newUnits.length < unitsNeeded', tag: 'CARRIER');
         return _TransitionResult.completed();
       }
 
@@ -139,6 +145,7 @@ class _GatheringTransition extends _TroopTransferTransition {
     state = state.copy(gatheringUnits: gatheringUnitsCopy);
 
     if (carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length) {
+      Logger.info('GATHERING_TRANSITION: return final. carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length', tag: 'CARRIER');
       return _TransitionResult(
         newState: _StateLoadingToCarrier(
           selectedCarrier: state.selectedCarrier,
@@ -148,6 +155,7 @@ class _GatheringTransition extends _TroopTransferTransition {
         canContinue: true,
       );
     } else {
+      Logger.info('GATHERING_TRANSITION: return final. else branch', tag: 'CARRIER');
       return _TransitionResult(
         newState: state,
         canContinue: false,

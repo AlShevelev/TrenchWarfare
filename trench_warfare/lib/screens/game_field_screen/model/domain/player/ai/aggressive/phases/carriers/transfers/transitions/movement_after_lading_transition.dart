@@ -20,6 +20,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
 
     // The carrier is alive
     if (cellWithSelectedCarrier != null && _state.selectedCarrier.state != UnitState.disabled) {
+      Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: The carrier is alive', tag: 'CARRIER');
       final carrierTargetCell = _gameField
           .findCellsAround(cellWithSelectedCarrier)
           .where((c) =>
@@ -32,6 +33,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
       if (carrierTargetCell != null) {
         await _moveUnit(_state.selectedCarrier, from: cellWithSelectedCarrier, to: carrierTargetCell);
       }
+      Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: The carrier movement is completed', tag: 'CARRIER');
     }
 
     final unitCells = _state.landedUnits
@@ -41,6 +43,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
         .toSet()
         .toList(growable: false);
 
+    Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: Units movement phase is started', tag: 'CARRIER');
     await UnitsMovingPhase.withActions(
       actions: _actions,
       gameField: _gameField,
@@ -48,7 +51,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
       metadata: _metadata,
       iterator: StableUnitsIterator.fromCell(unitCells),
     ).start();
-
+    Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: Units movement phase is completed', tag: 'CARRIER');
     return _TransitionResult.completed();
   }
 }

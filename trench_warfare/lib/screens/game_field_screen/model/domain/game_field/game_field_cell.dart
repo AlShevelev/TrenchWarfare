@@ -112,9 +112,9 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
     _units.addAll(units);
   }
 
-  Unit removeActiveUnit() =>  _units.removeAt(0);
+  Unit removeActiveUnit() => _units.removeAt(0);
 
-  void removeUnit(Unit unit) =>  _units.remove(unit);
+  void removeUnit(Unit unit) => _units.remove(unit);
 
   void removeUnits(Iterable<Unit> units) {
     for (final unit in units) {
@@ -132,4 +132,11 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
     _units.clear();
     _units.addAll(result);
   }
+
+  @override
+  String toString() =>
+      'CELL: {row: $row; col: $col; units: ${units.length}; terrain: $terrain; '
+          'terrainModifier: ${terrainModifier?.type}; '
+          'production: [type: ${productionCenter?.type}; level: ${productionCenter?.level}]; '
+          'hasRoad: $hasRoad; hasRiver: $hasRiver}';
 }

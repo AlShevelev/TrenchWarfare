@@ -16,15 +16,18 @@ class _TransportingTransition extends _TroopTransferTransition {
 
     // The carrier is dead - the transfer doesn't make sense
     if (cellWithSelectedCarrier == null) {
+      Logger.info('TRANSPORTING_TRANSITION: return. cellWithSelectedCarrier == null', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     if (!_GatheringPointCalculator.isPointValid(_state.landingPoint)) {
+      Logger.info('TRANSPORTING_TRANSITION: return. !_GatheringPointCalculator.isPointValid(_state.landingPoint)', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     // The carrier can't move in this turn
     if (_state.selectedCarrier.state == UnitState.disabled) {
+      Logger.info('TRANSPORTING_TRANSITION: return. _state.selectedCarrier.state == UnitState.disabled', tag: 'CARRIER');
       return _TransitionResult(newState: _state, canContinue: false);
     }
 
@@ -37,6 +40,7 @@ class _TransportingTransition extends _TroopTransferTransition {
 
     // The carrier can't reach the target cell
     if (carrierPath.isEmpty) {
+      Logger.info('TRANSPORTING_TRANSITION: return. carrierPath.isEmpty', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
@@ -48,10 +52,12 @@ class _TransportingTransition extends _TroopTransferTransition {
 
     // The carried has been destroyed during the moving (due to a mine field, for exemple)
     if (resultCell == null) {
+      Logger.info('TRANSPORTING_TRANSITION: return. resultCell == null', tag: 'CARRIER');
       return _TransitionResult.completed();
     }
 
     if (resultCell == _state.landingPoint.carrierCell) {
+      Logger.info('TRANSPORTING_TRANSITION: return final. resultCell == _state.landingPoint.carrierCell', tag: 'CARRIER');
       return _TransitionResult(
         newState: _StateLanding(
           selectedCarrier: _state.selectedCarrier,
@@ -60,6 +66,7 @@ class _TransportingTransition extends _TroopTransferTransition {
         canContinue: _state.selectedCarrier.state != UnitState.disabled,
       );
     } else {
+      Logger.info('TRANSPORTING_TRANSITION: return final. else branch', tag: 'CARRIER');
       return _TransitionResult(newState: _state, canContinue: false);
     }
   }

@@ -36,10 +36,16 @@ class CarriersPhase implements TurnPhase {
 
   @override
   Future<void> start() async {
+    Logger.info('Start the phase', tag: 'CARRIER');
     final carriersCount = _gameField.cells
         .where((c) => c.nation == _myNation && c.units.isNotEmpty)
         .map((c) => c.units.count((u) => u.type == UnitType.carrier))
         .sum;
+
+    Logger.info(
+      'Carriers count: $carriersCount; Total transfers: ${_transfersStorage.totalTransfers}',
+      tag: 'CARRIER',
+    );
 
     // We've got free carriers
     if (carriersCount > _transfersStorage.totalTransfers) {
@@ -49,12 +55,16 @@ class CarriersPhase implements TurnPhase {
         metadata: _metadata,
       ).getTarget();
 
+      Logger.info('Target is: $target', tag: 'CARRIER');
+
       // And have a target for them
       if (target != null) {
+        Logger.info('New transfer is added', tag: 'CARRIER');
         _transfersStorage.addNewTransfer(targetCell: target);
       }
     }
 
     await _transfersStorage.processAll();
+    Logger.info('End the phase', tag: 'CARRIER');
   }
 }
