@@ -17,6 +17,12 @@ class BattleResult {
   // The value is null if the defending cell hasn't got a production center or the defending cell is not captured
   final ProductionCenterLevel? defendingCellProductionCenterNewLevel;
 
+  @override
+  String toString() => 'BATTLE_RESULT: {attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+      'attackingUnitCellId: $attackingUnitCellId; defendingUnitCellId: $defendingUnitCellId; '
+      'isDefendingCellTerrainModifierDestroyed: $isDefendingCellTerrainModifierDestroyed; '
+      'isDefendingCellProductionCenterDestroyed: $isDefendingCellProductionCenterDestroyed}';
+
   BattleResult({
     required this.attackingUnit,
     required this.defendingUnit,

@@ -21,12 +21,21 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     final defendingUnit = defendingCell.activeUnit!;
 
+    Logger.info(
+      'BATTLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
+          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+          'attackingCell: $attackingCell; defendingCell: $defendingCell',
+      tag: 'MOVEMENT',
+    );
+
     // The battle calculation
     final battleResult = _calculateBattleResult(
       attackingUnit,
       attackingCell: attackingCell,
       defendingCell: defendingCell,
     );
+
+    Logger.info('BATTLE; result: $battleResult', tag: 'MOVEMENT');
 
     // set nations to the cells up to the attacking cell
     for (var i = 0; i <= reachableCells.length - 2; i++) {

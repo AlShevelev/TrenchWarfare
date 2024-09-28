@@ -76,4 +76,8 @@ class UnitInBattle {
   }
 
   void increaseTookPartInBattles(int valueToIncrease) => _tookPartInBattles += valueToIncrease;
+
+  @override
+  String toString() =>
+      'UNIT_IN_BATTLE: {type: $type; level: $experienceRank; health: $health; fatigue: $fatigue}';
 }

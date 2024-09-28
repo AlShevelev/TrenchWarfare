@@ -19,9 +19,18 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
     final defendingUnit = defendingCell.activeUnit!;
 
+    Logger.info(
+      'BATTLE_WITH_UNREACHABLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
+          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+          'attackingCell: $attackingCell; defendingCell: $defendingCell',
+      tag: 'MOVEMENT',
+    );
+
     // The battle calculation
     final battleResult =
         _calculateBattleResult(attackingUnit, attackingCell: attackingCell, defendingCell: defendingCell);
+
+    Logger.info('BATTLE_WITH_UNREACHABLE; result: $battleResult', tag: 'MOVEMENT');
 
     // Update the defending cell
     if (battleResult.isDefendingCellTerrainModifierDestroyed) {

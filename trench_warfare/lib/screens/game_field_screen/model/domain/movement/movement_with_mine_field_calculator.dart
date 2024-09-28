@@ -16,6 +16,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
   State startMovement(Iterable<GameFieldCell> path) {
     final unit = _detachActiveUnit(path);
 
+    Logger.info(
+      'MINE_FIELD; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: $unit',
+      tag: 'MOVEMENT',
+    );
+
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
     final lastReachableCell = reachableCells.last;
 
@@ -34,6 +39,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         reachableCells: reachableCells,
         unit: unit,
       );
+
+      Logger.info(
+        'MINE_FIELD; lastReachableCell == path.first; Cancelled',
+        tag: 'MOVEMENT',
+      );
     } else {
       for (var cell in reachableCells) {
         cell.setNation(_nation);
@@ -45,6 +55,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       lastReachableCell.setTerrainModifier(null);
 
       final isUnitAlive = damage < unit.health;
+
+      Logger.info(
+        'MINE_FIELD; isUnitAlive: $isUnitAlive',
+        tag: 'MOVEMENT',
+      );
 
       if (isUnitAlive) {
         lastReachableCell.addUnitAsActive(unit);
@@ -58,6 +73,12 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         } else {
           unit.setState(UnitState.disabled);
         }
+
+        Logger.info(
+          'MINE_FIELD; unit.health: ${unit.health}; unit.movementPoints: ${unit.movementPoints}; '
+              'unit.state: ${unit.state}',
+          tag: 'MOVEMENT',
+        );
       }
 
       for (var cell in path) {
@@ -78,7 +99,14 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final min = unit.maxHealth * minPossibleDamage;
     final max = unit.maxHealth * maxPossibleDamage;
 
-    return RandomGen.randomDouble(min, max);
+    final result = RandomGen.randomDouble(min, max);
+
+    Logger.info(
+      'MINE_FIELD; Damage calculation; unit.maxHealth: ${unit.maxHealth}; min: $min; max: $max; result: $result',
+      tag: 'MOVEMENT',
+    );
+
+    return result;
   }
 
   void _updateUIForMovingUnit({

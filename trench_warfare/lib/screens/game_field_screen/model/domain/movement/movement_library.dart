@@ -13,6 +13,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/ga
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 

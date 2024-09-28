@@ -13,6 +13,11 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
   State startMovement(Iterable<GameFieldCell> path) {
     final unit = _detachActiveUnit(path);
 
+    Logger.info(
+      'WITHOUT_OBSTACLES; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: $unit',
+      tag: 'MOVEMENT',
+    );
+
     final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
     final lastReachableCell = reachableCells.last;
 
@@ -27,6 +32,11 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       }
 
       _updateUIForStandingUnit(path: path, reachableCells: reachableCells, unit: unit);
+
+      Logger.info(
+        'WITHOUT_OBSTACLES; lastReachableCell == path.first; Canceled',
+        tag: 'MOVEMENT',
+      );
     } else {
       for (var cell in reachableCells) {
         cell.setNation(_nation);
@@ -36,12 +46,19 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
 
       unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
 
+      Logger.info(
+        'WITHOUT_OBSTACLES; unit.movementPoints: ${unit.movementPoints}',
+        tag: 'MOVEMENT',
+      );
+
       if (unit.movementPoints > 0) {
         final state = _canMove(startCell: lastReachableCell) ? UnitState.enabled : UnitState.disabled;
         unit.setState(state);
       } else {
         unit.setState(UnitState.disabled);
       }
+
+      Logger.info('WITHOUT_OBSTACLES; new unit state is: ${unit.state}', tag: 'MOVEMENT');
 
       for (var cell in path) {
         cell.setPathItem(null);
