@@ -50,6 +50,9 @@ class GameFieldControlsUnitCard extends GameFieldControlsCard<UnitType> {
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+
+  @override
+  String toString() => 'CARD: {units. type: $type}';
 }
 
 class GameFieldControlsUnitCardBrief extends GameFieldControlsCard<UnitType> {
@@ -62,6 +65,9 @@ class GameFieldControlsUnitCardBrief extends GameFieldControlsCard<UnitType> {
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String toString() => 'CARD: {units brief. type: $type}';
 }
 
 class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<ProductionCenterType> {
@@ -90,6 +96,9 @@ class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<Produ
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+
+  @override
+  String toString() => 'CARD: {production center. type: $type}';
 }
 
 class GameFieldControlsProductionCentersCardBrief extends GameFieldControlsCard<ProductionCenterType> {
@@ -102,6 +111,9 @@ class GameFieldControlsProductionCentersCardBrief extends GameFieldControlsCard<
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String toString() => 'CARD: {production center brief. type: $type}';
 }
 
 class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<TerrainModifierType> {
@@ -130,6 +142,9 @@ class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<Terrai
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+
+  @override
+  String toString() => 'CARD: {terrain modifier. type: $type}';
 }
 
 class GameFieldControlsTerrainModifiersCardBrief extends GameFieldControlsCard<TerrainModifierType> {
@@ -142,6 +157,9 @@ class GameFieldControlsTerrainModifiersCardBrief extends GameFieldControlsCard<T
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String toString() => 'CARD: {terrain modifier brief. type: $type}';
 }
 
 class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost> {
@@ -170,6 +188,9 @@ class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost>
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+
+  @override
+  String toString() => 'CARD: {unit booster. type: $type}';
 }
 
 class GameFieldControlsUnitBoostersCardBrief extends GameFieldControlsCard<UnitBoost> {
@@ -182,6 +203,9 @@ class GameFieldControlsUnitBoostersCardBrief extends GameFieldControlsCard<UnitB
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String toString() => 'CARD: {unit booster brief. type: $type}';
 }
 
 class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard<SpecialStrikeType> {
@@ -210,6 +234,9 @@ class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard<SpecialS
     required this.buildDisplayRestriction,
     required this.buildError,
   });
+
+  @override
+  String toString() => 'CARD: {special strike. type: $type}';
 }
 
 class GameFieldControlsSpecialStrikesCardBrief extends GameFieldControlsCard<SpecialStrikeType> {
@@ -222,4 +249,7 @@ class GameFieldControlsSpecialStrikesCardBrief extends GameFieldControlsCard<Spe
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
+  String toString() => 'CARD: {special strike brief. type: $type}';
 }

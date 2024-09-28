@@ -34,4 +34,7 @@ class MoneyUnit {
         currency: currency ?? this.currency,
         industryPoints: industryPoints ?? this.industryPoints,
       );
+
+  @override
+  String toString() => 'MONEY_UNIT: {currency: $currency; industryPoints: $industryPoints}';
 }

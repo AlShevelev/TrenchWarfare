@@ -1,6 +1,5 @@
 library game_field_sm;
 
-import 'dart:developer';
 import 'dart:math' as math;
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,6 +31,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 

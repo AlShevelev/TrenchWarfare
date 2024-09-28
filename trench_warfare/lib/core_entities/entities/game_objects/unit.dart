@@ -344,6 +344,6 @@ class Unit extends GameObject {
   }
 
   @override
-  String toString() => 'UNIT: {type: $type; state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
+  String toString() => 'UNIT: {id: $id; type: $type; state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
       'level: $experienceRank; health: $health; movementPoints: $movementPoints}';
 }

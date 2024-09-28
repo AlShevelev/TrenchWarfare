@@ -9,4 +9,8 @@ class PathItem {
   final double movementPointsLeft;
 
   PathItem({required this.type, required this.isActive, required this.movementPointsLeft});
+
+  @override
+  String toString() =>
+      'PATH_ITEM: {type: $type; isActive: $isActive; movementPointsLeft: $movementPointsLeft}';
 }
