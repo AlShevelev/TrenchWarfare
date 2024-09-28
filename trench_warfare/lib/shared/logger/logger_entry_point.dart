@@ -1,10 +1,12 @@
-import 'package:talker_flutter/talker_flutter.dart';
+part of logger;
 
 class Logger {
   static late final Talker talkerFlutter;
 
   static void init() {
-    talkerFlutter = Talker();
+    talkerFlutter = Talker(
+      history: _TalkerDbHistory(dao: Database.talkerHistoryDao),
+    );
   }
 
   static void info(String message, {String? tag, Object? exception, StackTrace? stackTrace}) => _log(

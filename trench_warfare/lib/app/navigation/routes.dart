@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:trench_warfare/app/navigation/fade_route.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field_screen.dart';
-import 'package:trench_warfare/shared/utils/logger/logger.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class Routes {
   static const startScreen = '/';

@@ -1,0 +1,94 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "3:4332078635293440905",
+      "lastPropertyId": "9:5918448870015553261",
+      "name": "TalkerDataDbEntity",
+      "properties": [
+        {
+          "id": "1:8198649107745803603",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7950731184131067211",
+          "name": "message",
+          "type": 9
+        },
+        {
+          "id": "3:846178785455145106",
+          "name": "logLevel",
+          "type": 6
+        },
+        {
+          "id": "4:3659514362481207735",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "5:5488543279267005750",
+          "name": "key",
+          "type": 9
+        },
+        {
+          "id": "6:7150606349020566957",
+          "name": "penFColor",
+          "type": 6
+        },
+        {
+          "id": "7:3439737037213805236",
+          "name": "penBColor",
+          "type": 6
+        },
+        {
+          "id": "8:2559605263898787672",
+          "name": "time",
+          "type": 10
+        },
+        {
+          "id": "9:5918448870015553261",
+          "name": "stackTrace",
+          "type": 9
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:4332078635293440905",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [
+    4036390663965995175,
+    3377034406171530323
+  ],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    3037082238910709093,
+    8322230449658626567,
+    7154222840745891179,
+    5223827669256880326,
+    3001136329678658329,
+    3758257046697067388,
+    3725789529605501120,
+    499134733215046961,
+    3202753595630021765,
+    3015041911764701074,
+    5858936920019458924,
+    6914137639230071088,
+    2346508508294854882,
+    7699715947932068148,
+    3919681862940740580,
+    3119890857270017098,
+    9204318584145459748,
+    8510908930930246586
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}

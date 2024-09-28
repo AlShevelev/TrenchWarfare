@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart' hide Animation, Image;
-import 'package:trench_warfare/shared/utils/logger/logger.dart';
+import 'package:trench_warfare/database/database.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 import 'app/app.dart';
 
@@ -11,6 +11,7 @@ void main() async {
 
   //debugPaintSizeEnabled=true;
 
+  await Database.start();
   Logger.init();
 
   runApp(

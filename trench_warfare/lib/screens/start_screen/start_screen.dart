@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/navigation/routes.dart';
-import 'package:trench_warfare/shared/utils/logger/logger.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
