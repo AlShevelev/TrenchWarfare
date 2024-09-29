@@ -39,7 +39,12 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     final chanceToSuccess = _calculateChanceToSuccess(activeUnit);
 
-    if (RandomGen.randomDouble(0, 1) <= chanceToSuccess) {
+    final random = RandomGen.randomDouble(0, 1);
+
+    Logger.info('PROPAGANDA; cell: $_cell; unit: $activeUnit; chanceToSuccess: $chanceToSuccess; '
+        'random: $random', tag: 'SPECIAL_STRIKE');
+
+    if (random <= chanceToSuccess) {
       final possibleEffects = _calculatePossibleEffects();
 
       _effect = possibleEffects[RandomGen.randomInt(possibleEffects.length)];
@@ -48,21 +53,27 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         case _DecreaseDefense():
           {
             activeUnit.setDefence((activeUnit.defence ~/ 2).toDouble());
+            Logger.info('PROPAGANDA; effect is DecreaseDefense', tag: 'SPECIAL_STRIKE');
           }
         case _Deserting():
           {
             _cell.removeActiveUnit();
+            Logger.info('PROPAGANDA; effect is Deserting', tag: 'SPECIAL_STRIKE');
           }
         case _RunAway(newCell: var newCell):
           {
             _cell.removeActiveUnit();
             newCell.addUnitAsActive(activeUnit);
+            Logger.info('PROPAGANDA; effect is RunAway to: $newCell', tag: 'SPECIAL_STRIKE');
           }
         case _Convert():
           {
             _cell.setNation(_myNation);
+            Logger.info('PROPAGANDA; effect is Convert', tag: 'SPECIAL_STRIKE');
           }
       }
+    } else {
+      Logger.info('PROPAGANDA; no effect', tag: 'SPECIAL_STRIKE');
     }
   }
 

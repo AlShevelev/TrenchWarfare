@@ -34,10 +34,17 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     for (var unit in cell.units) {
       final random = RandomGen.randomDouble(0, 1);
 
+      Logger.info('GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
+          'random: $random', tag: 'SPECIAL_STRIKE');
+
       if (random <= chanceToKill) {
         unit.setHealth(0);
+
+        Logger.info('GAS_ATTACK; killed unit: $unit killed;', tag: 'SPECIAL_STRIKE');
       } else if (random <= chanceToReduceHealth) {
         unit.setHealth(unit.health / 2);
+
+        Logger.info('GAS_ATTACK; health halved for unit: $unit killed', tag: 'SPECIAL_STRIKE');
       }
     }
 

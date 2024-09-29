@@ -1,7 +1,5 @@
 library cards_placing;
 
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/animaition_constants.dart';
 import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
@@ -19,12 +17,12 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/meta
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
