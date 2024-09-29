@@ -17,6 +17,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objec
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class GameFieldForControls {
   Stream<GameFieldControlsState> get controlsState;
@@ -146,6 +147,7 @@ class GameField extends FlameGame
 
   void _onGameFieldStateUpdate(GameFieldState state) async {
     if (state is Completed) {
+      Logger.info('pop to previous screen', tag: 'NAVIGATION');
       gameRef.buildContext?.let((context) => Navigator.of(context).pop());
     }
   }

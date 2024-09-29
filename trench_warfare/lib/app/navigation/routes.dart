@@ -14,10 +14,13 @@ class Routes {
       case gameField:
         {
           final mapName = settings.arguments as String;
+          Logger.info('to: gameField; mapName: $mapName', tag: 'NAVIGATION');
+
           return FadeRoute(GameFieldScreen(mapName: mapName));
         }
       case debugLogging:
         {
+          Logger.info('to: debugLogging', tag: 'NAVIGATION');
           return FadeRoute(TalkerScreen(talker: Logger.talkerFlutter));
         }
       default:
