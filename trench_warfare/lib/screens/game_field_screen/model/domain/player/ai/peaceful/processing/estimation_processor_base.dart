@@ -66,7 +66,7 @@ abstract class EstimationProcessorBase<D extends EstimationData> implements Esti
 
   double _calculateAverageWeight(Iterable<EstimationResult<D>> estimationResult) => estimationResult.isEmpty
       ? 0.0
-      : estimationResult.map((e) => e.weight).average().let((v) => v == 0 ? 0.0 : log10(v))!;
+      : estimationResult.map((e) => e.weight).average().let((v) => v <= 0 ? 0.0 : log10(v))!;
 
   @protected
   Future<void> _simulateCardSelection({

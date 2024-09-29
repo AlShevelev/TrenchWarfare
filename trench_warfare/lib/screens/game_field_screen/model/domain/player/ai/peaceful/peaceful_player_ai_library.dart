@@ -21,6 +21,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/ga
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 

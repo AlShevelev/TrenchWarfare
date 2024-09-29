@@ -9,5 +9,6 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/units_moving/units_moving_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 part 'aggressive_player_ai.dart';

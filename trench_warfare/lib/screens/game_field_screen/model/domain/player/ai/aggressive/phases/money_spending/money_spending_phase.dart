@@ -82,7 +82,17 @@ class MoneySpendingPhase implements TurnPhase {
 
       final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
 
+      Logger.info(
+        'calculated weights are: '
+            'ProductionCenter: ${averageWeights[0]}; SpecialStrike: ${averageWeights[1]}; '
+            'TerrainModifier: ${averageWeights[2]}; UnitBooster: ${averageWeights[3]}; '
+            'Units: ${averageWeights[4]}; Carriers: ${averageWeights[5]};',
+        tag: 'MONEY_SPENDING',
+      );
+
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
+
+      Logger.info('selected index is: $generalActionIndex', tag: 'MONEY_SPENDING');
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can

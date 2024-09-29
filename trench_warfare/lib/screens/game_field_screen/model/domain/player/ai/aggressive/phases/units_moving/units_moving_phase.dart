@@ -52,13 +52,23 @@ class UnitsMovingPhase implements TurnPhase {
 
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled) {
+        Logger.info('processing unit: $unit on cell: $cellWithUnit', tag: 'UNITS_MOVING');
+
         influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
             (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+
+        Logger.info('influence map is recalculated', tag: 'UNITS_MOVING');
 
         final estimators = _createEstimators(
           influences: influences,
           unit: unit,
           cell: cellWithUnit,
+        );
+
+        Logger.info(
+          'estimators: Attack[0]; CarrierInterception[1]; DoNothing[2]; MoveToEnemyPc[3]; '
+              'MoveToMyPc[4]; Resort[5]',
+          tag: 'UNITS_MOVING',
         );
 
         final List<Tuple2<int, double>> indexedWeights = estimators
@@ -68,6 +78,11 @@ class UnitsMovingPhase implements TurnPhase {
             .where((i) => i.item2 != 0) // Skip and estimation errors
             .toList(growable: false);
 
+        Logger.info(
+          'estimation result: ${indexedWeights.map((e) => '[${e.item1} : ${e.item2}]').join(' | ')};',
+          tag: 'UNITS_MOVING',
+        );
+
         final weightIndex =
             RandomGen.randomWeight(indexedWeights.map((e) => e.item2).toList(growable: false));
 
@@ -75,6 +90,8 @@ class UnitsMovingPhase implements TurnPhase {
         if (weightIndex == null) {
           break;
         }
+
+        Logger.info('selected estimator index is: ${indexedWeights[weightIndex].item1}', tag: 'MONEY_SPENDING');
 
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
         await selectedEstimator.processAction();

@@ -60,7 +60,15 @@ class PeacefulPlayerAi extends PlayerAi {
 
       final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
 
+      Logger.info(
+        'calculated weights are: ProductionCenter: ${averageWeights[0]}; '
+        'MineField: ${averageWeights[1]}; Units: ${averageWeights[2]}',
+        tag: 'AI_PLAYER_PEACEFUL',
+      );
+
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
+
+      Logger.info('selected index is: $generalActionIndex', tag: 'AI_PLAYER_PEACEFUL');
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can

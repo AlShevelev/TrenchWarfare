@@ -35,6 +35,7 @@ class AggressivePlayerAi extends PlayerAi {
   void start() async {
     // If I lost - do nothing
     if (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
+      Logger.info('MoneySpendingPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
       await MoneySpendingPhase(
         player: player,
         gameField: _gameField,
@@ -42,7 +43,9 @@ class AggressivePlayerAi extends PlayerAi {
         nationMoney: _nationMoney,
         metadata: _metadata,
       ).start();
+      Logger.info('MoneySpendingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
+      Logger.info('CarriersPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
       await CarriersPhase(
         player: player,
         gameField: _gameField,
@@ -50,6 +53,7 @@ class AggressivePlayerAi extends PlayerAi {
         metadata: _metadata,
         transfersStorage: _transfersStorage,
       ).start();
+      Logger.info('CarriersPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
       final unitsExcludedToMove = _transfersStorage.allTransfers
           .map((t) => t.transportingUnits)
@@ -57,6 +61,7 @@ class AggressivePlayerAi extends PlayerAi {
           .map((u) => u)
           .toList(growable: false);
 
+      Logger.info('UnitsMovingPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
       await UnitsMovingPhase(
         player: player,
         gameField: _gameField,
@@ -68,6 +73,7 @@ class AggressivePlayerAi extends PlayerAi {
           excludedUnits: unitsExcludedToMove,
         ),
       ).start();
+      Logger.info('UnitsMovingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
     }
 
     await Future.delayed(const Duration(seconds: 1));

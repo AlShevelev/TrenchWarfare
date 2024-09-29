@@ -17,6 +17,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
