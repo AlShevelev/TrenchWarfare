@@ -19,6 +19,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:tuple/tuple.dart';
 
 abstract interface class GameFieldModelCallback {
@@ -61,6 +62,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   }
 
   Future<void> init(RenderableTiledMap tileMap) async {
+    Logger.info('initialization', tag: 'GAME_GENERAL');
+
     final metadata = await compute(MetadataReader.read, tileMap.map);
 
     _gameField = await compute(
@@ -86,6 +89,12 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       );
     }
 
+    Logger.info('initialization completed', tag: 'GAME_GENERAL');
+
+    Logger.info(
+      'new turn is started for player $_currentPlayerIndex (isHuman = $isHumanPlayer)',
+      tag: 'GAME_GENERAL',
+    );
     _players[_currentPlayerIndex].onStartTurn();
 
     _gameFieldState.update(Playing());
@@ -98,6 +107,10 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       _currentPlayerIndex = 0;
     }
 
+    Logger.info(
+      'new turn is started for player $_currentPlayerIndex (isHuman = $isHumanPlayer)',
+      tag: 'GAME_GENERAL',
+    );
     _players[_currentPlayerIndex].onStartTurn();
 
     if (_currentPlayerIndex != _humanIndex) {
@@ -108,6 +121,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   @override
   void dispose() {
+    Logger.info('disposed', tag: 'GAME_GENERAL');
+
     _updateGameObjectsEvent.close();
     _controlsState.close();
     _gameFieldState.close();
@@ -115,6 +130,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   @override
   void onGameIsOver() {
+    Logger.info('the game is over', tag: 'GAME_GENERAL');
+
     _gameFieldState.update(Completed());
   }
 
@@ -137,8 +154,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required MapMetadata metadata,
     required NationRecord nationRecord,
   }) {
-    final isHuman = index == _humanIndex; 
-    
+    final isHuman = index == _humanIndex;
+
     final dayStorage = DayStorage(0);
 
     final core = PlayerCore(
@@ -153,7 +170,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       gameOverConditionsCalculator,
       isAI: !isHuman,
     );
-    
+
     _players.add(isHuman ? core : PlayerAiInputProxy(playerCore: core));
 
     if (isHuman) {
@@ -181,5 +198,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
       _playersAi.add(ai);
     }
+
+    Logger.info(
+      'a player is created. index: $index; isHuman: $isHuman; nation: ${nationRecord.code}; '
+      'startCurrency: ${nationRecord.startMoney}; startIndustryPoints: ${nationRecord.startIndustryPoints}',
+      tag: 'GAME_GENERAL',
+    );
   }
 }
