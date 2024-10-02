@@ -15,7 +15,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final ProductionCenterType _type;
 
@@ -42,7 +42,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
   _ProductionCenterEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required ProductionCenterType type,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
@@ -56,7 +56,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
   @override
   Iterable<EstimationResult<_ProductionCenterEstimationData>> estimate() {
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
-    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
@@ -114,9 +114,18 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
       }
     }
 
-    final resultWeight = allOurCellsWithPC.isEmpty
+    var resultWeight = allOurCellsWithPC.isEmpty
         ? 100.0
-        : 1 + ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
+        : ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
+
+    resultWeight *= switch (_type) {
+      ProductionCenterType.city => getCityBuildBalancedFactor(_nationMoney),
+      ProductionCenterType.factory => getFactoryBuildBalancedFactor(_nationMoney),
+      _ => 1
+    };
+
+    resultWeight += 1;
+
     return allSafeCells
         .map((c) => EstimationResult<_ProductionCenterEstimationData>(
               weight: resultWeight,

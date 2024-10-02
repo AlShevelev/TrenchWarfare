@@ -15,7 +15,7 @@ class ProductionCenterEstimator extends Estimator<ProductionCenterEstimationData
 
   final Nation _myNation;
 
-  final MoneyUnit _nationMoney;
+  final MoneyStorageRead _nationMoney;
 
   final ProductionCenterType _type;
 
@@ -32,7 +32,7 @@ class ProductionCenterEstimator extends Estimator<ProductionCenterEstimationData
   ProductionCenterEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
-    required MoneyUnit nationMoney,
+    required MoneyStorageRead nationMoney,
     required ProductionCenterType type,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
@@ -50,7 +50,7 @@ class ProductionCenterEstimator extends Estimator<ProductionCenterEstimationData
     }
 
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
-    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
@@ -108,9 +108,17 @@ class ProductionCenterEstimator extends Estimator<ProductionCenterEstimationData
       }
     }
 
-    final resultWeight = allOurCellsWithPC.isEmpty
+    var resultWeight = allOurCellsWithPC.isEmpty
         ? 10.0
         : (math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor;
+
+    resultWeight *= switch (_type) {
+      ProductionCenterType.city => getCityBuildBalancedFactor(_nationMoney),
+      ProductionCenterType.factory => getFactoryBuildBalancedFactor(_nationMoney),
+      _ => 1
+    };
+
+    resultWeight += 1;
 
     return allSafeCells
         .map((c) => EstimationResult<ProductionCenterEstimationData>(

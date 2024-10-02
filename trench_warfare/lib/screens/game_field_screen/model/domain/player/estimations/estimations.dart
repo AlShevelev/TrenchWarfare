@@ -17,6 +17,7 @@ class EstimationResult<D extends EstimationData> {
 abstract class Estimator<D extends EstimationData> {
   Iterable<EstimationResult<D>> estimate();
 
+  /// Estimates have we got enough money to spend it (to units, special strikes etc.)
   @protected
   double getMoneyWeightFactor(MoneyStorageRead money) {
     if (money.totalExpenses.currency == 0 || money.totalExpenses.industryPoints == 0) {
@@ -30,5 +31,31 @@ abstract class Estimator<D extends EstimationData> {
     final factor4 = money.totalSum.industryPoints.toDouble() / (2.0 * money.totalExpenses.industryPoints);
 
     return (factor1 + factor2 + factor3 + factor4) / 4.0;
+  }
+
+  /// If we've got too mush IP we should build/update a city to balance the situation
+  @protected
+  double getCityBuildBalancedFactor(MoneyStorageRead money) {
+    final currency = money.totalSum.currency.toDouble();
+    final industryPoints = money.totalSum.industryPoints.toDouble();
+
+    if (currency == 0) {
+      return 1000;
+    }
+
+    return industryPoints / currency;
+  }
+
+  /// If we've got too mush currency we should build/update a factory to balance the situation
+  @protected
+  double getFactoryBuildBalancedFactor(MoneyStorageRead money) {
+    final currency = money.totalSum.currency.toDouble();
+    final industryPoints = money.totalSum.industryPoints.toDouble();
+
+    if (industryPoints == 0) {
+      return 1000;
+    }
+
+    return currency / industryPoints;
   }
 }
