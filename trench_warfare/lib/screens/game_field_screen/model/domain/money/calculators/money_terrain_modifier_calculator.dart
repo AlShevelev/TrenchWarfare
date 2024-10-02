@@ -1,9 +1,6 @@
 part of money_calculators;
 
 class MoneyTerrainModifierCalculator {
-  static const _baseCurrency = 5;
-  static const _baseIndustryPoints = 5;
-
   static MoneyUnit? calculateBuildCost(CellTerrain terrain, TerrainModifierType type) => switch (terrain) {
         CellTerrain.plain => _calculateBaseCost(type),
         CellTerrain.wood => switch (type) {
@@ -51,29 +48,11 @@ class MoneyTerrainModifierCalculator {
       };
 
   static MoneyUnit _calculateBaseCost(TerrainModifierType type) => switch (type) {
-        TerrainModifierType.antiAirGun => MoneyUnit(
-            currency: multiplyBy(_baseCurrency, 2),
-            industryPoints: multiplyBy(_baseIndustryPoints, 2),
-          ),
-        TerrainModifierType.barbedWire => MoneyUnit(
-            currency: _baseCurrency,
-            industryPoints: _baseIndustryPoints,
-          ),
-        TerrainModifierType.landFort => MoneyUnit(
-            currency: multiplyBy(_baseCurrency, 3),
-            industryPoints: multiplyBy(_baseIndustryPoints, 3),
-          ),
-        TerrainModifierType.landMine => MoneyUnit(
-            currency: multiplyBy(_baseCurrency, 2),
-            industryPoints: multiplyBy(_baseIndustryPoints, 2),
-          ),
-        TerrainModifierType.seaMine => MoneyUnit(
-            currency: multiplyBy(_baseCurrency, 2),
-            industryPoints: multiplyBy(_baseIndustryPoints, 2),
-          ),
-        TerrainModifierType.trench => MoneyUnit(
-            currency: _baseCurrency,
-            industryPoints: 0,
-          ),
+        TerrainModifierType.antiAirGun => _MoneyConstants.antiAirGunBuildCost,
+        TerrainModifierType.barbedWire => _MoneyConstants.barbedWireBuildCost,
+        TerrainModifierType.landFort => _MoneyConstants.landFortBuildCost,
+        TerrainModifierType.landMine => _MoneyConstants.landMineBuildCost,
+        TerrainModifierType.seaMine => _MoneyConstants.seaMineBuildCost,
+        TerrainModifierType.trench => _MoneyConstants.trenchBuildCost,
       };
 }

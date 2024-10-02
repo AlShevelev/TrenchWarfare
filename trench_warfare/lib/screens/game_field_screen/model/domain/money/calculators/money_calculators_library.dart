@@ -14,6 +14,7 @@ import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 
 part 'money_cell_calculator.dart';
+part 'money_constants.dart';
 part 'money_production_center_calculator.dart';
 part 'money_special_strike_calculator.dart';
 part 'money_terrain_modifier_calculator.dart';

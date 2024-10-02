@@ -16,7 +16,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   @override
   void updateGameField() {
-    updateCell(_cell, chanceToKill: 0.45, chanceToReduceHealth: 0.9);
+    updateCell(_cell, chanceToKill: 0.2, chanceToReduceHealth: 0.4);
 
     final allCellsAround = _gameField
         .findCellsAround(_cell)
@@ -25,7 +25,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     for (var cell in allCellsAround) {
       if (RandomGen.randomDouble(0, 1) <= 0.25) {
-        updateCell(cell, chanceToKill: 0.225, chanceToReduceHealth: 0.45);
+        updateCell(cell, chanceToKill: 0.1, chanceToReduceHealth: 0.2);
       }
     }
   }
