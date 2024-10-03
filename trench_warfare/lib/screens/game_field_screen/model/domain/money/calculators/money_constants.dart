@@ -1,11 +1,19 @@
 part of money_calculators;
 
 class _MoneyConstants {
-  static final cellPlainIncome = MoneyUnit(currency: 10, industryPoints: 0);
+  static final cellPlainIncome = MoneyUnit(currency: 4, industryPoints: 0);
+  static final cellWoodIncome = MoneyUnit(currency: 2, industryPoints: 0);
+  static final cellMarshIncome = MoneyUnit(currency: 1, industryPoints: 0);
+  static final cellSandIncome = MoneyUnit(currency: 1, industryPoints: 0);
+  static final cellHillsIncome = MoneyUnit(currency: 2, industryPoints: 0);
+  static final cellMountainsIncome = MoneyUnit(currency: 1, industryPoints: 0);
+  static final cellSnowIncome = MoneyUnit(currency: 1, industryPoints: 0);
+  static final cellWaterIncome = MoneyUnit(currency: 2, industryPoints: 0);
+
 
   static const unitBaseCostCurrency = 10;
   static const unitBaseCostIndustryPoints = 1;
-  static const unitExpenseFactor = 4.0;
+  static const unitExpenseFactor = 2.0;
 
   static final cityBuildCost = MoneyUnit(currency: 200, industryPoints: 0);
   static final factoryBuildCost = MoneyUnit(currency: 300, industryPoints: 0);

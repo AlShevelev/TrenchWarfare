@@ -20,13 +20,13 @@ class MoneyCellCalculator {
 
     return switch (cell.terrain) {
       CellTerrain.plain => _MoneyConstants.cellPlainIncome,
-      CellTerrain.wood => _MoneyConstants.cellPlainIncome.multiplyBy(0.5),
-      CellTerrain.marsh => _MoneyConstants.cellPlainIncome.multiplyBy(0.2),
-      CellTerrain.sand => _MoneyConstants.cellPlainIncome.multiplyBy(0.1),
-      CellTerrain.hills => _MoneyConstants.cellPlainIncome.multiplyBy(0.5),
-      CellTerrain.mountains => _MoneyConstants.cellPlainIncome.multiplyBy(0.1),
-      CellTerrain.snow => _MoneyConstants.cellPlainIncome.multiplyBy(0.1),
-      CellTerrain.water => _MoneyConstants.cellPlainIncome.multiplyBy(0.5),
+      CellTerrain.wood => _MoneyConstants.cellWoodIncome,
+      CellTerrain.marsh => _MoneyConstants.cellMarshIncome,
+      CellTerrain.sand => _MoneyConstants.cellSandIncome,
+      CellTerrain.hills => _MoneyConstants.cellHillsIncome,
+      CellTerrain.mountains => _MoneyConstants.cellMountainsIncome,
+      CellTerrain.snow => _MoneyConstants.cellSnowIncome,
+      CellTerrain.water => _MoneyConstants.cellWaterIncome,
     };
   }
 
