@@ -133,6 +133,14 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
     _units.addAll(result);
   }
 
+  void clear() {
+    _nation = null;
+    _units.clear();
+    _terrainModifier = null;
+    _productionCenter = null;
+    _pathItem = null;
+  }
+
   @override
   String toString() =>
       'CELL: {id: $id; row: $row; col: $col; units: ${units.length}; terrain: $terrain; '

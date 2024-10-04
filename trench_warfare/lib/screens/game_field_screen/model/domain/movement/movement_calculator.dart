@@ -30,11 +30,13 @@ abstract class MovementCalculator {
   State startMovement(Iterable<GameFieldCell> path);
 
   @protected
-  bool _canMove({required GameFieldCell startCell}) =>
-      _pathFacade.canMove(startCell);
+  bool _canMove({required GameFieldCell startCell}) => _pathFacade.canMove(startCell);
 
   @protected
-  bool _canMoveForUnit({required GameFieldCell startCell, required Unit unit,}) =>
+  bool _canMoveForUnit({
+    required GameFieldCell startCell,
+    required Unit unit,
+  }) =>
       _pathFacade.canMoveForUnit(startCell, unit);
 
   @protected
@@ -62,10 +64,30 @@ abstract class MovementCalculator {
   State _getNextState() {
     final gameOverConditions = _gameOverConditionsCalculator.calculate(_nation);
 
-    return switch(gameOverConditions) {
-      GlobalVictory() => MovingInProgress(isVictory: true, defeated: null),
-      Defeat(nation: var nation) => MovingInProgress(isVictory: false, defeated: nation),
-      null => MovingInProgress(isVictory: false, defeated: null)
+    return switch (gameOverConditions) {
+      GlobalVictory() => MovingInProgress(isVictory: true, defeated: null, cellsToUpdate: []),
+      Defeat(nation: var nation) => MovingInProgress(
+          isVictory: false,
+          defeated: nation,
+          cellsToUpdate: _clearDefeatedCells(nation),
+        ),
+      null => MovingInProgress(isVictory: false, defeated: null, cellsToUpdate: [])
     };
+  }
+
+  Iterable<GameFieldCellRead> _clearDefeatedCells(Nation defeatedNation) {
+    final result = <GameFieldCellRead>[];
+
+    for (final cell in _gameField.cells) {
+      if (cell.nation != defeatedNation) {
+        continue;
+      }
+
+      cell.clear();
+
+      result.add(cell);
+    }
+
+    return result;
   }
 }

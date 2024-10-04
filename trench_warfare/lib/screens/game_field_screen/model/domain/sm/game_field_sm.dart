@@ -35,7 +35,10 @@ class GameFieldStateMachine {
   }
 
   void process(Event event) {
-    Logger.info('Start. nation: ${_context.nation}; incomingEvent $event; currentState: $_currentState', tag: 'STATE_MACHINE');
+    Logger.info(
+      'Start. nation: ${_context.nation}; incomingEvent $event; currentState: $_currentState',
+      tag: 'STATE_MACHINE',
+    );
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {
@@ -73,16 +76,28 @@ class GameFieldStateMachine {
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(_context).process(path),
           _ => _currentState,
         },
-      MovingInProgress(isVictory: var isVictory, defeated: var defeated) => switch (event) {
+      MovingInProgress(
+        isVictory: var isVictory,
+        defeated: var defeated,
+        cellsToUpdate: var cellsToUpdate,
+      ) =>
+        switch (event) {
           OnAnimationCompleted() => FromMovingInProgressOnAnimationCompleted(_context).process(
               isVictory,
               defeated,
+              cellsToUpdate,
             ),
           _ => _currentState,
         },
-      VictoryDefeatConfirmation(isVictory: var isVictory) => switch (event) {
-          OnPopupDialogClosed() =>
-            FromVictoryDefeatConfirmationOnPopupDialogClosed(_context).process(isVictory),
+      VictoryDefeatConfirmation(
+        isVictory: var isVictory,
+        cellsToUpdate: var cellsToUpdate,
+      ) =>
+        switch (event) {
+          OnPopupDialogClosed() => FromVictoryDefeatConfirmationOnPopupDialogClosed(_context).process(
+              isVictory,
+              cellsToUpdate,
+            ),
           _ => _currentState,
         },
       CardSelecting() => switch (event) {
@@ -127,13 +142,16 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       GameIsOver() => switch (event) {
-        _ => _currentState,
-      }
+          _ => _currentState,
+        }
     };
 
     _currentState = newState;
 
-    Logger.info('Finish. nation: ${_context.nation}; newState: $_currentState', tag: 'STATE_MACHINE');
+    Logger.info(
+      'Finish. nation: ${_context.nation}; newState: $_currentState',
+      tag: 'STATE_MACHINE',
+    );
 
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();

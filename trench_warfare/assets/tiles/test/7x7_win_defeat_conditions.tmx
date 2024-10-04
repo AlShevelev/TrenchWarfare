@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-down" width="7" height="7" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="5" nextobjectid="8">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-down" width="7" height="7" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="5" nextobjectid="18">
  <properties>
-  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;First Battle of the Marne (1914)&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;First Battle of the Marne, (September 6–12, 1914), an offensive during World War I by the French army and the British Expeditionary Force (BEF) against the advancing Germans who had invaded Belgium and northeastern France and were within 30 miles (48 km) of Paris. The French threw back the massive German advance and thwarted German plans for a quick and total victory on the Western Front.&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 42, &quot;startIndustryPoints&quot;: 43 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 42, &quot;startIndustryPoints&quot;: 43 }, { &quot;code&quot;: &quot;japan&quot;, &quot;aggressiveness&quot;: &quot;peaceful&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;bulgaria&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;japan&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;japan&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;japan&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;neutral&quot; } ] }"/>
+  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;First Battle of the Marne (1914)&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;First Battle of the Marne, (September 6–12, 1914), an offensive during World War I by the French army and the British Expeditionary Force (BEF) against the advancing Germans who had invaded Belgium and northeastern France and were within 30 miles (48 km) of Paris. The French threw back the massive German advance and thwarted German plans for a quick and total victory on the Western Front.&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 42, &quot;startIndustryPoints&quot;: 43 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 42, &quot;startIndustryPoints&quot;: 43 }, { &quot;code&quot;: &quot;japan&quot;, &quot;aggressiveness&quot;: &quot;peaceful&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 }, { &quot;code&quot;: &quot;bulgaria&quot;, &quot;aggressiveness&quot;: &quot;passive&quot;, &quot;startMoney&quot;: 0, &quot;startIndustryPoints&quot;: 0 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;japan&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;japan&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;neutral&quot; }, { &quot;firstNation&quot;: &quot;japan&quot;, &quot;secondNation&quot;: &quot;bulgaria&quot;, &quot;relationship&quot;: &quot;neutral&quot; } ] }"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="64" tileheight="74" tilecount="121" columns="11">
   <image source="../images/tiles/terrain_atlas.png" width="704" height="814"/>
@@ -9,10 +9,10 @@
  <tileset firstgid="122" source="game_objects.tsx"/>
  <layer id="2" name="Terrain" width="7" height="7">
   <data encoding="csv">
+4,4,4,4,4,1,4,
 4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,
-4,4,4,4,4,4,4,
+4,4,4,4,4,4,1,
 4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,
 4,4,4,4,4,4,4
@@ -35,8 +35,8 @@
     <property name="productionCenter" type="object" value="2"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="3"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
+    <property name="unit2" type="object" value="3"/>
+    <property name="unit3" type="object" value="3"/>
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
@@ -91,6 +91,92 @@
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="3"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="8" name="bulgaria" type="ownership" gid="170" x="286.366" y="124.34" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="9" name="bulgaria" type="ownership" gid="170" x="255.808" y="71.0424" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="3"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="10" name="japan" type="ownership" gid="165" x="352.455" y="233.778" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="3"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="11" name="landMine" type="terrainModifier" gid="123" x="287.787" y="-105.906" width="64" height="64"/>
+  <object id="12" name="level1" type="navalBase" gid="128" x="248.702" y="-45.5021" width="64" height="64">
+   <properties>
+    <property name="name" value=""/>
+   </properties>
+  </object>
+  <object id="13" name="bulgaria" type="ownership" gid="170" x="349.612" y="127.183" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="11"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="14" name="bulgaria" type="ownership" gid="170" x="317.634" y="73.1743" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="12"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="15" name="japan" type="ownership" gid="165" x="319.765" y="289.208" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="11"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="16" name="japan" type="ownership" gid="165" x="383.723" y="291.34" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="17" name="japan" type="ownership" gid="165" x="413.57" y="234.489" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="12"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>

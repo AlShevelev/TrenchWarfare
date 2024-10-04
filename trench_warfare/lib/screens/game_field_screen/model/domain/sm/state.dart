@@ -37,7 +37,8 @@ class PathIsShown implements State {
   PathIsShown(this.path);
 
   @override
-  String toString() => 'PATH_IS_SHOWN: {pathFirst: ${path.first}; pathLast: ${path.last}; pathTotal: ${path.length}}';
+  String toString() =>
+      'PATH_IS_SHOWN: {pathFirst: ${path.first}; pathLast: ${path.last}; pathTotal: ${path.length}}';
 }
 
 class MovingInProgress implements State {
@@ -47,7 +48,13 @@ class MovingInProgress implements State {
   /// This player has been defeated but the game is not over
   final Nation? defeated;
 
-  MovingInProgress({required this.isVictory, required this.defeated});
+  final Iterable<GameFieldCellRead> cellsToUpdate;
+
+  MovingInProgress({
+    required this.isVictory,
+    required this.defeated,
+    required this.cellsToUpdate,
+  });
 
   @override
   String toString() => 'MOVING_IN_PROGRESS: {isVictory: $isVictory; defeated: $defeated}';
@@ -89,7 +96,8 @@ class CardPlacingInProgress implements State {
   });
 
   @override
-  String toString() => 'CARD_PLACING_IN_PROGRESS: {card: $card; newInactiveCells: ${newInactiveCells.length}; '
+  String toString() =>
+      'CARD_PLACING_IN_PROGRESS: {card: $card; newInactiveCells: ${newInactiveCells.length}; '
       'oldInactiveCells: ${oldInactiveCells.length}; productionCost: $productionCost; '
       'canPlaceNext: $canPlaceNext}';
 }
@@ -105,7 +113,12 @@ class VictoryDefeatConfirmation implements State {
   /// The player is win and game must be over
   final bool isVictory;
 
-  VictoryDefeatConfirmation({required this.isVictory});
+  final Iterable<GameFieldCellRead> cellsToUpdate;
+
+  VictoryDefeatConfirmation({
+    required this.isVictory,
+    required this.cellsToUpdate,
+  });
 
   @override
   String toString() => 'VICTORY_DEFEAT_CONFIRMATION: {isVictory: $isVictory}';

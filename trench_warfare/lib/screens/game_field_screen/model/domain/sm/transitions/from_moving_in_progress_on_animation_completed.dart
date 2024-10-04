@@ -3,7 +3,7 @@ part of game_field_sm;
 class FromMovingInProgressOnAnimationCompleted extends GameObjectTransitionBase {
   FromMovingInProgressOnAnimationCompleted(super.context);
 
-  State process(bool isVictory, Nation? defeated) {
+  State process(bool isVictory, Nation? defeated, Iterable<GameFieldCellRead> cellsToUpdate) {
     if (isVictory) {
       if (_context.isAI) {
         _context.controlsState.update(DefeatControls(
@@ -16,7 +16,7 @@ class FromMovingInProgressOnAnimationCompleted extends GameObjectTransitionBase 
         ));
       }
 
-      return VictoryDefeatConfirmation(isVictory: isVictory);
+      return VictoryDefeatConfirmation(isVictory: isVictory, cellsToUpdate: cellsToUpdate);
     }
 
     if (defeated != null) {
@@ -25,7 +25,7 @@ class FromMovingInProgressOnAnimationCompleted extends GameObjectTransitionBase 
         isGlobal: false,
       ));
 
-      return VictoryDefeatConfirmation(isVictory: isVictory);
+      return VictoryDefeatConfirmation(isVictory: isVictory, cellsToUpdate: cellsToUpdate);
     }
 
     _context.money.recalculateIncomeAndExpenses();
