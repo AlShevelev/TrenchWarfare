@@ -68,7 +68,7 @@ class SpecialStrikesBuildCalculator {
     switch (type) {
       case SpecialStrikeType.gasAttack:
         {
-          return cell.isLand;
+          return cell.isLand && _gameField.findCellsAround(cell).any((c) => c.nation == _myNation);
         }
       case SpecialStrikeType.flechettes:
         {
@@ -95,10 +95,18 @@ class SpecialStrikesBuildCalculator {
             return false;
           }
 
+          if (!_gameField.findCellsAround(cell).any((c) => c.nation == _myNation)) {
+            return false;
+          }
+
           return cell.units.any((u) => u.type == UnitType.infantry || u.type == UnitType.tank);
         }
       case SpecialStrikeType.propaganda:
         {
+          if (!_gameField.findCellsAround(cell).any((c) => c.nation == _myNation)) {
+            return false;
+          }
+
           return activeUnit.type != UnitType.carrier;
         }
     }

@@ -23,7 +23,7 @@ class MoneyPanel extends StatelessWidget {
         Padding(
           padding: EdgeInsets.fromLTRB(2, 0, stretch ? 0 : 8, 0),
           child: Text(
-            money.currency < 10000 ? money.currency.toString() : tr('greater_10_k'),
+            money.currency < 100000 ? money.currency.toString() : tr('greater_100_k'),
             style: smallFont ? AppTypography.s18w600 : AppTypography.s20w600,
             overflow: TextOverflow.fade,
           ),
@@ -37,7 +37,7 @@ class MoneyPanel extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 0, 0),
           child: Text(
-            money.industryPoints < 10000 ? money.industryPoints.toString() : tr('greater_10_k'),
+            money.industryPoints < 100000 ? money.industryPoints.toString() : tr('greater_100_k'),
             style: smallFont ? AppTypography.s18w600 : AppTypography.s20w600,
             overflow: TextOverflow.fade,
           ),

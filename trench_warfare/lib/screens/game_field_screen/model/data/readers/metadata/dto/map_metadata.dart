@@ -40,12 +40,13 @@ class MapMetadata implements MapMetadataRead {
       return false;
     }
 
-    return diplomacy
+    final relationship = diplomacy
             .singleWhere((e) =>
                 (e.firstNation == nation1 && e.secondNation == nation2) ||
                 (e.firstNation == nation2 && e.secondNation == nation1))
-            .relationship ==
-        Relationship.war;
+            .relationship;
+
+    return relationship == Relationship.war || relationship == Relationship.neutral;
   }
 
   @override

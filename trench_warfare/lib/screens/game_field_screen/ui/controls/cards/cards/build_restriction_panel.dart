@@ -33,7 +33,7 @@ class BuildRestrictionPanel extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 12, 0),
           child: Text(
-            money.currency < 10000 ? money.currency.toString() : tr('greater_10_k'),
+            money.currency < 100000 ? money.currency.toString() : tr('greater_100_k'),
             style: buildPossibility.canBuildByCurrency ? textStyle : textStyle.copyWith(color: rejectedColor),
             overflow: TextOverflow.fade,
           ),
@@ -46,7 +46,7 @@ class BuildRestrictionPanel extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(2, 0, 12, 0),
           child: Text(
-            money.industryPoints < 10000 ? money.industryPoints.toString() : tr('greater_10_k'),
+            money.industryPoints < 100000 ? money.industryPoints.toString() : tr('greater_100_k'),
             style: buildPossibility.canBuildByIndustryPoint ? textStyle : textStyle.copyWith(color: rejectedColor),
             overflow: TextOverflow.fade,
           ),
