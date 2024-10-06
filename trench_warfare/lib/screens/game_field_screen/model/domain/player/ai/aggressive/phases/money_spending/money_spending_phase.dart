@@ -26,8 +26,10 @@ class MoneySpendingPhase implements TurnPhase {
   @override
   Future<void> start() async {
     while (true) {
+      Logger.info('loop started', tag: 'MONEY_SPENDING');
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+      Logger.info('influences map is calculated', tag: 'MONEY_SPENDING');
 
       final List<_EstimationProcessor> processors = [
         _ProductionCenterEstimationProcessor(
@@ -108,7 +110,9 @@ class MoneySpendingPhase implements TurnPhase {
         selectedProcessor.onAnimationCompleted();
       });
       try {
+        Logger.info('selectedProcessor.process() started', tag: 'MONEY_SPENDING');
         await selectedProcessor.process();
+        Logger.info('selectedProcessor.process() completed', tag: 'MONEY_SPENDING');
       } finally {
         playerCore.registerOnAnimationCompleted(null);
       }

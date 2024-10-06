@@ -104,8 +104,9 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
 
   @override
   void onAnimationCompleted() {
+    _player.onCardsPlacingCancelled();
+
     _signal.unlock();
     _signal.close();
-    _player.onCardsPlacingCancelled();
   }
 }
