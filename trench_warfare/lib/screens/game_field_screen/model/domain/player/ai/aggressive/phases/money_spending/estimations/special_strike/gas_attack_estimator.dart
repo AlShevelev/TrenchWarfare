@@ -15,6 +15,8 @@ class _GasAttackCellWithFactors {
 }
 
 class _GasAttackEstimator extends Estimator<_SpecialStrikeEstimationData> {
+  static const _correctionFactor = 1.5;
+
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -52,18 +54,18 @@ class _GasAttackEstimator extends Estimator<_SpecialStrikeEstimationData> {
 
     final cellsWithFactors = cellsPossibleToBuild
         .map((cell) {
-      final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
+          final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
 
-      if (cellFromMap.hasAny(_myNation)) {
-        return null;
-      }
+          if (cellFromMap.hasAny(_myNation)) {
+            return null;
+          }
 
-      return _GasAttackCellWithFactors(
-        cell: cell,
-        unitsQuantity: cell.units.length,
-        unitsSumPower: cell.units.map((u) => UnitPowerEstimation.estimate(u)).sum,
-      );
-    })
+          return _GasAttackCellWithFactors(
+            cell: cell,
+            unitsQuantity: cell.units.length,
+            unitsSumPower: cell.units.map((u) => UnitPowerEstimation.estimate(u)).sum,
+          );
+        })
         .where((e) => e != null)
         .toList(growable: false);
 
@@ -72,11 +74,12 @@ class _GasAttackEstimator extends Estimator<_SpecialStrikeEstimationData> {
     }
 
     return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
-      weight: 1.0 + c!.unitsQuantity * c.unitsSumPower * getMoneyWeightFactor(_nationMoney),
-      data: _SpecialStrikeEstimationData(
-        cell: c.cell,
-        type: SpecialStrikeType.gasAttack,
-      ),
-    ));
+          weight: 1.0 +
+              (c!.unitsQuantity * c.unitsSumPower * getMoneyWeightFactor(_nationMoney)) / _correctionFactor,
+          data: _SpecialStrikeEstimationData(
+            cell: c.cell,
+            type: SpecialStrikeType.gasAttack,
+          ),
+        ));
   }
 }

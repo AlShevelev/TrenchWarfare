@@ -29,7 +29,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
         ProductionCenterType.navalBase => 4.0,
         ProductionCenterType.city => 2.0,
         ProductionCenterType.factory => 2.0,
-        ProductionCenterType.airField => 3.0,
+        ProductionCenterType.airField => 2.5,
       };
 
   double get _maxFractionCellWithPCs => switch (_type) {

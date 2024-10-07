@@ -31,12 +31,12 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   }
 
   void updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
+    final random = RandomGen.randomDouble(0, 1);
+
+    Logger.info('GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
+        'random: $random', tag: 'SPECIAL_STRIKE');
+
     for (var unit in cell.units) {
-      final random = RandomGen.randomDouble(0, 1);
-
-      Logger.info('GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
-          'random: $random', tag: 'SPECIAL_STRIKE');
-
       if (random <= chanceToKill) {
         unit.setHealth(0);
 
