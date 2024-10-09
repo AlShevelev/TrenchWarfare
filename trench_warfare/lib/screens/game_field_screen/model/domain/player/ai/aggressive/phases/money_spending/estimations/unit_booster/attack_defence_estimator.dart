@@ -90,7 +90,10 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
-          weight: _weight + (c.hasArtillery ? _weight / 2 : 0) + (c.hasMachineGun ? _weight / 2 : 0),
+          weight: _weight +
+              (c.hasArtillery ? _weight : 0) +
+              (c.hasMachineGun ? _weight : 0) +
+              (_type == UnitBoost.defence && c.cell.productionCenter != null ? _weight : 0),
           data: _UnitBoosterEstimationData(
             cell: c.cell,
             type: _type,

@@ -20,9 +20,15 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
     if (_cell.productionCenter != null) {
       final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-      final sumDanger = _allOpponents.map((o) => influenceCell.getCombined(o)).sum;
-      if (sumDanger > 0) {
-        return (sumDanger / influenceCell.getCombined(_myNation)) + 1;
+      final sumDangerInfluence = _allEnemies.map((o) => influenceCell.getCombined(o)).sum;
+      final mySafeInfluence = influenceCell.getCombined(_myNation);
+      
+      if (sumDangerInfluence > 0) {
+        if (mySafeInfluence != 0) {
+          return 5 * (sumDangerInfluence / mySafeInfluence) + 1;
+        } else {
+          return 100;
+        }
       }
     }
 

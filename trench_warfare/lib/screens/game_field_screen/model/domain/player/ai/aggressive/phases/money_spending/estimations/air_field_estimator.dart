@@ -48,12 +48,12 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allEnemies = _metadata.getMyEnemies(_myNation);
 
     var allSafeCells = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);
 
-      for (final aggressor in allAggressors) {
+      for (final aggressor in allEnemies) {
         if (cellFromMap.getCombined(aggressor) > cellFromMap.getCombined(_myNation)) {
           return false;
         }
@@ -114,7 +114,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
         // All enemy cells with units
         final allEnemyCellsAround = _gameField
             .findCellsAroundR(cellCandidateToBuild, radius: i)
-            .where((c) => allAggressors.contains(c.nation))
+            .where((c) => allEnemies.contains(c.nation))
             .toList(growable: false);
 
         enemyCellsTotal += allEnemyCellsAround.length;

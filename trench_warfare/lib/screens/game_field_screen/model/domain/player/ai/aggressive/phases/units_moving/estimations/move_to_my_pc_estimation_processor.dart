@@ -61,7 +61,7 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       (_unit.isLand ? influenceItem.getLand(_myNation) : influenceItem.getSea(_myNation)) ?? 0.0;
 
   double _getOpponentsInfluence(InfluenceMapItemRead influenceItem) =>
-      _allOpponents
+      _allEnemies
           .map((o) => (_unit.isLand ? influenceItem.getLand(o) : influenceItem.getSea(o)) ?? 0.0)
           .sum;
 

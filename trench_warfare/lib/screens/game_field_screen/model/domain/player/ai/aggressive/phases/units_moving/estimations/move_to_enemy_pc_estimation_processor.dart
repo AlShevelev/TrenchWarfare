@@ -20,7 +20,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
     }
 
     final allEnemyReachablePCs = _gameField.cells.where(
-        (c) => c.productionCenter != null && _unit.isLand == c.isLand && _allOpponents.contains(c.nation));
+        (c) => c.productionCenter != null && _unit.isLand == c.isLand && _allEnemies.contains(c.nation));
 
     if (allEnemyReachablePCs.isEmpty) {
       return 0;

@@ -53,7 +53,7 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
 
     final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-    if (!_allOpponents.any((o) => influenceCell.hasAny(o))) {
+    if (!_allEnemies.any((o) => influenceCell.hasAny(o))) {
       return 0;
     }
 
@@ -76,7 +76,7 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
 
     final influenceCell = _influences.getItem(_cell.row, _cell.col);
 
-    if (!_allOpponents.any((o) => influenceCell.hasAny(o))) {
+    if (!_allEnemies.any((o) => influenceCell.hasAny(o))) {
       return 0;
     }
 
