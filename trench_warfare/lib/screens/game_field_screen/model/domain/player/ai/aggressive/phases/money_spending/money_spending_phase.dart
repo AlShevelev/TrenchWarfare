@@ -40,6 +40,14 @@ class MoneySpendingPhase implements TurnPhase {
           metadata: _metadata,
           influenceMap: influences,
         ),
+        _AirFieldEstimationProcessor(
+          player: _player,
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney,
+          metadata: _metadata,
+          influenceMap: influences,
+        ),
         _SpecialStrikeEstimationProcessor(
           player: _player,
           gameField: _gameField,

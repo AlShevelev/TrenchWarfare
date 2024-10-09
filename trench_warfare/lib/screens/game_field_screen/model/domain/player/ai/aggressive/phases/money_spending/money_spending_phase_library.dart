@@ -1,6 +1,5 @@
 library money_spending_phase_library;
 
-import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
@@ -48,9 +47,11 @@ part 'estimations/unit_booster/attack_defence_estimator.dart';
 part 'estimations/unit_booster/commander_estimator.dart';
 part 'estimations/unit_booster/transport_estimator.dart';
 part 'estimations/unit_booster/unit_booster_estimation_data.dart';
+part 'estimations/air_field_estimator.dart';
 part 'estimations/carriers_building_estimator.dart';
 part 'estimations/production_center_estimator.dart';
 part 'estimations/units_building_estimator.dart';
+part 'processing/air_field_estimation_processor.dart';
 part 'processing/carriers_estimation_processor.dart';
 part 'processing/estimation_processor_base.dart';
 part 'processing/production_center_estimation_processor.dart';

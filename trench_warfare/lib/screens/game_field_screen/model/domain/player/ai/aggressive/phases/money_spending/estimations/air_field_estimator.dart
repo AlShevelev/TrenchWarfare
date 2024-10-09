@@ -1,66 +1,47 @@
 part of money_spending_phase_library;
 
-class _ProductionCenterEstimationData implements EstimationData {
+class _AirFieldEstimationData implements EstimationData {
   @override
   final GameFieldCellRead cell;
 
-  final ProductionCenterType type;
-
-  _ProductionCenterEstimationData({required this.cell, required this.type});
+  _AirFieldEstimationData({required this.cell});
 }
 
 /// Should we build production center on not in general?
-class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationData> {
+class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
   final MoneyStorageRead _nationMoney;
 
-  final ProductionCenterType _type;
-
   final InfluenceMapRepresentationRead _influenceMap;
 
   final MapMetadataRead _metadata;
 
-  bool get _isLand => _type != ProductionCenterType.navalBase;
+  static const _maxFractionCellWithPCs = 0.075;
 
-  double get _correctionFactor => switch (_type) {
-        ProductionCenterType.navalBase => 4.0,
-        ProductionCenterType.city => 2.0,
-        ProductionCenterType.factory => 2.0,
-        _ => 0.0,
-      };
+  static const _type = ProductionCenterType.airField;
 
-  double get _maxFractionCellWithPCs => switch (_type) {
-        ProductionCenterType.navalBase => 0.05,
-        ProductionCenterType.city => 0.1,
-        ProductionCenterType.factory => 0.1,
-        _ => 0.0,
-  };
-
-  _ProductionCenterEstimator({
+  _AirFieldEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyStorageRead nationMoney,
-    required ProductionCenterType type,
     required InfluenceMapRepresentationRead influenceMap,
     required MapMetadataRead metadata,
   })  : _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
-        _type = type,
         _influenceMap = influenceMap,
         _metadata = metadata;
 
   @override
-  Iterable<EstimationResult<_ProductionCenterEstimationData>> estimate() {
-    if (_type == ProductionCenterType.airField) {
-      throw UnsupportedError('This type of production center is not supported: $_type');
-    }
-
+  Iterable<EstimationResult<_AirFieldEstimationData>> estimate() {
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
-    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
+    final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
+      _type,
+      _nationMoney.totalSum,
+    );
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
@@ -90,7 +71,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
     final List<GameFieldCellRead> allOurCellsWithPC = [];
 
     for (final cell in _gameField.cells) {
-      if ((cell.isLand && !_isLand) || (!cell.isLand && _isLand)) {
+      if (!cell.isLand) {
         continue;
       }
 
@@ -119,24 +100,41 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
       }
     }
 
-    var resultWeight = allOurCellsWithPC.isEmpty
+    final List<({GameFieldCellRead cell, double weight})> weightedCells = [];
+    for (final cellCandidateToBuild in allSafeCells) {
+      var cellWithEnemyUnitsTotal = 0;
+      var enemyCellsTotal = 0;
+
+      final battleRadius = cellCandidateToBuild.productionCenter == null
+          ? GameConstants.flechettesRadius
+          : GameConstants.airBombardmentRadius;
+
+      // Calculates possible enemies inside a battle radius
+      for (var i = 1; i <= battleRadius; i++) {
+        // All enemy cells with units
+        final allEnemyCellsAround = _gameField
+            .findCellsAroundR(cellCandidateToBuild, radius: i)
+            .where((c) => allAggressors.contains(c.nation))
+            .toList(growable: false);
+
+        enemyCellsTotal += allEnemyCellsAround.length;
+        cellWithEnemyUnitsTotal += allEnemyCellsAround.where((c) => c.units.isNotEmpty).length;
+      }
+
+      final weight = enemyCellsTotal == 0 ? 0.0 : cellWithEnemyUnitsTotal / enemyCellsTotal;
+      weightedCells.add((cell: cellCandidateToBuild, weight: weight));
+    }
+
+    var baseResultWeight = allOurCellsWithPC.isEmpty
         ? 100.0
-        : ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
+        : allOurCellsCount.toDouble() / allOurCellsWithPC.length;
 
-    resultWeight *= switch (_type) {
-      ProductionCenterType.city => getCityBuildBalancedFactor(_nationMoney),
-      ProductionCenterType.factory => getFactoryBuildBalancedFactor(_nationMoney),
-      _ => 1
-    };
-
-    resultWeight += 1;
-
-    return allSafeCells
-        .map((c) => EstimationResult<_ProductionCenterEstimationData>(
-              weight: resultWeight,
-              data: _ProductionCenterEstimationData(
-                cell: c,
-                type: _type,
+    return weightedCells
+        .where((c) => c.weight != 0)
+        .map((c) => EstimationResult<_AirFieldEstimationData>(
+              weight: (baseResultWeight * c.weight) + 1,
+              data: _AirFieldEstimationData(
+                cell: c.cell,
               ),
             ))
         .toList(growable: false);

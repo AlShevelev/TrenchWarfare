@@ -21,7 +21,6 @@ class _ProductionCenterEstimationProcessor extends _EstimationProcessorBase<_Pro
       ProductionCenterType.navalBase,
       ProductionCenterType.city,
       ProductionCenterType.factory,
-      ProductionCenterType.airField,
     ];
 
     for (final type in types) {
