@@ -45,6 +45,7 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
 
   @override
   Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
+    Logger.info('_LandFortEstimator: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.landFort,
@@ -53,6 +54,7 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_LandFortEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -85,10 +87,12 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
+      Logger.info('_LandFortEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
+    Logger.info('_LandFortEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 +
               (c!.onRoad ? _weightFactor : 0) +
               (c.blockBridge ? _weightFactor : 0) +
@@ -98,5 +102,8 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
             type: TerrainModifierType.landFort,
           ),
         ));
+
+    Logger.info('_LandFortEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

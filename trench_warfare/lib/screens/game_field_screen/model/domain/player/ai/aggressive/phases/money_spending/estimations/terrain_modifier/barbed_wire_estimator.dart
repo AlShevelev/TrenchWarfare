@@ -42,6 +42,7 @@ class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
 
   @override
   Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
+    Logger.info('_BarbedWire: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.barbedWire,
@@ -50,6 +51,7 @@ class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_BarbedWire: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -87,15 +89,20 @@ class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
+      Logger.info('_BarbedWire: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
+    Logger.info('_BarbedWire: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 + (c!.properCellAroundTotal / c.cellAroundTotal) * _weightCorrectionFactor,
           data: _TerrainModifierEstimationData(
             cell: c.cell,
             type: TerrainModifierType.barbedWire,
           ),
         ));
+
+    Logger.info('_BarbedWire: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

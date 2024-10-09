@@ -94,9 +94,10 @@ class MoneySpendingPhase implements TurnPhase {
 
       Logger.info(
         'calculated weights are: '
-            'ProductionCenter: ${averageWeights[0]}; SpecialStrike: ${averageWeights[1]}; '
-            'TerrainModifier: ${averageWeights[2]}; UnitBooster: ${averageWeights[3]}; '
-            'Units: ${averageWeights[4]}; Carriers: ${averageWeights[5]};',
+            'ProductionCenter: ${averageWeights[0]}; _AirField: ${averageWeights[1]}; '
+            'SpecialStrike: ${averageWeights[2]}; TerrainModifier: ${averageWeights[3]}; '
+            'UnitBooster: ${averageWeights[4]}; Units: ${averageWeights[5]}; '
+            'Carriers: ${averageWeights[6]};',
         tag: 'MONEY_SPENDING',
       );
 

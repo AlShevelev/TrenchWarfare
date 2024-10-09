@@ -49,11 +49,13 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
 
   @override
   Iterable<EstimationResult<_UnitBoosterEstimationData>> estimate() {
+    Logger.info('_CommanderEstimator: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -83,10 +85,12 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     if (cellsPossibleToBuildExt.isEmpty) {
+      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
+    Logger.info('_CommanderEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: 1.0 +
               c.unitPower +
               _experienceToWeight(c.unitExperienceRank) +
@@ -97,6 +101,9 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
             unitIndex: c.unitIndex,
           ),
         ));
+
+    Logger.info('_CommanderEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 
   double _experienceToWeight(UnitExperienceRank rank) => switch (rank) {

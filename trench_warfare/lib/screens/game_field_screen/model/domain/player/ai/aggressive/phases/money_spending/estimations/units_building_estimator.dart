@@ -67,11 +67,13 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
       throw ArgumentError("Can't make an estimation for this type of unit: $_type");
     }
 
+    Logger.info('_UnitsBuildingEstimator [$_type]: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney.totalSum);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_UnitsBuildingEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -119,11 +121,13 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
       );
     }).toList(growable: false);
 
+    Logger.info('_UnitsBuildingEstimator: _CellWithDangerFactor[] calculated', tag: 'MONEY_SPENDING');
     final unitPower = UnitPowerEstimation.estimate(Unit.byType(_type));
 
     final maxDistance = math.sqrt(math.pow(_gameField.rows, 2) + math.pow(_gameField.cols, 2));
 
-    return cellsPossibleToBuildExt.map((cell) {
+    Logger.info('_UnitsBuildingEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((cell) {
       final enemyUnitsWeight = log10(
         unitPower *
             cell.dangerFactor *
@@ -145,6 +149,9 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
         ),
       );
     }).toList(growable: false);
+
+    Logger.info('_UnitsBuildingEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 
   Iterable<GameFieldCellRead> _getAllCellsWithEnemyUnits(Iterable<Nation> allAggressors) =>

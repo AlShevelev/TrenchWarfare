@@ -36,11 +36,13 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
       throw ArgumentError("Can't make an estimation for this type of terrain modifier: $_type");
     }
 
+    Logger.info('_MineFieldsEstimator [$_type]: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -58,15 +60,20 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // Our rivals are nearby, but we are not
     if (cellsPossibleToBuildExt.isEmpty) {
+      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
+    Logger.info('_MineFieldsEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: _weight,
           data: _TerrainModifierEstimationData(
             cell: c,
             type: _type,
           ),
         ));
+
+    Logger.info('_MineFieldsEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

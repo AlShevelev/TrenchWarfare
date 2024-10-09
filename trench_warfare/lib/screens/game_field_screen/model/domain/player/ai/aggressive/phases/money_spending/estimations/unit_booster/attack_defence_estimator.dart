@@ -53,11 +53,13 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
       throw UnsupportedError('This type of booster is not supported: $_type');
     }
 
+    Logger.info('_AttackDefenceEstimator [$_type]: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_AttackDefenceEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -86,10 +88,12 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     if (cellsPossibleToBuildExt.isEmpty) {
+      Logger.info('_AttackDefenceEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
+    Logger.info('_AttackDefenceEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: _weight +
               (c.hasArtillery ? _weight : 0) +
               (c.hasMachineGun ? _weight : 0) +
@@ -100,5 +104,8 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
             unitIndex: c.unitIndex,
           ),
         ));
+
+    Logger.info('_AttackDefenceEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

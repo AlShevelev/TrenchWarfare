@@ -34,11 +34,13 @@ class _CarriersBuildingEstimator extends Estimator<_CarriersBuildingEstimationDa
 
   @override
   Iterable<EstimationResult<_CarriersBuildingEstimationData>> estimate() {
+    Logger.info('_CarriersBuildingEstimator: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = UnitBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(UnitType.carrier, _nationMoney);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_CarriersBuildingEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -53,6 +55,7 @@ class _CarriersBuildingEstimator extends Estimator<_CarriersBuildingEstimationDa
 
     // We've got enough carriers for now
     if (totalCarriers >= _maxCarries) {
+      Logger.info('_CarriersBuildingEstimator: estimate() completed [totalCarriers >= _maxCarries]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -64,14 +67,19 @@ class _CarriersBuildingEstimator extends Estimator<_CarriersBuildingEstimationDa
 
     // It is not worth it - too complicated
     if (targetCalculator.getTarget() == null) {
+      Logger.info('_CarriersBuildingEstimator: estimate() completed [targetCalculator.getTarget() == null]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuild
+    Logger.info('_CarriersBuildingEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuild
         .map((cell) => EstimationResult(
               weight: _defaultWeight,
               data: _CarriersBuildingEstimationData(cell: cell),
             ))
         .toList(growable: false);
+
+    Logger.info('_CarriersBuildingEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

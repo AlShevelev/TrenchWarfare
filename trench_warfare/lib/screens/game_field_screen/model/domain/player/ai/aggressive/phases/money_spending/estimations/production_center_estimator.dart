@@ -55,6 +55,8 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
   @override
   Iterable<EstimationResult<_ProductionCenterEstimationData>> estimate() {
+    Logger.info('_ProductionCenterEstimator: estimate() started', tag: 'MONEY_SPENDING');
+
     if (_type == ProductionCenterType.airField) {
       throw UnsupportedError('This type of production center is not supported: $_type');
     }
@@ -64,6 +66,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
+      Logger.info('_ProductionCenterEstimator: estimate() completed [allCellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -83,6 +86,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
     // It's a dangerous time, we shouldn't build production centers in a moment
     if (allSafeCells.isEmpty) {
+      Logger.info('_ProductionCenterEstimator [$_type]: estimate() completed [allSafeCells.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -102,6 +106,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
         }
       }
     }
+    Logger.info('_ProductionCenterEstimator: estimate() allOurCells are calculated', tag: 'MONEY_SPENDING');
 
     // We don't need too many production centers.
     if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
@@ -131,7 +136,9 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
     resultWeight += 1;
 
-    return allSafeCells
+    Logger.info('_ProductionCenterEstimator: estimate() ready to calculate a result', tag: 'MONEY_SPENDING');
+
+    final result = allSafeCells
         .map((c) => EstimationResult<_ProductionCenterEstimationData>(
               weight: resultWeight,
               data: _ProductionCenterEstimationData(
@@ -140,5 +147,8 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
               ),
             ))
         .toList(growable: false);
+
+    Logger.info('_ProductionCenterEstimator: estimate() result is calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

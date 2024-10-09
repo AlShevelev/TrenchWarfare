@@ -37,11 +37,13 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
 
   @override
   Iterable<EstimationResult<_UnitBoosterEstimationData>> estimate() {
+    Logger.info('_TransportEstimator: estimate() started', tag: 'MONEY_SPENDING');
     final buildCalculator = UnitBoosterBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(_type, _nationMoney);
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -62,10 +64,12 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     if (cellsPossibleToBuildExt.isEmpty) {
+      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
+    Logger.info('_TransportEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
           weight: 1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints),
           data: _UnitBoosterEstimationData(
             cell: c.cell,
@@ -73,6 +77,9 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
             unitIndex: c.unitIndex,
           ),
         ));
+
+    Logger.info('_TransportEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 
   double _maxMovementPointsToWeight(double maxMovementPoints) =>

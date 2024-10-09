@@ -26,6 +26,8 @@ class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
 
   @override
   Iterable<EstimationResult<_TerrainModifierEstimationData>> estimate() {
+    Logger.info('_TrenchEstimator: estimate() started', tag: 'MONEY_SPENDING');
+
     final buildCalculator = TerrainModifierBuildCalculator(_gameField, _myNation);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       TerrainModifierType.trench,
@@ -34,6 +36,7 @@ class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -50,15 +53,20 @@ class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
     }).toList(growable: false);
 
     if (cellsPossibleToBuildExt.isEmpty) {
+      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
+    Logger.info('_TrenchEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
           weight: 1.0 + c.units.count((u) => u.type == UnitType.infantry || u.type == UnitType.machineGuns),
           data: _TerrainModifierEstimationData(
             cell: c,
             type: TerrainModifierType.trench,
           ),
         ));
+
+    Logger.info('_TrenchEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

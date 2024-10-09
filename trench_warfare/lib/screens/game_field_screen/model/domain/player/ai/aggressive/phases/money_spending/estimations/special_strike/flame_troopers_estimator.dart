@@ -36,6 +36,8 @@ class _FlameTroopersEstimator extends Estimator<_SpecialStrikeEstimationData> {
 
   @override
   Iterable<EstimationResult<_SpecialStrikeEstimationData>> estimate() {
+    Logger.info('_FlameTroopersEstimator: estimate() started', tag: 'MONEY_SPENDING');
+
     final buildCalculator = SpecialStrikesBuildCalculator(_gameField, _myNation, _metadata);
     final cellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       SpecialStrikeType.flameTroopers,
@@ -44,6 +46,7 @@ class _FlameTroopersEstimator extends Estimator<_SpecialStrikeEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
+      Logger.info('_FlameTroopersEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -64,15 +67,20 @@ class _FlameTroopersEstimator extends Estimator<_SpecialStrikeEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
+      Logger.info('_FlameTroopersEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
-    return cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
+    Logger.info('_FlameTroopersEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
+    final result = cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
           weight: 1.0 + c!.unitPower * getMoneyWeightFactor(_nationMoney),
           data: _SpecialStrikeEstimationData(
             cell: c.cell,
             type: SpecialStrikeType.flameTroopers,
           ),
         ));
+
+    Logger.info('_FlameTroopersEstimator: the result are calculated', tag: 'MONEY_SPENDING');
+    return result;
   }
 }

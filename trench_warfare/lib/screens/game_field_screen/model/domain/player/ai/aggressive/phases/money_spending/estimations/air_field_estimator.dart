@@ -37,6 +37,8 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
   @override
   Iterable<EstimationResult<_AirFieldEstimationData>> estimate() {
+    Logger.info('_AirFieldEstimator: estimate() started', tag: 'MONEY_SPENDING');
+
     final buildCalculator = ProductionCentersBuildCalculator(_gameField, _myNation);
     final allCellsPossibleToBuild = buildCalculator.getAllCellsPossibleToBuild(
       _type,
@@ -45,6 +47,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
+      Logger.info('_AirFieldEstimator: estimate() completed [allCellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -64,6 +67,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
     // It's a dangerous time, we shouldn't build production centers in a moment
     if (allSafeCells.isEmpty) {
+      Logger.info('_AirFieldEstimator: estimate() completed [allSafeCells.isEmpty]', tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -84,6 +88,8 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       }
     }
 
+    Logger.info('_AirFieldEstimator: estimate() allOurCells are calculated', tag: 'MONEY_SPENDING');
+
     // We don't need too many production centers.
     if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
       final pcWithoutMaxLevel = allOurCellsWithPC
@@ -100,6 +106,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       }
     }
 
+    Logger.info('_AirFieldEstimator: estimate() ready to calculate weightedCells', tag: 'MONEY_SPENDING');
     final List<({GameFieldCellRead cell, double weight})> weightedCells = [];
     for (final cellCandidateToBuild in allSafeCells) {
       var cellWithEnemyUnitsTotal = 0;
@@ -125,11 +132,15 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       weightedCells.add((cell: cellCandidateToBuild, weight: weight));
     }
 
+    Logger.info('_AirFieldEstimator: estimate() weightedCells are calculated', tag: 'MONEY_SPENDING');
+
     var baseResultWeight = allOurCellsWithPC.isEmpty
         ? 100.0
         : allOurCellsCount.toDouble() / allOurCellsWithPC.length;
 
-    return weightedCells
+    Logger.info('_AirFieldEstimator: estimate() ready to calculate a result', tag: 'MONEY_SPENDING');
+
+    final result = weightedCells
         .where((c) => c.weight != 0)
         .map((c) => EstimationResult<_AirFieldEstimationData>(
               weight: (baseResultWeight * c.weight) + 1,
@@ -138,5 +149,9 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
               ),
             ))
         .toList(growable: false);
+
+    Logger.info('_AirFieldEstimator: the result is calculated', tag: 'MONEY_SPENDING');
+
+    return result;
   }
 }
