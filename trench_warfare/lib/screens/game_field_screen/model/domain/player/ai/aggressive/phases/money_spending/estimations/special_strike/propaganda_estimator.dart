@@ -45,39 +45,43 @@ class _PropagandaEstimator extends Estimator<_SpecialStrikeEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_PropagandaEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_PropagandaEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     final cellsWithFactors = cellsPossibleToBuild
         .map((cell) {
-      final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
+          final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
 
-      if (!cellFromMap.hasAny(_myNation)) {
-        return null;
-      }
+          if (!cellFromMap.hasAny(_myNation)) {
+            return null;
+          }
 
-      return _PropagandaCellWithFactors(
-        cell: cell,
-        unitPower: UnitPowerEstimation.estimate(cell.activeUnit!),
-      );
-    })
+          return _PropagandaCellWithFactors(
+            cell: cell,
+            unitPower: UnitPowerEstimation.estimate(cell.activeUnit!),
+          );
+        })
         .where((e) => e != null)
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
-      Logger.info('_PropagandaEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_PropagandaEstimator: estimate() completed [cellsWithFactors.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_PropagandaEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
-      weight: 1.0 + c!.unitPower * getMoneyWeightFactor(_nationMoney),
-      data: _SpecialStrikeEstimationData(
-        cell: c.cell,
-        type: SpecialStrikeType.propaganda,
-      ),
-    ));
+    final result = cellsWithFactors
+        .map((c) => EstimationResult<_SpecialStrikeEstimationData>(
+              weight: 1.0 + c!.unitPower * getMoneyWeightFactor(_nationMoney),
+              data: _SpecialStrikeEstimationData(
+                cell: c.cell,
+                type: SpecialStrikeType.propaganda,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_PropagandaEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

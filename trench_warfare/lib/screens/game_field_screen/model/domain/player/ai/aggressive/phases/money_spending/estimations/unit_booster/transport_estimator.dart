@@ -43,7 +43,8 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -64,19 +65,22 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     if (cellsPossibleToBuildExt.isEmpty) {
-      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_TransportEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_TransportEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
-          weight: 1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints),
-          data: _UnitBoosterEstimationData(
-            cell: c.cell,
-            type: _type,
-            unitIndex: c.unitIndex,
-          ),
-        ));
+    final result = cellsPossibleToBuildExt
+        .map((c) => EstimationResult<_UnitBoosterEstimationData>(
+              weight: 1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints),
+              data: _UnitBoosterEstimationData(
+                cell: c.cell,
+                type: _type,
+                unitIndex: c.unitIndex,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_TransportEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

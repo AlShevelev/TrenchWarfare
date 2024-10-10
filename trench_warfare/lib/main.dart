@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart' hide Animation, Image;
 import 'package:trench_warfare/database/database.dart';
@@ -13,6 +15,16 @@ void main() async {
 
   await Database.start();
   Logger.init();
+
+  FlutterError.onError = (details) {
+    Logger.error(details.exception.toString(), exception: details.exception, stackTrace: details.stack);
+    FlutterError.presentError(details);
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    Logger.error(error.toString(), exception: error, stackTrace: stack);
+    return true;
+  };
 
   runApp(
       EasyLocalization(

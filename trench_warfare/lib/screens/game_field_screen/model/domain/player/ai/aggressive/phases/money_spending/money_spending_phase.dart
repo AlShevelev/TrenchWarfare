@@ -94,10 +94,10 @@ class MoneySpendingPhase implements TurnPhase {
 
       Logger.info(
         'calculated weights are: '
-            'ProductionCenter: ${averageWeights[0]}; _AirField: ${averageWeights[1]}; '
-            'SpecialStrike: ${averageWeights[2]}; TerrainModifier: ${averageWeights[3]}; '
-            'UnitBooster: ${averageWeights[4]}; Units: ${averageWeights[5]}; '
-            'Carriers: ${averageWeights[6]};',
+        'ProductionCenter: ${averageWeights[0]}; _AirField: ${averageWeights[1]}; '
+        'SpecialStrike: ${averageWeights[2]}; TerrainModifier: ${averageWeights[3]}; '
+        'UnitBooster: ${averageWeights[4]}; Units: ${averageWeights[5]}; '
+        'Carriers: ${averageWeights[6]};',
         tag: 'MONEY_SPENDING',
       );
 
@@ -122,6 +122,8 @@ class MoneySpendingPhase implements TurnPhase {
         Logger.info('selectedProcessor.process() started', tag: 'MONEY_SPENDING');
         await selectedProcessor.process();
         Logger.info('selectedProcessor.process() completed', tag: 'MONEY_SPENDING');
+      } catch (e, s) {
+        Logger.error(e.toString(), stackTrace: s);
       } finally {
         playerCore.registerOnAnimationCompleted(null);
       }

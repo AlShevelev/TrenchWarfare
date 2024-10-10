@@ -42,7 +42,8 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -60,18 +61,21 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // Our rivals are nearby, but we are not
     if (cellsPossibleToBuildExt.isEmpty) {
-      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_MineFieldsEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
-          weight: _weight,
-          data: _TerrainModifierEstimationData(
-            cell: c,
-            type: _type,
-          ),
-        ));
+    final result = cellsPossibleToBuildExt
+        .map((c) => EstimationResult<_TerrainModifierEstimationData>(
+              weight: _weight,
+              data: _TerrainModifierEstimationData(
+                cell: c,
+                type: _type,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_MineFieldsEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

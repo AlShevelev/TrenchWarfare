@@ -85,6 +85,8 @@ class PeacefulPlayerAi extends PlayerAi {
       });
       try {
         await selectedProcessor.process();
+      } catch (e, s) {
+        Logger.error(e.toString(), stackTrace: s);
       } finally {
         playerCore.registerOnAnimationCompleted(null);
       }

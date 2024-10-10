@@ -50,7 +50,8 @@ class _GasAttackEstimator extends Estimator<_SpecialStrikeEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_GasAttackEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_GasAttackEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -72,19 +73,23 @@ class _GasAttackEstimator extends Estimator<_SpecialStrikeEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
-      Logger.info('_GasAttackEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_GasAttackEstimator: estimate() completed [cellsWithFactors.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_GasAttackEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsWithFactors.map((c) => EstimationResult<_SpecialStrikeEstimationData>(
-          weight: 1.0 +
-              (c!.unitsQuantity * c.unitsSumPower * getMoneyWeightFactor(_nationMoney)) / _correctionFactor,
-          data: _SpecialStrikeEstimationData(
-            cell: c.cell,
-            type: SpecialStrikeType.gasAttack,
-          ),
-        ));
+    final result = cellsWithFactors
+        .map((c) => EstimationResult<_SpecialStrikeEstimationData>(
+              weight: 1.0 +
+                  (c!.unitsQuantity * c.unitsSumPower * getMoneyWeightFactor(_nationMoney)) /
+                      _correctionFactor,
+              data: _SpecialStrikeEstimationData(
+                cell: c.cell,
+                type: SpecialStrikeType.gasAttack,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_GasAttackEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

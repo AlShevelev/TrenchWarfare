@@ -36,7 +36,8 @@ class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -53,18 +54,22 @@ class _TrenchEstimator extends Estimator<_TerrainModifierEstimationData> {
     }).toList(growable: false);
 
     if (cellsPossibleToBuildExt.isEmpty) {
-      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_TrenchEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_TrenchEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_TerrainModifierEstimationData>(
-          weight: 1.0 + c.units.count((u) => u.type == UnitType.infantry || u.type == UnitType.machineGuns),
-          data: _TerrainModifierEstimationData(
-            cell: c,
-            type: TerrainModifierType.trench,
-          ),
-        ));
+    final result = cellsPossibleToBuildExt
+        .map((c) => EstimationResult<_TerrainModifierEstimationData>(
+              weight:
+                  1.0 + c.units.count((u) => u.type == UnitType.infantry || u.type == UnitType.machineGuns),
+              data: _TerrainModifierEstimationData(
+                cell: c,
+                type: TerrainModifierType.trench,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_TrenchEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

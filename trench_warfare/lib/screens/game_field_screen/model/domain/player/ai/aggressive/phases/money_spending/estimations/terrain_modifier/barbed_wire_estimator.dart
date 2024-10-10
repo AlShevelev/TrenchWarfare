@@ -94,13 +94,15 @@ class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
     }
 
     Logger.info('_BarbedWire: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
-          weight: 1.0 + (c!.properCellAroundTotal / c.cellAroundTotal) * _weightCorrectionFactor,
-          data: _TerrainModifierEstimationData(
-            cell: c.cell,
-            type: TerrainModifierType.barbedWire,
-          ),
-        ));
+    final result = cellsWithFactors
+        .map((c) => EstimationResult<_TerrainModifierEstimationData>(
+              weight: 1.0 + (c!.properCellAroundTotal / c.cellAroundTotal) * _weightCorrectionFactor,
+              data: _TerrainModifierEstimationData(
+                cell: c.cell,
+                type: TerrainModifierType.barbedWire,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_BarbedWire: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

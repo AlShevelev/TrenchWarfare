@@ -45,7 +45,8 @@ class _AntiAirGunEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_AntiAirGunEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_AntiAirGunEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -96,20 +97,23 @@ class _AntiAirGunEstimator extends Estimator<_TerrainModifierEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
-      Logger.info('_AntiAirGunEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_AntiAirGunEstimator: estimate() completed [cellsWithFactors.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_AntiAirGunEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
-          weight: 1.0 +
-              _calculateWeight(c!.cell, ProductionCenterLevel.level1) * c.level1EnemyAirFieldsTotal +
-              _calculateWeight(c.cell, ProductionCenterLevel.level2) * c.level2EnemyAirFieldsTotal,
-          data: _TerrainModifierEstimationData(
-            cell: c.cell,
-            type: TerrainModifierType.antiAirGun,
-          ),
-        ));
+    final result = cellsWithFactors
+        .map((c) => EstimationResult<_TerrainModifierEstimationData>(
+              weight: 1.0 +
+                  _calculateWeight(c!.cell, ProductionCenterLevel.level1) * c.level1EnemyAirFieldsTotal +
+                  _calculateWeight(c.cell, ProductionCenterLevel.level2) * c.level2EnemyAirFieldsTotal,
+              data: _TerrainModifierEstimationData(
+                cell: c.cell,
+                type: TerrainModifierType.antiAirGun,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_AntiAirGunEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

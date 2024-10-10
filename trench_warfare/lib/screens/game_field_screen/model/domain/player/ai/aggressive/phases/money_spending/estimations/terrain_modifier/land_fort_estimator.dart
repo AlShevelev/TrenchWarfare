@@ -54,7 +54,8 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_LandFortEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_LandFortEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -87,21 +88,24 @@ class _LandFortEstimator extends Estimator<_TerrainModifierEstimationData> {
         .toList(growable: false);
 
     if (cellsWithFactors.isEmpty) {
-      Logger.info('_LandFortEstimator: estimate() completed [cellsWithFactors.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_LandFortEstimator: estimate() completed [cellsWithFactors.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_LandFortEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsWithFactors.map((c) => EstimationResult<_TerrainModifierEstimationData>(
-          weight: 1.0 +
-              (c!.onRoad ? _weightFactor : 0) +
-              (c.blockBridge ? _weightFactor : 0) +
-              c.pcNearbyCount * _weightFactor,
-          data: _TerrainModifierEstimationData(
-            cell: c.cell,
-            type: TerrainModifierType.landFort,
-          ),
-        ));
+    final result = cellsWithFactors
+        .map((c) => EstimationResult<_TerrainModifierEstimationData>(
+              weight: 1.0 +
+                  (c!.onRoad ? _weightFactor : 0) +
+                  (c.blockBridge ? _weightFactor : 0) +
+                  c.pcNearbyCount * _weightFactor,
+              data: _TerrainModifierEstimationData(
+                cell: c.cell,
+                type: TerrainModifierType.landFort,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_LandFortEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;

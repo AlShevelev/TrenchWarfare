@@ -55,7 +55,8 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
 
     // We can't build shit
     if (cellsPossibleToBuild.isEmpty) {
-      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -85,22 +86,25 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
     }
 
     if (cellsPossibleToBuildExt.isEmpty) {
-      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_CommanderEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
     Logger.info('_CommanderEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
-    final result = cellsPossibleToBuildExt.map((c) => EstimationResult<_UnitBoosterEstimationData>(
-          weight: 1.0 +
-              c.unitPower +
-              _experienceToWeight(c.unitExperienceRank) +
-              2 * log10(1 / c.unitHealthRelative),
-          data: _UnitBoosterEstimationData(
-            cell: c.cell,
-            type: _type,
-            unitIndex: c.unitIndex,
-          ),
-        ));
+    final result = cellsPossibleToBuildExt
+        .map((c) => EstimationResult<_UnitBoosterEstimationData>(
+              weight: 1.0 +
+                  c.unitPower +
+                  _experienceToWeight(c.unitExperienceRank) +
+                  2 * log10(1 / c.unitHealthRelative),
+              data: _UnitBoosterEstimationData(
+                cell: c.cell,
+                type: _type,
+                unitIndex: c.unitIndex,
+              ),
+            ))
+        .toList(growable: false);
 
     Logger.info('_CommanderEstimator: the result are calculated', tag: 'MONEY_SPENDING');
     return result;
