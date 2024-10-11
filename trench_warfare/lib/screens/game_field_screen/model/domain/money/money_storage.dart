@@ -29,7 +29,7 @@ class MoneyStorage implements MoneyStorageRead {
 
   late MoneyUnit _totalIncome;
   @override
-  MoneyUnit get totalIncome => throw _totalIncome;
+  MoneyUnit get totalIncome => _totalIncome;
 
   late MoneyUnit _totalExpenses;
   @override
