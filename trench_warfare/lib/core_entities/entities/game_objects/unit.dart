@@ -235,32 +235,19 @@ class Unit extends GameObject {
 
   static const double absoluteMaxMovementPoints = 4.0;
 
-  static double _getMaxMovementPoints(UnitType type) {
-    switch (type) {
-      case UnitType.armoredCar:
-        return 3;
-      case UnitType.artillery:
-        return 1;
-      case UnitType.infantry:
-        return 2;
-      case UnitType.cavalry:
-        return 4;
-      case UnitType.machineGunnersCart:
-        return 3;
-      case UnitType.machineGuns:
-        return 1;
-      case UnitType.tank:
-        return 2;
-      case UnitType.destroyer:
-        return 4;
-      case UnitType.cruiser:
-        return 3;
-      case UnitType.battleship:
-        return 2;
-      case UnitType.carrier:
-        return 3;
-    }
-  }
+  static double _getMaxMovementPoints(UnitType type) => switch (type) {
+      UnitType.armoredCar => 3 * GameConstants.landMovementSpeedFactor,
+      UnitType.artillery => 1 * GameConstants.landMovementSpeedFactor,
+      UnitType.infantry => 2 * GameConstants.landMovementSpeedFactor,
+      UnitType.cavalry => 4 * GameConstants.landMovementSpeedFactor,
+      UnitType.machineGunnersCart => 3 * GameConstants.landMovementSpeedFactor,
+      UnitType.machineGuns => 1 * GameConstants.landMovementSpeedFactor,
+      UnitType.tank => 2 * GameConstants.landMovementSpeedFactor,
+      UnitType.destroyer => 4,
+      UnitType.cruiser => 3,
+      UnitType.battleship => 2,
+      UnitType.carrier => 3,
+    };
 
   double _getAttack() {
     switch (type) {

@@ -138,7 +138,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
           _ => double.maxFinite,
         },
       _ => double.maxFinite,
-    };
+    } * GameConstants.landMovementSpeedFactor;
   }
 
   @override
