@@ -75,22 +75,32 @@ class UnitsBattleCalculator {
   static double _calculateDamage(UnitInBattle attacking, UnitInBattle defending) {
     final startDamage = RandomGen.randomDouble(attacking.damage.min, attacking.damage.max);
 
-    final damageBase = startDamage + startDamage * 0.15 * (attacking.attack - defending.defence);
+    var damageBase = startDamage;
 
-    final damageExp = startDamage +
+    if (attacking.attack > defending.defence) {
+      damageBase += startDamage * 0.1 * (attacking.attack / defending.defence);
+    } else if (attacking.attack < defending.defence) {
+      damageBase -= startDamage * 0.05 * (defending.defence / attacking.attack);
+    }
+
+    damageBase = math.max(attacking.damage.min, damageBase);
+
+    var damageExp = startDamage +
         startDamage *
             0.125 *
             (UnitExperienceRank.asNumber(attacking.experienceRank) -
                 UnitExperienceRank.asNumber(defending.experienceRank));
 
+    damageExp = math.max(attacking.damage.min, damageExp);
+
     final damageFatigue = startDamage + startDamage * attacking._fatigue;
 
     final damageHealth = startDamage + startDamage * (attacking._health / defending.maxHealth);
 
-    var totalDamage = (damageBase + damageExp + damageFatigue + damageHealth) / 4;
+    var totalDamage = (damageBase + damageExp + damageFatigue + damageHealth) / 4.0;
 
-    if (totalDamage < 0) {
-      totalDamage = 0;
+    if (totalDamage < 0.0) {
+      totalDamage = 0.0;
     }
 
     return totalDamage;

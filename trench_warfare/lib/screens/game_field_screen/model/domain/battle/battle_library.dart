@@ -1,5 +1,6 @@
 library battle;
 
+import 'dart:math' as math;
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';

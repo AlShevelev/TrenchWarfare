@@ -217,7 +217,7 @@ class Unit extends GameObject {
       case UnitType.cavalry:
         return 10;
       case UnitType.machineGunnersCart:
-        return 12;
+        return 10;
       case UnitType.machineGuns:
         return 10;
       case UnitType.tank:
@@ -279,7 +279,7 @@ class Unit extends GameObject {
   double _getDefence() {
     switch (type) {
       case UnitType.armoredCar:
-        return 5;
+        return 3;
       case UnitType.artillery:
         return 1;
       case UnitType.infantry:
@@ -287,7 +287,7 @@ class Unit extends GameObject {
       case UnitType.cavalry:
         return 2;
       case UnitType.machineGunnersCart:
-        return 3;
+        return 1;
       case UnitType.machineGuns:
         return 1;
       case UnitType.tank:
@@ -318,7 +318,7 @@ class Unit extends GameObject {
       case UnitType.machineGuns:
         return Range(2, 3);
       case UnitType.tank:
-        return Range(5, 6);
+        return Range(3, 6);
       case UnitType.destroyer:
         return Range(5, 6);
       case UnitType.cruiser:

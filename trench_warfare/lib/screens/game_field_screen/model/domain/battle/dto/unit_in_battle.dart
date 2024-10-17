@@ -55,9 +55,9 @@ class UnitInBattle {
         _defence = defence,
         _attack = attack;
 
-  void updateAttack(double updateFactor) => _attack *= updateFactor;
+  void updateAttack(double valueToAdd) => _attack *= valueToAdd;
 
-  void updateDefence(double updateFactor) => _defence *= updateFactor;
+  void updateDefence(double valueToAdd) => _defence *= valueToAdd;
 
   void updateHasArtillery(bool hasArtillery) => _hasArtillery = hasArtillery;
 
