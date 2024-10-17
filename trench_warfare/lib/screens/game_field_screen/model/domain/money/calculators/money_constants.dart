@@ -11,9 +11,11 @@ class _MoneyConstants {
   static final cellWaterIncome = MoneyUnit(currency: 1, industryPoints: 0);
 
 
-  static const unitBaseCostCurrency = 15;
-  static const unitBaseCostIndustryPoints = 1;
-  static const unitExpenseFactor = 2.0;
+  static const unitLandBaseCostCurrency = 15;
+  static const unitLandBaseCostIndustryPoints = 3;
+  static const unitSeaBaseCostCurrency = 20;
+  static const unitSeaBaseCostIndustryPoints = 5;
+  static const unitExpenseFactor = 4.0;
 
   static final cityBuildCost = MoneyUnit(currency: 200, industryPoints: 0);
   static final factoryBuildCost = MoneyUnit(currency: 300, industryPoints: 0);

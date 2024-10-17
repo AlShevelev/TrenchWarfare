@@ -3,49 +3,49 @@ part of money_calculators;
 class MoneyUnitsCalculator {
   static MoneyUnit calculateProductionCost(UnitType unitType) => switch (unitType) {
         UnitType.infantry => MoneyUnit(
-            currency: _MoneyConstants.unitBaseCostCurrency,
-            industryPoints: _MoneyConstants.unitBaseCostIndustryPoints,
-          ),
+            currency: _MoneyConstants.unitLandBaseCostCurrency,
+            industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+          ).multiplyBy(UnitsPowerWeights.infantry),
         UnitType.machineGuns => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 2),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 5),
-          ),
-        UnitType.cavalry => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 2),
-            industryPoints: _MoneyConstants.unitBaseCostIndustryPoints,
-          ),
-        UnitType.machineGunnersCart => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 3),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 10),
-          ),
-        UnitType.artillery => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 4),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 15),
-          ),
-        UnitType.armoredCar => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 4),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 15),
-          ),
-        UnitType.tank => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 8),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 30),
-          ),
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.machineGuns),
+        UnitType.cavalry =>  MoneyUnit(
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.cavalry),
+        UnitType.machineGunnersCart =>  MoneyUnit(
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.machineGunnersCart),
+        UnitType.artillery =>  MoneyUnit(
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.artillery),
+        UnitType.armoredCar =>  MoneyUnit(
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.armoredCar),
+        UnitType.tank =>  MoneyUnit(
+          currency: _MoneyConstants.unitLandBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitLandBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.tank),
         UnitType.carrier => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 5),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 30),
-          ),
+          currency: _MoneyConstants.unitSeaBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitSeaBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.carrier),
         UnitType.destroyer => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 5),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 20),
-          ),
+          currency: _MoneyConstants.unitSeaBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitSeaBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.destroyer),
         UnitType.cruiser => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 9),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 40),
-          ),
+          currency: _MoneyConstants.unitSeaBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitSeaBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.cruiser),
         UnitType.battleship => MoneyUnit(
-            currency: multiplyBy(_MoneyConstants.unitBaseCostCurrency, 14),
-            industryPoints: multiplyBy(_MoneyConstants.unitBaseCostIndustryPoints, 60),
-          ),
+          currency: _MoneyConstants.unitSeaBaseCostCurrency,
+          industryPoints: _MoneyConstants.unitSeaBaseCostIndustryPoints,
+        ).multiplyBy(UnitsPowerWeights.battleship),
       };
 
   static MoneyUnit calculateExpense(Unit unit) {

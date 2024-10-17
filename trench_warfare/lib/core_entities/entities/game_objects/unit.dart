@@ -209,27 +209,27 @@ class Unit extends GameObject {
   static double _getMaxHealth(UnitType type) {
     switch (type) {
       case UnitType.armoredCar:
-        return 8;
+        return 16;
       case UnitType.artillery:
-        return 5;
+        return 10;
       case UnitType.infantry:
-        return 5;
+        return 10;
       case UnitType.cavalry:
-        return 6;
+        return 10;
       case UnitType.machineGunnersCart:
-        return 6;
+        return 12;
       case UnitType.machineGuns:
-        return 5;
+        return 10;
       case UnitType.tank:
-        return 10;
+        return 20;
       case UnitType.destroyer:
-        return 10;
+        return 20;
       case UnitType.cruiser:
-        return 15;
+        return 30;
       case UnitType.battleship:
-        return 25;
+        return 50;
       case UnitType.carrier:
-        return 25;
+        return 50;
     }
   }
 
@@ -243,9 +243,9 @@ class Unit extends GameObject {
       UnitType.machineGunnersCart => 3 * GameConstants.landMovementSpeedFactor,
       UnitType.machineGuns => 1 * GameConstants.landMovementSpeedFactor,
       UnitType.tank => 2 * GameConstants.landMovementSpeedFactor,
-      UnitType.destroyer => 4,
-      UnitType.cruiser => 3,
-      UnitType.battleship => 2,
+      UnitType.destroyer => 5,
+      UnitType.cruiser => 4,
+      UnitType.battleship => 3,
       UnitType.carrier => 3,
     };
 
@@ -258,7 +258,7 @@ class Unit extends GameObject {
       case UnitType.infantry:
         return 1;
       case UnitType.cavalry:
-        return 2;
+        return 1;
       case UnitType.machineGunnersCart:
         return 3;
       case UnitType.machineGuns:
@@ -291,9 +291,9 @@ class Unit extends GameObject {
       case UnitType.machineGuns:
         return 1;
       case UnitType.tank:
-        return 8;
+        return 6;
       case UnitType.destroyer:
-        return 8;
+        return 6;
       case UnitType.cruiser:
         return 10;
       case UnitType.battleship:
