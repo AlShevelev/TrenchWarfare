@@ -11,7 +11,11 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
   void updateGameField() {
     final unit = _cell.activeUnit!;
 
-    final chanceToDevastate = switch (unit.type) { UnitType.infantry => 0.5, UnitType.tank => 0.25, _ => 0 };
+    final chanceToDevastate = switch (unit.type) {
+      UnitType.infantry => 0.75,
+      UnitType.tank => 0.075,
+      _ => 0,
+    };
 
     final random = RandomGen.randomDouble(0, 1);
 
