@@ -10,11 +10,8 @@ class _MoneyConstants {
   static final cellSnowIncome = MoneyUnit(currency: 0, industryPoints: 0);
   static final cellWaterIncome = MoneyUnit(currency: 1, industryPoints: 0);
 
-
-  static const unitLandBaseCostCurrency = 15;
-  static const unitLandBaseCostIndustryPoints = 3;
-  static const unitSeaBaseCostCurrency = 20;
-  static const unitSeaBaseCostIndustryPoints = 5;
+  static final unitLandBaseCost = MoneyUnit(currency: 15, industryPoints: 3);
+  static final unitSeaBaseCost = MoneyUnit(currency: 20, industryPoints: 5);
   static const unitExpenseFactor = 4.0;
 
   static final cityBuildCost = MoneyUnit(currency: 200, industryPoints: 0);
@@ -34,10 +31,10 @@ class _MoneyConstants {
   static final seaMineBuildCost = MoneyUnit(currency: 10, industryPoints: 2);
   static final trenchBuildCost = MoneyUnit(currency: 10, industryPoints: 0);
 
-  static final attackBoosterBuildCost = MoneyUnit(currency: 5, industryPoints: 1);
-  static final defenceBoosterBuildCost = MoneyUnit(currency: 5, industryPoints: 1);
-  static final commanderBoosterBuildCost = MoneyUnit(currency: 40, industryPoints: 0);
-  static final transportBoosterBuildCost = MoneyUnit(currency: 20, industryPoints: 5);
+  static final attackBoosterBuildCost = MoneyUnit(currency: 15, industryPoints: 3);
+  static final defenceBoosterBuildCost = MoneyUnit(currency: 15, industryPoints: 3);
+  static final commanderBoosterBuildCost = MoneyUnit(currency: 45, industryPoints: 9);
+  static final transportBoosterBuildCost = MoneyUnit(currency: 20, industryPoints: 4);
 
   static final gasAttackCost = MoneyUnit(currency: 80, industryPoints: 20);
   static final flechettesCost = MoneyUnit(currency: 120, industryPoints: 10);
