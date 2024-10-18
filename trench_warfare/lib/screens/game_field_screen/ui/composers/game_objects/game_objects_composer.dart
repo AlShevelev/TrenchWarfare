@@ -89,7 +89,10 @@ class GameObjectsComposer {
     _removeGameObject(_getCellComponentKey(cell));
     _removeGameObject(borderComponentKey);
 
-    _addGameObject(GameCellBorder(cell, _gameField), borderComponentKey);
+    // The low priority (-1000) moves this component to back
+    final border = GameCellBorder(cell, _gameField)..priority = -1000;
+    _addGameObject(border, borderComponentKey);
+
     _addGameObject(
         GameObjectCell(
           _spritesAtlas,
@@ -101,7 +104,10 @@ class GameObjectsComposer {
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
       _removeGameObject(updateBorderComponentKey);
-      _addGameObject(GameCellBorder(updateBorderCell, _gameField), updateBorderComponentKey);
+
+      // The low priority (-1000) moves this component to back
+      final border = GameCellBorder(updateBorderCell, _gameField)..priority = -1000;
+      _addGameObject(border, updateBorderComponentKey);
     }
   }
 
