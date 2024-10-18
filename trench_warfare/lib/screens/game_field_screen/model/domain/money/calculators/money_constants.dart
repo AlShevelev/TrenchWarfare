@@ -24,12 +24,12 @@ class _MoneyConstants {
   static final airFieldIncome = MoneyUnit(currency: 0, industryPoints: 0);
   static final navalBaseIncome = MoneyUnit(currency: 10, industryPoints: 10);
 
-  static final antiAirGunBuildCost = MoneyUnit(currency: 20, industryPoints: 10);
-  static final barbedWireBuildCost = MoneyUnit(currency: 10, industryPoints: 1);
-  static final landFortBuildCost = MoneyUnit(currency: 50, industryPoints: 15);
-  static final landMineBuildCost = MoneyUnit(currency: 10, industryPoints: 2);
-  static final seaMineBuildCost = MoneyUnit(currency: 10, industryPoints: 2);
-  static final trenchBuildCost = MoneyUnit(currency: 10, industryPoints: 0);
+  static final antiAirGunBuildCost = MoneyUnit(currency: 105, industryPoints: 21);
+  static final barbedWireBuildCost = MoneyUnit(currency: 20, industryPoints: 4);
+  static final landFortBuildCost = MoneyUnit(currency: 150, industryPoints: 30);
+  static final landMineBuildCost = MoneyUnit(currency: 36, industryPoints: 7);
+  static final seaMineBuildCost = MoneyUnit(currency: 48, industryPoints: 12);
+  static final trenchBuildCost = MoneyUnit(currency: 20, industryPoints: 4);
 
   static final attackBoosterBuildCost = MoneyUnit(currency: 15, industryPoints: 3);
   static final defenceBoosterBuildCost = MoneyUnit(currency: 15, industryPoints: 3);

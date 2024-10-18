@@ -10,6 +10,7 @@ class MoneyUnitsCalculator {
         UnitType.artillery => _MoneyConstants.unitLandBaseCost.multiplyBy(UnitsPowerWeights.artillery),
         UnitType.armoredCar => _MoneyConstants.unitLandBaseCost.multiplyBy(UnitsPowerWeights.armoredCar),
         UnitType.tank => _MoneyConstants.unitLandBaseCost.multiplyBy(UnitsPowerWeights.tank),
+
         UnitType.carrier => _MoneyConstants.unitSeaBaseCost.multiplyBy(UnitsPowerWeights.carrier),
         UnitType.destroyer => _MoneyConstants.unitSeaBaseCost.multiplyBy(UnitsPowerWeights.destroyer),
         UnitType.cruiser => _MoneyConstants.unitSeaBaseCost.multiplyBy(UnitsPowerWeights.cruiser),
