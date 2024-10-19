@@ -14,15 +14,15 @@ class _MoneyConstants {
   static final unitSeaBaseCost = MoneyUnit(currency: 20, industryPoints: 5);
   static const unitExpenseFactor = 4.0;
 
-  static final cityBuildCost = MoneyUnit(currency: 200, industryPoints: 0);
-  static final factoryBuildCost = MoneyUnit(currency: 300, industryPoints: 0);
-  static final airFieldBuildCost = MoneyUnit(currency: 100, industryPoints: 0);
-  static final navalBaseBuildCost = MoneyUnit(currency: 250, industryPoints: 0);
+  static final cityBuildCost = MoneyUnit(currency: 1000, industryPoints: 0);
+  static final factoryBuildCost = MoneyUnit(currency: 1000, industryPoints: 0);
+  static final airFieldBuildCost = MoneyUnit(currency: 500, industryPoints: 0);
+  static final navalBaseBuildCost = MoneyUnit(currency: 750, industryPoints: 0);
 
-  static final cityIncome = MoneyUnit(currency: 20, industryPoints: 0);
-  static final factoryIncome = MoneyUnit(currency: 0, industryPoints: 20);
+  static final cityIncome = MoneyUnit(currency: 40, industryPoints: 0);
+  static final factoryIncome = MoneyUnit(currency: 0, industryPoints: 40);
   static final airFieldIncome = MoneyUnit(currency: 0, industryPoints: 0);
-  static final navalBaseIncome = MoneyUnit(currency: 10, industryPoints: 10);
+  static final navalBaseIncome = MoneyUnit(currency: 20, industryPoints: 20);
 
   static final antiAirGunBuildCost = MoneyUnit(currency: 105, industryPoints: 21);
   static final barbedWireBuildCost = MoneyUnit(currency: 20, industryPoints: 4);
