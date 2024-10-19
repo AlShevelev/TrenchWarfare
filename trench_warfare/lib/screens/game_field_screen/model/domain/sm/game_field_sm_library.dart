@@ -60,6 +60,7 @@ part 'transitions/from_start_turn_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_start_turn_initial_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_turn_is_ended_on_start_turn.dart';
 part 'transitions/from_victory_defeat_confirmation_on_popup_dialog_closed.dart';
+part 'transitions/from_waiting_for_end_of_path_on_cards_button_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_end_of_turn_button_click.dart';
 part 'transitions/from_waiting_for_end_of_path_on_resort_unit.dart';

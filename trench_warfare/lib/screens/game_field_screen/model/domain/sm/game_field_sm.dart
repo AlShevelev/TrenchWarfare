@@ -67,6 +67,8 @@ class GameFieldStateMachine {
           OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
             FromWaitingForEndOfPathOnResortUnit(_context)
                 .process(startPathCell, cellId, unitsId, isCarrier: isCarrier),
+          OnCardsButtonClick() =>
+            FromWaitingForEndOfPathOnCardsButtonClick(_context, startPathCell).process(),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
