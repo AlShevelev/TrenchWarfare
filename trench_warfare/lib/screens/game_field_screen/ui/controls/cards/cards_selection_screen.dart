@@ -20,7 +20,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   late final ui.Image _oldBookCover;
   late final ui.Image _oldPaper;
 
-  CardsTab _selectedTab = CardsTab.units;
+  static CardsTab _selectedTab = CardsTab.units;
   int _selectedCardIndex = -1;
 
   @override
@@ -58,6 +58,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
                 alignment: AlignmentDirectional.topStart,
                 children: [
                   CardsBookmarks(
+                    startTab: _selectedTab,
                     onSwitchTab: (selectedTab) {
                       setState(() {
                         _selectedTab = selectedTab;

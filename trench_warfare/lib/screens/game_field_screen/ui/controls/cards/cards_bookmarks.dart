@@ -1,11 +1,16 @@
 part of card_controls;
 
 class CardsBookmarks extends StatefulWidget {
-  late final void Function(CardsTab) _onSwitchTab;
+  final CardsTab _startTab;
 
-  CardsBookmarks({super.key, required void Function(CardsTab) onSwitchTab}) {
-    _onSwitchTab = onSwitchTab;
-  }
+  final void Function(CardsTab) _onSwitchTab;
+
+  const CardsBookmarks({
+    super.key,
+    required CardsTab startTab,
+    required void Function(CardsTab) onSwitchTab,
+  })  : _startTab = startTab,
+        _onSwitchTab = onSwitchTab;
 
   @override
   State<CardsBookmarks> createState() => _CardsBookmarksState();
@@ -20,8 +25,7 @@ class _CardsBookmarksState extends State<CardsBookmarks> {
   static const double _bookmarkStartOffset = 40;
   static const double _bookmarksGap = 5;
 
-  CardsTab _activeTab = CardsTab.units;
-  CardsTab get activeTab => _activeTab;
+  late CardsTab _activeTab = widget._startTab;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,11 @@ class _CardsBookmarksState extends State<CardsBookmarks> {
     );
   }
 
-  Widget _getBookmark({required int index, required CardsTab tab, required String folder}) =>
+  Widget _getBookmark({
+    required int index,
+    required CardsTab tab,
+    required String folder,
+  }) =>
       GestureDetector(
         onTap: () {
           setState(() {
@@ -66,7 +74,7 @@ class _CardsBookmarksState extends State<CardsBookmarks> {
         },
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-            index == 0 ?_bookmarkStartOffset : _bookmarksGap,
+            index == 0 ? _bookmarkStartOffset : _bookmarksGap,
             _activeTab == tab ? 0 : _inactiveTabPadding,
             0,
             0,
