@@ -32,4 +32,6 @@ abstract interface class PlayerInput {
 
   /// Confirms that a turn is started. Must not be called from the AI - it's called from the model
   void onPopupDialogClosed();
+
+  void onPhoneBackAction();
 }

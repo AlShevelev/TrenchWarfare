@@ -23,50 +23,56 @@ class GameFieldControls extends StatefulWidget {
 class _GameFieldControlsState extends State<GameFieldControls> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<GameFieldControlsState>(
-        stream: widget._gameField.controlsState,
-        builder: (context, value) {
-          if (!value.hasData) {
-            return const SizedBox.shrink();
-          }
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        widget._gameField.onPhoneBackAction();
+      },
+      child: StreamBuilder<GameFieldControlsState>(
+          stream: widget._gameField.controlsState,
+          builder: (context, value) {
+            if (!value.hasData) {
+              return const SizedBox.shrink();
+            }
 
-          return switch (value.data) {
-            Invisible() => const SizedBox.shrink(),
-            MainControls() => MainControlsWidget(
-                state: value.data as MainControls,
-                gameField: widget._gameField,
-              ),
-            CardsSelectionControls() => CardsSelectionScreen(
-                state: value.data as CardsSelectionControls,
-                gameField: widget._gameField,
-              ),
-            CardsPlacingControls() => CardPlacingWidget(
-                state: value.data as CardsPlacingControls,
-                gameField: widget._gameField,
-              ),
-            StartTurnControls(nation: final nation, day: final day) => WinDefeatTurnDialog(
-                type: WinDefeatTurnDialogType.turn,
+            return switch (value.data) {
+              Invisible() => const SizedBox.shrink(),
+              MainControls() => MainControlsWidget(
+                  state: value.data as MainControls,
+                  gameField: widget._gameField,
+                ),
+              CardsSelectionControls() => CardsSelectionScreen(
+                  state: value.data as CardsSelectionControls,
+                  gameField: widget._gameField,
+                ),
+              CardsPlacingControls() => CardPlacingWidget(
+                  state: value.data as CardsPlacingControls,
+                  gameField: widget._gameField,
+                ),
+              StartTurnControls(nation: final nation, day: final day) => WinDefeatTurnDialog(
+                  type: WinDefeatTurnDialogType.turn,
+                  nation: nation,
+                  day: day,
+                  gameField: widget._gameField,
+                ),
+              WinControls(nation: final nation) => WinDefeatTurnDialog(
+                  type: WinDefeatTurnDialogType.win,
+                  nation: nation,
+                  gameField: widget._gameField,
+                ),
+              DefeatControls(nation: final nation, isGlobal: var isGlobal) => WinDefeatTurnDialog(
+                  type: isGlobal ? WinDefeatTurnDialogType.defeatGlobal : WinDefeatTurnDialogType.defeat,
+                  nation: nation,
+                  gameField: widget._gameField,
+                ),
+              MenuControls(nation: final nation, day: final day) => MenuDialog(
                 nation: nation,
                 day: day,
                 gameField: widget._gameField,
               ),
-            WinControls(nation: final nation) => WinDefeatTurnDialog(
-                type: WinDefeatTurnDialogType.win,
-                nation: nation,
-                gameField: widget._gameField,
-              ),
-            DefeatControls(nation: final nation, isGlobal: var isGlobal) => WinDefeatTurnDialog(
-                type: isGlobal ? WinDefeatTurnDialogType.defeatGlobal : WinDefeatTurnDialogType.defeat,
-                nation: nation,
-                gameField: widget._gameField,
-              ),
-            MenuControls(nation: final nation, day: final day) => MenuDialog(
-              nation: nation,
-              day: day,
-              gameField: widget._gameField,
-            ),
-            _ => const SizedBox.shrink(),
-          };
-        });
+              _ => const SizedBox.shrink(),
+            };
+          }),
+    );
   }
 }

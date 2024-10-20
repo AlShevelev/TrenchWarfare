@@ -58,6 +58,7 @@ class GameFieldStateMachine {
           OnCardsButtonClick() => FromReadyForInputOnCardsButtonClick(_context).process(),
           OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick().process(),
           OnMenuButtonClick() => FromReadyForInputOnMenuButtonClick(_context).process(),
+          OnPhoneBackAction() => FromReadyForInputOnMenuButtonClick(_context).process(),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
@@ -71,6 +72,7 @@ class GameFieldStateMachine {
           OnCardsButtonClick() =>
             FromWaitingForEndOfPathOnCardsButtonClick(_context, startPathCell).process(),
           OnMenuButtonClick() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
+          OnPhoneBackAction() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -148,7 +150,10 @@ class GameFieldStateMachine {
       GameIsOver() => switch (event) {
           _ => _currentState,
         },
-      MenuIsVisible() => throw UnimplementedError(),
+      MenuIsVisible() => switch (event) {
+        OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
+        _ => _currentState,
+      }
     };
 
     _currentState = newState;
