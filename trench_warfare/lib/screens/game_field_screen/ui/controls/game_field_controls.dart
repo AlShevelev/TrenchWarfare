@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placing/cards_placing_widget.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/menu_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/win_defeat_turn_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -59,6 +60,11 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 nation: nation,
                 gameField: widget._gameField,
               ),
+            MenuControls(nation: final nation, day: final day) => MenuDialog(
+              nation: nation,
+              day: day,
+              gameField: widget._gameField,
+            ),
             _ => const SizedBox.shrink(),
           };
         });

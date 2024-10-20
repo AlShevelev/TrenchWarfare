@@ -86,5 +86,10 @@
   "victory_dialog": "The victory is yours!",
   "defeat_dialog_global": "You have been defeated...",
   "defeat_dialog": "This country has been defeated...",
-  "day_dialog": "Day"
+  "day_dialog": "Day",
+  "resume_menu_dialog": "Resume",
+  "save_menu_dialog": "Save",
+  "load_menu_dialog": "Load",
+  "settings_menu_dialog": "Settings",
+  "quit_menu_dialog": "Quit"
 }

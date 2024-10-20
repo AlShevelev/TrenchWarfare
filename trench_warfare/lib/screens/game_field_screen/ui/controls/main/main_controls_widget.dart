@@ -46,7 +46,9 @@ class MainControlsWidget extends StatelessWidget {
         right: 15,
         top: 15,
         image: const AssetImage('assets/images/game_field_overlays/main/button_menu.webp'),
-        onPress: () {},
+        onPress: () {
+          _gameField.onMenuButtonClick();
+        },
       ),
       GameFieldGeneralPanel(
         money: state.totalSum,

@@ -85,3 +85,8 @@ class OnPopupDialogClosed implements Event {
   @override
   String toString() => 'ON_POPUP_DIALOG_CLOSED';
 }
+
+class OnMenuButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_BUTTON_CLICK';
+}

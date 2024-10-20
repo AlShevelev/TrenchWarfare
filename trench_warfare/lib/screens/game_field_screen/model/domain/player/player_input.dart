@@ -15,6 +15,8 @@ abstract interface class PlayerInput {
 
   void onCardsButtonClick();
 
+  void onMenuButtonClick();
+
   void onEndOfTurnButtonClick();
 
   void onCardsSelectionCancelled();

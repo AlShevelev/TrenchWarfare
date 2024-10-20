@@ -63,4 +63,9 @@ class PlayerAiInputProxy extends PlayerInputProxy {
 
   @override
   void onStartTurn() => _playerCore.onStartTurn();
+
+  @override
+  void onMenuButtonClick() {
+    // do nothing
+  }
 }

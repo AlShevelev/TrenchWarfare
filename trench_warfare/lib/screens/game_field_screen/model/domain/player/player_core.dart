@@ -107,4 +107,7 @@ class PlayerCore extends PlayerInputProxy {
 
   @override
   void onPopupDialogClosed() => _stateMachine.process(OnPopupDialogClosed());
+
+  @override
+  void onMenuButtonClick() => _stateMachine.process(OnMenuButtonClick());
 }

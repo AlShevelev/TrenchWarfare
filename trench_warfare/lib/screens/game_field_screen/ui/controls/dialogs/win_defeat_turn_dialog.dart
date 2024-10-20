@@ -39,7 +39,6 @@ class WinDefeatTurnDialog extends StatelessWidget {
             padding: const EdgeInsets.all(24.0),
             child: Center(
               child: Container(
-                  //color: Colors.red,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(_background),
@@ -57,7 +56,6 @@ class WinDefeatTurnDialog extends StatelessWidget {
                           padding: const EdgeInsets.fromLTRB(5, 0, 5, 3),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //mainAxisSize: MainAxisSize.min,
                             children: [
                               Image.asset(_getBanner()),
                               Expanded(

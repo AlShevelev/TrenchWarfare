@@ -30,6 +30,8 @@ abstract interface class GameFieldForControls {
 
   void onEndOfTurnButtonClick();
 
+  void onMenuButtonClick();
+
   void onCardSelected(GameFieldControlsCard? card);
 
   void onCardsSelectionCancelled();
@@ -169,4 +171,7 @@ class GameField extends FlameGame
 
   @override
   void onPopupDialogClosed() => _viewModel.input.onPopupDialogClosed();
+
+  @override
+  void onMenuButtonClick() =>_viewModel.input.onMenuButtonClick();
 }

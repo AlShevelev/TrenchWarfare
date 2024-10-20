@@ -18,8 +18,7 @@ class MainControls extends GameFieldControlsState {
     required this.carrierInfo,
   });
 
-  MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) =>
-      MainControls(
+  MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
         totalSum: totalSum,
         cellInfo: cellInfo,
         armyInfo: armyInfo,
@@ -81,4 +80,12 @@ class DefeatControls extends GameFieldControlsState {
   final bool isGlobal;
 
   DefeatControls({required this.nation, required this.isGlobal});
+}
+
+class MenuControls extends GameFieldControlsState {
+  final Nation nation;
+
+  final int day;
+
+  MenuControls({required this.nation, required this.day});
 }

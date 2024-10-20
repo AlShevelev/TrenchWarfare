@@ -128,3 +128,8 @@ class GameIsOver implements State {
   @override
   String toString() => 'GAME_IS_OVER';
 }
+
+class MenuIsVisible implements State {
+  @override
+  String toString() => 'MENU_IS_VISIBLE';
+}
