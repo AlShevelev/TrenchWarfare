@@ -41,6 +41,8 @@ abstract interface class GameFieldForControls {
   void onPopupDialogClosed();
 
   void onPhoneBackAction();
+
+  void onMenuQuitButtonClick();
 }
 
 class GameField extends FlameGame
@@ -179,4 +181,7 @@ class GameField extends FlameGame
 
   @override
   void onPhoneBackAction() =>_viewModel.input.onPhoneBackAction();
+
+  @override
+  void onMenuQuitButtonClick() =>_viewModel.input.onMenuQuitButtonClick();
 }

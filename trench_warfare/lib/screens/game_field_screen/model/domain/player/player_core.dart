@@ -113,4 +113,7 @@ class PlayerCore extends PlayerInputProxy {
 
   @override
   void onPhoneBackAction() => _stateMachine.process(OnPhoneBackAction());
+
+  @override
+  void onMenuQuitButtonClick() => _stateMachine.process(OnMenuQuitButtonClick());
 }

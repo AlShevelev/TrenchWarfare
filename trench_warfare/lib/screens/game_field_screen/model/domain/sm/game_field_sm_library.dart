@@ -45,6 +45,7 @@ part 'transitions/from_card_placing_on_cell_clicked.dart';
 part 'transitions/from_card_placing_in_progress_on_animation_completed.dart';
 part 'transitions/from_card_selecting_on_card_selected.dart';
 part 'transitions/from_card_selecting_on_card_selection_cancelled.dart';
+part 'transitions/from_menu_is_visible_on_menu_quit_button_click.dart';
 part 'transitions/from_menu_is_visible_on_phone_back_action.dart';
 part 'transitions/from_initial_on_start_turn_transition.dart';
 part 'transitions/from_moving_in_progress_on_animation_completed.dart';

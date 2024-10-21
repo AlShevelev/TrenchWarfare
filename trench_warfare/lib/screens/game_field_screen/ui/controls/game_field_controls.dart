@@ -26,7 +26,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        widget._gameField.onPhoneBackAction();
+        if (!didPop) {
+          widget._gameField.onPhoneBackAction();
+        }
       },
       child: StreamBuilder<GameFieldControlsState>(
           stream: widget._gameField.controlsState,

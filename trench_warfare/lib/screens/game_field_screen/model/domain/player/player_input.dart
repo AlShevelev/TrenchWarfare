@@ -34,4 +34,6 @@ abstract interface class PlayerInput {
   void onPopupDialogClosed();
 
   void onPhoneBackAction();
+
+  void onMenuQuitButtonClick();
 }

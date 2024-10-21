@@ -73,4 +73,9 @@ class PlayerAiInputProxy extends PlayerInputProxy {
   void onPhoneBackAction() {
     // do nothing
   }
+
+  @override
+  void onMenuQuitButtonClick() {
+    // do nothing
+  }
 }

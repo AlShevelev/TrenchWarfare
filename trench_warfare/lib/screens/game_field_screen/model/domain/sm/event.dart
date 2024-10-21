@@ -91,6 +91,11 @@ class OnMenuButtonClick implements Event {
   String toString() => 'ON_MENU_BUTTON_CLICK';
 }
 
+class OnMenuQuitButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_QUIT_BUTTON_CLICK';
+}
+
 class OnPhoneBackAction implements Event {
   @override
   String toString() => 'ON_PHONE_BACK_ACTION';
