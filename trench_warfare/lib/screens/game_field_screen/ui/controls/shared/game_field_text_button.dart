@@ -20,7 +20,10 @@ class GameFieldTextButton extends StatelessWidget {
     return Material(
       child: InkWell(
         onTap: () {
-          onPress();
+          // To show a press animation
+          Future.delayed(const Duration(milliseconds: 300), () {
+            onPress();
+          });
         }, // Handle your callback.
         splashColor: AppColors.brown.withOpacity(0.5),
         child: Ink(

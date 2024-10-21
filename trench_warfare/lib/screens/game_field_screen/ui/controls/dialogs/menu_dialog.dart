@@ -51,7 +51,9 @@ class MenuDialog extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: GameFieldTextButton(
                           text: tr('resume_menu_dialog'),
-                          onPress: () {},
+                          onPress: () {
+                            _gameField.onPhoneBackAction();
+                          },
                         ),
                       ),
                       Padding(
