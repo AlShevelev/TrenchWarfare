@@ -16,7 +16,7 @@ class CardProductionCenter extends CardBase {
 }
 
 class _CardProductionCenterState extends CardBaseState<CardProductionCenter> {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/production_centers/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/production_centers/';
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {

@@ -23,7 +23,7 @@ abstract class CardBase extends StatefulWidget {
 }
 
 abstract class CardBaseState<T extends CardBase> extends State<T> {
-  static const _imagesPath = 'assets/images/game_field_overlays/cards/';
+  static const _imagesPath = 'assets/images/screens/game_field/cards/';
 
   bool _collapsed = true;
 

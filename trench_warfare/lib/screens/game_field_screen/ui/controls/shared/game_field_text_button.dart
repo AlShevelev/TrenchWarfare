@@ -31,7 +31,7 @@ class GameFieldTextButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.black.withAlpha(100),
             image: const DecorationImage(
-              image: AssetImage('assets/images/game_field_overlays/button_text.webp'),
+              image: AssetImage('assets/images/screens/game_field/button_text.webp'),
               fit: BoxFit.fill,
             ),
           ),

@@ -17,7 +17,7 @@ class MoneyPanel extends StatelessWidget {
     Row(
       children: [
         Image.asset(
-          'assets/images/game_field_overlays/icon_money.webp',
+          'assets/images/screens/game_field/icon_money.webp',
           height: 18,
         ),
         Padding(
@@ -31,7 +31,7 @@ class MoneyPanel extends StatelessWidget {
         if (stretch)
           const Spacer(),
         Image.asset(
-          'assets/images/game_field_overlays/icon_industry_points.webp',
+          'assets/images/screens/game_field/icon_industry_points.webp',
           height: 18,
         ),
         Padding(

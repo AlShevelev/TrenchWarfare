@@ -10,7 +10,7 @@ class MenuDialog extends StatelessWidget {
 
   final GameFieldForControls _gameField;
 
-  static const _imagesPath = 'assets/images/game_field_overlays/dialogs/win_defeat_turn/';
+  static const _imagesPath = 'assets/images/screens/game_field/dialogs/win_defeat_turn/';
   static const _background = '${_imagesPath}card_background.webp';
 
   const MenuDialog({

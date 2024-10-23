@@ -84,7 +84,7 @@ class _CardsBookmarksState extends State<CardsBookmarks> {
             height: _bookmarkHeight,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/images/game_field_overlays/cards/$folder/bookmark.webp'),
+              image: AssetImage('assets/images/screens/game_field/cards/$folder/bookmark.webp'),
               fit: BoxFit.cover,
             )),
           ),

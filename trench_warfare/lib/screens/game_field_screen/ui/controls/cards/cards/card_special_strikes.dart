@@ -16,7 +16,7 @@ class CardSpecialStrike extends CardBase {
 }
 
 class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/special_strikes/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/special_strikes/';
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {

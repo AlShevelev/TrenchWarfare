@@ -16,7 +16,7 @@ class CardTerrainModifier extends CardBase {
 }
 
 class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/terrain_modifiers/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/terrain_modifiers/';
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {

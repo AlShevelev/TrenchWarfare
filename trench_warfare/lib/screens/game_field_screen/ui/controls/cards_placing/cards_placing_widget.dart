@@ -25,7 +25,7 @@ class CardPlacingWidget extends StatelessWidget {
         GameFieldCornerButton(
           right: 15,
           bottom: 15,
-          image: const AssetImage('assets/images/game_field_overlays/cards/button_close.webp'),
+          image: const AssetImage('assets/images/screens/game_field/cards/button_close.webp'),
           onPress: () {
             _gameField.onCardsPlacingCancelled();
           },

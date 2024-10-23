@@ -49,17 +49,17 @@ flutter:
 
     # general purpose images
     - assets/images/
-    - assets/images/game_field_overlays/
-    - assets/images/game_field_overlays/main/
-    - assets/images/game_field_overlays/cards/
-    - assets/images/game_field_overlays/cards/production_centers/
-    - assets/images/game_field_overlays/cards/special_strikes/
-    - assets/images/game_field_overlays/cards/terrain_modifiers/
-    - assets/images/game_field_overlays/cards/troop_boosters/
-    - assets/images/game_field_overlays/cards/units/
-    - assets/images/game_field_overlays/dialogs/win_defeat_turn/
-    - assets/images/game_field_overlays/dialogs/win_defeat_turn/banners/
-    - assets/images/game_field_overlays/dialogs/win_defeat_turn/photos/
+    - assets/images/screens/game_field/
+    - assets/images/screens/game_field/main/
+    - assets/images/screens/game_field/cards/
+    - assets/images/screens/game_field/cards/production_centers/
+    - assets/images/screens/game_field/cards/special_strikes/
+    - assets/images/screens/game_field/cards/terrain_modifiers/
+    - assets/images/screens/game_field/cards/troop_boosters/
+    - assets/images/screens/game_field/cards/units/
+    - assets/images/screens/game_field/dialogs/win_defeat_turn/
+    - assets/images/screens/game_field/dialogs/win_defeat_turn/banners/
+    - assets/images/screens/game_field/dialogs/win_defeat_turn/photos/
 
     # localisation
     - assets/translations/

@@ -16,7 +16,7 @@ class CardUnitBooster extends CardBase {
 }
 
 class _CardUnitBoosterState extends CardBaseState<CardUnitBooster> {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/troop_boosters/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/troop_boosters/';
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {

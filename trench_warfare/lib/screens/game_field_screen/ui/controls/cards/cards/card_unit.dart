@@ -16,7 +16,7 @@ class CardUnit extends CardBase {
 }
 
 class _CardUnitState extends CardBaseState<CardUnit> {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/units/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/units/';
 
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {

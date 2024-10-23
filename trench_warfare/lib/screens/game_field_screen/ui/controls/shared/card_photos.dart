@@ -6,7 +6,7 @@ import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 
 class CardPhotos {
-  static const _pathToImages = 'assets/images/game_field_overlays/cards/';
+  static const _pathToImages = 'assets/images/screens/game_field/cards/';
 
   static String getPhoto(GameFieldControlsCard card) =>
     _pathToImages + switch(card) {

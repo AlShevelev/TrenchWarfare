@@ -26,7 +26,7 @@ class BuildRestrictionPanel extends StatelessWidget {
     return Row(
       children: [
         Image.asset(
-          'assets/images/game_field_overlays/icon_money.webp',
+          'assets/images/screens/game_field/icon_money.webp',
           height: 18,
           color: buildPossibility.canBuildByCurrency ? acceptedColor : rejectedColor,
         ),
@@ -39,7 +39,7 @@ class BuildRestrictionPanel extends StatelessWidget {
           ),
         ),
         Image.asset(
-          'assets/images/game_field_overlays/icon_industry_points.webp',
+          'assets/images/screens/game_field/icon_industry_points.webp',
           height: 18,
           color: buildPossibility.canBuildByIndustryPoint ? acceptedColor : rejectedColor,
         ),
@@ -72,13 +72,13 @@ class BuildRestrictionPanel extends StatelessWidget {
 
   String _getRestrictionIcon(BuildRestriction restriction) => switch (restriction) {
         ProductionCenterBuildRestriction(productionCenterType: var productionCenterType) => switch (productionCenterType) {
-            ProductionCenterType.city => 'assets/images/game_field_overlays/icon_city.webp',
-            ProductionCenterType.factory => 'assets/images/game_field_overlays/icon_factory.webp',
-            ProductionCenterType.airField => 'assets/images/game_field_overlays/icon_air_field.webp',
-            ProductionCenterType.navalBase => 'assets/images/game_field_overlays/icon_naval_base.webp',
+            ProductionCenterType.city => 'assets/images/screens/game_field/icon_city.webp',
+            ProductionCenterType.factory => 'assets/images/screens/game_field/icon_factory.webp',
+            ProductionCenterType.airField => 'assets/images/screens/game_field/icon_air_field.webp',
+            ProductionCenterType.navalBase => 'assets/images/screens/game_field/icon_naval_base.webp',
           },
-        AppropriateCell() => 'assets/images/game_field_overlays/icon_cell.webp',
-        AppropriateUnit() => 'assets/images/game_field_overlays/icon_unit.webp',
+        AppropriateCell() => 'assets/images/screens/game_field/icon_cell.webp',
+        AppropriateUnit() => 'assets/images/screens/game_field/icon_unit.webp',
       };
 
   String _getRestrictionText(BuildRestriction restriction) => switch (restriction) {

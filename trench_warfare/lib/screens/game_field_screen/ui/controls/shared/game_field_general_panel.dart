@@ -31,7 +31,7 @@ class GameFieldGeneralPanel extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.black.withAlpha(100),
             image: const DecorationImage(
-              image: AssetImage("assets/images/game_field_overlays/main/panel_general_info.webp"),
+              image: AssetImage("assets/images/screens/game_field/main/panel_general_info.webp"),
               fit: BoxFit.cover,
             ),
           ),
