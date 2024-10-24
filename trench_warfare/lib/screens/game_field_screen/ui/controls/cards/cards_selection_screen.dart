@@ -30,7 +30,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   }
 
   Future init() async {
-    _background = await loadImage('assets/images/screens/game_field/cards/background.webp');
+    _background = await loadImage('assets/images/screens/game_field/cards/cover_background.webp');
     _oldBookCover = await loadImage('assets/images/screens/game_field/cards/old_book_cover.webp');
     _oldPaper = await loadImage('assets/images/screens/game_field/cards/old_paper.webp', completeCallback: () {
       setState(() {

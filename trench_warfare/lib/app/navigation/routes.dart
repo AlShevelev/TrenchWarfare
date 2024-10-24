@@ -5,7 +5,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_field_screen.da
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class Routes {
-  static const startScreen = '/';
+  static const coverScreen = '/';
   static const gameField = '/game_field';
   static const debugLogging = '/debug_logging';
 

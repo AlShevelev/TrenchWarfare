@@ -15,7 +15,7 @@ class GameFieldScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Background.path(
-        imagePath: 'assets/images/game_field_background.webp',
+        imagePath: 'assets/images/screens/game_field/game_field_background.webp',
         child: GameWidget(
           game: GameField(mapName: _mapName),
           overlayBuilderMap: {

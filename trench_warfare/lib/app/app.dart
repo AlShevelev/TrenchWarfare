@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:trench_warfare/app/app_lifecycle_observer.dart';
 import 'package:trench_warfare/app/navigation/routes.dart';
 import 'package:trench_warfare/app/theme/theme.dart';
-import 'package:trench_warfare/screens/start_screen/start_screen.dart';
+import 'package:trench_warfare/screens/cover_screen/cover_screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class App extends StatelessWidget {
         locale: context.locale,
         theme: AppThemeFactory.defaultTheme(),
         onGenerateRoute: (settings) => Routes.createPageRouteBuilder(settings),
-        home: const StartScreen(),
+        home: const CoverScreen(),
       ),
     );
   }

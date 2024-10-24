@@ -49,6 +49,7 @@ flutter:
 
     # general purpose images
     - assets/images/
+    - assets/images/screens/cover/
     - assets/images/screens/game_field/
     - assets/images/screens/game_field/main/
     - assets/images/screens/game_field/cards/

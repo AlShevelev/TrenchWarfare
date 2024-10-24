@@ -91,5 +91,9 @@
   "save_menu_dialog": "Save",
   "load_menu_dialog": "Load",
   "settings_menu_dialog": "Settings",
-  "quit_menu_dialog": "Quit"
+  "quit_menu_dialog": "Quit",
+
+  "cover_new_game": "NEW GAME",
+  "cover_load": "LOAD",
+  "cover_settings": "SETTINGS"
 }
