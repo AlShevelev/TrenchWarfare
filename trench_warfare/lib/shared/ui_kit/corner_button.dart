@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
+import 'package:trench_warfare/shared/ui_kit/ui_constants.dart';
 
-class GameFieldCornerButton extends StatelessWidget {
+class CornerButton extends StatelessWidget {
   static const _size = 40.0;
 
   final double? left;
@@ -13,7 +14,7 @@ class GameFieldCornerButton extends StatelessWidget {
 
   final Function onPress;
 
-  const GameFieldCornerButton({
+  const CornerButton({
     super.key,
     this.left,
     this.top,
@@ -34,7 +35,12 @@ class GameFieldCornerButton extends StatelessWidget {
       height: _size,
       child: Material(
         child: InkWell(
-          onTap: () { onPress(); }, // Handle your callback.
+          onTap: () {
+            // To show a press animation
+            Future.delayed(const Duration(milliseconds: UiConstants.pressButtonTime), () {
+              onPress();
+            });
+          }, // Handle your callback.
           splashColor: AppColors.brown.withOpacity(0.5),
           child: Ink(
             height: _size,

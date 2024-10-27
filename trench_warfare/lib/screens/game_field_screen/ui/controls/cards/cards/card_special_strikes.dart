@@ -16,8 +16,6 @@ class CardSpecialStrike extends CardBase {
 }
 
 class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
-  static const _pathToImages = 'assets/images/screens/game_field/cards/special_strikes/';
-
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {
         SpecialStrikeType.gasAttack => tr('gas_attack_card_description'),
@@ -40,7 +38,7 @@ class _CardSpecialStrikeState extends CardBaseState<CardSpecialStrike> {
       };
 
   @override
-  String getBackgroundImage() => '${_pathToImages}card_background.webp';
+  String getBackgroundImage() => 'assets/images/screens/shared/card_brown_background.webp';
 
   @override
   String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);

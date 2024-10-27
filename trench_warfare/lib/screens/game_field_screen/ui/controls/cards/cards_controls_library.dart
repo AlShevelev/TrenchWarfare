@@ -13,7 +13,7 @@ import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/card_photos.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
+import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';

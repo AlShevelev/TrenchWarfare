@@ -16,8 +16,6 @@ class CardProductionCenter extends CardBase {
 }
 
 class _CardProductionCenterState extends CardBaseState<CardProductionCenter> {
-  static const _pathToImages = 'assets/images/screens/game_field/cards/production_centers/';
-
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {
     ProductionCenterType.city => tr('city_card_description'),
@@ -38,7 +36,7 @@ class _CardProductionCenterState extends CardBaseState<CardProductionCenter> {
   };
 
   @override
-  String getBackgroundImage() => '${_pathToImages}card_background.webp';
+  String getBackgroundImage() => 'assets/images/screens/shared/card_blue_background.webp';
 
   @override
   String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);

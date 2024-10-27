@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
+import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 
@@ -24,7 +24,7 @@ class MainControlsWidget extends StatelessWidget {
 
     widgets.addAll([
       // Cards buttons
-      GameFieldCornerButton(
+      CornerButton(
         left: 15,
         bottom: 15,
         image: const AssetImage('assets/images/screens/game_field/main/button_cards.webp'),
@@ -33,7 +33,7 @@ class MainControlsWidget extends StatelessWidget {
         },
       ),
       // Next turn button
-      GameFieldCornerButton(
+      CornerButton(
         right: 15,
         bottom: 15,
         image: const AssetImage('assets/images/screens/game_field/main/button_next_turn.webp'),
@@ -42,7 +42,7 @@ class MainControlsWidget extends StatelessWidget {
         },
       ),
       // Menu button
-      GameFieldCornerButton(
+      CornerButton(
         right: 15,
         top: 15,
         image: const AssetImage('assets/images/screens/game_field/main/button_menu.webp'),

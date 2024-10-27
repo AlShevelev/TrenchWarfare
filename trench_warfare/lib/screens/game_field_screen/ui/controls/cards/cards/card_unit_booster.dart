@@ -16,8 +16,6 @@ class CardUnitBooster extends CardBase {
 }
 
 class _CardUnitBoosterState extends CardBaseState<CardUnitBooster> {
-  static const _pathToImages = 'assets/images/screens/game_field/cards/troop_boosters/';
-
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {
     UnitBoost.attack => tr('attack_card_description'),
@@ -38,7 +36,7 @@ class _CardUnitBoosterState extends CardBaseState<CardUnitBooster> {
   };
 
   @override
-  String getBackgroundImage() => '${_pathToImages}card_background.webp';
+  String getBackgroundImage() => 'assets/images/screens/shared/card_green_background.webp';
 
   @override
   String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);

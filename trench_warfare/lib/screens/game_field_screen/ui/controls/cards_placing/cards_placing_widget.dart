@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/card_photos.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_corner_button.dart';
+import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 
@@ -22,10 +22,10 @@ class CardPlacingWidget extends StatelessWidget {
       alignment: AlignmentDirectional.topCenter,
       children: [
         // Cancel button
-        GameFieldCornerButton(
+        CornerButton(
           right: 15,
           bottom: 15,
-          image: const AssetImage('assets/images/screens/game_field/cards/button_close.webp'),
+          image: const AssetImage('assets/images/screens/shared/button_close.webp'),
           onPress: () {
             _gameField.onCardsPlacingCancelled();
           },

@@ -30,9 +30,9 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   }
 
   Future init() async {
-    _background = await loadImage('assets/images/screens/game_field/cards/cover_background.webp');
-    _oldBookCover = await loadImage('assets/images/screens/game_field/cards/old_book_cover.webp');
-    _oldPaper = await loadImage('assets/images/screens/game_field/cards/old_paper.webp', completeCallback: () {
+    _background = await loadImage('assets/images/screens/shared/screen_background.webp');
+    _oldBookCover = await loadImage('assets/images/screens/shared/old_book_cover.webp');
+    _oldPaper = await loadImage('assets/images/screens/shared/old_paper.webp', completeCallback: () {
       setState(() {
         _isBackgroundLoaded = true;
       });
@@ -85,10 +85,10 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
             ),
           ),
           // Select button
-          GameFieldCornerButton(
+          CornerButton(
             left: 15,
             bottom: 15,
-            image: const AssetImage('assets/images/screens/game_field/cards/button_select.webp'),
+            image: const AssetImage('assets/images/screens/shared/button_select.webp'),
             onPress: () {
               if (_selectedCardIndex != -1) {
                 switch(_selectedTab) {
@@ -104,10 +104,10 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
             },
           ),
           // Close button
-          GameFieldCornerButton(
+          CornerButton(
             right: 15,
             bottom: 15,
-            image: const AssetImage('assets/images/screens/game_field/cards/button_close.webp'),
+            image: const AssetImage('assets/images/screens/shared/button_close.webp'),
             onPress: () {
               widget._gameField.onCardsSelectionCancelled();
             },

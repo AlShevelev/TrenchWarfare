@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
+import 'package:trench_warfare/shared/ui_kit/ui_constants.dart';
 
 class GameFieldTextButton extends StatelessWidget {
   static const _height = 40.0;
@@ -21,7 +22,7 @@ class GameFieldTextButton extends StatelessWidget {
       child: InkWell(
         onTap: () {
           // To show a press animation
-          Future.delayed(const Duration(milliseconds: 300), () {
+          Future.delayed(const Duration(milliseconds: UiConstants.pressButtonTime), () {
             onPress();
           });
         }, // Handle your callback.

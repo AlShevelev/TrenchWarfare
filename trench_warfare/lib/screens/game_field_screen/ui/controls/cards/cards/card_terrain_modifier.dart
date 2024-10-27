@@ -16,8 +16,6 @@ class CardTerrainModifier extends CardBase {
 }
 
 class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
-  static const _pathToImages = 'assets/images/screens/game_field/cards/terrain_modifiers/';
-
   @override
   String _getDescriptionText() => switch (widget.cardInfo.type) {
     TerrainModifierType.seaMine => tr('sea_mine_field_card_description'),
@@ -42,7 +40,7 @@ class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
   };
 
   @override
-  String getBackgroundImage() => '${_pathToImages}card_background.webp';
+  String getBackgroundImage() => 'assets/images/screens/shared/card_yellow_background.webp';
 
   @override
   String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);

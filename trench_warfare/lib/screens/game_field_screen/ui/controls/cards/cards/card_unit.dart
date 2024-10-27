@@ -52,7 +52,7 @@ class _CardUnitState extends CardBaseState<CardUnit> {
   };
 
   @override
-  String getBackgroundImage() => '${_pathToImages}card_background.webp';
+  String getBackgroundImage() => 'assets/images/screens/shared/card_red_background.webp';
 
   @override
   Widget _getFeaturesPanel() => Row(
