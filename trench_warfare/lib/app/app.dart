@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:trench_warfare/app/app_lifecycle_observer.dart';
 import 'package:trench_warfare/app/navigation/routes.dart';
 import 'package:trench_warfare/app/theme/theme.dart';
-import 'package:trench_warfare/screens/cover_screen/cover_screen.dart';
+import 'package:trench_warfare/screens/cover/cover_screen.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

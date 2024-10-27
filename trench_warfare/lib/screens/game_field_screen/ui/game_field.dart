@@ -7,6 +7,7 @@ import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
+import 'package:trench_warfare/app/navigation/routes.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
@@ -153,8 +154,11 @@ class GameField extends FlameGame
 
   void _onGameFieldStateUpdate(GameFieldState state) async {
     if (state is Completed) {
-      Logger.info('pop to previous screen', tag: 'NAVIGATION');
-      gameRef.buildContext?.let((context) => Navigator.of(context).pop());
+      Logger.info('pop to the cover screen', tag: 'NAVIGATION');
+      gameRef.buildContext?.let((context) => Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.coverScreen,
+            (r) => false,
+          ));
     }
   }
 
@@ -177,11 +181,11 @@ class GameField extends FlameGame
   void onPopupDialogClosed() => _viewModel.input.onPopupDialogClosed();
 
   @override
-  void onMenuButtonClick() =>_viewModel.input.onMenuButtonClick();
+  void onMenuButtonClick() => _viewModel.input.onMenuButtonClick();
 
   @override
-  void onPhoneBackAction() =>_viewModel.input.onPhoneBackAction();
+  void onPhoneBackAction() => _viewModel.input.onPhoneBackAction();
 
   @override
-  void onMenuQuitButtonClick() =>_viewModel.input.onMenuQuitButtonClick();
+  void onMenuQuitButtonClick() => _viewModel.input.onMenuQuitButtonClick();
 }

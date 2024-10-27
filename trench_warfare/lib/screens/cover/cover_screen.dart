@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/navigation/routes.dart';
-import 'package:trench_warfare/screens/cover_screen/cover_screen_button.dart';
+import 'package:trench_warfare/screens/cover/cover_screen_button.dart';
 
 class CoverScreen extends StatelessWidget {
   const CoverScreen({super.key});
@@ -37,7 +37,7 @@ class CoverScreen extends StatelessWidget {
                 child: CoverScreenButton(
                   text: localization.tr('cover_new_game'),
                   onPress: () {
-                    Navigator.of(context).pushNamed(Routes.gameField, arguments: 'real/europe/the_battle_of_tannenburg.tmx');
+                    Navigator.of(context).pushNamed(Routes.newGame);
                   },
                 ),
               ),
