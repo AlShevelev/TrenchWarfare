@@ -46,7 +46,7 @@ class MapMetadata implements MapMetadataRead {
                 (e.firstNation == nation2 && e.secondNation == nation1))
             .relationship;
 
-    return relationship == Relationship.war || relationship == Relationship.neutral;
+    return relationship == Relationship.war;
   }
 
   @override
