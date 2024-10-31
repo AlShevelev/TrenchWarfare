@@ -1,10 +1,10 @@
-part of new_game_dto_library;
+part of map_selection_dto_library;
 
-sealed class NewGameDataState {}
+sealed class MapSelectionState {}
 
-class Loading extends NewGameDataState {}
+class Loading extends MapSelectionState {}
 
-class DataIsReady extends NewGameDataState {
+class DataIsReady extends MapSelectionState {
   final Tab europeTab;
 
   final Tab asiaTab;

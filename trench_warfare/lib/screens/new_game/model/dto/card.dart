@@ -1,15 +1,15 @@
-part of new_game_dto_library;
+part of map_selection_dto_library;
 
 class Card {
   final String id;
 
-  final String title;
+  final Map<AppLocale, String> title;
+
+  final Map<AppLocale, String> description;
 
   final DateTime from;
 
   final DateTime to;
-
-  final String description;
 
   final Iterable<SideOfConflict> opponents;
 
@@ -30,10 +30,10 @@ class Card {
 
   Card copy({
     String? id,
-    String? title,
+    Map<AppLocale, String>? title,
     DateTime? from,
     DateTime? to,
-    String? description,
+    Map<AppLocale, String>? description,
     Iterable<SideOfConflict>? opponents,
     Iterable<Nation>? neutrals,
     bool? selected,

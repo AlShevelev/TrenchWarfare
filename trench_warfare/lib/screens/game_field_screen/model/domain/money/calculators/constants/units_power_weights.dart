@@ -1,3 +1,5 @@
+part of money_calculators;
+
 /// Represents relative units power
 class UnitsPowerWeights {
   // An infantry attacks an armoredCar

@@ -1,7 +1,8 @@
-import 'package:trench_warfare/app/localization/locale.dart';
+import 'package:trench_warfare/core_entities/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/core_entities/enums/relationship.dart';
+import 'package:trench_warfare/core_entities/localization/app_locale.dart';
 
 abstract interface class MapMetadataRead {
   bool isInWar(Nation? nation1, Nation? nation2);
@@ -16,19 +17,19 @@ abstract interface class MapMetadataRead {
 }
 
 class MapMetadata implements MapMetadataRead {
-  final int version;
-  final Map<Locale, String> title;
-  final Map<Locale, String> description;
-  final List<NationRecord> nations;
-  final List<DiplomacyRecord> diplomacy;
+  final MapMetadataRecord _record;
 
-  MapMetadata({
-    required this.version,
-    required this.title,
-    required this.description,
-    required this.nations,
-    required this.diplomacy,
-  });
+  int get version => _record.version;
+
+  Map<AppLocale, String> get title => _record.title;
+
+  Map<AppLocale, String> get description => _record.description;
+
+  List<NationRecord> get nations => _record.nations;
+
+  List<DiplomacyRecord> get diplomacy => _record.diplomacy;
+
+  MapMetadata(MapMetadataRecord record): _record = record;
 
   @override
   bool isInWar(Nation? nation1, Nation? nation2) {
@@ -73,30 +74,4 @@ class MapMetadata implements MapMetadataRead {
 
   @override
   List<Nation> getAll() => nations.map((n) => n.code).toList(growable: false);
-}
-
-class NationRecord {
-  final Nation code;
-  final Aggressiveness aggressiveness;
-  final int startMoney;
-  final int startIndustryPoints;
-
-  NationRecord({
-    required this.code,
-    required this.aggressiveness,
-    required this.startMoney,
-    required this.startIndustryPoints,
-  });
-}
-
-class DiplomacyRecord {
-  final Nation firstNation;
-  final Nation secondNation;
-  final Relationship relationship;
-
-  DiplomacyRecord({
-    required this.firstNation,
-    required this.secondNation,
-    required this.relationship,
-  });
 }

@@ -2,7 +2,6 @@ library money_calculators;
 
 import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
 import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
-import 'package:trench_warfare/core_entities/units_power_weights.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
 import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
 import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
@@ -14,7 +13,8 @@ import 'package:trench_warfare/core_entities/enums/unit_type.dart';
 import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
 
 part 'money_cell_calculator.dart';
-part 'money_constants.dart';
+part 'constants/money_constants.dart';
+part 'constants/units_power_weights.dart';
 part 'money_production_center_calculator.dart';
 part 'money_special_strike_calculator.dart';
 part 'money_terrain_modifier_calculator.dart';

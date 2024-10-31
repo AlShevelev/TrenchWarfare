@@ -1,4 +1,4 @@
-part of new_game_dto_library;
+part of map_selection_dto_library;
 
 class SideOfConflict {
   final Nation nation;

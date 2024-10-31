@@ -21,6 +21,7 @@ dependencies:
   talker_flutter: ^4.4.1
   objectbox: ^4.0.2
   objectbox_flutter_libs: any
+  xml: ^6.5.0
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +42,9 @@ flutter:
     # maps
     - assets/tiles/
     - assets/tiles/test/
+    - assets/tiles/real/asia/
     - assets/tiles/real/europe/
+    - assets/tiles/real/new_world/
     - assets/images/tiles/
 
     # sprites

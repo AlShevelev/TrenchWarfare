@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
+import 'package:trench_warfare/core_entities/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
