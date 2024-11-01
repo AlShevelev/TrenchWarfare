@@ -12,7 +12,7 @@ import 'package:xml/xpath.dart';
 class MapsDataLoader {
   List<String>? _allAssets;
 
-  Future<Tab> loadTab(String filter) async {
+  Future<Tab> loadTab(String filter, TabCode tabCode, {required bool selected}) async {
     final mapsFileNames = (await _getAllAssets()).where((m) => m.contains(filter)).toList(growable: false);
 
     final cards = <Card>[];
@@ -36,7 +36,11 @@ class MapsDataLoader {
       }
     }
 
-    return Tab(selected: false, cards: cards.sorted((c1, c2) => c1.from.compareTo(c2.from)));
+    return Tab(
+      code: tabCode,
+      selected: selected,
+      cards: cards.sorted((c1, c2) => c1.from.compareTo(c2.from)),
+    );
   }
 
   Future<List<String>> _getAllAssets() async {

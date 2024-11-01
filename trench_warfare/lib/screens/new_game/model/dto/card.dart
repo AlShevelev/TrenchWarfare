@@ -29,7 +29,6 @@ class Card {
   });
 
   Card copy({
-    String? id,
     Map<AppLocale, String>? title,
     DateTime? from,
     DateTime? to,
@@ -39,7 +38,7 @@ class Card {
     bool? selected,
   }) =>
       Card(
-        id: id ?? this.id,
+        id: id,
         title: title ?? this.title,
         from: from ?? this.from,
         to: to ?? this.to,

@@ -95,5 +95,9 @@
 
   "cover_new_game": "NEW GAME",
   "cover_load": "LOAD",
-  "cover_settings": "SETTINGS"
+  "cover_settings": "SETTINGS",
+
+  "new_game_tab_europe": "Europe",
+  "new_game_tab_asia": "Asia",
+  "new_game_tab_new_world": "New World"
 }

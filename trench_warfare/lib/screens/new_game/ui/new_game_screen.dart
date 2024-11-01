@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/screens/new_game/ui/map_selection.dart';
+import 'package:trench_warfare/screens/new_game/ui/map_selection/map_selection_library.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 
 class NewGameScreen extends StatelessWidget {

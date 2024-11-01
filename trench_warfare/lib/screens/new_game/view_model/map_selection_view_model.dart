@@ -15,14 +15,25 @@ class MapSelectionViewModel extends ViewModelBase {
   Future<void> init() async {
     final dataLoader = MapsDataLoader();
 
-    final europeTab = await _loadTab(dataLoader, 'tiles/real/europe');
-    final asiaTab = await _loadTab(dataLoader, 'tiles/real/asia');
-    final newWorldTab = await _loadTab(dataLoader, 'tiles/real/new_world');
-
     _gameFieldState.update(DataIsReady(
-      europeTab: europeTab.copy(selected: true),
-      asiaTab: asiaTab,
-      newWorldTab: newWorldTab,
+      tabs: {
+        TabCode.europe: await _loadTab(
+          dataLoader,
+          'tiles/real/europe',
+          TabCode.europe,
+          selected: true,
+        ),
+        TabCode.asia: await _loadTab(
+          dataLoader,
+          'tiles/real/asia',
+          TabCode.asia,
+        ),
+        TabCode.newWorld: await _loadTab(
+          dataLoader,
+          'tiles/real/new_world',
+          TabCode.newWorld,
+        ),
+      },
     ));
   }
 
@@ -31,12 +42,21 @@ class MapSelectionViewModel extends ViewModelBase {
     _gameFieldState.close();
   }
 
-  Future<Tab> _loadTab(MapsDataLoader dataLoader, String filter) async {
+  Future<Tab> _loadTab(
+    MapsDataLoader dataLoader,
+    String filter,
+    TabCode tabCode, {
+    bool selected = false,
+  }) async {
     try {
-      return dataLoader.loadTab(filter);
+      return dataLoader.loadTab(
+        filter,
+        tabCode,
+        selected: selected,
+      );
     } catch (e, s) {
       Logger.error(e.toString(), stackTrace: s);
-      return Tab(selected: false, cards: []);
+      return Tab(code: tabCode, selected: selected, cards: []);
     }
   }
 }

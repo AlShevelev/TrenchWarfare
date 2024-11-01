@@ -5,22 +5,11 @@ sealed class MapSelectionState {}
 class Loading extends MapSelectionState {}
 
 class DataIsReady extends MapSelectionState {
-  final Tab europeTab;
+  final Map<TabCode, Tab> tabs;
 
-  final Tab asiaTab;
+  DataIsReady({required this.tabs});
 
-  final Tab newWorldTab;
-
-  DataIsReady({required this.europeTab, required this.asiaTab, required this.newWorldTab});
-
-  DataIsReady copy({
-    Tab? europeTab,
-    Tab? asiaTab,
-    Tab? newWorldTab,
-  }) =>
-      DataIsReady(
-        europeTab: europeTab ?? this.europeTab,
-        asiaTab: asiaTab ?? this.asiaTab,
-        newWorldTab: newWorldTab ?? this.newWorldTab,
+  DataIsReady copy(Map<TabCode, Tab> tabs) => DataIsReady(
+        tabs: tabs,
       );
 }

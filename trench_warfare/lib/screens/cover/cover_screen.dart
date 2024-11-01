@@ -17,57 +17,68 @@ class CoverScreen extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/screens/cover/cover_background.webp"),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/screens/cover/cover_background.webp"),
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.topCenter,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
-                child: Image.asset("assets/images/screens/cover/cover_title_$locale.webp"),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+              child: Image.asset("assets/images/screens/cover/cover_title_$locale.webp"),
+            ),
+            const Spacer(flex: 1),
+            Padding(
+              padding: buttonsPadding,
+              child: CoverScreenButton(
+                text: localization.tr('cover_new_game'),
+                onPress: () {
+                  Navigator.of(context).pushNamed(Routes.newGame);
+                },
               ),
-              const Spacer(flex: 1,),
+            ),
+            Padding(
+              padding: buttonsPadding,
+              child: CoverScreenButton(
+                text: localization.tr('cover_load'),
+                onPress: () {},
+              ),
+            ),
+            Padding(
+              padding: buttonsPadding,
+              child: CoverScreenButton(
+                text: localization.tr('cover_settings'),
+                onPress: () {},
+              ),
+            ),
+            if (kDebugMode)
               Padding(
                 padding: buttonsPadding,
                 child: CoverScreenButton(
-                  text: localization.tr('cover_new_game'),
+                  text: 'TEST MAP',
                   onPress: () {
-                    Navigator.of(context).pushNamed(Routes.newGame);
+                    Navigator.of(context)
+                        .pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
                   },
                 ),
               ),
+            if (kDebugMode)
               Padding(
                 padding: buttonsPadding,
                 child: CoverScreenButton(
-                  text: localization.tr('cover_load'),
-                  onPress: () { },
+                  text: 'DEBUG LOGS',
+                  onPress: () {
+                    Navigator.of(context).pushNamed(Routes.debugLogging);
+                  },
                 ),
               ),
-              Padding(
-                padding: buttonsPadding,
-                child: CoverScreenButton(
-                  text: localization.tr('cover_settings'),
-                  onPress: () { },
-                ),
-              ),
-              if (kDebugMode)
-                Padding(
-                  padding: buttonsPadding,
-                  child: CoverScreenButton(
-                    text: 'DEBUG LOGS',
-                    onPress: () {
-                      Navigator.of(context).pushNamed(Routes.debugLogging);
-                    },
-                  ),
-                ),
-            ],
-          ),
+          ],
         ),
+      ),
     );
   }
 }
