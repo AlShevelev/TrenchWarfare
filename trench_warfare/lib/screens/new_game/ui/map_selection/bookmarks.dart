@@ -1,11 +1,11 @@
 part of map_selection_ui;
 
-class MapSelectionBookmarks extends StatefulWidget {
+class Bookmarks extends StatefulWidget {
   final MapSelectionState _state;
 
   final void Function(TabCode) _onSwitchTab;
 
-  const MapSelectionBookmarks({
+  const Bookmarks({
     super.key,
     required MapSelectionState state,
     required void Function(TabCode) onSwitchTab,
@@ -13,10 +13,10 @@ class MapSelectionBookmarks extends StatefulWidget {
         _onSwitchTab = onSwitchTab;
 
   @override
-  State<MapSelectionBookmarks> createState() => _MapSelectionBookmarksState();
+  State<Bookmarks> createState() => _BookmarksState();
 }
 
-class _MapSelectionBookmarksState extends State<MapSelectionBookmarks> {
+class _BookmarksState extends State<Bookmarks> {
   static const double _inactiveTabPadding = 20;
 
   static const double _bookmarkHeight = 83;
@@ -50,12 +50,6 @@ class _MapSelectionBookmarksState extends State<MapSelectionBookmarks> {
     );
   }
 
-  String _getTabImageName(TabCode tabCode) => switch (tabCode) {
-        TabCode.europe => 'europe',
-        TabCode.asia => 'asia',
-        TabCode.newWorld => 'new_world',
-      };
-
   String _getTabName(TabCode tabCode) => switch (tabCode) {
         TabCode.europe => tr('new_game_tab_europe'),
         TabCode.asia => tr('new_game_tab_asia'),
@@ -81,7 +75,7 @@ class _MapSelectionBookmarksState extends State<MapSelectionBookmarks> {
           height: _bookmarkHeight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/screens/new_game/bookmark_${_getTabImageName(tab)}.webp'),
+              image: AssetImage('assets/images/screens/new_game/bookmark_${tab.uiString}.webp'),
               fit: BoxFit.cover,
             ),
           ),

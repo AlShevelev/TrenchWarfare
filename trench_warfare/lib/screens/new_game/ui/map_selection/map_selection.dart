@@ -59,13 +59,13 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
             }
 
             return Padding(
-              padding: const EdgeInsets.fromLTRB(7, 36, 7, 36),
+              padding: const EdgeInsets.fromLTRB(7, 20, 7, 20),
               child: Background.image(
                 image: _oldBookCover,
                 child: Stack(
                   alignment: AlignmentDirectional.topStart,
                   children: [
-                    MapSelectionBookmarks(
+                    Bookmarks(
                       state: value.data as MapSelectionState,
                       onSwitchTab: (selectedTab) {
                         // setState(() {
@@ -80,11 +80,12 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                           alignment: AlignmentDirectional.topCenter,
-                          child: SizedBox.shrink(),/*CardsList(
-                            key: ObjectKey(_selectedTab),
-                            factory: _getCardsFactory(_selectedTab),
-                            onCardSelected: (index) => _selectedCardIndex = index,
-                          ),*/
+                          child: MapsList(
+                            key: ObjectKey(TabCode.europe),
+                            selectedTab: TabCode.europe,
+                            state: value.data as MapSelectionState,
+                            onMapSelected: (index) {},
+                          ),
                         ),
                       ),
                     ),
@@ -94,34 +95,6 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
             );
           }
         ),
-/*
-        StreamBuilder<MapSelectionState>(
-          stream: _viewModel.gameFieldState,
-          builder: (context, value) {
-            return switch (value.data.runtimeType) {
-              Loading() => Container(
-                  color: Colors.red,
-                  child: Center(
-                    child: Text(
-                      'Loading',
-                      style: AppTypography.s20w600,
-                    ),
-                  ),
-                ),
-              MapSelectionState() => Container(
-                  color: Colors.red,
-                  child: Center(
-                    child: Text(
-                      'Cards',
-                      style: AppTypography.s20w600,
-                    ),
-                  ),
-                ),
-              _ => const SizedBox.shrink(),
-            };
-          },
-        ),
-*/
         CornerButton(
           left: 15,
           bottom: 15,

@@ -5,11 +5,11 @@ sealed class MapSelectionState {}
 class Loading extends MapSelectionState {}
 
 class DataIsReady extends MapSelectionState {
-  final Map<TabCode, Tab> tabs;
+  final Map<TabCode, MapTabDto> tabs;
 
   DataIsReady({required this.tabs});
 
-  DataIsReady copy(Map<TabCode, Tab> tabs) => DataIsReady(
+  DataIsReady copy(Map<TabCode, MapTabDto> tabs) => DataIsReady(
         tabs: tabs,
       );
 }

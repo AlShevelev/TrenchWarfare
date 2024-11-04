@@ -12,10 +12,10 @@ import 'package:xml/xpath.dart';
 class MapsDataLoader {
   List<String>? _allAssets;
 
-  Future<Tab> loadTab(String filter, TabCode tabCode, {required bool selected}) async {
+  Future<MapTabDto> loadTab(String filter, TabCode tabCode, {required bool selected}) async {
     final mapsFileNames = (await _getAllAssets()).where((m) => m.contains(filter)).toList(growable: false);
 
-    final cards = <Card>[];
+    final cards = <MapCardDto>[];
 
     for (var i = 0; i < mapsFileNames.length; i++) {
       final mapFileName = mapsFileNames[i];
@@ -36,7 +36,7 @@ class MapsDataLoader {
       }
     }
 
-    return Tab(
+    return MapTabDto(
       code: tabCode,
       selected: selected,
       cards: cards.sorted((c1, c2) => c1.from.compareTo(c2.from)),
@@ -62,7 +62,7 @@ class MapsDataLoader {
     return rawMetadata;
   }
 
-  Card _metadataToCard(
+  MapCardDto _metadataToCard(
     MapMetadataRecord metadata,
     String mapFileName, {
     required bool selected,
@@ -71,7 +71,7 @@ class MapsDataLoader {
 
     final opponents = metadata.nations
         .where((n) => n.aggressiveness == Aggressiveness.aggressive)
-        .mapIndexed((i, n) => SideOfConflict(nation: n.code, selected: i == 0))
+        .mapIndexed((i, n) => SideOfConflictDto(nation: n.code, selected: i == 0))
         .toList(growable: false);
 
     final neutrals = metadata.nations
@@ -79,9 +79,9 @@ class MapsDataLoader {
         .map((n) => n.code)
         .toList(growable: false);
 
-    return Card(
+    return MapCardDto(
       id: id,
-      title: metadata.description,
+      title: metadata.title,
       from: metadata.from,
       to: metadata.to,
       description: metadata.description,

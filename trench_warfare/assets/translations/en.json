@@ -10,6 +10,19 @@
   "snow": "Snow",
   "water": "Water",
 
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December",
+
   "level_1": "Level 1",
   "level_2": "Level 2",
   "level_3": "Level 3",
@@ -99,5 +112,9 @@
 
   "new_game_tab_europe": "Europe",
   "new_game_tab_asia": "Asia",
-  "new_game_tab_new_world": "New World"
+  "new_game_tab_new_world": "New World",
+  "new_game_list_loading": "One moment, please",
+  "new_game_list_empty": "Coming soon",
+  "new_game_opponents": "Opponents",
+  "new_game_neutrals": "Neutrals"
 }

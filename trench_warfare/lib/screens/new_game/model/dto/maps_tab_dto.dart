@@ -6,20 +6,20 @@ enum TabCode {
   newWorld,
 }
 
-class Tab {
+class MapTabDto {
   final bool selected;
 
   final TabCode code;
 
-  final Iterable<Card> cards;
+  final Iterable<MapCardDto> cards;
 
-  Tab({required this.selected, required this.code, required this.cards});
+  MapTabDto({required this.selected, required this.code, required this.cards});
 
-  Tab copy({
+  MapTabDto copy({
     bool? selected,
-    Iterable<Card>? cards,
+    Iterable<MapCardDto>? cards,
   }) =>
-      Tab(
+      MapTabDto(
         selected: selected ?? this.selected,
         code: code,
         cards: cards ?? this.cards,

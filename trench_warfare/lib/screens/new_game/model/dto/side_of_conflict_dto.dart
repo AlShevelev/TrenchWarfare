@@ -1,13 +1,13 @@
 part of map_selection_dto_library;
 
-class SideOfConflict {
+class SideOfConflictDto {
   final Nation nation;
 
   final bool selected;
 
-  SideOfConflict({required this.nation, required this.selected});
+  SideOfConflictDto({required this.nation, required this.selected});
 
-  SideOfConflict copy({Nation? nation, bool? selected}) => SideOfConflict(
+  SideOfConflictDto copy({Nation? nation, bool? selected}) => SideOfConflictDto(
         nation: nation ?? this.nation,
         selected: selected ?? this.selected,
       );

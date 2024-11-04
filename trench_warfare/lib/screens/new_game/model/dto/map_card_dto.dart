@@ -1,6 +1,6 @@
 part of map_selection_dto_library;
 
-class Card {
+class MapCardDto {
   final String id;
 
   final Map<AppLocale, String> title;
@@ -11,13 +11,13 @@ class Card {
 
   final DateTime to;
 
-  final Iterable<SideOfConflict> opponents;
+  final Iterable<SideOfConflictDto> opponents;
 
   final Iterable<Nation> neutrals;
 
   final bool selected;
 
-  Card({
+  MapCardDto({
     required this.id,
     required this.title,
     required this.from,
@@ -28,16 +28,16 @@ class Card {
     required this.selected,
   });
 
-  Card copy({
+  MapCardDto copy({
     Map<AppLocale, String>? title,
     DateTime? from,
     DateTime? to,
     Map<AppLocale, String>? description,
-    Iterable<SideOfConflict>? opponents,
+    Iterable<SideOfConflictDto>? opponents,
     Iterable<Nation>? neutrals,
     bool? selected,
   }) =>
-      Card(
+      MapCardDto(
         id: id,
         title: title ?? this.title,
         from: from ?? this.from,

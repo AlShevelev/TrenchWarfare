@@ -42,7 +42,7 @@ class MapSelectionViewModel extends ViewModelBase {
     _gameFieldState.close();
   }
 
-  Future<Tab> _loadTab(
+  Future<MapTabDto> _loadTab(
     MapsDataLoader dataLoader,
     String filter,
     TabCode tabCode, {
@@ -56,7 +56,7 @@ class MapSelectionViewModel extends ViewModelBase {
       );
     } catch (e, s) {
       Logger.error(e.toString(), stackTrace: s);
-      return Tab(code: tabCode, selected: selected, cards: []);
+      return MapTabDto(code: tabCode, selected: selected, cards: []);
     }
   }
 }
