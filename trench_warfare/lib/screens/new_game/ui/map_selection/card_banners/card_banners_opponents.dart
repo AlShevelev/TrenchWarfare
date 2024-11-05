@@ -21,12 +21,12 @@ class CardBannersOpponents extends StatefulWidget {
 }
 
 class _CardBannersOpponentsState extends State<CardBannersOpponents> {
-  late Nation _selected;
+  late Nation _selectedNation;
 
   @override
   void initState() {
     super.initState();
-    _selected = widget._opponents.firstWhere((o) => o.selected).nation;
+    _selectedNation = widget._opponents.firstWhere((o) => o.selected).nation;
   }
 
   @override
@@ -35,12 +35,15 @@ class _CardBannersOpponentsState extends State<CardBannersOpponents> {
         .mapIndexed((index, opponent) => Padding(
               padding: EdgeInsets.fromLTRB(index > 0 ? 2 : 0, 0, 0, 0),
               child: CardBannersOpponent(
+                key: ObjectKey(opponent.nation),
                 nation: opponent.nation,
                 bannerSize: widget._bannerSize,
                 opponentSelectionWidth: widget._opponentSelectionWidth,
-                selected: opponent.selected,
+                selected: opponent.nation == _selectedNation,
                 onNationSelected: (nation) {
-                  _selected = nation;
+                  setState(() {
+                    _selectedNation = nation;
+                  });
                 },
               ),
             ))

@@ -28,6 +28,8 @@ class MapsDataLoader {
           _metadataToCard(
             metadataRecord,
             mapFileName,
+            tabCode,
+            index: i,
             selected: i == 0,
           ),
         );
@@ -64,10 +66,12 @@ class MapsDataLoader {
 
   MapCardDto _metadataToCard(
     MapMetadataRecord metadata,
-    String mapFileName, {
+    String mapFileName,
+    TabCode tabCode, {
+    required int index,
     required bool selected,
   }) {
-    final id = mapFileName.replaceFirst('.tmx', '').let((s) => s.substring(s.lastIndexOf('/') + 1))!;
+    final mapName = mapFileName.replaceFirst('.tmx', '').let((s) => s.substring(s.lastIndexOf('/') + 1))!;
 
     final opponents = metadata.nations
         .where((n) => n.aggressiveness == Aggressiveness.aggressive)
@@ -80,7 +84,8 @@ class MapsDataLoader {
         .toList(growable: false);
 
     return MapCardDto(
-      id: id,
+      id: '${tabCode.name}_$index',
+      mapName: mapName,
       title: metadata.title,
       from: metadata.from,
       to: metadata.to,

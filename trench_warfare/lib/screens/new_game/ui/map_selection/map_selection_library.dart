@@ -28,3 +28,4 @@ part 'map_selection.dart';
 part 'bookmarks.dart';
 part 'card.dart';
 part 'maps_list.dart';
+part 'selected_map.dart';

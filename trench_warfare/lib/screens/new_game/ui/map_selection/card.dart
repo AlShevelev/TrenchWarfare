@@ -100,7 +100,7 @@ class _CardState extends State<Card> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                       child: Text(
                         _getDatesText(),
-                        style: AppTypography.s18w600,
+                        style: AppTypography.s16w600,
                       ),
                     ),
                     Padding(
@@ -155,7 +155,7 @@ class _CardState extends State<Card> {
     }
 
     final from = widget._card.from;
-    final to = widget._card.from;
+    final to = widget._card.to;
 
     if (from.month == to.month && from.year == to.year) {
       return dateToText(from);
@@ -165,5 +165,5 @@ class _CardState extends State<Card> {
   }
 
   String _getPhoto() =>
-      'assets/images/screens/new_game/maps/${widget._tabCode.uiString}/${widget._card.id}.webp';
+      'assets/images/screens/new_game/maps/${widget._tabCode.uiString}/${widget._card.mapName}.webp';
 }

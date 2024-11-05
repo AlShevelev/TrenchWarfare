@@ -10,6 +10,8 @@ class MapSelection extends StatefulWidget {
 class _MapSelectionState extends State<MapSelection> with ImageLoading {
   bool _isBackgroundLoaded = false;
 
+  TabCode _selectedTab = TabCode.europe;
+
   late final MapSelectionViewModel _viewModel;
 
   late final ui.Image _oldBookCover;
@@ -20,6 +22,7 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
     super.initState();
 
     _viewModel = MapSelectionViewModel();
+
     _init();
   }
 
@@ -46,8 +49,6 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
       return const SizedBox.shrink();
     }
 
-    final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
-
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -68,9 +69,9 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                     Bookmarks(
                       state: value.data as MapSelectionState,
                       onSwitchTab: (selectedTab) {
-                        // setState(() {
-                        //   _selectedTab = selectedTab;
-                        // });
+                        setState(() {
+                          _selectedTab = selectedTab;
+                        });
                       },
                     ),
                     Padding(
@@ -81,8 +82,8 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                           alignment: AlignmentDirectional.topCenter,
                           child: MapsList(
-                            key: ObjectKey(TabCode.europe),
-                            selectedTab: TabCode.europe,
+                            key: ObjectKey(_selectedTab),
+                            selectedTab: _selectedTab,
                             state: value.data as MapSelectionState,
                             onMapSelected: (index) {},
                           ),

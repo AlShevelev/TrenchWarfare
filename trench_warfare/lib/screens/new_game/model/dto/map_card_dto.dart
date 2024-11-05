@@ -3,6 +3,9 @@ part of map_selection_dto_library;
 class MapCardDto {
   final String id;
 
+  /// Without .tmx
+  String mapName;
+
   final Map<AppLocale, String> title;
 
   final Map<AppLocale, String> description;
@@ -19,6 +22,7 @@ class MapCardDto {
 
   MapCardDto({
     required this.id,
+    required this.mapName,
     required this.title,
     required this.from,
     required this.to,
@@ -39,6 +43,7 @@ class MapCardDto {
   }) =>
       MapCardDto(
         id: id,
+        mapName: mapName,
         title: title ?? this.title,
         from: from ?? this.from,
         to: to ?? this.to,
