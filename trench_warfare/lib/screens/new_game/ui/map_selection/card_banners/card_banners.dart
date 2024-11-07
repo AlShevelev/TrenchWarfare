@@ -3,10 +3,17 @@ part of map_selection_ui;
 class CardBanners extends StatelessWidget {
   final MapCardDto _card;
 
+  final MapSelectionUserActions _userActions;
+
   static const _bannerSize = 50.0;
   static const _opponentSelectionWidth = 3.0;
 
-  const CardBanners({super.key, required MapCardDto card}) : _card = card;
+  const CardBanners({
+    super.key,
+    required MapCardDto card,
+    required MapSelectionUserActions userActions,
+  })  : _card = card,
+        _userActions = userActions;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +55,9 @@ class CardBanners extends StatelessWidget {
           opponents: _card.opponents,
           bannerSize: _bannerSize,
           opponentSelectionWidth: _opponentSelectionWidth,
+          selectedNation: _card.opponents.firstWhere((o) => o.selected).nation,
+          cardId: _card.id,
+          userActions: _userActions,
         ),
       );
 }

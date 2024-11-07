@@ -1,22 +1,8 @@
 part of map_selection_ui;
 
-class Bookmarks extends StatefulWidget {
-  final MapSelectionState _state;
+class Bookmarks extends StatelessWidget {
+  final MapSelectionUserActions _userActions;
 
-  final void Function(TabCode) _onSwitchTab;
-
-  const Bookmarks({
-    super.key,
-    required MapSelectionState state,
-    required void Function(TabCode) onSwitchTab,
-  })  : _state = state,
-        _onSwitchTab = onSwitchTab;
-
-  @override
-  State<Bookmarks> createState() => _BookmarksState();
-}
-
-class _BookmarksState extends State<Bookmarks> {
   static const double _inactiveTabPadding = 20;
 
   static const double _bookmarkHeight = 83;
@@ -24,11 +10,18 @@ class _BookmarksState extends State<Bookmarks> {
   static const double _bookmarkStartOffset = 40;
   static const double _bookmarksGap = 10;
 
-  bool get isLoading => widget._state is Loading;
+  final bool _isLoading;
 
-  late TabCode _activeTab = isLoading
-      ? TabCode.europe
-      : (widget._state as DataIsReady).tabs.entries.firstWhere((e) => e.value.selected).key;
+  final TabCode _activeTab;
+
+  const Bookmarks({
+    super.key,
+    required TabCode activeTab,
+    required bool isLoading,
+    required MapSelectionUserActions userActions,
+  })  : _activeTab = activeTab,
+        _isLoading = isLoading,
+        _userActions = userActions;
 
   @override
   Widget build(BuildContext context) {
@@ -50,23 +43,14 @@ class _BookmarksState extends State<Bookmarks> {
     );
   }
 
-  String _getTabName(TabCode tabCode) => switch (tabCode) {
-        TabCode.europe => tr('new_game_tab_europe'),
-        TabCode.asia => tr('new_game_tab_asia'),
-        TabCode.newWorld => tr('new_game_tab_new_world'),
-      };
-
   Widget _getBookmark({
     required double leftPadding,
     required TabCode tab,
   }) {
     return GestureDetector(
       onTap: () {
-        if (!isLoading) {
-          setState(() {
-            _activeTab = tab;
-            widget._onSwitchTab(tab);
-          });
+        if (!_isLoading && _activeTab != tab) {
+          _userActions.onTabSelected(tab);
         }
       },
       child: Padding(
@@ -93,4 +77,10 @@ class _BookmarksState extends State<Bookmarks> {
       ),
     );
   }
+
+  String _getTabName(TabCode tabCode) => switch (tabCode) {
+        TabCode.europe => tr('new_game_tab_europe'),
+        TabCode.asia => tr('new_game_tab_asia'),
+        TabCode.newWorld => tr('new_game_tab_new_world'),
+      };
 }

@@ -1,7 +1,5 @@
 part of map_selection_ui;
 
-typedef _OnNationSelected = void Function(Nation);
-
 class CardBannersOpponent extends StatelessWidget {
   final Nation _nation;
 
@@ -11,7 +9,9 @@ class CardBannersOpponent extends StatelessWidget {
 
   final bool _selected;
 
-  final _OnNationSelected _onNationSelected;
+  final String _cardId;
+
+  final MapSelectionUserActions _userActions;
 
   const CardBannersOpponent({
     super.key,
@@ -19,12 +19,14 @@ class CardBannersOpponent extends StatelessWidget {
     required double bannerSize,
     required double opponentSelectionWidth,
     required bool selected,
-    required _OnNationSelected onNationSelected,
+    required String cardId,
+    required MapSelectionUserActions userActions,
   })  : _nation = nation,
         _bannerSize = bannerSize,
         _opponentSelectionWidth = opponentSelectionWidth,
         _selected = selected,
-        _onNationSelected = onNationSelected;
+        _cardId = cardId,
+        _userActions = userActions;
 
   @override
   Widget build(BuildContext context) {
@@ -32,38 +34,36 @@ class CardBannersOpponent extends StatelessWidget {
       return _getSelectedBanner();
     } else {
       return GestureDetector(
-        onTap: () {
-          _onNationSelected(_nation);
-        },
+        onTap: () => _userActions.onOpponentSelected(_cardId, _nation),
         child: _getUnselectedBanner(),
       );
     }
   }
 
   Widget _getUnselectedBanner() => Padding(
-    padding: EdgeInsets.all(_opponentSelectionWidth),
-    child: Image.asset(
-      _nation.image,
-      color: AppColors.halfLight,
-      colorBlendMode: BlendMode.srcATop,
-      height: _bannerSize,
-      fit: BoxFit.fitHeight,
-    ),
-  );
+        padding: EdgeInsets.all(_opponentSelectionWidth),
+        child: Image.asset(
+          _nation.image,
+          color: AppColors.halfLight,
+          colorBlendMode: BlendMode.srcATop,
+          height: _bannerSize,
+          fit: BoxFit.fitHeight,
+        ),
+      );
 
   Widget _getSelectedBanner() => Container(
-    width: _bannerSize + _opponentSelectionWidth * 2,
-    height: _bannerSize + _opponentSelectionWidth * 2,
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: AssetImage(_nation.image),
-        fit: BoxFit.scaleDown,
-      ),
-      borderRadius: BorderRadius.all( Radius.circular(_bannerSize)),
-      border: Border.all(
-        color: AppColors.yellow,
-        width: _opponentSelectionWidth,
-      ),
-    ),
-  );
+        width: _bannerSize + _opponentSelectionWidth * 2,
+        height: _bannerSize + _opponentSelectionWidth * 2,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(_nation.image),
+            fit: BoxFit.scaleDown,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(_bannerSize)),
+          border: Border.all(
+            color: AppColors.yellow,
+            width: _opponentSelectionWidth,
+          ),
+        ),
+      );
 }

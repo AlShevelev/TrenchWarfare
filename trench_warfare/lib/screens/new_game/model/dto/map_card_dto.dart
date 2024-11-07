@@ -14,11 +14,13 @@ class MapCardDto {
 
   final DateTime to;
 
-  final Iterable<SideOfConflictDto> opponents;
+  final List<SideOfConflictDto> _opponents;
+  Iterable<SideOfConflictDto> get opponents => _opponents;
 
   final Iterable<Nation> neutrals;
 
-  final bool selected;
+  bool _selected;
+  bool get selected => _selected;
 
   MapCardDto({
     required this.id,
@@ -27,29 +29,17 @@ class MapCardDto {
     required this.from,
     required this.to,
     required this.description,
-    required this.opponents,
+    required List<SideOfConflictDto> opponents,
     required this.neutrals,
-    required this.selected,
-  });
+    required bool selected,
+  }) : _selected = selected,
+    _opponents = opponents;
 
-  MapCardDto copy({
-    Map<AppLocale, String>? title,
-    DateTime? from,
-    DateTime? to,
-    Map<AppLocale, String>? description,
-    Iterable<SideOfConflictDto>? opponents,
-    Iterable<Nation>? neutrals,
-    bool? selected,
-  }) =>
-      MapCardDto(
-        id: id,
-        mapName: mapName,
-        title: title ?? this.title,
-        from: from ?? this.from,
-        to: to ?? this.to,
-        description: description ?? this.description,
-        opponents: opponents ?? this.opponents,
-        neutrals: neutrals ?? this.neutrals,
-        selected: selected ?? this.selected,
-      );
+  void setSelected(bool selected) => _selected = selected;
+
+  void setSelectedOpponent(Nation opponentNation) {
+    for (var opponent in _opponents) {
+      opponent.setSelected(opponent.nation == opponentNation);
+    }
+  }
 }

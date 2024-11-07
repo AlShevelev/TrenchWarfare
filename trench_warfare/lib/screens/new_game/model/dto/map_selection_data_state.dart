@@ -5,11 +5,12 @@ sealed class MapSelectionState {}
 class Loading extends MapSelectionState {}
 
 class DataIsReady extends MapSelectionState {
-  final Map<TabCode, MapTabDto> tabs;
+  final List<MapTabDto> _tabs;
+  Iterable<MapTabDto> get tabs => _tabs;
 
-  DataIsReady({required this.tabs});
+  MapTabDto get selectedTab => tabs.firstWhere((e) => e.selected);
 
-  DataIsReady copy(Map<TabCode, MapTabDto> tabs) => DataIsReady(
-        tabs: tabs,
-      );
+  DataIsReady({required List<MapTabDto> tabs}): _tabs = tabs;
+
+  DataIsReady copy(Iterable<MapTabDto> tabs) => DataIsReady(tabs: tabs.toList(growable: false));
 }

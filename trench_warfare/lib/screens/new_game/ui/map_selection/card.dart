@@ -1,54 +1,24 @@
 part of map_selection_ui;
 
-class Card extends StatefulWidget {
-  final ValueNotifier<bool> _selected = ValueNotifier(false);
+class Card extends StatelessWidget {
+  final bool _selected;
 
   final MapCardDto _card;
 
   final TabCode _tabCode;
 
-  final int _index;
+  final MapSelectionUserActions _userActions;
 
-  final _OnMapClick _onClick;
-
-  Card({
+  const Card({
     super.key,
     required bool selected,
     required TabCode tabCode,
     required MapCardDto card,
-    required int index,
-    required _OnMapClick onClick,
-  })  : _onClick = onClick,
-        _tabCode = tabCode,
+    required MapSelectionUserActions userActions,
+  })  : _tabCode = tabCode,
         _card = card,
-        _index = index {
-    _selected.value = selected;
-  }
-
-  void updateSelection(bool selected) => _selected.value = selected;
-
-  @override
-  State<StatefulWidget> createState() => _CardState();
-}
-
-class _CardState extends State<Card> {
-  static const _imagesPath = 'assets/images/screens/game_field/cards/';
-
-  bool _selected = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _selected = widget._selected.value;
-
-    widget._selected.addListener(() {
-      if (mounted) {
-        setState(() {
-          _selected = widget._selected.value;
-        });
-      }
-    });
-  }
+        _userActions = userActions,
+        _selected = selected;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +43,7 @@ class _CardState extends State<Card> {
         child: GestureDetector(
           onTap: () {
             if (!_selected) {
-              widget._onClick(widget._index);
+              _userActions.onCardSelected(_card.id);
             }
           },
           child: Container(
@@ -92,7 +62,7 @@ class _CardState extends State<Card> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                       child: Text(
-                        widget._card.title[locale]!,
+                        _card.title[locale]!,
                         style: AppTypography.s20w600,
                       ),
                     ),
@@ -109,12 +79,15 @@ class _CardState extends State<Card> {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: CardBanners(card: widget._card,),
+                      child: CardBanners(
+                        card: _card,
+                        userActions: _userActions,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(2, 0, 2, 3),
                       child: Text(
-                        widget._card.description[locale]!,
+                        _card.description[locale]!,
                         style: AppTypography.s14w400,
                         textAlign: TextAlign.justify,
                       ),
@@ -127,11 +100,11 @@ class _CardState extends State<Card> {
     );
   }
 
-  String _getBackgroundImage() => switch (widget._tabCode) {
-        TabCode.europe => 'assets/images/screens/shared/card_red_background.webp',
-        TabCode.asia => 'assets/images/screens/shared/card_blue_background.webp',
-        TabCode.newWorld => 'assets/images/screens/shared/card_green_background.webp',
-      };
+  String _getBackgroundImage() => switch (_tabCode) {
+    TabCode.europe => 'assets/images/screens/shared/card_red_background.webp',
+    TabCode.asia => 'assets/images/screens/shared/card_blue_background.webp',
+    TabCode.newWorld => 'assets/images/screens/shared/card_green_background.webp',
+  };
 
   String _getDatesText() {
     String dateToText(DateTime date) {
@@ -154,8 +127,8 @@ class _CardState extends State<Card> {
       return '${tr(month)} ${date.year}';
     }
 
-    final from = widget._card.from;
-    final to = widget._card.to;
+    final from = _card.from;
+    final to = _card.to;
 
     if (from.month == to.month && from.year == to.year) {
       return dateToText(from);
@@ -165,5 +138,5 @@ class _CardState extends State<Card> {
   }
 
   String _getPhoto() =>
-      'assets/images/screens/new_game/maps/${widget._tabCode.uiString}/${widget._card.mapName}.webp';
+      'assets/images/screens/new_game/maps/${_tabCode.uiString}/${_card.mapName}.webp';
 }

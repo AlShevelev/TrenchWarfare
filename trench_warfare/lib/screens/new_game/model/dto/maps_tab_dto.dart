@@ -7,21 +7,17 @@ enum TabCode {
 }
 
 class MapTabDto {
-  final bool selected;
+  bool _selected;
+  bool get selected => _selected;
 
   final TabCode code;
 
-  final Iterable<MapCardDto> cards;
+  final List<MapCardDto> _cards;
+  Iterable<MapCardDto> get cards => _cards;
 
-  MapTabDto({required this.selected, required this.code, required this.cards});
+  MapTabDto({required bool selected, required this.code, required List<MapCardDto> cards})
+      : _selected = selected,
+        _cards = cards;
 
-  MapTabDto copy({
-    bool? selected,
-    Iterable<MapCardDto>? cards,
-  }) =>
-      MapTabDto(
-        selected: selected ?? this.selected,
-        code: code,
-        cards: cards ?? this.cards,
-      );
+  void setSelected(bool selected) => _selected = selected;
 }
