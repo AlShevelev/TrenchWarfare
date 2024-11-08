@@ -1,14 +1,37 @@
 part of map_selection_dto_library;
 
-sealed class MapSelectionState {}
+sealed class MapSelectionState {
+  MapTabDto get selectedTab;
 
-class Loading extends MapSelectionState {}
+  bool get isConfirmButtonEnabled;
+
+  bool get isCloseActionEnabled;
+}
+
+class Loading extends MapSelectionState {
+  final MapTabDto _selectedTab = MapTabDto(selected: true, code: TabCode.europe, cards: []);
+  @override
+  MapTabDto get selectedTab => _selectedTab;
+
+  @override
+  bool get isConfirmButtonEnabled => false;
+
+  @override
+  bool get isCloseActionEnabled => false;
+}
 
 class DataIsReady extends MapSelectionState {
   final List<MapTabDto> _tabs;
   Iterable<MapTabDto> get tabs => _tabs;
 
+  @override
   MapTabDto get selectedTab => tabs.firstWhere((e) => e.selected);
+
+  @override
+  bool get isConfirmButtonEnabled => selectedTab.cards.any((c) => c.selected);
+
+  @override
+  bool get isCloseActionEnabled => true;
 
   DataIsReady({required List<MapTabDto> tabs}): _tabs = tabs;
 

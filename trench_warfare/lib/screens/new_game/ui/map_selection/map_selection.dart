@@ -47,69 +47,73 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
       return const SizedBox.shrink();
     }
 
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        StreamBuilder<MapSelectionState>(
-            stream: _viewModel.gameFieldState,
-            builder: (context, value) {
-              if (!value.hasData) {
-                return const SizedBox.shrink();
-              }
-
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(7, 20, 7, 20),
-                child: Background.image(
-                  image: _oldBookCover,
-                  child: Stack(
-                    alignment: AlignmentDirectional.topStart,
-                    children: [
-                      Bookmarks(
-                        activeTab: value.data is Loading
-                            ? TabCode.europe
-                            : (value.data as DataIsReady).selectedTab.code,
-                        isLoading: value.data is Loading,
-                        userActions: _viewModel,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
-                        child: Background.image(
-                          image: _oldPaper,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                            alignment: AlignmentDirectional.topCenter,
-                            child: MapsList(
-                              cards: value.data is Loading ? null : (value.data as DataIsReady).selectedTab.cards,
-                              selectedTab: value.data is Loading ? TabCode.europe : (value.data as DataIsReady).selectedTab.code,
-                              userActions: _viewModel,
+    return StreamBuilder<MapSelectionState>(
+        stream: _viewModel.gameFieldState,
+        builder: (context, value) {
+          return PopScope(
+            canPop: value.hasData && value.data is! Loading,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                if (!value.hasData)
+                  const SizedBox.shrink()
+                else
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(7, 20, 7, 20),
+                    child: Background.image(
+                      image: _oldBookCover,
+                      child: Stack(
+                        alignment: AlignmentDirectional.topStart,
+                        children: [
+                          Bookmarks(
+                            activeTab: value.data!.selectedTab.code,
+                            isLoading: value.data is Loading,
+                            userActions: _viewModel,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
+                            child: Background.image(
+                              image: _oldPaper,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                                alignment: AlignmentDirectional.topCenter,
+                                child: MapsList(
+                                  cards: value.data is Loading
+                                      ? null
+                                      : (value.data as DataIsReady).selectedTab.cards,
+                                  selectedTab: value.data!.selectedTab.code,
+                                  userActions: _viewModel,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
+                CornerButton(
+                  left: 15,
+                  bottom: 15,
+                  image: const AssetImage('assets/images/screens/shared/button_select.webp'),
+                  enabled: value.data?.isConfirmButtonEnabled ?? false,
+                  onPress: () {
+                    Navigator.of(context)
+                        .pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
+                  },
                 ),
-              );
-            }),
-        CornerButton(
-          left: 15,
-          bottom: 15,
-          image: const AssetImage('assets/images/screens/shared/button_select.webp'),
-          onPress: () {
-            Navigator.of(context)
-                .pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
-          },
-        ),
-        // Close button
-        CornerButton(
-          right: 15,
-          bottom: 15,
-          image: const AssetImage('assets/images/screens/shared/button_close.webp'),
-          onPress: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
+                // Close button
+                CornerButton(
+                  right: 15,
+                  bottom: 15,
+                  image: const AssetImage('assets/images/screens/shared/button_close.webp'),
+                  enabled: value.data?.isCloseActionEnabled ?? false,
+                  onPress: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

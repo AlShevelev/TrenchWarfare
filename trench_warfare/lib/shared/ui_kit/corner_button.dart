@@ -14,6 +14,8 @@ class CornerButton extends StatelessWidget {
 
   final Function onPress;
 
+  final bool enabled;
+
   const CornerButton({
     super.key,
     this.left,
@@ -21,6 +23,7 @@ class CornerButton extends StatelessWidget {
     this.right,
     this.bottom,
     required this.image,
+    this.enabled = true,
     required this.onPress,
   });
 
@@ -35,7 +38,7 @@ class CornerButton extends StatelessWidget {
       height: _size,
       child: Material(
         child: InkWell(
-          onTap: () {
+          onTap: !enabled ? null : () {
             // To show a press animation
             Future.delayed(const Duration(milliseconds: UiConstants.pressButtonTime), () {
               onPress();
