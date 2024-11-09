@@ -1,6 +1,6 @@
 part of map_selection_ui;
 
-class CardBannersOpponent extends StatelessWidget {
+class _CardBannersOpponent extends StatelessWidget {
   final Nation _nation;
 
   final double _bannerSize;
@@ -13,7 +13,7 @@ class CardBannersOpponent extends StatelessWidget {
 
   final MapSelectionUserActions _userActions;
 
-  const CardBannersOpponent({
+  const _CardBannersOpponent({
     super.key,
     required Nation nation,
     required double bannerSize,

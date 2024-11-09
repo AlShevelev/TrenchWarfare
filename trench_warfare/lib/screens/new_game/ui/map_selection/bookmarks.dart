@@ -1,6 +1,6 @@
 part of map_selection_ui;
 
-class Bookmarks extends StatelessWidget {
+class _Bookmarks extends StatelessWidget {
   final MapSelectionUserActions _userActions;
 
   static const double _inactiveTabPadding = 20;
@@ -14,7 +14,7 @@ class Bookmarks extends StatelessWidget {
 
   final TabCode _activeTab;
 
-  const Bookmarks({
+  const _Bookmarks({
     super.key,
     required TabCode activeTab,
     required bool isLoading,

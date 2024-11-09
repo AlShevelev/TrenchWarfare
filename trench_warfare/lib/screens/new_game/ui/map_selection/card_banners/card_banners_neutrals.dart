@@ -1,11 +1,11 @@
 part of map_selection_ui;
 
-class CardBannersNeutrals extends StatelessWidget {
+class _CardBannersNeutrals extends StatelessWidget {
   final Iterable<Nation> _neutrals;
 
   final double _bannerSize;
 
-  const CardBannersNeutrals({
+  const _CardBannersNeutrals({
     super.key,
     required Iterable<Nation> neutrals,
     required double bannerSize,

@@ -1,6 +1,6 @@
 part of map_selection_ui;
 
-class CardBanners extends StatelessWidget {
+class _CardBanners extends StatelessWidget {
   final MapCardDto _card;
 
   final MapSelectionUserActions _userActions;
@@ -8,7 +8,7 @@ class CardBanners extends StatelessWidget {
   static const _bannerSize = 50.0;
   static const _opponentSelectionWidth = 3.0;
 
-  const CardBanners({
+  const _CardBanners({
     super.key,
     required MapCardDto card,
     required MapSelectionUserActions userActions,
@@ -26,7 +26,7 @@ class CardBanners extends StatelessWidget {
           _getOpponents(),
           _getBannersColumn(
             header: tr('new_game_neutrals'),
-            body: CardBannersNeutrals(
+            body: _CardBannersNeutrals(
               neutrals: _card.neutrals,
               bannerSize: _bannerSize,
             ),
@@ -51,7 +51,7 @@ class CardBanners extends StatelessWidget {
 
   Widget _getOpponents() => _getBannersColumn(
         header: tr('new_game_opponents'),
-        body: CardBannersOpponents(
+        body: _CardBannersOpponents(
           opponents: _card.opponents,
           bannerSize: _bannerSize,
           opponentSelectionWidth: _opponentSelectionWidth,

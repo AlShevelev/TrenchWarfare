@@ -1,6 +1,6 @@
 part of map_selection_ui;
 
-class CardBannersOpponents extends StatelessWidget {
+class _CardBannersOpponents extends StatelessWidget {
   final Iterable<SideOfConflictDto> _opponents;
 
   final double _bannerSize;
@@ -13,7 +13,7 @@ class CardBannersOpponents extends StatelessWidget {
 
   final MapSelectionUserActions _userActions;
 
-  const CardBannersOpponents({
+  const _CardBannersOpponents({
     super.key,
     required Iterable<SideOfConflictDto> opponents,
     required double bannerSize,
@@ -33,7 +33,7 @@ class CardBannersOpponents extends StatelessWidget {
     final banners = _opponents
         .mapIndexed((index, opponent) => Padding(
               padding: EdgeInsets.fromLTRB(index > 0 ? 2 : 0, 0, 0, 0),
-              child: CardBannersOpponent(
+              child: _CardBannersOpponent(
                 key: ObjectKey(opponent.nation),
                 nation: opponent.nation,
                 bannerSize: _bannerSize,

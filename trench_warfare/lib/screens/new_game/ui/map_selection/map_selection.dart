@@ -65,7 +65,7 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                       child: Stack(
                         alignment: AlignmentDirectional.topStart,
                         children: [
-                          Bookmarks(
+                          _Bookmarks(
                             activeTab: value.data!.selectedTab.code,
                             isLoading: value.data is Loading,
                             userActions: _viewModel,
@@ -77,7 +77,7 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                                 alignment: AlignmentDirectional.topCenter,
-                                child: MapsList(
+                                child: _MapsList(
                                   cards: value.data is Loading
                                       ? null
                                       : (value.data as DataIsReady).selectedTab.cards,

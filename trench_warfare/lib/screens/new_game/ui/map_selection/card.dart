@@ -1,6 +1,6 @@
 part of map_selection_ui;
 
-class Card extends StatelessWidget {
+class _Card extends StatelessWidget {
   final bool _selected;
 
   final MapCardDto _card;
@@ -9,7 +9,7 @@ class Card extends StatelessWidget {
 
   final MapSelectionUserActions _userActions;
 
-  const Card({
+  const _Card({
     super.key,
     required bool selected,
     required TabCode tabCode,
@@ -79,7 +79,7 @@ class Card extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: CardBanners(
+                      child: _CardBanners(
                         card: _card,
                         userActions: _userActions,
                       ),

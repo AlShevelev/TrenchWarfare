@@ -1,13 +1,13 @@
 part of map_selection_ui;
 
-class MapsList extends StatelessWidget {
+class _MapsList extends StatelessWidget {
   final Iterable<MapCardDto>? _cards;
 
   final TabCode _selectedTab;
 
   final MapSelectionUserActions _userActions;
 
-  const MapsList({
+  const _MapsList({
     super.key,
     required Iterable<MapCardDto>? cards,
     required TabCode selectedTab,
@@ -34,7 +34,7 @@ class MapsList extends StatelessWidget {
         itemBuilder: (context, index) {
           final card = cards.elementAt(index);
 
-          return Card(
+          return _Card(
             selected: card.selected,
             tabCode: _selectedTab,
             card: card,
