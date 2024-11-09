@@ -7,7 +7,8 @@ import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
-import 'package:trench_warfare/app/navigation/routes.dart';
+import 'package:trench_warfare/app/navigation/navigation_library.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
@@ -55,6 +56,8 @@ class GameField extends FlameGame
 
   late final String _mapName;
 
+  late final Nation _selectedNation;
+
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
@@ -68,8 +71,9 @@ class GameField extends FlameGame
   @override
   TextureAtlas get spritesAtlas => _spritesAtlas;
 
-  GameField({required mapName}) : super() {
-    _mapName = mapName;
+  GameField({required String mapName, required Nation selectedNation}) : super() {
+    _mapName = mapName.replaceFirst('assets/tiles/', '');
+    _selectedNation = selectedNation;
     _viewModel = GameFieldViewModel();
   }
 
@@ -104,7 +108,7 @@ class GameField extends FlameGame
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 
-    await _viewModel.init(_mapComponent.tileMap);
+    await _viewModel.init(_mapComponent.tileMap, _selectedNation);
 
     _gameObjectsComposer.init(_viewModel.gameField, _viewModel);
     _gameGesturesComposer.init(_viewModel);

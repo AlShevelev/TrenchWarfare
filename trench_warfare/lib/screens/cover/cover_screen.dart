@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/app/navigation/routes.dart';
+import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/screens/cover/cover_screen_button.dart';
 
 class CoverScreen extends StatelessWidget {

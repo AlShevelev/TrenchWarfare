@@ -1,3 +1,4 @@
+import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:trench_warfare/screens/new_game/model/maps_data_loader.dart';
@@ -81,6 +82,20 @@ class MapSelectionViewModel extends ViewModelBase implements MapSelectionUserAct
           tab.setSelected(tab.code == tabCode);
         }
       });
+
+  NewGameToGameFieldNavArg? getNavigateToGameFieldArguments() {
+    final state = _gameFieldState.current;
+
+    if (state is DataIsReady) {
+      final selectedCard = state.selectedTab.cards.singleWhere((c) => c.selected);
+      return NewGameToGameFieldNavArg(
+        mapName: selectedCard.mapFileName,
+        selectedNation: selectedCard.opponents.firstWhere((o) => o.selected).nation,
+      );
+    }
+
+    return null;
+  }
 
   void _updateState(void Function(DataIsReady) action) {
     final state = _gameFieldState.current;

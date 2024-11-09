@@ -86,6 +86,7 @@ class MapsDataLoader {
     return MapCardDto(
       id: '${tabCode.name}_$index',
       mapName: mapName,
+      mapFileName: mapFileName,
       title: metadata.title,
       from: metadata.from,
       to: metadata.to,

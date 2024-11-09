@@ -98,7 +98,7 @@ class _MapSelectionState extends State<MapSelection> with ImageLoading {
                   enabled: value.data?.isConfirmButtonEnabled ?? false,
                   onPress: () {
                     Navigator.of(context)
-                        .pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
+                        .pushNamed(Routes.gameField, arguments: _viewModel.getNavigateToGameFieldArguments());
                   },
                 ),
                 // Close button

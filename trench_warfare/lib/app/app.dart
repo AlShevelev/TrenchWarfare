@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trench_warfare/app/app_lifecycle_observer.dart';
-import 'package:trench_warfare/app/navigation/routes.dart';
+import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/app/theme/theme.dart';
 import 'package:trench_warfare/screens/cover/cover_screen.dart';
 

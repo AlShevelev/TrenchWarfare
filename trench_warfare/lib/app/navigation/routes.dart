@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:talker_flutter/talker_flutter.dart';
-import 'package:trench_warfare/app/navigation/fade_route.dart';
-import 'package:trench_warfare/screens/cover/cover_screen.dart';
-import 'package:trench_warfare/screens/game_field_screen/game_field_screen.dart';
-import 'package:trench_warfare/screens/new_game/new_game_screen.dart';
-import 'package:trench_warfare/shared/logger/logger_library.dart';
+part of navigation;
 
 class Routes {
   static const coverScreen = '/';
@@ -18,25 +12,31 @@ class Routes {
         {
           Logger.info('to: coverScreen', tag: 'NAVIGATION');
 
-          return FadeRoute(const CoverScreen());
+          return _FadeRoute(const CoverScreen());
         }
       case newGame:
         {
           Logger.info('to: newGame', tag: 'NAVIGATION');
 
-          return FadeRoute(const NewGameScreen());
+          return _FadeRoute(const NewGameScreen());
         }
       case gameField:
         {
-          final mapName = settings.arguments as String;
-          Logger.info('to: gameField; mapName: $mapName', tag: 'NAVIGATION');
+          final mapName = settings.arguments as NewGameToGameFieldNavArg;
+          Logger.info('to: gameField; mapName: ${mapName.mapName}; nation: ${mapName.selectedNation}',
+              tag: 'NAVIGATION');
 
-          return FadeRoute(GameFieldScreen(mapName: mapName));
+          return _FadeRoute(
+            GameFieldScreen(
+              mapName: mapName.mapName,
+              selectedNation: mapName.selectedNation,
+            ),
+          );
         }
       case debugLogging:
         {
           Logger.info('to: debugLogging', tag: 'NAVIGATION');
-          return FadeRoute(TalkerScreen(talker: Logger.talkerFlutter));
+          return _FadeRoute(TalkerScreen(talker: Logger.talkerFlutter));
         }
       default:
         {

@@ -3,6 +3,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core_entities/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
@@ -62,7 +63,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _gameFieldState.update(Loading());
   }
 
-  Future<void> init(RenderableTiledMap tileMap) async {
+  Future<void> init(RenderableTiledMap tileMap, Nation selectedNation) async {
     Logger.info('initialization', tag: 'GAME_GENERAL');
 
     final metadata = await compute(MetadataReader.read, tileMap.map);
@@ -79,7 +80,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       metadata: metadata,
     );
 
-    final players = _sortPlayers(metadata.nations);
+    final players = _sortPlayers(metadata.nations, selectedNation);
     for (var i = 0; i < players.length; i++) {
       _createPlayer(
         index: i,
@@ -136,10 +137,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _gameFieldState.update(Completed());
   }
 
-  List<NationRecord> _sortPlayers(Iterable<NationRecord> players) {
+  List<NationRecord> _sortPlayers(Iterable<NationRecord> players, Nation selectedNation) {
     final result = <NationRecord>[...players];
 
-    final firstAggressive = result.indexWhere((it) => it.aggressiveness == Aggressiveness.aggressive);
+    final firstAggressive = result
+        .indexWhere((it) => it.aggressiveness == Aggressiveness.aggressive && it.code == selectedNation);
 
     if (firstAggressive != _humanIndex) {
       result.insert(_humanIndex, result.removeAt(firstAggressive));

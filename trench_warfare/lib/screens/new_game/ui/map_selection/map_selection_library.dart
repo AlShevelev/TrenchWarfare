@@ -7,7 +7,7 @@ import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/app/navigation/routes.dart';
+import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
