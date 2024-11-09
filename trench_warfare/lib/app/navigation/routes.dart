@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:trench_warfare/app/navigation/fade_route.dart';
 import 'package:trench_warfare/screens/cover/cover_screen.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/game_field_screen.dart';
-import 'package:trench_warfare/screens/new_game/ui/new_game_screen.dart';
+import 'package:trench_warfare/screens/game_field_screen/game_field_screen.dart';
+import 'package:trench_warfare/screens/new_game/new_game_screen.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class Routes {
