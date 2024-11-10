@@ -20,12 +20,14 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   late final ui.Image _oldBookCover;
   late final ui.Image _oldPaper;
 
-  static CardsTab _selectedTab = CardsTab.units;
-  int _selectedCardIndex = -1;
+  late final _CardsSelectionViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
+
+    _viewModel = _CardsSelectionViewModel(widget.state);
+
     init();
   }
 
@@ -40,94 +42,116 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _viewModel.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (!_isBackgroundLoaded) {
       return const SizedBox.shrink();
     }
 
-    return Background.image(
-      image: _background,
-      child: Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(7, 36, 7, 36),
-            child: Background.image(
-              image: _oldBookCover,
-              child: Stack(
-                alignment: AlignmentDirectional.topStart,
-                children: [
-                  CardsBookmarks(
-                    startTab: _selectedTab,
-                    onSwitchTab: (selectedTab) {
-                      setState(() {
-                        _selectedTab = selectedTab;
-                      });
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
-                    child: Background.image(
-                      image: _oldPaper,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                        alignment: AlignmentDirectional.topCenter,
-                        child: CardsList(
-                          key: ObjectKey(_selectedTab),
-                          factory: _getCardsFactory(_selectedTab),
-                          onCardSelected: (index) =>  _selectedCardIndex = index,
+    return StreamBuilder<_CardsScreenState>(
+      stream: _viewModel.cardsState,
+      builder: (context, value) {
+        if (!value.hasData) {
+          return const SizedBox.shrink();
+        }
+
+        final state = value.data as _DataIsReady;
+        final selectedTab = state.selectedTab;
+
+        return Background.image(
+          image: _background,
+          child: Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(7, 36, 7, 36),
+                child: Background.image(
+                  image: _oldBookCover,
+                  child: Stack(
+                    alignment: AlignmentDirectional.topStart,
+                    children: [
+                      _CardsBookmarks(
+                        tabs: state.tabs,
+                        userActions: _viewModel,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
+                        child: Background.image(
+                          image: _oldPaper,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                            alignment: AlignmentDirectional.topCenter,
+                            child: _CardsList(
+                              key: ObjectKey(selectedTab),
+                              factory: _getCardsFactory(selectedTab),
+                              tabCode: selectedTab.code,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+              // Select button
+              CornerButton(
+                left: 15,
+                bottom: 15,
+                image: const AssetImage('assets/images/screens/shared/button_select.webp'),
+                onPress: () {
+                  if (state.isConfirmButtonEnabled) {
+                    widget._gameField.onCardSelected(_viewModel.getSelectedCard());
+                  }
+                },
+              ),
+              // Close button
+              CornerButton(
+                right: 15,
+                bottom: 15,
+                image: const AssetImage('assets/images/screens/shared/button_close.webp'),
+                onPress: () {
+                  if (state.isCloseActionEnabled) {
+                    widget._gameField.onCardsSelectionCancelled();
+                  }
+                },
+              ),
+              GameFieldGeneralPanel(
+                money: widget.state.totalMoney,
+                left: 15,
+                top: 0,
+              ),
+            ],
           ),
-          // Select button
-          CornerButton(
-            left: 15,
-            bottom: 15,
-            image: const AssetImage('assets/images/screens/shared/button_select.webp'),
-            onPress: () {
-              if (_selectedCardIndex != -1) {
-                switch(_selectedTab) {
-                  case CardsTab.units: { widget._gameField.onCardSelected(widget.state.units[_selectedCardIndex]); }
-                  case CardsTab.productionCenters: { widget._gameField.onCardSelected(widget.state.productionCenters[_selectedCardIndex]); }
-                  case CardsTab.terrainModifiers: { widget._gameField.onCardSelected(widget.state.terrainModifiers[_selectedCardIndex]); }
-                  case CardsTab.unitBoosters: { widget._gameField.onCardSelected(widget.state.unitBoosters[_selectedCardIndex]); }
-                  case CardsTab.specialStrikes: { widget._gameField.onCardSelected(widget.state.specialStrikes[_selectedCardIndex]); }
-                }
-              } else {
-                widget._gameField.onCardSelected(null);
-              }
-            },
-          ),
-          // Close button
-          CornerButton(
-            right: 15,
-            bottom: 15,
-            image: const AssetImage('assets/images/screens/shared/button_close.webp'),
-            onPress: () {
-              widget._gameField.onCardsSelectionCancelled();
-            },
-          ),
-          GameFieldGeneralPanel(
-            money: widget.state.totalMoney,
-            left: 15,
-            top: 0,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  CardsFactory<GameFieldControlsCard> _getCardsFactory(CardsTab tab) => switch (tab) {
-        // ignore: unnecessary_cast
-        CardsTab.units => UnitsCardFactory(widget.state.units) as CardsFactory<GameFieldControlsCard>,
-        CardsTab.productionCenters => ProductionCentersCardFactory(widget.state.productionCenters),
-        CardsTab.terrainModifiers => TerrainModifiersCardFactory(widget.state.terrainModifiers),
-        CardsTab.unitBoosters => UnitBoosterCardFactory(widget.state.unitBoosters),
-        CardsTab.specialStrikes => SpecialStrikesCardFactory(widget.state.specialStrikes),
+  _CardsFactory _getCardsFactory(_TabDto tab) => switch (tab.code) {
+        _TabCode.units => _UnitsCardFactory(
+            tab.cards as List<_CardDto<UnitType>>,
+            _viewModel,
+          ) as _CardsFactory,
+        _TabCode.productionCenters => _ProductionCentersCardFactory(
+            tab.cards as List<_CardDto<ProductionCenterType>>,
+            _viewModel,
+          ),
+        _TabCode.terrainModifiers => _TerrainModifiersCardFactory(
+            tab.cards as List<_CardDto<TerrainModifierType>>,
+            _viewModel,
+          ),
+        _TabCode.unitBoosters => _UnitBoosterCardFactory(
+            tab.cards as List<_CardDto<UnitBoost>>,
+            _viewModel,
+          ),
+        _TabCode.specialStrikes => _SpecialStrikesCardFactory(
+            tab.cards as List<_CardDto<SpecialStrikeType>>,
+            _viewModel,
+          ),
       };
 }

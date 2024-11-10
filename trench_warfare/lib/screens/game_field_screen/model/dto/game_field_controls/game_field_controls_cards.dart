@@ -8,9 +8,12 @@ abstract interface class BuildPossibility {
 }
 abstract class GameFieldControlsCard<T> implements BuildPossibility {
   T get type;
+
+  MoneyUnit get cost;
 }
 
 class GameFieldControlsUnitCard extends GameFieldControlsCard<UnitType> {
+  @override
   final MoneyUnit cost;
 
   @override
@@ -71,6 +74,7 @@ class GameFieldControlsUnitCardBrief extends GameFieldControlsCard<UnitType> {
 }
 
 class GameFieldControlsProductionCentersCard extends GameFieldControlsCard<ProductionCenterType> {
+  @override
   final MoneyUnit cost;
 
   @override
@@ -117,6 +121,7 @@ class GameFieldControlsProductionCentersCardBrief extends GameFieldControlsCard<
 }
 
 class GameFieldControlsTerrainModifiersCard extends GameFieldControlsCard<TerrainModifierType> {
+  @override
   final MoneyUnit cost;
 
   @override
@@ -163,6 +168,7 @@ class GameFieldControlsTerrainModifiersCardBrief extends GameFieldControlsCard<T
 }
 
 class GameFieldControlsUnitBoostersCard extends GameFieldControlsCard<UnitBoost> {
+  @override
   final MoneyUnit cost;
 
   @override
@@ -209,6 +215,7 @@ class GameFieldControlsUnitBoostersCardBrief extends GameFieldControlsCard<UnitB
 }
 
 class GameFieldControlsSpecialStrikesCard extends GameFieldControlsCard<SpecialStrikeType> {
+  @override
   final MoneyUnit cost;
 
   @override

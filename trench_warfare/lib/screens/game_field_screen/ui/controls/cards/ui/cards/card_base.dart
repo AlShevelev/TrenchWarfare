@@ -1,59 +1,24 @@
 part of card_controls;
 
-typedef OnCardClick = void Function(int);
+abstract class _CardBase<T> extends StatelessWidget {
+  @protected
+  final _CardDto<T> _card;
 
-abstract class CardBase extends StatefulWidget {
-  final ValueNotifier<bool> _selected = ValueNotifier(false);
+  final _CardsSelectionUserActions _userActions;
 
-  late final int index;
-
-  late final OnCardClick _onClick;
-
-  CardBase({
-    super.key,
-    required bool selected,
-    required this.index,
-    required OnCardClick onClick,
-  }) {
-    _selected.value = selected;
-    _onClick = onClick;
-  }
-
-  void updateSelection(bool selected) => _selected.value = selected;
-}
-
-abstract class CardBaseState<T extends CardBase> extends State<T> {
   static const _imagesPath = 'assets/images/screens/game_field/cards/';
 
-  bool _collapsed = true;
-
-  bool _selected = false;
-
-  bool get canBuild {
-    final buildPossibility = _getBuildPossibility();
-    return buildPossibility.buildError == null &&
-        buildPossibility.canBuildByIndustryPoint &&
-        buildPossibility.canBuildByCurrency;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _selected = widget._selected.value;
-
-    widget._selected.addListener(() {
-      if (mounted) {
-        setState(() {
-          _selected = widget._selected.value;
-        });
-      }
-    });
-  }
+  const _CardBase({
+    super.key,
+    required _CardDto<T> card,
+    required _CardsSelectionUserActions userActions,
+  })  : _card = card,
+        _userActions = userActions;
 
   @override
   Widget build(BuildContext context) {
     final List<BoxShadow> shadow = [];
-    if (_selected) {
+    if (_card.selected) {
       shadow.add(
         const BoxShadow(
           color: AppColors.black,
@@ -70,8 +35,8 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(
           onTap: () {
-            if (!_selected && canBuild) {
-              widget._onClick(widget.index);
+            if (!_card.selected && _card.canBuild) {
+              _userActions.onCardSelected(_card.indexInTab);
             }
           },
           child: Container(
@@ -106,7 +71,6 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
                     _getFooter(
                       _getFooterMoney(),
                       _getFooterRestriction(),
-                      _getBuildPossibility(),
                     ),
                   ],
                 ),
@@ -119,36 +83,26 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
   @protected
   String getBackgroundImage();
 
-  @protected
-  MoneyUnit _getFooterMoney();
+  MoneyUnit _getFooterMoney() => _card.card.cost;
 
-  @protected
-  BuildRestriction? _getFooterRestriction() => null;
-
-  @protected
-  BuildPossibility _getBuildPossibility();
+  BuildRestriction? _getFooterRestriction() => _card.card.buildDisplayRestriction;
 
   @protected
   Widget _getFooter(
     MoneyUnit money,
     BuildRestriction? restriction,
-    BuildPossibility buildPossibility,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         BuildRestrictionPanel(
           money: money,
-          buildPossibility: buildPossibility,
+          buildPossibility: _card.card,
         ),
         GestureDetector(
-          onTap: () {
-            setState(() {
-              _collapsed = !_collapsed;
-            });
-          },
+          onTap: () => _userActions.onCardExpendedOrCollapsed(_card.indexInTab),
           child: Image.asset(
-            '$_imagesPath${_collapsed ? 'icon_expand.webp' : 'icon_collapse.webp'}',
+            '$_imagesPath${!_card.expanded ? 'icon_expand.webp' : 'icon_collapse.webp'}',
             scale: 1.1,
           ),
         ),
@@ -166,7 +120,7 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
   String _getDescriptionText();
 
   Widget _getDescription(String text) {
-    if (_collapsed) {
+    if (!_card.expanded) {
       return const SizedBox.shrink();
     } else {
       return Padding(
@@ -180,5 +134,5 @@ abstract class CardBaseState<T extends CardBase> extends State<T> {
   }
 
   @protected
-  String _getPhoto();
+  String _getPhoto() => CardPhotos.getPhoto(_card.card);
 }

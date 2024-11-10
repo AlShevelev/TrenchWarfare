@@ -1,6 +1,6 @@
 part of card_controls;
 
-enum CardsTab {
+enum _TabCode {
   units,
   productionCenters,
   terrainModifiers,

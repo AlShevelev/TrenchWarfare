@@ -1,23 +1,14 @@
 part of card_controls;
 
-class CardTerrainModifier extends CardBase {
-  final GameFieldControlsTerrainModifiersCard cardInfo;
-
-  CardTerrainModifier({
+class _CardTerrainModifier extends _CardBase<TerrainModifierType> {
+  const _CardTerrainModifier({
     super.key,
-    required this.cardInfo,
-    required super.selected,
-    required super.index,
-    required super.onClick,
+    required super.card,
+    required super.userActions,
   });
 
   @override
-  State<StatefulWidget> createState() => _CardTerrainModifierState();
-}
-
-class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
-  @override
-  String _getDescriptionText() => switch (widget.cardInfo.type) {
+  String _getDescriptionText() => switch (_card.card.type) {
     TerrainModifierType.seaMine => tr('sea_mine_field_card_description'),
     TerrainModifierType.antiAirGun => tr('anti_air_gun_card_description'),
     TerrainModifierType.landMine => tr('land_mine_field_card_description'),
@@ -27,10 +18,10 @@ class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
   };
 
   @override
-  MoneyUnit _getFooterMoney() => widget.cardInfo.cost;
+  MoneyUnit _getFooterMoney() => _card.card.cost;
 
   @override
-  String _getTitleText() => switch (widget.cardInfo.type) {
+  String _getTitleText() => switch (_card.card.type) {
     TerrainModifierType.seaMine => tr('sea_mine_field_card_name'),
     TerrainModifierType.antiAirGun => tr('anti_air_gun_card_name'),
     TerrainModifierType.landMine => tr('land_mine_field_card_name'),
@@ -41,13 +32,4 @@ class _CardTerrainModifierState extends CardBaseState<CardTerrainModifier> {
 
   @override
   String getBackgroundImage() => 'assets/images/screens/shared/card_yellow_background.webp';
-
-  @override
-  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
-
-  @override
-  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;
-
-  @override
-  BuildPossibility _getBuildPossibility() => widget.cardInfo;
 }

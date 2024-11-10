@@ -1,25 +1,16 @@
 part of card_controls;
 
-class CardUnit extends CardBase {
-  final GameFieldControlsUnitCard cardInfo;
+class _CardUnit extends _CardBase<UnitType> {
+  static const _pathToImages = 'assets/images/screens/game_field/cards/units/';
 
-  CardUnit({
+  const _CardUnit({
     super.key,
-    required this.cardInfo,
-    required super.selected,
-    required super.index,
-    required super.onClick,
+    required super.card,
+    required super.userActions,
   });
 
   @override
-  State<StatefulWidget> createState() => _CardUnitState();
-}
-
-class _CardUnitState extends CardBaseState<CardUnit> {
-  static const _pathToImages = 'assets/images/screens/game_field/cards/units/';
-
-  @override
-  String _getDescriptionText() => switch (widget.cardInfo.type) {
+  String _getDescriptionText() => switch (_card.card.type) {
     UnitType.armoredCar => tr('armored_car_card_description'),
     UnitType.artillery => tr('artillery_card_description'),
     UnitType.infantry => tr('infantry_card_description'),
@@ -34,10 +25,10 @@ class _CardUnitState extends CardBaseState<CardUnit> {
   };
 
   @override
-  MoneyUnit _getFooterMoney() => widget.cardInfo.cost;
+  MoneyUnit _getFooterMoney() => _card.card.cost;
 
   @override
-  String _getTitleText() => switch (widget.cardInfo.type) {
+  String _getTitleText() => switch (_card.card.type) {
     UnitType.armoredCar => tr('armored_car_card_name'),
     UnitType.artillery => tr('artillery_card_name'),
     UnitType.infantry => tr('infantry_card_name'),
@@ -55,16 +46,20 @@ class _CardUnitState extends CardBaseState<CardUnit> {
   String getBackgroundImage() => 'assets/images/screens/shared/card_red_background.webp';
 
   @override
-  Widget _getFeaturesPanel() => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _getFeature(widget.cardInfo.maxHealth.toString(), '${_pathToImages}icon_health.webp'),
-          _getFeature(widget.cardInfo.attack.toString(), '${_pathToImages}icon_attack.webp'),
-          _getFeature(widget.cardInfo.defence.toString(), '${_pathToImages}icon_defence.webp'),
-          _getFeature('${widget.cardInfo.damage.min}-${widget.cardInfo.damage.max}', '${_pathToImages}icon_damage.webp'),
-          _getFeature(widget.cardInfo.movementPoints.toInt().toString(), '${_pathToImages}icon_speed.webp'),
-        ],
-      );
+  Widget _getFeaturesPanel() {
+    final card = _card.card as GameFieldControlsUnitCard;
+
+    return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      _getFeature(card.maxHealth.toString(), '${_pathToImages}icon_health.webp'),
+      _getFeature(card.attack.toString(), '${_pathToImages}icon_attack.webp'),
+      _getFeature(card.defence.toString(), '${_pathToImages}icon_defence.webp'),
+      _getFeature('${card.damage.min}-${card.damage.max}', '${_pathToImages}icon_damage.webp'),
+      _getFeature(card.movementPoints.toInt().toString(), '${_pathToImages}icon_speed.webp'),
+    ],
+  );
+  }
 
   Widget _getFeature(String text, String icon) {
     return Stack(
@@ -95,14 +90,4 @@ class _CardUnitState extends CardBaseState<CardUnit> {
       ],
     );
   }
-
-
-  @override
-  String _getPhoto() => CardPhotos.getPhoto(widget.cardInfo);
-
-  @override
-  BuildRestriction? _getFooterRestriction() => widget.cardInfo.buildDisplayRestriction;
-
-  @override
-  BuildPossibility _getBuildPossibility() => widget.cardInfo;
 }

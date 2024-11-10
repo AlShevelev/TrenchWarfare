@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
+import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/cover/cover_screen_button.dart';
 
 class CoverScreen extends StatelessWidget {
@@ -61,8 +62,11 @@ class CoverScreen extends StatelessWidget {
                 child: CoverScreenButton(
                   text: 'TEST MAP',
                   onPress: () {
-                    Navigator.of(context)
-                        .pushNamed(Routes.gameField, arguments: 'test/7x7_win_defeat_conditions.tmx');
+                    Navigator.of(context).pushNamed(Routes.gameField,
+                        arguments: NewGameToGameFieldNavArg(
+                          mapName: 'test/7x7_win_defeat_conditions.tmx',
+                          selectedNation: Nation.russia,
+                        ));
                   },
                 ),
               ),
