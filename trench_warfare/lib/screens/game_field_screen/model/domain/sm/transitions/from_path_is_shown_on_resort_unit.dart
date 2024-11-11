@@ -23,6 +23,7 @@ class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
 
       CarrierPanelCalculator.updateCarrierPanel(
         cellId,
+        cell.nation!,
         _context.controlsState,
         oldActiveUnit: activeUnit,
         newActiveUnit: newActiveUnit,

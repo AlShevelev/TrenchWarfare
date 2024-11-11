@@ -10,6 +10,7 @@ class FromReadyForInputOnClick extends GameObjectTransitionBase {
         ? GameFieldControlsArmyInfo(
             cellId: cell.id,
             units: cell.units.toList(growable: true),
+            nation: _context.nation,
           )
         : null;
 

@@ -73,6 +73,7 @@ class MainControlsWidget extends StatelessWidget {
         GameFieldArmyInfoPanel(
           cellId: state.armyInfo!.cellId,
           armyInfo: state.armyInfo!,
+          nation: state.armyInfo!.nation,
           spritesAtlas: _gameField.spritesAtlas,
           left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
           top: screenHeight - GameFieldArmyInfoPanel.height,
@@ -87,6 +88,7 @@ class MainControlsWidget extends StatelessWidget {
         GameFieldArmyInfoPanel(
           cellId: state.carrierInfo!.cellId,
           armyInfo: state.carrierInfo!,
+          nation: state.carrierInfo!.nation,
           spritesAtlas: _gameField.spritesAtlas,
           left: (screenWidth - GameFieldArmyInfoPanel.width) / 2,
           top: screenHeight - GameFieldArmyInfoPanel.height * (state.armyInfo == null ? 1 : 2),

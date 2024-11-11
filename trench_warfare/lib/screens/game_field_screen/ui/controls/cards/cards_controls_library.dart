@@ -35,7 +35,6 @@ part 'ui/cards_list.dart';
 part 'cards_selection_screen.dart';
 part 'dto/tab_code.dart';
 part 'ui/cards/card_base.dart';
-part 'ui/cards/card_id.dart';
 part 'ui/cards/build_restriction_panel.dart';
 part 'ui/cards/cards_factory.dart';
 part 'ui/cards/card_terrain_modifier.dart';

@@ -20,10 +20,13 @@ class GameFieldControlsCellInfo {
 class GameFieldControlsArmyInfo {
   final int cellId;
 
+  final Nation nation;
+
   final List<Unit> units;
 
   GameFieldControlsArmyInfo({
     required this.cellId,
+    required this.nation,
     required this.units,
   });
 }

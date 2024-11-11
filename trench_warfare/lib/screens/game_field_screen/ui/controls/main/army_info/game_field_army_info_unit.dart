@@ -1,36 +1,38 @@
 part of game_field_army_info;
 
 class GameFieldArmyInfoUnit extends StatelessWidget {
-  late final Unit _unit;
+  final Unit _unit;
 
-  late final TextureAtlas _spritesAtlas;
+  final TextureAtlas _spritesAtlas;
 
-  late final GameFieldArmyInfoUnitsCache _cache;
+  final Nation _nation;
 
-  GameFieldArmyInfoUnit({
+  final GameFieldArmyInfoUnitsCache _cache;
+
+  const GameFieldArmyInfoUnit({
     super.key,
     required Unit unit,
+    required Nation nation,
     required TextureAtlas spritesAtlas,
     required GameFieldArmyInfoUnitsCache cache,
-  }) {
-    _unit = unit;
-    _spritesAtlas = spritesAtlas;
-    _cache = cache;
-  }
+  })  : _unit = unit,
+        _spritesAtlas = spritesAtlas,
+        _nation = nation,
+        _cache = cache;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
       child: CustomPaint(
         painter: GameFieldArmyInfoUnitPainter(
           unit: _unit,
-          nation: Nation.austriaHungary,
+          nation: _nation,
           spritesAtlas: _spritesAtlas,
           cache: _cache,
         ),
         child: const SizedBox(
-          width: 50,
+          width: 55,
           height: 50,
           child: null,
         ),

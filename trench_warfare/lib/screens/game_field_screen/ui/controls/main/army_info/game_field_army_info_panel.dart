@@ -8,6 +8,8 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 
   final GameFieldControlsArmyInfo armyInfo;
 
+  final Nation nation;
+
   final double left;
   final double top;
 
@@ -20,6 +22,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
   GameFieldArmyInfoPanel({
     super.key,
     required int cellId,
+    required this.nation,
     required this.armyInfo,
     required this.left,
     required this.top,
@@ -73,6 +76,7 @@ class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel>
                     index: i,
                     child: GameFieldArmyInfoUnit(
                       unit: widget.armyInfo.units[i],
+                      nation: widget.armyInfo.nation,
                       spritesAtlas: widget._spritesAtlas,
                       cache: this,
                     ),
