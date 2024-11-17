@@ -21,7 +21,7 @@ class _DataCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_slot.selected) {
-              _userActions.onCardClick(_slot.slotIndex);
+              _userActions.onCardClick(_slot.slotId);
             }
           },
           child: Cardboard(

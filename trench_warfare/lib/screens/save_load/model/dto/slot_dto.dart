@@ -4,9 +4,9 @@ sealed class _SlotDto {
   bool _selected;
   bool get selected => _selected;
 
-  final int slotIndex;
+  final int slotId;
 
-  _SlotDto({required bool selected, required this.slotIndex}) : _selected = selected;
+  _SlotDto({required bool selected, required this.slotId}) : _selected = selected;
 
   void setSelected({required bool selected}) => _selected = selected;
 }
@@ -24,7 +24,7 @@ class _DataSlotDto extends _SlotDto {
 
   _DataSlotDto({
     required super.selected,
-    required super.slotIndex,
+    required super.slotId,
     required this.isAutosave,
     required this.title,
     required this.day,
@@ -36,7 +36,7 @@ class _DataSlotDto extends _SlotDto {
 class _EmptySlotDto extends _SlotDto {
   _EmptySlotDto({
     required super.selected,
-    required super.slotIndex,
+    required super.slotId,
   });
 }
 

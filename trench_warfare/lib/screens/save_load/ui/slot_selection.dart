@@ -3,7 +3,19 @@ part of save_load_screen;
 class _SlotSelection extends StatefulWidget {
   final bool _isSave;
 
-  const _SlotSelection({super.key, required bool isSave}) : _isSave = isSave;
+  final void Function() _onCancel;
+
+  /// The argument is an id of the selected slot
+  final void Function(int) _onSlotSelected;
+
+  _SlotSelection({
+    super.key,
+    required bool isSave,
+    required void Function() onCancel,
+    required void Function(int) onSlotSelected,
+  })  : _isSave = isSave,
+        _onCancel = onCancel,
+        _onSlotSelected = onSlotSelected;
 
   @override
   State<StatefulWidget> createState() => _SlotSelectionState();
@@ -53,7 +65,12 @@ class _SlotSelectionState extends State<_SlotSelection> with ImageLoading {
         stream: _viewModel.state,
         builder: (context, value) {
           return PopScope(
-            canPop: value.hasData && value.data is! _Loading,
+            canPop: false,
+            onPopInvoked: (didPop) {
+              if (!didPop && value.hasData && value.data is! _Loading) {
+                widget._onCancel();
+              }
+            },
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
@@ -89,8 +106,7 @@ class _SlotSelectionState extends State<_SlotSelection> with ImageLoading {
                   image: const AssetImage('assets/images/screens/shared/button_select.webp'),
                   enabled: value.data?.isConfirmButtonEnabled ?? false,
                   onPress: () {
-                    // Navigator.of(context)
-                    //     .pushNamed(Routes.gameField, arguments: _viewModel.getNavigateToGameFieldArguments());
+                    _viewModel.selectedSlotId?.let((index) => widget._onSlotSelected(index));
                   },
                 ),
                 // Close button
@@ -100,7 +116,7 @@ class _SlotSelectionState extends State<_SlotSelection> with ImageLoading {
                   image: const AssetImage('assets/images/screens/shared/button_close.webp'),
                   enabled: value.data?.isCloseActionEnabled ?? false,
                   onPress: () {
-                    Navigator.of(context).pop();
+                    widget._onCancel();
                   },
                 ),
               ],
