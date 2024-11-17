@@ -65,8 +65,10 @@ flutter:
     - assets/images/screens/game_field/dialogs/win_defeat_turn/banners/
     - assets/images/screens/game_field/dialogs/win_defeat_turn/photos/
     - assets/images/screens/new_game/
-    - assets/images/screens/new_game/banners/
     - assets/images/screens/new_game/maps/europe/
+    - assets/images/screens/save_load/
     - assets/images/screens/shared/
+    - assets/images/screens/shared/banners/
+    - assets/images/screens/shared/bookmarks/
     # localisation
     - assets/translations/

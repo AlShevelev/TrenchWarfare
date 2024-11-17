@@ -21,7 +21,7 @@ class _MapsList extends StatelessWidget {
     final cards = _cards;
 
     if (cards == null) {
-      return _getStateText(tr('new_game_list_loading'));
+      return _getStateText(tr('loading'));
     }
 
     if (cards.isEmpty) {

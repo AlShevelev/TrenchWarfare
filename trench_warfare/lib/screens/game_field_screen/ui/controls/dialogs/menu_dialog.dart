@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_text_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
+import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 
 class MenuDialog extends StatelessWidget {
   final Nation nation;
   final int? day;
 
   final GameFieldForControls _gameField;
-
-  static const _imagesPath = 'assets/images/screens/game_field/dialogs/win_defeat_turn/';
-  static const _background = '${_imagesPath}card_background.webp';
 
   const MenuDialog({
     super.key,
@@ -33,14 +31,7 @@ class MenuDialog extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(64.0),
             child: Center(
-              child: Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(_background),
-                    fit: BoxFit.fill,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                ),
+              child: Cardboard(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
@@ -59,14 +50,14 @@ class MenuDialog extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                         child: GameFieldTextButton(
-                          text: tr('save_menu_dialog'),
+                          text: tr('save'),
                           onPress: () {},
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
                         child: GameFieldTextButton(
-                          text: tr('load_menu_dialog'),
+                          text: tr('load'),
                           onPress: () {},
                         ),
                       ),

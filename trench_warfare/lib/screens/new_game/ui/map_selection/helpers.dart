@@ -7,7 +7,3 @@ extension _TabCodeExt on TabCode {
     TabCode.newWorld => 'new_world',
   };
 }
-
-extension _NationExt on Nation {
-  String get image => 'assets/images/screens/new_game/banners/$name.webp';
-}

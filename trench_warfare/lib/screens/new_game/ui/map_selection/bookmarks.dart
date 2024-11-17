@@ -59,7 +59,7 @@ class _Bookmarks extends StatelessWidget {
           height: _bookmarkHeight,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/screens/new_game/bookmark_${tab.uiString}.webp'),
+              image: AssetImage(_getTabBookmark(tab)),
               fit: BoxFit.cover,
             ),
           ),
@@ -83,4 +83,10 @@ class _Bookmarks extends StatelessWidget {
         TabCode.asia => tr('new_game_tab_asia'),
         TabCode.newWorld => tr('new_game_tab_new_world'),
       };
+
+  String _getTabBookmark(TabCode tabCode) => switch (tabCode) {
+    TabCode.europe => 'assets/images/screens/shared/bookmarks/bookmark_red_92.webp',
+    TabCode.asia => 'assets/images/screens/shared/bookmarks/bookmark_blue_64.webp',
+    TabCode.newWorld => 'assets/images/screens/shared/bookmarks/bookmark_green_131.webp',
+  };
 }

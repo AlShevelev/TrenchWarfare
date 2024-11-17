@@ -24,5 +24,5 @@ class _CardUnitBooster extends _CardBase<UnitBoost> {
   };
 
   @override
-  String getBackgroundImage() => 'assets/images/screens/shared/card_green_background.webp';
+  CardboardStyle _getCardStyle() => CardboardStyle.green;
 }

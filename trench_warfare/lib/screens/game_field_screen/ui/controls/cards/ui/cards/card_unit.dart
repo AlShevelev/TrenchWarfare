@@ -43,7 +43,7 @@ class _CardUnit extends _CardBase<UnitType> {
   };
 
   @override
-  String getBackgroundImage() => 'assets/images/screens/shared/card_red_background.webp';
+  CardboardStyle _getCardStyle() => CardboardStyle.red;
 
   @override
   Widget _getFeaturesPanel() {

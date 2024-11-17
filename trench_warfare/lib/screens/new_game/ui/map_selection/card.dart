@@ -24,18 +24,6 @@ class _Card extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
 
-    final List<BoxShadow> shadow = [];
-    if (_selected) {
-      shadow.add(
-        const BoxShadow(
-          color: AppColors.black,
-          spreadRadius: 3,
-          blurRadius: 5,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      );
-    }
-
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -46,15 +34,9 @@ class _Card extends StatelessWidget {
               _userActions.onCardSelected(_card.id);
             }
           },
-          child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(_getBackgroundImage()),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                boxShadow: shadow,
-              ),
+          child: Cardboard(
+              selected: _selected,
+              style: _getCardStyle(),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -100,10 +82,10 @@ class _Card extends StatelessWidget {
     );
   }
 
-  String _getBackgroundImage() => switch (_tabCode) {
-    TabCode.europe => 'assets/images/screens/shared/card_red_background.webp',
-    TabCode.asia => 'assets/images/screens/shared/card_blue_background.webp',
-    TabCode.newWorld => 'assets/images/screens/shared/card_green_background.webp',
+  CardboardStyle _getCardStyle() => switch (_tabCode) {
+    TabCode.europe => CardboardStyle.red,
+    TabCode.asia => CardboardStyle.blue,
+    TabCode.newWorld => CardboardStyle.green,
   };
 
   String _getDatesText() {

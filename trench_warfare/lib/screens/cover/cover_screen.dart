@@ -46,7 +46,9 @@ class CoverScreen extends StatelessWidget {
               padding: buttonsPadding,
               child: CoverScreenButton(
                 text: localization.tr('cover_load'),
-                onPress: () {},
+                onPress: () {
+                  Navigator.of(context).pushNamed(Routes.loadGame);
+                },
               ),
             ),
             Padding(

@@ -3,6 +3,7 @@ part of navigation;
 class Routes {
   static const coverScreen = '/';
   static const newGame = '/newGame';
+  static const loadGame = '/loadGame';
   static const gameField = '/game_field';
   static const debugLogging = '/debug_logging';
 
@@ -11,14 +12,17 @@ class Routes {
       case coverScreen:
         {
           Logger.info('to: coverScreen', tag: 'NAVIGATION');
-
           return _FadeRoute(const CoverScreen());
         }
       case newGame:
         {
           Logger.info('to: newGame', tag: 'NAVIGATION');
-
           return _FadeRoute(const NewGameScreen());
+        }
+      case loadGame:
+        {
+          Logger.info('to: loadGame', tag: 'NAVIGATION');
+          return _FadeRoute(const SaveLoadScreen());
         }
       case gameField:
         {

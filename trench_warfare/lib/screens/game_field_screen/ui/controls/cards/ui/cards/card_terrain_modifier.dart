@@ -31,5 +31,5 @@ class _CardTerrainModifier extends _CardBase<TerrainModifierType> {
   };
 
   @override
-  String getBackgroundImage() => 'assets/images/screens/shared/card_yellow_background.webp';
+  CardboardStyle _getCardStyle() => CardboardStyle.yellow;
 }

@@ -24,5 +24,5 @@ class _CardProductionCenter extends _CardBase<ProductionCenterType> {
   };
 
   @override
-  String getBackgroundImage() => 'assets/images/screens/shared/card_blue_background.webp';
+  CardboardStyle _getCardStyle() => CardboardStyle.blue;
 }

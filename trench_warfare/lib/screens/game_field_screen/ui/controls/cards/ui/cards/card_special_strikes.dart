@@ -26,5 +26,5 @@ class _CardSpecialStrike extends _CardBase<SpecialStrikeType> {
   };
 
   @override
-  String getBackgroundImage() => 'assets/images/screens/shared/card_brown_background.webp';
+  CardboardStyle _getCardStyle() => CardboardStyle.brown;
 }

@@ -7,6 +7,8 @@ import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
+import 'package:trench_warfare/shared/ui_kit/helpers.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';

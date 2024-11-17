@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core_entities/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
+import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 enum WinDefeatTurnDialogType { win, defeat, defeatGlobal, turn }
@@ -15,7 +16,6 @@ class WinDefeatTurnDialog extends StatelessWidget {
   final GameFieldForControls _gameField;
 
   static const _imagesPath = 'assets/images/screens/game_field/dialogs/win_defeat_turn/';
-  static const _background = '${_imagesPath}card_background.webp';
 
   const WinDefeatTurnDialog({
     super.key,
@@ -38,14 +38,7 @@ class WinDefeatTurnDialog extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Center(
-              child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(_background),
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  ),
+              child: Cardboard(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
@@ -105,6 +98,6 @@ class WinDefeatTurnDialog extends StatelessWidget {
         WinDefeatTurnDialogType.win => tr('victory_dialog'),
         WinDefeatTurnDialogType.defeat => tr('defeat_dialog'),
         WinDefeatTurnDialogType.defeatGlobal => tr('defeat_dialog_global'),
-        WinDefeatTurnDialogType.turn => '${tr('day_dialog')} ${day!}',
+        WinDefeatTurnDialogType.turn => '${tr('day')} ${day!}',
       };
 }

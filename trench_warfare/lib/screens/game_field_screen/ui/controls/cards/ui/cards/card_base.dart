@@ -17,18 +17,6 @@ abstract class _CardBase<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<BoxShadow> shadow = [];
-    if (_card.selected) {
-      shadow.add(
-        const BoxShadow(
-          color: AppColors.black,
-          spreadRadius: 3,
-          blurRadius: 5,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      );
-    }
-
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -39,15 +27,9 @@ abstract class _CardBase<T> extends StatelessWidget {
               _userActions.onCardSelected(_card.indexInTab);
             }
           },
-          child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(getBackgroundImage()),
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                boxShadow: shadow,
-              ),
+          child: Cardboard(
+              style: _getCardStyle(),
+              selected: _card.selected,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -81,7 +63,7 @@ abstract class _CardBase<T> extends StatelessWidget {
   }
 
   @protected
-  String getBackgroundImage();
+  CardboardStyle _getCardStyle();
 
   MoneyUnit _getFooterMoney() => _card.card.cost;
 

@@ -31,6 +31,11 @@
   "no_cell_to_add": "No cell to place",
   "no_unit_to_add": "No unit to strike",
 
+  "save": "Save",
+  "load": "Load",
+  "day": "Day",
+  "loading": "One moment, please",
+
   "armored_car_card_name": "Armored car",
   "armored_car_card_description": "An armored car is a light, but tenacious and fast combat unit. Armed with machine guns, it causes additional damage to manpower. The unit can be built in a factory of level 3 or higher.",
   "artillery_card_name": "Artillery",
@@ -99,10 +104,7 @@
   "victory_dialog": "The victory is yours!",
   "defeat_dialog_global": "You have been defeated...",
   "defeat_dialog": "This country has been defeated...",
-  "day_dialog": "Day",
   "resume_menu_dialog": "Resume",
-  "save_menu_dialog": "Save",
-  "load_menu_dialog": "Load",
   "settings_menu_dialog": "Settings",
   "quit_menu_dialog": "Quit",
 
@@ -113,8 +115,10 @@
   "new_game_tab_europe": "Europe",
   "new_game_tab_asia": "Asia",
   "new_game_tab_new_world": "New World",
-  "new_game_list_loading": "One moment, please",
   "new_game_list_empty": "Coming soon",
   "new_game_opponents": "Opponents",
-  "new_game_neutrals": "Neutrals"
+  "new_game_neutrals": "Neutrals",
+
+  "save_load_autosave": "Autosave",
+  "save_load_empty_load": "Nothing to upload"
 }
