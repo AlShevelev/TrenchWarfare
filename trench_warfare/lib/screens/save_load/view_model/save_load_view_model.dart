@@ -16,7 +16,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
 
   Future<void> init() async {
     // Fake implementation vvvvvvvvvvvvv
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(seconds: 1));
 
     if (_isSave) {
       // Add empty slots here (up to 10 slots total)

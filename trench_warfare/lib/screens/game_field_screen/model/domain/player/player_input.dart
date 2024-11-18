@@ -36,4 +36,8 @@ abstract interface class PlayerInput {
   void onPhoneBackAction();
 
   void onMenuQuitButtonClick();
+
+  void onMenuLoadButtonClick();
+
+  void onMenuSaveButtonClick();
 }

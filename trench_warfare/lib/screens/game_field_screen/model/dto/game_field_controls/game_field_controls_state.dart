@@ -89,3 +89,11 @@ class MenuControls extends GameFieldControlsState {
 
   MenuControls({required this.nation, required this.day});
 }
+
+class SaveControls extends GameFieldControlsState {
+  SaveControls();
+}
+
+class LoadControls extends GameFieldControlsState {
+  LoadControls();
+}

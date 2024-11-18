@@ -51,14 +51,18 @@ class MenuDialog extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                         child: GameFieldTextButton(
                           text: tr('save'),
-                          onPress: () {},
+                          onPress: () {
+                            _gameField.onMenuSaveButtonClick();
+                          },
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
                         child: GameFieldTextButton(
                           text: tr('load'),
-                          onPress: () {},
+                          onPress: () {
+                            _gameField.onMenuLoadButtonClick();
+                          },
                         ),
                       ),
                       Padding(

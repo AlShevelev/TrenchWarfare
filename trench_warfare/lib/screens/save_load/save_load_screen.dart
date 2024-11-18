@@ -10,7 +10,7 @@ class SaveLoadScreen extends StatelessWidget {
       textDirection: ui.TextDirection.ltr,
       child: Background.path(
         imagePath: 'assets/images/screens/shared/screen_background.webp',
-        child: _SlotSelection(isSave: true, onCancel: () {}, onSlotSelected: (slotId) {},),
+        child: SlotSelection(isSave: true, onCancel: () {}, onSlotSelected: (slotId) {},),
       ),
     );
   }

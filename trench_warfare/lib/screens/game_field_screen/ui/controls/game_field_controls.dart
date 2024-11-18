@@ -4,6 +4,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placi
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/menu_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/win_defeat_turn_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/save_load/save_load_screen.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 
@@ -72,6 +73,8 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                 day: day,
                 gameField: widget._gameField,
               ),
+              SaveControls() => const SaveLoadScreen(isSave: true),
+              LoadControls() => const SaveLoadScreen(isSave: false),
               _ => const SizedBox.shrink(),
             };
           }),

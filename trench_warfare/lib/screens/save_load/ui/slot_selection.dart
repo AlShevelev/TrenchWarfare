@@ -1,6 +1,6 @@
 part of save_load_screen;
 
-class _SlotSelection extends StatefulWidget {
+class SlotSelection extends StatefulWidget {
   final bool _isSave;
 
   final void Function() _onCancel;
@@ -8,7 +8,7 @@ class _SlotSelection extends StatefulWidget {
   /// The argument is an id of the selected slot
   final void Function(int) _onSlotSelected;
 
-  _SlotSelection({
+  const SlotSelection({
     super.key,
     required bool isSave,
     required void Function() onCancel,
@@ -21,7 +21,7 @@ class _SlotSelection extends StatefulWidget {
   State<StatefulWidget> createState() => _SlotSelectionState();
 }
 
-class _SlotSelectionState extends State<_SlotSelection> with ImageLoading {
+class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
   bool _isBackgroundLoaded = false;
 
   late final _SaveLoadViewModel _viewModel;

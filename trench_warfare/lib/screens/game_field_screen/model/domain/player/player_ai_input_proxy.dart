@@ -78,4 +78,14 @@ class PlayerAiInputProxy extends PlayerInputProxy {
   void onMenuQuitButtonClick() {
     // do nothing
   }
+
+  @override
+  void onMenuLoadButtonClick() {
+    // do nothing
+  }
+
+  @override
+  void onMenuSaveButtonClick() {
+    // do nothing
+  }
 }

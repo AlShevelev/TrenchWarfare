@@ -116,4 +116,10 @@ class PlayerCore extends PlayerInputProxy {
 
   @override
   void onMenuQuitButtonClick() => _stateMachine.process(OnMenuQuitButtonClick());
+
+  @override
+  void onMenuLoadButtonClick() => _stateMachine.process(OnMenuLoadButtonClick());
+
+  @override
+  void onMenuSaveButtonClick() => _stateMachine.process(OnMenuSaveButtonClick());
 }

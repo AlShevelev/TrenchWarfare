@@ -153,8 +153,12 @@ class GameFieldStateMachine {
       MenuIsVisible() => switch (event) {
         OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
         OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick().process(),
+        OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
+        OnMenuLoadButtonClick() => FromMenuIsVisibleOnMenuLoadButtonClick(_context).process(),
         _ => _currentState,
-      }
+      },
+      SaveSlotSelection() => _currentState,
+      LoadSlotSelection() => _currentState,
     };
 
     _currentState = newState;

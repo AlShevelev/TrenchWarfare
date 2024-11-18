@@ -100,3 +100,13 @@ class OnPhoneBackAction implements Event {
   @override
   String toString() => 'ON_PHONE_BACK_ACTION';
 }
+
+class OnMenuSaveButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_SAVE_BUTTON_CLICK';
+}
+
+class OnMenuLoadButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_LOAD_BUTTON_CLICK';
+}

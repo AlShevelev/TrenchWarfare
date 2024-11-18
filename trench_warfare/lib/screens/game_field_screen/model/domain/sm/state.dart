@@ -133,3 +133,13 @@ class MenuIsVisible implements State {
   @override
   String toString() => 'MENU_IS_VISIBLE';
 }
+
+class SaveSlotSelection implements State {
+  @override
+  String toString() => 'SAVE_SLOT_SELECTION';
+}
+
+class LoadSlotSelection implements State {
+  @override
+  String toString() => 'LOAD_SLOT_SELECTION';
+}
