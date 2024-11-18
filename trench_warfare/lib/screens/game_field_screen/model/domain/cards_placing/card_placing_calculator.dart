@@ -63,8 +63,9 @@ class CardPlacingCalculator implements PlacingCalculator {
     );
   }
 
-  bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) =>
-      totalCellsImpossibleToBuild < _strategy.gameField.cells.length &&
-      _strategy.nationMoney.totalSum.currency >= productionCost.currency &&
-      _strategy.nationMoney.totalSum.industryPoints >= productionCost.industryPoints;
+  bool _canPlaceNext(int totalCellsImpossibleToBuild, MoneyUnit productionCost) {
+    final recalculatedNationMoney = _strategy.nationMoney.totalSum - productionCost;
+    return totalCellsImpossibleToBuild < _strategy.gameField.cells.length &&
+        recalculatedNationMoney >= productionCost;
+  }
 }
