@@ -4,14 +4,7 @@ class FromVictoryDefeatConfirmationOnPopupDialogClosed extends GameObjectTransit
   FromVictoryDefeatConfirmationOnPopupDialogClosed(super.context);
 
   State process(bool isVictory, Iterable<GameFieldCellRead> cellsToUpdate) {
-    _context.controlsState.update(
-      MainControls(
-        totalSum: _context.money.totalSum,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-      ),
-    );
+    TransitionUtils(_context).closeUI();
 
     if (isVictory) {
       return GameIsOver();

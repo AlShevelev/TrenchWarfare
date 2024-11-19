@@ -6,14 +6,7 @@ class FromReadyForInputOnLongClickEnd {
   FromReadyForInputOnLongClickEnd(this._context);
 
   State process() {
-    _context.controlsState.update(
-      MainControls(
-        totalSum: _context.money.totalSum,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-      ),
-    );
+    TransitionUtils(_context).closeUI();
 
     return ReadyForInput();
   }

@@ -69,12 +69,18 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   gameField: widget._gameField,
                 ),
               MenuControls(nation: final nation, day: final day) => MenuDialog(
-                nation: nation,
-                day: day,
-                gameField: widget._gameField,
-              ),
-              SaveControls() => const SaveLoadScreen(isSave: true),
-              LoadControls() => const SaveLoadScreen(isSave: false),
+                  nation: nation,
+                  day: day,
+                  gameField: widget._gameField,
+                ),
+              SaveControls() => SaveLoadScreen(
+                  isSave: true,
+                  gameField: widget._gameField,
+                ),
+              LoadControls() => SaveLoadScreen(
+                  isSave: false,
+                  gameField: widget._gameField,
+                ),
               _ => const SizedBox.shrink(),
             };
           }),

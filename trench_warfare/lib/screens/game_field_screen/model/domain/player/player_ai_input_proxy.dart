@@ -29,7 +29,7 @@ class PlayerAiInputProxy extends PlayerInputProxy {
   }
 
   @override
-  void onCardsSelectionCancelled() {
+  void onCancelled() {
     // do nothing
   }
 

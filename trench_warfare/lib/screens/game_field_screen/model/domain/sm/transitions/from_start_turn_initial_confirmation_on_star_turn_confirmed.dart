@@ -4,14 +4,7 @@ class FromStartTurnInitialConfirmationOnStarTurnConfirmed extends GameObjectTran
   FromStartTurnInitialConfirmationOnStarTurnConfirmed(super.context);
 
   State process() {
-    _context.controlsState.update(
-      MainControls(
-        totalSum: _context.money.totalSum,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-      ),
-    );
+    TransitionUtils(_context).closeUI();
 
     List<UpdateGameEvent> events = [];
 

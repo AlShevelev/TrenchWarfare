@@ -1,9 +1,9 @@
 part of game_field_sm;
 
-class FromCardSelectingOnCardsSelectionCancelled {
+class FromSaveSlotSelectionOnCancelled {
   final GameFieldStateMachineContext _context;
 
-  FromCardSelectingOnCardsSelectionCancelled(this._context);
+  FromSaveSlotSelectionOnCancelled(this._context);
 
   State process() {
     TransitionUtils(_context).closeUI();

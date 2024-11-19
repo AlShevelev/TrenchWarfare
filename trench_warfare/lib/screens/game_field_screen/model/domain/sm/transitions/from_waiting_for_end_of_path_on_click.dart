@@ -36,12 +36,5 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
     return PathIsShown(estimatedPath);
   }
 
-  void _hideArmyPanel() => _context.controlsState.update(
-        MainControls(
-          totalSum: _context.money.totalSum,
-          cellInfo: null,
-          armyInfo: null,
-          carrierInfo: null,
-        ),
-      );
+  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
 }

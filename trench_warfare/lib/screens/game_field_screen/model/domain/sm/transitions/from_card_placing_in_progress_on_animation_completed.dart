@@ -47,14 +47,7 @@ class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransition
 
       return CardPlacing(_card, _newInactiveCells);
     } else {
-      _context.controlsState.update(
-        MainControls(
-          totalSum: _context.money.totalSum,
-          cellInfo: null,
-          armyInfo: null,
-          carrierInfo: null,
-        ),
-      );
+      TransitionUtils(_context).closeUI();
 
       if (!_context.isAI) {
         _context.updateGameObjectsEvent.update([

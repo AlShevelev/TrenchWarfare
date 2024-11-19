@@ -19,7 +19,7 @@ abstract interface class PlayerInput {
 
   void onEndOfTurnButtonClick();
 
-  void onCardsSelectionCancelled();
+  void onCancelled();
 
   void onCardSelected(GameFieldControlsCard? card);
 

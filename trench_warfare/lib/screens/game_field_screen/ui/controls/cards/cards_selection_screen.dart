@@ -116,7 +116,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
                 image: const AssetImage('assets/images/screens/shared/button_close.webp'),
                 onPress: () {
                   if (state.isCloseActionEnabled) {
-                    widget._gameField.onCardsSelectionCancelled();
+                    widget._gameField.onCancelled();
                   }
                 },
               ),

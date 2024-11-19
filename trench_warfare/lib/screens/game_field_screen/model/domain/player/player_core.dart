@@ -67,7 +67,7 @@ class PlayerCore extends PlayerInputProxy {
   void onEndOfTurnButtonClick() => _stateMachine.process(OnEndOfTurnButtonClick());
 
   @override
-  void onCardsSelectionCancelled() => _stateMachine.process(OnCancelled());
+  void onCancelled() => _stateMachine.process(OnCancelled());
 
   @override
   void onCardSelected(GameFieldControlsCard? card) {

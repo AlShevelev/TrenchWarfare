@@ -116,7 +116,8 @@ class GameFieldStateMachine {
         cellsImpossibleToBuild: var cellsImpossibleToBuild,
       ) =>
         switch (event) {
-          OnCancelled() => FromCardPlacingOnCardPlacingCancelled(_context).process(cellsImpossibleToBuild),
+          OnCancelled() =>
+            FromCardPlacingOnCardPlacingCancelled(_context).process(cellsImpossibleToBuild),
           OnCellClick(cell: var cell) =>
             FromCardPlacingOnCellClicked(_context).process(cellsImpossibleToBuild, cell, card),
           _ => _currentState,
@@ -151,14 +152,20 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       MenuIsVisible() => switch (event) {
-        OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
-        OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick().process(),
-        OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
-        OnMenuLoadButtonClick() => FromMenuIsVisibleOnMenuLoadButtonClick(_context).process(),
-        _ => _currentState,
-      },
-      SaveSlotSelection() => _currentState,
-      LoadSlotSelection() => _currentState,
+          OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
+          OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick().process(),
+          OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
+          OnMenuLoadButtonClick() => FromMenuIsVisibleOnMenuLoadButtonClick(_context).process(),
+          _ => _currentState,
+        },
+      SaveSlotSelection() => switch (event) {
+          OnCancelled() => FromSaveSlotSelectionOnCancelled(_context).process(),
+          _ => _currentState,
+        },
+      LoadSlotSelection() => switch (event) {
+          OnCancelled() => FromLoadSlotSelectionOnCancelled(_context).process(),
+          _ => _currentState,
+        },
     };
 
     _currentState = newState;

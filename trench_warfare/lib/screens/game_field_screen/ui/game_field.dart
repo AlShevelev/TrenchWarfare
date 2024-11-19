@@ -36,7 +36,7 @@ abstract interface class GameFieldForControls {
 
   void onCardSelected(GameFieldControlsCard? card);
 
-  void onCardsSelectionCancelled();
+  void onCancelled();
 
   void onCardsPlacingCancelled();
 
@@ -174,7 +174,7 @@ class GameField extends FlameGame
   void onCardsButtonClick() => _viewModel.input.onCardsButtonClick();
 
   @override
-  void onCardsSelectionCancelled() => _viewModel.input.onCardsSelectionCancelled();
+  void onCancelled() => _viewModel.input.onCancelled();
 
   @override
   void onCardSelected(GameFieldControlsCard? card) => _viewModel.input.onCardSelected(card);

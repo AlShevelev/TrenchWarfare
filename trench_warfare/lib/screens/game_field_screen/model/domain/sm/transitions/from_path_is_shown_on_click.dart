@@ -63,12 +63,5 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     return ReadyForInput();
   }
 
-  void _hideArmyPanel() => _context.controlsState.update(
-        MainControls(
-          totalSum: _context.money.totalSum,
-          cellInfo: null,
-          armyInfo: null,
-          carrierInfo: null,
-        ),
-      );
+  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
 }
