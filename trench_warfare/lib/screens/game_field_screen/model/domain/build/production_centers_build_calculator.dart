@@ -51,84 +51,91 @@ class ProductionCentersBuildCalculator {
       return false;
     }
 
-    if (cell.activeUnit != null) {
-      return false;
-    }
-
     if (cell.productionCenter != null && cell.productionCenter!.type != type) {
       return false;
     }
 
+    var upgrade = false;
     if (cell.productionCenter != null &&
-        cell.productionCenter!.type == type &&
-        cell.productionCenter!.level == ProductionCenter.getMaxLevel(type)) {
-      return false;
+        cell.productionCenter!.type == type) {
+      if (cell.productionCenter!.level == ProductionCenter.getMaxLevel(type)) {
+        return false;
+      } else {
+        upgrade = true;
+      }
     }
 
+    var canBuildOrUpgrade = true;
     switch (type) {
       case ProductionCenterType.city:
         {
           if (!cell.isLand) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.hasRiver || cell.hasRoad) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.terrain == CellTerrain.marsh || cell.terrain == CellTerrain.mountains) {
-            return false;
+            canBuildOrUpgrade = false;
           }
-
-          return true;
         }
       case ProductionCenterType.factory:
         {
           if (!cell.isLand) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.hasRiver || cell.hasRoad) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.terrain == CellTerrain.wood ||
               cell.terrain == CellTerrain.marsh ||
               cell.terrain == CellTerrain.sand ||
               cell.terrain == CellTerrain.mountains) {
-            return false;
+            canBuildOrUpgrade = false;
           }
-
-          return true;
         }
       case ProductionCenterType.airField:
         {
           if (!cell.isLand) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.hasRiver || cell.hasRoad) {
-            return false;
+            canBuildOrUpgrade = false;
           }
 
           if (cell.terrain == CellTerrain.marsh ||
               cell.terrain == CellTerrain.hills ||
               cell.terrain == CellTerrain.mountains ||
               cell.terrain == CellTerrain.snow) {
-            return false;
+            canBuildOrUpgrade = false;
           }
-
-          return true;
         }
       case ProductionCenterType.navalBase:
         {
           if (cell.isLand) {
-            return false;
+            canBuildOrUpgrade = false;
+          } else {
+            // A naval base must be nearby a landmass
+            canBuildOrUpgrade = _gameField.findCellsAround(cell).any((c) => c.isLand);
           }
-
-          // A naval base must be nearby a landmass
-          return _gameField.findCellsAround(cell).any((c) => c.isLand);
         }
     }
+
+    if (canBuildOrUpgrade) {
+      // We can't build a PC in a cell with units
+      if (!upgrade && cell.activeUnit != null) {
+        return false;
+      } else  {
+        // But we can upgrade the PC
+        return true;
+      }
+    }
+
+    return false;
   }
 }
