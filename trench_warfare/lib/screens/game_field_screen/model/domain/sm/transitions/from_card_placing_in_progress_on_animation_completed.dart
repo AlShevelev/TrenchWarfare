@@ -1,30 +1,31 @@
 part of game_field_sm;
 
-class FromCardPlacingInProgressOnAnimationCompleted extends GameObjectTransitionBase {
-  late final GameFieldControlsCard _card;
+class FromCardPlacingInProgressOnAnimationCompleted {
+  final GameFieldStateMachineContext _context;
 
-  late final Map<int, GameFieldCellRead> _newInactiveCells;
+  final GameFieldControlsCard _card;
 
-  late final Map<int, GameFieldCellRead> _oldInactiveCells;
+  final Map<int, GameFieldCellRead> _newInactiveCells;
 
-  late final MoneyUnit _productionCost;
+  final Map<int, GameFieldCellRead> _oldInactiveCells;
 
-  late final bool _canPlaceNext;
+  final MoneyUnit _productionCost;
 
-  FromCardPlacingInProgressOnAnimationCompleted(
-    super.context, {
+  final bool _canPlaceNext;
+
+  FromCardPlacingInProgressOnAnimationCompleted({
+    required GameFieldStateMachineContext context,
     required GameFieldControlsCard card,
     required Map<int, GameFieldCellRead> newInactiveCells,
     required Map<int, GameFieldCellRead> oldInactiveCells,
     required MoneyUnit productionCost,
     required bool canPlaceNext,
-  }) {
-    _card = card;
-    _newInactiveCells = newInactiveCells;
-    _oldInactiveCells = oldInactiveCells;
-    _productionCost = productionCost;
-    _canPlaceNext = canPlaceNext;
-  }
+  })  : _context = context,
+        _card = card,
+        _newInactiveCells = newInactiveCells,
+        _oldInactiveCells = oldInactiveCells,
+        _productionCost = productionCost,
+        _canPlaceNext = canPlaceNext;
 
   State process() {
     // Update the money

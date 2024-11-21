@@ -1,7 +1,11 @@
 part of game_field_sm;
 
-class FromPathIsShownOnClick extends GameObjectTransitionBase {
-  FromPathIsShownOnClick(super.context);
+class FromPathIsShownOnClick {
+  final GameFieldStateMachineContext _context;
+
+  late final TransitionUtils _transitionUtils = TransitionUtils(_context);
+
+  FromPathIsShownOnClick(this._context);
 
   State process(Iterable<GameFieldCellRead> path, GameFieldCell cell) {
     final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
@@ -29,7 +33,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     }
 
     // calculate a path
-    Iterable<GameFieldCellRead> newPath = _calculatePath(startCell: firstCell, endCell: cell);
+    Iterable<GameFieldCellRead> newPath = _transitionUtils.calculatePath(startCell: firstCell, endCell: cell);
 
     if (newPath.isEmpty) {
       return _resetPathAndEnableUnit(pathToProcess, unit);
@@ -38,7 +42,7 @@ class FromPathIsShownOnClick extends GameObjectTransitionBase {
     _resetPath(pathToProcess);
 
     // show the new path
-    final estimatedPath = _estimatePath(path: newPath);
+    final estimatedPath = _transitionUtils.estimatePath(path: newPath);
     if (!_context.isAI) {
       _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
     }

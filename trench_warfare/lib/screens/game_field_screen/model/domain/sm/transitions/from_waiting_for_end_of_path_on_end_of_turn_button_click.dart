@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromWaitingForEndOfPathOnEndOfTurnButtonClick extends GameObjectTransitionBase {
-  FromWaitingForEndOfPathOnEndOfTurnButtonClick(super.context);
+class FromWaitingForEndOfPathOnEndOfTurnButtonClick {
+  final GameFieldStateMachineContext _context;
+
+  FromWaitingForEndOfPathOnEndOfTurnButtonClick(this._context);
 
   State process(GameFieldCell startCell) {
     final unit = startCell.activeUnit!;

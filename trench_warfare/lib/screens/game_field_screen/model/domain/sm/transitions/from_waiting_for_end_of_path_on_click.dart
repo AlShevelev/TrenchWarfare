@@ -1,7 +1,11 @@
 part of game_field_sm;
 
-class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
-  FromWaitingForEndOfPathOnClick(super.context);
+class FromWaitingForEndOfPathOnClick {
+  final GameFieldStateMachineContext _context;
+
+  late final TransitionUtils _transitionUtils = TransitionUtils(_context);
+
+  FromWaitingForEndOfPathOnClick(this._context);
 
   State process(GameFieldCell startCell, GameFieldCell endCell) {
     final unit = startCell.activeUnit!;
@@ -15,7 +19,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
     }
 
     // calculate a path
-    Iterable<GameFieldCellRead> path = _calculatePath(startCell: startCell, endCell: endCell);
+    Iterable<GameFieldCellRead> path = _transitionUtils.calculatePath(startCell: startCell, endCell: endCell);
 
     if (path.isEmpty) {
       // reset the unit active state
@@ -28,7 +32,7 @@ class FromWaitingForEndOfPathOnClick extends GameObjectTransitionBase {
       return ReadyForInput();
     }
 
-    final estimatedPath = _estimatePath(path: path);
+    final estimatedPath = _transitionUtils.estimatePath(path: path);
     if (!_context.isAI) {
       _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
     }

@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromInitialOnStarTurnTransition extends GameObjectTransitionBase {
-  FromInitialOnStarTurnTransition(super.context);
+class FromInitialOnStarTurnTransition {
+  final GameFieldStateMachineContext _context;
+
+  FromInitialOnStarTurnTransition(this._context);
 
   State process() {
     _context.dayStorage.increaseDay();

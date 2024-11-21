@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromCardPlacingOnCellClicked extends GameObjectTransitionBase {
-  FromCardPlacingOnCellClicked(super.context);
+class FromCardPlacingOnCellClicked {
+  final GameFieldStateMachineContext _context;
+
+  FromCardPlacingOnCellClicked(this._context);
 
   State process(
     Map<int, GameFieldCellRead> cellsImpossibleToBuild,

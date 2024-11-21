@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromPathIsShownOnResortUnit extends GameObjectTransitionBase {
-  FromPathIsShownOnResortUnit(super.context);
+class FromPathIsShownOnResortUnit {
+  final GameFieldStateMachineContext _context;
+
+  FromPathIsShownOnResortUnit(this._context);
 
   State process(Iterable<GameFieldCellRead> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
     final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);

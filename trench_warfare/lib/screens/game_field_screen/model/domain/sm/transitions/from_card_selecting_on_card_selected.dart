@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromCardSelectingOnCardsSelected extends GameObjectTransitionBase {
-  FromCardSelectingOnCardsSelected(super.context);
+class FromCardSelectingOnCardsSelected {
+  final GameFieldStateMachineContext _context;
+
+  FromCardSelectingOnCardsSelected(this._context);
 
   State process(GameFieldControlsCard card) {
     _context.controlsState.update(CardsPlacingControls(

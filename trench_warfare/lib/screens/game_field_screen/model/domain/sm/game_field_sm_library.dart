@@ -39,7 +39,6 @@ part 'game_field_sm.dart';
 part 'game_field_sm_context.dart';
 part 'event.dart';
 part 'state.dart';
-part 'transitions/game_object_transition_base.dart';
 part 'transitions/from_card_placing_on_card_placing_cancelled.dart';
 part 'transitions/from_card_placing_on_cell_clicked.dart';
 part 'transitions/from_card_placing_in_progress_on_animation_completed.dart';

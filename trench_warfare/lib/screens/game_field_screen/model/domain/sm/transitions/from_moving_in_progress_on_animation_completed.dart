@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromMovingInProgressOnAnimationCompleted extends GameObjectTransitionBase {
-  FromMovingInProgressOnAnimationCompleted(super.context);
+class FromMovingInProgressOnAnimationCompleted {
+  final GameFieldStateMachineContext _context;
+
+  FromMovingInProgressOnAnimationCompleted(this._context);
 
   State process(bool isVictory, Nation? defeated, Iterable<GameFieldCellRead> cellsToUpdate) {
     if (isVictory) {

@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromVictoryDefeatConfirmationOnPopupDialogClosed extends GameObjectTransitionBase {
-  FromVictoryDefeatConfirmationOnPopupDialogClosed(super.context);
+class FromVictoryDefeatConfirmationOnPopupDialogClosed {
+  final GameFieldStateMachineContext _context;
+
+  FromVictoryDefeatConfirmationOnPopupDialogClosed(this._context);
 
   State process(bool isVictory, Iterable<GameFieldCellRead> cellsToUpdate) {
     TransitionUtils(_context).closeUI();

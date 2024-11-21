@@ -131,7 +131,7 @@ class GameFieldStateMachine {
       ) =>
         switch (event) {
           OnAnimationCompleted() => FromCardPlacingInProgressOnAnimationCompleted(
-              _context,
+              context: _context,
               card: card,
               newInactiveCells: newInactiveCells,
               oldInactiveCells: oldInactiveCells,

@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromTurnIsEndedOnStartTurn extends GameObjectTransitionBase {
-  FromTurnIsEndedOnStartTurn(super.context);
+class FromTurnIsEndedOnStartTurn {
+  final GameFieldStateMachineContext _context;
+
+  FromTurnIsEndedOnStartTurn(this._context);
 
   State process() {
     _context.dayStorage.increaseDay();

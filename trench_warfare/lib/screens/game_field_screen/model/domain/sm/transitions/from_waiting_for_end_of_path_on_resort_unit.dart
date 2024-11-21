@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromWaitingForEndOfPathOnResortUnit extends GameObjectTransitionBase {
-  FromWaitingForEndOfPathOnResortUnit(super.context);
+class FromWaitingForEndOfPathOnResortUnit {
+  final GameFieldStateMachineContext _context;
+
+  FromWaitingForEndOfPathOnResortUnit(this._context);
 
   State process(
     GameFieldCell startPathCell,

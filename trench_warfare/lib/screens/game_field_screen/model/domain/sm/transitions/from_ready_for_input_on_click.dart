@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromReadyForInputOnClick extends GameObjectTransitionBase {
-  FromReadyForInputOnClick(super.context);
+class FromReadyForInputOnClick {
+  final GameFieldStateMachineContext _context;
+
+  FromReadyForInputOnClick(this._context);
 
   State process(GameFieldCell cell) {
     final unit = cell.activeUnit;

@@ -1,10 +1,14 @@
 part of game_field_sm;
 
-class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionBase {
+class FromStartTurnConfirmationOnStarTurnConfirmed {
   static const partOfHealthRestoredWithoutProductionCenter = 0.2;
   static const partOfHealthRestoredWithProductionCenter = 0.4;
 
-  FromStartTurnConfirmationOnStarTurnConfirmed(super.context);
+  final GameFieldStateMachineContext _context;
+
+  late final TransitionUtils _transitionUtils = TransitionUtils(_context);
+
+  FromStartTurnConfirmationOnStarTurnConfirmed(this._context);
 
   State process() {
     _context.money.recalculateIncomeAndSum();
@@ -47,7 +51,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed extends GameObjectTransitionB
 
     _context.money.recalculateExpenses();
 
-    _setCameraPosition(events);
+    _transitionUtils.setCameraPosition(events);
 
     _context.updateGameObjectsEvent.update(events);
 

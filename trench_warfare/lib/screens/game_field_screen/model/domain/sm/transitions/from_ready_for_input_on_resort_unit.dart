@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromReadyForInputOnResortUnit extends GameObjectTransitionBase {
-  FromReadyForInputOnResortUnit(super.context);
+class FromReadyForInputOnResortUnit {
+  final GameFieldStateMachineContext _context;
+
+  FromReadyForInputOnResortUnit(this._context);
 
   State process(int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
     final cell = _context.gameField.getCellById(cellId);

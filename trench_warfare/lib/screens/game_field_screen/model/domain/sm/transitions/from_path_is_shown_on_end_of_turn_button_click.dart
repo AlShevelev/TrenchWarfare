@@ -1,7 +1,9 @@
 part of game_field_sm;
 
-class FromPathIsShownOnEndOfTurnButtonClick extends GameObjectTransitionBase {
-  FromPathIsShownOnEndOfTurnButtonClick(super.context);
+class FromPathIsShownOnEndOfTurnButtonClick {
+  final GameFieldStateMachineContext _context;
+
+  FromPathIsShownOnEndOfTurnButtonClick(this._context);
 
   State process(Iterable<GameFieldCellRead> path) {
     final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
