@@ -122,14 +122,16 @@ class GameObjectsComposer {
       _addGameObject(border, borderComponentKey);
     }
 
-    _addGameObject(
-      GameObjectCell(
-        _spritesAtlas,
-        cell,
-        _viewModelInput.isHumanPlayer,
-      ),
-      _getCellComponentKey(cell),
-    );
+    if (!cell.isEmpty || cell.pathItem != null) {
+      _addGameObject(
+        GameObjectCell(
+          _spritesAtlas,
+          cell,
+          _viewModelInput.isHumanPlayer,
+        ),
+        _getCellComponentKey(cell),
+      );
+    }
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
