@@ -13,6 +13,12 @@ enum DamageType {
 
 sealed class UpdateGameEvent {}
 
+class InitCell implements UpdateGameEvent {
+  final GameFieldCell cell;
+
+  InitCell(this.cell);
+}
+
 class UpdateCell implements UpdateGameEvent {
   final GameFieldCell cell;
 

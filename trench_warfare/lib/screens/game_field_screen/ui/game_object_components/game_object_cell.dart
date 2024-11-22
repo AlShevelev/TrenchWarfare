@@ -47,8 +47,7 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final levelName = SpriteAtlasNames.getProductionCenterLevel(productionCenter);
 
-    _addSprite(bodyName);
-    _addSprite(levelName);
+    _addCombinedSprite([bodyName, levelName]);
     _addText(productionCenter.name);
   }
 

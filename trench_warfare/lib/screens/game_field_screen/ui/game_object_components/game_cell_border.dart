@@ -7,6 +7,8 @@ class GameCellBorder extends PositionComponent {
   late final Nation? _nation;
   late final List<Nation?> _allNationsAround;
 
+  late final bool isNotEmpty;
+
   static final _borderAreaSize = ComponentConstants.cellRealSize * 0.96;
   static final _borderWidth =
       ((ComponentConstants.cellRealSize.x - _borderAreaSize.x) + (ComponentConstants.cellRealSize.y - _borderAreaSize.y)) / 2;
@@ -23,6 +25,8 @@ class GameCellBorder extends PositionComponent {
 
     final positionCenter = Offset(cell.center.x, cell.center.y);
     _position = positionCenter - Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
+
+    isNotEmpty = _allNationsAround.any((n) => n != _nation);
   }
 
   @override

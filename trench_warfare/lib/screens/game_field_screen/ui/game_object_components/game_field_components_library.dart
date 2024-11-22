@@ -28,3 +28,4 @@ part 'game_cell_inactive.dart';
 part 'game_object_component_base.dart';
 part 'game_object_cell.dart';
 part 'game_object_untied_unit.dart';
+part 'sprite_combined_component.dart';

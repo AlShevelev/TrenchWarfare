@@ -10,6 +10,7 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
@@ -44,7 +45,12 @@ class GameObjectsComposer {
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
+    Logger.debug('Total root objects: ${_mapComponent.children.length}', tag: 'G_OBJECTS');
+
     switch (event) {
+      case InitCell(cell: var cell):
+        _initCell(cell);
+
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         _updateCell(cell, updateBorderCells);
 
@@ -83,6 +89,27 @@ class GameObjectsComposer {
     }
   }
 
+  void _initCell(GameFieldCell cell) {
+    final borderComponentKey = _getBorderComponentKey(cell);
+
+    // The low priority (-1000) moves this component to back
+    final border = GameCellBorder(cell, _gameField)..priority = -1000;
+    if (border.isNotEmpty) {
+      _addGameObject(border, borderComponentKey);
+    }
+
+    if (!cell.isEmpty) {
+      _addGameObject(
+        GameObjectCell(
+          _spritesAtlas,
+          cell,
+          _viewModelInput.isHumanPlayer,
+        ),
+        _getCellComponentKey(cell),
+      );
+    }
+  }
+
   void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
     final borderComponentKey = _getBorderComponentKey(cell);
 
@@ -91,15 +118,18 @@ class GameObjectsComposer {
 
     // The low priority (-1000) moves this component to back
     final border = GameCellBorder(cell, _gameField)..priority = -1000;
-    _addGameObject(border, borderComponentKey);
+    if (border.isNotEmpty) {
+      _addGameObject(border, borderComponentKey);
+    }
 
     _addGameObject(
-        GameObjectCell(
-          _spritesAtlas,
-          cell,
-          _viewModelInput.isHumanPlayer,
-        ),
-        _getCellComponentKey(cell));
+      GameObjectCell(
+        _spritesAtlas,
+        cell,
+        _viewModelInput.isHumanPlayer,
+      ),
+      _getCellComponentKey(cell),
+    );
 
     for (var updateBorderCell in updateBorderCells) {
       final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
