@@ -48,8 +48,8 @@ class GameObjectsComposer {
     Logger.debug('Total root objects: ${_mapComponent.children.length}', tag: 'G_OBJECTS');
 
     switch (event) {
-      case InitCell(cell: var cell):
-        _initCell(cell);
+      case InitCell(cell: var cell, drawBorder: var drawBorder):
+        _initCell(cell, drawBorder);
 
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         _updateCell(cell, updateBorderCells);
@@ -89,13 +89,16 @@ class GameObjectsComposer {
     }
   }
 
-  void _initCell(GameFieldCell cell) {
+  void _initCell(GameFieldCell cell, bool drawBorder) {
     final borderComponentKey = _getBorderComponentKey(cell);
 
     // The low priority (-1000) moves this component to back
-    final border = GameCellBorder(cell, _gameField)..priority = -1000;
-    if (border.isNotEmpty) {
-      _addGameObject(border, borderComponentKey);
+    if (drawBorder) {
+      final border = GameCellBorder(cell, _gameField)
+        ..priority = -1000;
+      if (border.isNotEmpty) {
+        _addGameObject(border, borderComponentKey);
+      }
     }
 
     if (!cell.isEmpty) {
@@ -133,14 +136,14 @@ class GameObjectsComposer {
       );
     }
 
-    for (var updateBorderCell in updateBorderCells) {
-      final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
-      _removeGameObject(updateBorderComponentKey);
-
-      // The low priority (-1000) moves this component to back
-      final border = GameCellBorder(updateBorderCell, _gameField)..priority = -1000;
-      _addGameObject(border, updateBorderComponentKey);
-    }
+    // for (var updateBorderCell in updateBorderCells) {
+    //   final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
+    //   _removeGameObject(updateBorderComponentKey);
+    //
+    //   // The low priority (-1000) moves this component to back
+    //   final border = GameCellBorder(updateBorderCell, _gameField)..priority = -1000;
+    //   _addGameObject(border, updateBorderComponentKey);
+    // }
   }
 
   void _updateCellInactivity(
@@ -174,7 +177,12 @@ class GameObjectsComposer {
     _removeGameObject(unit.id);
   }
 
-  Future<void> _moveUntiedUnit(GameFieldCell startCell, GameFieldCell endCell, Unit unit, int time) async {
+  Future<void> _moveUntiedUnit(
+    GameFieldCell startCell,
+    GameFieldCell endCell,
+    Unit unit,
+    int time,
+  ) async {
     final unitSprite = _gameObjects[unit.id];
 
     if (unitSprite == null) {
@@ -191,7 +199,11 @@ class GameObjectsComposer {
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  Future<void> _showDamage(GameFieldCell cell, DamageType damageType, int time) async {
+  Future<void> _showDamage(
+    GameFieldCell cell,
+    DamageType damageType,
+    int time,
+  ) async {
     _showAnimation(cell: cell, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType));
     await Future.delayed(Duration(milliseconds: time));
   }

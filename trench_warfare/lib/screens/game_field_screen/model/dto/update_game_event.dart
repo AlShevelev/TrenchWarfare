@@ -16,7 +16,9 @@ sealed class UpdateGameEvent {}
 class InitCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
-  InitCell(this.cell);
+  final bool drawBorder;
+
+  InitCell(this.cell, {required this.drawBorder});
 }
 
 class UpdateCell implements UpdateGameEvent {

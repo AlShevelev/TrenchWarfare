@@ -19,7 +19,7 @@ class FromStartTurnInitialConfirmationOnStarTurnConfirmed {
           // The cell has some game objects or we need to draw borders
           (!c.isEmpty ||
               _context.gameField.findCellsAround(c).any((cellAround) => cellAround.nation != c.nation)));
-      events.addAll(cellsToAdd.map((c) => InitCell(c)));
+      events.addAll(cellsToAdd.map((c) => InitCell(c, drawBorder: c.nation == _context.nation)));
     }
 
     _transitionUtils.setCameraPosition(events);
