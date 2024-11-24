@@ -35,14 +35,13 @@ abstract base class GameObjectComponentBase extends PositionComponent {
   }
 
   @override
-  @mustCallSuper
-  void onMount() {
-    super.onMount();
-    _addSprites();
+  void onLoad() {
+    super.onLoad();
+    _addChildComponents();
   }
 
   @protected
-  void _addSprites() {}
+  void _addChildComponents() {}
 
   @protected
   void _addUnitSprites({
@@ -50,6 +49,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     required Nation? nation,
     required int? unitsTotal,
     bool alwaysEnabled = false,
+    PositionComponent? root,
   }) {
     final quantityName = SpriteAtlasNames.getUnitQuantity(unitsTotal);
 
@@ -73,6 +73,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
         [primaryUnitName, secondaryUnitName],
         decorator: _getDisabledDecorator(),
         size: _SpriteSize.base,
+        root: root,
       );
     } else {
       if (state == UnitState.active && _isHuman) {
@@ -96,6 +97,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     _addCombinedSprite(
       combinedSpriteNames,
       size: _SpriteSize.base,
+      root: root,
     );
   }
 
@@ -104,6 +106,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     String? spriteName, {
     _SpriteSize size = _SpriteSize.small,
     Decorator? decorator,
+    PositionComponent? root,
   }) {
     if (spriteName == null) {
       return;
@@ -127,7 +130,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       spriteComponent.decorator.removeLast();
     }
 
-    add(spriteComponent);
+    (root ?? this).add(spriteComponent);
   }
 
   @protected
@@ -135,6 +138,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     Iterable<String?> spriteNames, {
     _SpriteSize size = _SpriteSize.small,
     Decorator? decorator,
+    PositionComponent? root,
   }) {
     if (spriteNames.length == 1) {
       _addSprite(spriteNames.first, size: size, decorator: decorator);
@@ -172,7 +176,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       spriteComponent.decorator.removeLast();
     }
 
-    add(spriteComponent);
+    (root ?? this).add(spriteComponent);
   }
 
   /// See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale

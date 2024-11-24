@@ -90,23 +90,13 @@ class GameObjectsComposer {
   }
 
   void _initCell(GameFieldCell cell, bool drawBorder) {
-    final borderComponentKey = _getBorderComponentKey(cell);
-
-    // The low priority (-1000) moves this component to back
-    if (drawBorder) {
-      final border = GameCellBorder(cell, _gameField)
-        ..priority = -1000;
-      if (border.isNotEmpty) {
-        _addGameObject(border, borderComponentKey);
-      }
-    }
-
-    if (!cell.isEmpty) {
+    if (!cell.isEmpty || drawBorder) {
       _addGameObject(
         GameObjectCell(
           _spritesAtlas,
           cell,
           _viewModelInput.isHumanPlayer,
+          _gameField,
         ),
         _getCellComponentKey(cell),
       );
@@ -114,16 +104,7 @@ class GameObjectsComposer {
   }
 
   void _updateCell(GameFieldCell cell) {
-    final borderComponentKey = _getBorderComponentKey(cell);
-
     _removeGameObject(_getCellComponentKey(cell));
-    _removeGameObject(borderComponentKey);
-
-    // The low priority (-1000) moves this component to back
-    final border = GameCellBorder(cell, _gameField)..priority = -1000;
-    if (border.isNotEmpty) {
-      _addGameObject(border, borderComponentKey);
-    }
 
     if (!cell.isEmpty || cell.pathItem != null) {
       _addGameObject(
@@ -131,6 +112,7 @@ class GameObjectsComposer {
           _spritesAtlas,
           cell,
           _viewModelInput.isHumanPlayer,
+          _gameField,
         ),
         _getCellComponentKey(cell),
       );
@@ -259,8 +241,6 @@ class GameObjectsComposer {
       };
 
   String _getCellComponentKey(GameFieldCell cell) => '${cell.id}_cell';
-
-  String _getBorderComponentKey(GameFieldCell cell) => '${cell.id}_border';
 
   String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';
 }

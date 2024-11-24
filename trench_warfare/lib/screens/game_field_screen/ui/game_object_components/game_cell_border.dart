@@ -7,9 +7,7 @@ class GameCellBorder extends PositionComponent {
   late final Nation? _nation;
   late final List<GameFieldCell?> _allCellsAround;
 
-  late final bool isNotEmpty;
-
-  static final _borderAreaSize = ComponentConstants.cellRealSize ;
+  static final _borderAreaSize = ComponentConstants.cellRealSize;
   static final _borderWidth = (_borderAreaSize.x + _borderAreaSize.y) * 0.02;
 
   // ignore: unnecessary_late
@@ -22,11 +20,12 @@ class GameCellBorder extends PositionComponent {
     _nation = cell.nation;
     _allCellsAround = gameField.findAllCellsAround(cell).toList();
 
-    final positionCenter = Offset(cell.center.x, cell.center.y);
+    const positionCenter = Offset(0, 0);
     _position = positionCenter - Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
-
-    isNotEmpty = _allCellsAround.any((c) => c != null && c.nation != _nation);
   }
+
+  static bool isNotEmpty(GameFieldCellRead cell, GameFieldRead gameField) =>
+      gameField.findAllCellsAround(cell).any((c) => c != null && c.nation != cell.nation);
 
   @override
   void render(Canvas canvas) {
@@ -89,11 +88,12 @@ class GameCellBorder extends PositionComponent {
   }
 
   void _drawSide(
-      Canvas canvas,
-      Nation nation, {
-        required Offset start,
-        required Offset end,
-      }) => _drawSideSegments(canvas, splitLine([0.25, 0.75], start: start, end: end), _getPaints(nation));
+    Canvas canvas,
+    Nation nation, {
+    required Offset start,
+    required Offset end,
+  }) =>
+      _drawSideSegments(canvas, splitLine([0.25, 0.75], start: start, end: end), _getPaints(nation));
 
   void _drawSideSegments(Canvas canvas, List<Tuple2<Offset, Offset>> segments, List<Paint> paints) {
     canvas.drawLine(segments[0].item1, segments[0].item2, paints[0]);
@@ -113,13 +113,12 @@ class GameCellBorder extends PositionComponent {
   }
 
   static List<Paint> _createPaints(Nation nation) => [
-    BasicPalette.black.paint()
-      ..strokeWidth = _borderWidth
-      ..strokeCap = StrokeCap.round,
-    BasicPalette.white.paint()
-      ..strokeWidth = _borderWidth,
-    BasicPalette.black.paint()
-      ..strokeWidth = _borderWidth
-      ..strokeCap = StrokeCap.round,
-  ];
+        BasicPalette.black.paint()
+          ..strokeWidth = _borderWidth
+          ..strokeCap = StrokeCap.round,
+        BasicPalette.white.paint()..strokeWidth = _borderWidth,
+        BasicPalette.black.paint()
+          ..strokeWidth = _borderWidth
+          ..strokeCap = StrokeCap.round,
+      ];
 }
