@@ -12,7 +12,7 @@ class FromWaitingForEndOfPathOnCardsButtonClick extends FromReadyForInputOnCards
     _startPathCell.activeUnit?.setState(UnitState.enabled);
 
     _context.updateGameObjectsEvent.update([
-      UpdateCell(_startPathCell as GameFieldCell, updateBorderCells: [])
+      UpdateCell(_startPathCell as GameFieldCell)
     ]);
 
     return super.process();

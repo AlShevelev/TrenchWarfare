@@ -14,7 +14,7 @@ class FromWaitingForEndOfPathOnClick {
       // reset the unit active state
       _hideArmyPanel();
       unit.setState(UnitState.enabled);
-      _context.updateGameObjectsEvent.update([UpdateCell(startCell, updateBorderCells: [])]);
+      _context.updateGameObjectsEvent.update([UpdateCell(startCell)]);
       return ReadyForInput();
     }
 
@@ -27,14 +27,14 @@ class FromWaitingForEndOfPathOnClick {
       unit.setState(UnitState.enabled);
 
       if (!_context.isAI) {
-        _context.updateGameObjectsEvent.update([UpdateCell(startCell, updateBorderCells: [])]);
+        _context.updateGameObjectsEvent.update([UpdateCell(startCell)]);
       }
       return ReadyForInput();
     }
 
     final estimatedPath = _transitionUtils.estimatePath(path: path);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c)));
     }
 
     return PathIsShown(estimatedPath);

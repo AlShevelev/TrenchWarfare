@@ -24,9 +24,7 @@ class InitCell implements UpdateGameEvent {
 class UpdateCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
-  final Iterable<GameFieldCell> updateBorderCells;
-
-  UpdateCell(this.cell, {required this.updateBorderCells});
+  UpdateCell(this.cell);
 }
 
 class UpdateCellInactivity implements UpdateGameEvent {

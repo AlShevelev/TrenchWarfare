@@ -78,7 +78,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     // setup untied unit
     final updateEvents = [
       CreateUntiedUnit(path.first, unit),
-      UpdateCell(path.first, updateBorderCells: []),
+      UpdateCell(path.first),
     ];
 
     // move the unit
@@ -92,7 +92,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
           unit: unit,
           time: AnimationConstants.unitMovementTime,
         ));
-        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
+        updateEvents.add(UpdateCell(cell));
         updateEvents.add(Pause(AnimationConstants.unitMovementPause));
       }
       priorCell = cell;
@@ -103,7 +103,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     // clear the rest of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
+        updateEvents.add(UpdateCell(cell));
       }
     }
 
@@ -119,13 +119,13 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     // setup untied unit
     final updateEvents = [
       MoveCameraToCell(path.first),
-      UpdateCell(path.first, updateBorderCells: []),
+      UpdateCell(path.first),
     ];
 
     // clear the rest of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
+        updateEvents.add(UpdateCell(cell));
       }
     }
 

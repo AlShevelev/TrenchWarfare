@@ -36,7 +36,7 @@ class FromPathIsShownOnResortUnit {
       pathCell.setPathItem(null);
     }
 
-    _context.updateGameObjectsEvent.update(pathToProcess.map((c) => UpdateCell(c, updateBorderCells: [])));
+    _context.updateGameObjectsEvent.update(pathToProcess.map((c) => UpdateCell(c)));
 
     return ReadyForInput();
   }

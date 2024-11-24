@@ -44,7 +44,7 @@ class FromPathIsShownOnClick {
     // show the new path
     final estimatedPath = _transitionUtils.estimatePath(path: newPath);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c)));
     }
 
     return PathIsShown(newPath);
@@ -56,7 +56,7 @@ class FromPathIsShownOnClick {
       pathCell.setPathItem(null);
     }
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
+      _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c)));
     }
   }
 

@@ -51,8 +51,8 @@ class GameObjectsComposer {
       case InitCell(cell: var cell, drawBorder: var drawBorder):
         _initCell(cell, drawBorder);
 
-      case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
-        _updateCell(cell, updateBorderCells);
+      case UpdateCell(cell: var cell):
+        _updateCell(cell);
 
       case UpdateCellInactivity(
           oldInactiveCells: var oldInactiveCells,
@@ -113,7 +113,7 @@ class GameObjectsComposer {
     }
   }
 
-  void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
+  void _updateCell(GameFieldCell cell) {
     final borderComponentKey = _getBorderComponentKey(cell);
 
     _removeGameObject(_getCellComponentKey(cell));
@@ -135,15 +135,6 @@ class GameObjectsComposer {
         _getCellComponentKey(cell),
       );
     }
-
-    // for (var updateBorderCell in updateBorderCells) {
-    //   final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
-    //   _removeGameObject(updateBorderComponentKey);
-    //
-    //   // The low priority (-1000) moves this component to back
-    //   final border = GameCellBorder(updateBorderCell, _gameField)..priority = -1000;
-    //   _addGameObject(border, updateBorderComponentKey);
-    // }
   }
 
   void _updateCellInactivity(

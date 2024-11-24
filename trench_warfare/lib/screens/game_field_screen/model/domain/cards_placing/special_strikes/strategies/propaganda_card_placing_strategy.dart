@@ -119,13 +119,13 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         }
       case _Deserting():
         {
-          updateEvents.add(UpdateCell(_cell, updateBorderCells: []));
+          updateEvents.add(UpdateCell(_cell));
         }
       case _RunAway(newCell: var newCell, unit: var unit):
         {
           updateEvents.addAll([
             CreateUntiedUnit(_cell, unit),
-            UpdateCell(_cell, updateBorderCells: []),
+            UpdateCell(_cell),
             MoveCameraToCell(_cell),
             MoveUntiedUnit(
               startCell: _cell,
@@ -133,13 +133,13 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
               unit: unit,
               time: AnimationConstants.unitMovementTime,
             ),
-            UpdateCell(newCell, updateBorderCells: []),
+            UpdateCell(newCell),
             RemoveUntiedUnit(unit),
           ]);
         }
       case _Convert():
         {
-          updateEvents.add(UpdateCell(_cell, updateBorderCells: _gameField.findCellsAround(_cell)));
+          updateEvents.add(UpdateCell(_cell));
         }
     }
 

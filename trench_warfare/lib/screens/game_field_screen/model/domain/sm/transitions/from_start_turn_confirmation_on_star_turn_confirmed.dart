@@ -46,7 +46,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
 
       cell.removeUnits(unitsToRemove);
 
-      events.add(UpdateCell(cell, updateBorderCells: []));
+      events.add(UpdateCell(cell));
     }
 
     _context.money.recalculateExpenses();

@@ -36,7 +36,7 @@ class FromWaitingForEndOfPathOnResortUnit {
         newActiveUnit: newActiveUnit,
       );
 
-      _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
+      _context.updateGameObjectsEvent.update([UpdateCell(cell)]);
 
       return ReadyForInput();
     }

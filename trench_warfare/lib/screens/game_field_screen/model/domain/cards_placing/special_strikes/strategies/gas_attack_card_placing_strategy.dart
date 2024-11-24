@@ -62,7 +62,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
       time: AnimationConstants.damageAnimationTime,
     ));
 
-    updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));
+    updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c)));
     updateEvents.add(AnimationCompleted());
 
     return updateEvents;

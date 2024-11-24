@@ -25,15 +25,12 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
 
   @override
   Iterable<UpdateGameEvent> _getUpdateEvents() => [
-    ShowDamage(
-      cell: _cell,
-      damageType: DamageType.explosion,
-      time: AnimationConstants.damageAnimationTime,
-    ),
-    UpdateCell(
-      _cell,
-      updateBorderCells: [],
-    ),
-    AnimationCompleted(),
-  ];
+        ShowDamage(
+          cell: _cell,
+          damageType: DamageType.explosion,
+          time: AnimationConstants.damageAnimationTime,
+        ),
+        UpdateCell(_cell),
+        AnimationCompleted(),
+      ];
 }
