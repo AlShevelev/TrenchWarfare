@@ -5,7 +5,7 @@ class GameCellBorder extends PositionComponent {
   late final Offset _position;
 
   late final Nation? _nation;
-  late final List<Nation?> _allNationsAround;
+  late final Iterable<GameFieldCell?> _allCellsAround;
 
   static final _borderAreaSize = ComponentConstants.cellRealSize * 0.96;
   static final _borderWidth =
@@ -19,10 +19,9 @@ class GameCellBorder extends PositionComponent {
 
   GameCellBorder(GameFieldCellRead cell, GameFieldRead gameField) {
     _nation = cell.nation;
-    _allNationsAround = gameField.findAllCellsAround(cell).map((c) => c?.nation).toList();
+    _allCellsAround = gameField.findAllCellsAround(cell);
 
-    final positionCenter = Offset(cell.center.x, cell.center.y);
-    _position = positionCenter - Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
+    _position = -Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
   }
 
   @override
@@ -34,9 +33,9 @@ class GameCellBorder extends PositionComponent {
     }
 
     var index = -1;
-    for (var nationAround in _allNationsAround) {
+    for (var cellAround in _allCellsAround) {
       index++;
-      if (nationAround == null || nationAround == nation) {
+      if (cellAround == null || cellAround.nation == nation) {
         continue;
       }
 

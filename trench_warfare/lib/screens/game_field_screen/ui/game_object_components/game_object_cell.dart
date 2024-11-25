@@ -1,19 +1,21 @@
 part of game_field_components;
 
-
 final class GameObjectCell extends GameObjectComponentBase {
-  late final GameFieldCell _cell;
+  final GameFieldCell _cell;
+
+  final GameFieldRead _gameField;
 
   GameObjectCell(
     TextureAtlas spritesAtlas,
     GameFieldCell cell,
     bool isHuman,
-  ) : super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman) {
-    _cell = cell;
-  }
+    GameFieldRead gameField,
+  )   : _cell = cell,
+        _gameField = gameField,
+        super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
 
   @override
-  void _addSprites() {
+  void _addChildObjects() {
     _addTerrainModifierSprites();
     _addProductionCenterSprites();
     _addUnitsSprites();
@@ -22,6 +24,8 @@ final class GameObjectCell extends GameObjectComponentBase {
     if (_isHuman) {
       _addPathSprites();
     }
+
+    _addBorder();
   }
 
   void _addTerrainModifierSprites() {
@@ -107,5 +111,11 @@ final class GameObjectCell extends GameObjectComponentBase {
       ..priority = 2;
 
     add(textComponent);
+  }
+
+  _addBorder() {
+    // The low priority (-1000) moves this component to back
+    final border = GameCellBorder(_cell, _gameField)..priority = -1000;
+    add(border);
   }
 }

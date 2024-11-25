@@ -36,13 +36,13 @@ abstract base class GameObjectComponentBase extends PositionComponent {
 
   @override
   @mustCallSuper
-  void onMount() {
-    super.onMount();
-    _addSprites();
+  void onLoad() {
+    super.onLoad();
+    _addChildObjects();
   }
 
   @protected
-  void _addSprites() {}
+  void _addChildObjects() {}
 
   @protected
   void _addUnitSprites({
