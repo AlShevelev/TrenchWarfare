@@ -42,7 +42,7 @@ class FromReadyForInputOnClick {
 
     unit.setState(UnitState.active);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update([UpdateCell(cell)]);
+      _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
     }
 
     return WaitingForEndOfPath(cell);

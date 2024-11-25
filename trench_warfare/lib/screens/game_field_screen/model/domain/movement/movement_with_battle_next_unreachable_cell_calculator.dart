@@ -21,8 +21,8 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
     Logger.info(
       'BATTLE_WITH_UNREACHABLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
-      'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
-      'attackingCell: $attackingCell; defendingCell: $defendingCell',
+          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+          'attackingCell: $attackingCell; defendingCell: $defendingCell',
       tag: 'MOVEMENT',
     );
 
@@ -151,7 +151,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
       CreateUntiedUnit(path.first, attackingUnit),
-      UpdateCell(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
     final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
@@ -193,16 +193,14 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     );
 
     if (newDefendingUnitCell != null) {
-      updateEvents.add(UpdateCell(
-        newDefendingUnitCell,
-        updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell),
-      ));
+      updateEvents.add(UpdateCell(newDefendingUnitCell,
+          updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell)));
     }
 
     // Update cells in an inactive part of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 

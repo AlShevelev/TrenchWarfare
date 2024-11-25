@@ -13,18 +13,12 @@ enum DamageType {
 
 sealed class UpdateGameEvent {}
 
-class InitCell implements UpdateGameEvent {
-  final GameFieldCell cell;
-
-  InitCell(this.cell);
-}
-
 class UpdateCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
   final Iterable<GameFieldCell> updateBorderCells;
 
-  UpdateCell(this.cell, {this.updateBorderCells = const []});
+  UpdateCell(this.cell, {required this.updateBorderCells});
 }
 
 class UpdateCellInactivity implements UpdateGameEvent {

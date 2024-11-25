@@ -25,7 +25,7 @@ class FromPathIsShownOnEndOfTurnButtonClick {
     for (var pathCell in path) {
       pathCell.setPathItem(null);
     }
-    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c)));
+    _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
   }
 
   void _hideArmyPanel() => TransitionUtils(_context).closeUI();

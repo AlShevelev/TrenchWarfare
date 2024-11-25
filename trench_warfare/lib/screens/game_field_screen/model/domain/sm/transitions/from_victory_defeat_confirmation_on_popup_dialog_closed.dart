@@ -16,7 +16,7 @@ class FromVictoryDefeatConfirmationOnPopupDialogClosed {
 
     // Clear all the cell of the defeated nation
     final events = cellsToUpdate
-        .map((c) => UpdateCell(c as GameFieldCell))
+        .map((c) => UpdateCell(c as GameFieldCell, updateBorderCells: []))
         .toList(growable: false);
     _context.updateGameObjectsEvent.update(events);
 

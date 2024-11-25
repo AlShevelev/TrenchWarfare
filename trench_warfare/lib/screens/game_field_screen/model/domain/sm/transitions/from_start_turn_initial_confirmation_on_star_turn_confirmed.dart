@@ -12,15 +12,8 @@ class FromStartTurnInitialConfirmationOnStarTurnConfirmed {
 
     List<UpdateGameEvent> events = [];
 
-    // A human player plays first - so we can make a global initialization for this player only
-    if (!_context.isAI) {
-      final cellsToAdd = _context.gameField.cells.where((c) =>
-          c.nation != null &&
-          // The cell has some game objects or we need to draw borders
-          (!c.isEmpty ||
-              _context.gameField.findCellsAround(c).any((cellAround) => cellAround.nation != c.nation)));
-      events.addAll(cellsToAdd.map((c) => InitCell(c)));
-    }
+    final cellsToAdd = _context.gameField.cells.where((c) => c.nation != null);
+    events.addAll(cellsToAdd.map((c) => UpdateCell(c, updateBorderCells: [])));
 
     _transitionUtils.setCameraPosition(events);
 

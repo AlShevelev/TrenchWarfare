@@ -16,7 +16,7 @@ final class GameObjectUntiedUnit extends GameObjectComponentBase {
   }
 
   @override
-  void _addChildComponents() {
+  void _addSprites() {
     _addUnitSprites(unit: _unit, nation: _nation, unitsTotal: null, alwaysEnabled: true);
   }
 }

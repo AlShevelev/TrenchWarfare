@@ -1,40 +1,30 @@
 part of game_field_components;
 
-final class GameObjectCell extends GameObjectComponentBase with Snapshot {
-  final GameFieldCell _cell;
 
-  final GameFieldRead _gameField;
+final class GameObjectCell extends GameObjectComponentBase {
+  late final GameFieldCell _cell;
 
   GameObjectCell(
     TextureAtlas spritesAtlas,
     GameFieldCell cell,
     bool isHuman,
-    GameFieldRead gameField,
-  )   : _cell = cell,
-        _gameField = gameField,
-        super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
+  ) : super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman) {
+    _cell = cell;
+  }
 
   @override
-  void _addChildComponents() {
-    final root = SnapshotComponent();
-    add(root);
-
-    _addTerrainModifierSprites(root);
-    _addProductionCenterSprites(root);
-    _addUnitsSprites(root);
-    _addNationBannerSprites(root);
+  void _addSprites() {
+    _addTerrainModifierSprites();
+    _addProductionCenterSprites();
+    _addUnitsSprites();
+    _addNationBannerSprites();
 
     if (_isHuman) {
-      _addPathSprites(root);
-    }
-
-    if (GameCellBorder.isNotEmpty(_cell, _gameField)) {
-      final border = GameCellBorder(_cell, _gameField)..priority = -1000;
-      root.add(border);
+      _addPathSprites();
     }
   }
 
-  void _addTerrainModifierSprites(PositionComponent root) {
+  void _addTerrainModifierSprites() {
     final terrainModifier = _cell.terrainModifier;
 
     if (terrainModifier == null) {
@@ -43,10 +33,10 @@ final class GameObjectCell extends GameObjectComponentBase with Snapshot {
 
     final name = SpriteAtlasNames.getTerrainModifier(terrainModifier.type);
 
-    _addSprite(name, root: root);
+    _addSprite(name);
   }
 
-  void _addProductionCenterSprites(PositionComponent root) {
+  void _addProductionCenterSprites() {
     final productionCenter = _cell.productionCenter;
 
     if (productionCenter == null) {
@@ -57,32 +47,28 @@ final class GameObjectCell extends GameObjectComponentBase with Snapshot {
 
     final levelName = SpriteAtlasNames.getProductionCenterLevel(productionCenter);
 
-    _addCombinedSprite([bodyName, levelName], root: root);
-    _addText(productionCenter.name, root);
+    _addSprite(bodyName);
+    _addSprite(levelName);
+    _addText(productionCenter.name);
   }
 
-  void _addUnitsSprites(PositionComponent root) {
+  void _addUnitsSprites() {
     if (_cell.units.isEmpty) {
       return;
     }
 
-    _addUnitSprites(
-      unit: _cell.activeUnit!,
-      nation: _cell.nation,
-      unitsTotal: _cell.units.length,
-      root: root,
-    );
+    _addUnitSprites(unit: _cell.activeUnit!, nation: _cell.nation, unitsTotal: _cell.units.length);
   }
 
-  void _addNationBannerSprites(PositionComponent root) {
+  void _addNationBannerSprites() {
     if (_cell.isEmpty) {
       return;
     }
 
-    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!), root: root);
+    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!));
   }
 
-  void _addPathSprites(PositionComponent root) {
+  void _addPathSprites() {
     final pathItem = _cell.pathItem;
 
     if (pathItem == null) {
@@ -91,10 +77,10 @@ final class GameObjectCell extends GameObjectComponentBase with Snapshot {
 
     final pathSprite = SpriteAtlasNames.getPath(pathItem.type);
 
-    _addSprite(pathSprite, decorator: pathItem.isActive ? null : _getDisabledDecorator(), root: root);
+    _addSprite(pathSprite, decorator: pathItem.isActive ? null : _getDisabledDecorator());
   }
 
-  void _addText(String? text, PositionComponent? root) {
+  void _addText(String? text) {
     if (text == null || text.isEmpty) {
       return;
     }
@@ -120,6 +106,6 @@ final class GameObjectCell extends GameObjectComponentBase with Snapshot {
       ..position = Vector2(0, ComponentConstants.cellRealSize.y * 0.3)
       ..priority = 2;
 
-    (root ?? this).add(textComponent);
+    add(textComponent);
   }
 }

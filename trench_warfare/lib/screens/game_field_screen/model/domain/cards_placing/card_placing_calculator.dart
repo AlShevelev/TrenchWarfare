@@ -33,7 +33,10 @@ class CardPlacingCalculator implements PlacingCalculator {
       );
     }
 
-    events.add(UpdateCell(_strategy.cell));
+    events.add(UpdateCell(
+      _strategy.cell,
+      updateBorderCells: [],
+    ));
 
     events.add(
       Pause(_isAI ? AnimationConstants.pauseAfterBuildingAi : AnimationConstants.pauseAfterBuildingHuman),

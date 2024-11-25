@@ -23,8 +23,8 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     Logger.info(
       'BATTLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
-      'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
-      'attackingCell: $attackingCell; defendingCell: $defendingCell',
+          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+          'attackingCell: $attackingCell; defendingCell: $defendingCell',
       tag: 'MOVEMENT',
     );
 
@@ -206,7 +206,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
       CreateUntiedUnit(path.first, attackingUnit),
-      UpdateCell(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
     // Move the attacking unit to the attack cell
@@ -288,16 +288,14 @@ class MovementWithBattleCalculator extends MovementCalculator {
         UpdateCell(reachableCells.last, updateBorderCells: _gameField.findCellsAround(reachableCells.last)));
 
     if (newDefendingUnitCell != null) {
-      updateEvents.add(UpdateCell(
-        newDefendingUnitCell,
-        updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell),
-      ));
+      updateEvents.add(UpdateCell(newDefendingUnitCell,
+          updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell)));
     }
 
     // Update cells in an inactive part of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 

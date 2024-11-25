@@ -38,7 +38,10 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
           damageType: DamageType.flame,
           time: AnimationConstants.damageAnimationTime,
         ),
-        UpdateCell(_cell),
+        UpdateCell(
+          _cell,
+          updateBorderCells: [],
+        ),
         AnimationCompleted(),
       ];
 }

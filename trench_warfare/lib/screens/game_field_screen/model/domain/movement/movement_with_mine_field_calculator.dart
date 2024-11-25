@@ -117,7 +117,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     // setup untied unit
     var updateEvents = [
       CreateUntiedUnit(path.first, unit),
-      UpdateCell(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
     // move the unit
@@ -148,7 +148,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     // clear the rest of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 
@@ -164,13 +164,13 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     // setup untied unit
     final updateEvents = [
       MoveCameraToCell(path.first),
-      UpdateCell(path.first),
+      UpdateCell(path.first, updateBorderCells: []),
     ];
 
     // clear the rest of the path
     for (var cell in path) {
       if (!reachableCells.contains(cell)) {
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: []));
       }
     }
 

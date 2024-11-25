@@ -10,7 +10,6 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
-import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
@@ -45,12 +44,7 @@ class GameObjectsComposer {
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
-    Logger.debug('Total root objects: ${_mapComponent.children.length}', tag: 'G_OBJECTS');
-
     switch (event) {
-      case InitCell(cell: var cell):
-        _initCell(cell);
-
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         _updateCell(cell, updateBorderCells);
 
@@ -89,44 +83,31 @@ class GameObjectsComposer {
     }
   }
 
-  void _initCell(GameFieldCell cell) {
-    _addGameObject(
-      GameObjectCell(
-        _spritesAtlas,
-        cell,
-        _viewModelInput.isHumanPlayer,
-        _gameField,
-      ),
-      _getCellComponentKey(cell),
-    );
-  }
-
   void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
-    _removeGameObject(_getCellComponentKey(cell));
+    final borderComponentKey = _getBorderComponentKey(cell);
 
-    if (!cell.isEmpty || cell.pathItem != null) {
-      _addGameObject(
+    _removeGameObject(_getCellComponentKey(cell));
+    _removeGameObject(borderComponentKey);
+
+    // The low priority (-1000) moves this component to back
+    final border = GameCellBorder(cell, _gameField)..priority = -1000;
+    _addGameObject(border, borderComponentKey);
+
+    _addGameObject(
         GameObjectCell(
           _spritesAtlas,
           cell,
           _viewModelInput.isHumanPlayer,
-          _gameField,
         ),
-        _getCellComponentKey(cell),
-      );
-    }
+        _getCellComponentKey(cell));
 
     for (var updateBorderCell in updateBorderCells) {
-      _removeGameObject(_getCellComponentKey(updateBorderCell));
-      _addGameObject(
-        GameObjectCell(
-          _spritesAtlas,
-          updateBorderCell,
-          _viewModelInput.isHumanPlayer,
-          _gameField,
-        ),
-        _getCellComponentKey(updateBorderCell),
-      );
+      final updateBorderComponentKey = _getBorderComponentKey(updateBorderCell);
+      _removeGameObject(updateBorderComponentKey);
+
+      // The low priority (-1000) moves this component to back
+      final border = GameCellBorder(updateBorderCell, _gameField)..priority = -1000;
+      _addGameObject(border, updateBorderComponentKey);
     }
   }
 
@@ -161,12 +142,7 @@ class GameObjectsComposer {
     _removeGameObject(unit.id);
   }
 
-  Future<void> _moveUntiedUnit(
-    GameFieldCell startCell,
-    GameFieldCell endCell,
-    Unit unit,
-    int time,
-  ) async {
+  Future<void> _moveUntiedUnit(GameFieldCell startCell, GameFieldCell endCell, Unit unit, int time) async {
     final unitSprite = _gameObjects[unit.id];
 
     if (unitSprite == null) {
@@ -183,11 +159,7 @@ class GameObjectsComposer {
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  Future<void> _showDamage(
-    GameFieldCell cell,
-    DamageType damageType,
-    int time,
-  ) async {
+  Future<void> _showDamage(GameFieldCell cell, DamageType damageType, int time) async {
     _showAnimation(cell: cell, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType));
     await Future.delayed(Duration(milliseconds: time));
   }
@@ -252,6 +224,8 @@ class GameObjectsComposer {
       };
 
   String _getCellComponentKey(GameFieldCell cell) => '${cell.id}_cell';
+
+  String _getBorderComponentKey(GameFieldCell cell) => '${cell.id}_border';
 
   String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';
 }

@@ -35,13 +35,14 @@ abstract base class GameObjectComponentBase extends PositionComponent {
   }
 
   @override
-  void onLoad() {
-    super.onLoad();
-    _addChildComponents();
+  @mustCallSuper
+  void onMount() {
+    super.onMount();
+    _addSprites();
   }
 
   @protected
-  void _addChildComponents() {}
+  void _addSprites() {}
 
   @protected
   void _addUnitSprites({
@@ -49,7 +50,6 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     required Nation? nation,
     required int? unitsTotal,
     bool alwaysEnabled = false,
-    PositionComponent? root,
   }) {
     final quantityName = SpriteAtlasNames.getUnitQuantity(unitsTotal);
 
@@ -65,40 +65,26 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     final primaryUnitName = SpriteAtlasNames.getUnitPrimary(unit, nation);
 
     final state = alwaysEnabled ? UnitState.enabled : unit.state;
-
-    final combinedSpriteNames = <String?>[];
-
     if (state == UnitState.disabled) {
-      _addCombinedSprite(
-        [primaryUnitName, secondaryUnitName],
-        decorator: _getDisabledDecorator(),
-        size: _SpriteSize.base,
-        root: root,
-      );
+      _addSprite(primaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
+      _addSprite(secondaryUnitName, decorator: _getDisabledDecorator(), size: _SpriteSize.base);
     } else {
       if (state == UnitState.active && _isHuman) {
-        combinedSpriteNames.add(SpriteAtlasNames.getSelectionFrame());
+        _addSprite(SpriteAtlasNames.getSelectionFrame(), size: _SpriteSize.base);
       }
 
-      combinedSpriteNames.add(primaryUnitName);
-      combinedSpriteNames.add(secondaryUnitName);
+      _addSprite(primaryUnitName, size: _SpriteSize.base);
+      _addSprite(secondaryUnitName, size: _SpriteSize.base);
     }
 
-    combinedSpriteNames.add(healthName);
-
+    _addSprite(healthName, size: _SpriteSize.base);
     if (quantityName != null) {
-      combinedSpriteNames.add(quantityName);
+      _addSprite(quantityName, size: _SpriteSize.base);
     }
-    combinedSpriteNames.add(experienceRankName);
-    combinedSpriteNames.add(boost1Name);
-    combinedSpriteNames.add(boost2Name);
-    combinedSpriteNames.add(boost3Name);
-
-    _addCombinedSprite(
-      combinedSpriteNames,
-      size: _SpriteSize.base,
-      root: root,
-    );
+    _addSprite(experienceRankName, size: _SpriteSize.base);
+    _addSprite(boost1Name, size: _SpriteSize.base);
+    _addSprite(boost2Name, size: _SpriteSize.base);
+    _addSprite(boost3Name, size: _SpriteSize.base);
   }
 
   @protected
@@ -106,7 +92,6 @@ abstract base class GameObjectComponentBase extends PositionComponent {
     String? spriteName, {
     _SpriteSize size = _SpriteSize.small,
     Decorator? decorator,
-    PositionComponent? root,
   }) {
     if (spriteName == null) {
       return;
@@ -118,65 +103,19 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       _SpriteSize.large => _largeSize,
     };
 
-    final spriteComponent = SpriteComponent(
+    final sprite = SpriteComponent(
       size: componentSize,
       sprite: _spritesAtlas.findSpriteByName(spriteName),
       anchor: Anchor.center,
     );
 
     if (decorator != null) {
-      spriteComponent.decorator.addLast(decorator);
+      sprite.decorator.addLast(decorator);
     } else {
-      spriteComponent.decorator.removeLast();
+      sprite.decorator.removeLast();
     }
 
-    (root ?? this).add(spriteComponent);
-  }
-
-  @protected
-  void _addCombinedSprite(
-    Iterable<String?> spriteNames, {
-    _SpriteSize size = _SpriteSize.small,
-    Decorator? decorator,
-    PositionComponent? root,
-  }) {
-    if (spriteNames.length == 1) {
-      _addSprite(spriteNames.first, size: size, decorator: decorator);
-    }
-
-    final validSpriteNames = spriteNames.where((n) => n != null).map((n) => n!).toList(growable: false);
-
-    if (validSpriteNames.isEmpty) {
-      return;
-    }
-
-    if (validSpriteNames.length == 1) {
-      _addSprite(validSpriteNames.first, size: size, decorator: decorator);
-    }
-
-    final componentSize = switch (size) {
-      _SpriteSize.small => _smallSize,
-      _SpriteSize.base => _baseSize,
-      _SpriteSize.large => _largeSize,
-    };
-
-    final additionalSprites =
-        validSpriteNames.skip(1).map((n) => _spritesAtlas.findSpriteByName(n)).toList(growable: false);
-
-    final spriteComponent = SpriteCombinedComponent(
-      size: componentSize,
-      sprite: _spritesAtlas.findSpriteByName(validSpriteNames.first),
-      additionalSprites: additionalSprites,
-      anchor: Anchor.center,
-    );
-
-    if (decorator != null) {
-      spriteComponent.decorator.addLast(decorator);
-    } else {
-      spriteComponent.decorator.removeLast();
-    }
-
-    (root ?? this).add(spriteComponent);
+    add(sprite);
   }
 
   /// See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale
