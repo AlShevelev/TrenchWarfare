@@ -4,8 +4,8 @@ class GameCellBorder extends PositionComponent {
   // top-left
   late final Offset _position;
 
-  late final Nation? _nation;
-  late final Iterable<GameFieldCell?> _allCellsAround;
+  late final Nation _nation;
+  late final List<bool> _sidesToDraw;
 
   static final _borderAreaSize = ComponentConstants.cellRealSize * 0.96;
   static final _borderWidth =
@@ -18,51 +18,58 @@ class GameCellBorder extends PositionComponent {
   static late final Map<Nation, List<Paint>> _paints = {};
 
   GameCellBorder(GameFieldCellRead cell, GameFieldRead gameField) {
-    _nation = cell.nation;
-    _allCellsAround = gameField.findAllCellsAround(cell);
+    _nation = cell.nation!;
+
+    _sidesToDraw = [true, true, true, true, true, true];
+    final allCellsAround = gameField.findAllCellsAround(cell);
+    for (var i = 0; i < allCellsAround.length; i++) {
+      final cellAround = allCellsAround.elementAt(i);
+      _sidesToDraw[i] = !(cellAround == null || cellAround.nation == cell.nation);
+    }
 
     _position = -Offset(_borderAreaSize.x / 2, _borderAreaSize.y / 2);
   }
 
-  @override
-  void render(Canvas canvas) {
-    final nation = _nation;
-
-    if (nation == null) {
-      return;
+  static bool needToDrawBorders(GameFieldCellRead cell, GameFieldRead gameField) {
+    if (cell.nation == null) {
+      return false;
     }
 
-    var index = -1;
-    for (var cellAround in _allCellsAround) {
-      index++;
-      if (cellAround == null || cellAround.nation == nation) {
+    final allCellsAround = gameField.findCellsAround(cell);
+    return allCellsAround.any((c) => c.nation != cell.nation);
+  }
+
+  @override
+  void render(Canvas canvas) {
+    for (var i = 0; i < _sidesToDraw.length; i++) {
+      if (!_sidesToDraw[i]) {
         continue;
       }
 
-      switch (index) {
+      switch (i) {
         // top-right
         case 0:
-          _drawSide(canvas, nation, start: _vertices[0] + _position, end: _vertices[1] + _position);
+          _drawSide(canvas, _nation, start: _vertices[0] + _position, end: _vertices[1] + _position);
 
         // right
         case 1:
-          _drawSide(canvas, nation, start: _vertices[1] + _position, end: _vertices[2] + _position);
+          _drawSide(canvas, _nation, start: _vertices[1] + _position, end: _vertices[2] + _position);
 
         // bottom-right
         case 2:
-          _drawSide(canvas, nation, start: _vertices[2] + _position, end: _vertices[3] + _position);
+          _drawSide(canvas, _nation, start: _vertices[2] + _position, end: _vertices[3] + _position);
 
         // bottom-left
         case 3:
-          _drawSide(canvas, nation, start: _vertices[3] + _position, end: _vertices[4] + _position);
+          _drawSide(canvas, _nation, start: _vertices[3] + _position, end: _vertices[4] + _position);
 
         // left
         case 4:
-          _drawSide(canvas, nation, start: _vertices[4] + _position, end: _vertices[5] + _position);
+          _drawSide(canvas, _nation, start: _vertices[4] + _position, end: _vertices[5] + _position);
 
         // top-left
         case 5:
-          _drawSide(canvas, nation, start: _vertices[5] + _position, end: _vertices[0] + _position);
+          _drawSide(canvas, _nation, start: _vertices[5] + _position, end: _vertices[0] + _position);
       }
     }
   }

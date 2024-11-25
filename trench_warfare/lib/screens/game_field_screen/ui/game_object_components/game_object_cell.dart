@@ -114,6 +114,10 @@ final class GameObjectCell extends GameObjectComponentBase {
   }
 
   _addBorder() {
+    if (!GameCellBorder.needToDrawBorders(_cell, _gameField)) {
+      return;
+    }
+
     // The low priority (-1000) moves this component to back
     final border = GameCellBorder(_cell, _gameField)..priority = -1000;
     add(border);
