@@ -36,7 +36,7 @@ class GameCellBorder extends PositionComponent {
     var index = -1;
     for (var nationAround in _allNationsAround) {
       index++;
-      if (/*nationAround == null*/ nationAround == nation) {
+      if (nationAround == null || nationAround == nation) {
         continue;
       }
 
