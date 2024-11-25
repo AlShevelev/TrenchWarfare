@@ -10,6 +10,7 @@ import 'package:trench_warfare/core_entities/entities/game_objects/game_object.d
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
 
@@ -44,6 +45,8 @@ class GameObjectsComposer {
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
+    Logger.debug('Root game objects total: ${_mapComponent.children.length}', tag: 'GAME_OBJ_TOTAL');
+
     switch (event) {
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         _updateCell(cell, updateBorderCells);
