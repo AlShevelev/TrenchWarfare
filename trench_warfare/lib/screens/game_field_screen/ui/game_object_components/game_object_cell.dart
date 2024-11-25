@@ -24,19 +24,22 @@ final class GameObjectCell extends GameObjectComponentBase {
 
   @override
   void _addChildObjects() {
-    _addTerrainModifierSprites();
-    _addProductionCenterSprites();
-    _addUnitsSprites();
-    _addNationBannerSprites();
+    final root = SnapshotComponent();
+    add(root);
+
+    _addTerrainModifierSprites(root: root);
+    _addProductionCenterSprites(root: root);
+    _addUnitsSprites(root: root);
+    _addNationBannerSprites(root: root);
 
     if (_isHuman) {
-      _addPathSprites();
+      _addPathSprites(root: root);
     }
 
-    _addBorder();
+    _addBorder(root: root);
   }
 
-  void _addTerrainModifierSprites() {
+  void _addTerrainModifierSprites({Component? root}) {
     final terrainModifier = _cell.terrainModifier;
 
     if (terrainModifier == null) {
@@ -45,10 +48,10 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final name = SpriteAtlasNames.getTerrainModifier(terrainModifier.type);
 
-    _addSprite(name);
+    _addSprite(name, root: root);
   }
 
-  void _addProductionCenterSprites() {
+  void _addProductionCenterSprites({Component? root}) {
     final productionCenter = _cell.productionCenter;
 
     if (productionCenter == null) {
@@ -59,28 +62,33 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final levelName = SpriteAtlasNames.getProductionCenterLevel(productionCenter);
 
-    _addSprite(bodyName);
-    _addSprite(levelName);
-    _addText(productionCenter.name);
+    _addSprite(bodyName, root: root);
+    _addSprite(levelName, root: root);
+    _addText(productionCenter.name, root: root);
   }
 
-  void _addUnitsSprites() {
+  void _addUnitsSprites({Component? root}) {
     if (_cell.units.isEmpty) {
       return;
     }
 
-    _addUnitSprites(unit: _cell.activeUnit!, nation: _cell.nation, unitsTotal: _cell.units.length);
+    _addUnitSprites(
+      unit: _cell.activeUnit!,
+      nation: _cell.nation,
+      unitsTotal: _cell.units.length,
+      root: root,
+    );
   }
 
-  void _addNationBannerSprites() {
+  void _addNationBannerSprites({Component? root}) {
     if (_cell.isEmpty) {
       return;
     }
 
-    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!));
+    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!), root: root);
   }
 
-  void _addPathSprites() {
+  void _addPathSprites({Component? root}) {
     final pathItem = _cell.pathItem;
 
     if (pathItem == null) {
@@ -89,10 +97,14 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final pathSprite = SpriteAtlasNames.getPath(pathItem.type);
 
-    _addSprite(pathSprite, decorator: pathItem.isActive ? null : _getDisabledDecorator());
+    _addSprite(
+      pathSprite,
+      decorator: pathItem.isActive ? null : _getDisabledDecorator(),
+      root: root,
+    );
   }
 
-  void _addText(String? text) {
+  void _addText(String? text, {Component? root}) {
     if (text == null || text.isEmpty) {
       return;
     }
@@ -118,16 +130,16 @@ final class GameObjectCell extends GameObjectComponentBase {
       ..position = Vector2(0, ComponentConstants.cellRealSize.y * 0.3)
       ..priority = 2;
 
-    add(textComponent);
+    (root ?? this).add(textComponent);
   }
 
-  _addBorder() {
+  _addBorder({Component? root}) {
     if (!GameCellBorder.needToDrawBorders(_cell, _gameField)) {
       return;
     }
 
     // The low priority (-1000) moves this component to back
     final border = GameCellBorder(_cell, _gameField)..priority = -1000;
-    add(border);
+    (root ?? this).add(border);
   }
 }
