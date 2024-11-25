@@ -139,7 +139,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         }
       case _Convert():
         {
-          updateEvents.add(UpdateCell(_cell));
+          updateEvents.add(UpdateCell(_cell, updateBorderCells: _gameField.findCellsAround(_cell)));
         }
     }
 

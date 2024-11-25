@@ -48,11 +48,11 @@ class GameObjectsComposer {
     Logger.debug('Total root objects: ${_mapComponent.children.length}', tag: 'G_OBJECTS');
 
     switch (event) {
-      case InitCell(cell: var cell, drawBorder: var drawBorder):
-        _initCell(cell, drawBorder);
+      case InitCell(cell: var cell):
+        _initCell(cell);
 
-      case UpdateCell(cell: var cell):
-        _updateCell(cell);
+      case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
+        _updateCell(cell, updateBorderCells);
 
       case UpdateCellInactivity(
           oldInactiveCells: var oldInactiveCells,
@@ -89,21 +89,19 @@ class GameObjectsComposer {
     }
   }
 
-  void _initCell(GameFieldCell cell, bool drawBorder) {
-    if (!cell.isEmpty || drawBorder) {
-      _addGameObject(
-        GameObjectCell(
-          _spritesAtlas,
-          cell,
-          _viewModelInput.isHumanPlayer,
-          _gameField,
-        ),
-        _getCellComponentKey(cell),
-      );
-    }
+  void _initCell(GameFieldCell cell) {
+    _addGameObject(
+      GameObjectCell(
+        _spritesAtlas,
+        cell,
+        _viewModelInput.isHumanPlayer,
+        _gameField,
+      ),
+      _getCellComponentKey(cell),
+    );
   }
 
-  void _updateCell(GameFieldCell cell) {
+  void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
     _removeGameObject(_getCellComponentKey(cell));
 
     if (!cell.isEmpty || cell.pathItem != null) {
@@ -115,6 +113,19 @@ class GameObjectsComposer {
           _gameField,
         ),
         _getCellComponentKey(cell),
+      );
+    }
+
+    for (var updateBorderCell in updateBorderCells) {
+      _removeGameObject(_getCellComponentKey(updateBorderCell));
+      _addGameObject(
+        GameObjectCell(
+          _spritesAtlas,
+          updateBorderCell,
+          _viewModelInput.isHumanPlayer,
+          _gameField,
+        ),
+        _getCellComponentKey(updateBorderCell),
       );
     }
   }

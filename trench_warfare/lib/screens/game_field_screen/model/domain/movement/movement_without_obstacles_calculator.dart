@@ -92,7 +92,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
           unit: unit,
           time: AnimationConstants.unitMovementTime,
         ));
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
         updateEvents.add(Pause(AnimationConstants.unitMovementPause));
       }
       priorCell = cell;

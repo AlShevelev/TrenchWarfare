@@ -16,15 +16,15 @@ sealed class UpdateGameEvent {}
 class InitCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
-  final bool drawBorder;
-
-  InitCell(this.cell, {required this.drawBorder});
+  InitCell(this.cell);
 }
 
 class UpdateCell implements UpdateGameEvent {
   final GameFieldCell cell;
 
-  UpdateCell(this.cell);
+  final Iterable<GameFieldCell> updateBorderCells;
+
+  UpdateCell(this.cell, {this.updateBorderCells = const []});
 }
 
 class UpdateCellInactivity implements UpdateGameEvent {

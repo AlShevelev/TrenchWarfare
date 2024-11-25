@@ -23,8 +23,8 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     Logger.info(
       'BATTLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
-          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
-          'attackingCell: $attackingCell; defendingCell: $defendingCell',
+      'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+      'attackingCell: $attackingCell; defendingCell: $defendingCell',
       tag: 'MOVEMENT',
     );
 
@@ -221,7 +221,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
           unit: attackingUnit,
           time: AnimationConstants.unitMovementTime,
         ));
-        updateEvents.add(UpdateCell(cell));
+        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
         updateEvents.add(Pause(AnimationConstants.unitMovementPause));
       }
       priorCell = cell;
@@ -285,10 +285,13 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     // Update the defending cell
     updateEvents.add(
-        UpdateCell(reachableCells.last));
+        UpdateCell(reachableCells.last, updateBorderCells: _gameField.findCellsAround(reachableCells.last)));
 
     if (newDefendingUnitCell != null) {
-      updateEvents.add(UpdateCell(newDefendingUnitCell));
+      updateEvents.add(UpdateCell(
+        newDefendingUnitCell,
+        updateBorderCells: _gameField.findCellsAround(newDefendingUnitCell),
+      ));
     }
 
     // Update cells in an inactive part of the path
