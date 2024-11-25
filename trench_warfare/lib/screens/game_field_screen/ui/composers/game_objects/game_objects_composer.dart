@@ -89,26 +89,30 @@ class GameObjectsComposer {
   void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
     _removeGameObject(_getCellComponentKey(cell));
 
-    _addGameObject(
-        GameObjectCell(
-          _spritesAtlas,
-          cell,
-          _viewModelInput.isHumanPlayer,
-          _gameField,
-        ),
-        _getCellComponentKey(cell));
+    if (GameObjectCell.needToDrawCell(cell, _gameField)) {
+      _addGameObject(
+          GameObjectCell(
+            _spritesAtlas,
+            cell,
+            _viewModelInput.isHumanPlayer,
+            _gameField,
+          ),
+          _getCellComponentKey(cell));
+    }
 
     for (var updateBorderCell in updateBorderCells) {
       _removeGameObject(_getCellComponentKey(updateBorderCell));
 
-      _addGameObject(
-          GameObjectCell(
-            _spritesAtlas,
-            updateBorderCell,
-            _viewModelInput.isHumanPlayer,
-            _gameField,
-          ),
-          _getCellComponentKey(updateBorderCell));
+      if (GameObjectCell.needToDrawCell(updateBorderCell, _gameField)) {
+        _addGameObject(
+            GameObjectCell(
+              _spritesAtlas,
+              updateBorderCell,
+              _viewModelInput.isHumanPlayer,
+              _gameField,
+            ),
+            _getCellComponentKey(updateBorderCell));
+      }
     }
   }
 

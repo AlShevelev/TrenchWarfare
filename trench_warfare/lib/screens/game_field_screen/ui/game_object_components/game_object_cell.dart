@@ -14,6 +14,14 @@ final class GameObjectCell extends GameObjectComponentBase {
         _gameField = gameField,
         super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
 
+  static bool needToDrawCell(GameFieldCell cell, GameFieldRead gameField) {
+    if (!cell.isEmpty || cell.pathItem != null) {
+      return true;
+    }
+
+    return GameCellBorder.needToDrawBorders(cell, gameField);
+  }
+
   @override
   void _addChildObjects() {
     _addTerrainModifierSprites();
