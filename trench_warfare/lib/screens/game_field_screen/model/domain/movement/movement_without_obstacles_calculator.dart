@@ -52,7 +52,9 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       );
 
       if (unit.movementPoints > 0) {
-        final state = _canMove(startCell: lastReachableCell) ? UnitState.enabled : UnitState.disabled;
+        final state = _canMove(startCell: lastReachableCell) && lastReachableCell == path.last
+            ? UnitState.enabled
+            : UnitState.disabled;
         unit.setState(state);
       } else {
         unit.setState(UnitState.disabled);
