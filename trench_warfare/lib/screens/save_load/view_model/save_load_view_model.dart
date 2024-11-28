@@ -8,7 +8,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
 
   int? get selectedSlotId => state is _Loading
       ? null
-      : ((state as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotId;
+      : ((state as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotNumber;
 
   _SaveLoadViewModel({required bool isSave}) : _isSave = isSave {
     _state.update(_Loading());
@@ -23,7 +23,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
       final slots = [
         _DataSlotDto(
           selected: false,
-          slotId: 0,
+          slotNumber: 0,
           isAutosave: true,
           title: 'Battle of Tannenberg',
           day: 42,
@@ -35,31 +35,31 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
         ),
         _DataSlotDto(
           selected: false,
-          slotId: 1,
+          slotNumber: 1,
           isAutosave: false,
           title: 'Russia-Japanese war',
           day: 142,
           saveDateTime: DateTime.now(),
           sideOfConflict: [
             _SideOfConflictDto(nation: Nation.japan, selected: true),
-            _SideOfConflictDto(nation: Nation.russia, selected: true),
+            _SideOfConflictDto(nation: Nation.russia, selected: false),
           ],
         ),
-        _EmptySlotDto(selected: false, slotId: 2),
-        _EmptySlotDto(selected: false, slotId: 3),
-        _EmptySlotDto(selected: false, slotId: 4),
-        _EmptySlotDto(selected: false, slotId: 5),
-        _EmptySlotDto(selected: false, slotId: 6),
-        _EmptySlotDto(selected: false, slotId: 7),
-        _EmptySlotDto(selected: false, slotId: 8),
-        _EmptySlotDto(selected: false, slotId: 9),
+        _EmptySlotDto(selected: false, slotNumber: 2),
+        _EmptySlotDto(selected: false, slotNumber: 3),
+        _EmptySlotDto(selected: false, slotNumber: 4),
+        _EmptySlotDto(selected: false, slotNumber: 5),
+        _EmptySlotDto(selected: false, slotNumber: 6),
+        _EmptySlotDto(selected: false, slotNumber: 7),
+        _EmptySlotDto(selected: false, slotNumber: 8),
+        _EmptySlotDto(selected: false, slotNumber: 9),
       ];
       _state.update(_DataIsLoaded(slots: slots));
     } else {
       final slots = [
         _DataSlotDto(
           selected: false,
-          slotId: 0,
+          slotNumber: 0,
           isAutosave: true,
           title: 'Battle of Tannenberg',
           day: 42,
@@ -71,7 +71,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
         ),
         _DataSlotDto(
           selected: false,
-          slotId: 2,
+          slotNumber: 2,
           isAutosave: false,
           title: 'Russia-Japanese war',
           day: 142,
@@ -90,7 +90,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   @override
   void onCardClick(int slotIndex) => _updateState((oldState) {
         for (var slot in oldState.slots) {
-          slot.setSelected(selected: slot.slotId == slotIndex);
+          slot.setSelected(selected: slot.slotNumber == slotIndex);
         }
       });
 

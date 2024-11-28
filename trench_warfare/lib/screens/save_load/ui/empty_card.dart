@@ -21,7 +21,7 @@ class _EmptyCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_slot.selected) {
-              _userActions.onCardClick(_slot.slotId);
+              _userActions.onCardClick(_slot.slotNumber);
             }
           },
           child: Cardboard(

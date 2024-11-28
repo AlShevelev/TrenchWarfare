@@ -1,6 +1,6 @@
 # trench_warfare
 
-A Trench Warfare turn-bases stratety game
+A Trench Warfare turn-bases strategy game
 
 ## UT
 

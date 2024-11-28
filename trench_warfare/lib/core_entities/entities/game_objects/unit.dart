@@ -150,7 +150,7 @@ class Unit extends GameObject {
 
   void setFatigue(double fatigue) => _fatigue = fatigue;
 
-  void setDefence(double defence) => _defence = defence;
+  void setDefence(double defence) => _defence = math.max(defence, 1);
 
   void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
 

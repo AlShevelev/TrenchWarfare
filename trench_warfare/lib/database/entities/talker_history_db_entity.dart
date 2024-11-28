@@ -3,7 +3,7 @@ import 'package:objectbox/objectbox.dart';
 @Entity()
 class TalkerDataDbEntity {
   @Id()
-  int id;
+  int dbId;
 
   String? message;
 
@@ -23,7 +23,7 @@ class TalkerDataDbEntity {
   String? stackTrace;
 
   TalkerDataDbEntity({
-    this.id = 0,
+    this.dbId = 0,
     this.message,
     this.logLevel,
     this.title,

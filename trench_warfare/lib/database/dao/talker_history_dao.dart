@@ -9,7 +9,7 @@ class TalkerHistoryDao {
   void create(TalkerDataDbEntity item) => _box.put(item, mode: PutMode.insert);
 
   List<TalkerDataDbEntity> readAll() {
-    final query = _box.query().order(TalkerDataDbEntity_.id).build();
+    final query = _box.query().order(TalkerDataDbEntity_.dbId).build();
     final result = query.find();
     query.close();
 
