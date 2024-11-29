@@ -1,20 +1,15 @@
+import 'package:trench_warfare/database/dao/dao_base.dart';
 import 'package:trench_warfare/database/entities/talker_history_db_entity.dart';
 import 'package:trench_warfare/database/objectbox.g.dart';
 
-class TalkerHistoryDao {
+class TalkerHistoryDao extends DaoBase {
   final Box<TalkerDataDbEntity> _box;
 
   TalkerHistoryDao({required Box<TalkerDataDbEntity> box}) : _box = box;
 
   void create(TalkerDataDbEntity item) => _box.put(item, mode: PutMode.insert);
 
-  List<TalkerDataDbEntity> readAll() {
-    final query = _box.query().order(TalkerDataDbEntity_.dbId).build();
-    final result = query.find();
-    query.close();
-
-    return result;
-  }
+  List<TalkerDataDbEntity> readAll() => read(_box.query().order(TalkerDataDbEntity_.dbId));
 
   void deleteAll() => _box.removeAll();
 }
