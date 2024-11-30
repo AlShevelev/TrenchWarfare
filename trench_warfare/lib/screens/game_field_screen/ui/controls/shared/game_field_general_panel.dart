@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
+import 'package:trench_warfare/core/entities/money/money_unit.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/money_panel.dart';
 
 class GameFieldGeneralPanel extends StatelessWidget {

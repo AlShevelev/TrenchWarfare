@@ -7,7 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';

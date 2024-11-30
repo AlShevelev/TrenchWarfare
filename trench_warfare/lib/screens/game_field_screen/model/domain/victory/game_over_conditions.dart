@@ -1,4 +1,4 @@
-import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 
 sealed class GameOverConditions {
   final Nation nation;

@@ -1,12 +1,12 @@
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_level.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_experience_rank.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/core/enums/production_center_level.dart';
+import 'package:trench_warfare/core/enums/production_center_type.dart';
+import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
+import 'package:trench_warfare/core/enums/unit_boost.dart';
+import 'package:trench_warfare/core/enums/unit_experience_rank.dart';
+import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
 /// Returns a sprite name from the sprite atlas

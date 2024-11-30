@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:trench_warfare/core_entities/entities/map_metadata/map_metadata_record.dart';
-import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
+import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
+import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:trench_warfare/shared/data/map_metadata_decoder.dart';

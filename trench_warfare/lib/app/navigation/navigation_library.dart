@@ -2,7 +2,7 @@ library navigation;
 
 import 'package:flutter/material.dart';
 import 'package:talker_flutter/talker_flutter.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/cover/cover_screen.dart';
 import 'package:trench_warfare/screens/game_field_screen/game_field_screen.dart';
 import 'package:trench_warfare/screens/new_game/new_game_screen.dart';

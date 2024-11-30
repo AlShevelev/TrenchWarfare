@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 
 abstract interface class EstimationData {

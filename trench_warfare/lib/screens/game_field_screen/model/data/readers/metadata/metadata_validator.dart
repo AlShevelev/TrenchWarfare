@@ -1,5 +1,5 @@
-import 'package:trench_warfare/core_entities/enums/aggressiveness.dart';
-import 'package:trench_warfare/core_entities/enums/relationship.dart';
+import 'package:trench_warfare/core/enums/aggressiveness.dart';
+import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 
 class MetadataValidator {

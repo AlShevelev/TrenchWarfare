@@ -1,8 +1,8 @@
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
-import 'package:trench_warfare/core_entities/enums/special_strike_type.dart';
-import 'package:trench_warfare/core_entities/enums/terrain_modifier_type.dart';
-import 'package:trench_warfare/core_entities/enums/unit_boost.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
+import 'package:trench_warfare/core/enums/production_center_type.dart';
+import 'package:trench_warfare/core/enums/special_strike_type.dart';
+import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
+import 'package:trench_warfare/core/enums/unit_boost.dart';
+import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 
 class CardPhotos {

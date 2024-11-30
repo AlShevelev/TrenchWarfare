@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
-import 'package:trench_warfare/core_entities/entities/hex_matrix/hex_matrix_item.dart';
+import 'package:trench_warfare/core/entities/hex_matrix/hex_matrix_item.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
 abstract class HexMatrix<T extends HexMatrixItem> {

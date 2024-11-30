@@ -1,5 +1,5 @@
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:trench_warfare/screens/new_game/data/maps_data_loader.dart';
 import 'package:trench_warfare/screens/new_game/view_model/map_selection_user_actions.dart';

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
-import 'package:trench_warfare/core_entities/entities/money/money_unit.dart';
+import 'package:trench_warfare/core/entities/money/money_unit.dart';
 
 class MoneyPanel extends StatelessWidget {
   final MoneyUnit money;

@@ -1,4 +1,4 @@
-import 'package:trench_warfare/core_entities/enums/nation.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 
 abstract interface class MapSelectionUserActions {

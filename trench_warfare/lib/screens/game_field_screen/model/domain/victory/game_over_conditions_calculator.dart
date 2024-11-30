@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/production_center_type.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/core/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 

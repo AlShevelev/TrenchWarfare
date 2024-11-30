@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/core/enums/cell_terrain.dart';
 
 class CellsReader {
   static List<GameFieldCell> read(Vector2 tileSize, TiledMap map) {

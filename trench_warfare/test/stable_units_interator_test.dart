@@ -2,11 +2,11 @@ import 'package:flame/components.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-import 'package:trench_warfare/core_entities/entities/game_objects/game_object.dart';
-import 'package:trench_warfare/core_entities/enums/cell_terrain.dart';
-import 'package:trench_warfare/core_entities/enums/nation.dart';
-import 'package:trench_warfare/core_entities/enums/unit_type.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/game_field/game_field_library.dart';
+import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/enums/cell_terrain.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/core/enums/unit_type.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/units_moving/units_moving_phase_library.dart';
 
 import 'assert.dart';
