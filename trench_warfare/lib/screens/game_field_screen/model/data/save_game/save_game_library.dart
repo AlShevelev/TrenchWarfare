@@ -12,6 +12,7 @@ import 'package:trench_warfare/database/entities/save_settings_storage_db_entity
 import 'package:trench_warfare/database/entities/save_slot_db_entity.dart';
 import 'package:trench_warfare/database/entities/save_troop_transfer_db_entity.dart';
 import 'package:trench_warfare/database/entities/save_unit_db_entity.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
 

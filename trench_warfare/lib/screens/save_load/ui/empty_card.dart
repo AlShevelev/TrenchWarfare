@@ -27,7 +27,15 @@ class _EmptyCard extends StatelessWidget {
           child: Cardboard(
               selected: _slot.selected,
               style: CardboardStyle.red,
-              child: const SizedBox(height: 50,)
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    localization.tr('save_load_empty_slot'),
+                    style: AppTypography.s20w600,
+                  ),
+                ),
+              ),
           ),
         ),
       ),

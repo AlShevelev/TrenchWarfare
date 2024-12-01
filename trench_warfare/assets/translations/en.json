@@ -120,5 +120,6 @@
   "new_game_neutrals": "Neutrals",
 
   "save_load_autosave": "Autosave",
-  "save_load_empty_load": "Nothing to upload"
+  "save_load_empty_load": "Nothing to load",
+  "save_load_empty_slot": "Empty slot"
 }

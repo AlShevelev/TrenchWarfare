@@ -82,7 +82,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(10, 1040213547054064254),
       name: 'SaveSlotDbEntity',
-      lastPropertyId: const obx_int.IdUid(6, 4622065262205933966),
+      lastPropertyId: const obx_int.IdUid(7, 5618103816987610024),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -94,11 +94,6 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(2, 6801832129691860140),
             name: 'slotNumber',
             type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 1929170078315949513),
-            name: 'mapId',
-            type: 9,
             flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(4, 7871652896794284433),
@@ -114,6 +109,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(6, 4622065262205933966),
             name: 'saveDateTime',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 5618103816987610024),
+            name: 'mapFileName',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -121,7 +121,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(11, 1437931050667927488),
       name: 'SaveNationDbEntity',
-      lastPropertyId: const obx_int.IdUid(6, 8219479900666684200),
+      lastPropertyId: const obx_int.IdUid(7, 3375040025276721492),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -152,6 +152,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(6, 8219479900666684200),
             name: 'defeated',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 3375040025276721492),
+            name: 'isSideOfConflict',
             type: 1,
             flags: 0)
       ],
@@ -583,7 +588,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
         101274425392636489,
         3641881253890080781,
         3391301510739558413,
-        2920873775308592272
+        2920873775308592272,
+        1929170078315949513
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -665,14 +671,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveSlotDbEntity object, fb.Builder fbb) {
-          final mapIdOffset = fbb.writeString(object.mapId);
-          fbb.startTable(7);
+          final mapFileNameOffset = fbb.writeString(object.mapFileName);
+          fbb.startTable(8);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotNumber);
-          fbb.addOffset(2, mapIdOffset);
           fbb.addBool(3, object.isAutosave);
           fbb.addInt64(4, object.day);
           fbb.addInt64(5, object.saveDateTime.millisecondsSinceEpoch);
+          fbb.addOffset(6, mapFileNameOffset);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -683,8 +689,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
           final slotNumberParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final mapIdParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
+          final mapFileNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 16, '');
           final isAutosaveParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
           final dayParam =
@@ -694,7 +701,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final object = SaveSlotDbEntity(
               dbId: dbIdParam,
               slotNumber: slotNumberParam,
-              mapId: mapIdParam,
+              mapFileName: mapFileNameParam,
               isAutosave: isAutosaveParam,
               day: dayParam,
               saveDateTime: saveDateTimeParam);
@@ -710,13 +717,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveNationDbEntity object, fb.Builder fbb) {
-          fbb.startTable(7);
+          fbb.startTable(8);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addBool(2, object.isHuman);
           fbb.addInt64(3, object.playingOrder);
           fbb.addInt64(4, object.nation);
           fbb.addBool(5, object.defeated);
+          fbb.addBool(6, object.isSideOfConflict);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -735,13 +743,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
           final defeatedParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
+          final isSideOfConflictParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
           final object = SaveNationDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
               isHuman: isHumanParam,
               playingOrder: playingOrderParam,
               nation: nationParam,
-              defeated: defeatedParam);
+              defeated: defeatedParam,
+              isSideOfConflict: isSideOfConflictParam);
 
           return object;
         }),
@@ -1090,21 +1101,21 @@ class SaveSlotDbEntity_ {
   static final slotNumber =
       obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[1]);
 
-  /// See [SaveSlotDbEntity.mapId].
-  static final mapId =
-      obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[2]);
-
   /// See [SaveSlotDbEntity.isAutosave].
   static final isAutosave =
-      obx.QueryBooleanProperty<SaveSlotDbEntity>(_entities[1].properties[3]);
+      obx.QueryBooleanProperty<SaveSlotDbEntity>(_entities[1].properties[2]);
 
   /// See [SaveSlotDbEntity.day].
   static final day =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[4]);
+      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[3]);
 
   /// See [SaveSlotDbEntity.saveDateTime].
   static final saveDateTime =
-      obx.QueryDateProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
+      obx.QueryDateProperty<SaveSlotDbEntity>(_entities[1].properties[4]);
+
+  /// See [SaveSlotDbEntity.mapFileName].
+  static final mapFileName =
+      obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
 }
 
 /// [SaveNationDbEntity] entity fields to define ObjectBox queries.
@@ -1132,6 +1143,10 @@ class SaveNationDbEntity_ {
   /// See [SaveNationDbEntity.defeated].
   static final defeated =
       obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[5]);
+
+  /// See [SaveNationDbEntity.isSideOfConflict].
+  static final isSideOfConflict =
+      obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[6]);
 }
 
 /// [SaveGameFieldCellDbEntity] entity fields to define ObjectBox queries.

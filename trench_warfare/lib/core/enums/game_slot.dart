@@ -12,5 +12,5 @@ enum GameSlot {
   slot8,
   slot9;
 
-  static void createFromIndex(int index) => GameSlot.values[index];
+  static GameSlot createFromIndex(int index) => GameSlot.values[index];
 }

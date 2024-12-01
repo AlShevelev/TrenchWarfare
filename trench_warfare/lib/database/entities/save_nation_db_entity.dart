@@ -18,6 +18,8 @@ class SaveNationDbEntity {
 
   bool defeated;
 
+  bool isSideOfConflict;
+
   SaveNationDbEntity({
     this.dbId = 0,
     required this.slotDbId,
@@ -25,5 +27,6 @@ class SaveNationDbEntity {
     required this.playingOrder,
     required this.nation,
     required this.defeated,
+    required this.isSideOfConflict,
   });
 }

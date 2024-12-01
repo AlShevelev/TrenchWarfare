@@ -26,7 +26,7 @@ class _Bookmarks extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 20, 8, 0),
           child: StrokedText(
-            text: tr(_isSave ? 'save' : 'load'),
+            text: localization.tr(_isSave ? 'save' : 'load'),
             style: AppTypography.s20w600,
             textColor: AppColors.white,
             strokeColor: AppColors.halfDark,

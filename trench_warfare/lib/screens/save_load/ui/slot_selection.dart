@@ -6,13 +6,13 @@ class SlotSelection extends StatefulWidget {
   final void Function() _onCancel;
 
   /// The argument is an id of the selected slot
-  final void Function(int) _onSlotSelected;
+  final void Function(GameSlot) _onSlotSelected;
 
   const SlotSelection({
     super.key,
     required bool isSave,
     required void Function() onCancel,
-    required void Function(int) onSlotSelected,
+    required void Function(GameSlot) onSlotSelected,
   })  : _isSave = isSave,
         _onCancel = onCancel,
         _onSlotSelected = onSlotSelected;
@@ -127,13 +127,13 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
 
   Widget _getList(_SaveLoadScreenState? state) {
     if (state == null || state is _Loading) {
-      return _getStateText(tr('loading'));
+      return _getStateText(localization.tr('loading'));
     }
 
     final slots = (state as _DataIsLoaded).slots;
 
     if (slots.isEmpty) {
-      return _getStateText(tr('save_load_empty_load'));
+      return _getStateText(localization.tr('save_load_empty_load'));
     }
 
     return ListView.builder(

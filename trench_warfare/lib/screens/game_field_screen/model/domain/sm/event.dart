@@ -110,3 +110,12 @@ class OnMenuLoadButtonClick implements Event {
   @override
   String toString() => 'ON_MENU_LOAD_BUTTON_CLICK';
 }
+
+class OnSaveSlotSelected implements Event {
+  final GameSlot slot;
+
+  OnSaveSlotSelected({required this.slot});
+
+  @override
+  String toString() => 'ON_SAVE_SLOT_SELECTED: {slot: $slot}';
+}

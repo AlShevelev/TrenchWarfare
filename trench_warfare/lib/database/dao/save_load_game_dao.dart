@@ -49,8 +49,9 @@ class SaveLoadGameDao extends DaoBase {
   List<SaveGameFieldCellDbEntity> readAllCells(int slotDbId) =>
       read(_cellBox.query(SaveGameFieldCellDbEntity_.slotDbId.equals(slotDbId)));
 
-  List<SaveNationDbEntity> readAllNations(int slotDbId) =>
-      read(_nationBox.query(SaveNationDbEntity_.slotDbId.equals(slotDbId)));
+  List<SaveNationDbEntity> readAllNations(int slotDbId) => read(_nationBox
+      .query(SaveNationDbEntity_.slotDbId.equals(slotDbId))
+      .order(SaveNationDbEntity_.playingOrder));
 
   List<SaveSettingsStorageDbEntity> readAllSettings(int slotDbId) =>
       read(_settingsStorageBox.query(SaveSettingsStorageDbEntity_.slotDbId.equals(slotDbId)));

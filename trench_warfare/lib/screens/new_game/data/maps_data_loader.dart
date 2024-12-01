@@ -6,8 +6,6 @@ import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:trench_warfare/shared/data/map_metadata_decoder.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
-import 'package:xml/xml.dart';
-import 'package:xml/xpath.dart';
 
 class MapsDataLoader {
   List<String>? _allAssets;
@@ -20,10 +18,9 @@ class MapsDataLoader {
     for (var i = 0; i < mapsFileNames.length; i++) {
       final mapFileName = mapsFileNames[i];
 
-      final rawMetadata = await _extractMetadata(mapFileName);
+      final metadataRecord = await MapMetadataDecoder.decodeFromFile(mapFileName);
 
-      if (rawMetadata != null) {
-        final metadataRecord = MapMetadataDecoder.decode(rawMetadata);
+      if (metadataRecord != null) {
         cards.add(
           _metadataToCard(
             metadataRecord,
@@ -52,16 +49,6 @@ class MapsDataLoader {
     }
 
     return _allAssets!;
-  }
-
-  Future<String?> _extractMetadata(String mapFileName) async {
-    final rawText = await rootBundle.loadString(mapFileName);
-
-    final document = XmlDocument.parse(rawText);
-    final nodes = document.xpath('/map/properties/property[@name = "metadata"]');
-    final rawMetadata = nodes.firstOrNull?.getAttribute('value');
-
-    return rawMetadata;
   }
 
   MapCardDto _metadataToCard(

@@ -3,14 +3,6 @@ part of save_game;
 abstract interface class GameSaverBuilder {
   void save();
 
-  void addGameField(GameFieldRead gameField);
-
-  void addSettings(GameFieldSettingsStorageRead settingsStorage);
-
-  void addDefeated(Iterable<Nation> defeated);
-
-  void addPlayingNations(Iterable<Nation> playingNations);
-
   void addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers);
 }
 
@@ -19,9 +11,11 @@ class GameSaver implements GameSaverBuilder {
 
   late final GameFieldRead _gameField;
 
+  late final MapMetadataRead _metadata;
+
   final int _slotNumber;
 
-  final String _mapId;
+  final String _mapFileName;
 
   final bool _isAutosave;
 
@@ -39,15 +33,25 @@ class GameSaver implements GameSaverBuilder {
 
   GameSaver._(
     GameSlot slot,
-    String mapId,
+    String mapFileName,
     bool isAutosave,
     int day,
     int humanPlayerIndex,
-  )   : _mapId = mapId,
+    GameFieldRead gameField,
+    MapMetadataRead metadata,
+    GameFieldSettingsStorageRead settingsStorage,
+    Iterable<Nation> defeated,
+    Iterable<Nation> playingNations,
+  )   : _slotNumber = slot.index,
+        _mapFileName = mapFileName,
         _isAutosave = isAutosave,
         _day = day,
         _humanPlayerIndex = humanPlayerIndex,
-        _slotNumber = slot.index;
+        _gameField = gameField,
+        _metadata = metadata,
+        _settingsStorage = settingsStorage,
+        _defeated = defeated,
+        _playingNations = playingNations;
 
   static GameSaverBuilder start({
     required GameSlot slot,
@@ -55,8 +59,24 @@ class GameSaver implements GameSaverBuilder {
     required bool isAutosave,
     required int day,
     required int humanPlayerIndex,
+    required GameFieldRead gameField,
+    required MapMetadataRead metadata,
+    required GameFieldSettingsStorageRead settingsStorage,
+    required Iterable<Nation> defeated,
+    required Iterable<Nation> playingNations,
   }) {
-    return GameSaver._(slot, mapId, isAutosave, day, humanPlayerIndex);
+    return GameSaver._(
+      slot,
+      mapId,
+      isAutosave,
+      day,
+      humanPlayerIndex,
+      gameField,
+      metadata,
+      settingsStorage,
+      defeated,
+      playingNations,
+    );
   }
 
   @override
@@ -67,7 +87,7 @@ class GameSaver implements GameSaverBuilder {
     // Creating a new slot
     final slotDbRecord = SaveSlotDbEntity(
       slotNumber: _slotNumber,
-      mapId: _mapId,
+      mapFileName: _mapFileName,
       isAutosave: _isAutosave,
       day: _day,
       saveDateTime: DateTime.now(),
@@ -82,6 +102,7 @@ class GameSaver implements GameSaverBuilder {
     // A link between a unit Id (String) and db's id of a transfer
     final Map<String, int> unitsInTransfers = {};
 
+    final allAggressive = _metadata.getAllAggressive();
     for (var i = 0; i < _playingNations.length; i++) {
       final nation = _playingNations.elementAt(i);
       final dbNation = SaveNationDbEntity(
@@ -90,6 +111,7 @@ class GameSaver implements GameSaverBuilder {
         playingOrder: i,
         nation: nation.index,
         defeated: _defeated.contains(nation),
+        isSideOfConflict: allAggressive.contains(nation),
       );
       _dao.createNation(dbNation);
 
@@ -155,18 +177,6 @@ class GameSaver implements GameSaverBuilder {
       }
     }
   }
-
-  @override
-  void addGameField(GameFieldRead gameField) => _gameField = gameField;
-
-  @override
-  void addSettings(GameFieldSettingsStorageRead settingsStorage) => _settingsStorage = settingsStorage;
-
-  @override
-  void addDefeated(Iterable<Nation> defeated) => _defeated = defeated;
-
-  @override
-  void addPlayingNations(Iterable<Nation> playingNations) => _playingNations = playingNations;
 
   @override
   void addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers) =>

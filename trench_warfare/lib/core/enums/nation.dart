@@ -21,5 +21,7 @@ enum Nation {
   turkey,
   usa,
   usNorth,
-  usSouth,
+  usSouth;
+
+  static Nation createFromIndex(int index) => Nation.values[index];
 }

@@ -1,13 +1,26 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:xml/xml.dart';
+import 'package:xml/xpath.dart';
 
 class MapMetadataDecoder {
+  static Future<MapMetadataRecord?> decodeFromFile(String mapFileName) async {
+    final rawMetadata = await _extractMetadata(mapFileName);
+
+    if (rawMetadata == null) {
+      return null;
+    }
+
+    return decode(rawMetadata);
+  }
+
   static MapMetadataRecord decode(String rawMetadataString) {
     final decodedMetadata = jsonDecode(rawMetadataString) as Map<String, dynamic>;
 
@@ -59,5 +72,15 @@ class MapMetadataDecoder {
               relationship: relationshipNames[e['relationship']]!,
             ))
         .toList();
+  }
+
+  static Future<String?> _extractMetadata(String mapFileName) async {
+    final rawText = await rootBundle.loadString(mapFileName);
+
+    final document = XmlDocument.parse(rawText);
+    final nodes = document.xpath('/map/properties/property[@name = "metadata"]');
+    final rawMetadata = nodes.firstOrNull?.getAttribute('value');
+
+    return rawMetadata;
   }
 }

@@ -4,7 +4,7 @@ sealed class _SlotDto {
   bool _selected;
   bool get selected => _selected;
 
-  final int slotNumber;
+  final GameSlot slotNumber;
 
   _SlotDto({required bool selected, required this.slotNumber}) : _selected = selected;
 
@@ -14,7 +14,7 @@ sealed class _SlotDto {
 class _DataSlotDto extends _SlotDto {
   final bool isAutosave;
 
-  final String title;
+  final Map<AppLocale, String> title;
 
   final int day;
 

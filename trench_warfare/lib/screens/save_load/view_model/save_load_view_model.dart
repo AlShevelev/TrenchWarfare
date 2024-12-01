@@ -6,91 +6,45 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   final SingleStream<_SaveLoadScreenState> _state = SingleStream<_SaveLoadScreenState>();
   Stream<_SaveLoadScreenState> get state => _state.output;
 
-  int? get selectedSlotId => state is _Loading
+  GameSlot? get selectedSlotId => state is _Loading
       ? null
       : ((state as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotNumber;
+
+  late final _dao = Database.saveLoadGameDao;
 
   _SaveLoadViewModel({required bool isSave}) : _isSave = isSave {
     _state.update(_Loading());
   }
 
   Future<void> init() async {
-    // Fake implementation vvvvvvvvvvvvv
-    await Future.delayed(const Duration(seconds: 1));
+    final allDbSlots = _dao.readAllSlots();
+
+    final slots = <_SlotDto>[];
 
     if (_isSave) {
-      // Add empty slots here (up to 10 slots total)
-      final slots = [
-        _DataSlotDto(
-          selected: false,
-          slotNumber: 0,
-          isAutosave: true,
-          title: 'Battle of Tannenberg',
-          day: 42,
-          saveDateTime: DateTime.now(),
-          sideOfConflict: [
-            _SideOfConflictDto(nation: Nation.russia, selected: false),
-            _SideOfConflictDto(nation: Nation.germany, selected: true),
-          ],
-        ),
-        _DataSlotDto(
-          selected: false,
-          slotNumber: 1,
-          isAutosave: false,
-          title: 'Russia-Japanese war',
-          day: 142,
-          saveDateTime: DateTime.now(),
-          sideOfConflict: [
-            _SideOfConflictDto(nation: Nation.japan, selected: true),
-            _SideOfConflictDto(nation: Nation.russia, selected: false),
-          ],
-        ),
-        _EmptySlotDto(selected: false, slotNumber: 2),
-        _EmptySlotDto(selected: false, slotNumber: 3),
-        _EmptySlotDto(selected: false, slotNumber: 4),
-        _EmptySlotDto(selected: false, slotNumber: 5),
-        _EmptySlotDto(selected: false, slotNumber: 6),
-        _EmptySlotDto(selected: false, slotNumber: 7),
-        _EmptySlotDto(selected: false, slotNumber: 8),
-        _EmptySlotDto(selected: false, slotNumber: 9),
-      ];
-      _state.update(_DataIsLoaded(slots: slots));
+      for (var i = GameSlot.slot0.index; i <= GameSlot.slot9.index; i++) {
+        final dbSlotCandidate = allDbSlots.firstWhereOrNull((s) => s.slotNumber == i);
+
+        // Some slots may be skipped
+        if (dbSlotCandidate == null) {
+          slots.add(_EmptySlotDto(selected: false, slotNumber: GameSlot.createFromIndex(i)));
+        } else {
+          slots.add(await _mapSlotDbToDto(dbSlotCandidate));
+        }
+      }
     } else {
-      final slots = [
-        _DataSlotDto(
-          selected: false,
-          slotNumber: 0,
-          isAutosave: true,
-          title: 'Battle of Tannenberg',
-          day: 42,
-          saveDateTime: DateTime.now(),
-          sideOfConflict: [
-            _SideOfConflictDto(nation: Nation.russia, selected: false),
-            _SideOfConflictDto(nation: Nation.germany, selected: true),
-          ],
-        ),
-        _DataSlotDto(
-          selected: false,
-          slotNumber: 2,
-          isAutosave: false,
-          title: 'Russia-Japanese war',
-          day: 142,
-          saveDateTime: DateTime.now(),
-          sideOfConflict: [
-            _SideOfConflictDto(nation: Nation.japan, selected: true),
-            _SideOfConflictDto(nation: Nation.russia, selected: false),
-          ],
-        ),
-      ];
-      _state.update(_DataIsLoaded(slots: slots));
+      for (final dbSlot in allDbSlots) {
+        slots.add(await _mapSlotDbToDto(dbSlot));
+      }
     }
-    // Fake implementation ^^^^^^^^^^^^
+
+    _state.update(_DataIsLoaded(slots: slots));
   }
 
   @override
-  void onCardClick(int slotIndex) => _updateState((oldState) {
+  void onCardClick(GameSlot cardSlot) => _updateState((oldState) {
         for (var slot in oldState.slots) {
-          slot.setSelected(selected: slot.slotNumber == slotIndex);
+          slot.setSelected(selected: slot.slotNumber == cardSlot);
         }
       });
 
@@ -108,5 +62,24 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
       final newState = state.copy(state.slots);
       _state.update(newState);
     }
+  }
+
+  Future<_DataSlotDto> _mapSlotDbToDto(SaveSlotDbEntity slotDbEntity) async {
+    final nations = _dao.readAllNations(slotDbEntity.dbId);
+
+    final metadataRecord = await MapMetadataDecoder.decodeFromFile(slotDbEntity.mapFileName);
+
+    return _DataSlotDto(
+      selected: false,
+      slotNumber: GameSlot.createFromIndex(slotDbEntity.slotNumber),
+      isAutosave: slotDbEntity.isAutosave,
+      title: metadataRecord!.title,
+      day: slotDbEntity.day,
+      saveDateTime: slotDbEntity.saveDateTime,
+      sideOfConflict: nations.map((n) => _SideOfConflictDto(
+            nation: Nation.createFromIndex(n.nation),
+            selected: n.isHuman,
+          )),
+    );
   }
 }

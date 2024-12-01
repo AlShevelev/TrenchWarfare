@@ -14,6 +14,8 @@ class _DataCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -34,12 +36,12 @@ class _DataCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                     child: Text(
-                      _slot.title,
+                      _slot.title[locale] ?? '',
                       style: AppTypography.s20w600,
                     ),
                   ),
                   Text(
-                    '${tr('day')} ${_slot.day}',
+                    '${localization.tr('day')} ${_slot.day}',
                     style: AppTypography.s16w600,
                   ),
                   Padding(
@@ -52,7 +54,7 @@ class _DataCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                       child: Text(
-                        tr('save_load_autosave'),
+                        localization.tr('save_load_autosave'),
                         style: AppTypography.s20w600.copyWith(color: AppColors.darkRed),
                         textAlign: TextAlign.center,
                       ),
@@ -62,14 +64,14 @@ class _DataCard extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            DateFormat.Hm().format(_slot.saveDateTime),
+                            localization.DateFormat.Hm().format(_slot.saveDateTime),
                             style: AppTypography.s16w600..copyWith(color: AppColors.darkRed),
                           ),
                           const Spacer(
                             flex: 1,
                           ),
                           Text(
-                            DateFormat.yMMMMd().format(_slot.saveDateTime),
+                            localization.DateFormat.yMMMMd().format(_slot.saveDateTime),
                             style: AppTypography.s16w600..copyWith(color: AppColors.darkRed),
                           ),
                         ],
