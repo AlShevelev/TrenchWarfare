@@ -11,6 +11,7 @@ abstract class DaoBase {
     return result;
   }
 
+  @protected
   T? readFirst<T>(QueryBuilder<T> queryBuilder) {
     final query = queryBuilder.build();
     final result = query.findFirst();
@@ -19,11 +20,13 @@ abstract class DaoBase {
     return result;
   }
 
+  @protected
   void remove<T>(QueryBuilder<T> queryBuilder) {
     final query = queryBuilder.build();
     query.remove();
     query.close();
   }
 
+  @protected
   void put<T>(Box<T> box, T entity) => box.putAsync(entity, mode: PutMode.insert);
 }

@@ -288,7 +288,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(14, 8117750202096937206),
       name: 'SaveTroopTransferDbEntity',
-      lastPropertyId: const obx_int.IdUid(11, 2920873775308592272),
+      lastPropertyId: const obx_int.IdUid(18, 209249109067945736),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -307,43 +307,43 @@ final _entities = <obx_int.ModelEntity>[
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 344405784960220718),
-            name: 'targetCellDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(5, 7858854561201788816),
             name: 'troopTransferId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 4107078212765266895),
-            name: 'stateName',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 1808350503915593098),
-            name: 'selectedCarrierDbId',
+            id: const obx_int.IdUid(12, 2346859158054322192),
+            name: 'targetCellId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 101274425392636489),
-            name: 'landingPointCarrierCellDbId',
+            id: const obx_int.IdUid(13, 7284614715421360826),
+            name: 'stateAlias',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 4290502473834067691),
+            name: 'selectedCarrierId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 7284941263785447254),
+            name: 'landingPointCarrierCellId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 3641881253890080781),
-            name: 'landingPointUnitsCellDbId',
+            id: const obx_int.IdUid(16, 4960946921766921957),
+            name: 'landingPointUnitsCellId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 3391301510739558413),
-            name: 'gatheringPointCarrierCellDbId',
+            id: const obx_int.IdUid(17, 314221348976168079),
+            name: 'gatheringPointCarrierCellId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 2920873775308592272),
-            name: 'gatheringPointUnitsCellDbId',
+            id: const obx_int.IdUid(18, 209249109067945736),
+            name: 'gatheringPointUnitsCellId',
             type: 6,
             flags: 0)
       ],
@@ -576,7 +576,14 @@ obx_int.ModelDefinition getObjectBoxModel() {
         2641836734400550081,
         5599467821880043061,
         320055416084879567,
-        6970300456076311016
+        6970300456076311016,
+        344405784960220718,
+        4107078212765266895,
+        1808350503915593098,
+        101274425392636489,
+        3641881253890080781,
+        3391301510739558413,
+        2920873775308592272
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -878,19 +885,23 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveTroopTransferDbEntity object, fb.Builder fbb) {
-          final stateNameOffset = fbb.writeString(object.stateName);
-          fbb.startTable(12);
+          final troopTransferIdOffset = fbb.writeString(object.troopTransferId);
+          final stateAliasOffset = fbb.writeString(object.stateAlias);
+          final selectedCarrierIdOffset = object.selectedCarrierId == null
+              ? null
+              : fbb.writeString(object.selectedCarrierId!);
+          fbb.startTable(19);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addInt64(2, object.nationDbId);
-          fbb.addInt64(3, object.targetCellDbId);
-          fbb.addInt64(4, object.troopTransferId);
-          fbb.addOffset(5, stateNameOffset);
-          fbb.addInt64(6, object.selectedCarrierDbId);
-          fbb.addInt64(7, object.landingPointCarrierCellDbId);
-          fbb.addInt64(8, object.landingPointUnitsCellDbId);
-          fbb.addInt64(9, object.gatheringPointCarrierCellDbId);
-          fbb.addInt64(10, object.gatheringPointUnitsCellDbId);
+          fbb.addOffset(4, troopTransferIdOffset);
+          fbb.addInt64(11, object.targetCellId);
+          fbb.addOffset(12, stateAliasOffset);
+          fbb.addOffset(13, selectedCarrierIdOffset);
+          fbb.addInt64(14, object.landingPointCarrierCellId);
+          fbb.addInt64(15, object.landingPointUnitsCellId);
+          fbb.addInt64(16, object.gatheringPointCarrierCellId);
+          fbb.addInt64(17, object.gatheringPointUnitsCellId);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -903,34 +914,36 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final nationDbIdParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          final targetCellDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final targetCellIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0);
           final troopTransferIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
-          final stateNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final selectedCarrierDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
-          final landingPointCarrierCellDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
-          final landingPointUnitsCellDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 20);
-          final gatheringPointCarrierCellDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
-          final gatheringPointUnitsCellDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 24);
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final stateAliasParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 28, '');
+          final selectedCarrierIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 30);
+          final landingPointCarrierCellIdParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 32);
+          final landingPointUnitsCellIdParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 34);
+          final gatheringPointCarrierCellIdParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 36);
+          final gatheringPointUnitsCellIdParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 38);
           final object = SaveTroopTransferDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
               nationDbId: nationDbIdParam,
-              targetCellDbId: targetCellDbIdParam,
+              targetCellId: targetCellIdParam,
               troopTransferId: troopTransferIdParam,
-              stateName: stateNameParam,
-              selectedCarrierDbId: selectedCarrierDbIdParam,
-              landingPointCarrierCellDbId: landingPointCarrierCellDbIdParam,
-              landingPointUnitsCellDbId: landingPointUnitsCellDbIdParam,
-              gatheringPointCarrierCellDbId: gatheringPointCarrierCellDbIdParam,
-              gatheringPointUnitsCellDbId: gatheringPointUnitsCellDbIdParam);
+              stateAlias: stateAliasParam,
+              selectedCarrierId: selectedCarrierIdParam,
+              landingPointCarrierCellId: landingPointCarrierCellIdParam,
+              landingPointUnitsCellId: landingPointUnitsCellIdParam,
+              gatheringPointCarrierCellId: gatheringPointCarrierCellIdParam,
+              gatheringPointUnitsCellId: gatheringPointUnitsCellIdParam);
 
           return object;
         }),
@@ -1237,42 +1250,42 @@ class SaveTroopTransferDbEntity_ {
   static final nationDbId = obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
       _entities[5].properties[2]);
 
-  /// See [SaveTroopTransferDbEntity.targetCellDbId].
-  static final targetCellDbId =
-      obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[3]);
-
   /// See [SaveTroopTransferDbEntity.troopTransferId].
   static final troopTransferId =
+      obx.QueryStringProperty<SaveTroopTransferDbEntity>(
+          _entities[5].properties[3]);
+
+  /// See [SaveTroopTransferDbEntity.targetCellId].
+  static final targetCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[4]);
 
-  /// See [SaveTroopTransferDbEntity.stateName].
-  static final stateName = obx.QueryStringProperty<SaveTroopTransferDbEntity>(
+  /// See [SaveTroopTransferDbEntity.stateAlias].
+  static final stateAlias = obx.QueryStringProperty<SaveTroopTransferDbEntity>(
       _entities[5].properties[5]);
 
-  /// See [SaveTroopTransferDbEntity.selectedCarrierDbId].
-  static final selectedCarrierDbId =
-      obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
+  /// See [SaveTroopTransferDbEntity.selectedCarrierId].
+  static final selectedCarrierId =
+      obx.QueryStringProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[6]);
 
-  /// See [SaveTroopTransferDbEntity.landingPointCarrierCellDbId].
-  static final landingPointCarrierCellDbId =
+  /// See [SaveTroopTransferDbEntity.landingPointCarrierCellId].
+  static final landingPointCarrierCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[7]);
 
-  /// See [SaveTroopTransferDbEntity.landingPointUnitsCellDbId].
-  static final landingPointUnitsCellDbId =
+  /// See [SaveTroopTransferDbEntity.landingPointUnitsCellId].
+  static final landingPointUnitsCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[8]);
 
-  /// See [SaveTroopTransferDbEntity.gatheringPointCarrierCellDbId].
-  static final gatheringPointCarrierCellDbId =
+  /// See [SaveTroopTransferDbEntity.gatheringPointCarrierCellId].
+  static final gatheringPointCarrierCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[9]);
 
-  /// See [SaveTroopTransferDbEntity.gatheringPointUnitsCellDbId].
-  static final gatheringPointUnitsCellDbId =
+  /// See [SaveTroopTransferDbEntity.gatheringPointUnitsCellId].
+  static final gatheringPointUnitsCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
           _entities[5].properties[10]);
 }

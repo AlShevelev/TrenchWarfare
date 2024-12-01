@@ -31,7 +31,7 @@ class SaveGameFieldCellDbEntity {
   /// An item's index in [ProductionCenterType] enum
   int? productionCenterType;
 
-  /// [1-5]
+  /// An item's index in [ProductionCenterLevel] enum
   int? productionCenterLevel;
 
   /// An item's index in [TerrainModifierType] enum

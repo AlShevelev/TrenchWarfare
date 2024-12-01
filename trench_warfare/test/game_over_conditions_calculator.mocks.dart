@@ -5,13 +5,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flame/extensions.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart'
+    as _i2;
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart'
     as _i4;
 import 'package:trench_warfare/core/enums/nation.dart' as _i5;
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart'
     as _i6;
-import 'package:trench_warfare/core/entities/game_field/game_field_library.dart'
-    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -14,8 +14,16 @@ abstract interface class TroopTransferRead {
   List<Unit> get transportingUnits;
 }
 
-class _TroopTransfer implements TroopTransferRead {
+abstract interface class TroopTransferReadForSaving implements TroopTransferRead {
+  GameFieldCellRead get targetCell;
+
+  String get stateAlias;
+}
+
+class _TroopTransfer implements TroopTransferReadForSaving {
   final GameFieldCellRead _targetCell;
+  @override
+  GameFieldCellRead get targetCell => _targetCell;
 
   final CarrierTroopTransfersStorageRead _transfersStorage;
 
@@ -28,6 +36,8 @@ class _TroopTransfer implements TroopTransferRead {
   final MapMetadataRead _metadata;
 
   _TroopTransferState _currentState = _StateInit();
+  @override
+  String get stateAlias => _currentState.stateAlias;
 
   final String _id;
   @override

@@ -11,41 +11,40 @@ class SaveTroopTransferDbEntity {
   // A link to [SaveNationDbEntity]
   int nationDbId;
 
-  // A link to [SaveGameFieldCellDbEntity]
-  int targetCellDbId;
+  // A link to [SaveGameFieldCellDbEntity.cellId]
+  int targetCellId;
 
-  int troopTransferId;
+  String troopTransferId;
 
-  /// Is mapped to [_TroopTransferState]: "Init"; "Gathering"; "LoadingToCarrier"; "Transporting";
-  /// "Landing"; "MoveUnitsAfterLanding"; "Completed"
-  String stateName;
+  /// Is mapped to [_TroopTransferState.stateAlias]
+  String stateAlias;
 
-  /// A link to [SaveUnitDbEntity]
-  int? selectedCarrierDbId;
+  /// A link to [SaveUnitDbEntity.unitId]
+  String? selectedCarrierId;
 
-  // A link to [SaveGameFieldCellDbEntity]
-  int? landingPointCarrierCellDbId;
+  // A link to [SaveGameFieldCellDbEntity.cellId]
+  int? landingPointCarrierCellId;
 
-  // A link to [SaveGameFieldCellDbEntity]
-  int? landingPointUnitsCellDbId;
+  // A link to [SaveGameFieldCellDbEntity.cellId]
+  int? landingPointUnitsCellId;
 
-  // A link to [SaveGameFieldCellDbEntity]
-  int? gatheringPointCarrierCellDbId;
+  // A link to [SaveGameFieldCellDbEntity.cellId]
+  int? gatheringPointCarrierCellId;
 
-  // A link to [SaveGameFieldCellDbEntity]
-  int? gatheringPointUnitsCellDbId;
+  // A link to [SaveGameFieldCellDbEntity.cellId]
+  int? gatheringPointUnitsCellId;
 
   SaveTroopTransferDbEntity({
     this.dbId = 0,
     required this.slotDbId,
     required this.nationDbId,
-    required this.targetCellDbId,
+    required this.targetCellId,
     required this.troopTransferId,
-    required this.stateName,
-    this.selectedCarrierDbId,
-    this.landingPointCarrierCellDbId,
-    this.landingPointUnitsCellDbId,
-    this.gatheringPointCarrierCellDbId,
-    this.gatheringPointUnitsCellDbId,
+    required this.stateAlias,
+    this.selectedCarrierId,
+    this.landingPointCarrierCellId,
+    this.landingPointUnitsCellId,
+    this.gatheringPointCarrierCellId,
+    this.gatheringPointUnitsCellId,
   });
 }

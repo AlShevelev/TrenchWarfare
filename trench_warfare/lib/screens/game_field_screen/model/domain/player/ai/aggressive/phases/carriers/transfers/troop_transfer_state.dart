@@ -3,11 +3,16 @@ part of carriers_phase_library;
 sealed class _TroopTransferState {
   @override
   String toString();
+
+  String get stateAlias;
 }
 
 class _StateInit extends _TroopTransferState {
   @override
-  String toString() => 'INIT';
+  String toString() => stateAlias;
+
+  @override
+  String get stateAlias => 'INIT';
 }
 
 class _StateGathering extends _TroopTransferState {
@@ -45,9 +50,12 @@ class _StateGathering extends _TroopTransferState {
       );
 
   @override
-  String toString() => 'GATHERING: {carrier: $selectedCarrier; landing: $landingPoint; '
+  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint; '
       'gatheringPoint: $gatheringPoint; gatheringUnits: ${gatheringUnits.length}; '
       'targetCell: $transferTargetCell}';
+
+  @override
+  String get stateAlias => 'GATHERING';
 }
 
 class _StateLoadingToCarrier extends _TroopTransferState {
@@ -75,8 +83,11 @@ class _StateLoadingToCarrier extends _TroopTransferState {
       );
 
   @override
-  String toString() => 'LOADING_TO_CARRIER: {carrier: $selectedCarrier; landing: $landingPoint; '
+  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint; '
       'unitsToLoad: ${unitsToLoad.length};}';
+
+  @override
+  String get stateAlias => 'LOADING_TO_CARRIER';
 }
 
 class _StateTransporting extends _TroopTransferState {
@@ -90,7 +101,10 @@ class _StateTransporting extends _TroopTransferState {
   });
 
   @override
-  String toString() => 'TRANSPORTING: {carrier: $selectedCarrier; landing: $landingPoint;}';
+  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
+
+  @override
+  String get stateAlias => 'TRANSPORTING';
 }
 
 class _StateLanding extends _TroopTransferState {
@@ -104,7 +118,10 @@ class _StateLanding extends _TroopTransferState {
   });
 
   @override
-  String toString() => 'LANDING: {carrier: $selectedCarrier; landing: $landingPoint;}';
+  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
+
+  @override
+  String get stateAlias => 'LANDING';
 }
 
 class _StateMoveUnitsAfterLanding extends _TroopTransferState {
@@ -115,7 +132,16 @@ class _StateMoveUnitsAfterLanding extends _TroopTransferState {
   _StateMoveUnitsAfterLanding({required this.selectedCarrier, required this.landedUnits});
 
   @override
-  String toString() => 'MOVE_UNITS_AFTER: {carrier: $selectedCarrier; units: ${landedUnits.length};}';
+  String toString() => '$stateAlias: {carrier: $selectedCarrier; units: ${landedUnits.length};}';
+
+  @override
+  String get stateAlias => 'MOVE_UNITS_AFTER_LANDING';
 }
 
-class _StateCompleted extends _TroopTransferState {}
+class _StateCompleted extends _TroopTransferState {
+  @override
+  String toString() => stateAlias;
+
+  @override
+  String get stateAlias => 'COMPLETED';
+}

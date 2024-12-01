@@ -265,7 +265,7 @@
     },
     {
       "id": "14:8117750202096937206",
-      "lastPropertyId": "11:2920873775308592272",
+      "lastPropertyId": "18:209249109067945736",
       "name": "SaveTroopTransferDbEntity",
       "properties": [
         {
@@ -285,43 +285,43 @@
           "type": 6
         },
         {
-          "id": "4:344405784960220718",
-          "name": "targetCellDbId",
-          "type": 6
-        },
-        {
           "id": "5:7858854561201788816",
           "name": "troopTransferId",
-          "type": 6
-        },
-        {
-          "id": "6:4107078212765266895",
-          "name": "stateName",
           "type": 9
         },
         {
-          "id": "7:1808350503915593098",
-          "name": "selectedCarrierDbId",
+          "id": "12:2346859158054322192",
+          "name": "targetCellId",
           "type": 6
         },
         {
-          "id": "8:101274425392636489",
-          "name": "landingPointCarrierCellDbId",
+          "id": "13:7284614715421360826",
+          "name": "stateAlias",
+          "type": 9
+        },
+        {
+          "id": "14:4290502473834067691",
+          "name": "selectedCarrierId",
+          "type": 9
+        },
+        {
+          "id": "15:7284941263785447254",
+          "name": "landingPointCarrierCellId",
           "type": 6
         },
         {
-          "id": "9:3641881253890080781",
-          "name": "landingPointUnitsCellDbId",
+          "id": "16:4960946921766921957",
+          "name": "landingPointUnitsCellId",
           "type": 6
         },
         {
-          "id": "10:3391301510739558413",
-          "name": "gatheringPointCarrierCellDbId",
+          "id": "17:314221348976168079",
+          "name": "gatheringPointCarrierCellId",
           "type": 6
         },
         {
-          "id": "11:2920873775308592272",
-          "name": "gatheringPointUnitsCellDbId",
+          "id": "18:209249109067945736",
+          "name": "gatheringPointUnitsCellId",
           "type": 6
         }
       ],
@@ -520,7 +520,14 @@
     2641836734400550081,
     5599467821880043061,
     320055416084879567,
-    6970300456076311016
+    6970300456076311016,
+    344405784960220718,
+    4107078212765266895,
+    1808350503915593098,
+    101274425392636489,
+    3641881253890080781,
+    3391301510739558413,
+    2920873775308592272
   ],
   "retiredRelationUids": [],
   "version": 1
