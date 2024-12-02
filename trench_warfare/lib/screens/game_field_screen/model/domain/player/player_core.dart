@@ -122,4 +122,7 @@ class PlayerCore extends PlayerInputProxy {
 
   @override
   void onMenuSaveButtonClick() => _stateMachine.process(OnMenuSaveButtonClick());
+
+  @override
+  void onSaveSlotSelected(GameSlot slot) => _stateMachine.process(OnSaveSlotSelected(slot: slot));
 }

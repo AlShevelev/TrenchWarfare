@@ -88,4 +88,9 @@ class PlayerAiInputProxy extends PlayerInputProxy {
   void onMenuSaveButtonClick() {
     // do nothing
   }
+
+  @override
+  void onSaveSlotSelected(GameSlot slot) {
+    // do nothing
+  }
 }

@@ -63,6 +63,7 @@ part 'transitions/from_ready_for_input_on_long_click_start.dart';
 part 'transitions/from_ready_for_input_on_long_click_end.dart';
 part 'transitions/from_ready_for_input_on_resort_unit.dart';
 part 'transitions/from_save_slot_selection_on_cancelled.dart';
+part 'transitions/from_save_slot_selection_on_save_slot_selected.dart';
 part 'transitions/from_start_turn_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_start_turn_initial_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_turn_is_ended_on_start_turn.dart';

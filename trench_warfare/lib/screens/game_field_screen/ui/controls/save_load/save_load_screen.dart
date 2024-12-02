@@ -26,7 +26,9 @@ class SaveLoadScreen extends StatelessWidget {
           onCancel: () {
             _gameField.onCancelled();
           },
-          onSlotSelected: (slot) {},
+          onSlotSelected: (slot) {
+            _gameField.onSaveSlotSelected(slot);
+          },
         ),
       ),
     );

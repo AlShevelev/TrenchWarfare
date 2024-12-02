@@ -3,6 +3,7 @@ import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
+import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
@@ -28,6 +29,8 @@ abstract interface class GameFieldModelCallback {
   void onTurnCompleted();
 
   void onGameIsOver();
+
+  void saveGame(GameSlot slot, {required bool isAutosave});
 }
 
 class GameFieldModel implements GameFieldModelCallback, Disposable {
@@ -207,5 +210,10 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       'startCurrency: ${nationRecord.startMoney}; startIndustryPoints: ${nationRecord.startIndustryPoints}',
       tag: 'GAME_GENERAL',
     );
+  }
+
+  @override
+  void saveGame(GameSlot slot, {required bool isAutosave}) {
+    return;
   }
 }

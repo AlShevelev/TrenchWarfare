@@ -6,9 +6,9 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   final SingleStream<_SaveLoadScreenState> _state = SingleStream<_SaveLoadScreenState>();
   Stream<_SaveLoadScreenState> get state => _state.output;
 
-  GameSlot? get selectedSlotId => state is _Loading
+  GameSlot? get selectedSlotId => _state.current is _Loading
       ? null
-      : ((state as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotNumber;
+      : ((_state.current as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotNumber;
 
   late final _dao = Database.saveLoadGameDao;
 

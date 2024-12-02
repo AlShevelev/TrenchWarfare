@@ -8,6 +8,7 @@ import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
+import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
@@ -49,6 +50,8 @@ abstract interface class GameFieldForControls {
   void onMenuSaveButtonClick();
 
   void onMenuLoadButtonClick();
+
+  void onSaveSlotSelected(GameSlot slot);
 }
 
 class GameField extends FlameGame
@@ -202,4 +205,7 @@ class GameField extends FlameGame
 
   @override
   void onMenuSaveButtonClick() => _viewModel.input.onMenuSaveButtonClick();
+
+  @override
+  void onSaveSlotSelected(GameSlot slot)  => _viewModel.input.onSaveSlotSelected(slot);
 }

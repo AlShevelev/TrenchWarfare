@@ -40,4 +40,6 @@ abstract interface class PlayerInput {
   void onMenuLoadButtonClick();
 
   void onMenuSaveButtonClick();
+
+  void onSaveSlotSelected(GameSlot slot);
 }

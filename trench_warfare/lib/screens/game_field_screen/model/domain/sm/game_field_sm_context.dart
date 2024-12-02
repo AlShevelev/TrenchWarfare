@@ -21,6 +21,8 @@ class GameFieldStateMachineContext {
 
   final GameOverConditionsCalculator gameOverConditionsCalculator;
 
+  final GameFieldModelCallback modelCallback;
+
   GameFieldStateMachineContext({
     required this.gameField,
     required this.nation,
@@ -32,5 +34,6 @@ class GameFieldStateMachineContext {
     required this.isAI,
     required this.dayStorage,
     required this.gameOverConditionsCalculator,
+    required this.modelCallback,
   });
 }

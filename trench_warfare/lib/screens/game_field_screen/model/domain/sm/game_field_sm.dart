@@ -31,6 +31,7 @@ class GameFieldStateMachine {
       isAI: isAI,
       dayStorage: dayStorage,
       gameOverConditionsCalculator: gameOverConditionsCalculator,
+      modelCallback: _modelCallback,
     );
   }
 
@@ -161,6 +162,8 @@ class GameFieldStateMachine {
         },
       SaveSlotSelection() => switch (event) {
           OnCancelled() => FromSaveSlotSelectionOnCancelled(_context).process(),
+          OnSaveSlotSelected(slot: var slot) =>
+            FromSaveSlotSelectionOnSaveSlotSelected(_context, slot).process(),
           _ => _currentState,
         },
       LoadSlotSelection() => switch (event) {
