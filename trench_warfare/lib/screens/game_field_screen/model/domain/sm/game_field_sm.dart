@@ -80,6 +80,8 @@ class GameFieldStateMachine {
           OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
             FromPathIsShownOnResortUnit(_context).process(path, cellId, unitsId, isCarrier: isCarrier),
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(_context).process(path),
+          OnMenuButtonClick() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
+          OnPhoneBackAction() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
           _ => _currentState,
         },
       MovingInProgress(
@@ -116,8 +118,7 @@ class GameFieldStateMachine {
         cellsImpossibleToBuild: var cellsImpossibleToBuild,
       ) =>
         switch (event) {
-          OnCancelled() =>
-            FromCardPlacingOnCardPlacingCancelled(_context).process(cellsImpossibleToBuild),
+          OnCancelled() => FromCardPlacingOnCardPlacingCancelled(_context).process(cellsImpossibleToBuild),
           OnCellClick(cell: var cell) =>
             FromCardPlacingOnCellClicked(_context).process(cellsImpossibleToBuild, cell, card),
           _ => _currentState,

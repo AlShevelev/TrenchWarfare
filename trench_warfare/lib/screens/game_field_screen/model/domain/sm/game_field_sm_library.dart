@@ -53,6 +53,7 @@ part 'transitions/from_load_slot_selection_on_cancelled.dart';
 part 'transitions/from_moving_in_progress_on_animation_completed.dart';
 part 'transitions/from_path_is_shown_on_click.dart';
 part 'transitions/from_path_is_shown_on_end_of_turn_button_click.dart';
+part 'transitions/from_path_is_shown_on_menu_button_click.dart';
 part 'transitions/from_path_is_shown_on_resort_unit.dart';
 part 'transitions/from_ready_for_input_on_click.dart';
 part 'transitions/from_ready_for_input_on_cards_button_click.dart';
