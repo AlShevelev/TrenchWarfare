@@ -28,5 +28,5 @@ abstract class DaoBase {
   }
 
   @protected
-  void put<T>(Box<T> box, T entity) => box.putAsync(entity, mode: PutMode.insert);
+  void put<T>(Box<T> box, T entity) => box.put(entity, mode: PutMode.insert);
 }

@@ -8,9 +8,9 @@ class FromSaveSlotSelectionOnSaveSlotSelected {
   FromSaveSlotSelectionOnSaveSlotSelected(this._context, GameSlot slot) : _slot = slot;
 
   State process() {
-    TransitionUtils(_context).closeUI();
-
     _context.modelCallback.saveGame(_slot, isAutosave: false);
+
+    TransitionUtils(_context).closeUI();
 
     return ReadyForInput();
   }
