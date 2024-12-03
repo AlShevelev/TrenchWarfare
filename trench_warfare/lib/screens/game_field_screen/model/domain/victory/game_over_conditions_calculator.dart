@@ -11,7 +11,8 @@ class GameOverConditionsCalculator {
 
   final MapMetadataRead _metadata;
 
-  final defeated = <Nation>{};
+  final _defeated = <Nation>{};
+  Set<Nation> get defeated => Set.unmodifiable(_defeated);
 
   GameOverConditionsCalculator({
     required GameFieldRead gameField,
@@ -51,13 +52,13 @@ class GameOverConditionsCalculator {
     final allOpposite = _metadata.getMyNotEnemies(nation) + allEnemies;
 
     final firstOppositeDefeatedNow =
-        allOpposite.firstWhereOrNull((a) => defeatedNow.contains(a) && !defeated.contains(a));
+        allOpposite.firstWhereOrNull((a) => defeatedNow.contains(a) && !_defeated.contains(a));
 
-    defeated.clear();
-    defeated.addAll(defeatedNow);
+    _defeated.clear();
+    _defeated.addAll(defeatedNow);
 
     return firstOppositeDefeatedNow?.let((e) => Defeat(nation: e));
   }
 
-  bool isDefeated(Nation nation) => defeated.contains(nation);
+  bool isDefeated(Nation nation) => _defeated.contains(nation);
 }

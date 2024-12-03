@@ -25,7 +25,7 @@ class GameFieldScreen extends StatelessWidget {
       child: Background.path(
         imagePath: 'assets/images/screens/game_field/game_field_background.webp',
         child: GameWidget(
-          game: GameField(mapName: _mapName, selectedNation: _selectedNation),
+          game: GameField(mapFileName: _mapName, selectedNation: _selectedNation),
           overlayBuilderMap: {
             GameFieldControls.overlayKey: (BuildContext context, GameField gameField) {
               return GameFieldControls(gameField);

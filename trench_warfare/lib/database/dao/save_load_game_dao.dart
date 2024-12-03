@@ -63,7 +63,14 @@ class SaveLoadGameDao extends DaoBase {
       read(_unitBox.query(SaveUnitDbEntity_.slotDbId.equals(slotDbId)));
 
   void deleteSlot(int slotNumber) {
-    final slotDbId = readSlot(slotNumber)!.dbId;
+    final dbSlot = readSlot(slotNumber);
+
+    // The slot is empty
+    if (dbSlot == null) {
+      return;
+    }
+
+    final slotDbId = dbSlot.dbId;
 
     remove(_slotBox.query(SaveSlotDbEntity_.dbId.equals(slotDbId)));
     remove(_cellBox.query(SaveGameFieldCellDbEntity_.slotDbId.equals(slotDbId)));

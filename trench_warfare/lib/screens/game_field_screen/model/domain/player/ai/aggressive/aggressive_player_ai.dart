@@ -4,6 +4,7 @@ class AggressivePlayerAi extends PlayerAi {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
+  Nation get myNation => _myNation;
 
   final MoneyStorageRead _nationMoney;
 
@@ -12,6 +13,7 @@ class AggressivePlayerAi extends PlayerAi {
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
   final CarrierTroopTransfersStorage _transfersStorage;
+  CarrierTroopTransfersStorageRead get transfersStorage => _transfersStorage;
 
   AggressivePlayerAi(
     GameFieldRead gameField,

@@ -40,8 +40,12 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
     _model = GameFieldModel();
   }
 
-  Future<void> init(RenderableTiledMap tileMap, Nation selectedNation) async {
-    await _model.init(tileMap, selectedNation);
+  Future<void> init({
+    required RenderableTiledMap tileMap,
+    required Nation selectedNation,
+    required String mapFileName,
+  }) async {
+    await _model.init(tileMap: tileMap, selectedNation: selectedNation, mapFileName: mapFileName);
   }
 
   @override

@@ -61,7 +61,7 @@ class GameField extends FlameGame
 
   late TiledComponent _mapComponent;
 
-  late final String _mapName;
+  late final String _mapFileName;
 
   late final Nation _selectedNation;
 
@@ -78,8 +78,8 @@ class GameField extends FlameGame
   @override
   TextureAtlas get spritesAtlas => _spritesAtlas;
 
-  GameField({required String mapName, required Nation selectedNation}) : super() {
-    _mapName = mapName.replaceFirst('assets/tiles/', '');
+  GameField({required String mapFileName, required Nation selectedNation}) : super() {
+    _mapFileName = mapFileName;
     _selectedNation = selectedNation;
     _viewModel = GameFieldViewModel();
   }
@@ -94,7 +94,7 @@ class GameField extends FlameGame
       ..anchor = Anchor.center;
 
     _mapComponent = await TiledComponent.load(
-      _mapName,
+      _mapFileName.replaceFirst('assets/tiles/', ''),
       ComponentConstants.cellRealSize,
     );
     world.add(_mapComponent);
@@ -115,7 +115,11 @@ class GameField extends FlameGame
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 
-    await _viewModel.init(_mapComponent.tileMap, _selectedNation);
+    await _viewModel.init(
+      tileMap: _mapComponent.tileMap,
+      selectedNation: _selectedNation,
+      mapFileName: _mapFileName,
+    );
 
     _gameObjectsComposer.init(_viewModel.gameField, _viewModel);
     _gameGesturesComposer.init(_viewModel);
@@ -207,5 +211,5 @@ class GameField extends FlameGame
   void onMenuSaveButtonClick() => _viewModel.input.onMenuSaveButtonClick();
 
   @override
-  void onSaveSlotSelected(GameSlot slot)  => _viewModel.input.onSaveSlotSelected(slot);
+  void onSaveSlotSelected(GameSlot slot) => _viewModel.input.onSaveSlotSelected(slot);
 }

@@ -3,7 +3,7 @@ part of save_game;
 abstract interface class GameSaverBuilder {
   void save();
 
-  void addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers);
+  GameSaverBuilder addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers);
 }
 
 class GameSaver implements GameSaverBuilder {
@@ -55,7 +55,7 @@ class GameSaver implements GameSaverBuilder {
 
   static GameSaverBuilder start({
     required GameSlot slot,
-    required String mapId,
+    required String mapFileName,
     required bool isAutosave,
     required int day,
     required int humanPlayerIndex,
@@ -67,7 +67,7 @@ class GameSaver implements GameSaverBuilder {
   }) {
     return GameSaver._(
       slot,
-      mapId,
+      mapFileName,
       isAutosave,
       day,
       humanPlayerIndex,
@@ -179,8 +179,10 @@ class GameSaver implements GameSaverBuilder {
   }
 
   @override
-  void addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers) =>
-      _troopTransfers = troopTransfers;
+  GameSaverBuilder addTroopTransfers(Map<Nation, Iterable<TroopTransferReadForSaving>> troopTransfers) {
+    _troopTransfers = troopTransfers;
+    return this;
+  }
 
   SaveGameFieldCellDbEntity _mapCellToDbEntity(
     GameFieldCell cell, {
