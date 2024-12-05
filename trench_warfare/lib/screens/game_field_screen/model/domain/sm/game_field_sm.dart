@@ -155,7 +155,7 @@ class GameFieldStateMachine {
         },
       MenuIsVisible() => switch (event) {
           OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
-          OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick().process(),
+          OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick(_context).process(),
           OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
           OnMenuLoadButtonClick() => FromMenuIsVisibleOnMenuLoadButtonClick(_context).process(),
           _ => _currentState,

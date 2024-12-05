@@ -32,7 +32,7 @@ abstract interface class GameFieldModelCallback {
 
   void onGameIsOver();
 
-  void saveGame(GameSlot slot, {required bool isAutosave});
+  void saveGame(GameSlot slot);
 }
 
 class GameFieldModel implements GameFieldModelCallback, Disposable {
@@ -155,8 +155,6 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   @override
   void onGameIsOver() {
-    Logger.info('the game is over', tag: 'GAME_GENERAL');
-
     _gameFieldState.update(Completed());
   }
 
@@ -237,7 +235,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   }
 
   @override
-  void saveGame(GameSlot slot, {required bool isAutosave}) {
+  void saveGame(GameSlot slot) {
     final transfers = <Nation, Iterable<TroopTransferReadForSaving>>{};
     for (final ai in _playersAi) {
       if (ai is! AggressivePlayerAi) {
@@ -256,7 +254,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     GameSaver.start(
       slot: slot,
       mapFileName: _mapFileName,
-      isAutosave: isAutosave,
+      isAutosave: slot == GameSlot.autoSave,
       day: _humanDayStorage.day,
       humanPlayerIndex: _humanIndex,
       gameField: _gameField,

@@ -42,11 +42,18 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   }
 
   @override
-  void onCardClick(GameSlot cardSlot) => _updateState((oldState) {
-        for (var slot in oldState.slots) {
-          slot.setSelected(selected: slot.slotNumber == cardSlot);
-        }
-      });
+  void onCardClick(GameSlot cardSlot) {
+    // We can't select a slot for auto-save for saving
+    if (_isSave && cardSlot == GameSlot.autoSave) {
+      return;
+    }
+
+    _updateState((oldState) {
+      for (var slot in oldState.slots) {
+        slot.setSelected(selected: slot.slotNumber == cardSlot);
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -69,9 +76,11 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
 
     final metadataRecord = await MapMetadataDecoder.decodeFromFile(slotDbEntity.mapFileName);
 
+    final slotNumber = GameSlot.createFromIndex(slotDbEntity.slotNumber);
+
     return _DataSlotDto(
-      selected: false,
-      slotNumber: GameSlot.createFromIndex(slotDbEntity.slotNumber),
+      selected: slotNumber == GameSlot.autoSave && !_isSave,
+      slotNumber: slotNumber,
       isAutosave: slotDbEntity.isAutosave,
       title: metadataRecord!.title,
       day: slotDbEntity.day,

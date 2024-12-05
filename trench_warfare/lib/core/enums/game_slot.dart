@@ -13,4 +13,6 @@ enum GameSlot {
   slot9;
 
   static GameSlot createFromIndex(int index) => GameSlot.values[index];
+
+  static GameSlot get autoSave => GameSlot.slot0;
 }

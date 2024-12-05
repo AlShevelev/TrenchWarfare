@@ -13,6 +13,10 @@ class FromTurnIsEndedOnStartTurn {
       day: _context.dayStorage.day,
     ));
 
+    if (!_context.isAI) {
+      _context.modelCallback.saveGame(GameSlot.autoSave);
+    }
+
     return StartTurnConfirmation();
   }
 }

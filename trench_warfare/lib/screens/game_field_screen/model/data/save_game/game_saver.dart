@@ -81,6 +81,8 @@ class GameSaver implements GameSaverBuilder {
 
   @override
   void save() {
+    Logger.info('Saving started', tag: 'GAME_SAVE_LOAD');
+
     // The old slot must be removed first
     _dao.deleteSlot(_slotNumber);
 
@@ -92,10 +94,10 @@ class GameSaver implements GameSaverBuilder {
       day: _day,
       saveDateTime: DateTime.now(),
     );
-    _dao.createSlot(slotDbRecord);
+    final slotDbId = _dao.createSlot(slotDbRecord);
 
     // Saving the settings
-    final dbSettings = _mapSettingsToDbEntity(_settingsStorage, slotDbId: slotDbRecord.dbId);
+    final dbSettings = _mapSettingsToDbEntity(_settingsStorage, slotDbId: slotDbId);
     _dao.createSettings(dbSettings);
 
     // Saving the playing nations
@@ -106,14 +108,14 @@ class GameSaver implements GameSaverBuilder {
     for (var i = 0; i < _playingNations.length; i++) {
       final nation = _playingNations.elementAt(i);
       final dbNation = SaveNationDbEntity(
-        slotDbId: slotDbRecord.dbId,
+        slotDbId: slotDbId,
         isHuman: i == _humanPlayerIndex,
         playingOrder: i,
         nation: nation.index,
         defeated: _defeated.contains(nation),
         isSideOfConflict: allAggressive.contains(nation),
       );
-      _dao.createNation(dbNation);
+      final nationDbId = _dao.createNation(dbNation);
 
       // Saving the nations' transfer
       final transfers = _troopTransfers[nation];
@@ -121,14 +123,14 @@ class GameSaver implements GameSaverBuilder {
         for (final transfer in transfers) {
           final transferRecord = _mapTransferToDbEntity(
             transfer,
-            slotDbId: slotDbRecord.dbId,
-            nationDbId: dbNation.dbId,
+            slotDbId: slotDbId,
+            nationDbId: nationDbId,
           );
 
-          _dao.createTroopTransfer(transferRecord);
+          final transferDbId = _dao.createTroopTransfer(transferRecord);
 
           for (final unit in transfer.transportingUnits) {
-            unitsInTransfers[unit.id] = transferRecord.dbId;
+            unitsInTransfers[unit.id] = transferDbId;
           }
         }
       }
@@ -136,9 +138,9 @@ class GameSaver implements GameSaverBuilder {
 
     // Saving the game field
     for (final cell in _gameField.cells) {
-      final dbCell = _mapCellToDbEntity(slotDbId: slotDbRecord.dbId, cell);
+      final dbCell = _mapCellToDbEntity(slotDbId: slotDbId, cell);
 
-      _dao.createCell(dbCell);
+      final cellDbId = _dao.createCell(dbCell);
 
       // Saving units
       for (var i = 0; i < cell.units.length; i++) {
@@ -146,14 +148,14 @@ class GameSaver implements GameSaverBuilder {
 
         final dbUnit = _maUnitToDbEntity(
           unit,
-          slotDbId: slotDbRecord.dbId,
-          cellDbId: dbCell.dbId,
+          slotDbId: slotDbId,
+          cellDbId: cellDbId,
           carrierDbId: null,
           troopTransferDbId: unitsInTransfers[unit.id],
           index: i,
         );
 
-        _dao.createUnit(dbUnit);
+        final unitDbId = _dao.createUnit(dbUnit);
 
         // Saving carrier's units
         if (unit.type == UnitType.carrier) {
@@ -164,9 +166,9 @@ class GameSaver implements GameSaverBuilder {
 
             final dbCarrierInsideUnit = _maUnitToDbEntity(
               carrierInsideUnit,
-              slotDbId: slotDbRecord.dbId,
+              slotDbId: slotDbId,
               cellDbId: null,
-              carrierDbId: dbUnit.dbId,
+              carrierDbId: unitDbId,
               troopTransferDbId: unitsInTransfers[unit.id],
               index: j,
             );
@@ -176,6 +178,8 @@ class GameSaver implements GameSaverBuilder {
         }
       }
     }
+
+    Logger.info('Saving completed', tag: 'GAME_SAVE_LOAD');
   }
 
   @override
