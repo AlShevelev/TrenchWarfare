@@ -35,7 +35,8 @@ class _TroopTransfer implements TroopTransferReadForSaving {
 
   final MapMetadataRead _metadata;
 
-  _TroopTransferState _currentState = _StateInit();
+  late _TroopTransferState _currentState;
+
   @override
   String get stateAlias => _currentState.stateAlias;
 
@@ -71,7 +72,57 @@ class _TroopTransfer implements TroopTransferReadForSaving {
         _myNation = myNation,
         _actions = actions,
         _metadata = metadata,
-        _id = RandomGen.generateId();
+        _id = RandomGen.generateId(),
+        _currentState = _StateInit();
+
+  _TroopTransfer.fromSaving({
+    required TroopTransferReadForSaving saving,
+    required CarrierTroopTransfersStorageRead transfersStorage,
+    required GameFieldRead gameField,
+    required Nation myNation,
+    required MapMetadataRead metadata,
+  })  : _targetCell = saving.targetCell,
+        _transfersStorage = transfersStorage,
+        _gameField = gameField,
+        _myNation = myNation,
+        _id = saving.id,
+        _metadata = metadata {
+    _currentState = switch (saving.stateAlias) {
+      _StateInit._stateAlias => _StateInit(),
+      _StateGathering._stateAlias => _StateGathering(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+          landingPoint: saving.landingPoint!,
+          gatheringPoint: saving.gatheringPoint!,
+          gatheringUnits: saving.transportingUnits
+              .where((u) => u.id != saving.selectedCarrierId!)
+              .toList(growable: false),
+          transferTargetCell: saving.targetCell,
+        ),
+      _StateLoadingToCarrier._stateAlias => _StateLoadingToCarrier(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+          landingPoint: saving.landingPoint!,
+          unitsToLoad: saving.transportingUnits
+              .where((u) => u.id != saving.selectedCarrierId!)
+              .toList(growable: false),
+        ),
+      _StateTransporting._stateAlias => _StateTransporting(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+          landingPoint: saving.landingPoint!,
+        ),
+      _StateLanding._stateAlias => _StateLanding(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+          landingPoint: saving.landingPoint!,
+        ),
+      _StateMoveUnitsAfterLanding._stateAlias => _StateMoveUnitsAfterLanding(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+          landedUnits: saving.transportingUnits
+              .where((u) => u.id != saving.selectedCarrierId!)
+              .toList(growable: false),
+        ),
+      _StateCompleted._stateAlias => _StateCompleted(),
+      _ => throw UnsupportedError('This state is not supported: ${saving.stateAlias}'),
+    };
+  }
 
   void setPlayerActions(PlayerActions actions) {
     _actions = actions;
@@ -117,11 +168,11 @@ class _TroopTransfer implements TroopTransferReadForSaving {
             transfersStorage: _transfersStorage,
           ),
         _StateLoadingToCarrier() => _LoadingToCarrierTransition(
-          state: _currentState as _StateLoadingToCarrier,
-          actions: _actions,
-          myNation: _myNation,
-          gameField: _gameField,
-        ),
+            state: _currentState as _StateLoadingToCarrier,
+            actions: _actions,
+            myNation: _myNation,
+            gameField: _gameField,
+          ),
         _StateTransporting() => _TransportingTransition(
             state: _currentState as _StateTransporting,
             actions: _actions,
@@ -134,7 +185,7 @@ class _TroopTransfer implements TroopTransferReadForSaving {
             gameField: _gameField,
             myNation: _myNation,
           ),
-          _StateMoveUnitsAfterLanding() => _MovementAfterLadingTransition(
+        _StateMoveUnitsAfterLanding() => _MovementAfterLadingTransition(
             state: _currentState as _StateMoveUnitsAfterLanding,
             actions: _actions,
             gameField: _gameField,

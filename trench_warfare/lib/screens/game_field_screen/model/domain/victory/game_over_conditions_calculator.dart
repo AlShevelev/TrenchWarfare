@@ -11,14 +11,17 @@ class GameOverConditionsCalculator {
 
   final MapMetadataRead _metadata;
 
-  final _defeated = <Nation>{};
+  final Set<Nation> _defeated;
+
   Set<Nation> get defeated => Set.unmodifiable(_defeated);
 
   GameOverConditionsCalculator({
     required GameFieldRead gameField,
     required MapMetadataRead metadata,
+    required List<Nation> defeated,
   })  : _gameField = gameField,
-        _metadata = metadata;
+        _metadata = metadata,
+        _defeated = defeated.toSet();
 
   GameOverConditions? calculate(Nation nation) {
     if (_gameField.cells.isEmpty) {

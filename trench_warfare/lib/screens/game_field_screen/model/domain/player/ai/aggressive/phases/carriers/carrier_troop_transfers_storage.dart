@@ -25,9 +25,20 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
     required GameFieldRead gameField,
     required Nation myNation,
     required MapMetadataRead metadata,
+    required Iterable<TroopTransferReadForSaving> initialTransfers,
   })  : _gameField = gameField,
         _myNation = myNation,
-        _metadata = metadata;
+        _metadata = metadata {
+    for (final initialTransfer in initialTransfers) {
+      _troopTransfers.add(_TroopTransfer.fromSaving(
+        saving: initialTransfer,
+        transfersStorage: this,
+        gameField: gameField,
+        myNation: myNation,
+        metadata: metadata,
+      ));
+    }
+  }
 
   void setPlayerActions(PlayerActions actions) {
     _actions = actions;

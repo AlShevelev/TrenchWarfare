@@ -22,6 +22,7 @@ class AggressivePlayerAi extends PlayerAi {
     MoneyStorageRead nationMoney,
     MapMetadataRead metadata,
     GameOverConditionsCalculator gameOverConditionsCalculator,
+    Iterable<TroopTransferReadForSaving> initialTransfers,
   )   : _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
@@ -31,6 +32,7 @@ class AggressivePlayerAi extends PlayerAi {
           gameField: gameField,
           myNation: myNation,
           metadata: metadata,
+          initialTransfers: initialTransfers,
         );
 
   @override

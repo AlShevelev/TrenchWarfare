@@ -11,8 +11,9 @@ class _StateInit extends _TroopTransferState {
   @override
   String toString() => stateAlias;
 
+  static const _stateAlias = 'INIT';
   @override
-  String get stateAlias => 'INIT';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateGathering extends _TroopTransferState {
@@ -54,8 +55,9 @@ class _StateGathering extends _TroopTransferState {
       'gatheringPoint: $gatheringPoint; gatheringUnits: ${gatheringUnits.length}; '
       'targetCell: $transferTargetCell}';
 
+  static const _stateAlias = 'GATHERING';
   @override
-  String get stateAlias => 'GATHERING';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateLoadingToCarrier extends _TroopTransferState {
@@ -86,8 +88,9 @@ class _StateLoadingToCarrier extends _TroopTransferState {
   String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint; '
       'unitsToLoad: ${unitsToLoad.length};}';
 
+  static const _stateAlias = 'LOADING_TO_CARRIER';
   @override
-  String get stateAlias => 'LOADING_TO_CARRIER';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateTransporting extends _TroopTransferState {
@@ -103,8 +106,9 @@ class _StateTransporting extends _TroopTransferState {
   @override
   String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
 
+  static const _stateAlias = 'TRANSPORTING';
   @override
-  String get stateAlias => 'TRANSPORTING';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateLanding extends _TroopTransferState {
@@ -120,8 +124,9 @@ class _StateLanding extends _TroopTransferState {
   @override
   String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
 
+  static const _stateAlias = 'LANDING';
   @override
-  String get stateAlias => 'LANDING';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateMoveUnitsAfterLanding extends _TroopTransferState {
@@ -134,14 +139,16 @@ class _StateMoveUnitsAfterLanding extends _TroopTransferState {
   @override
   String toString() => '$stateAlias: {carrier: $selectedCarrier; units: ${landedUnits.length};}';
 
+  static const _stateAlias = 'MOVE_UNITS_AFTER_LANDING';
   @override
-  String get stateAlias => 'MOVE_UNITS_AFTER_LANDING';
+  String get stateAlias => _stateAlias;
 }
 
 class _StateCompleted extends _TroopTransferState {
   @override
   String toString() => stateAlias;
 
+  static const _stateAlias = 'COMPLETED';
   @override
-  String get stateAlias => 'COMPLETED';
+  String get stateAlias => _stateAlias;
 }

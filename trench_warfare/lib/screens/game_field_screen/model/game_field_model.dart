@@ -1,16 +1,12 @@
-import 'package:flame/components.dart';
-import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/game_builders/game_builders_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/save_game/save_game_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/game_field_reader.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/metadata_reader.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
@@ -25,7 +21,6 @@ import 'package:trench_warfare/screens/game_field_screen/model/game_field_storag
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
-import 'package:tuple/tuple.dart';
 
 abstract interface class GameFieldModelCallback {
   void onTurnCompleted();
@@ -36,9 +31,9 @@ abstract interface class GameFieldModelCallback {
 }
 
 class GameFieldModel implements GameFieldModelCallback, Disposable {
-  static const _humanIndex = 0;
+  late final int _humanIndex;
 
-  int _currentPlayerIndex = _humanIndex;
+  int _currentPlayerIndex = 0;
 
   final List<PlayerInputProxy> _players = [];
 
@@ -81,29 +76,27 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   }
 
   Future<void> init({
-    required RenderableTiledMap tileMap,
-    required Nation selectedNation,
-    required String mapFileName,
+    required GameBuilder builder,
   }) async {
     Logger.info('initialization', tag: 'GAME_GENERAL');
 
-    _mapFileName = mapFileName;
+    _mapFileName = builder.mapFileName;
 
-    _metadata = await compute(MetadataReader.read, tileMap.map);
+    _metadata = await builder.getMetadata();
 
-    _gameField = await compute(
-      GameFieldReader.read,
-      Tuple2<Vector2, TiledMap>(tileMap.destTileSize, tileMap.map),
-    );
+    _gameField = await builder.getGameField();
 
-    _settingsStorage = GameFieldSettingsStorage();
+    _settingsStorage = builder.getSettings();
 
-    _gameOverConditionsCalculator = GameOverConditionsCalculator(
-      gameField: _gameField,
-      metadata: _metadata,
-    );
+    _gameOverConditionsCalculator = builder.getGameOverConditions();
 
-    _sortedPlayers = _sortPlayers(_metadata.nations, selectedNation);
+    _sortedPlayers = builder.getPlayingNations().toList(growable: false);
+
+    _humanIndex = builder.humanIndex;
+    _currentPlayerIndex = _humanIndex;
+
+    final Map<Nation, Iterable<TroopTransferReadForSaving>> allTransfers = builder.getTransfers();
+
     for (var i = 0; i < _sortedPlayers.length; i++) {
       _createPlayer(
         index: i,
@@ -111,6 +104,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         gameOverConditionsCalculator: _gameOverConditionsCalculator,
         metadata: _metadata,
         nationRecord: _sortedPlayers[i],
+        startDay: builder.dayNumber,
+        initialTransfers: allTransfers,
       );
     }
 
@@ -158,29 +153,18 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _gameFieldState.update(Completed());
   }
 
-  List<NationRecord> _sortPlayers(Iterable<NationRecord> players, Nation selectedNation) {
-    final result = <NationRecord>[...players];
-
-    final firstAggressive = result
-        .indexWhere((it) => it.aggressiveness == Aggressiveness.aggressive && it.code == selectedNation);
-
-    if (firstAggressive != _humanIndex) {
-      result.insert(_humanIndex, result.removeAt(firstAggressive));
-    }
-
-    return result;
-  }
-
   void _createPlayer({
     required int index,
     required GameFieldSettingsStorage gameFieldSettingsStorage,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required MapMetadata metadata,
     required NationRecord nationRecord,
+    required int startDay,
+    required Map<Nation, Iterable<TroopTransferReadForSaving>> initialTransfers,
   }) {
     final isHuman = index == _humanIndex;
 
-    final dayStorage = DayStorage(0);
+    final dayStorage = DayStorage(startDay);
 
     if (isHuman) {
       _humanDayStorage = dayStorage;
@@ -221,6 +205,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             core.money,
             metadata,
             gameOverConditionsCalculator,
+            initialTransfers[nationRecord.code] ?? [],
           )
       };
 

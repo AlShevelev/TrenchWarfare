@@ -28,6 +28,8 @@ abstract interface class GameFieldRead {
   double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2);
 
   GameFieldCellRead? getCellWithUnit(Unit unit, Nation nation);
+
+  Unit? findUnitById(String unitId, Nation nation);
 }
 
 class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
@@ -80,4 +82,20 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
   @override
   GameFieldCellRead? getCellWithUnit(Unit unit, Nation nation) =>
     cells.firstWhereOrNull((c) => c.nation == nation && c.units.isNotEmpty && c.units.contains(unit));
+
+  @override
+  Unit? findUnitById(String unitId, Nation nation) {
+    for (final cell in cells) {
+      if (cell.nation != nation || cell.units.isEmpty) {
+        continue;
+      }
+
+      final unit = cell.units.firstWhereOrNull((u) => u.id == unitId);
+      if (unit != null) {
+        return unit;
+      }
+    }
+
+    return null;
+  }
 }
