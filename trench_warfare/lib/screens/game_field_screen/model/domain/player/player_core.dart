@@ -1,13 +1,18 @@
 part of player;
 
-class PlayerCore extends PlayerInputProxy {
+class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   final GameFieldRead _gameField;
 
   late final GameFieldStateMachine _stateMachine;
 
   final GameFieldSettingsStorage _gameFieldSettingsStorage;
 
+  late final Nation _nation;
+  @override
+  Nation get nation => _nation;
+
   late final MoneyStorage _money;
+  @override
   MoneyStorageRead get money => _money;
 
   void Function()? _onAnimationCompleted;
@@ -21,10 +26,13 @@ class PlayerCore extends PlayerInputProxy {
     SimpleStream<GameFieldControlsState> controlsState,
     GameFieldModelCallback modelCallback,
     DayStorage dayStorage,
-    GameOverConditionsCalculator gameOverConditionsCalculator, {
+    GameOverConditionsCalculator gameOverConditionsCalculator,
+    MoneyStorage money, {
     required bool isAI,
   }) {
-    _money = MoneyStorage(_gameField, playerNation);
+    _money = money;
+
+    _nation = playerNation.code;
 
     _stateMachine = GameFieldStateMachine(
       _gameField,

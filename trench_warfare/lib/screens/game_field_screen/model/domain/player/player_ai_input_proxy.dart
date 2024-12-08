@@ -1,7 +1,13 @@
 part of player;
 
-class PlayerAiInputProxy extends PlayerInputProxy {
+class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   final PlayerCore _playerCore;
+
+  @override
+  MoneyStorageRead get money => _playerCore.money;
+
+  @override
+  Nation get nation => _playerCore.nation;
 
   PlayerAiInputProxy({required PlayerCore playerCore}) : _playerCore = playerCore;
 

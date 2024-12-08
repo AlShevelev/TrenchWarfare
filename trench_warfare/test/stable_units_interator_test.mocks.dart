@@ -196,4 +196,17 @@ class MockGameFieldRead extends _i1.Mock implements _i2.GameFieldRead {
           nation,
         ],
       )) as _i2.GameFieldCellRead?);
+
+  @override
+  _i4.Unit? findUnitById(
+    String? unitId,
+    _i5.Nation? nation,
+  ) =>
+      (super.noSuchMethod(Invocation.method(
+        #findUnitById,
+        [
+          unitId,
+          nation,
+        ],
+      )) as _i4.Unit?);
 }

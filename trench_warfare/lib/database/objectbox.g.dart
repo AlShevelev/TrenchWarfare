@@ -121,7 +121,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(11, 1437931050667927488),
       name: 'SaveNationDbEntity',
-      lastPropertyId: const obx_int.IdUid(7, 3375040025276721492),
+      lastPropertyId: const obx_int.IdUid(13, 5395939840080142209),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -158,6 +158,36 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(7, 3375040025276721492),
             name: 'isSideOfConflict',
             type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 2055787052188701658),
+            name: 'totalSumCurrency',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 8755844885931037959),
+            name: 'totalSumIndustryPoints',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 7902434076942519920),
+            name: 'totalIncomeCurrency',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 1705521373804679970),
+            name: 'totalIncomeIndustryPoints',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 3612879627547597853),
+            name: 'totalExpensesCurrency',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 5395939840080142209),
+            name: 'totalExpensesIndustryPoints',
+            type: 6,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -717,7 +747,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveNationDbEntity object, fb.Builder fbb) {
-          fbb.startTable(8);
+          fbb.startTable(14);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addBool(2, object.isHuman);
@@ -725,6 +755,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(4, object.nation);
           fbb.addBool(5, object.defeated);
           fbb.addBool(6, object.isSideOfConflict);
+          fbb.addInt64(7, object.totalSumCurrency);
+          fbb.addInt64(8, object.totalSumIndustryPoints);
+          fbb.addInt64(9, object.totalIncomeCurrency);
+          fbb.addInt64(10, object.totalIncomeIndustryPoints);
+          fbb.addInt64(11, object.totalExpensesCurrency);
+          fbb.addInt64(12, object.totalExpensesIndustryPoints);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -745,6 +781,18 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
           final isSideOfConflictParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
+          final totalSumCurrencyParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          final totalSumIndustryPointsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
+          final totalIncomeCurrencyParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0);
+          final totalIncomeIndustryPointsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0);
+          final totalExpensesCurrencyParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0);
+          final totalExpensesIndustryPointsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 28, 0);
           final object = SaveNationDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
@@ -752,7 +800,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
               playingOrder: playingOrderParam,
               nation: nationParam,
               defeated: defeatedParam,
-              isSideOfConflict: isSideOfConflictParam);
+              isSideOfConflict: isSideOfConflictParam,
+              totalSumCurrency: totalSumCurrencyParam,
+              totalSumIndustryPoints: totalSumIndustryPointsParam,
+              totalIncomeCurrency: totalIncomeCurrencyParam,
+              totalIncomeIndustryPoints: totalIncomeIndustryPointsParam,
+              totalExpensesCurrency: totalExpensesCurrencyParam,
+              totalExpensesIndustryPoints: totalExpensesIndustryPointsParam);
 
           return object;
         }),
@@ -1147,6 +1201,30 @@ class SaveNationDbEntity_ {
   /// See [SaveNationDbEntity.isSideOfConflict].
   static final isSideOfConflict =
       obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[6]);
+
+  /// See [SaveNationDbEntity.totalSumCurrency].
+  static final totalSumCurrency =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[7]);
+
+  /// See [SaveNationDbEntity.totalSumIndustryPoints].
+  static final totalSumIndustryPoints =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[8]);
+
+  /// See [SaveNationDbEntity.totalIncomeCurrency].
+  static final totalIncomeCurrency =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[9]);
+
+  /// See [SaveNationDbEntity.totalIncomeIndustryPoints].
+  static final totalIncomeIndustryPoints =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[10]);
+
+  /// See [SaveNationDbEntity.totalExpensesCurrency].
+  static final totalExpensesCurrency =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[11]);
+
+  /// See [SaveNationDbEntity.totalExpensesIndustryPoints].
+  static final totalExpensesIndustryPoints =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[12]);
 }
 
 /// [SaveGameFieldCellDbEntity] entity fields to define ObjectBox queries.

@@ -4,9 +4,10 @@ import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/game_builders/game_builders_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/data/save_game/save_game_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/save_game/game_saver.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
@@ -80,22 +81,16 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   }) async {
     Logger.info('initialization', tag: 'GAME_GENERAL');
 
-    _mapFileName = builder.mapFileName;
+    final gameBuildResult = await builder.build();
 
-    _metadata = await builder.getMetadata();
-
-    _gameField = await builder.getGameField();
-
-    _settingsStorage = builder.getSettings();
-
-    _gameOverConditionsCalculator = builder.getGameOverConditions();
-
-    _sortedPlayers = builder.getPlayingNations().toList(growable: false);
-
-    _humanIndex = builder.humanIndex;
+    _mapFileName = gameBuildResult.mapFileName;
+    _metadata = gameBuildResult.metadata;
+    _gameField = gameBuildResult.gameField;
+    _settingsStorage = gameBuildResult.settings;
+    _gameOverConditionsCalculator = gameBuildResult.conditions;
+    _sortedPlayers = gameBuildResult.playingNations;
+    _humanIndex = gameBuildResult.humanIndex;
     _currentPlayerIndex = _humanIndex;
-
-    final Map<Nation, Iterable<TroopTransferReadForSaving>> allTransfers = builder.getTransfers();
 
     for (var i = 0; i < _sortedPlayers.length; i++) {
       _createPlayer(
@@ -104,8 +99,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         gameOverConditionsCalculator: _gameOverConditionsCalculator,
         metadata: _metadata,
         nationRecord: _sortedPlayers[i],
-        startDay: builder.dayNumber,
-        initialTransfers: allTransfers,
+        startDay: gameBuildResult.dayNumber,
+        initialTransfers: gameBuildResult.transfers,
+        money: gameBuildResult.money,
       );
     }
 
@@ -161,6 +157,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required NationRecord nationRecord,
     required int startDay,
     required Map<Nation, Iterable<TroopTransferReadForSaving>> initialTransfers,
+    required Map<Nation, MoneyStorage> money,
   }) {
     final isHuman = index == _humanIndex;
 
@@ -180,6 +177,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       this,
       dayStorage,
       gameOverConditionsCalculator,
+      money[nationRecord.code]!,
       isAI: !isHuman,
     );
 
@@ -236,6 +234,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       }
     }
 
+    final allMoney =
+        Map.fromEntries(_players.map((p) => p as PlayerMoney).map((m) => MapEntry(m.nation, m.money)));
+
     GameSaver.start(
       slot: slot,
       mapFileName: _mapFileName,
@@ -247,6 +248,6 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       settingsStorage: _settingsStorage,
       defeated: _gameOverConditionsCalculator.defeated,
       playingNations: _sortedPlayers.map((p) => p.code).toList(growable: false),
-    ).addTroopTransfers(transfers).save();
+    ).addTroopTransfers(transfers).addMoney(allMoney).save();
   }
 }

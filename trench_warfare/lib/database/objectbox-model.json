@@ -98,7 +98,7 @@
     },
     {
       "id": "11:1437931050667927488",
-      "lastPropertyId": "7:3375040025276721492",
+      "lastPropertyId": "13:5395939840080142209",
       "name": "SaveNationDbEntity",
       "properties": [
         {
@@ -136,6 +136,36 @@
           "id": "7:3375040025276721492",
           "name": "isSideOfConflict",
           "type": 1
+        },
+        {
+          "id": "8:2055787052188701658",
+          "name": "totalSumCurrency",
+          "type": 6
+        },
+        {
+          "id": "9:8755844885931037959",
+          "name": "totalSumIndustryPoints",
+          "type": 6
+        },
+        {
+          "id": "10:7902434076942519920",
+          "name": "totalIncomeCurrency",
+          "type": 6
+        },
+        {
+          "id": "11:1705521373804679970",
+          "name": "totalIncomeIndustryPoints",
+          "type": 6
+        },
+        {
+          "id": "12:3612879627547597853",
+          "name": "totalExpensesCurrency",
+          "type": 6
+        },
+        {
+          "id": "13:5395939840080142209",
+          "name": "totalExpensesIndustryPoints",
+          "type": 6
         }
       ],
       "relations": []

@@ -20,6 +20,18 @@ class SaveNationDbEntity {
 
   bool isSideOfConflict;
 
+  int totalSumCurrency;
+
+  int totalSumIndustryPoints;
+
+  int totalIncomeCurrency;
+
+  int totalIncomeIndustryPoints;
+
+  int totalExpensesCurrency;
+
+  int totalExpensesIndustryPoints;
+
   SaveNationDbEntity({
     this.dbId = 0,
     required this.slotDbId,
@@ -28,5 +40,11 @@ class SaveNationDbEntity {
     required this.nation,
     required this.defeated,
     required this.isSideOfConflict,
+    required this.totalSumCurrency,
+    required this.totalSumIndustryPoints,
+    required this.totalIncomeCurrency,
+    required this.totalIncomeIndustryPoints,
+    required this.totalExpensesCurrency,
+    required this.totalExpensesIndustryPoints,
   });
 }
