@@ -51,6 +51,24 @@ class MoneyStorage implements MoneyStorageRead {
     );
   }
 
+  MoneyStorage.fromSaving(
+    GameFieldRead gameField,
+    Nation nation, {
+    required int totalSumCurrency,
+    required int totalSumIndustryPoints,
+    required int totalIncomeCurrency,
+    required int totalIncomeIndustryPoints,
+    required int totalExpensesCurrency,
+    required int totalExpensesIndustryPoints,
+  })  : _gameField = gameField,
+        _nation = nation,
+        _totalSum = MoneyUnit(currency: totalSumCurrency, industryPoints: totalSumIndustryPoints),
+        _totalIncome = MoneyUnit(currency: totalIncomeCurrency, industryPoints: totalIncomeIndustryPoints),
+        _totalExpenses = MoneyUnit(
+          currency: totalExpensesCurrency,
+          industryPoints: totalExpensesIndustryPoints,
+        );
+
   void recalculateIncomeAndSum() {
     _totalIncome = _calculateIncomeAndExpenses(income: true).income;
     _totalSum = _totalSum + _totalIncome;

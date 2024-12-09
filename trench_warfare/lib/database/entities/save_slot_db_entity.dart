@@ -15,6 +15,10 @@ class SaveSlotDbEntity {
 
   int day;
 
+  int rows;
+
+  int cols;
+
   @Property(type: PropertyType.date)
   DateTime saveDateTime;
 
@@ -24,6 +28,8 @@ class SaveSlotDbEntity {
     required this.mapFileName,
     required this.isAutosave,
     required this.day,
+    required this.rows,
+    required this.cols,
     required this.saveDateTime,
   });
 }

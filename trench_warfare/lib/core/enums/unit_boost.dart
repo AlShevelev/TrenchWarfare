@@ -4,5 +4,7 @@ enum UnitBoost {
   attack,
   defence,
   commander,
-  transport,
+  transport;
+
+  static UnitBoost createFromIndex(int index) => UnitBoost.values[index];
 }

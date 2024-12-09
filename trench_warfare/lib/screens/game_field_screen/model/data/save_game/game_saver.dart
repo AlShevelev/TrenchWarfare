@@ -112,6 +112,8 @@ class GameSaver implements GameSaverBuilder {
       mapFileName: _mapFileName,
       isAutosave: _isAutosave,
       day: _day,
+      rows: _gameField.rows,
+      cols: _gameField.cols,
       saveDateTime: DateTime.now(),
     );
     final slotDbId = _dao.createSlot(slotDbRecord);
@@ -240,6 +242,7 @@ class GameSaver implements GameSaverBuilder {
         nation: cell.nation?.index,
         productionCenterType: cell.productionCenter?.type.index,
         productionCenterLevel: cell.productionCenter?.level.index,
+        productionCenterName: cell.productionCenter?.name,
         terrainModifier: cell.terrainModifier?.type.index,
         pathItemType: cell.pathItem?.type.index,
         pathItemIsActive: cell.pathItem?.isActive,

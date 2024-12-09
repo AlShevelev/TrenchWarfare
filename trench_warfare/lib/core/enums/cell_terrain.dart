@@ -8,5 +8,7 @@ enum CellTerrain {
   wood,
   marsh,
   hills,
-  mountains,
+  mountains;
+
+  static CellTerrain createFromIndex(int index) => CellTerrain.values[index];
 }

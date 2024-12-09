@@ -129,6 +129,37 @@ class Unit extends GameObject {
     _state = UnitState.enabled;
   }
 
+  Unit.restoreAfterSaving(
+      {
+        required this.id,
+        required UnitBoost? boost1,
+        required UnitBoost? boost2,
+        required UnitBoost? boost3,
+        required int tookPartInBattles,
+        required double fatigue,
+        required double health,
+        required double movementPoints,
+        required double defence,
+        required UnitType type,
+      }
+      ) {
+    _type = type;
+
+    _boost1 = boost1;
+    _boost2 = boost2;
+    _boost3 = boost3;
+
+    _tookPartInBattles = tookPartInBattles;
+    _health = health;
+    _fatigue = fatigue;
+
+    _defence = defence;
+
+    _movementPoints = movementPoints;
+
+    _state = UnitState.enabled;
+  }
+
   Unit.copy(Unit unit) {
     _boost1 = unit.boost1;
     _boost2 = unit.boost2;

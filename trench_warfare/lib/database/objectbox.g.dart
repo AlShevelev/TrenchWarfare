@@ -82,7 +82,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(10, 1040213547054064254),
       name: 'SaveSlotDbEntity',
-      lastPropertyId: const obx_int.IdUid(7, 5618103816987610024),
+      lastPropertyId: const obx_int.IdUid(9, 1912319832816708282),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -114,6 +114,16 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(7, 5618103816987610024),
             name: 'mapFileName',
             type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 3395918268164948918),
+            name: 'rows',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 1912319832816708282),
+            name: 'cols',
+            type: 6,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -195,7 +205,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(12, 4539461880704731537),
       name: 'SaveGameFieldCellDbEntity',
-      lastPropertyId: const obx_int.IdUid(17, 458752511003461786),
+      lastPropertyId: const obx_int.IdUid(18, 9079641929135168054),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -282,6 +292,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(17, 458752511003461786),
             name: 'pathItemMovementPointsLeft',
             type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 9079641929135168054),
+            name: 'productionCenterName',
+            type: 9,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -702,13 +717,15 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (SaveSlotDbEntity object, fb.Builder fbb) {
           final mapFileNameOffset = fbb.writeString(object.mapFileName);
-          fbb.startTable(8);
+          fbb.startTable(10);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotNumber);
           fbb.addBool(3, object.isAutosave);
           fbb.addInt64(4, object.day);
           fbb.addInt64(5, object.saveDateTime.millisecondsSinceEpoch);
           fbb.addOffset(6, mapFileNameOffset);
+          fbb.addInt64(7, object.rows);
+          fbb.addInt64(8, object.cols);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -726,6 +743,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
           final dayParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final rowsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
+          final colsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
           final saveDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
           final object = SaveSlotDbEntity(
@@ -734,6 +755,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               mapFileName: mapFileNameParam,
               isAutosave: isAutosaveParam,
               day: dayParam,
+              rows: rowsParam,
+              cols: colsParam,
               saveDateTime: saveDateTimeParam);
 
           return object;
@@ -820,7 +843,10 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveGameFieldCellDbEntity object, fb.Builder fbb) {
-          fbb.startTable(18);
+          final productionCenterNameOffset = object.productionCenterName == null
+              ? null
+              : fbb.writeString(object.productionCenterName!);
+          fbb.startTable(19);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addInt64(2, object.row);
@@ -838,6 +864,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(14, object.pathItemType);
           fbb.addBool(15, object.pathItemIsActive);
           fbb.addFloat64(16, object.pathItemMovementPointsLeft);
+          fbb.addOffset(17, productionCenterNameOffset);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -870,6 +897,9 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 26);
           final productionCenterLevelParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
+          final productionCenterNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 38);
           final terrainModifierParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 30);
           final pathItemTypeParam =
@@ -892,6 +922,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               nation: nationParam,
               productionCenterType: productionCenterTypeParam,
               productionCenterLevel: productionCenterLevelParam,
+              productionCenterName: productionCenterNameParam,
               terrainModifier: terrainModifierParam,
               pathItemType: pathItemTypeParam,
               pathItemIsActive: pathItemIsActiveParam,
@@ -1170,6 +1201,14 @@ class SaveSlotDbEntity_ {
   /// See [SaveSlotDbEntity.mapFileName].
   static final mapFileName =
       obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
+
+  /// See [SaveSlotDbEntity.rows].
+  static final rows =
+      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[6]);
+
+  /// See [SaveSlotDbEntity.cols].
+  static final cols =
+      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[7]);
 }
 
 /// [SaveNationDbEntity] entity fields to define ObjectBox queries.
@@ -1302,6 +1341,11 @@ class SaveGameFieldCellDbEntity_ {
   static final pathItemMovementPointsLeft =
       obx.QueryDoubleProperty<SaveGameFieldCellDbEntity>(
           _entities[3].properties[16]);
+
+  /// See [SaveGameFieldCellDbEntity.productionCenterName].
+  static final productionCenterName =
+      obx.QueryStringProperty<SaveGameFieldCellDbEntity>(
+          _entities[3].properties[17]);
 }
 
 /// [SaveSettingsStorageDbEntity] entity fields to define ObjectBox queries.

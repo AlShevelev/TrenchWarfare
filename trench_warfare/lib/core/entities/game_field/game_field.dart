@@ -24,6 +24,9 @@ abstract interface class GameFieldRead {
   /// Looks for a cell by some position on a map
   GameFieldCell findCellByPosition(Vector2 position);
 
+  /// null - not found
+  GameFieldCell? findCellById(int cellId);
+
   /// Calculates a logical (in terms of rows and cols) distance between the cells
   double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2);
 
@@ -73,6 +76,9 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
 
     return targetCell!;
   }
+
+  @override
+  GameFieldCell? findCellById(int cellId) => cells.firstWhereOrNull((c) => c.id == cellId);
 
   /// Calculates a logical (in terms of rows and cols) distance between the cells
   @override

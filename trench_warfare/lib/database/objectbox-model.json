@@ -59,7 +59,7 @@
     },
     {
       "id": "10:1040213547054064254",
-      "lastPropertyId": "7:5618103816987610024",
+      "lastPropertyId": "9:1912319832816708282",
       "name": "SaveSlotDbEntity",
       "properties": [
         {
@@ -92,6 +92,16 @@
           "id": "7:5618103816987610024",
           "name": "mapFileName",
           "type": 9
+        },
+        {
+          "id": "8:3395918268164948918",
+          "name": "rows",
+          "type": 6
+        },
+        {
+          "id": "9:1912319832816708282",
+          "name": "cols",
+          "type": 6
         }
       ],
       "relations": []
@@ -172,7 +182,7 @@
     },
     {
       "id": "12:4539461880704731537",
-      "lastPropertyId": "17:458752511003461786",
+      "lastPropertyId": "18:9079641929135168054",
       "name": "SaveGameFieldCellDbEntity",
       "properties": [
         {
@@ -260,6 +270,11 @@
           "id": "17:458752511003461786",
           "name": "pathItemMovementPointsLeft",
           "type": 8
+        },
+        {
+          "id": "18:9079641929135168054",
+          "name": "productionCenterName",
+          "type": 9
         }
       ],
       "relations": []

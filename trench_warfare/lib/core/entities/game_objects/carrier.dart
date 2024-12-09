@@ -14,37 +14,31 @@ class Carrier extends Unit {
   /// [health] - from 0 to 1
   /// [movementPoints] - from 0 to 1
   Carrier({
-    required boost1,
-    required boost2,
-    required boost3,
-    required fatigue,
-    required health,
-    required movementPoints,
-    required type,
+    super.boost1,
+    super.boost2,
+    super.boost3,
+    required super.fatigue,
+    required super.health,
+    required super.movementPoints,
     required List<Unit> units,
   }) : super(
-    boost1: boost1,
-    boost2: boost2,
-    boost3: boost3,
-    experienceRank: UnitExperienceRank.rookies,
-    fatigue: fatigue,
-    health: health,
-    movementPoints: movementPoints,
-    type: type,
-  ) {
+          experienceRank: UnitExperienceRank.rookies,
+          type: UnitType.carrier,
+        ) {
     _units = units;
   }
 
-  Carrier.copy(Carrier carrier) : super(
-    boost1: carrier.boost1,
-    boost2: carrier.boost2,
-    boost3: carrier.boost3,
-    experienceRank: carrier.experienceRank,
-    fatigue: carrier.fatigue,
-    health: carrier.health,
-    movementPoints: carrier.movementPoints,
-    type: carrier.type,
-  ) {
+  Carrier.copy(Carrier carrier)
+      : super(
+          boost1: carrier.boost1,
+          boost2: carrier.boost2,
+          boost3: carrier.boost3,
+          experienceRank: carrier.experienceRank,
+          fatigue: carrier.fatigue,
+          health: carrier.health,
+          movementPoints: carrier.movementPoints,
+          type: carrier.type,
+        ) {
     _tookPartInBattles = carrier._tookPartInBattles;
     _health = carrier._health;
     _fatigue = carrier._fatigue;
@@ -52,6 +46,21 @@ class Carrier extends Unit {
     _state = carrier._state;
 
     _units = carrier._units.map((u) => Unit.copy(u)).toList(growable: true);
+  }
+
+  Carrier.restoreAfterSaving({
+    required super.id,
+    required super.boost1,
+    required super.boost2,
+    required super.boost3,
+    required super.tookPartInBattles,
+    required super.fatigue,
+    required super.health,
+    required super.movementPoints,
+    required super.defence,
+    required super.type,
+  }) : super.restoreAfterSaving() {
+    _units = [];
   }
 
   @override
@@ -72,17 +81,20 @@ class Carrier extends Unit {
     _units.insert(0, unit);
   }
 
-  Unit removeActiveUnit() =>  _units.removeAt(0);
+  void addUnits(Iterable<Unit> units) {
+    _units.clear();
+    _units.addAll(units);
+  }
 
-  static Carrier create() =>
-      Carrier(
+  Unit removeActiveUnit() => _units.removeAt(0);
+
+  static Carrier create() => Carrier(
         boost1: null,
         boost2: null,
         boost3: null,
         fatigue: 1.0, // well rested
-        health: 1.0,  // max health
+        health: 1.0, // max health
         movementPoints: 1.0, // max movement points
-        type: UnitType.carrier,
         units: [],
       );
 

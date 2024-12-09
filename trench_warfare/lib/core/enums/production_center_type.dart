@@ -4,5 +4,7 @@ enum ProductionCenterType {
   city,
   factory,
   navalBase,
-  airField
+  airField;
+
+  static ProductionCenterType createFromIndex(int index) => ProductionCenterType.values[index];
 }

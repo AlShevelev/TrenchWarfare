@@ -10,7 +10,7 @@ class ProductionCenter extends GameObject {
 
   ProductionCenterLevel? get nextLevel => ProductionCenter.getNextLevel(type, level);
 
-  final String name;
+  final String? name;
 
   bool get isLand => type != ProductionCenterType.navalBase;
 

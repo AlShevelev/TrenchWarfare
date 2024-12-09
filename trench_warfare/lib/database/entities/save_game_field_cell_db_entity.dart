@@ -34,6 +34,8 @@ class SaveGameFieldCellDbEntity {
   /// An item's index in [ProductionCenterLevel] enum
   int? productionCenterLevel;
 
+  String? productionCenterName;
+
   /// An item's index in [TerrainModifierType] enum
   int? terrainModifier;
 
@@ -58,6 +60,7 @@ class SaveGameFieldCellDbEntity {
     this.nation,
     this.productionCenterType,
     this.productionCenterLevel,
+    this.productionCenterName,
     this.terrainModifier,
     this.pathItemType,
     this.pathItemIsActive,

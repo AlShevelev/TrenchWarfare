@@ -9,5 +9,7 @@ enum PathItemType {
   battleNextUnreachableCell,
   end,
   loadUnit,
-  unloadUnit,
+  unloadUnit;
+
+  static PathItemType createFromIndex(int index) => PathItemType.values[index];
 }

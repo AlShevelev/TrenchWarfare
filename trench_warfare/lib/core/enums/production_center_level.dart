@@ -21,4 +21,6 @@ enum ProductionCenterLevel {
         ProductionCenterLevel.level4 => 4,
         ProductionCenterLevel.capital => 5,
       };
+
+  static ProductionCenterLevel createFromIndex(int index) => ProductionCenterLevel.values[index];
 }

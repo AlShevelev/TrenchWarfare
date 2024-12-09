@@ -6,5 +6,7 @@ enum TerrainModifierType {
   landFort,
   landMine,
   seaMine,
-  trench,
+  trench;
+
+  static TerrainModifierType createFromIndex(int index) => TerrainModifierType.values[index];
 }

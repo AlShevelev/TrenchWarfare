@@ -11,7 +11,9 @@ enum UnitType {
   destroyer,
   cruiser,
   battleship,
-  carrier,
+  carrier;
+
+  static UnitType createFromIndex(int index) => UnitType.values[index];
 }
 
 extension UnitTypeExt on UnitType {
