@@ -5,14 +5,14 @@ class SlotSelection extends StatefulWidget {
 
   final void Function() _onCancel;
 
-  /// The argument is an id of the selected slot
-  final void Function(GameSlot) _onSlotSelected;
+  /// The arguments are: 1) is an id of the selected slot; 2) the map's file name
+  final void Function(GameSlot, String) _onSlotSelected;
 
   const SlotSelection({
     super.key,
     required bool isSave,
     required void Function() onCancel,
-    required void Function(GameSlot) onSlotSelected,
+    required void Function(GameSlot, String) onSlotSelected,
   })  : _isSave = isSave,
         _onCancel = onCancel,
         _onSlotSelected = onSlotSelected;
@@ -106,7 +106,18 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
                   image: const AssetImage('assets/images/screens/shared/button_select.webp'),
                   enabled: value.data?.isConfirmButtonEnabled ?? false,
                   onPress: () {
-                    _viewModel.selectedSlotId?.let((index) => widget._onSlotSelected(index));
+                    final selectedSlot = _viewModel.selectedSlot;
+                    final selectedMapFileName = _viewModel.selectedMapFileName;
+
+                    if (selectedSlot != null) {
+                      if(_viewModel.isSave) {
+                        widget._onSlotSelected(selectedSlot, '');
+                      } else {
+                        if (selectedMapFileName != null) {
+                          widget._onSlotSelected(selectedSlot, selectedMapFileName);
+                        }
+                      }
+                    }
                   },
                 ),
                 // Close button

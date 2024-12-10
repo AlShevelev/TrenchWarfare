@@ -22,6 +22,8 @@ class _DataSlotDto extends _SlotDto {
 
   final Iterable<_SideOfConflictDto> sideOfConflict;
 
+  final String mapFileName;
+
   _DataSlotDto({
     required super.selected,
     required super.slotNumber,
@@ -30,6 +32,7 @@ class _DataSlotDto extends _SlotDto {
     required this.day,
     required this.saveDateTime,
     required this.sideOfConflict,
+    required this.mapFileName,
   });
 }
 

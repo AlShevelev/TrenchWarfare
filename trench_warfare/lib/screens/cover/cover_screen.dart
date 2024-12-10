@@ -64,7 +64,7 @@ class CoverScreen extends StatelessWidget {
                 child: CoverScreenButton(
                   text: 'TEST MAP',
                   onPress: () {
-                    Navigator.of(context).pushNamed(Routes.gameField,
+                    Navigator.of(context).pushNamed(Routes.gameFieldNewGame,
                         arguments: NewGameToGameFieldNavArg(
                           mapName: 'test/7x7_win_defeat_conditions.tmx',
                           selectedNation: Nation.russia,

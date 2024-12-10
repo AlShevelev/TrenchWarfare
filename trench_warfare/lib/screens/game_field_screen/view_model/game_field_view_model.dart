@@ -1,4 +1,5 @@
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/game_builders/game_builders_library.dart';
@@ -41,7 +42,7 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
     _model = GameFieldModel();
   }
 
-  Future<void> init({
+  Future<void> initNewGame({
     required RenderableTiledMap tileMap,
     required Nation selectedNation,
     required String mapFileName,
@@ -51,6 +52,13 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
       tileMap: tileMap,
       selectedNation: selectedNation,
     );
+    await _model.init(builder: builder);
+  }
+
+  Future<void> initLoadGame({
+    required GameSlot slot,
+  }) async {
+    final builder = LoadedGameBuilder(slot: slot);
     await _model.init(builder: builder);
   }
 

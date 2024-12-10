@@ -63,7 +63,8 @@ class GameField extends FlameGame
 
   late final String _mapFileName;
 
-  late final Nation _selectedNation;
+  late final Nation? _selectedNation;
+  late final GameSlot? _slot;
 
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
@@ -78,11 +79,12 @@ class GameField extends FlameGame
   @override
   TextureAtlas get spritesAtlas => _spritesAtlas;
 
-  GameField({required String mapFileName, required Nation selectedNation}) : super() {
-    _mapFileName = mapFileName;
-    _selectedNation = selectedNation;
-    _viewModel = GameFieldViewModel();
-  }
+  GameField({required String mapFileName, Nation? selectedNation, GameSlot? slot})
+      : _mapFileName = mapFileName,
+        _selectedNation = selectedNation,
+        _slot = slot,
+        _viewModel = GameFieldViewModel(),
+        super();
 
   @override
   Color backgroundColor() => const Color(0x00000000); // Must be transparent to show the background
@@ -115,11 +117,15 @@ class GameField extends FlameGame
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 
-    await _viewModel.init(
-      tileMap: _mapComponent.tileMap,
-      selectedNation: _selectedNation,
-      mapFileName: _mapFileName,
-    );
+    if (_slot == null) {
+      await _viewModel.initNewGame(
+        tileMap: _mapComponent.tileMap,
+        selectedNation: _selectedNation!,
+        mapFileName: _mapFileName,
+      );
+    } else {
+      await _viewModel.initLoadGame(slot: _slot!);
+    }
 
     _gameObjectsComposer.init(_viewModel.gameField, _viewModel);
     _gameGesturesComposer.init(_viewModel);

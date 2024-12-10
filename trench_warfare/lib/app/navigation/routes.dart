@@ -4,7 +4,8 @@ class Routes {
   static const coverScreen = '/';
   static const newGame = '/newGame';
   static const loadGame = '/loadGame';
-  static const gameField = '/game_field';
+  static const gameFieldNewGame = '/game_field_new_game';
+  static const gameFieldLoadGame = '/game_field_load_game';
   static const debugLogging = '/debug_logging';
 
   static PageRouteBuilder? createPageRouteBuilder(RouteSettings settings) {
@@ -24,16 +25,29 @@ class Routes {
           Logger.info('to: loadGame', tag: 'NAVIGATION');
           return _FadeRoute(const SaveLoadScreen());
         }
-      case gameField:
+      case gameFieldNewGame:
         {
-          final mapName = settings.arguments as NewGameToGameFieldNavArg;
-          Logger.info('to: gameField; mapName: ${mapName.mapName}; nation: ${mapName.selectedNation}',
+          final args = settings.arguments as NewGameToGameFieldNavArg;
+          Logger.info('to: gameField for a new game; mapName: ${args.mapName}; nation: ${args.selectedNation}',
               tag: 'NAVIGATION');
 
           return _FadeRoute(
             GameFieldScreen(
-              mapName: mapName.mapName,
-              selectedNation: mapName.selectedNation,
+              mapFileName: args.mapName,
+              selectedNation: args.selectedNation,
+            ),
+          );
+        }
+      case gameFieldLoadGame:
+        {
+          final args = settings.arguments as LoadGameToGameFieldNavArg;
+          Logger.info('to: gameField for loading game; mapFileName: ${args.mapFileName}; slot: ${args.slot}',
+              tag: 'NAVIGATION');
+
+          return _FadeRoute(
+            GameFieldScreen(
+              mapFileName: args.mapFileName,
+              slot: args.slot,
             ),
           );
         }

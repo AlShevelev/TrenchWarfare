@@ -1,18 +1,33 @@
 part of save_load_screen;
 
 class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
-  final bool _isSave;
+  final bool isSave;
 
   final SingleStream<_SaveLoadScreenState> _state = SingleStream<_SaveLoadScreenState>();
   Stream<_SaveLoadScreenState> get state => _state.output;
 
-  GameSlot? get selectedSlotId => _state.current is _Loading
+  GameSlot? get selectedSlot => _state.current is _Loading
       ? null
       : ((_state.current as _DataIsLoaded).slots.firstWhereOrNull((s) => s.selected))?.slotNumber;
 
+  String? get selectedMapFileName {
+    if (_state.current is _Loading) {
+      return null;
+    }
+
+    final dataState = _state.current as _DataIsLoaded;
+    final selectedSlot = dataState.slots.firstWhereOrNull((s) => s.selected);
+
+    if (selectedSlot is _DataSlotDto) {
+      return selectedSlot.mapFileName;
+    }
+
+    return null;
+  }
+
   late final _dao = Database.saveLoadGameDao;
 
-  _SaveLoadViewModel({required bool isSave}) : _isSave = isSave {
+  _SaveLoadViewModel({required this.isSave}) {
     _state.update(_Loading());
   }
 
@@ -21,7 +36,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
 
     final slots = <_SlotDto>[];
 
-    if (_isSave) {
+    if (isSave) {
       for (var i = GameSlot.slot0.index; i <= GameSlot.slot9.index; i++) {
         final dbSlotCandidate = allDbSlots.firstWhereOrNull((s) => s.slotNumber == i);
 
@@ -44,7 +59,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   @override
   void onCardClick(GameSlot cardSlot) {
     // We can't select a slot for auto-save for saving
-    if (_isSave && cardSlot == GameSlot.autoSave) {
+    if (isSave && cardSlot == GameSlot.autoSave) {
       return;
     }
 
@@ -79,7 +94,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
     final slotNumber = GameSlot.createFromIndex(slotDbEntity.slotNumber);
 
     return _DataSlotDto(
-      selected: slotNumber == GameSlot.autoSave && !_isSave,
+      selected: slotNumber == GameSlot.autoSave && !isSave,
       slotNumber: slotNumber,
       isAutosave: slotDbEntity.isAutosave,
       title: metadataRecord!.title,
@@ -89,6 +104,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
             nation: Nation.createFromIndex(n.nation),
             selected: n.isHuman,
           )),
+      mapFileName: slotDbEntity.mapFileName,
     );
   }
 }
