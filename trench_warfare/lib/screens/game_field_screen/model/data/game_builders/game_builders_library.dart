@@ -15,6 +15,7 @@ import 'package:trench_warfare/core/enums/production_center_level.dart';
 import 'package:trench_warfare/core/enums/production_center_type.dart';
 import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core/enums/unit_boost.dart';
+import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/database/database.dart';
 import 'package:trench_warfare/database/entities/save_game_field_cell_db_entity.dart';

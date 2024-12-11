@@ -59,6 +59,7 @@ class Carrier extends Unit {
     required super.movementPoints,
     required super.defence,
     required super.type,
+    required super.state,
   }) : super.restoreAfterSaving() {
     _units = [];
   }

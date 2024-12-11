@@ -3,5 +3,7 @@
 enum UnitState {
   enabled,
   disabled,
-  active,
+  active;
+
+  static UnitState createFromIndex(int index) => UnitState.values[index];
 }

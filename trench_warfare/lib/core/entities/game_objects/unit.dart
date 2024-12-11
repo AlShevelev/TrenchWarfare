@@ -141,6 +141,7 @@ class Unit extends GameObject {
         required double movementPoints,
         required double defence,
         required UnitType type,
+        required UnitState state,
       }
       ) {
     _type = type;
@@ -157,7 +158,7 @@ class Unit extends GameObject {
 
     _movementPoints = movementPoints;
 
-    _state = UnitState.enabled;
+    _state = state;
   }
 
   Unit.copy(Unit unit) {
