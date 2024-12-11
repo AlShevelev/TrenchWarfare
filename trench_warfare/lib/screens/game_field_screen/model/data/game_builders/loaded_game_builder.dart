@@ -36,6 +36,7 @@ class LoadedGameBuilder implements GameBuilder {
 
     return GameBuildResult(
       humanIndex: _humanIndex,
+      isGameLoaded: true,
       mapFileName: slotDb.mapFileName,
       dayNumber: slotDb.day,
       metadata: metadata,

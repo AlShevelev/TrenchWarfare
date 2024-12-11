@@ -102,6 +102,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         startDay: gameBuildResult.dayNumber,
         initialTransfers: gameBuildResult.transfers,
         money: gameBuildResult.money,
+        isGameLoaded: gameBuildResult.isGameLoaded,
       );
     }
 
@@ -158,6 +159,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required int startDay,
     required Map<Nation, Iterable<TroopTransferReadForSaving>> initialTransfers,
     required Map<Nation, MoneyStorage> money,
+    required bool isGameLoaded,
   }) {
     final isHuman = index == _humanIndex;
 
@@ -179,6 +181,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       gameOverConditionsCalculator,
       money[nationRecord.code]!,
       isAI: !isHuman,
+      isGameLoaded: isGameLoaded,
     );
 
     _players.add(isHuman ? core : PlayerAiInputProxy(playerCore: core));

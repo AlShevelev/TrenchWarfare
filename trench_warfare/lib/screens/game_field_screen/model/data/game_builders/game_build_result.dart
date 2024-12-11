@@ -3,6 +3,8 @@ part of game_builders;
 class GameBuildResult {
   final int humanIndex;
 
+  final bool isGameLoaded;
+
   final String mapFileName;
 
   final int dayNumber;
@@ -23,6 +25,7 @@ class GameBuildResult {
 
   GameBuildResult({
     required this.humanIndex,
+    required this.isGameLoaded,
     required this.mapFileName,
     required this.dayNumber,
     required this.metadata,

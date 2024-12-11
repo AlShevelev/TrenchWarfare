@@ -5,8 +5,10 @@ class FromInitialOnStarTurnTransition {
 
   FromInitialOnStarTurnTransition(this._context);
 
-  State process() {
-    _context.dayStorage.increaseDay();
+  State process({required bool isGameLoaded}) {
+    if (!isGameLoaded) {
+      _context.dayStorage.increaseDay();
+    }
 
     _context.controlsState.update(StartTurnControls(
       nation: _context.nation,

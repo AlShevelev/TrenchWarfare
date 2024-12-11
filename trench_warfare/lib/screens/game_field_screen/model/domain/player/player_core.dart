@@ -29,6 +29,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
     GameOverConditionsCalculator gameOverConditionsCalculator,
     MoneyStorage money, {
     required bool isAI,
+    required bool isGameLoaded,
   }) {
     _money = money;
 
@@ -46,6 +47,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
       gameOverConditionsCalculator,
       modelCallback,
       isAI: isAI,
+      isGameLoaded: isGameLoaded,
     );
   }
 

@@ -43,6 +43,7 @@ class NewGameBuilder implements GameBuilder {
 
     return GameBuildResult(
       humanIndex: _humanIndex,
+      isGameLoaded: false,
       mapFileName: _mapFileName,
       dayNumber: 0,
       metadata: metadata,

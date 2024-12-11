@@ -5,6 +5,8 @@ class GameFieldStateMachine {
 
   late final GameFieldStateMachineContext _context;
 
+  final bool _isGameLoaded;
+
   State _currentState = Initial();
 
   GameFieldStateMachine(
@@ -19,7 +21,8 @@ class GameFieldStateMachine {
     GameOverConditionsCalculator gameOverConditionsCalculator,
     this._modelCallback, {
     required bool isAI,
-  }) {
+    required bool isGameLoaded,
+  }) : _isGameLoaded = isGameLoaded {
     _context = GameFieldStateMachineContext(
       gameField: gameField,
       nation: nation,
@@ -43,7 +46,7 @@ class GameFieldStateMachine {
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(),
+          OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(isGameLoaded: _isGameLoaded),
           _ => _currentState,
         },
       StartTurnInitialConfirmation() => switch (event) {
