@@ -133,7 +133,6 @@ class _GatheringTransition extends _TroopTransferTransition {
         continue;
       }
 
-
       final newUnitToGatherCell = await _moveUnit(
         unitToGather,
         from: unitToGatherCell,
