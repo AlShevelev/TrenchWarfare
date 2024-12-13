@@ -32,7 +32,8 @@ class _GatheringTransition extends _TroopTransferTransition {
 
     // The carrier can't move in this turn
     if (_state.selectedCarrier.state == UnitState.disabled) {
-      Logger.info('GATHERING_TRANSITION: return. _state.selectedCarrier.state == UnitState.disabled', tag: 'CARRIER');
+      Logger.info('GATHERING_TRANSITION: return. _state.selectedCarrier.state == UnitState.disabled',
+          tag: 'CARRIER');
       return _TransitionResult(newState: _state, canContinue: false);
     }
 
@@ -89,8 +90,8 @@ class _GatheringTransition extends _TroopTransferTransition {
       final unitsNeeded = state.gatheringUnits.length - aliveGatheringUnits.length;
       final newUnits = _findNewUnits(
         quantity: unitsNeeded,
-        gatheringCell:  state.gatheringPoint.unitsCell,
-        selectedCarrier:  state.selectedCarrier,
+        gatheringCell: state.gatheringPoint.unitsCell,
+        selectedCarrier: state.selectedCarrier,
         transferTargetCell: state.transferTargetCell,
       ).map((u) => u.item1);
 
@@ -113,9 +114,10 @@ class _GatheringTransition extends _TroopTransferTransition {
     final gatheringUnitsCopy = <Unit>[...state.gatheringUnits];
     for (final unitToGather in state.gatheringUnits) {
       final unitToGatherCell = _gameField.getCellWithUnit(unitToGather, _myNation)!;
+      final targetCell = state.gatheringPoint.unitsCell;
 
       // The target cell is reached - do nothing
-      if (unitToGatherCell == state.gatheringPoint.unitsCell) {
+      if (unitToGatherCell == targetCell) {
         unitsReachedTargetCellQuantity++;
         continue;
       }
@@ -126,17 +128,23 @@ class _GatheringTransition extends _TroopTransferTransition {
         continue;
       }
 
+      // The target cell is busy - we have to wait
+      if (targetCell.units.length == GameConstants.maxUnitsInCell) {
+        continue;
+      }
+
+
       final newUnitToGatherCell = await _moveUnit(
         unitToGather,
         from: unitToGatherCell,
-        to: state.gatheringPoint.unitsCell,
+        to: targetCell,
       );
 
       // The unit are dead
       if (newUnitToGatherCell == null) {
         gatheringUnitsCopy.remove(unitToGather);
       } else {
-        if (newUnitToGatherCell == state.gatheringPoint.unitsCell) {
+        if (newUnitToGatherCell == targetCell) {
           unitsReachedTargetCellQuantity++;
         }
       }
@@ -145,7 +153,9 @@ class _GatheringTransition extends _TroopTransferTransition {
     state = state.copy(gatheringUnits: gatheringUnitsCopy);
 
     if (carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length) {
-      Logger.info('GATHERING_TRANSITION: return final. carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length', tag: 'CARRIER');
+      Logger.info(
+          'GATHERING_TRANSITION: return final. carrierReachedTargetCell && unitsReachedTargetCellQuantity == state.gatheringUnits.length',
+          tag: 'CARRIER');
       return _TransitionResult(
         newState: _StateLoadingToCarrier(
           selectedCarrier: state.selectedCarrier,
