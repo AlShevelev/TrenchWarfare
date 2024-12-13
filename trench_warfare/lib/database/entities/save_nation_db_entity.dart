@@ -16,6 +16,8 @@ class SaveNationDbEntity {
   /// An item's index in [Nation] enum
   int nation;
 
+  int day;
+
   bool defeated;
 
   bool isSideOfConflict;
@@ -38,6 +40,7 @@ class SaveNationDbEntity {
     required this.isHuman,
     required this.playingOrder,
     required this.nation,
+    required this.day,
     required this.defeated,
     required this.isSideOfConflict,
     required this.totalSumCurrency,

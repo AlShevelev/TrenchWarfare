@@ -98,7 +98,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
       slotNumber: slotNumber,
       isAutosave: slotDbEntity.isAutosave,
       title: metadataRecord!.title,
-      day: slotDbEntity.day,
+      day: nations.firstWhere((n) => n.isHuman).day,
       saveDateTime: slotDbEntity.saveDateTime,
       sideOfConflict: nations.map((n) => _SideOfConflictDto(
             nation: Nation.createFromIndex(n.nation),

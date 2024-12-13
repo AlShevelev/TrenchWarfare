@@ -99,7 +99,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         gameOverConditionsCalculator: _gameOverConditionsCalculator,
         metadata: _metadata,
         nationRecord: _sortedPlayers[i],
-        startDay: gameBuildResult.dayNumber,
+        startDay: gameBuildResult.nationsDayNumber[i],
         initialTransfers: gameBuildResult.transfers,
         money: gameBuildResult.money,
         isGameLoaded: gameBuildResult.isGameLoaded,

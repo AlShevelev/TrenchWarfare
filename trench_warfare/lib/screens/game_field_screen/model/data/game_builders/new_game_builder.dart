@@ -45,7 +45,7 @@ class NewGameBuilder implements GameBuilder {
       humanIndex: _humanIndex,
       isGameLoaded: false,
       mapFileName: _mapFileName,
-      dayNumber: 0,
+      nationsDayNumber: List<int>.filled(playingNations.length, 0, growable: false),
       metadata: metadata,
       gameField: gameField,
       settings: GameFieldSettingsStorage(),

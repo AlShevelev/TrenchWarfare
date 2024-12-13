@@ -13,8 +13,6 @@ class SaveSlotDbEntity {
 
   bool isAutosave;
 
-  int day;
-
   int rows;
 
   int cols;
@@ -27,7 +25,6 @@ class SaveSlotDbEntity {
     required this.slotNumber,
     required this.mapFileName,
     required this.isAutosave,
-    required this.day,
     required this.rows,
     required this.cols,
     required this.saveDateTime,

@@ -101,11 +101,6 @@ final _entities = <obx_int.ModelEntity>[
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 4841850396354497904),
-            name: 'day',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
             id: const obx_int.IdUid(6, 4622065262205933966),
             name: 'saveDateTime',
             type: 10,
@@ -131,7 +126,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(11, 1437931050667927488),
       name: 'SaveNationDbEntity',
-      lastPropertyId: const obx_int.IdUid(13, 5395939840080142209),
+      lastPropertyId: const obx_int.IdUid(14, 3726927680983737400),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -197,6 +192,11 @@ final _entities = <obx_int.ModelEntity>[
         obx_int.ModelProperty(
             id: const obx_int.IdUid(13, 5395939840080142209),
             name: 'totalExpensesIndustryPoints',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 3726927680983737400),
+            name: 'day',
             type: 6,
             flags: 0)
       ],
@@ -634,7 +634,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
         3641881253890080781,
         3391301510739558413,
         2920873775308592272,
-        1929170078315949513
+        1929170078315949513,
+        4841850396354497904
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -721,7 +722,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotNumber);
           fbb.addBool(3, object.isAutosave);
-          fbb.addInt64(4, object.day);
           fbb.addInt64(5, object.saveDateTime.millisecondsSinceEpoch);
           fbb.addOffset(6, mapFileNameOffset);
           fbb.addInt64(7, object.rows);
@@ -741,8 +741,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
                   .vTableGet(buffer, rootOffset, 16, '');
           final isAutosaveParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
-          final dayParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
           final rowsParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
           final colsParam =
@@ -754,7 +752,6 @@ obx_int.ModelDefinition getObjectBoxModel() {
               slotNumber: slotNumberParam,
               mapFileName: mapFileNameParam,
               isAutosave: isAutosaveParam,
-              day: dayParam,
               rows: rowsParam,
               cols: colsParam,
               saveDateTime: saveDateTimeParam);
@@ -770,7 +767,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           object.dbId = id;
         },
         objectToFB: (SaveNationDbEntity object, fb.Builder fbb) {
-          fbb.startTable(14);
+          fbb.startTable(15);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addBool(2, object.isHuman);
@@ -784,6 +781,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addInt64(10, object.totalIncomeIndustryPoints);
           fbb.addInt64(11, object.totalExpensesCurrency);
           fbb.addInt64(12, object.totalExpensesIndustryPoints);
+          fbb.addInt64(13, object.day);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -800,6 +798,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
           final nationParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final dayParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 30, 0);
           final defeatedParam =
               const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
           final isSideOfConflictParam =
@@ -822,6 +822,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
               isHuman: isHumanParam,
               playingOrder: playingOrderParam,
               nation: nationParam,
+              day: dayParam,
               defeated: defeatedParam,
               isSideOfConflict: isSideOfConflictParam,
               totalSumCurrency: totalSumCurrencyParam,
@@ -1190,25 +1191,21 @@ class SaveSlotDbEntity_ {
   static final isAutosave =
       obx.QueryBooleanProperty<SaveSlotDbEntity>(_entities[1].properties[2]);
 
-  /// See [SaveSlotDbEntity.day].
-  static final day =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[3]);
-
   /// See [SaveSlotDbEntity.saveDateTime].
   static final saveDateTime =
-      obx.QueryDateProperty<SaveSlotDbEntity>(_entities[1].properties[4]);
+      obx.QueryDateProperty<SaveSlotDbEntity>(_entities[1].properties[3]);
 
   /// See [SaveSlotDbEntity.mapFileName].
   static final mapFileName =
-      obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
+      obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[4]);
 
   /// See [SaveSlotDbEntity.rows].
   static final rows =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[6]);
+      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
 
   /// See [SaveSlotDbEntity.cols].
   static final cols =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[7]);
+      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[6]);
 }
 
 /// [SaveNationDbEntity] entity fields to define ObjectBox queries.
@@ -1264,6 +1261,10 @@ class SaveNationDbEntity_ {
   /// See [SaveNationDbEntity.totalExpensesIndustryPoints].
   static final totalExpensesIndustryPoints =
       obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[12]);
+
+  /// See [SaveNationDbEntity.day].
+  static final day =
+      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[13]);
 }
 
 /// [SaveGameFieldCellDbEntity] entity fields to define ObjectBox queries.

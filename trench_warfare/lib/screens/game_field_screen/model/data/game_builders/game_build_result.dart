@@ -7,8 +7,6 @@ class GameBuildResult {
 
   final String mapFileName;
 
-  final int dayNumber;
-
   final MapMetadata metadata;
 
   final GameField gameField;
@@ -19,6 +17,8 @@ class GameBuildResult {
 
   final List<NationRecord> playingNations;
 
+  final List<int> nationsDayNumber;
+
   final Map<Nation, Iterable<TroopTransferReadForSaving>> transfers;
 
   final Map<Nation, MoneyStorage> money;
@@ -27,7 +27,7 @@ class GameBuildResult {
     required this.humanIndex,
     required this.isGameLoaded,
     required this.mapFileName,
-    required this.dayNumber,
+    required this.nationsDayNumber,
     required this.metadata,
     required this.gameField,
     required this.settings,

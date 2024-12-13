@@ -34,16 +34,18 @@ class LoadedGameBuilder implements GameBuilder {
     final dbTransfers = _dao.readAllTroopTransfers(slotDb.dbId);
     final transfers = _getTransfers(dbTransfers, dbNations, dbUnits, gameField);
 
+    final playingNations = _getPlayingNations(metadata, dbNations);
+
     return GameBuildResult(
       humanIndex: _humanIndex,
       isGameLoaded: true,
       mapFileName: slotDb.mapFileName,
-      dayNumber: slotDb.day,
+      nationsDayNumber: dbNations.map((n) => n.day).toList(growable: false),
       metadata: metadata,
       gameField: gameField,
       settings: _getSettings(slotDb),
       conditions: conditions,
-      playingNations: _getPlayingNations(metadata, dbNations),
+      playingNations: playingNations,
       transfers: transfers,
       money: _getMoney(dbNations, gameField),
     );

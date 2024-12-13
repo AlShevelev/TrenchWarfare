@@ -111,7 +111,6 @@ class GameSaver implements GameSaverBuilder {
       slotNumber: _slotNumber,
       mapFileName: _mapFileName,
       isAutosave: _isAutosave,
-      day: _day,
       rows: _gameField.rows,
       cols: _gameField.cols,
       saveDateTime: DateTime.now(),
@@ -132,11 +131,13 @@ class GameSaver implements GameSaverBuilder {
 
       final moneyRecord = _money[nation]!;
 
+      final isHuman = i == _humanPlayerIndex;
       final dbNation = SaveNationDbEntity(
         slotDbId: slotDbId,
-        isHuman: i == _humanPlayerIndex,
+        isHuman: isHuman,
         playingOrder: i,
         nation: nation.index,
+        day: isHuman ? _day : _day - 1,       // There is still yesterday for an AI player
         defeated: _defeated.contains(nation),
         isSideOfConflict: allAggressive.contains(nation),
         totalSumCurrency: moneyRecord.totalSum.currency,

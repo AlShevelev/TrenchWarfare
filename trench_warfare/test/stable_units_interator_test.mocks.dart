@@ -169,6 +169,13 @@ class MockGameFieldRead extends _i1.Mock implements _i2.GameFieldRead {
       ) as _i2.GameFieldCell);
 
   @override
+  _i2.GameFieldCell? findCellById(int? cellId) =>
+      (super.noSuchMethod(Invocation.method(
+        #findCellById,
+        [cellId],
+      )) as _i2.GameFieldCell?);
+
+  @override
   double calculateDistance(
     _i2.GameFieldCellRead? cell1,
     _i2.GameFieldCellRead? cell2,

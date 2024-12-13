@@ -36,6 +36,10 @@ class GameFieldStateMachine {
       gameOverConditionsCalculator: gameOverConditionsCalculator,
       modelCallback: _modelCallback,
     );
+
+    if (isGameLoaded && isAI) {
+      _currentState = dayStorage.day == 0 ? Initial() : TurnIsEnded();
+    }
   }
 
   void process(Event event) {
@@ -46,7 +50,7 @@ class GameFieldStateMachine {
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {
-          OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(isGameLoaded: _isGameLoaded),
+          OnStarTurn() => FromInitialOnStarTurnTransition(_context).process(),
           _ => _currentState,
         },
       StartTurnInitialConfirmation() => switch (event) {

@@ -5,8 +5,8 @@ class FromInitialOnStarTurnTransition {
 
   FromInitialOnStarTurnTransition(this._context);
 
-  State process({required bool isGameLoaded}) {
-    if (!isGameLoaded) {
+  State process() {
+    if (_context.dayStorage.day == 0) {
       _context.dayStorage.increaseDay();
     }
 

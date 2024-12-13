@@ -36,6 +36,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act
@@ -201,6 +202,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act
@@ -346,6 +348,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act
@@ -438,6 +441,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act
@@ -584,6 +588,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act
@@ -659,6 +664,7 @@ void main() {
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
         metadata: mockMetadata,
+        defeated: [],
       );
 
       // Act

@@ -36,6 +36,7 @@ class _DataCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                     child: Text(
+                      textAlign: TextAlign.center,
                       _slot.title[locale] ?? '',
                       style: AppTypography.s20w600,
                     ),
