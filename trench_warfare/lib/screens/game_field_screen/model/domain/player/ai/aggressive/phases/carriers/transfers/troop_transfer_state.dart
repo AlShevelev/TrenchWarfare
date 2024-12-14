@@ -1,19 +1,20 @@
 part of carriers_phase_library;
 
 sealed class _TroopTransferState {
-  @override
-  String toString();
+  void logState();
 
   String get stateAlias;
 }
 
 class _StateInit extends _TroopTransferState {
-  @override
-  String toString() => stateAlias;
-
   static const _stateAlias = 'INIT';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias [End log]');
+  }
 }
 
 class _StateGathering extends _TroopTransferState {
@@ -50,14 +51,23 @@ class _StateGathering extends _TroopTransferState {
         transferTargetCell: transferTargetCell ?? this.transferTargetCell,
       );
 
-  @override
-  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint; '
-      'gatheringPoint: $gatheringPoint; gatheringUnits: ${gatheringUnits.length}; '
-      'targetCell: $transferTargetCell}';
-
   static const _stateAlias = 'GATHERING';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias');
+    Logger.info('Carrier: $selectedCarrier');
+    Logger.info('Landing: $landingPoint');
+    Logger.info('Gathering: $gatheringPoint');
+    Logger.info('Target cell: $transferTargetCell');
+    Logger.info('Gathering units:');
+    for (var i = 0; i < gatheringUnits.length; i++) {
+      Logger.info('[$i] Unit: ${gatheringUnits[i]}');
+    }
+    Logger.info('[End log] $_stateAlias');
+  }
 }
 
 class _StateLoadingToCarrier extends _TroopTransferState {
@@ -84,13 +94,22 @@ class _StateLoadingToCarrier extends _TroopTransferState {
         landingPoint: landingPoint ?? this.landingPoint,
       );
 
-  @override
-  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint; '
-      'unitsToLoad: ${unitsToLoad.length};}';
-
   static const _stateAlias = 'LOADING_TO_CARRIER';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias');
+    Logger.info('Carrier: $selectedCarrier');
+    Logger.info('Landing: $landingPoint');
+    Logger.info('Loading units:');
+    for (var i = 0; i < unitsToLoad.length; i++) {
+      Logger.info('[$i] Unit: ${unitsToLoad[i]}');
+    }
+    Logger.info('[End log] $_stateAlias');
+
+  }
 }
 
 class _StateTransporting extends _TroopTransferState {
@@ -103,12 +122,17 @@ class _StateTransporting extends _TroopTransferState {
     required this.landingPoint,
   });
 
-  @override
-  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
-
   static const _stateAlias = 'TRANSPORTING';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias');
+    Logger.info('Carrier: $selectedCarrier');
+    Logger.info('Landing: $landingPoint');
+    Logger.info('[End log] $_stateAlias');
+  }
 }
 
 class _StateLanding extends _TroopTransferState {
@@ -121,12 +145,17 @@ class _StateLanding extends _TroopTransferState {
     required this.landingPoint,
   });
 
-  @override
-  String toString() => '$stateAlias: {carrier: $selectedCarrier; landing: $landingPoint;}';
-
   static const _stateAlias = 'LANDING';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias');
+    Logger.info('Carrier: $selectedCarrier');
+    Logger.info('Landing: $landingPoint');
+    Logger.info('[End log] $_stateAlias');
+  }
 }
 
 class _StateMoveUnitsAfterLanding extends _TroopTransferState {
@@ -136,19 +165,29 @@ class _StateMoveUnitsAfterLanding extends _TroopTransferState {
 
   _StateMoveUnitsAfterLanding({required this.selectedCarrier, required this.landedUnits});
 
-  @override
-  String toString() => '$stateAlias: {carrier: $selectedCarrier; units: ${landedUnits.length};}';
-
   static const _stateAlias = 'MOVE_UNITS_AFTER_LANDING';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias');
+    Logger.info('Carrier: $selectedCarrier');
+    Logger.info('Landed units:');
+    for (var i = 0; i < landedUnits.length; i++) {
+      Logger.info('[$i] Unit: ${landedUnits.elementAt(i)}');
+    }
+    Logger.info('[End log] $_stateAlias');
+  }
 }
 
 class _StateCompleted extends _TroopTransferState {
-  @override
-  String toString() => stateAlias;
-
   static const _stateAlias = 'COMPLETED';
   @override
   String get stateAlias => _stateAlias;
+
+  @override
+  void logState() {
+    Logger.info('[Start log] $_stateAlias [End log]');
+  }
 }

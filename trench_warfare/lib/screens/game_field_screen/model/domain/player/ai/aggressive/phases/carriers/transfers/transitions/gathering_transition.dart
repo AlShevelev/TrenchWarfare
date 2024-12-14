@@ -113,11 +113,19 @@ class _GatheringTransition extends _TroopTransferTransition {
     // Moves all the gathering units
     final gatheringUnitsCopy = <Unit>[...state.gatheringUnits];
     for (final unitToGather in state.gatheringUnits) {
+      Logger.info('GATHERING_TRANSITION: unitToGather processing: $unitToGather', tag: 'CARRIER');
       final unitToGatherCell = _gameField.getCellWithUnit(unitToGather, _myNation)!;
       final targetCell = state.gatheringPoint.unitsCell;
+      Logger.info('GATHERING_TRANSITION: unitToGather cell: $unitToGatherCell', tag: 'CARRIER');
+      Logger.info('GATHERING_TRANSITION: unitToGather target cell: $targetCell', tag: 'CARRIER');
+      Logger.info('GATHERING_TRANSITION: target cell units:', tag: 'CARRIER');
+      for (var i = 0; i < targetCell.units.length; i++) {
+        Logger.info('GATHERING_TRANSITION: target cell unit[$i]: ${targetCell.units.elementAt(i)}', tag: 'CARRIER');
+      }
 
       // The target cell is reached - do nothing
       if (unitToGatherCell == targetCell) {
+        Logger.info('GATHERING_TRANSITION: the cell is reached', tag: 'CARRIER');
         unitsReachedTargetCellQuantity++;
         continue;
       }
@@ -125,11 +133,13 @@ class _GatheringTransition extends _TroopTransferTransition {
       // The unit can't move - skip it
       if (unitToGather.state == UnitState.disabled ||
           !pathFacade.canMoveForUnit(unitToGatherCell, unitToGather)) {
+        Logger.info('GATHERING_TRANSITION: the unit can\'t move', tag: 'CARRIER');
         continue;
       }
 
       // The target cell is busy - we have to wait
       if (targetCell.units.length == GameConstants.maxUnitsInCell) {
+        Logger.info('GATHERING_TRANSITION: The target cell is busy', tag: 'CARRIER');
         continue;
       }
 

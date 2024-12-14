@@ -96,9 +96,18 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
         continue;
       }
 
-      final unit = cell.units.firstWhereOrNull((u) => u.id == unitId);
-      if (unit != null) {
-        return unit;
+      for (final unitInCell in cell.units) {
+        if (unitInCell.id == unitId) {
+          return unitInCell;
+        }
+
+        if (unitInCell.type == UnitType.carrier) {
+          final carrierUnit = unitInCell as Carrier;
+          final unitInCarrier = carrierUnit.units.firstWhereOrNull((u) => u.id == unitId);
+          if (unitInCarrier != null) {
+            return unitInCarrier;
+          }
+        }
       }
     }
 

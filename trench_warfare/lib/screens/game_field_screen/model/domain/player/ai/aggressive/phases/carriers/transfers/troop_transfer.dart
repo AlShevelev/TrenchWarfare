@@ -139,10 +139,11 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
   }
 
   Future<void> process() async {
-    Logger.info('Transfer [$hashCode] processing started', tag: 'CARRIER');
+    Logger.info('Transfer [$id] processing started', tag: 'CARRIER');
 
     var canContinue = true;
-    Logger.info('Start state: $_currentState', tag: 'CARRIER');
+    Logger.info('Start state: ${_currentState.stateAlias}', tag: 'CARRIER');
+    _currentState.logState();
     while (_currentState is! _StateCompleted && canContinue) {
       var transition = _getTransition();
 
@@ -150,10 +151,12 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
 
       _currentState = transitionResult.newState;
       canContinue = transitionResult.canContinue;
-      Logger.info('New state: $_currentState; canContinue: $canContinue', tag: 'CARRIER');
+      Logger.info('New state: ${_currentState.stateAlias}; canContinue: $canContinue', tag: 'CARRIER');
+      _currentState.logState();
     }
 
-    Logger.info('End state: $_currentState;', tag: 'CARRIER');
+    Logger.info('End state: ${_currentState.stateAlias};', tag: 'CARRIER');
+    _currentState.logState();
 
     if (_currentState is _StateCompleted) {
       _cleanUp();

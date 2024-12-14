@@ -194,6 +194,8 @@ class LoadedGameBuilder implements GameBuilder {
         continue;
       }
 
+      final nation = Nation.createFromIndex(dbNation.nation);
+
       final transfers = dbNationTransfers.map((t) {
         LandingPoint? gatheringPoint;
         if (t.gatheringPointCarrierCellId != null && t.gatheringPointUnitsCellId != null) {
@@ -213,7 +215,7 @@ class LoadedGameBuilder implements GameBuilder {
 
         final transportingUnits = dbUnits
             .where((u) => u.troopTransferDbId == t.dbId)
-            .map((u) => _mapUnitFromDb(u, dbUnits))
+            .map((u) => gameField.findUnitById(u.unitId, nation)!)
             .toList(growable: false);
 
         return TroopTransferReadForSavingImpl(
