@@ -96,6 +96,11 @@ class OnMenuQuitButtonClick implements Event {
   String toString() => 'ON_MENU_QUIT_BUTTON_CLICK';
 }
 
+class OnMenuObjectivesButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_OBJECTIVES_BUTTON_CLICK';
+}
+
 class OnPhoneBackAction implements Event {
   @override
   String toString() => 'ON_PHONE_BACK_ACTION';
@@ -104,11 +109,6 @@ class OnPhoneBackAction implements Event {
 class OnMenuSaveButtonClick implements Event {
   @override
   String toString() => 'ON_MENU_SAVE_BUTTON_CLICK';
-}
-
-class OnMenuLoadButtonClick implements Event {
-  @override
-  String toString() => 'ON_MENU_LOAD_BUTTON_CLICK';
 }
 
 class OnSaveSlotSelected implements Event {

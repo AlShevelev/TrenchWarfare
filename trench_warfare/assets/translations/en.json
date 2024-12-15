@@ -107,6 +107,9 @@
   "resume_menu_dialog": "Resume",
   "settings_menu_dialog": "Settings",
   "quit_menu_dialog": "Quit",
+  "objectives_menu_dialog": "Objectives",
+
+  "objectives_text": "Capture or destroy all enemy cities and factories",
 
   "cover_new_game": "NEW GAME",
   "cover_load": "LOAD",

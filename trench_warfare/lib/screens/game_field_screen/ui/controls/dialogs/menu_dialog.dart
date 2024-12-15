@@ -36,7 +36,6 @@ class MenuDialog extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    //crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -61,6 +60,15 @@ class MenuDialog extends StatelessWidget {
                         child: GameFieldTextButton(
                           text: tr('settings_menu_dialog'),
                           onPress: () {},
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GameFieldTextButton(
+                          text: tr('objectives_menu_dialog'),
+                          onPress: () {
+                            _gameField.onMenuObjectivesButtonClick();
+                          },
                         ),
                       ),
                       Padding(

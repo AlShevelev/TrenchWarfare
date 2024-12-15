@@ -37,7 +37,7 @@ abstract interface class PlayerInput {
 
   void onMenuQuitButtonClick();
 
-  void onMenuLoadButtonClick();
+  void onMenuObjectivesButtonClick();
 
   void onMenuSaveButtonClick();
 

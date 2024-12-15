@@ -1,9 +1,9 @@
 part of game_field_sm;
 
-class FromLoadSlotSelectionOnCancelled {
+class FromObjectivesAreVisibleOnPopupDialogClosed {
   final GameFieldStateMachineContext _context;
 
-  FromLoadSlotSelectionOnCancelled(this._context);
+  FromObjectivesAreVisibleOnPopupDialogClosed(this._context);
 
   State process() {
     TransitionUtils(_context).closeUI();

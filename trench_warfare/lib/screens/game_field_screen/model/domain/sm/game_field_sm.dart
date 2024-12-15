@@ -164,7 +164,7 @@ class GameFieldStateMachine {
           OnPhoneBackAction() => FromMenuIsVisibleOnPhoneBackAction(_context).process(),
           OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick(_context).process(),
           OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
-          OnMenuLoadButtonClick() => FromMenuIsVisibleOnMenuLoadButtonClick(_context).process(),
+          OnMenuObjectivesButtonClick() => FromMenuIsVisibleOnMenuObjectivesButtonClick(_context).process(),
           _ => _currentState,
         },
       SaveSlotSelection() => switch (event) {
@@ -173,8 +173,9 @@ class GameFieldStateMachine {
             FromSaveSlotSelectionOnSaveSlotSelected(_context, slot).process(),
           _ => _currentState,
         },
-      LoadSlotSelection() => switch (event) {
-          OnCancelled() => FromLoadSlotSelectionOnCancelled(_context).process(),
+      ObjectivesAreVisible() => switch (event) {
+        OnPopupDialogClosed() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
+        OnPhoneBackAction() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
           _ => _currentState,
         },
     };

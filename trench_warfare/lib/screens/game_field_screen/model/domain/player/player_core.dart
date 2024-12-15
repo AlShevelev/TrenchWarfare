@@ -128,7 +128,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   void onMenuQuitButtonClick() => _stateMachine.process(OnMenuQuitButtonClick());
 
   @override
-  void onMenuLoadButtonClick() => _stateMachine.process(OnMenuLoadButtonClick());
+  void onMenuObjectivesButtonClick() => _stateMachine.process(OnMenuObjectivesButtonClick());
 
   @override
   void onMenuSaveButtonClick() => _stateMachine.process(OnMenuSaveButtonClick());

@@ -86,7 +86,7 @@ class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   }
 
   @override
-  void onMenuLoadButtonClick() {
+  void onMenuObjectivesButtonClick() {
     // do nothing
   }
 

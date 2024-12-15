@@ -139,7 +139,7 @@ class SaveSlotSelection implements State {
   String toString() => 'SAVE_SLOT_SELECTION';
 }
 
-class LoadSlotSelection implements State {
+class ObjectivesAreVisible implements State {
   @override
-  String toString() => 'LOAD_SLOT_SELECTION';
+  String toString() => 'OBJECTIVES_ARE_VISIBLE';
 }
