@@ -177,7 +177,7 @@ class GameField extends FlameGame
     if (state is Completed) {
       Logger.info('pop to the cover screen', tag: 'NAVIGATION');
       gameRef.buildContext?.let((context) => Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.coverScreen,
+            Routes.cover,
             (r) => false,
           ));
     }

@@ -124,5 +124,11 @@
 
   "save_load_autosave": "Autosave",
   "save_load_empty_load": "Nothing to load",
-  "save_load_empty_slot": "Empty slot"
+  "save_load_empty_slot": "Empty slot",
+
+  "settings_music": "Music",
+  "settings_sounds": "Sounds",
+  "settings_my_units": "My units speed",
+  "settings_enemy_units": "Enemy units speed",
+  "settings_title": "Settings"
 }

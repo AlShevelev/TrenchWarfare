@@ -1,34 +1,34 @@
 part of navigation;
 
 class Routes {
-  static const coverScreen = '/';
-  static const newGame = '/newGame';
-  static const loadGame = '/loadGame';
-  static const gameFieldNewGame = '/game_field_new_game';
-  static const gameFieldLoadGame = '/game_field_load_game';
-  static const debugLogging = '/debug_logging';
+  static const cover = '/';
+  static const fromCoverToMapSelection = '/from_cover_to_map_selection';
+  static const fromCoverToLoadGame = '/from_cover_to_loadGame';
+  static const fromMapSelectionToGameFieldNewGame = '/from_map_selection_to_game_field_new_game';
+  static const fromLoadToGameFieldLoadGame = '/from_load_to_game_field_load_game';
+  static const fromCoverToDebugLogging = '/from_cover_to_debug_logging';
+  static const fromCoverToSettings = '/from_cover_to_settings';
 
   static PageRouteBuilder? createPageRouteBuilder(RouteSettings settings) {
+    Logger.info('route: ${settings.name}', tag: 'NAVIGATION');
+
     switch (settings.name) {
-      case coverScreen:
+      case cover:
         {
-          Logger.info('to: coverScreen', tag: 'NAVIGATION');
           return _FadeRoute(const CoverScreen());
         }
-      case newGame:
+      case fromCoverToMapSelection:
         {
-          Logger.info('to: newGame', tag: 'NAVIGATION');
           return _FadeRoute(const NewGameScreen());
         }
-      case loadGame:
+      case fromCoverToLoadGame:
         {
-          Logger.info('to: loadGame', tag: 'NAVIGATION');
           return _FadeRoute(const SaveLoadScreen());
         }
-      case gameFieldNewGame:
+      case fromMapSelectionToGameFieldNewGame:
         {
           final args = settings.arguments as NewGameToGameFieldNavArg;
-          Logger.info('to: gameField for a new game; mapName: ${args.mapName}; nation: ${args.selectedNation}',
+          Logger.info('route arguments: mapName: ${args.mapName}; nation: ${args.selectedNation}',
               tag: 'NAVIGATION');
 
           return _FadeRoute(
@@ -38,10 +38,10 @@ class Routes {
             ),
           );
         }
-      case gameFieldLoadGame:
+      case fromLoadToGameFieldLoadGame:
         {
           final args = settings.arguments as LoadGameToGameFieldNavArg;
-          Logger.info('to: gameField for loading game; mapFileName: ${args.mapFileName}; slot: ${args.slot}',
+          Logger.info('route arguments: mapFileName: ${args.mapFileName}; slot: ${args.slot}',
               tag: 'NAVIGATION');
 
           return _FadeRoute(
@@ -51,10 +51,13 @@ class Routes {
             ),
           );
         }
-      case debugLogging:
+      case fromCoverToDebugLogging:
         {
-          Logger.info('to: debugLogging', tag: 'NAVIGATION');
           return _FadeRoute(TalkerScreen(talker: Logger.talkerFlutter));
+        }
+      case fromCoverToSettings:
+        {
+          return _FadeRoute(const SettingsScreen());
         }
       default:
         {

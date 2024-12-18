@@ -17,7 +17,7 @@ class SaveLoadScreen extends StatelessWidget {
           },
           onSlotSelected: (slot, mapFileName) {
             Navigator.of(context).pushNamed(
-              Routes.gameFieldLoadGame,
+              Routes.fromLoadToGameFieldLoadGame,
               arguments: LoadGameToGameFieldNavArg(mapFileName: mapFileName, slot: slot),
             );
           },

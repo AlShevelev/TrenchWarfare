@@ -67,6 +67,7 @@ flutter:
     - assets/images/screens/new_game/
     - assets/images/screens/new_game/maps/europe/
     - assets/images/screens/save_load/
+    - assets/images/screens/settings/
     - assets/images/screens/shared/
     - assets/images/screens/shared/banners/
     - assets/images/screens/shared/bookmarks/

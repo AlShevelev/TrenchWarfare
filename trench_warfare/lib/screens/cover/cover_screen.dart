@@ -38,7 +38,7 @@ class CoverScreen extends StatelessWidget {
               child: CoverScreenButton(
                 text: localization.tr('cover_new_game'),
                 onPress: () {
-                  Navigator.of(context).pushNamed(Routes.newGame);
+                  Navigator.of(context).pushNamed(Routes.fromCoverToMapSelection);
                 },
               ),
             ),
@@ -47,7 +47,7 @@ class CoverScreen extends StatelessWidget {
               child: CoverScreenButton(
                 text: localization.tr('cover_load'),
                 onPress: () {
-                  Navigator.of(context).pushNamed(Routes.loadGame);
+                  Navigator.of(context).pushNamed(Routes.fromCoverToLoadGame);
                 },
               ),
             ),
@@ -55,7 +55,9 @@ class CoverScreen extends StatelessWidget {
               padding: buttonsPadding,
               child: CoverScreenButton(
                 text: localization.tr('cover_settings'),
-                onPress: () {},
+                onPress: () {
+                  Navigator.of(context).pushNamed(Routes.fromCoverToSettings);
+                },
               ),
             ),
             if (kDebugMode)
@@ -64,7 +66,7 @@ class CoverScreen extends StatelessWidget {
                 child: CoverScreenButton(
                   text: 'TEST MAP',
                   onPress: () {
-                    Navigator.of(context).pushNamed(Routes.gameFieldNewGame,
+                    Navigator.of(context).pushNamed(Routes.fromMapSelectionToGameFieldNewGame,
                         arguments: NewGameToGameFieldNavArg(
                           mapName: 'assets/tiles/test/15x15_carriers_enemy_pc_reachable_by_water_only.tmx',
                           selectedNation: Nation.austriaHungary,
@@ -78,7 +80,7 @@ class CoverScreen extends StatelessWidget {
                 child: CoverScreenButton(
                   text: 'DEBUG LOGS',
                   onPress: () {
-                    Navigator.of(context).pushNamed(Routes.debugLogging);
+                    Navigator.of(context).pushNamed(Routes.fromCoverToDebugLogging);
                   },
                 ),
               ),
