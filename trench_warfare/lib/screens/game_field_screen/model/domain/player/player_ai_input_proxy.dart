@@ -96,7 +96,17 @@ class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   }
 
   @override
+  void onMenuSettingsButtonClick() {
+    // do nothing
+  }
+
+  @override
   void onSaveSlotSelected(GameSlot slot) {
+    // do nothing
+  }
+
+  @override
+  void onSettingsClosed(SettingsResult result) {
     // do nothing
   }
 }

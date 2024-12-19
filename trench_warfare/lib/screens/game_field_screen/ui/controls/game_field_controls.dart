@@ -6,6 +6,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/obj
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/win_defeat_turn_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/main_controls_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/save_load/save_load_screen.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/settings/settings_screen.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 
@@ -81,6 +82,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
               ObjectivesControls() => ObjectivesDialog(
                   gameField: widget._gameField,
                 ),
+              SettingsControls() => SettingsScreen(
+                gameField: widget._gameField,
+              ),
               _ => const SizedBox.shrink(),
             };
           }),

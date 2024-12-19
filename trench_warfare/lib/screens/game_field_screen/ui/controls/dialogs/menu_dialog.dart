@@ -59,7 +59,9 @@ class MenuDialog extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: GameFieldTextButton(
                           text: tr('settings_menu_dialog'),
-                          onPress: () {},
+                          onPress: () {
+                            _gameField.onMenuSettingsButtonClick();
+                          },
                         ),
                       ),
                       Padding(

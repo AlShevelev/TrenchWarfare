@@ -44,7 +44,7 @@ class _SettingsSliderState extends State<SettingsSlider> {
 
   @override
   Widget build(BuildContext context) {
-    const iconSize = 40.0;
+    const iconSize = 35.0;
 
     return Column(
       children: [

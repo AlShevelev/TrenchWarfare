@@ -143,3 +143,8 @@ class ObjectivesAreVisible implements State {
   @override
   String toString() => 'OBJECTIVES_ARE_VISIBLE';
 }
+
+class SettingsAreVisible implements State {
+  @override
+  String toString() => 'SETTINGS_ARE_VISIBLE';
+}

@@ -111,6 +111,11 @@ class OnMenuSaveButtonClick implements Event {
   String toString() => 'ON_MENU_SAVE_BUTTON_CLICK';
 }
 
+class OnMenuSettingsButtonClick implements Event {
+  @override
+  String toString() => 'ON_MENU_SETTINGS_BUTTON_CLICK';
+}
+
 class OnSaveSlotSelected implements Event {
   final GameSlot slot;
 
@@ -118,4 +123,14 @@ class OnSaveSlotSelected implements Event {
 
   @override
   String toString() => 'ON_SAVE_SLOT_SELECTED: {slot: $slot}';
+}
+
+class OnSettingsClosed implements Event {
+  final SettingsResult result;
+
+  OnSettingsClosed({required this.result});
+
+  @override
+  String toString() => 'ON_SETTINGS_CLOSED: {music: ${result.music}; sounds: ${result.sounds}; '
+      'myUnitsSpeed: ${result.myUnitsSpeed}; enemyUnitsSpeed: ${result.enemyUnitsSpeed};}';
 }

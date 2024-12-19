@@ -97,3 +97,7 @@ class SaveControls extends GameFieldControlsState {
 class ObjectivesControls extends GameFieldControlsState {
   ObjectivesControls();
 }
+
+class SettingsControls extends GameFieldControlsState {
+  SettingsControls();
+}

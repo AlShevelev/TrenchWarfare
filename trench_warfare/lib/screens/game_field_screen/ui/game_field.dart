@@ -19,6 +19,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objects/game_objects_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
+import 'package:trench_warfare/screens/settings/settings_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
@@ -51,7 +52,11 @@ abstract interface class GameFieldForControls {
 
   void onMenuSaveButtonClick();
 
+  void onMenuSettingsButtonClick();
+
   void onSaveSlotSelected(GameSlot slot);
+
+  void onSettingsClosed(SettingsResult result);
 }
 
 class GameField extends FlameGame
@@ -217,5 +222,11 @@ class GameField extends FlameGame
   void onMenuSaveButtonClick() => _viewModel.input.onMenuSaveButtonClick();
 
   @override
+  void onMenuSettingsButtonClick() => _viewModel.input.onMenuSettingsButtonClick();
+
+  @override
   void onSaveSlotSelected(GameSlot slot) => _viewModel.input.onSaveSlotSelected(slot);
+
+  @override
+  void onSettingsClosed(SettingsResult result) => _viewModel.input.onSettingsClosed(result);
 }

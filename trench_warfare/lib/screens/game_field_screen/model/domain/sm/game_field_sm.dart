@@ -165,6 +165,7 @@ class GameFieldStateMachine {
           OnMenuQuitButtonClick() => FromMenuIsVisibleOnMenuQuitButtonClick(_context).process(),
           OnMenuSaveButtonClick() => FromMenuIsVisibleOnMenuSaveButtonClick(_context).process(),
           OnMenuObjectivesButtonClick() => FromMenuIsVisibleOnMenuObjectivesButtonClick(_context).process(),
+          OnMenuSettingsButtonClick() => FromMenuIsVisibleOnMenuSettingsButtonClick(_context).process(),
           _ => _currentState,
         },
       SaveSlotSelection() => switch (event) {
@@ -176,6 +177,10 @@ class GameFieldStateMachine {
       ObjectivesAreVisible() => switch (event) {
         OnPopupDialogClosed() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
         OnPhoneBackAction() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
+          _ => _currentState,
+        },
+        SettingsAreVisible() => switch (event) {
+          OnSettingsClosed(result: var result) => FromSettingsAreVisibleOnSettingsClosed(_context).process(),
           _ => _currentState,
         },
     };
