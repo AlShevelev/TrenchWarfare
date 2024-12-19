@@ -28,5 +28,9 @@ abstract class DaoBase {
   }
 
   @protected
-  int put<T>(Box<T> box, T entity) => box.put(entity, mode: PutMode.insert);
+  int insert<T>(Box<T> box, T entity) => box.put(entity, mode: PutMode.insert);
+
+  /// Insert (if given object's ID is zero) or update an existing object.
+  @protected
+  int put<T>(Box<T> box, T entity) => box.put(entity, mode: PutMode.put);
 }

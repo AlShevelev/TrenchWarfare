@@ -29,17 +29,17 @@ class SaveLoadGameDao extends DaoBase {
         _troopTransferBox = troopTransferBox,
         _unitBox = unitBox;
 
-  int createSlot(SaveSlotDbEntity entity) => put(_slotBox, entity);
+  int createSlot(SaveSlotDbEntity entity) => insert(_slotBox, entity);
 
-  int createCell(SaveGameFieldCellDbEntity entity) => put(_cellBox, entity);
+  int createCell(SaveGameFieldCellDbEntity entity) => insert(_cellBox, entity);
 
-  int createNation(SaveNationDbEntity entity) => put(_nationBox, entity);
+  int createNation(SaveNationDbEntity entity) => insert(_nationBox, entity);
 
-  int createSettings(SaveSettingsStorageDbEntity entity) => put(_settingsStorageBox, entity);
+  int createSettings(SaveSettingsStorageDbEntity entity) => insert(_settingsStorageBox, entity);
 
-  int createTroopTransfer(SaveTroopTransferDbEntity entity) => put(_troopTransferBox, entity);
+  int createTroopTransfer(SaveTroopTransferDbEntity entity) => insert(_troopTransferBox, entity);
 
-  int createUnit(SaveUnitDbEntity entity) => put(_unitBox, entity);
+  int createUnit(SaveUnitDbEntity entity) => insert(_unitBox, entity);
 
   List<SaveSlotDbEntity> readAllSlots() => read(_slotBox.query().order(SaveSlotDbEntity_.slotNumber));
 

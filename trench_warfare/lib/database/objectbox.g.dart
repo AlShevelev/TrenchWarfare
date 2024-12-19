@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'
 import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import '../database/entities/key_value_db_entity.dart';
 import '../database/entities/save_game_field_cell_db_entity.dart';
 import '../database/entities/save_nation_db_entity.dart';
 import '../database/entities/save_settings_storage_db_entity.dart';
@@ -492,6 +493,30 @@ final _entities = <obx_int.ModelEntity>[
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(16, 8236510794821688330),
+      name: 'KeyValueDbEntity',
+      lastPropertyId: const obx_int.IdUid(3, 1504312151144897400),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 1462349663655532551),
+            name: 'dbId',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 7129891787318555872),
+            name: 'key',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 1504312151144897400),
+            name: 'value',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
 ];
 
@@ -530,7 +555,7 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(15, 2175914356507412232),
+      lastEntityId: const obx_int.IdUid(16, 8236510794821688330),
       lastIndexId: const obx_int.IdUid(0, 0),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
@@ -1132,6 +1157,38 @@ obx_int.ModelDefinition getObjectBoxModel() {
               state: stateParam);
 
           return object;
+        }),
+    KeyValueDbEntity: obx_int.EntityDefinition<KeyValueDbEntity>(
+        model: _entities[7],
+        toOneRelations: (KeyValueDbEntity object) => [],
+        toManyRelations: (KeyValueDbEntity object) => {},
+        getId: (KeyValueDbEntity object) => object.dbId,
+        setId: (KeyValueDbEntity object, int id) {
+          object.dbId = id;
+        },
+        objectToFB: (KeyValueDbEntity object, fb.Builder fbb) {
+          final keyOffset = fbb.writeString(object.key);
+          final valueOffset = fbb.writeString(object.value);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.dbId);
+          fbb.addOffset(1, keyOffset);
+          fbb.addOffset(2, valueOffset);
+          fbb.finish(fbb.endTable());
+          return object.dbId;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final dbIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+          final keyParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final valueParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final object = KeyValueDbEntity(
+              dbId: dbIdParam, key: keyParam, value: valueParam);
+
+          return object;
         })
   };
 
@@ -1497,4 +1554,19 @@ class SaveUnitDbEntity_ {
   /// See [SaveUnitDbEntity.state].
   static final state =
       obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[16]);
+}
+
+/// [KeyValueDbEntity] entity fields to define ObjectBox queries.
+class KeyValueDbEntity_ {
+  /// See [KeyValueDbEntity.dbId].
+  static final dbId =
+      obx.QueryIntegerProperty<KeyValueDbEntity>(_entities[7].properties[0]);
+
+  /// See [KeyValueDbEntity.key].
+  static final key =
+      obx.QueryStringProperty<KeyValueDbEntity>(_entities[7].properties[1]);
+
+  /// See [KeyValueDbEntity.value].
+  static final value =
+      obx.QueryStringProperty<KeyValueDbEntity>(_entities[7].properties[2]);
 }
