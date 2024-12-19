@@ -21,10 +21,10 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   Future<void> init() async {
     // Fake data
     final dataState = _DataIsLoaded(
-      music: SettingsConstants.defaultValue,
-      sounds: SettingsConstants.defaultValue,
-      myUnitsSpeed: SettingsConstants.defaultValue,
-      enemyUnitsSpeed: SettingsConstants.defaultValue,
+      music: SettingsStorageFacade.music ?? SettingsConstants.defaultValue,
+      sounds: SettingsStorageFacade.sounds ?? SettingsConstants.defaultValue,
+      myUnitsSpeed: SettingsStorageFacade.myUnitsSpeed ?? SettingsConstants.defaultValue,
+      enemyUnitsSpeed: SettingsStorageFacade.enemyUnitsSpeed ?? SettingsConstants.defaultValue,
       minValue: SettingsConstants.minValue,
       maxValue: SettingsConstants.maxValue,
     );
@@ -35,16 +35,28 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   }
 
   @override
-  void onEnemyUnitsSpeedUpdated(double value) => _state = _state?.copy(enemyUnitsSpeed: value);
+  void onEnemyUnitsSpeedUpdated(double value) {
+    _state = _state?.copy(enemyUnitsSpeed: value);
+    SettingsStorageFacade.setEnemyUnitsSpeed(value);
+  }
 
   @override
-  void onMusicUpdated(double value) => _state = _state?.copy(music: value);
+  void onMusicUpdated(double value) {
+    _state = _state?.copy(music: value);
+    SettingsStorageFacade.setMusic(value);
+  }
 
   @override
-  void onMyUnitsSpeedUpdated(double value) => _state = _state?.copy(myUnitsSpeed: value);
+  void onMyUnitsSpeedUpdated(double value) {
+    _state = _state?.copy(myUnitsSpeed: value);
+    SettingsStorageFacade.setMyUnitsSpeed(value);
+  }
 
   @override
-  void onSoundsUpdated(double value) => _state = _state?.copy(sounds: value);
+  void onSoundsUpdated(double value) {
+    _state = _state?.copy(sounds: value);
+    SettingsStorageFacade.setSounds(value);
+  }
 
   @override
   void dispose() {
