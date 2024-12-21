@@ -6,6 +6,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required super.nation,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
+    required super.animationTime,
   });
 
   @override
@@ -219,10 +220,10 @@ class MovementWithBattleCalculator extends MovementCalculator {
           startCell: priorCell!,
           endCell: cell,
           unit: attackingUnit,
-          time: AnimationConstants.unitMovementTime,
+          time: _animationTime.unitMovementTime,
         ));
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
-        updateEvents.add(Pause(AnimationConstants.unitMovementPause));
+        updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
       priorCell = cell;
     }
@@ -237,7 +238,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
           Tuple2(attackingCell, attackingDamageType),
           Tuple2(defendingCell, defendingDamageType),
         ],
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 
@@ -246,7 +247,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 
@@ -255,13 +256,13 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 
@@ -270,13 +271,13 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 

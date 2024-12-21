@@ -7,6 +7,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
+    required super.animationTime,
   });
 
   @override
@@ -92,10 +93,10 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
           startCell: priorCell!,
           endCell: cell,
           unit: unit,
-          time: AnimationConstants.unitMovementTime,
+          time: _animationTime.unitMovementTime,
         ));
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
-        updateEvents.add(Pause(AnimationConstants.unitMovementPause));
+        updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
       priorCell = cell;
     }
@@ -131,7 +132,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       }
     }
 
-    updateEvents.add(Pause(AnimationConstants.unitMovementPause));
+    updateEvents.add(Pause(_animationTime.unitMovementPause));
     updateEvents.add(AnimationCompleted());
 
     _updateGameObjectsEvent.update(updateEvents);

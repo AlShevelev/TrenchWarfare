@@ -5,6 +5,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     super.updateGameObjectsEvent,
     super.cell,
     super.isAI,
+    super.animationTime,
   );
 
   @override
@@ -31,15 +32,15 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   @override
   Iterable<UpdateGameEvent> _getUpdateEvents() => [
-    ShowDamage(
-      cell: _cell,
-      damageType: DamageType.bloodSplash,
-      time: AnimationConstants.damageAnimationTime,
-    ),
-    UpdateCell(
-      _cell,
-      updateBorderCells: [],
-    ),
-    AnimationCompleted(),
-  ];
+        ShowDamage(
+          cell: _cell,
+          damageType: DamageType.bloodSplash,
+          time: _animationTime.damageAnimationTime,
+        ),
+        UpdateCell(
+          _cell,
+          updateBorderCells: [],
+        ),
+        AnimationCompleted(),
+      ];
 }

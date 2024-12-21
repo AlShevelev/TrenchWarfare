@@ -132,5 +132,5 @@ class OnSettingsClosed implements Event {
 
   @override
   String toString() => 'ON_SETTINGS_CLOSED: {music: ${result.music}; sounds: ${result.sounds}; '
-      'myUnitsSpeed: ${result.myUnitsSpeed}; enemyUnitsSpeed: ${result.enemyUnitsSpeed};}';
+      'myUnitsSpeed: ${result.humanUnitsSpeed}; enemyUnitsSpeed: ${result.aiUnitsSpeed};}';
 }

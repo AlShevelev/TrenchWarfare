@@ -23,6 +23,8 @@ class GameFieldStateMachineContext {
 
   final GameFieldModelCallback modelCallback;
 
+  final AnimationTimeFacade animationTimeFacade;
+
   GameFieldStateMachineContext({
     required this.gameField,
     required this.nation,
@@ -35,5 +37,6 @@ class GameFieldStateMachineContext {
     required this.dayStorage,
     required this.gameOverConditionsCalculator,
     required this.modelCallback,
+    required this.animationTimeFacade,
   });
 }

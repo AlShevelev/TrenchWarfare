@@ -19,6 +19,7 @@ class GameFieldStateMachine {
     SimpleStream<GameFieldControlsState> controlsState,
     DayStorage dayStorage,
     GameOverConditionsCalculator gameOverConditionsCalculator,
+    AnimationTimeFacade animationTimeFacade,
     this._modelCallback, {
     required bool isAI,
     required bool isGameLoaded,
@@ -35,6 +36,7 @@ class GameFieldStateMachine {
       dayStorage: dayStorage,
       gameOverConditionsCalculator: gameOverConditionsCalculator,
       modelCallback: _modelCallback,
+      animationTimeFacade: animationTimeFacade,
     );
 
     if (isGameLoaded && isAI) {
@@ -175,12 +177,12 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       ObjectivesAreVisible() => switch (event) {
-        OnPopupDialogClosed() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
-        OnPhoneBackAction() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
+          OnPopupDialogClosed() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
+          OnPhoneBackAction() => FromObjectivesAreVisibleOnPopupDialogClosed(_context).process(),
           _ => _currentState,
         },
-        SettingsAreVisible() => switch (event) {
-          OnSettingsClosed(result: var result) => FromSettingsAreVisibleOnSettingsClosed(_context).process(),
+      SettingsAreVisible() => switch (event) {
+          OnSettingsClosed(result: var result) => FromSettingsAreVisibleOnSettingsClosed(_context).process(result),
           _ => _currentState,
         },
     };

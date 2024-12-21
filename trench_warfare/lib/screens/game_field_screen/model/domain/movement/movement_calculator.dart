@@ -16,16 +16,21 @@ abstract class MovementCalculator {
   @protected
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
+  @protected
+  final AnimationTime _animationTime;
+
   MovementCalculator({
     required GameFieldRead gameField,
     required Nation nation,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
+    required AnimationTime animationTime,
   })  : _gameField = gameField,
         _nation = nation,
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _pathFacade = PathFacade(gameField),
-        _gameOverConditionsCalculator = gameOverConditionsCalculator;
+        _gameOverConditionsCalculator = gameOverConditionsCalculator,
+        _animationTime = animationTime;
 
   State startMovement(Iterable<GameFieldCell> path);
 

@@ -5,8 +5,10 @@ class FromSettingsAreVisibleOnSettingsClosed {
 
   FromSettingsAreVisibleOnSettingsClosed(this._context);
 
-  State process() {
+  State process(SettingsResult result) {
     TransitionUtils(_context).closeUI();
+    
+    _context.animationTimeFacade.updateTime(result);
 
     return ReadyForInput();
   }

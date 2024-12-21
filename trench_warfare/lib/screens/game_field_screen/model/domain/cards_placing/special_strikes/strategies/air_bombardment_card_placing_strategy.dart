@@ -5,6 +5,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     super.updateGameObjectsEvent,
     super.cell,
     super.isAI,
+    super.animationTime,
   );
 
   @override
@@ -28,7 +29,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     ShowDamage(
       cell: _cell,
       damageType: DamageType.explosion,
-      time: AnimationConstants.damageAnimationTime,
+      time: _animationTime.damageAnimationTime,
     ),
     UpdateCell(
       _cell,

@@ -8,15 +8,15 @@ class SettingsResult {
   final double sounds;
 
   /// [SettingsConstants.minValue - SettingsConstants.maxValue]
-  final double myUnitsSpeed;
+  final double humanUnitsSpeed;
 
   /// [SettingsConstants.minValue - SettingsConstants.maxValue]
-  final double enemyUnitsSpeed;
+  final double aiUnitsSpeed;
 
   SettingsResult({
     required this.music,
     required this.sounds,
-    required this.myUnitsSpeed,
-    required this.enemyUnitsSpeed,
+    required this.humanUnitsSpeed,
+    required this.aiUnitsSpeed,
   });
 }

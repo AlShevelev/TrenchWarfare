@@ -29,6 +29,7 @@ class FromPathIsShownOnClick {
         gameField: _context.gameField,
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
         gameOverConditionsCalculator: _context.gameOverConditionsCalculator,
+        animationTime: _context.animationTimeFacade.getAnimationTime(!_context.isAI),
       ).startMovement(pathToProcess);
     }
 

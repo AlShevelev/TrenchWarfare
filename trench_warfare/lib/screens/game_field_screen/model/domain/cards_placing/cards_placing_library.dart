@@ -1,7 +1,6 @@
 library cards_placing;
 
 import 'package:flutter/foundation.dart';
-import 'package:trench_warfare/core/animaition_constants.dart';
 import 'package:trench_warfare/core/enums/special_strike_type.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
@@ -14,6 +13,7 @@ import 'package:trench_warfare/core/enums/unit_boost.dart';
 import 'package:trench_warfare/core/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/calculators/money_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';

@@ -6,6 +6,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     required super.nation,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
+    required super.animationTime,
   });
 
   @override
@@ -162,7 +163,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 
@@ -171,13 +172,13 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       updateEvents.add(ShowDamage(
         cell: defendingCell,
         damageType: defendingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(ShowDamage(
         cell: attackingCell,
         damageType: attackingDamageType,
-        time: AnimationConstants.damageAnimationTime,
+        time: _animationTime.damageAnimationTime,
       ));
     }
 

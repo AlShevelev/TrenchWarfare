@@ -27,7 +27,8 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
     GameFieldModelCallback modelCallback,
     DayStorage dayStorage,
     GameOverConditionsCalculator gameOverConditionsCalculator,
-    MoneyStorage money, {
+    MoneyStorage money,
+    AnimationTimeFacade animationTimeFacade, {
     required bool isAI,
     required bool isGameLoaded,
   }) {
@@ -45,6 +46,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
       controlsState,
       dayStorage,
       gameOverConditionsCalculator,
+      animationTimeFacade,
       modelCallback,
       isAI: isAI,
       isGameLoaded: isGameLoaded,

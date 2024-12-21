@@ -10,6 +10,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     super.cell,
     GameFieldRead gameField,
     super.isAI,
+    super.animationTime,
   ) {
     _gameField = gameField;
   }
@@ -59,7 +60,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     updateEvents.add(ShowComplexDamage(
       cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
-      time: AnimationConstants.damageAnimationTime,
+      time: _animationTime.damageAnimationTime,
     ));
 
     updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));

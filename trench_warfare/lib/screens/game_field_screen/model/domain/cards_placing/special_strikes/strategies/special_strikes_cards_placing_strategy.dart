@@ -2,23 +2,26 @@ part of cards_placing;
 
 abstract interface class SpecialStrikesCardsPlacingStrategy {
   @protected
-  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
   @protected
-  late final GameFieldCell _cell;
+  final GameFieldCell _cell;
 
   @protected
-  late final bool _isAI;
+  final bool _isAI;
+
+  @protected
+  final AnimationTime _animationTime;
 
   SpecialStrikesCardsPlacingStrategy(
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     GameFieldCell cell,
     bool isAI,
-  ) {
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-    _cell = cell;
-    _isAI = isAI;
-  }
+    AnimationTime animationTime,
+  )   : _updateGameObjectsEvent = updateGameObjectsEvent,
+        _cell = cell,
+        _isAI = isAI,
+        _animationTime = animationTime;
 
   @protected
   void updateGameField();

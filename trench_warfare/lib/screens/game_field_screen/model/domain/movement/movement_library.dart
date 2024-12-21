@@ -1,11 +1,11 @@
 library movement;
 
 import 'package:flutter/foundation.dart';
-import 'package:trench_warfare/core/animaition_constants.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/battle/battle_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm_library.dart';

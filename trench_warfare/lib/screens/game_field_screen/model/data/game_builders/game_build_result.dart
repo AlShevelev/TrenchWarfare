@@ -23,6 +23,9 @@ class GameBuildResult {
 
   final Map<Nation, MoneyStorage> money;
 
+  final double humanUnitsSpeed;
+  final double aiUnitsSpeed;
+
   GameBuildResult({
     required this.humanIndex,
     required this.isGameLoaded,
@@ -35,5 +38,7 @@ class GameBuildResult {
     required this.playingNations,
     required this.transfers,
     required this.money,
+    required this.humanUnitsSpeed,
+    required this.aiUnitsSpeed,
   });
 }

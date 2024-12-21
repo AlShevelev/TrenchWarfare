@@ -10,8 +10,8 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   SettingsResult get settingsValue => SettingsResult(
         music: _state?.music ?? SettingsConstants.defaultValue,
         sounds: _state?.sounds ?? SettingsConstants.defaultValue,
-        myUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultValue,
-        enemyUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultValue,
+        humanUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultValue,
+        aiUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultValue,
       );
 
   _SettingsViewModel() {
@@ -23,8 +23,8 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
     final dataState = _DataIsLoaded(
       music: SettingsStorageFacade.music ?? SettingsConstants.defaultValue,
       sounds: SettingsStorageFacade.sounds ?? SettingsConstants.defaultValue,
-      myUnitsSpeed: SettingsStorageFacade.myUnitsSpeed ?? SettingsConstants.defaultValue,
-      enemyUnitsSpeed: SettingsStorageFacade.enemyUnitsSpeed ?? SettingsConstants.defaultValue,
+      myUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed ?? SettingsConstants.defaultValue,
+      enemyUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed ?? SettingsConstants.defaultValue,
       minValue: SettingsConstants.minValue,
       maxValue: SettingsConstants.maxValue,
     );
@@ -37,7 +37,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   @override
   void onEnemyUnitsSpeedUpdated(double value) {
     _state = _state?.copy(enemyUnitsSpeed: value);
-    SettingsStorageFacade.setEnemyUnitsSpeed(value);
+    SettingsStorageFacade.setAiUnitsSpeed(value);
   }
 
   @override
@@ -49,7 +49,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   @override
   void onMyUnitsSpeedUpdated(double value) {
     _state = _state?.copy(myUnitsSpeed: value);
-    SettingsStorageFacade.setMyUnitsSpeed(value);
+    SettingsStorageFacade.setHumanUnitsSpeed(value);
   }
 
   @override

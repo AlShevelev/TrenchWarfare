@@ -5,6 +5,7 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/game_builders/game_builders_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/save_game/game_saver.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
@@ -92,6 +93,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _humanIndex = gameBuildResult.humanIndex;
     _currentPlayerIndex = _humanIndex;
 
+    final animationTimeFacade = AnimationTimeFacade(
+      humanUnitsSpeed: gameBuildResult.humanUnitsSpeed,
+      aiUnitsSpeed: gameBuildResult.aiUnitsSpeed,
+    );
+
     for (var i = 0; i < _sortedPlayers.length; i++) {
       _createPlayer(
         index: i,
@@ -103,6 +109,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         initialTransfers: gameBuildResult.transfers,
         money: gameBuildResult.money,
         isGameLoaded: gameBuildResult.isGameLoaded,
+        animationTimeFacade: animationTimeFacade,
       );
     }
 
@@ -160,6 +167,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required Map<Nation, Iterable<TroopTransferReadForSaving>> initialTransfers,
     required Map<Nation, MoneyStorage> money,
     required bool isGameLoaded,
+    required AnimationTimeFacade animationTimeFacade,
   }) {
     final isHuman = index == _humanIndex;
 
@@ -180,6 +188,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       dayStorage,
       gameOverConditionsCalculator,
       money[nationRecord.code]!,
+      animationTimeFacade,
       isAI: !isHuman,
       isGameLoaded: isGameLoaded,
     );

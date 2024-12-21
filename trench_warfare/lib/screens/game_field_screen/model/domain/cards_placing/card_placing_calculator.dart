@@ -1,25 +1,27 @@
 part of cards_placing;
 
 class CardPlacingCalculator implements PlacingCalculator {
-  late final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
 
-  late final Map<int, GameFieldCellRead> _oldInactiveCells;
+  final Map<int, GameFieldCellRead> _oldInactiveCells;
 
-  late final CardsPlacingStrategy _strategy;
+  final CardsPlacingStrategy _strategy;
 
-  late final bool _isAI;
+  final bool _isAI;
+
+  final AnimationTime _animationTime;
 
   CardPlacingCalculator({
     required CardsPlacingStrategy strategy,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required Map<int, GameFieldCellRead> oldInactiveCells,
     required bool isAI,
-  }) {
-    _strategy = strategy;
-    _updateGameObjectsEvent = updateGameObjectsEvent;
-    _oldInactiveCells = oldInactiveCells;
-    _isAI = isAI;
-  }
+    required AnimationTime animationTime,
+  }) : _strategy = strategy,
+    _updateGameObjectsEvent = updateGameObjectsEvent,
+    _oldInactiveCells = oldInactiveCells,
+    _isAI = isAI,
+    _animationTime = animationTime;
 
   @override
   State place() {
@@ -39,7 +41,7 @@ class CardPlacingCalculator implements PlacingCalculator {
     ));
 
     events.add(
-      Pause(_isAI ? AnimationConstants.pauseAfterBuildingAi : AnimationConstants.pauseAfterBuildingHuman),
+      Pause(_animationTime.pauseAfterBuilding),
     );
 
     events.add(AnimationCompleted());

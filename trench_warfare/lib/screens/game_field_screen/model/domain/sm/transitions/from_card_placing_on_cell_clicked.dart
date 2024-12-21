@@ -15,6 +15,8 @@ class FromCardPlacingOnCellClicked {
       return CardPlacing(card, cellsImpossibleToBuild);
     }
 
+    final animationTime = _context.animationTimeFacade.getAnimationTime(!_context.isAI);
+
     final PlacingCalculator calculator = switch (card) {
       GameFieldControlsUnitCard() || GameFieldControlsUnitCardBrief() => CardPlacingCalculator(
           strategy: UnitsCardsPlacingStrategy(
@@ -27,6 +29,7 @@ class FromCardPlacingOnCellClicked {
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
+          animationTime: animationTime,
         ),
       GameFieldControlsUnitBoostersCard() ||
       GameFieldControlsUnitBoostersCardBrief() =>
@@ -41,6 +44,7 @@ class FromCardPlacingOnCellClicked {
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
+          animationTime: animationTime,
         ),
       GameFieldControlsTerrainModifiersCard() ||
       GameFieldControlsTerrainModifiersCardBrief() =>
@@ -55,6 +59,7 @@ class FromCardPlacingOnCellClicked {
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
+          animationTime: animationTime,
         ),
       GameFieldControlsProductionCentersCard() ||
       GameFieldControlsProductionCentersCardBrief() =>
@@ -69,6 +74,7 @@ class FromCardPlacingOnCellClicked {
           updateGameObjectsEvent: _context.updateGameObjectsEvent,
           oldInactiveCells: cellsImpossibleToBuild,
           isAI: _context.isAI,
+          animationTime: animationTime,
         ),
       GameFieldControlsSpecialStrikesCard() ||
       GameFieldControlsSpecialStrikesCardBrief() =>
@@ -78,22 +84,26 @@ class FromCardPlacingOnCellClicked {
                 _context.updateGameObjectsEvent,
                 cell,
                 _context.isAI,
+                animationTime,
               ),
             SpecialStrikeType.flechettes => FlechettesCardPlacingStrategy(
                 _context.updateGameObjectsEvent,
                 cell,
                 _context.isAI,
+                animationTime,
               ),
             SpecialStrikeType.flameTroopers => FlameTroopersCardPlacingStrategy(
                 _context.updateGameObjectsEvent,
                 cell,
                 _context.isAI,
+                animationTime,
               ),
             SpecialStrikeType.gasAttack => GasAttackCardPlacingStrategy(
                 _context.updateGameObjectsEvent,
                 cell,
                 _context.gameField,
                 _context.isAI,
+                animationTime,
               ),
             SpecialStrikeType.propaganda => PropagandaCardPlacingStrategy(
                 _context.updateGameObjectsEvent,
@@ -101,6 +111,7 @@ class FromCardPlacingOnCellClicked {
                 _context.gameField,
                 _context.nation,
                 _context.isAI,
+                animationTime,
               ),
           },
           oldInactiveCells: cellsImpossibleToBuild,

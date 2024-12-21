@@ -10,6 +10,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
+    required super.animationTime,
   });
 
   @override
@@ -129,10 +130,10 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
           startCell: priorCell!,
           endCell: cell,
           unit: unit,
-          time: AnimationConstants.unitMovementTime,
+          time: _animationTime.unitMovementTime,
         ));
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
-        updateEvents.add(Pause(AnimationConstants.unitMovementPause));
+        updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
       priorCell = cell;
     }
@@ -140,7 +141,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     updateEvents.add(ShowDamage(
       cell: reachableCells.last,
       damageType: DamageType.explosion,
-      time: AnimationConstants.damageAnimationTime,
+      time: _animationTime.damageAnimationTime,
     ));
 
     updateEvents.add(RemoveUntiedUnit(unit));
@@ -174,7 +175,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       }
     }
 
-    updateEvents.add(Pause(AnimationConstants.unitMovementPause));
+    updateEvents.add(Pause(_animationTime.unitMovementPause));
     updateEvents.add(AnimationCompleted());
 
     _updateGameObjectsEvent.update(updateEvents);

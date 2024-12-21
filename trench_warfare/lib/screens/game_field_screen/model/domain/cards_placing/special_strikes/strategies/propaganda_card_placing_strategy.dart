@@ -28,6 +28,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     GameFieldRead gameField,
     Nation myNation,
     super.isAI,
+    super.animationTime,
   ) {
     _gameField = gameField;
     _myNation = myNation;
@@ -109,7 +110,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     updateEvents.add(ShowDamage(
       cell: _cell,
       damageType: DamageType.propaganda,
-      time: AnimationConstants.damageAnimationTime,
+      time: _animationTime.damageAnimationTime,
     ));
 
     switch (_effect) {
@@ -131,7 +132,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
               startCell: _cell,
               endCell: newCell,
               unit: unit,
-              time: AnimationConstants.unitMovementTime,
+              time: _animationTime.unitMovementTime,
             ),
             UpdateCell(newCell, updateBorderCells: []),
             RemoveUntiedUnit(unit),

@@ -5,6 +5,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     super.updateGameObjectsEvent,
     super.cell,
     super.isAI,
+    super.animationTime,
   );
 
   @override
@@ -36,7 +37,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
         ShowDamage(
           cell: _cell,
           damageType: DamageType.flame,
-          time: AnimationConstants.damageAnimationTime,
+          time: _animationTime.damageAnimationTime,
         ),
         UpdateCell(
           _cell,
