@@ -31,5 +31,5 @@ class Database {
     _store = await openStore();
   }
 
-  void close() => _store.close();
+  static void close() => _store.close();
 }

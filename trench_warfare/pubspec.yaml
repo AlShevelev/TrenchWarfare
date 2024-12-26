@@ -22,6 +22,7 @@ dependencies:
   objectbox: ^4.0.2
   objectbox_flutter_libs: any
   xml: ^6.5.0
+  audioplayers: 6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,5 +72,10 @@ flutter:
     - assets/images/screens/shared/
     - assets/images/screens/shared/banners/
     - assets/images/screens/shared/bookmarks/
+
     # localisation
     - assets/translations/
+
+    #audio
+    - assets/audio/music/
+    - assets/audio/sounds/

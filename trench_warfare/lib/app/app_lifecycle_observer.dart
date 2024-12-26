@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:trench_warfare/database/database.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class AppLifecycleObserver extends StatefulWidget {
   final Widget child;
@@ -29,6 +31,9 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> with Widget
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+
+    Database.close();
+
     super.dispose();
   }
 
@@ -36,5 +41,12 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> with Widget
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+
+    init();
+  }
+
+  Future init() async {
+    await Database.start();
+    Logger.init();
   }
 }
