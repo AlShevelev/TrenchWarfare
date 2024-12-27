@@ -1,0 +1,155 @@
+part of audio;
+
+abstract interface class AudioControllerPlaySound {
+  void playSound(SoundType type);
+}
+
+abstract interface class AudioControllerSetVolume {
+  /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
+  void setSoundsVolume(double value);
+
+  /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
+  void setMusicVolume(double value);
+}
+
+
+class AudioController implements AudioControllerPlaySound, AudioControllerSetVolume {
+  late final AudioPlayer _musicPlayer = AudioPlayer(playerId: 'MUSIC_PLAYER');
+  late final AudioPlayer _soundsPlayer = AudioPlayer(playerId: 'SOUND_PLAYER');
+
+  int _activeTrackIndex = 0;
+
+  final _tracksToPlay = ['1_cover.ogg', '2.ogg', '3.ogg', '4.ogg', '5.ogg'];
+
+  ValueNotifier<AppLifecycleState>? _lifecycleNotifier;
+
+  AudioController() {
+    _musicPlayer.onPlayerComplete.listen(_playNextMusicTrack);
+  }
+
+  Future<void> init() async {
+    await AudioCache.instance.loadAll(SoundType.values.map((s) => _getSoundFile(s)).toList(growable: false));
+
+    _setVolume(SettingsStorageFacade.sounds, _soundsPlayer);
+
+    _setVolume(SettingsStorageFacade.music, _musicPlayer);
+    _playMusicTrack(0);
+  }
+
+  void dispose() {
+    _lifecycleNotifier?.removeListener(_handleAppLifecycle);
+
+    _stopAllSound();
+
+    _musicPlayer.dispose();
+    _soundsPlayer.dispose();
+  }
+
+  void attachLifecycleNotifier(ValueNotifier<AppLifecycleState> lifecycleNotifier) {
+    _lifecycleNotifier?.removeListener(_handleAppLifecycle);
+
+    lifecycleNotifier.addListener(_handleAppLifecycle);
+    _lifecycleNotifier = lifecycleNotifier;
+  }
+
+  @override
+  void playSound(SoundType type) {
+    if (_isMuted(_soundsPlayer)) {
+      return;
+    }
+
+    _soundsPlayer.play(AssetSource(_getSoundFile(type)));
+  }
+
+  @override
+  void setMusicVolume(double value) {
+    _setVolume(value, _musicPlayer);
+  }
+
+  @override
+  void setSoundsVolume(double value) => _setVolume(value, _soundsPlayer);
+
+  void _handleAppLifecycle() {
+    switch (_lifecycleNotifier!.value) {
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        _stopAllSound();
+        break;
+      case AppLifecycleState.resumed:
+        _resumeMusic();
+        break;
+      case AppLifecycleState.inactive:
+        // No need to react to this state change.
+        break;
+      case AppLifecycleState.hidden:
+        // No need to react to this state change.
+        break;
+    }
+  }
+
+  String _getSoundFile(SoundType type) {
+    final fileName = switch (type) {
+      SoundType.shot => 'gun_shots',
+      SoundType.explosion => 'explosion',
+      SoundType.flame => 'flame',
+      SoundType.gasAttack => 'gas_attack',
+      SoundType.flechettes => 'flechettes',
+      SoundType.win => 'win',
+      SoundType.propagandaSuccess => 'propaganda_success',
+      SoundType.propagandaFail => 'propaganda_fail',
+      SoundType.defeat => 'defeat',
+    };
+
+    return 'audio/sounds/$fileName.ogg';
+  }
+
+  void _playNextMusicTrack(void _) {
+    var newActiveTrackIndex = RandomGen.randomInt(_tracksToPlay.length);
+    while (newActiveTrackIndex == _activeTrackIndex) {
+      newActiveTrackIndex = RandomGen.randomInt(_tracksToPlay.length);
+    }
+
+    _playMusicTrack(newActiveTrackIndex);
+  }
+
+  Future<void> _playMusicTrack(int index) async {
+    _activeTrackIndex = index;
+    await _musicPlayer.play(AssetSource('audio/music/${_tracksToPlay[index]}'));
+  }
+
+  void _stopAllSound() {
+    if (_musicPlayer.state == PlayerState.playing) {
+      _musicPlayer.pause();
+    }
+
+    _soundsPlayer.stop();
+  }
+
+  Future<void> _resumeMusic() async {
+    switch (_musicPlayer.state) {
+      case PlayerState.paused:
+        try {
+          await _musicPlayer.resume();
+        } catch (e) {
+          _playMusicTrack(0);
+        }
+        break;
+      case PlayerState.stopped:
+        _playMusicTrack(0);
+        break;
+      case PlayerState.playing:
+        break;
+      case PlayerState.completed:
+        _playMusicTrack(0);
+        break;
+      case PlayerState.disposed:
+        break;
+    }
+  }
+
+  /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
+  void _setVolume(double value, AudioPlayer player) =>
+    player.setVolume(value / SettingsConstants.maxValue);
+
+  bool _isMuted(AudioPlayer player) => player.volume == 0.0;
+}

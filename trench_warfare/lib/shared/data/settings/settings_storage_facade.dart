@@ -1,3 +1,4 @@
+import 'package:trench_warfare/core/settings_constants.dart';
 import 'package:trench_warfare/database/database.dart';
 
 class SettingsStorageFacade {
@@ -8,19 +9,36 @@ class SettingsStorageFacade {
   static const String _humanUnitsSpeedKey = 'humanUnitsSpeedSettingsKey';
   static const String _aiUnitsSpeedKey = 'aiUnitsSpeedSettingsKey';
 
-  static double? get music => _dao.readDouble(_musicKey);
+  static double _music = _dao.readDouble(_musicKey) ?? SettingsConstants.defaultValue;
+  static double _sounds = _dao.readDouble(_soundsKey) ?? SettingsConstants.defaultValue;
+  static double _humanUnitsSpeed = _dao.readDouble(_humanUnitsSpeedKey) ?? SettingsConstants.defaultValue;
+  static double _aiUnitsSpeed = _dao.readDouble(_aiUnitsSpeedKey) ?? SettingsConstants.defaultValue;
 
-  static double? get sounds => _dao.readDouble(_soundsKey);
+  static double get music => _music;
 
-  static double? get humanUnitsSpeed => _dao.readDouble(_humanUnitsSpeedKey);
+  static double get sounds => _sounds;
 
-  static double? get aiUnitsSpeed => _dao.readDouble(_aiUnitsSpeedKey);
+  static double get humanUnitsSpeed => _humanUnitsSpeed;
 
-  static void setMusic(double value) => _dao.putDouble(_musicKey, value);
+  static double get aiUnitsSpeed => _aiUnitsSpeed;
 
-  static void setSounds(double value) => _dao.putDouble(_soundsKey, value);
+  static void setMusic(double value) {
+    _dao.putDouble(_musicKey, value);
+    _music = value;
+  }
 
-  static void setHumanUnitsSpeed(double value) => _dao.putDouble(_humanUnitsSpeedKey, value);
+  static void setSounds(double value) {
+    _dao.putDouble(_soundsKey, value);
+    _sounds = value;
+  }
 
-  static void setAiUnitsSpeed(double value) => _dao.putDouble(_aiUnitsSpeedKey, value);
+  static void setHumanUnitsSpeed(double value) {
+    _dao.putDouble(_humanUnitsSpeedKey, value);
+    _humanUnitsSpeed = value;
+  }
+
+  static void setAiUnitsSpeed(double value) {
+    _dao.putDouble(_aiUnitsSpeedKey, value);
+    _aiUnitsSpeed = value;
+  }
 }

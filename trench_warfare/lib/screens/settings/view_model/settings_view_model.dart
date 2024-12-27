@@ -21,10 +21,10 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   Future<void> init() async {
     // Fake data
     final dataState = _DataIsLoaded(
-      music: SettingsStorageFacade.music ?? SettingsConstants.defaultValue,
-      sounds: SettingsStorageFacade.sounds ?? SettingsConstants.defaultValue,
-      myUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed ?? SettingsConstants.defaultValue,
-      enemyUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed ?? SettingsConstants.defaultValue,
+      music: SettingsStorageFacade.music,
+      sounds: SettingsStorageFacade.sounds,
+      myUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed,
+      enemyUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed,
       minValue: SettingsConstants.minValue,
       maxValue: SettingsConstants.maxValue,
     );
