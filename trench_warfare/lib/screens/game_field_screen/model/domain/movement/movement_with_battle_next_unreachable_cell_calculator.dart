@@ -22,8 +22,8 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
     Logger.info(
       'BATTLE_WITH_UNREACHABLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
-          'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
-          'attackingCell: $attackingCell; defendingCell: $defendingCell',
+      'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+      'attackingCell: $attackingCell; defendingCell: $defendingCell',
       tag: 'MOVEMENT',
     );
 
@@ -160,26 +160,47 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
     // Show damage - case 2 - the defending unit doesn't strike back
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
-      updateEvents.add(ShowDamage(
-        cell: defendingCell,
-        damageType: defendingDamageType,
-        time: _animationTime.damageAnimationTime,
+      updateEvents.add(PlaySound(
+        type: defendingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
+
+      updateEvents.add(
+        ShowDamage(
+          cell: defendingCell,
+          damageType: defendingDamageType,
+          time: _animationTime.damageAnimationTime,
+        ),
+      );
     }
 
     // Show damage - case 3 - the attacking artillery strikes first, then the defending troop fires back.
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
-      updateEvents.add(ShowDamage(
-        cell: defendingCell,
-        damageType: defendingDamageType,
-        time: _animationTime.damageAnimationTime,
+      updateEvents.add(PlaySound(
+        type: defendingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
-      updateEvents.add(ShowDamage(
-        cell: attackingCell,
-        damageType: attackingDamageType,
-        time: _animationTime.damageAnimationTime,
+      updateEvents.add(
+        ShowDamage(
+          cell: defendingCell,
+          damageType: defendingDamageType,
+          time: _animationTime.damageAnimationTime,
+        ),
+      );
+
+      updateEvents.add(PlaySound(
+        type: attackingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
+
+      updateEvents.add(
+        ShowDamage(
+          cell: attackingCell,
+          damageType: attackingDamageType,
+          time: _animationTime.damageAnimationTime,
+        ),
+      );
     }
 
     // Remove the attacking troop as a separate unit

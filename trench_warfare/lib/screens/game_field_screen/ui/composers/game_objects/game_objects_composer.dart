@@ -19,25 +19,19 @@ typedef OnAnimationCompletedCallback = void Function();
 class GameObjectsComposer {
   late final GameFieldRead _gameField;
 
-  late final TextureAtlas _spritesAtlas;
-  late final Image _animationAtlas;
+  final TextureAtlas _spritesAtlas;
+  final Image _animationAtlas;
 
-  late final TiledComponent _mapComponent;
+  final TiledComponent _mapComponent;
 
   final Map<String, PositionComponent> _gameObjects = {};
 
   late final GameFieldViewModelInput _viewModelInput;
 
-  GameObjectsComposer(
-    TiledComponent mapComponent,
-    TextureAtlas spritesAtlas, {
-    required Image animationAtlas,
-  }) {
-    _spritesAtlas = spritesAtlas;
-    _animationAtlas = animationAtlas;
-
-    _mapComponent = mapComponent;
-  }
+  GameObjectsComposer(TiledComponent mapComponent, TextureAtlas spritesAtlas, {required Image animationAtlas})
+      : _spritesAtlas = spritesAtlas,
+        _animationAtlas = animationAtlas,
+        _mapComponent = mapComponent;
 
   void init(GameFieldRead gameField, GameFieldViewModelInput viewModelInput) {
     _gameField = gameField;
@@ -69,7 +63,11 @@ class GameObjectsComposer {
       case Pause(time: var time):
         await _pause(time);
 
-      case ShowDamage(cell: var cell, damageType: var damageType, time: var time):
+      case ShowDamage(
+          cell: var cell,
+          damageType: var damageType,
+          time: var time,
+        ):
         await _showDamage(cell, damageType, time);
 
       case ShowComplexDamage(
@@ -164,7 +162,11 @@ class GameObjectsComposer {
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  Future<void> _showDamage(GameFieldCell cell, DamageType damageType, int time) async {
+  Future<void> _showDamage(
+    GameFieldCell cell,
+    DamageType damageType,
+    int time,
+  ) async {
     _showAnimation(cell: cell, time: time, atlas: _animationAtlas, frames: _getAnimationFrames(damageType));
     await Future.delayed(Duration(milliseconds: time));
   }

@@ -77,7 +77,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
 
         Logger.info(
           'MINE_FIELD; unit.health: ${unit.health}; unit.movementPoints: ${unit.movementPoints}; '
-              'unit.state: ${unit.state}',
+          'unit.state: ${unit.state}',
           tag: 'MOVEMENT',
         );
       }
@@ -138,11 +138,17 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       priorCell = cell;
     }
 
-    updateEvents.add(ShowDamage(
-      cell: reachableCells.last,
-      damageType: DamageType.explosion,
-      time: _animationTime.damageAnimationTime,
-    ));
+    updateEvents.add(
+      PlaySound(type: SoundType.explosion, delayAfterPlay: UiConstants.damageSoundDelay)
+    );
+
+    updateEvents.add(
+      ShowDamage(
+        cell: reachableCells.last,
+        damageType: DamageType.explosion,
+        time: _animationTime.damageAnimationTime,
+      ),
+    );
 
     updateEvents.add(RemoveUntiedUnit(unit));
 

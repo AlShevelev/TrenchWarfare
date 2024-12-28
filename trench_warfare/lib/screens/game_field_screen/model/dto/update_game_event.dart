@@ -1,4 +1,5 @@
 import 'package:flame/game.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:tuple/tuple.dart';
@@ -69,7 +70,11 @@ class ShowDamage implements UpdateGameEvent {
   /// Animation time in [ms]
   final int time;
 
-  ShowDamage({required this.cell, required this.damageType, required this.time});
+  ShowDamage({
+    required this.cell,
+    required this.damageType,
+    required this.time,
+  });
 }
 
 class ShowComplexDamage implements UpdateGameEvent {
@@ -98,4 +103,12 @@ class MoveCameraToCell implements UpdateGameEvent {
   final GameFieldCellRead cell;
 
   MoveCameraToCell(this.cell);
+}
+
+class PlaySound implements UpdateGameEvent {
+  final SoundType type;
+
+  final int delayAfterPlay;  // in [ms]
+
+  PlaySound({required this.type, required this.delayAfterPlay});
 }

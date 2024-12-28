@@ -42,8 +42,10 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     final random = RandomGen.randomDouble(0, 1);
 
-    Logger.info('PROPAGANDA; cell: $_cell; unit: $activeUnit; chanceToSuccess: $chanceToSuccess; '
-        'random: $random', tag: 'SPECIAL_STRIKE');
+    Logger.info(
+        'PROPAGANDA; cell: $_cell; unit: $activeUnit; chanceToSuccess: $chanceToSuccess; '
+        'random: $random',
+        tag: 'SPECIAL_STRIKE');
 
     if (random <= chanceToSuccess) {
       final possibleEffects = _calculatePossibleEffects();
@@ -74,6 +76,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
           }
       }
     } else {
+      _effect = null;
       Logger.info('PROPAGANDA; no effect', tag: 'SPECIAL_STRIKE');
     }
   }
@@ -107,11 +110,20 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   Iterable<UpdateGameEvent> _getUpdateEvents() {
     final List<UpdateGameEvent> updateEvents = [];
 
-    updateEvents.add(ShowDamage(
-      cell: _cell,
-      damageType: DamageType.propaganda,
-      time: _animationTime.damageAnimationTime,
-    ));
+    updateEvents.add(
+      PlaySound(
+        type: _effect == null ? SoundType.propagandaFail : SoundType.propagandaSuccess,
+        delayAfterPlay: 0,
+      ),
+    );
+
+    updateEvents.add(
+      ShowDamage(
+        cell: _cell,
+        damageType: DamageType.propaganda,
+        time: _animationTime.damageAnimationTime,
+      ),
+    );
 
     switch (_effect) {
       case _DecreaseDefense():

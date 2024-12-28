@@ -34,8 +34,10 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   void updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
     final random = RandomGen.randomDouble(0, 1);
 
-    Logger.info('GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
-        'random: $random', tag: 'SPECIAL_STRIKE');
+    Logger.info(
+        'GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
+        'random: $random',
+        tag: 'SPECIAL_STRIKE');
 
     for (var unit in cell.units) {
       if (random <= chanceToKill) {
@@ -58,10 +60,16 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   Iterable<UpdateGameEvent> _getUpdateEvents() {
     final List<UpdateGameEvent> updateEvents = [];
 
-    updateEvents.add(ShowComplexDamage(
-      cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
-      time: _animationTime.damageAnimationTime,
-    ));
+    updateEvents.add(
+      PlaySound(type: SoundType.gasAttack, delayAfterPlay: 0)
+    );
+
+    updateEvents.add(
+      ShowComplexDamage(
+        cells: _updatedCells.map((c) => Tuple2(c, DamageType.gasAttack)),
+        time: _animationTime.damageAnimationTime,
+      ),
+    );
 
     updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));
     updateEvents.add(AnimationCompleted());

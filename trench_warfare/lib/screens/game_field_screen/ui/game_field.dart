@@ -7,11 +7,14 @@ import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/composers/audio/audio_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
@@ -71,6 +74,7 @@ class GameField extends FlameGame
   late final Nation? _selectedNation;
   late final GameSlot? _slot;
 
+  late final AudioComposer _audioComposer;
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
@@ -116,6 +120,8 @@ class GameField extends FlameGame
 
     _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
 
+    _audioComposer = AudioComposer();
+
     _gameObjectsComposer = GameObjectsComposer(
       _mapComponent,
       _spritesAtlas,
@@ -136,6 +142,11 @@ class GameField extends FlameGame
     _gameGesturesComposer.init(_viewModel);
 
     overlays.add(GameFieldControls.overlayKey);
+  }
+
+  @override
+  void onAttach() {
+    _audioComposer.setAudioController(gameRef.buildContext?.read<AudioController>());
   }
 
   @override
@@ -173,6 +184,7 @@ class GameField extends FlameGame
 
   void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
     for (var event in events) {
+      await _audioComposer.onUpdateGameEvent(event);
       await _gameObjectsComposer.onUpdateGameEvent(event);
       await _gameGesturesComposer.onUpdateGameEvent(event);
     }
