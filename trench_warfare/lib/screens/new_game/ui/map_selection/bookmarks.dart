@@ -25,19 +25,24 @@ class _Bookmarks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return Row(
       children: [
         _getBookmark(
           leftPadding: _bookmarkStartOffset,
           tab: TabCode.europe,
+          audioController: audioController,
         ),
         _getBookmark(
           leftPadding: _bookmarksGap,
           tab: TabCode.asia,
+          audioController: audioController,
         ),
         _getBookmark(
           leftPadding: _bookmarksGap,
           tab: TabCode.newWorld,
+          audioController: audioController,
         ),
       ],
     );
@@ -46,10 +51,12 @@ class _Bookmarks extends StatelessWidget {
   Widget _getBookmark({
     required double leftPadding,
     required TabCode tab,
+    required AudioController audioController,
   }) {
     return GestureDetector(
       onTap: () {
         if (!_isLoading && _activeTab != tab) {
+          audioController.playSound(SoundType.buttonClick);
           _userActions.onTabSelected(tab);
         }
       },

@@ -14,6 +14,8 @@ class _EmptyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -21,6 +23,7 @@ class _EmptyCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_slot.selected) {
+              audioController.playSound(SoundType.buttonClick);
               _userActions.onCardClick(_slot.slotNumber);
             }
           },

@@ -110,7 +110,7 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
                     final selectedMapFileName = _viewModel.selectedMapFileName;
 
                     if (selectedSlot != null) {
-                      if(_viewModel.isSave) {
+                      if (_viewModel.isSave) {
                         widget._onSlotSelected(selectedSlot, '');
                       } else {
                         if (selectedMapFileName != null) {
@@ -156,7 +156,11 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
             return _EmptyCard(slot: slot, userActions: _viewModel);
           }
 
-          return _DataCard(slot: slot as _DataSlotDto, userActions: _viewModel);
+          return _DataCard(
+            slot: slot as _DataSlotDto,
+            userActions: _viewModel,
+            isSave: widget._isSave,
+          );
         });
   }
 

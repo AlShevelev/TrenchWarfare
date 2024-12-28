@@ -24,6 +24,8 @@ class _Card extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
 
+    final audioController = context.read<AudioController>();
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -31,6 +33,7 @@ class _Card extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_selected) {
+              audioController.playSound(SoundType.buttonClick);
               _userActions.onCardSelected(_card.id);
             }
           },

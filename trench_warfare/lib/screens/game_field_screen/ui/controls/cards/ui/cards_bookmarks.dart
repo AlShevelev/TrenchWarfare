@@ -22,14 +22,19 @@ class _CardsBookmarks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return Row(
         children: _tabs
-            .mapIndexed((index, tab) => _getBookmark(
-                  index: index,
-                  tabCode: tab.code,
-                  selected: tab.selected,
-                  folder: _getFolder(tab.code),
-                ))
+            .mapIndexed(
+              (index, tab) => _getBookmark(
+                index: index,
+                tabCode: tab.code,
+                selected: tab.selected,
+                folder: _getFolder(tab.code),
+                audioController: audioController,
+              ),
+            )
             .toList(growable: false));
   }
 
@@ -38,10 +43,12 @@ class _CardsBookmarks extends StatelessWidget {
     required _TabCode tabCode,
     required bool selected,
     required String folder,
+    required AudioController audioController,
   }) =>
       GestureDetector(
         onTap: () {
           if (!selected) {
+            audioController.playSound(SoundType.buttonClick);
             _userActions.onTabSelected(tabCode);
           }
         },

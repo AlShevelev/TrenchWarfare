@@ -17,6 +17,8 @@ abstract class _CardBase<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -24,6 +26,8 @@ abstract class _CardBase<T> extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_card.selected && _card.canBuild) {
+              audioController.playSound(SoundType.buttonClick);
+
               _userActions.onCardSelected(_card.indexInTab);
             }
           },
@@ -53,6 +57,7 @@ abstract class _CardBase<T> extends StatelessWidget {
                     _getFooter(
                       _getFooterMoney(),
                       _getFooterRestriction(),
+                      audioController,
                     ),
                   ],
                 ),
@@ -73,6 +78,7 @@ abstract class _CardBase<T> extends StatelessWidget {
   Widget _getFooter(
     MoneyUnit money,
     BuildRestriction? restriction,
+    AudioController audioController,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +88,10 @@ abstract class _CardBase<T> extends StatelessWidget {
           buildPossibility: _card.card,
         ),
         GestureDetector(
-          onTap: () => _userActions.onCardExpendedOrCollapsed(_card.indexInTab),
+          onTap: () {
+            audioController.playSound(SoundType.buttonClick);
+            _userActions.onCardExpendedOrCollapsed(_card.indexInTab);
+          },
           child: Image.asset(
             '$_imagesPath${!_card.expanded ? 'icon_expand.webp' : 'icon_collapse.webp'}',
             scale: 1.1,

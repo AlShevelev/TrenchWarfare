@@ -5,16 +5,22 @@ class _DataCard extends StatelessWidget {
 
   final _SaveLoadUserActions _userActions;
 
+  final bool _isSave;
+
   const _DataCard({
     super.key,
     required _DataSlotDto slot,
     required _SaveLoadUserActions userActions,
+    required bool isSave,
   })  : _slot = slot,
-        _userActions = userActions;
+        _userActions = userActions,
+        _isSave = isSave;
 
   @override
   Widget build(BuildContext context) {
     final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
+
+    final audioController = context.read<AudioController>();
 
     return DefaultTextStyle(
       style: const TextStyle(),
@@ -23,6 +29,10 @@ class _DataCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             if (!_slot.selected) {
+              if (!(_slot.isAutosave && _isSave)) {
+                audioController.playSound(SoundType.buttonClick);
+              }
+
               _userActions.onCardClick(_slot.slotNumber);
             }
           },

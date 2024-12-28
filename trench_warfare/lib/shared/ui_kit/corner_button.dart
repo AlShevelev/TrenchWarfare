@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/shared/ui_kit/ui_constants.dart';
 
 class CornerButton extends StatelessWidget {
@@ -29,6 +31,8 @@ class CornerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return Positioned(
       left: left,
       top: top,
@@ -39,6 +43,8 @@ class CornerButton extends StatelessWidget {
       child: Material(
         child: InkWell(
           onTap: !enabled ? null : () {
+            audioController.playSound(SoundType.buttonClick);
+
             // To show a press animation
             Future.delayed(const Duration(milliseconds: UiConstants.pressButtonTime), () {
               onPress();

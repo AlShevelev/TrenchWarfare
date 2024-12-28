@@ -30,11 +30,16 @@ class _CardBannersOpponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     if (_selected) {
       return _getSelectedBanner();
     } else {
       return GestureDetector(
-        onTap: () => _userActions.onOpponentSelected(_cardId, _nation),
+        onTap: () {
+          audioController.playSound(SoundType.buttonClick);
+          _userActions.onOpponentSelected(_cardId, _nation);
+        },
         child: _getUnselectedBanner(),
       );
     }

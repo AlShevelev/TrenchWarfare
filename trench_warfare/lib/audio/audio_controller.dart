@@ -98,6 +98,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
       SoundType.propagandaSuccess => 'propaganda_success',
       SoundType.propagandaFail => 'propaganda_fail',
       SoundType.defeat => 'defeat',
+      SoundType.buttonClick => 'button_click',
     };
 
     return 'audio/sounds/$fileName.ogg';

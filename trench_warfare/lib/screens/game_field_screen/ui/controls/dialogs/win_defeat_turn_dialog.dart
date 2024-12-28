@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
@@ -27,8 +29,11 @@ class WinDefeatTurnDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return GestureDetector(
       onTap: () {
+        audioController.playSound(SoundType.buttonClick);
         _gameField.onPopupDialogClosed();
       },
       child: Container(

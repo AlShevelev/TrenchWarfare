@@ -10,4 +10,5 @@ enum SoundType {
   propagandaSuccess,
   propagandaFail,
   defeat,
+  buttonClick,
 }

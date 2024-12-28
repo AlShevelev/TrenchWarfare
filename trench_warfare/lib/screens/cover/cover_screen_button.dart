@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/shared/ui_kit/stroked_text.dart';
 
 class CoverScreenButton extends StatelessWidget {
@@ -16,9 +18,13 @@ class CoverScreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+
     return Material(
       child: InkWell(
         onTap: () {
+          audioController.playSound(SoundType.buttonClick);
+
           // To show a press animation
           Future.delayed(const Duration(milliseconds: 300), () {
             onPress();
