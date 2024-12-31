@@ -12,7 +12,6 @@ abstract interface class AudioControllerSetVolume {
   void setMusicVolume(double value);
 }
 
-
 class AudioController implements AudioControllerPlaySound, AudioControllerSetVolume {
   late final AudioPlayer _musicPlayer = AudioPlayer(playerId: 'MUSIC_PLAYER');
   late final AudioPlayer _soundsPlayer = AudioPlayer(playerId: 'SOUND_PLAYER');
@@ -58,7 +57,9 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
       return;
     }
 
-    _soundsPlayer.play(AssetSource(_getSoundFile(type)));
+    if (_readyToPlay(_soundsPlayer)) {
+      _soundsPlayer.play(AssetSource(_getSoundFile(type)));
+    }
   }
 
   @override
@@ -89,16 +90,22 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
 
   String _getSoundFile(SoundType type) {
     final fileName = switch (type) {
-      SoundType.shot => 'gun_shots',
-      SoundType.explosion => 'explosion',
-      SoundType.flame => 'flame',
-      SoundType.gasAttack => 'gas_attack',
-      SoundType.flechettes => 'flechettes',
-      SoundType.win => 'win',
-      SoundType.propagandaSuccess => 'propaganda_success',
-      SoundType.propagandaFail => 'propaganda_fail',
-      SoundType.defeat => 'defeat',
+      SoundType.attackShot => 'attack/gun_shots',
+      SoundType.attackExplosion => 'attack/explosion',
+      SoundType.attackFlame => 'attack/flame',
+      SoundType.attackGas => 'attack/gas_attack',
+      SoundType.attackFlechettes => 'attack/flechettes',
+      SoundType.attackPropagandaSuccess => 'attack/propaganda_success',
+      SoundType.attackPropagandaFail => 'attack/propaganda_fail',
+      SoundType.battleResultWin => 'battle_result/win',
+      SoundType.battleResultDefeat => 'battle_result/defeat',
+      SoundType.productionCavalry => 'produce/cavalry',
+      SoundType.productionInfantry => 'produce/infantry',
+      SoundType.productionMechanical => 'produce/mechanical',
+      SoundType.productionPC => 'produce/pc',
+      SoundType.productionShip => 'produce/ship',
       SoundType.buttonClick => 'button_click',
+      SoundType.dingUniversal => 'ding_universal_sound',
     };
 
     return 'audio/sounds/$fileName.ogg';
@@ -149,8 +156,10 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
   }
 
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
-  void _setVolume(double value, AudioPlayer player) =>
-    player.setVolume(value / SettingsConstants.maxValue);
+  void _setVolume(double value, AudioPlayer player) => player.setVolume(value / SettingsConstants.maxValue);
 
   bool _isMuted(AudioPlayer player) => player.volume == 0.0;
+
+  bool _readyToPlay(AudioPlayer player) =>
+      player.state == PlayerState.completed || player.state == PlayerState.stopped;
 }

@@ -27,7 +27,11 @@ import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
-part 'cards_placing_strategy.dart';
+part 'strategies/cards_placing_strategy.dart';
+part 'strategies/production_center_cards_placing_strategy.dart';
+part 'strategies/terrain_modifier_cards_placing_strategy.dart';
+part 'strategies/unit_boost_cards_placing_strategy.dart';
+part 'strategies/units_cards_placing_strategy.dart';
 part 'placing_calculator.dart';
 part 'card_placing_calculator.dart';
 part 'special_strikes/special_strikes_start_calculator.dart';

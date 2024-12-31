@@ -79,3 +79,6 @@ flutter:
     #audio
     - assets/audio/music/
     - assets/audio/sounds/
+    - assets/audio/sounds/attack/
+    - assets/audio/sounds/battle_result/
+    - assets/audio/sounds/produce/

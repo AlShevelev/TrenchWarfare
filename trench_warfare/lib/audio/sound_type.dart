@@ -1,14 +1,23 @@
 part of audio;
 
 enum SoundType {
-  shot,
-  explosion,
-  flame,
-  gasAttack,
-  flechettes,
-  win,
-  propagandaSuccess,
-  propagandaFail,
-  defeat,
+  attackShot,
+  attackExplosion,
+  attackFlame,
+  attackGas,
+  attackFlechettes,
+  attackPropagandaSuccess,
+  attackPropagandaFail,
+
+  battleResultWin,
+  battleResultDefeat,
+
+  productionCavalry,
+  productionInfantry,
+  productionMechanical,
+  productionPC,
+  productionShip,
+
   buttonClick,
+  dingUniversal,
 }

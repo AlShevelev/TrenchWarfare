@@ -68,8 +68,8 @@ class CoverScreen extends StatelessWidget {
                   onPress: () {
                     Navigator.of(context).pushNamed(Routes.fromMapSelectionToGameFieldNewGame,
                         arguments: NewGameToGameFieldNavArg(
-                          mapName: 'assets/tiles/test/7x7_win_defeat_conditions.tmx',
-                          selectedNation: Nation.russia,
+                          mapName: 'assets/tiles/test/15x15_carriers_enemy_pc_reachable_by_water_only.tmx',
+                          selectedNation: Nation.austriaHungary,
                         ));
                   },
                 ),

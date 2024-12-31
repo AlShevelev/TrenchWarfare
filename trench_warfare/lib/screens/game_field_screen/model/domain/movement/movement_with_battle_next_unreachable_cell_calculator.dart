@@ -161,7 +161,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     // Show damage - case 2 - the defending unit doesn't strike back
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
         delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
@@ -177,7 +177,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     // Show damage - case 3 - the attacking artillery strikes first, then the defending troop fires back.
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
         delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
@@ -190,7 +190,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       );
 
       updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion ? SoundType.explosion : SoundType.shot,
+        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
         delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 

@@ -139,7 +139,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     }
 
     updateEvents.add(
-      PlaySound(type: SoundType.explosion, delayAfterPlay: UiConstants.damageSoundDelay)
+      PlaySound(type: SoundType.attackExplosion, delayAfterPlay: UiConstants.damageSoundDelay)
     );
 
     updateEvents.add(
