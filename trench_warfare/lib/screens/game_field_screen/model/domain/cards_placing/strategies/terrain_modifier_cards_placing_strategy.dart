@@ -23,5 +23,7 @@ class TerrainModifierCardsPlacingStrategy
   void updateCell() => _cell.setTerrainModifier(TerrainModifier(type: _type));
 
   @override
-  PlaySound? getSound() => null;
+  PlaySound? getSound() => _type == TerrainModifierType.landMine || _type == TerrainModifierType.seaMine
+      ? PlaySound(type: SoundType.dingUniversal, delayAfterPlay: 0)
+      : PlaySound(type: SoundType.productionPC, delayAfterPlay: 0);
 }
