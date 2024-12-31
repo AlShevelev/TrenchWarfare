@@ -141,6 +141,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       attackingCell: attackingCell,
       defendingCell: defendingCell,
       pcCaptured: battleResult.defendingCellProductionCenterNewLevel != null,
+      pcDestroyed: battleResult.isDefendingCellProductionCenterDestroyed,
       newDefendingUnitCell: newDefendingUnitCell,
     );
 
@@ -203,6 +204,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required GameFieldCell defendingCell,
     required GameFieldCell? newDefendingUnitCell,
     required bool pcCaptured,
+    required bool pcDestroyed,
     required Unit attackingUnit,
     required Unit defendingUnit,
   }) {
@@ -333,6 +335,10 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (pcCaptured) {
       updateEvents.add(
           PlaySound(type: SoundType.battleResultCaptured, delayAfterPlay: 0)
+      );
+    } else if (pcDestroyed) {
+      updateEvents.add(
+          PlaySound(type: SoundType.battleResultDestroyed, delayAfterPlay: 0)
       );
     }
 
