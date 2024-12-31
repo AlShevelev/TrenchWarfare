@@ -99,6 +99,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
       SoundType.attackPropagandaFail => 'attack/propaganda_fail',
       SoundType.battleResultWin => 'battle_result/win',
       SoundType.battleResultDefeat => 'battle_result/defeat',
+      SoundType.battleResultCaptured => 'battle_result/captured',
       SoundType.productionCavalry => 'produce/cavalry',
       SoundType.productionInfantry => 'produce/infantry',
       SoundType.productionMechanical => 'produce/mechanical',

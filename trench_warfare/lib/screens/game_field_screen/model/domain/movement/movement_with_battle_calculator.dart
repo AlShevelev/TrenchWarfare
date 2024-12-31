@@ -140,6 +140,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       defendingUnit: defendingUnit,
       attackingCell: attackingCell,
       defendingCell: defendingCell,
+      pcCaptured: battleResult.defendingCellProductionCenterNewLevel != null,
       newDefendingUnitCell: newDefendingUnitCell,
     );
 
@@ -200,7 +201,8 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required List<GameFieldCell> reachableCells,
     required GameFieldCell attackingCell,
     required GameFieldCell defendingCell,
-    GameFieldCell? newDefendingUnitCell,
+    required GameFieldCell? newDefendingUnitCell,
+    required bool pcCaptured,
     required Unit attackingUnit,
     required Unit defendingUnit,
   }) {
@@ -327,6 +329,12 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
+
+    if (pcCaptured) {
+      updateEvents.add(
+          PlaySound(type: SoundType.battleResultCaptured, delayAfterPlay: 0)
+      );
+    }
 
     // Update the defending cell
     updateEvents.add(

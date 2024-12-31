@@ -39,7 +39,13 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         tag: 'MOVEMENT',
       );
     } else {
+      GameFieldCell? cellWithCapturedPC;
+
       for (var cell in reachableCells) {
+        if (cell.nation != _nation && cell.productionCenter != null) {
+          cellWithCapturedPC = cell;
+        }
+
         cell.setNation(_nation);
       }
 
@@ -67,7 +73,12 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         cell.setPathItem(null);
       }
 
-      _updateUIForMovingUnit(path: path, reachableCells: reachableCells, unit: unit);
+      _updateUIForMovingUnit(
+        path: path,
+        reachableCells: reachableCells,
+        cellWithCapturedPC: cellWithCapturedPC,
+        unit: unit,
+      );
     }
 
     return _getNextState();
@@ -76,6 +87,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
   void _updateUIForMovingUnit({
     required Iterable<GameFieldCell> path,
     required Iterable<GameFieldCell> reachableCells,
+    required GameFieldCell? cellWithCapturedPC,
     required Unit unit,
   }) {
     // setup untied unit
@@ -95,6 +107,11 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
           unit: unit,
           time: _animationTime.unitMovementTime,
         ));
+
+        if (cell == cellWithCapturedPC) {
+          updateEvents.add(PlaySound(type: SoundType.battleResultCaptured, delayAfterPlay: 0));
+        }
+
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
         updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
