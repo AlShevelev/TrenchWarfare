@@ -24,6 +24,8 @@ class FromPathIsShownOnClick {
     if (cell == pathToProcess.last) {
       _hideArmyPanel();
 
+      _context.updateGameObjectsEvent.update([_getSoundForUnit(unit)]);
+
       return MovementFacade(
         nation: _context.nation,
         gameField: _context.gameField,
@@ -45,7 +47,12 @@ class FromPathIsShownOnClick {
     // show the new path
     final estimatedPath = _transitionUtils.estimatePath(path: newPath);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+      final events = <UpdateGameEvent>[];
+
+      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.addAll(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+
+      _context.updateGameObjectsEvent.update(events);
     }
 
     return PathIsShown(newPath);
@@ -69,4 +76,20 @@ class FromPathIsShownOnClick {
   }
 
   void _hideArmyPanel() => TransitionUtils(_context).closeUI();
+
+  PlaySound _getSoundForUnit(Unit unit) {
+    if (unit.isShip) {
+      return PlaySound(type: SoundType.productionShip, delayAfterPlay: 0);
+    }
+
+    if (unit.isMechanical) {
+      return PlaySound(type: SoundType.productionMechanical, delayAfterPlay: 0);
+    }
+
+    if (unit.type == UnitType.cavalry) {
+      return PlaySound(type: SoundType.productionCavalry, delayAfterPlay: 0);
+    }
+
+    return PlaySound(type: SoundType.productionInfantry, delayAfterPlay: 0);
+  }
 }

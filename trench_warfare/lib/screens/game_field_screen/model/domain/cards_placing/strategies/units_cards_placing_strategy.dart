@@ -23,7 +23,7 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsCa
   }
 
   @override
-  PlaySound? getSound() {
+  PlaySound? getSoundForUnit() {
     final unit = Unit.byType(_type);
 
     if (unit.isShip) {

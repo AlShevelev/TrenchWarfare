@@ -42,7 +42,12 @@ class FromReadyForInputOnClick {
 
     unit.setState(UnitState.active);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
+      final events = <UpdateGameEvent>[];
+
+      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.add(UpdateCell(cell, updateBorderCells: []));
+
+      _context.updateGameObjectsEvent.update(events);
     }
 
     return WaitingForEndOfPath(cell);

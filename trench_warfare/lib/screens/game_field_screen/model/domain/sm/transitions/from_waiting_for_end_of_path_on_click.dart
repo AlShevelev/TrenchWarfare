@@ -34,7 +34,12 @@ class FromWaitingForEndOfPathOnClick {
 
     final estimatedPath = _transitionUtils.estimatePath(path: path);
     if (!_context.isAI) {
-      _context.updateGameObjectsEvent.update(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+      final events = <UpdateGameEvent>[];
+
+      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.addAll(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
+
+      _context.updateGameObjectsEvent.update(events);
     }
 
     return PathIsShown(estimatedPath);

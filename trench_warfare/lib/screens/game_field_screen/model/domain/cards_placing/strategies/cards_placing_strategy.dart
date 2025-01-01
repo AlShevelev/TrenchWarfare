@@ -44,5 +44,5 @@ abstract interface class CardsPlacingStrategy<C extends GameFieldControlsCard<T>
 
   List<GameFieldCellRead> getAllCellsImpossibleToBuild();
 
-  PlaySound? getSound();
+  PlaySound? getSoundForUnit();
 }

@@ -32,5 +32,5 @@ class UnitBoostCardsPlacingStrategy
   }
 
   @override
-  PlaySound? getSound() => PlaySound(type: SoundType.dingUniversal, delayAfterPlay: 0);
+  PlaySound? getSoundForUnit() => PlaySound(type: SoundType.dingUniversal, delayAfterPlay: 0);
 }

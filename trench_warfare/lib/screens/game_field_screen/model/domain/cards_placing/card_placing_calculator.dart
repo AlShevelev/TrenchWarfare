@@ -35,7 +35,7 @@ class CardPlacingCalculator implements PlacingCalculator {
       );
     }
 
-    _strategy.getSound()?.let((soundEvent) {
+    _strategy.getSoundForUnit()?.let((soundEvent) {
       events.add(soundEvent);
     });
 
