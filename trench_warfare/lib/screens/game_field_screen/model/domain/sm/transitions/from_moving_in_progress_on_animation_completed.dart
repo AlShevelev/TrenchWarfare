@@ -8,11 +8,19 @@ class FromMovingInProgressOnAnimationCompleted {
   State process(bool isVictory, Nation? defeated, Iterable<GameFieldCellRead> cellsToUpdate) {
     if (isVictory) {
       if (_context.isAI) {
+        _context.updateGameObjectsEvent.update([
+          PlaySound(type: SoundType.battleResultDefeat, delayAfterPlay: 0),
+        ]);
+
         _context.controlsState.update(DefeatControls(
           nation: _context.nation,
           isGlobal: true,
         ));
       } else {
+        _context.updateGameObjectsEvent.update([
+          PlaySound(type: SoundType.battleResultVictory, delayAfterPlay: 0),
+        ]);
+
         _context.controlsState.update(WinControls(
           nation: _context.nation,
         ));

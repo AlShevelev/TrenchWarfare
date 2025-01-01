@@ -2,6 +2,7 @@ library game_field_sm;
 
 import 'dart:math' as math;
 import 'package:collection/collection.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';

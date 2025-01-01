@@ -9,7 +9,7 @@ enum SoundType {
   attackPropagandaSuccess,
   attackPropagandaFail,
 
-  battleResultWin,
+  battleResultVictory,
   battleResultDefeat,
   battleResultPcCaptured,
   battleResultPcDestroyed,

@@ -97,7 +97,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
       SoundType.attackFlechettes => 'attack/flechettes',
       SoundType.attackPropagandaSuccess => 'attack/propaganda_success',
       SoundType.attackPropagandaFail => 'attack/propaganda_fail',
-      SoundType.battleResultWin => 'battle_result/win',
+      SoundType.battleResultVictory => 'battle_result/victory',
       SoundType.battleResultDefeat => 'battle_result/defeat',
       SoundType.battleResultPcCaptured => 'battle_result/pc_captured',
       SoundType.battleResultPcDestroyed => 'battle_result/pc_destroyed',
