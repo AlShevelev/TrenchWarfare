@@ -90,6 +90,15 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       _addAttackingUnitToCell(attackingUnit, attackingCell);
     }
 
+    // Collect dead units
+    final deadUnits = <Unit>[];
+    if (battleResult.attackingUnit is Died) {
+      deadUnits.add(attackingUnit);
+    }
+    if (battleResult.defendingUnit is Died) {
+      deadUnits.add(defendingUnit);
+    }
+
     // Remove calculated path
     for (var cell in path) {
       cell.setPathItem(null);
@@ -103,6 +112,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       attackingCell: attackingCell,
       defendingCell: defendingCell,
       newDefendingUnitCell: newDefendingUnitCell,
+      deadUnits: deadUnits,
     );
 
     return _getNextState();
@@ -148,6 +158,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     GameFieldCell? newDefendingUnitCell,
     required Unit attackingUnit,
     required Unit defendingUnit,
+    required List<Unit> deadUnits,
   }) {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
@@ -172,6 +183,25 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
           time: _animationTime.damageAnimationTime,
         ),
       );
+    }
+
+    if (deadUnits.isNotEmpty) {
+      if (deadUnits.any((u) => !u.isMechanical)) {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultManDeath,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      } else if (deadUnits.any((u) => u.isShip)) {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultShipDestroyed,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      } else {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultMechanicalDestroyed,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      }
     }
 
     // Show damage - case 3 - the attacking artillery strikes first, then the defending troop fires back.

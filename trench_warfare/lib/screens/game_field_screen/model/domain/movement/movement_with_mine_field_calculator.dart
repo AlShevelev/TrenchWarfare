@@ -90,6 +90,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         path: path,
         reachableCells: reachableCells,
         unit: unit,
+        isUnitAlive: isUnitAlive,
       );
     }
 
@@ -114,6 +115,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required Iterable<GameFieldCell> path,
     required Iterable<GameFieldCell> reachableCells,
     required Unit unit,
+    required bool isUnitAlive,
   }) {
     // setup untied unit
     var updateEvents = [
@@ -141,6 +143,16 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     updateEvents.add(
       PlaySound(type: SoundType.attackExplosion, delayAfterPlay: UiConstants.damageSoundDelay)
     );
+
+    if (!isUnitAlive) {
+      if (unit.isShip) {
+        PlaySound(type: SoundType.battleResultShipDestroyed, delayAfterPlay: 0);
+      } else if (unit.isMechanical) {
+        PlaySound(type: SoundType.battleResultMechanicalDestroyed, delayAfterPlay: 0);
+      } else {
+        PlaySound(type: SoundType.battleResultManDeath, delayAfterPlay: 0);
+      }
+    }
 
     updateEvents.add(
       ShowDamage(

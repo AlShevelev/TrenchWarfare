@@ -11,8 +11,11 @@ enum SoundType {
 
   battleResultWin,
   battleResultDefeat,
-  battleResultCaptured,
-  battleResultDestroyed,
+  battleResultPcCaptured,
+  battleResultPcDestroyed,
+  battleResultManDeath,
+  battleResultMechanicalDestroyed,
+  battleResultShipDestroyed,
 
   productionCavalry,
   productionInfantry,

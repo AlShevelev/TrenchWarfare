@@ -133,6 +133,15 @@ class MovementWithBattleCalculator extends MovementCalculator {
       cell.setPathItem(null);
     }
 
+    // Collect dead units
+    final deadUnits = <Unit>[];
+    if (battleResult.attackingUnit is Died) {
+      deadUnits.add(attackingUnit);
+    }
+    if (battleResult.defendingUnit is Died) {
+      deadUnits.add(defendingUnit);
+    }
+
     _updateUI(
       path: path,
       reachableCells: reachableCells,
@@ -143,6 +152,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       pcCaptured: battleResult.defendingCellProductionCenterNewLevel != null,
       pcDestroyed: battleResult.isDefendingCellProductionCenterDestroyed,
       newDefendingUnitCell: newDefendingUnitCell,
+      deadUnits: deadUnits,
     );
 
     return _getNextState();
@@ -207,6 +217,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required bool pcDestroyed,
     required Unit attackingUnit,
     required Unit defendingUnit,
+    required List<Unit> deadUnits,
   }) {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
@@ -329,16 +340,35 @@ class MovementWithBattleCalculator extends MovementCalculator {
       );
     }
 
+    if (deadUnits.isNotEmpty) {
+      if (deadUnits.any((u) => !u.isMechanical)) {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultManDeath,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      } else if (deadUnits.any((u) => u.isShip)) {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultShipDestroyed,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      } else {
+        updateEvents.add(PlaySound(
+          type: SoundType.battleResultMechanicalDestroyed,
+          delayAfterPlay: UiConstants.damageSoundDelay,
+        ));
+      }
+    }
+
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
 
     if (pcCaptured) {
       updateEvents.add(
-          PlaySound(type: SoundType.battleResultCaptured, delayAfterPlay: 0)
+          PlaySound(type: SoundType.battleResultPcCaptured, delayAfterPlay: 0)
       );
     } else if (pcDestroyed) {
       updateEvents.add(
-          PlaySound(type: SoundType.battleResultDestroyed, delayAfterPlay: 0)
+          PlaySound(type: SoundType.battleResultPcDestroyed, delayAfterPlay: 0)
       );
     }
 
