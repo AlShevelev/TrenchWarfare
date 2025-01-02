@@ -22,12 +22,16 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
 
   ValueNotifier<AppLifecycleState>? _lifecycleNotifier;
 
+  final cachedSounds = <SoundType, Uri>{};
+
   AudioController() {
     _musicPlayer.onPlayerComplete.listen(_playNextMusicTrack);
   }
 
   Future<void> init() async {
-    await AudioCache.instance.loadAll(SoundType.values.map((s) => _getSoundFile(s)).toList(growable: false));
+    for (final soundType in SoundType.values) {
+      cachedSounds[soundType] = await AudioCache.instance.load(_getSoundFile(soundType));
+    }
 
     _setVolume(SettingsStorageFacade.sounds, _soundsPlayer);
 
@@ -58,7 +62,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
     }
 
     if (_readyToPlay(_soundsPlayer)) {
-      _soundsPlayer.play(AssetSource(_getSoundFile(type)));
+      _soundsPlayer.play(UrlSource(cachedSounds[type].toString()));
     }
   }
 
