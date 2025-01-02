@@ -6,6 +6,8 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
 
   _DataIsLoaded? _state;
 
+  AudioController? _audioController;
+
   @override
   SettingsResult get settingsValue => SettingsResult(
         music: _state?.music ?? SettingsConstants.defaultValue,
@@ -19,7 +21,6 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   }
 
   Future<void> init() async {
-    // Fake data
     final dataState = _DataIsLoaded(
       music: SettingsStorageFacade.music,
       sounds: SettingsStorageFacade.sounds,
@@ -34,16 +35,12 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
     _uiState.update(dataState.copy());
   }
 
+  void setAudioController(AudioController audioController) => _audioController = audioController;
+
   @override
   void onEnemyUnitsSpeedUpdated(double value) {
     _state = _state?.copy(enemyUnitsSpeed: value);
     SettingsStorageFacade.setAiUnitsSpeed(value);
-  }
-
-  @override
-  void onMusicUpdated(double value) {
-    _state = _state?.copy(music: value);
-    SettingsStorageFacade.setMusic(value);
   }
 
   @override
@@ -53,9 +50,20 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   }
 
   @override
+  void onMusicUpdated(double value) {
+    _state = _state?.copy(music: value);
+    SettingsStorageFacade.setMusic(value);
+
+    _audioController?.setMusicVolume(value);
+  }
+
+  @override
   void onSoundsUpdated(double value) {
     _state = _state?.copy(sounds: value);
     SettingsStorageFacade.setSounds(value);
+
+    _audioController?.setSoundsVolume(value);
+    _audioController?.playSound(SoundType.buttonClick);
   }
 
   @override

@@ -48,8 +48,8 @@ class LoadedGameBuilder implements GameBuilder {
       playingNations: playingNations,
       transfers: transfers,
       money: _getMoney(dbNations, gameField),
-      humanUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed ?? SettingsConstants.defaultValue,
-      aiUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed ?? SettingsConstants.defaultValue,
+      humanUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed,
+      aiUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed,
     );
   }
 

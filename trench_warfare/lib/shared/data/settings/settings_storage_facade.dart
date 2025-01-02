@@ -9,8 +9,8 @@ class SettingsStorageFacade {
   static const String _humanUnitsSpeedKey = 'humanUnitsSpeedSettingsKey';
   static const String _aiUnitsSpeedKey = 'aiUnitsSpeedSettingsKey';
 
-  static double _music = _dao.readDouble(_musicKey) ?? SettingsConstants.defaultValue;
-  static double _sounds = _dao.readDouble(_soundsKey) ?? SettingsConstants.defaultValue;
+  static double _music = _dao.readDouble(_musicKey) ?? SettingsConstants.defaultMusicValue;
+  static double _sounds = _dao.readDouble(_soundsKey) ?? SettingsConstants.defaultSoundsValue;
   static double _humanUnitsSpeed = _dao.readDouble(_humanUnitsSpeedKey) ?? SettingsConstants.defaultValue;
   static double _aiUnitsSpeed = _dao.readDouble(_aiUnitsSpeedKey) ?? SettingsConstants.defaultValue;
 

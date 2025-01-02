@@ -48,6 +48,9 @@ class _SettingsState extends State<Settings> with ImageLoading {
 
   @override
   Widget build(BuildContext context) {
+    final audioController = context.read<AudioController>();
+    _viewModel.setAudioController(audioController);
+
     if (!_isBackgroundLoaded) {
       return const SizedBox.shrink();
     }

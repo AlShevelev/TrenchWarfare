@@ -4,8 +4,10 @@ import 'dart:ui' as ui;
 
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
+import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/settings_constants.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
