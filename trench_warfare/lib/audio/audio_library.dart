@@ -1,5 +1,7 @@
 library audio;
 
+import 'dart:collection';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';

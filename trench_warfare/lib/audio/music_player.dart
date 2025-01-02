@@ -8,7 +8,7 @@ class MusicPlayer {
   final _tracksToPlay = ['1_cover.ogg', '2.ogg', '3.ogg', '4.ogg', '5.ogg'];
 
   MusicPlayer() {
-    _player.onPlayerComplete.listen(_playNextMusicTrack);
+    _player.onPlayerComplete.listen((_) => _playNextMusicTrack());
   }
 
   void init() {
@@ -23,7 +23,7 @@ class MusicPlayer {
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
   void setVolume(double value) => _player.setVolume(value / SettingsConstants.maxValue);
 
-  void _playNextMusicTrack(void _) {
+  void _playNextMusicTrack() {
     var newActiveTrackIndex = RandomGen.randomInt(_tracksToPlay.length);
     while (newActiveTrackIndex == _activeTrackIndex) {
       newActiveTrackIndex = RandomGen.randomInt(_tracksToPlay.length);

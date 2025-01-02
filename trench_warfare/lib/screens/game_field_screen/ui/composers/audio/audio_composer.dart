@@ -8,15 +8,21 @@ class AudioComposer {
 
   void onUpdateGameEvent(UpdateGameEvent event) {
     switch (event) {
-      case PlaySound(type: var type):
-        _playSound(type);
+      case PlaySound(
+          type: var type,
+          duration: var duration,
+          strategy: var strategy,
+          ignoreIfPlayed: var ignoreIfPlayed,
+        ):
+        _audioController?.playSound(
+          type,
+          duration: duration,
+          strategy: strategy,
+          ignoreIfPlayed: ignoreIfPlayed,
+        );
 
       default:
         {}
     }
-  }
-
-  void _playSound(SoundType type) {
-    _audioController?.playSound(type);
   }
 }

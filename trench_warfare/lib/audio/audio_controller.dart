@@ -1,7 +1,12 @@
 part of audio;
 
 abstract interface class AudioControllerPlaySound {
-  void playSound(SoundType type);
+  void playSound(
+    SoundType type, {
+    int? duration,
+    SoundStrategy strategy = SoundStrategy.interrupt,
+    bool ignoreIfPlayed = true,
+  });
 }
 
 abstract interface class AudioControllerSetVolume {
@@ -41,7 +46,18 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
   }
 
   @override
-  void playSound(SoundType type) => _soundsPlayer.play(type);
+  void playSound(
+    SoundType type, {
+    int? duration,
+    SoundStrategy strategy = SoundStrategy.interrupt,
+    bool ignoreIfPlayed = true,
+  }) =>
+      _soundsPlayer.play(
+        type: type,
+        duration: duration,
+        strategy: strategy,
+        ignoreIfPlayed: ignoreIfPlayed,
+      );
 
   @override
   void setMusicVolume(double value) => _musicPlayer.setVolume(value);

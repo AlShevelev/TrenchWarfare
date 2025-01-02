@@ -1,9 +1,34 @@
 part of audio;
 
+class _SoundsQueueItem {
+  final SoundType type;
+  final int? duration;
+
+  _SoundsQueueItem({required this.type, required this.duration});
+}
+
 class SoundsPlayer {
-  late final AudioPlayer _soundsPlayer = AudioPlayer(playerId: 'SOUND_PLAYER');
+  late final AudioPlayer _player = AudioPlayer(playerId: 'SOUND_PLAYER');
 
   final _cachedSounds = <SoundType, Uri>{};
+
+  // The played item is the first one
+  final _soundsQueue = Queue<_SoundsQueueItem>();
+
+  bool get _isMuted => _player.volume == 0.0;
+
+  bool get _notReadyToPlay => _player.state == PlayerState.paused || _player.state == PlayerState.disposed;
+
+  SoundsPlayer() {
+    _player.onPlayerComplete.listen((_) => _switchToNextSound());
+
+    _player.onPositionChanged.listen(
+      (position) => _onPositionChanged(
+        position: position,
+        durationToInterrupt: _soundsQueue.firstOrNull?.duration,
+      ),
+    );
+  }
 
   Future<void> init() async {
     for (final soundType in SoundType.values) {
@@ -14,23 +39,55 @@ class SoundsPlayer {
   }
 
   void dispose() {
-    _soundsPlayer.dispose();
+    _player.dispose();
   }
 
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
-  void setVolume(double value) => _soundsPlayer.setVolume(value / SettingsConstants.maxValue);
+  void setVolume(double value) => _player.setVolume(value / SettingsConstants.maxValue);
 
-  void play(SoundType type) {
-    if (_isMuted(_soundsPlayer)) {
+  void play({
+    required SoundType type,
+    int? duration,
+    required SoundStrategy strategy,
+    required bool ignoreIfPlayed,
+  }) {
+    if (_isMuted || _notReadyToPlay) {
       return;
     }
 
-    if (_readyToPlay(_soundsPlayer)) {
-      _soundsPlayer.play(UrlSource(_cachedSounds[type].toString()));
+    // The same track is in the queue - do nothing
+    if (ignoreIfPlayed && _soundsQueue.any((t) => t.type == type)) {
+      return;
+    }
+
+    switch (strategy) {
+      case SoundStrategy.interrupt:
+        {
+          if (_player.state == PlayerState.playing) {
+            _player.stop();
+          }
+
+          _soundsQueue.clear();
+          _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
+          _playNextSound();
+        }
+      case SoundStrategy.putToQueue:
+        {
+          if (_player.state == PlayerState.playing) {
+            _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
+          } else {
+            _soundsQueue.clear();
+            _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
+            _playNextSound();
+          }
+        }
     }
   }
 
-  void stopPlaying() => _soundsPlayer.stop();
+  void stopPlaying() {
+    _player.stop();
+    _soundsQueue.clear();
+  }
 
   String _getSoundFile(SoundType type) {
     final fileName = switch (type) {
@@ -60,8 +117,32 @@ class SoundsPlayer {
     return 'audio/sounds/$fileName.ogg';
   }
 
-  bool _isMuted(AudioPlayer player) => player.volume == 0.0;
+  void _playNextSound() {
+    final itemToPlay = _soundsQueue.firstOrNull;
 
-  bool _readyToPlay(AudioPlayer player) =>
-      player.state == PlayerState.completed || player.state == PlayerState.stopped;
+    if (itemToPlay == null) {
+      return;
+    }
+
+    _player.play(UrlSource(_cachedSounds[itemToPlay.type].toString()));
+  }
+
+  void _switchToNextSound() {
+    _player.stop();
+    _soundsQueue.removeFirst();
+    _playNextSound();
+  }
+
+  /// [durationToInterrupt] in ms
+  void _onPositionChanged({required Duration position, required int? durationToInterrupt}) {
+    final positionMs = position.inMilliseconds;
+
+    if (durationToInterrupt == null || durationToInterrupt == 0 || positionMs == 0) {
+      return;
+    }
+
+    if (positionMs >= durationToInterrupt) {
+      _switchToNextSound();
+    }
+  }
 }
