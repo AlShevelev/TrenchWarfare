@@ -6,18 +6,17 @@ class AudioComposer {
 
   void setAudioController(AudioControllerPlaySound? audioController) => _audioController = audioController;
 
-  Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
+  void onUpdateGameEvent(UpdateGameEvent event) {
     switch (event) {
-      case PlaySound(type: var type, delayAfterPlay: var delayAfterPlay):
-        await _playSound(type, delayAfterPlay);
+      case PlaySound(type: var type):
+        _playSound(type);
 
       default:
         {}
     }
   }
 
-  Future<void> _playSound(SoundType type, int delayAfterPlay) async {
+  void _playSound(SoundType type) {
     _audioController?.playSound(type);
-    await Future.delayed(Duration(milliseconds: delayAfterPlay));
   }
 }

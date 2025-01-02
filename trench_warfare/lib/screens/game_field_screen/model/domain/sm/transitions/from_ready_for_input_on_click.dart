@@ -44,7 +44,7 @@ class FromReadyForInputOnClick {
     if (!_context.isAI) {
       final events = <UpdateGameEvent>[];
 
-      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.add(PlaySound(type: SoundType.buttonClick));
       events.add(UpdateCell(cell, updateBorderCells: []));
 
       _context.updateGameObjectsEvent.update(events);

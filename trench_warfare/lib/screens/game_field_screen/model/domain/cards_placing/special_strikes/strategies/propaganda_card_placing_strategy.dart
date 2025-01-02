@@ -113,7 +113,6 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     updateEvents.add(
       PlaySound(
         type: _effect == null ? SoundType.attackPropagandaFail : SoundType.attackPropagandaSuccess,
-        delayAfterPlay: 0,
       ),
     );
 

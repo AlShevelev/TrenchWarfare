@@ -34,7 +34,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
 
   @override
   Iterable<UpdateGameEvent> _getUpdateEvents() => [
-        PlaySound(type: SoundType.attackFlame, delayAfterPlay: 0),
+        PlaySound(type: SoundType.attackFlame),
         ShowDamage(
           cell: _cell,
           damageType: DamageType.flame,

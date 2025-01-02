@@ -61,7 +61,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     final List<UpdateGameEvent> updateEvents = [];
 
     updateEvents.add(
-      PlaySound(type: SoundType.attackGas, delayAfterPlay: 0)
+      PlaySound(type: SoundType.attackGas)
     );
 
     updateEvents.add(

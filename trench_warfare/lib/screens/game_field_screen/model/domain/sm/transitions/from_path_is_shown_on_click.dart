@@ -49,7 +49,7 @@ class FromPathIsShownOnClick {
     if (!_context.isAI) {
       final events = <UpdateGameEvent>[];
 
-      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.add(PlaySound(type: SoundType.buttonClick));
       events.addAll(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
       _context.updateGameObjectsEvent.update(events);
@@ -79,17 +79,17 @@ class FromPathIsShownOnClick {
 
   PlaySound _getSoundForUnit(Unit unit) {
     if (unit.isShip) {
-      return PlaySound(type: SoundType.productionShip, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionShip);
     }
 
     if (unit.isMechanical) {
-      return PlaySound(type: SoundType.productionMechanical, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionMechanical);
     }
 
     if (unit.type == UnitType.cavalry) {
-      return PlaySound(type: SoundType.productionCavalry, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionCavalry);
     }
 
-    return PlaySound(type: SoundType.productionInfantry, delayAfterPlay: 0);
+    return PlaySound(type: SoundType.productionInfantry);
   }
 }

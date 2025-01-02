@@ -252,7 +252,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
         type: attackingDamageType == DamageType.explosion || defendingDamageType == DamageType.explosion
             ? SoundType.attackExplosion
             : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -270,7 +269,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -286,7 +284,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -299,7 +296,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -315,7 +311,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (!attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -328,7 +323,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -344,17 +338,14 @@ class MovementWithBattleCalculator extends MovementCalculator {
       if (deadUnits.any((u) => !u.isMechanical)) {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultManDeath,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       } else if (deadUnits.any((u) => u.isShip)) {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultShipDestroyed,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       } else {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultMechanicalDestroyed,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       }
     }
@@ -364,11 +355,11 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     if (pcCaptured) {
       updateEvents.add(
-          PlaySound(type: SoundType.battleResultPcCaptured, delayAfterPlay: 0)
+          PlaySound(type: SoundType.battleResultPcCaptured)
       );
     } else if (pcDestroyed) {
       updateEvents.add(
-          PlaySound(type: SoundType.battleResultPcDestroyed, delayAfterPlay: 0)
+          PlaySound(type: SoundType.battleResultPcDestroyed)
       );
     }
 

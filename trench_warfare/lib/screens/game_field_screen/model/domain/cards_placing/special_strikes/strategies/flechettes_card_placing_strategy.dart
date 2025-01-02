@@ -32,7 +32,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   @override
   Iterable<UpdateGameEvent> _getUpdateEvents() => [
-        PlaySound(type: SoundType.attackFlechettes, delayAfterPlay: 0),
+        PlaySound(type: SoundType.attackFlechettes),
         ShowDamage(
           cell: _cell,
           damageType: DamageType.bloodSplash,

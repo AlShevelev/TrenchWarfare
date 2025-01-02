@@ -109,7 +109,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         ));
 
         if (cell == cellWithCapturedPC) {
-          updateEvents.add(PlaySound(type: SoundType.battleResultPcCaptured, delayAfterPlay: 0));
+          updateEvents.add(PlaySound(type: SoundType.battleResultPcCaptured));
         }
 
         updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));

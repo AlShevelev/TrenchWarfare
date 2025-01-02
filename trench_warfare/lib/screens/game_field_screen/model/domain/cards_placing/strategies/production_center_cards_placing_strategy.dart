@@ -40,5 +40,5 @@ class ProductionCenterCardsPlacingStrategy
   }
 
   @override
-  PlaySound? getSoundForUnit() => PlaySound(type: SoundType.productionPC, delayAfterPlay: 0);
+  PlaySound? getSoundForUnit() => PlaySound(type: SoundType.productionPC);
 }

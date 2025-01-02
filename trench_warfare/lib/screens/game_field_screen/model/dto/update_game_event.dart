@@ -108,7 +108,5 @@ class MoveCameraToCell implements UpdateGameEvent {
 class PlaySound implements UpdateGameEvent {
   final SoundType type;
 
-  final int delayAfterPlay;  // in [ms]
-
-  PlaySound({required this.type, required this.delayAfterPlay});
+  PlaySound({required this.type});
 }

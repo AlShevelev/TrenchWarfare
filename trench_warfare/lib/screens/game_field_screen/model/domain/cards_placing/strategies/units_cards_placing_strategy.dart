@@ -27,17 +27,17 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsCa
     final unit = Unit.byType(_type);
 
     if (unit.isShip) {
-      return PlaySound(type: SoundType.productionShip, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionShip);
     }
 
     if (unit.isMechanical) {
-      return PlaySound(type: SoundType.productionMechanical, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionMechanical);
     }
 
     if (unit.type == UnitType.cavalry) {
-      return PlaySound(type: SoundType.productionCavalry, delayAfterPlay: 0);
+      return PlaySound(type: SoundType.productionCavalry);
     }
 
-    return PlaySound(type: SoundType.productionInfantry, delayAfterPlay: 0);
+    return PlaySound(type: SoundType.productionInfantry);
   }
 }

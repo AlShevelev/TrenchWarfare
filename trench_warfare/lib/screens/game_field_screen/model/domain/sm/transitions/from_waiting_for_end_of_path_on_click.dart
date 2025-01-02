@@ -36,7 +36,7 @@ class FromWaitingForEndOfPathOnClick {
     if (!_context.isAI) {
       final events = <UpdateGameEvent>[];
 
-      events.add(PlaySound(type: SoundType.buttonClick, delayAfterPlay: 0));
+      events.add(PlaySound(type: SoundType.buttonClick));
       events.addAll(estimatedPath.map((c) => UpdateCell(c, updateBorderCells: [])));
 
       _context.updateGameObjectsEvent.update(events);

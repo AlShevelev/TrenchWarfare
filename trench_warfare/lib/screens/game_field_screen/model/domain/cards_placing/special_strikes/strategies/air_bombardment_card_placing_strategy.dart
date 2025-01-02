@@ -26,7 +26,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
 
   @override
   Iterable<UpdateGameEvent> _getUpdateEvents() => [
-    PlaySound(type: SoundType.attackExplosion, delayAfterPlay: 0),
+    PlaySound(type: SoundType.attackExplosion),
     ShowDamage(
       cell: _cell,
       damageType: DamageType.explosion,

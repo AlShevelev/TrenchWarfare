@@ -24,6 +24,6 @@ class TerrainModifierCardsPlacingStrategy
 
   @override
   PlaySound? getSoundForUnit() => _type == TerrainModifierType.landMine || _type == TerrainModifierType.seaMine
-      ? PlaySound(type: SoundType.dingUniversal, delayAfterPlay: 0)
-      : PlaySound(type: SoundType.productionPC, delayAfterPlay: 0);
+      ? PlaySound(type: SoundType.dingUniversal)
+      : PlaySound(type: SoundType.productionPC);
 }

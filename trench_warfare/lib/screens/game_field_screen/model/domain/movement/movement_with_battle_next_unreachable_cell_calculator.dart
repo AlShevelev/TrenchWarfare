@@ -173,7 +173,6 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -189,17 +188,14 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       if (deadUnits.any((u) => !u.isMechanical)) {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultManDeath,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       } else if (deadUnits.any((u) => u.isShip)) {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultShipDestroyed,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       } else {
         updateEvents.add(PlaySound(
           type: SoundType.battleResultMechanicalDestroyed,
-          delayAfterPlay: UiConstants.damageSoundDelay,
         ));
       }
     }
@@ -208,7 +204,6 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(
@@ -221,7 +216,6 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-        delayAfterPlay: UiConstants.damageSoundDelay,
       ));
 
       updateEvents.add(

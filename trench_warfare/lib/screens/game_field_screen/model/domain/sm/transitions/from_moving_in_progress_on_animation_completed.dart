@@ -9,7 +9,7 @@ class FromMovingInProgressOnAnimationCompleted {
     if (isVictory) {
       if (_context.isAI) {
         _context.updateGameObjectsEvent.update([
-          PlaySound(type: SoundType.battleResultDefeat, delayAfterPlay: 0),
+          PlaySound(type: SoundType.battleResultDefeat),
         ]);
 
         _context.controlsState.update(DefeatControls(
@@ -18,7 +18,7 @@ class FromMovingInProgressOnAnimationCompleted {
         ));
       } else {
         _context.updateGameObjectsEvent.update([
-          PlaySound(type: SoundType.battleResultVictory, delayAfterPlay: 0),
+          PlaySound(type: SoundType.battleResultVictory),
         ]);
 
         _context.controlsState.update(WinControls(
