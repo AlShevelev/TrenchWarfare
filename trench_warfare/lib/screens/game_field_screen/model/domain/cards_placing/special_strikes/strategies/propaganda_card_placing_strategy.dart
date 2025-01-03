@@ -35,8 +35,10 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   }
 
   @override
-  void updateGameField() {
+  Unit? updateGameField() {
     final activeUnit = _cell.activeUnit!;
+
+    Unit? affectedUnit = activeUnit;
 
     final chanceToSuccess = _calculateChanceToSuccess(activeUnit);
 
@@ -77,8 +79,11 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
       }
     } else {
       _effect = null;
+      affectedUnit = null;
       Logger.info('PROPAGANDA; no effect', tag: 'SPECIAL_STRIKE');
     }
+
+    return affectedUnit;
   }
 
   double _calculateChanceToSuccess(Unit unit) {
@@ -106,8 +111,9 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     return possibleEffects;
   }
 
+  /// [killedUnit] is a unit, affected by propaganda
   @override
-  Iterable<UpdateGameEvent> _getUpdateEvents() {
+  Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
     final List<UpdateGameEvent> updateEvents = [];
 
     updateEvents.add(

@@ -23,11 +23,13 @@ abstract interface class SpecialStrikesCardsPlacingStrategy {
         _isAI = isAI,
         _animationTime = animationTime;
 
+  /// [return] killed units (or hit by propaganda)
   @protected
-  void updateGameField();
+  Unit? updateGameField();
 
+  /// [killedUnit] (or hit by propaganda)
   @protected
-  void showUpdate() {
+  void showUpdate(Unit? killedUnit) {
     final List<UpdateGameEvent> events = [];
 
     if (_isAI) {
@@ -36,11 +38,12 @@ abstract interface class SpecialStrikesCardsPlacingStrategy {
       );
     }
 
-    events.addAll(_getUpdateEvents());
+    events.addAll(_getUpdateEvents(killedUnit));
 
     _updateGameObjectsEvent.update(events);
   }
 
+  /// [killedUnit] (or hit by propaganda)
   @protected
-  Iterable<UpdateGameEvent> _getUpdateEvents();
+  Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit);
 }

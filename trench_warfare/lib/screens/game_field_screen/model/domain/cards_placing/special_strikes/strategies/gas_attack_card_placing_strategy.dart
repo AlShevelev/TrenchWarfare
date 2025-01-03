@@ -16,8 +16,10 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   }
 
   @override
-  void updateGameField() {
-    updateCell(_cell, chanceToKill: 0.2, chanceToReduceHealth: 0.4);
+  Unit? updateGameField() {
+    Unit? killedUnitCandidate;
+
+    killedUnitCandidate = updateCell(_cell, chanceToKill: 0.2, chanceToReduceHealth: 0.4);
 
     final allCellsAround = _gameField
         .findCellsAround(_cell)
@@ -26,12 +28,15 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     for (var cell in allCellsAround) {
       if (RandomGen.randomDouble(0, 1) <= 0.25) {
-        updateCell(cell, chanceToKill: 0.1, chanceToReduceHealth: 0.2);
+        final killedUnit = updateCell(cell, chanceToKill: 0.1, chanceToReduceHealth: 0.2);
+        killedUnitCandidate ??= killedUnit;
       }
     }
+
+    return killedUnitCandidate;
   }
 
-  void updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
+  Unit? updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
     final random = RandomGen.randomDouble(0, 1);
 
     Logger.info(
@@ -51,18 +56,24 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
       }
     }
 
-    cell.units.where((u) => u.health <= 0).toList(growable: false).forEach((u) => cell.removeUnit(u));
+    final killedUnits = cell.units.where((u) => u.health <= 0).toList(growable: false);
+
+    // ignore: avoid_function_literals_in_foreach_calls
+    killedUnits.forEach((u) => cell.removeUnit(u));
 
     _updatedCells.add(cell);
+
+    return killedUnits.firstOrNull;
   }
 
   @override
-  Iterable<UpdateGameEvent> _getUpdateEvents() {
-    final List<UpdateGameEvent> updateEvents = [];
+  Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
+    final updateEvents = <UpdateGameEvent>[];
 
-    updateEvents.add(
-      PlaySound(type: SoundType.attackGas)
-    );
+    updateEvents.add(PlaySound(
+      type: SoundType.attackGas,
+      duration: killedUnit == null ? null : (_animationTime.damageAnimationTime * 1.5).toInt(),
+    ));
 
     updateEvents.add(
       ShowComplexDamage(
@@ -70,6 +81,13 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         time: _animationTime.damageAnimationTime,
       ),
     );
+
+    if (killedUnit != null) {
+      updateEvents.add(PlaySound(
+        type: killedUnit.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
+    }
 
     updateEvents.addAll(_updatedCells.map((c) => UpdateCell(c, updateBorderCells: [])));
     updateEvents.add(AnimationCompleted());

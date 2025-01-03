@@ -169,10 +169,11 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
     final defendingDamageType = defendingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
 
-    // Show damage - case 2 - the defending unit doesn't strike back
+    // Show damage - case 1 - the defending unit doesn't strike back
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: SoundType.attackExplosion,
+        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
       updateEvents.add(
@@ -184,26 +185,11 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       );
     }
 
-    if (deadUnits.isNotEmpty) {
-      if (deadUnits.any((u) => !u.isMechanical)) {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultManDeath,
-        ));
-      } else if (deadUnits.any((u) => u.isShip)) {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultShipDestroyed,
-        ));
-      } else {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultMechanicalDestroyed,
-        ));
-      }
-    }
-
-    // Show damage - case 3 - the attacking artillery strikes first, then the defending troop fires back.
+    // Show damage - case 2 - the attacking artillery strikes first, then the defending troop fires back.
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: SoundType.attackExplosion,
+        duration: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(
@@ -214,9 +200,13 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
         ),
       );
 
-      updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
-      ));
+      updateEvents.add(
+        PlaySound(
+          type: SoundType.attackExplosion,
+          duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
+          ignoreIfPlayed: false,
+        ),
+      );
 
       updateEvents.add(
         ShowDamage(
@@ -225,6 +215,13 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
           time: _animationTime.damageAnimationTime,
         ),
       );
+    }
+
+    if (deadUnits.isNotEmpty) {
+      updateEvents.add(PlaySound(
+        type: deadUnits.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
     }
 
     // Remove the attacking troop as a separate unit

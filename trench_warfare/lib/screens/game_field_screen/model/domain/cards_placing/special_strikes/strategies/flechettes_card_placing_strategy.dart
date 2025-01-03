@@ -9,7 +9,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   );
 
   @override
-  void updateGameField() {
+  Unit? updateGameField() {
     final hasAntiAir = _cell.terrainModifier?.type == TerrainModifierType.antiAirGun;
 
     Logger.info('FLECHETTES; hasAntiAir: $hasAntiAir', tag: 'SPECIAL_STRIKE');
@@ -27,21 +27,43 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
       Logger.info('FLECHETTES; strike result. damage: $damage; unit: $unit', tag: 'SPECIAL_STRIKE');
     }
 
-    _cell.units.where((u) => u.health <= 0).toList(growable: false).forEach((u) => _cell.removeUnit(u));
+    final killedUnits = _cell.units.where((u) => u.health <= 0).toList(growable: false);
+
+    // ignore: avoid_function_literals_in_foreach_calls
+    killedUnits.forEach((u) => _cell.removeUnit(u));
+
+    return killedUnits.firstOrNull;
   }
 
   @override
-  Iterable<UpdateGameEvent> _getUpdateEvents() => [
-        PlaySound(type: SoundType.attackFlechettes),
-        ShowDamage(
-          cell: _cell,
-          damageType: DamageType.bloodSplash,
-          time: _animationTime.damageAnimationTime,
-        ),
-        UpdateCell(
-          _cell,
-          updateBorderCells: [],
-        ),
-        AnimationCompleted(),
-      ];
+  Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
+    final events = <UpdateGameEvent>[];
+
+    events.add(PlaySound(
+      type: SoundType.attackFlechettes,
+      duration: killedUnit == null ? null : _animationTime.damageAnimationTime,
+    ));
+
+    events.add(ShowDamage(
+      cell: _cell,
+      damageType: DamageType.bloodSplash,
+      time: _animationTime.damageAnimationTime,
+    ));
+
+    if (killedUnit != null) {
+      events.add(PlaySound(
+        type: killedUnit.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
+    }
+
+    events.add(UpdateCell(
+      _cell,
+      updateBorderCells: [],
+    ));
+
+    events.add(AnimationCompleted());
+
+    return events;
+  }
 }

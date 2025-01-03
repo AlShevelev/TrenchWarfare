@@ -217,7 +217,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required bool pcDestroyed,
     required Unit attackingUnit,
     required Unit defendingUnit,
-    required List<Unit> deadUnits,
+    required Iterable<Unit> deadUnits,
   }) {
     // Remove the attacking troop from the cell and show it as a separate unit
     var updateEvents = [
@@ -252,6 +252,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
         type: attackingDamageType == DamageType.explosion || defendingDamageType == DamageType.explosion
             ? SoundType.attackExplosion
             : SoundType.attackShot,
+        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
       updateEvents.add(
@@ -269,6 +270,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
       updateEvents.add(
@@ -284,6 +286,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        duration: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(
@@ -296,6 +299,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
       updateEvents.add(
@@ -311,6 +315,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (!attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        duration: _animationTime.damageAnimationTime,
       ));
 
       updateEvents.add(
@@ -323,6 +328,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
       updateEvents.add(PlaySound(
         type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
       updateEvents.add(
@@ -335,32 +341,25 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     if (deadUnits.isNotEmpty) {
-      if (deadUnits.any((u) => !u.isMechanical)) {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultManDeath,
-        ));
-      } else if (deadUnits.any((u) => u.isShip)) {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultShipDestroyed,
-        ));
-      } else {
-        updateEvents.add(PlaySound(
-          type: SoundType.battleResultMechanicalDestroyed,
-        ));
-      }
+      updateEvents.add(PlaySound(
+        type: deadUnits.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
     }
 
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
 
     if (pcCaptured) {
-      updateEvents.add(
-          PlaySound(type: SoundType.battleResultPcCaptured)
-      );
+      updateEvents.add(PlaySound(
+        type: SoundType.battleResultPcCaptured,
+        strategy: SoundStrategy.putToQueue,
+      ));
     } else if (pcDestroyed) {
-      updateEvents.add(
-          PlaySound(type: SoundType.battleResultPcDestroyed)
-      );
+      updateEvents.add(PlaySound(
+        type: SoundType.battleResultPcDestroyed,
+        strategy: SoundStrategy.putToQueue,
+      ));
     }
 
     // Update the defending cell

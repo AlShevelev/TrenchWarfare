@@ -140,18 +140,16 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       priorCell = cell;
     }
 
-    updateEvents.add(
-      PlaySound(type: SoundType.attackExplosion)
-    );
+    updateEvents.add(PlaySound(
+      type: SoundType.attackExplosion,
+      duration: isUnitAlive ? null : _animationTime.damageAnimationTime,
+    ));
 
     if (!isUnitAlive) {
-      if (unit.isShip) {
-        PlaySound(type: SoundType.battleResultShipDestroyed);
-      } else if (unit.isMechanical) {
-        PlaySound(type: SoundType.battleResultMechanicalDestroyed);
-      } else {
-        PlaySound(type: SoundType.battleResultManDeath);
-      }
+      updateEvents.add(PlaySound(
+        type: unit.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
     }
 
     updateEvents.add(

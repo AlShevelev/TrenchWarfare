@@ -9,7 +9,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
   );
 
   @override
-  void updateGameField() {
+  Unit? updateGameField() {
     final unit = _cell.activeUnit!;
 
     final chanceToDevastate = switch (unit.type) {
@@ -25,25 +25,45 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
       tag: 'SPECIAL_STRIKE',
     );
 
+    Unit? killedUnit;
     if (random <= chanceToDevastate) {
-      _cell.removeActiveUnit();
+      killedUnit = _cell.removeActiveUnit();
 
       Logger.info('FLAME_TROOPERS; unit is dead', tag: 'SPECIAL_STRIKE');
     }
+
+    return killedUnit;
   }
 
   @override
-  Iterable<UpdateGameEvent> _getUpdateEvents() => [
-        PlaySound(type: SoundType.attackFlame),
-        ShowDamage(
-          cell: _cell,
-          damageType: DamageType.flame,
-          time: _animationTime.damageAnimationTime,
-        ),
-        UpdateCell(
-          _cell,
-          updateBorderCells: [],
-        ),
-        AnimationCompleted(),
-      ];
+  Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
+    final events = <UpdateGameEvent>[];
+
+    events.add(PlaySound(
+      type: SoundType.attackFlame,
+      duration: killedUnit == null ? null : _animationTime.damageAnimationTime,
+    ));
+
+    events.add(ShowDamage(
+      cell: _cell,
+      damageType: DamageType.flame,
+      time: _animationTime.damageAnimationTime,
+    ));
+
+    if (killedUnit != null) {
+      events.add(PlaySound(
+        type: killedUnit.getDeathSoundType(),
+        strategy: SoundStrategy.putToQueue,
+      ));
+    }
+
+    events.add(UpdateCell(
+      _cell,
+      updateBorderCells: [],
+    ));
+
+    events.add(AnimationCompleted());
+
+    return events;
+  }
 }

@@ -35,7 +35,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
 
   @override
   State place() {
-    _strategy.updateGameField();
+    final killedUnit = _strategy.updateGameField();
 
     // Calculate the money
     final productionCost = MoneySpecialStrikeCalculator.calculateCost(_card.type);
@@ -44,7 +44,7 @@ class SpecialStrikesStartCalculator implements PlacingCalculator {
     final cellsImpossibleToBuild = SpecialStrikesBuildCalculator(_gameField, _myNation, _mapMetadata)
         .getAllCellsImpossibleToBuild(_card.type, _nationMoney.totalSum);
 
-    _strategy.showUpdate();
+    _strategy.showUpdate(killedUnit);
 
     final canPlaceNext = _canPlaceNext(cellsImpossibleToBuild.length, productionCost);
 
