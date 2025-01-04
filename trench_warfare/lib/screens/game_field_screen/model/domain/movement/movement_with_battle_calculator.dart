@@ -300,6 +300,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       updateEvents.add(PlaySound(
         type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
+        ignoreIfPlayed: false,
       ));
 
       updateEvents.add(

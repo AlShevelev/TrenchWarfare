@@ -50,21 +50,18 @@ class SoundsPlayer {
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
   void setVolume(double value) => _player.setVolume(value / SettingsConstants.maxValue);
 
-  void play({
+  Future<void> play({
     required SoundType type,
     int? duration,
     required SoundStrategy strategy,
     required bool ignoreIfPlayed,
-  }) {
-    Logger.error('[1.0] SoundsPlayer. play(type: $type, strategy: $strategy, _player.state: ${_player.state})', tag: 'SOUND_BUG');
+  }) async {
     if (_isMuted || _notReadyToPlay) {
-      Logger.error('[1.1] SoundsPlayer. return [type: $type]', tag: 'SOUND_BUG');
       return;
     }
 
     // The same track is in the queue - do nothing
     if (ignoreIfPlayed && _soundsQueue.any((t) => t.type == type)) {
-      Logger.error('[1.2] SoundsPlayer. return [type: $type]', tag: 'SOUND_BUG');
       return;
     }
 
@@ -72,23 +69,21 @@ class SoundsPlayer {
       case SoundStrategy.interrupt:
         {
           if (_player.state == PlayerState.playing) {
-            _player.stop();
+            await _player.stop();
           }
 
           _soundsQueue.clear();
           _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
-          _playNextSound();
+          await _playNextSound();
         }
       case SoundStrategy.putToQueue:
         {
-          Logger.error('[1.4] SoundsPlayer. SoundStrategy.putToQueue. type: $type, _player.state is: ${_player.state}', tag: 'SOUND_BUG');
           if (_player.state == PlayerState.playing) {
-            Logger.error('[2] SoundsPlayer. The sound is placed as last', tag: 'SOUND_BUG');
             _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
           } else {
             _soundsQueue.clear();
             _soundsQueue.addLast(_SoundsQueueItem(type: type, duration: duration));
-            _playNextSound();
+            await _playNextSound();
           }
         }
     }
@@ -127,25 +122,20 @@ class SoundsPlayer {
     return 'audio/sounds/$fileName.ogg';
   }
 
-  void _playNextSound() {
-    Logger.error('[4] SoundsPlayer._playNextSound() is called', tag: 'SOUND_BUG');
+  Future<void> _playNextSound() async {
     final itemToPlay = _soundsQueue.firstOrNull;
-
-    Logger.error('[5] SoundsPlayer. item to play is: $itemToPlay', tag: 'SOUND_BUG');
 
     if (itemToPlay == null) {
       return;
     }
 
-    Logger.error('[6] SoundsPlayer. start playing', tag: 'SOUND_BUG');
-    _player.play(UrlSource(_cachedSounds[itemToPlay.type].toString()));
+    await _player.play(UrlSource(_cachedSounds[itemToPlay.type].toString()));
   }
 
-  void _switchToNextSound() {
-    Logger.error('[3] SoundsPlayer._switchToNextSound() is called', tag: 'SOUND_BUG');
-    _player.stop();
+  Future<void> _switchToNextSound() async {
+    await _player.stop();
     _soundsQueue.removeFirst();
-    _playNextSound();
+    await _playNextSound();
   }
 
   /// [durationToInterrupt] in ms

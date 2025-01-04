@@ -6,7 +6,7 @@ class AudioComposer {
 
   void setAudioController(AudioControllerPlaySound? audioController) => _audioController = audioController;
 
-  void onUpdateGameEvent(UpdateGameEvent event) {
+  Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
     switch (event) {
       case PlaySound(
           type: var type,
@@ -14,7 +14,7 @@ class AudioComposer {
           strategy: var strategy,
           ignoreIfPlayed: var ignoreIfPlayed,
         ):
-        _audioController?.playSound(
+        await _audioController?.playSound(
           type,
           duration: duration,
           strategy: strategy,

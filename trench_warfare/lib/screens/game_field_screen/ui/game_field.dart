@@ -184,7 +184,7 @@ class GameField extends FlameGame
 
   void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
     for (var event in events) {
-      _audioComposer.onUpdateGameEvent(event);
+      await _audioComposer.onUpdateGameEvent(event);
       await _gameObjectsComposer.onUpdateGameEvent(event);
       await _gameGesturesComposer.onUpdateGameEvent(event);
     }
