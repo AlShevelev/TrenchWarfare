@@ -237,7 +237,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
           unit: attackingUnit,
           time: _animationTime.unitMovementTime,
         ));
-        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
+        updateEvents.add(UpdateCell(priorCell, updateBorderCells: _gameField.findCellsAround(priorCell)));
         updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
       priorCell = cell;
@@ -350,6 +350,11 @@ class MovementWithBattleCalculator extends MovementCalculator {
 
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));
+
+    updateEvents.add(UpdateCell(
+      reachableCells.last,
+      updateBorderCells: _gameField.findCellsAround(reachableCells.last),
+    ));
 
     if (pcCaptured) {
       updateEvents.add(PlaySound(

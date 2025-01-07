@@ -134,7 +134,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
           unit: unit,
           time: _animationTime.unitMovementTime,
         ));
-        updateEvents.add(UpdateCell(cell, updateBorderCells: _gameField.findCellsAround(cell)));
+        updateEvents.add(UpdateCell(priorCell, updateBorderCells: _gameField.findCellsAround(priorCell)));
         updateEvents.add(Pause(_animationTime.unitMovementPause));
       }
       priorCell = cell;
@@ -161,6 +161,11 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     );
 
     updateEvents.add(RemoveUntiedUnit(unit));
+
+    updateEvents.add(UpdateCell(
+      reachableCells.last,
+      updateBorderCells: _gameField.findCellsAround(reachableCells.last),
+    ));
 
     // clear the rest of the path
     for (var cell in path) {
