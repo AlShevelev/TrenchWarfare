@@ -26,7 +26,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
 
   Future<void> init() async {
     await _soundsPlayer.init();
-    _musicPlayer.init();
+    await _musicPlayer.init();
   }
 
   void dispose() {

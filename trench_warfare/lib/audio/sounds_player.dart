@@ -41,6 +41,7 @@ class SoundsPlayer {
     }
 
     setVolume(SettingsStorageFacade.sounds);
+    await _player.setPlaybackRate(1.0);
   }
 
   void dispose() {

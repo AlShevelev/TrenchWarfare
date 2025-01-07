@@ -11,9 +11,10 @@ class MusicPlayer {
     _player.onPlayerComplete.listen((_) => _playNextMusicTrack());
   }
 
-  void init() {
+  Future<void> init() async {
     setVolume(SettingsStorageFacade.music);
-    _playMusicTrack(0);
+    await _player.setPlaybackRate(1.0);
+    await _playMusicTrack(0);
   }
 
   void dispose() {
