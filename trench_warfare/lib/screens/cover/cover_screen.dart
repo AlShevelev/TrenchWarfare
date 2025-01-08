@@ -1,14 +1,36 @@
 import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
+import 'package:trench_warfare/app/theme/colors.dart';
+import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/cover/cover_screen_button.dart';
 
-class CoverScreen extends StatelessWidget {
+class CoverScreen extends StatefulWidget {
   const CoverScreen({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<StatefulWidget> createState() => _CoverScreenState();
+}
+
+class _CoverScreenState extends State<CoverScreen> {
+  String? version;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      version = info.version;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final locale = localization.EasyLocalization.of(context)?.locale;
@@ -84,6 +106,17 @@ class CoverScreen extends StatelessWidget {
                   },
                 ),
               ),
+            DefaultTextStyle(
+              style: const TextStyle(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                child: Text(
+                  version ?? '',
+                  textAlign: TextAlign.end,
+                  style: AppTypography.s14w400.copyWith(color: AppColors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),

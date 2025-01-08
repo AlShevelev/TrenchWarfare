@@ -23,6 +23,7 @@ dependencies:
   objectbox_flutter_libs: any
   xml: ^6.5.0
   audioplayers: 6.1.0
+  package_info_plus: ^8.1.2
 
 dev_dependencies:
   flutter_test:
