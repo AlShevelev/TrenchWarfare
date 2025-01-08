@@ -4,6 +4,8 @@ class Logger {
   static late final Talker talkerFlutter;
 
   static void init() {
+    if (!kDebugMode) return;
+
     talkerFlutter = Talker(
       history: _TalkerDbHistory(dao: Database.talkerHistoryDao),
     );
@@ -64,6 +66,8 @@ class Logger {
     StackTrace? stackTrace,
     required LogLevel level,
   }) {
+    if (!kDebugMode) return;
+
     final resultMessage = tag == null ? message : '[$tag] $message';
     talkerFlutter.log(resultMessage, logLevel: level, exception: exception, stackTrace: stackTrace);
   }
