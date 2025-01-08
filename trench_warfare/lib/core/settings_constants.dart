@@ -5,5 +5,6 @@ class SettingsConstants {
 
   static const defaultMusicValue = 25.0;
   static const defaultSoundsValue = 75.0;
-  static const defaultValue = 50.0;
+  static const defaultHumanUnitsSpeedValue = 60.0;
+  static const defaultAiUnitsSpeedValue = 50.0;
 }

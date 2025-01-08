@@ -57,8 +57,8 @@ class NewGameBuilder implements GameBuilder {
       playingNations: playingNations.toList(growable: false),
       transfers: {},
       money: Map.fromEntries(playingNations.map((n) => MapEntry(n.code, MoneyStorage(gameField, n)))),
-      humanUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed ?? SettingsConstants.defaultValue,
-      aiUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed ?? SettingsConstants.defaultValue,
+      humanUnitsSpeed: SettingsStorageFacade.humanUnitsSpeed,
+      aiUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed,
     );
   }
 }

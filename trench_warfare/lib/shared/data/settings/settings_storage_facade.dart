@@ -11,8 +11,10 @@ class SettingsStorageFacade {
 
   static double _music = _dao.readDouble(_musicKey) ?? SettingsConstants.defaultMusicValue;
   static double _sounds = _dao.readDouble(_soundsKey) ?? SettingsConstants.defaultSoundsValue;
-  static double _humanUnitsSpeed = _dao.readDouble(_humanUnitsSpeedKey) ?? SettingsConstants.defaultValue;
-  static double _aiUnitsSpeed = _dao.readDouble(_aiUnitsSpeedKey) ?? SettingsConstants.defaultValue;
+  static double _humanUnitsSpeed =
+      _dao.readDouble(_humanUnitsSpeedKey) ?? SettingsConstants.defaultHumanUnitsSpeedValue;
+  static double _aiUnitsSpeed =
+      _dao.readDouble(_aiUnitsSpeedKey) ?? SettingsConstants.defaultAiUnitsSpeedValue;
 
   static double get music => _music;
 

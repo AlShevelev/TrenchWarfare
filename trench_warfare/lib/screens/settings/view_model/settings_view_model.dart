@@ -10,10 +10,10 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
 
   @override
   SettingsResult get settingsValue => SettingsResult(
-        music: _state?.music ?? SettingsConstants.defaultValue,
-        sounds: _state?.sounds ?? SettingsConstants.defaultValue,
-        humanUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultValue,
-        aiUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultValue,
+        music: _state?.music ?? SettingsConstants.defaultMusicValue,
+        sounds: _state?.sounds ?? SettingsConstants.defaultSoundsValue,
+        humanUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultHumanUnitsSpeedValue,
+        aiUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultAiUnitsSpeedValue,
       );
 
   _SettingsViewModel() {
