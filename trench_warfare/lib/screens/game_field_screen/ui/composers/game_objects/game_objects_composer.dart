@@ -84,7 +84,7 @@ class GameObjectsComposer {
     }
   }
 
-  void _updateCell(GameFieldCell cell, Iterable<GameFieldCell> updateBorderCells) {
+  void _updateCell(GameFieldCellRead cell, Iterable<GameFieldCellRead> updateBorderCells) {
     _removeGameObject(_getCellComponentKey(cell));
 
     if (GameObjectCell.needToDrawCell(cell, _gameField)) {
@@ -129,7 +129,7 @@ class GameObjectsComposer {
     }
   }
 
-  void _createUntiedUnit(GameFieldCell cell, Unit unit) {
+  void _createUntiedUnit(GameFieldCellRead cell, Unit unit) {
     final gameObject = GameObjectUntiedUnit(
       spritesAtlas: _spritesAtlas,
       position: cell.center,
@@ -145,7 +145,12 @@ class GameObjectsComposer {
     _removeGameObject(unit.id);
   }
 
-  Future<void> _moveUntiedUnit(GameFieldCell startCell, GameFieldCell endCell, Unit unit, int time) async {
+  Future<void> _moveUntiedUnit(
+    GameFieldCellRead startCell,
+    GameFieldCellRead endCell,
+    Unit unit,
+    int time,
+  ) async {
     final unitSprite = _gameObjects[unit.id];
 
     if (unitSprite == null) {
@@ -163,7 +168,7 @@ class GameObjectsComposer {
   }
 
   Future<void> _showDamage(
-    GameFieldCell cell,
+    GameFieldCellRead cell,
     DamageType damageType,
     int time,
   ) async {
@@ -230,7 +235,7 @@ class GameObjectsComposer {
         DamageType.propaganda => Range(38, 46),
       };
 
-  String _getCellComponentKey(GameFieldCell cell) => '${cell.id}_cell';
+  String _getCellComponentKey(GameFieldCellRead cell) => '${cell.id}_cell';
 
   String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';
 }

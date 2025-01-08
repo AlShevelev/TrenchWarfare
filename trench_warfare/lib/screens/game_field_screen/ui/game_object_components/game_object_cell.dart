@@ -1,20 +1,20 @@
 part of game_field_components;
 
 final class GameObjectCell extends GameObjectComponentBase {
-  final GameFieldCell _cell;
+  final GameFieldCellRead _cell;
 
   final GameFieldRead _gameField;
 
   GameObjectCell(
     TextureAtlas spritesAtlas,
-    GameFieldCell cell,
+    GameFieldCellRead cell,
     bool isHuman,
     GameFieldRead gameField,
   )   : _cell = cell,
         _gameField = gameField,
         super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
 
-  static bool needToDrawCell(GameFieldCell cell, GameFieldRead gameField) {
+  static bool needToDrawCell(GameFieldCellRead cell, GameFieldRead gameField) {
     if (!cell.isEmpty || cell.pathItem != null) {
       return true;
     }

@@ -15,9 +15,9 @@ enum DamageType {
 sealed class UpdateGameEvent {}
 
 class UpdateCell implements UpdateGameEvent {
-  final GameFieldCell cell;
+  final GameFieldCellRead cell;
 
-  final Iterable<GameFieldCell> updateBorderCells;
+  final Iterable<GameFieldCellRead> updateBorderCells;
 
   UpdateCell(this.cell, {required this.updateBorderCells});
 }
@@ -31,7 +31,7 @@ class UpdateCellInactivity implements UpdateGameEvent {
 }
 
 class CreateUntiedUnit implements UpdateGameEvent {
-  final GameFieldCell cell;
+  final GameFieldCellRead cell;
 
   final Unit unit;
 
@@ -45,8 +45,8 @@ class RemoveUntiedUnit implements UpdateGameEvent {
 }
 
 class MoveUntiedUnit implements UpdateGameEvent {
-  final GameFieldCell startCell;
-  final GameFieldCell endCell;
+  final GameFieldCellRead startCell;
+  final GameFieldCellRead endCell;
 
   final Unit unit;
 
@@ -63,7 +63,7 @@ class Pause implements UpdateGameEvent {
 }
 
 class ShowDamage implements UpdateGameEvent {
-  final GameFieldCell cell;
+  final GameFieldCellRead cell;
 
   final DamageType damageType;
 
