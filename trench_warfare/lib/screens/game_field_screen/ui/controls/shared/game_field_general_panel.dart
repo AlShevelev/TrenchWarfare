@@ -4,7 +4,7 @@ import 'package:trench_warfare/core/entities/money/money_unit.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/money_panel.dart';
 
 class GameFieldGeneralPanel extends StatelessWidget {
-  static const _width = 162.0;
+  static const _width = 182.0;
   static const _height = 30.0;
 
   final MoneyUnit money;
