@@ -14,7 +14,7 @@ class BuildRestrictionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const acceptedColor = AppColors.black;
-    const rejectedColor = AppColors.darkRed;
+    const rejectedColor = AppColors.red;
     const textStyle = AppTypography.s18w600;
 
     final showLastRestriction = buildPossibility.buildError != null || buildPossibility.buildDisplayRestriction != null;

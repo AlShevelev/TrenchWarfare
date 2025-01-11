@@ -34,7 +34,7 @@ class Cardboard extends StatelessWidget {
           border: Border.all(color: _getBorderColor(), width: 4),
           boxShadow: [
             BoxShadow(
-              color: selected ? AppColors.black : AppColors.halfDark,
+              color: selected ? AppColors.black : AppColors.quarterDark,
               spreadRadius: 3,
               blurRadius: 5,
               offset: const Offset(0, 3), // changes position of shadow
