@@ -8,7 +8,7 @@ class _Bookmarks extends StatelessWidget {
   static const double _bookmarkHeight = 83;
 
   static const double _bookmarkStartOffset = 40;
-  static const double _bookmarksGap = 10;
+  static const double _bookmarksGap = 5;
 
   final bool _isLoading;
 
@@ -67,7 +67,7 @@ class _Bookmarks extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(_getTabBookmark(tab)),
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
           child: Padding(

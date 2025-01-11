@@ -52,7 +52,7 @@ class _Card extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       child: Text(
                         _getDatesText(),
                         style: AppTypography.s16w600,

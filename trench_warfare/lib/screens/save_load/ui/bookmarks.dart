@@ -20,7 +20,7 @@ class _Bookmarks extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/screens/shared/bookmarks/bookmark_red_68.webp'),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: Padding(

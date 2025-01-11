@@ -44,14 +44,14 @@ class _SettingsSliderState extends State<SettingsSlider> {
 
   @override
   Widget build(BuildContext context) {
-    const iconSize = 35.0;
+    const iconSize = 30.0;
 
     return Column(
       children: [
         Text(
           textAlign: TextAlign.center,
           widget._title,
-          style: AppTypography.s22w600,
+          style: AppTypography.s20w600,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

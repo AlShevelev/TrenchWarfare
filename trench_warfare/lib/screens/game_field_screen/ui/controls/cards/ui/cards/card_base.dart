@@ -39,10 +39,10 @@ abstract class _CardBase<T> extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       child: Text(
                         _getTitleText(),
-                        style: AppTypography.s22w600,
+                        style: AppTypography.s20w600,
                       ),
                     ),
                     Padding(
@@ -119,7 +119,7 @@ abstract class _CardBase<T> extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.justify,
-          style: AppTypography.s20w400,
+          style: AppTypography.s14w400,
         ),
       );
     }
