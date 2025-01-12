@@ -14,12 +14,6 @@ class CardsSelectionScreen extends StatefulWidget {
 }
 
 class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageLoading {
-  bool _isBackgroundLoaded = false;
-
-  late final ui.Image _background;
-  late final ui.Image _oldBookCover;
-  late final ui.Image _oldPaper;
-
   late final _CardsSelectionViewModel _viewModel;
 
   @override
@@ -27,18 +21,6 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
     super.initState();
 
     _viewModel = _CardsSelectionViewModel(widget.state);
-
-    init();
-  }
-
-  Future init() async {
-    _background = await loadImage('assets/images/screens/shared/screen_background.webp');
-    _oldBookCover = await loadImage('assets/images/screens/shared/old_book_cover.webp');
-    _oldPaper = await loadImage('assets/images/screens/shared/old_paper.webp', completeCallback: () {
-      setState(() {
-        _isBackgroundLoaded = true;
-      });
-    });
   }
 
   @override
@@ -49,10 +31,6 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
 
   @override
   Widget build(BuildContext context) {
-    if (!_isBackgroundLoaded) {
-      return const SizedBox.shrink();
-    }
-
     return StreamBuilder<_CardsScreenState>(
       stream: _viewModel.cardsState,
       builder: (context, value) {
@@ -63,15 +41,15 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
         final state = value.data as _DataIsReady;
         final selectedTab = state.selectedTab;
 
-        return Background.image(
-          image: _background,
+        return Background(
+          imagePath: 'assets/images/screens/shared/screen_background.webp',
           child: Stack(
             alignment: AlignmentDirectional.center,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(7, 36, 7, 36),
-                child: Background.image(
-                  image: _oldBookCover,
+                child: Background(
+                  imagePath: 'assets/images/screens/shared/old_book_cover.webp',
                   child: Stack(
                     alignment: AlignmentDirectional.topStart,
                     children: [
@@ -81,8 +59,8 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
-                        child: Background.image(
-                          image: _oldPaper,
+                        child: Background(
+                          imagePath: 'assets/images/screens/shared/old_paper.webp',
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
                             alignment: AlignmentDirectional.topCenter,

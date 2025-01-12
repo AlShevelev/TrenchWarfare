@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
     return Material(
       child: Directionality(
         textDirection: ui.TextDirection.ltr,
-        child: Background.path(
+        child: Background(
           imagePath: 'assets/images/screens/shared/screen_background.webp',
           child: Settings(
             onClose: (result) {

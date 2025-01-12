@@ -8,11 +8,11 @@ class NewGameScreen extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Directionality(
+    return const Directionality(
       textDirection: TextDirection.ltr,
-      child: Background.path(
+      child: Background(
         imagePath: 'assets/images/screens/shared/screen_background.webp',
-        child: const MapSelection(),
+        child: MapSelection(),
       ),
     );
   }

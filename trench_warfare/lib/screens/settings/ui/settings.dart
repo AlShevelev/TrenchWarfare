@@ -13,12 +13,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> with ImageLoading {
-  bool _isBackgroundLoaded = false;
-
   late final _SettingsViewModel _viewModel;
-
-  late final ui.Image _oldBookCover;
-  late final ui.Image _oldPaper;
 
   @override
   void initState() {
@@ -30,13 +25,6 @@ class _SettingsState extends State<Settings> with ImageLoading {
   }
 
   Future<void> _init() async {
-    _oldBookCover = await loadImage('assets/images/screens/shared/old_book_cover.webp');
-    _oldPaper = await loadImage('assets/images/screens/shared/old_paper.webp', completeCallback: () {
-      setState(() {
-        _isBackgroundLoaded = true;
-      });
-    });
-
     await _viewModel.init();
   }
 
@@ -51,10 +39,6 @@ class _SettingsState extends State<Settings> with ImageLoading {
     final audioController = context.read<AudioController>();
     _viewModel.setAudioController(audioController);
 
-    if (!_isBackgroundLoaded) {
-      return const SizedBox.shrink();
-    }
-
     return StreamBuilder<_SettingsScreenState>(
         stream: _viewModel.uiState,
         builder: (context, value) {
@@ -68,32 +52,29 @@ class _SettingsState extends State<Settings> with ImageLoading {
             child: Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                if (!value.hasData)
-                  const SizedBox.shrink()
-                else
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(7, 20, 7, 20),
-                    child: Background.image(
-                      image: _oldBookCover,
-                      child: Stack(
-                        alignment: AlignmentDirectional.topStart,
-                        children: [
-                          const _Bookmark(),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
-                            child: Background.image(
-                              image: _oldPaper,
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                                alignment: AlignmentDirectional.topCenter,
-                                child: _getContent(value.data),
-                              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(7, 20, 7, 20),
+                  child: Background(
+                    imagePath: 'assets/images/screens/shared/old_book_cover.webp',
+                    child: Stack(
+                      alignment: AlignmentDirectional.topStart,
+                      children: [
+                        const _Bookmark(),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(18, 70, 18, 18),
+                          child: Background(
+                            imagePath: 'assets/images/screens/shared/old_paper.webp',
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                              alignment: AlignmentDirectional.topCenter,
+                              child: _getContent(value.data),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
                 // Close button
                 CornerButton(
                   right: 15,

@@ -8,7 +8,7 @@ class SaveLoadScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: ui.TextDirection.ltr,
-      child: Background.path(
+      child: Background(
         imagePath: 'assets/images/screens/shared/screen_background.webp',
         child: SlotSelection(
           isSave: false,

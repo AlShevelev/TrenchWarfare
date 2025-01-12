@@ -4,7 +4,7 @@ class _FadeRoute extends PageRouteBuilder {
   _FadeRoute(Widget page)
       : super(
           pageBuilder: _createBuilder(page),
-          transitionDuration: const Duration(milliseconds: 200),
+          transitionDuration: const Duration(milliseconds: 350),
           transitionsBuilder: _createTransition(),
         );
 
