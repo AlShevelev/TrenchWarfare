@@ -51,11 +51,11 @@ class GameCellBorder extends PositionComponent {
         case 0:
           _drawSide(canvas, _nation, start: _vertices[0] + _position, end: _vertices[1] + _position);
 
-        // right
+        // bottom-right
         case 1:
           _drawSide(canvas, _nation, start: _vertices[1] + _position, end: _vertices[2] + _position);
 
-        // bottom-right
+        // bottom
         case 2:
           _drawSide(canvas, _nation, start: _vertices[2] + _position, end: _vertices[3] + _position);
 
@@ -63,29 +63,29 @@ class GameCellBorder extends PositionComponent {
         case 3:
           _drawSide(canvas, _nation, start: _vertices[3] + _position, end: _vertices[4] + _position);
 
-        // left
+        // top-left
         case 4:
           _drawSide(canvas, _nation, start: _vertices[4] + _position, end: _vertices[5] + _position);
 
-        // top-left
+        // top
         case 5:
           _drawSide(canvas, _nation, start: _vertices[5] + _position, end: _vertices[0] + _position);
       }
     }
   }
 
-  /// From the top-central, clockwise
+  /// From the top-right, clockwise
   static List<Offset> _calculateVertices(Vector2 size) {
-    final a = size.x / 2;
+    final a = size.y / 2;
     final b = a * math.tan(math.pi / 6);
 
     final result = [
-      Offset(a, 0.0),
-      Offset(size.x, b),
-      Offset(size.x, size.y - b),
-      Offset(a, size.y),
-      Offset(0, size.y - b),
-      Offset(0, b),
+      Offset(size.x - b, 0.0),
+      Offset(size.x, a),
+      Offset(size.x - b, size.y),
+      Offset(b, size.y),
+      Offset(0, a),
+      Offset(b, 0.0),
     ];
 
     return result;

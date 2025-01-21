@@ -147,4 +147,6 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
           'terrainModifier: ${terrainModifier?.type}; '
           'production: [type: ${productionCenter?.type}; level: ${productionCenter?.level}]; '
           'hasRoad: $hasRoad; hasRiver: $hasRiver}; pathItem: $pathItem; nation: $_nation';
+
+  String toStringBrief() => 'CELL: {id: $id; row: $row; col: $col';
 }

@@ -27,16 +27,17 @@ abstract class HexMatrix<T extends HexMatrixItem> {
     final result = List<T?>.empty(growable: true);
 
     // top-right
-    final row4 = centralCell.row - 1;
-    final col4 = centralCell.row % 2 == 0 ? centralCell.col : centralCell.col + 1;
+    final row4 = centralCell.col % 2 == 0 ? centralCell.row - 1 : centralCell.row;
+    final col4 = centralCell.col + 1;
+
     if (_isInsideMatrix(row: row4, col: col4)) {
       result.add(getCell(row4, col4));
     } else {
       result.add(null);
     }
 
-    // right
-    final row1 = centralCell.row;
+    // bottom-right
+    final row1 = centralCell.col % 2 == 0 ? centralCell.row : centralCell.row + 1;
     final col1 = centralCell.col + 1;
     if (_isInsideMatrix(row: row1, col: col1)) {
       result.add(getCell(row1, col1));
@@ -44,9 +45,9 @@ abstract class HexMatrix<T extends HexMatrixItem> {
       result.add(null);
     }
 
-    // bottom-right
+    // bottom
     final row6 = centralCell.row + 1;
-    final col6 = centralCell.row % 2 == 0 ? centralCell.col : centralCell.col + 1;
+    final col6 = centralCell.col;
     if (_isInsideMatrix(row: row6, col: col6)) {
       result.add(getCell(row6, col6));
     } else {
@@ -54,16 +55,16 @@ abstract class HexMatrix<T extends HexMatrixItem> {
     }
 
     // bottom-left
-    final row5 = centralCell.row + 1;
-    final col5 = centralCell.row % 2 == 0 ? centralCell.col - 1 : centralCell.col;
+    final row5 = centralCell.col % 2 == 0 ? centralCell.row : centralCell.row + 1;
+    final col5 = centralCell.col - 1;
     if (_isInsideMatrix(row: row5, col: col5)) {
       result.add(getCell(row5, col5));
     } else {
       result.add(null);
     }
 
-    // left
-    final row2 = centralCell.row;
+    // top-left
+    final row2 = centralCell.col % 2 == 0 ? centralCell.row - 1 : centralCell.row;
     final col2 = centralCell.col - 1;
     if (_isInsideMatrix(row: row2, col: col2)) {
       result.add(getCell(row2, col2));
@@ -71,9 +72,9 @@ abstract class HexMatrix<T extends HexMatrixItem> {
       result.add(null);
     }
 
-    // top-left
+    // top
     final row3 = centralCell.row - 1;
-    final col3 = centralCell.row % 2 == 0 ? centralCell.col - 1 : centralCell.col;
+    final col3 = centralCell.col;
     if (_isInsideMatrix(row: row3, col: col3)) {
       result.add(getCell(row3, col3));
     } else {
