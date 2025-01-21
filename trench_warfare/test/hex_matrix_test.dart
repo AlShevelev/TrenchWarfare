@@ -1,6 +1,5 @@
 import 'package:test/test.dart';
-import 'package:trench_warfare/core/entities/hex_matrix/hex_matrix.dart';
-import 'package:trench_warfare/core/entities/hex_matrix/hex_matrix_item.dart';
+import 'package:trench_warfare/core/entities/hex_matrix/hex_matrix_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 
 import 'assert.dart';
@@ -40,7 +39,7 @@ void main() {
       // Assert
       Assert.isTrue(result.length == 12);
 
-      Assert.isTrue(result.elementAt(0).let((e) => e.row == 1 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(0).let((e) => e.row == 2 && e.col == 4)!);
       Assert.isTrue(result.elementAt(1).let((e) => e.row == 2 && e.col == 5)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 3 && e.col == 5)!);
 
@@ -49,11 +48,11 @@ void main() {
       Assert.isTrue(result.elementAt(5).let((e) => e.row == 5 && e.col == 3)!);
 
       Assert.isTrue(result.elementAt(6).let((e) => e.row == 5 && e.col == 2)!);
-      Assert.isTrue(result.elementAt(7).let((e) => e.row == 4 && e.col == 2)!);
+      Assert.isTrue(result.elementAt(7).let((e) => e.row == 4 && e.col == 1)!);
       Assert.isTrue(result.elementAt(8).let((e) => e.row == 3 && e.col == 1)!);
 
-      Assert.isTrue(result.elementAt(9).let((e) => e.row == 2 && e.col == 2)!);
-      Assert.isTrue(result.elementAt(10).let((e) => e.row == 1 && e.col == 2)!);
+      Assert.isTrue(result.elementAt(9).let((e) => e.row == 2 && e.col == 1)!);
+      Assert.isTrue(result.elementAt(10).let((e) => e.row == 2 && e.col == 2)!);
       Assert.isTrue(result.elementAt(11).let((e) => e.row == 1 && e.col == 3)!);
     });
 
@@ -68,11 +67,11 @@ void main() {
       // Assert
       Assert.isTrue(result.length == 12);
 
-      Assert.isTrue(result.elementAt(0).let((e) => e.row == 0 && e.col == 4)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(0).let((e) => e.row == 1 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 5)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 2 && e.col == 5)!);
 
-      Assert.isTrue(result.elementAt(3).let((e) => e.row == 3 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(3).let((e) => e.row == 3 && e.col == 5)!);
       Assert.isTrue(result.elementAt(4).let((e) => e.row == 4 && e.col == 4)!);
       Assert.isTrue(result.elementAt(5).let((e) => e.row == 4 && e.col == 3)!);
 
@@ -81,7 +80,7 @@ void main() {
       Assert.isTrue(result.elementAt(8).let((e) => e.row == 2 && e.col == 1)!);
 
       Assert.isTrue(result.elementAt(9).let((e) => e.row == 1 && e.col == 1)!);
-      Assert.isTrue(result.elementAt(10).let((e) => e.row == 0 && e.col == 2)!);
+      Assert.isTrue(result.elementAt(10).let((e) => e.row == 1 && e.col == 2)!);
       Assert.isTrue(result.elementAt(11).let((e) => e.row == 0 && e.col == 3)!);
     });
   });
@@ -110,11 +109,11 @@ void main() {
       // Assert
       Assert.isTrue(result.length == 6);
 
-      Assert.isTrue(result.elementAt(0).let((e) => e.row == 2 && e.col == 4)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 3 && e.col == 4)!);
-      Assert.isTrue(result.elementAt(2).let((e) => e.row == 4 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(0).let((e) => e.row == 3 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 4 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(2).let((e) => e.row == 4 && e.col == 3)!);
 
-      Assert.isTrue(result.elementAt(3).let((e) => e.row == 4 && e.col == 3)!);
+      Assert.isTrue(result.elementAt(3).let((e) => e.row == 4 && e.col == 2)!);
       Assert.isTrue(result.elementAt(4).let((e) => e.row == 3 && e.col == 2)!);
       Assert.isTrue(result.elementAt(5).let((e) => e.row == 2 && e.col == 3)!);
     });
@@ -145,8 +144,8 @@ void main() {
       Assert.isTrue(result.length == 4);
 
       Assert.isTrue(result.elementAt(0).let((e) => e.row == 0 && e.col == 2)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 1)!);
-      Assert.isTrue(result.elementAt(2).let((e) => e.row == 2 && e.col == 1)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 2)!);
+      Assert.isTrue(result.elementAt(2).let((e) => e.row == 1 && e.col == 1)!);
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 2 && e.col == 0)!);
     });
 
@@ -162,7 +161,7 @@ void main() {
       Assert.isTrue(result.length == 4);
 
       Assert.isTrue(result.elementAt(0).let((e) => e.row == 2 && e.col == 6)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 2 && e.col == 5)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 5)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 1 && e.col == 4)!);
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 0 && e.col == 4)!);
     });
@@ -196,7 +195,7 @@ void main() {
       Assert.isTrue(result.length == 4);
 
       Assert.isTrue(result.elementAt(0).let((e) => e.row == 4 && e.col == 1)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 5 && e.col == 1)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 5 && e.col == 2)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 6 && e.col == 2)!);
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 4 && e.col == 0)!);
     });
@@ -215,7 +214,7 @@ void main() {
       Assert.isTrue(result.length == 7);
 
       Assert.isTrue(result.elementAt(0).let((e) => e.row == 0 && e.col == 5)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 1 && e.col == 5)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 2 && e.col == 4)!);
 
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 2 && e.col == 3)!);
@@ -237,11 +236,11 @@ void main() {
       Assert.isTrue(result.length == 7);
 
       Assert.isTrue(result.elementAt(0).let((e) => e.row == 5 && e.col == 6)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 5 && e.col == 5)!);
-      Assert.isTrue(result.elementAt(2).let((e) => e.row == 4 && e.col == 5)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 4 && e.col == 5)!);
+      Assert.isTrue(result.elementAt(2).let((e) => e.row == 4 && e.col == 4)!);
 
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 3 && e.col == 4)!);
-      Assert.isTrue(result.elementAt(4).let((e) => e.row == 2 && e.col == 5)!);
+      Assert.isTrue(result.elementAt(4).let((e) => e.row == 2 && e.col == 4)!);
       Assert.isTrue(result.elementAt(5).let((e) => e.row == 1 && e.col == 5)!);
 
       Assert.isTrue(result.elementAt(6).let((e) => e.row == 1 && e.col == 6)!);
@@ -258,13 +257,13 @@ void main() {
       // Assert
       Assert.isTrue(result.length == 7);
 
-      Assert.isTrue(result.elementAt(0).let((e) => e.row == 4 && e.col == 4)!);
-      Assert.isTrue(result.elementAt(1).let((e) => e.row == 5 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(0).let((e) => e.row == 5 && e.col == 4)!);
+      Assert.isTrue(result.elementAt(1).let((e) => e.row == 5 && e.col == 5)!);
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 6 && e.col == 5)!);
 
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 6 && e.col == 1)!);
       Assert.isTrue(result.elementAt(4).let((e) => e.row == 5 && e.col == 1)!);
-      Assert.isTrue(result.elementAt(5).let((e) => e.row == 4 && e.col == 2)!);
+      Assert.isTrue(result.elementAt(5).let((e) => e.row == 5 && e.col == 2)!);
 
       Assert.isTrue(result.elementAt(6).let((e) => e.row == 4 && e.col == 3)!);
     });
@@ -285,7 +284,7 @@ void main() {
       Assert.isTrue(result.elementAt(2).let((e) => e.row == 3 && e.col == 2)!);
 
       Assert.isTrue(result.elementAt(3).let((e) => e.row == 4 && e.col == 2)!);
-      Assert.isTrue(result.elementAt(4).let((e) => e.row == 5 && e.col == 1)!);
+      Assert.isTrue(result.elementAt(4).let((e) => e.row == 4 && e.col == 1)!);
       Assert.isTrue(result.elementAt(5).let((e) => e.row == 5 && e.col == 0)!);
 
       Assert.isTrue(result.elementAt(6).let((e) => e.row == 1 && e.col == 0)!);

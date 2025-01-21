@@ -1,4 +1,4 @@
-import 'package:trench_warfare/shared/utils/math.dart';
+part of hex_matrix;
 
 abstract class HexMatrixItem {
   final int row;
