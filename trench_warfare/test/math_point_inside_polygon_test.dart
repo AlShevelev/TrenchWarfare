@@ -18,7 +18,7 @@ void main() {
       final point = Vector2(2, 2);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isTrue(result);
@@ -36,7 +36,7 @@ void main() {
       final point = Vector2(2, 0);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isFalse(result);
@@ -54,7 +54,7 @@ void main() {
       final point = Vector2(2, 4);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isFalse(result);
@@ -72,7 +72,7 @@ void main() {
       final point = Vector2(0, 2);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isFalse(result);
@@ -90,7 +90,7 @@ void main() {
       final point = Vector2(4, 2);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isFalse(result);
@@ -108,7 +108,7 @@ void main() {
       final point = Vector2(0, 0);
 
       // Act
-      final result = isPointInsidePolygon(point, polygon);
+      final result = InGameMath.isPointInsidePolygon(point, polygon);
 
       // Assert
       Assert.isFalse(result);

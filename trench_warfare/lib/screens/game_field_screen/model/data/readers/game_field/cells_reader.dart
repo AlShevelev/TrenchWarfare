@@ -2,34 +2,40 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/enums/cell_terrain.dart';
+import 'package:trench_warfare/shared/utils/math.dart';
 
 class CellsReader {
   static List<GameFieldCell> read(Vector2 tileSize, TiledMap map) {
-    final rows = map.width;
-    final cols = map.height;
+    final cols = map.width;
+    final rows = map.height;
 
     final terrainLayer = map.layerByName("Terrain") as TileLayer;
     final roadsAndRiversLayer = map.layerByName("RoadsAndRivers") as TileLayer;
 
     final result = List<GameFieldCell>.empty(growable: true);
 
-    for (var i = 0; i < terrainLayer.data!.length; i++) {
-      final row = i ~/ rows;
-      final col = i % cols;
+    final a = InGameMath.getHexAFactor(tileSize);
+    final b = InGameMath.getHexBFactor(tileSize);
+    final c = InGameMath.getHexCFactor(tileSize);
 
-      result.add(
-        GameFieldCell(
-          terrain: _decodeTerrain(terrainLayer.data![i]),
-          hasRiver: _hasRiver(roadsAndRiversLayer.data![i]),
-          hasRoad: _hasRoad(roadsAndRiversLayer.data![i]),
-          center: Vector2(
-            col * tileSize.x - (col * tileSize.x / 4) + tileSize.x / 2, // x
-            row * tileSize.y + tileSize.y / 2 + (col.isEven ? 0 : tileSize.y / 2) // y
+    var i = 0;
+    for (var row = 0; row < rows; row++) {
+      for (var col = 0; col < cols; col++) {
+        result.add(
+          GameFieldCell(
+            terrain: _decodeTerrain(terrainLayer.data![i]),
+            hasRiver: _hasRiver(roadsAndRiversLayer.data![i]),
+            hasRoad: _hasRoad(roadsAndRiversLayer.data![i]),
+            center: Vector2(
+                (tileSize.x / 2) + (col * (b + c)),
+                a + (row * tileSize.y) + (col.isOdd ? a : 0),
+            ),
+            row: row,
+            col: col,
           ),
-          row: row,
-          col: col,
-        ),
-      );
+        );
+        i++;
+      }
     }
 
     return result;

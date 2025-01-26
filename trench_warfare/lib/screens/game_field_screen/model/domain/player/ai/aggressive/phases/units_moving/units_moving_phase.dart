@@ -74,7 +74,7 @@ class UnitsMovingPhase implements TurnPhase {
         final List<Tuple2<int, double>> indexedWeights = estimators
             .mapIndexed((i, e) => Tuple2<int, double>(i, e.estimate()))
             .where((i) => i.item2 >= 1.0) // Skip the failed estimations
-            .map((i) => Tuple2<int, double>(i.item1, log10(i.item2)))
+            .map((i) => Tuple2<int, double>(i.item1, InGameMath.log10(i.item2)))
             .where((i) => i.item2 != 0) // Skip and estimation errors
             .toList(growable: false);
 

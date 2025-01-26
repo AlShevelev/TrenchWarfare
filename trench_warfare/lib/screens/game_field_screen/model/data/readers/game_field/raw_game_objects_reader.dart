@@ -77,7 +77,7 @@ class RawGameObjectReader {
 
   static GameObjectRaw _decodeOwnershipRegion(TiledObject tiledObject) {
     var vertices = tiledObject.polygon.map((e) => Vector2(e.x + tiledObject.x, e.y + tiledObject.y)).toList();
-    var bounds = getBoundRectForPolygon(vertices);
+    var bounds = InGameMath.getBoundRectForPolygon(vertices);
 
     return RegionOwnershipRaw(
       tiledObject.id,

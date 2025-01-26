@@ -128,14 +128,14 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
 
     Logger.info('_UnitsBuildingEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
     final result = cellsPossibleToBuildExt.map((cell) {
-      final enemyUnitsWeight = log10(
+      final enemyUnitsWeight = InGameMath.log10(
         unitPower *
             cell.dangerFactor *
             (maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance)) *
             _correctionFactor,
       );
 
-      final nearestEnemyPcWeight = log10(
+      final nearestEnemyPcWeight = InGameMath.log10(
         cell.nearestEnemyPcPower * (maxDistance - (cell.minDistanceToEnemyPc ?? maxDistance))
       );
 

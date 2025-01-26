@@ -1,4 +1,4 @@
-import 'package:trench_warfare/shared/utils/math.dart' as math;
+import 'package:trench_warfare/shared/utils/math.dart';
 
 class MoneyUnit {
   final int currency;
@@ -6,7 +6,7 @@ class MoneyUnit {
   final int industryPoints;
 
   @override
-  int get hashCode => math.pair(currency, industryPoints);
+  int get hashCode => InGameMath.pair(currency, industryPoints);
 
   static MoneyUnit get zero => MoneyUnit(currency: 0, industryPoints: 0);
 
@@ -26,8 +26,8 @@ class MoneyUnit {
       currency >= other.currency && industryPoints >= other.industryPoints;
 
   MoneyUnit multiplyBy(double factor) => MoneyUnit(
-        currency: math.multiplyBy(currency, factor),
-        industryPoints: math.multiplyBy(industryPoints, factor),
+        currency: InGameMath.multiplyBy(currency, factor),
+        industryPoints: InGameMath.multiplyBy(industryPoints, factor),
       );
 
   MoneyUnit copy({int? currency, int? industryPoints}) => MoneyUnit(

@@ -76,8 +76,8 @@ class GameCellBorder extends PositionComponent {
 
   /// From the top-right, clockwise
   static List<Offset> _calculateVertices(Vector2 size) {
-    final a = size.y / 2;
-    final b = a * math.tan(math.pi / 6);
+    final a = InGameMath.getHexAFactor(size);
+    final b = InGameMath.getHexBFactor(size);
 
     final result = [
       Offset(size.x - b, 0.0),
@@ -103,7 +103,7 @@ class GameCellBorder extends PositionComponent {
       case Nation.japan:
       case Nation.mongolia:
       case Nation.turkey:
-        _drawSideSegments(canvas, splitLine([0.25, 0.75], start: start, end: end), _getPaints(nation));
+        _drawSideSegments(canvas, InGameMath.splitLine([0.25, 0.75], start: start, end: end), _getPaints(nation));
       case Nation.belgium:
       case Nation.bulgaria:
       case Nation.china:
@@ -120,7 +120,7 @@ class GameCellBorder extends PositionComponent {
       case Nation.usNorth:
       case Nation.usSouth:
       case Nation.usa:
-        _drawSideSegments(canvas, splitLine([1.0/3, 2.0/3], start: start, end: end), _getPaints(nation));
+        _drawSideSegments(canvas, InGameMath.splitLine([1.0/3, 2.0/3], start: start, end: end), _getPaints(nation));
       default:
         throw UnimplementedError();
     }

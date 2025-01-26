@@ -97,7 +97,7 @@ class _CommanderEstimator extends Estimator<_UnitBoosterEstimationData> {
               weight: 1.0 +
                   c.unitPower +
                   _experienceToWeight(c.unitExperienceRank) +
-                  2 * log10(1 / c.unitHealthRelative),
+                  2 * InGameMath.log10(1 / c.unitHealthRelative),
               data: _UnitBoosterEstimationData(
                 cell: c.cell,
                 type: _type,

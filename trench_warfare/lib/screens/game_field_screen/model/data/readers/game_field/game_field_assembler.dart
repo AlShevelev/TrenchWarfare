@@ -48,9 +48,9 @@ class GameFieldAssembler {
 
   static Nation? _tryToFindOwnership(GameFieldCell cell, List<RegionOwnershipRaw> ownerships) {
     for (var ownership in ownerships) {
-      if (isPointInsideRect(cell.center, ownership.bounds)) {
+      if (InGameMath.isPointInsideRect(cell.center, ownership.bounds)) {
         // fast check
-        if (isPointInsidePolygon(cell.center, ownership.vertices)) {
+        if (InGameMath.isPointInsidePolygon(cell.center, ownership.vertices)) {
           // exact check
           return ownership.nation;
         }

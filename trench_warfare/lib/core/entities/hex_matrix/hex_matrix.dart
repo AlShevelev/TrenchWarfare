@@ -14,7 +14,7 @@ abstract class HexMatrix<T extends HexMatrixItem> {
 
   T getCell(int row, int col) => cellsRaw[getCellIndex(row, col)];
 
-  int getCellIndex(int row, int col) => rows * row + col;
+  int getCellIndex(int row, int col) => cols * row + col;
 
   T getCellById(int id) => cellsRaw.where((c) => c.id == id).first;
 

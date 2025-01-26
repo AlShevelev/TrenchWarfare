@@ -10,6 +10,6 @@ abstract class HexMatrixItem {
     required this.row,
     required this.col,
   }) {
-    id = pair(row, col);
+    id = InGameMath.pair(row, col);
   }
 }

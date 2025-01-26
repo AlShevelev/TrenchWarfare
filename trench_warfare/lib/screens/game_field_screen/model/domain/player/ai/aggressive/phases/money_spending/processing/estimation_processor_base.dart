@@ -86,7 +86,7 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
       : estimationResult
           .map((e) => e.weight)
           .average()
-          .let((v) => v == 0 ? 0.0 : _averageWeightBalanceFactor * log10(v))!;
+          .let((v) => v == 0 ? 0.0 : _averageWeightBalanceFactor * InGameMath.log10(v))!;
 
   @protected
   Future<void> _simulateCardSelection({
