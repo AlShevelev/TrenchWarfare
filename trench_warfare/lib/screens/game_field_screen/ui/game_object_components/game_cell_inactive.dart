@@ -7,7 +7,7 @@ class GameCellInactive extends PositionComponent {
   static final _borderAreaSize = ComponentConstants.cellRealSize;
 
   // ignore: unnecessary_late
-  static late final List<Offset> _vertices = _calculateVertices(_borderAreaSize);
+  static late final List<Offset> _vertices = InGameMath.getHexVertices(_borderAreaSize);
 
   GameCellInactive(GameFieldCellRead cell) {
     final positionCenter = Offset(cell.center.x, cell.center.y);
@@ -17,7 +17,7 @@ class GameCellInactive extends PositionComponent {
   @override
   void render(Canvas canvas) {
     final paint = Paint()
-      ..color = const Color(0x50000000)
+      ..color = const Color(0x90000000)
       ..style = PaintingStyle.fill;
 
     final v0 = _vertices[0] + _position;
@@ -37,22 +37,5 @@ class GameCellInactive extends PositionComponent {
       ..lineTo(v0.dx, v0.dy);
 
     canvas.drawPath(path, paint);
-  }
-
-  /// From the top-central, clockwise
-  static List<Offset> _calculateVertices(Vector2 size) {
-    final a = size.x / 2;
-    final b = a * math.tan(math.pi / 6);
-
-    final result = [
-      Offset(a, 0.0),
-      Offset(size.x, b),
-      Offset(size.x, size.y - b),
-      Offset(a, size.y),
-      Offset(0, size.y - b),
-      Offset(0, b),
-    ];
-
-    return result;
   }
 }

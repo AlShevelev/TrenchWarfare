@@ -109,7 +109,11 @@ class InGameMath {
   /// [parts] is  monotonically increasing sequence
   /// For example, if we would like to split a line into 25%-50%-25% parts
   /// it must contain next values: [0.25, 0.75]
-  static List<Tuple2<Offset, Offset>> splitLine(List<double> parts, {required Offset start, required Offset end,}) {
+  static List<Tuple2<Offset, Offset>> splitLine(
+    List<double> parts, {
+    required Offset start,
+    required Offset end,
+  }) {
     Offset getPointOnLine(double part, {required Offset start, required Offset end}) =>
         Offset(start.dx + (end.dx - start.dx) * part, start.dy + (end.dy - start.dy) * part);
 
@@ -156,5 +160,23 @@ class InGameMath {
 
   static double getHexBFactor(Vector2 size) => getHexAFactor(size) * math.tan(math.pi / 6);
 
-  static double getHexCFactor(Vector2 size) => math.sqrt(math.pow(getHexAFactor(size), 2.0) + math.pow(getHexBFactor(size), 2.0));
+  static double getHexCFactor(Vector2 size) =>
+      math.sqrt(math.pow(getHexAFactor(size), 2.0) + math.pow(getHexBFactor(size), 2.0));
+
+  /// From the top-right, clockwise
+  static List<Offset> getHexVertices(Vector2 size) {
+    final a = InGameMath.getHexAFactor(size);
+    final b = InGameMath.getHexBFactor(size);
+
+    final result = [
+      Offset(size.x - b, 0.0),
+      Offset(size.x, a),
+      Offset(size.x - b, size.y),
+      Offset(b, size.y),
+      Offset(0, a),
+      Offset(b, 0.0),
+    ];
+
+    return result;
+  }
 }

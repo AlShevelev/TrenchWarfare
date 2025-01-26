@@ -12,7 +12,7 @@ class GameCellBorder extends PositionComponent {
       ((ComponentConstants.cellRealSize.x - _borderAreaSize.x) + (ComponentConstants.cellRealSize.y - _borderAreaSize.y)) / 2;
 
   // ignore: unnecessary_late
-  static late final List<Offset> _vertices = _calculateVertices(_borderAreaSize);
+  static late final List<Offset> _vertices = InGameMath.getHexVertices(_borderAreaSize);
 
   // ignore: unnecessary_late
   static late final Map<Nation, List<Paint>> _paints = {};
@@ -72,23 +72,6 @@ class GameCellBorder extends PositionComponent {
           _drawSide(canvas, _nation, start: _vertices[5] + _position, end: _vertices[0] + _position);
       }
     }
-  }
-
-  /// From the top-right, clockwise
-  static List<Offset> _calculateVertices(Vector2 size) {
-    final a = InGameMath.getHexAFactor(size);
-    final b = InGameMath.getHexBFactor(size);
-
-    final result = [
-      Offset(size.x - b, 0.0),
-      Offset(size.x, a),
-      Offset(size.x - b, size.y),
-      Offset(b, size.y),
-      Offset(0, a),
-      Offset(b, 0.0),
-    ];
-
-    return result;
   }
 
   void _drawSide(
