@@ -7,6 +7,8 @@ class MusicPlayer {
 
   final _tracksToPlay = ['1_cover.ogg', '2.ogg', '3.ogg', '4.ogg', '5.ogg'];
 
+  static const _musicReduceVolumeFactor = 0.5;
+
   MusicPlayer() {
     _player.onPlayerComplete.listen((_) => _playNextMusicTrack());
   }
@@ -22,7 +24,8 @@ class MusicPlayer {
   }
 
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
-  void setVolume(double value) => _player.setVolume(value / SettingsConstants.maxValue);
+  void setVolume(double value) =>
+      _player.setVolume(_musicReduceVolumeFactor * value / SettingsConstants.maxValue);
 
   void _playNextMusicTrack() {
     var newActiveTrackIndex = RandomGen.randomInt(_tracksToPlay.length);
