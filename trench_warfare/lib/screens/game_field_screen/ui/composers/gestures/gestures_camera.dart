@@ -9,6 +9,8 @@ class GesturesCamera {
 
   Rect get visibleRect => _camera.visibleWorldRect;
 
+  Vector2 get viewPortSize => _camera.viewport.size;
+
   GesturesCamera(CameraComponent camera) {
     _camera = camera;
   }

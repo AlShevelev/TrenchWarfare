@@ -9,6 +9,8 @@ class GameGesturesComposer {
 
   late final Offset _mapSize;
 
+  late final double _minZoom;
+
   Vector2? _tapPosition;
   bool _longTapStarted = false;
 
@@ -20,6 +22,8 @@ class GameGesturesComposer {
   }) {
     _mapSize = mapSize;
     _camera = camera;
+
+    _minZoom = _calculateMinZoom();
 
     _checkBorders();
   }
@@ -134,11 +138,11 @@ class GameGesturesComposer {
 
   void _processScale(Vector2 currentScale) {
     final newZoom = _zoom * ((currentScale.y + currentScale.x) / 2.0);
-    _camera.updateZoom(newZoom.clamp(ZoomConstants.minZoom, ZoomConstants.maxZoom));
+    _camera.updateZoom(newZoom.clamp(_minZoom, ZoomConstants.maxZoom));
   }
 
   void _checkScaleBorders(double currentZoom) =>
-      _camera.updateZoom(currentZoom.clamp(ZoomConstants.minZoom, ZoomConstants.maxZoom));
+      _camera.updateZoom(currentZoom.clamp(_minZoom, ZoomConstants.maxZoom));
 
   void _checkDragBorders(Rect visibleWorldRect, Vector2 cameraPosition) {
     final worldRect = visibleWorldRect;
@@ -159,5 +163,13 @@ class GameGesturesComposer {
     }
 
     _camera.updatePosition(cameraPosition.translated(xTranslate, yTranslate));
+  }
+
+  /// The zoom level to inscribe a map to a screen
+  double _calculateMinZoom() {
+    final minZoomX = _camera.viewPortSize.x / _mapSize.dx;
+    final minZoomY = _camera.viewPortSize.y / _mapSize.dy;
+
+    return math.max(minZoomX, minZoomY);
   }
 }

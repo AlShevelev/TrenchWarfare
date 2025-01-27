@@ -1,5 +1,6 @@
 library game_gesture_composer;
 
+import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
