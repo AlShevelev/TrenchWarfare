@@ -61,7 +61,8 @@ class RegionOwnershipRaw extends GameObjectRaw {
 class ProductionCenterRaw extends GameObjectRaw {
   final ProductionCenterType type;
   final ProductionCenterLevel level;
-  final String name;
+  final String nameRu;
+  final String nameEn;
 
   bool get isLand => type != ProductionCenterType.navalBase;
 
@@ -69,7 +70,8 @@ class ProductionCenterRaw extends GameObjectRaw {
     super.id, {
     required this.type,
     required this.level,
-    required this.name,
+    required this.nameRu,
+    required this.nameEn,
     required super.center,
   });
 }

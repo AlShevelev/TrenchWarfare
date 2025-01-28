@@ -2,6 +2,7 @@ import 'package:trench_warfare/core/entities/game_field/game_field_library.dart'
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/dto/game_object_raw.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 
@@ -63,7 +64,7 @@ class GameFieldAssembler {
   static ProductionCenter _mapProductionCenter(ProductionCenterRaw raw) => ProductionCenter(
         type: raw.type,
         level: raw.level,
-        name: raw.name,
+        name: {AppLocale.en: raw.nameEn, AppLocale.ru: raw.nameRu},
       );
 
   static TerrainModifier _mapTerrainModifier(TerrainModifierRaw raw) => TerrainModifier(type: raw.type);

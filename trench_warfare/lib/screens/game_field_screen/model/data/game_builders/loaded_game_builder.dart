@@ -118,11 +118,20 @@ class LoadedGameBuilder implements GameBuilder {
       cell.setProductionCenter(ProductionCenter(
         type: ProductionCenterType.createFromIndex(dbCell.productionCenterType!),
         level: ProductionCenterLevel.createFromIndex(dbCell.productionCenterLevel!),
-        name: dbCell.productionCenterName,
+        name: _mapProductionCenterName(dbCell.productionCenterName),
       ));
     }
 
     return cell;
+  }
+
+  Map<AppLocale, String> _mapProductionCenterName(String? dbName) {
+    if (dbName == null) {
+      return {};
+    }
+
+    final parts = dbName.split('|');
+    return {AppLocale.en: parts[0], AppLocale.ru: parts[1],};
   }
 
   Unit _mapUnitFromDb(SaveUnitDbEntity dbUnit, List<SaveUnitDbEntity> allUnits) {

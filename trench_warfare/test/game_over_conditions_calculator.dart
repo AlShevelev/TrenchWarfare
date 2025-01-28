@@ -67,7 +67,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // But my enemy hasn't
         GameFieldCell(
@@ -117,7 +117,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // This one has an Air field as well
         GameFieldCell(
@@ -132,7 +132,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And this one
         GameFieldCell(
@@ -164,7 +164,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // This one has a Naval base as well
         GameFieldCell(
@@ -179,7 +179,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         GameFieldCell(
           terrain: CellTerrain.water,
@@ -233,7 +233,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And my enemy as well
         GameFieldCell(
@@ -248,7 +248,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // But this one - hasn't
         GameFieldCell(
@@ -280,7 +280,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // As well as this one
         GameFieldCell(
@@ -295,7 +295,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         GameFieldCell(
           terrain: CellTerrain.water,
@@ -318,7 +318,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // As well as this one
         GameFieldCell(
@@ -333,7 +333,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
       ];
 
@@ -381,7 +381,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // But my enemy hasn't
         GameFieldCell(
@@ -396,7 +396,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // As well as this one
         GameFieldCell(
@@ -411,7 +411,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And this one
         GameFieldCell(
@@ -426,7 +426,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
       ];
 
@@ -473,7 +473,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And my enemy as well
         GameFieldCell(
@@ -488,7 +488,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // But this one - hasn't
         GameFieldCell(
@@ -520,7 +520,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // As well as this one
         GameFieldCell(
@@ -535,7 +535,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.airField,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         GameFieldCell(
           terrain: CellTerrain.water,
@@ -558,7 +558,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // As well as this one
         GameFieldCell(
@@ -573,7 +573,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.navalBase,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
       ];
 
@@ -619,7 +619,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And my enemy as well
         GameFieldCell(
@@ -634,7 +634,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
         // And this one
         GameFieldCell(
@@ -649,7 +649,7 @@ void main() {
           ..setProductionCenter(ProductionCenter(
             type: ProductionCenterType.city,
             level: ProductionCenterLevel.level1,
-            name: '',
+            name: {},
           )),
       ];
 

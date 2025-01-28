@@ -3,6 +3,7 @@ import 'package:trench_warfare/core/entities/game_objects/game_object_library.da
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/database/database.dart';
 import 'package:trench_warfare/database/entities/save_game_field_cell_db_entity.dart';
 import 'package:trench_warfare/database/entities/save_nation_db_entity.dart';
@@ -178,7 +179,7 @@ class GameSaver implements GameSaverBuilder {
       for (var i = 0; i < cell.units.length; i++) {
         final unit = cell.units.elementAt(i);
 
-        final dbUnit = _maUnitToDbEntity(
+        final dbUnit = _mapUnitToDbEntity(
           unit,
           slotDbId: slotDbId,
           cellDbId: cellDbId,
@@ -196,7 +197,7 @@ class GameSaver implements GameSaverBuilder {
           for (var j = 0; j < carrier.units.length; j++) {
             final carrierInsideUnit = carrier.units.elementAt(j);
 
-            final dbCarrierInsideUnit = _maUnitToDbEntity(
+            final dbCarrierInsideUnit = _mapUnitToDbEntity(
               carrierInsideUnit,
               slotDbId: slotDbId,
               cellDbId: null,
@@ -243,14 +244,22 @@ class GameSaver implements GameSaverBuilder {
         nation: cell.nation?.index,
         productionCenterType: cell.productionCenter?.type.index,
         productionCenterLevel: cell.productionCenter?.level.index,
-        productionCenterName: cell.productionCenter?.name,
+        productionCenterName: _mapProductionCenterName(cell.productionCenter),
         terrainModifier: cell.terrainModifier?.type.index,
         pathItemType: cell.pathItem?.type.index,
         pathItemIsActive: cell.pathItem?.isActive,
         pathItemMovementPointsLeft: cell.pathItem?.movementPointsLeft,
       );
 
-  SaveUnitDbEntity _maUnitToDbEntity(
+  String? _mapProductionCenterName(ProductionCenter? pc) {
+    if (pc == null || pc.name.isEmpty) {
+      return null;
+    }
+
+    return '${pc.name[AppLocale.en]}|${pc.name[AppLocale.ru]}';
+  }
+
+  SaveUnitDbEntity _mapUnitToDbEntity(
     Unit unit, {
     required int slotDbId,
     required int? cellDbId,

@@ -5,13 +5,17 @@ final class GameObjectCell extends GameObjectComponentBase {
 
   final GameFieldRead _gameField;
 
+  final AppLocale _locale;
+
   GameObjectCell(
     TextureAtlas spritesAtlas,
     GameFieldCellRead cell,
     bool isHuman,
     GameFieldRead gameField,
+    AppLocale locale,
   )   : _cell = cell,
         _gameField = gameField,
+        _locale = locale,
         super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
 
   static bool needToDrawCell(GameFieldCellRead cell, GameFieldRead gameField) {
@@ -64,7 +68,7 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     _addSprite(bodyName, root: root);
     _addSprite(levelName, root: root);
-    _addText(productionCenter.name, root: root);
+    _addText(productionCenter.name[_locale], root: root);
   }
 
   void _addUnitsSprites({Component? root}) {

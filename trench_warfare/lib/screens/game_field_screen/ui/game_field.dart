@@ -12,6 +12,7 @@ import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/audio/audio_library.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/audio/audio_composer.dart';
@@ -78,6 +79,8 @@ class GameField extends FlameGame
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
+  final AppLocale _locale;
+
   StreamSubscription? _updateGameObjectsSubscription;
   StreamSubscription? _gameFieldStateSubscription;
 
@@ -88,11 +91,16 @@ class GameField extends FlameGame
   @override
   TextureAtlas get spritesAtlas => _spritesAtlas;
 
-  GameField({required String mapFileName, Nation? selectedNation, GameSlot? slot})
-      : _mapFileName = mapFileName,
+  GameField({
+    required String mapFileName,
+    Nation? selectedNation,
+    GameSlot? slot,
+    required AppLocale locale,
+  })  : _mapFileName = mapFileName,
         _selectedNation = selectedNation,
         _slot = slot,
         _viewModel = GameFieldViewModel(),
+        _locale = locale,
         super();
 
   @override
@@ -125,6 +133,7 @@ class GameField extends FlameGame
     _gameObjectsComposer = GameObjectsComposer(
       _mapComponent,
       _spritesAtlas,
+      _locale,
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 

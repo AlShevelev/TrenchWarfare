@@ -41,7 +41,7 @@ class ObjectivesProductionCenterPainter extends CustomPainter {
     final productionCenter = ProductionCenter(
       type: _type,
       level: _level,
-      name: null,
+      name: {},
     );
 
     _draw(

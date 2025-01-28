@@ -68,142 +68,170 @@
  <objectgroup id="3" name="GameObjects">
   <object id="6" name="level1" type="city" gid="80" x="70.6976" y="601.215" width="33.1322" height="30.0902">
    <properties>
-    <property name="name" value="Gdynia"/>
+    <property name="name_en" value="Gdynia"/>
+    <property name="name_ru" value="Гдыня"/>
    </properties>
   </object>
   <object id="7" name="level1" type="city" gid="80" x="123.275" y="699.446" width="30.6436" height="29.6481">
    <properties>
-    <property name="name" value="Danzig"/>
+    <property name="name_en" value="Danzig"/>
+    <property name="name_ru" value="Данциг"/>
    </properties>
   </object>
   <object id="9" name="level1" type="city" gid="80" x="232.973" y="1081.09" width="29.2891" height="28.4104">
    <properties>
-    <property name="name" value="Marienwerder"/>
+    <property name="name_en" value="Marienwerder"/>
+    <property name="name_ru" value="Мариенвердер"/>
    </properties>
   </object>
   <object id="10" name="level1" type="city" gid="80" x="177.685" y="1242.37" width="37.1974" height="35.8794">
    <properties>
-    <property name="name" value="Grudzaidz"/>
+    <property name="name_en" value="Grudzaidz"/>
+    <property name="name_ru" value="Грудзёндз"/>
    </properties>
   </object>
   <object id="11" name="level1" type="city" gid="80" x="126.986" y="1530.76" width="32.8039" height="30.6072">
    <properties>
-    <property name="name" value="Thorn"/>
+    <property name="name_en" value="Thorn"/>
+    <property name="name_ru" value="Торн"/>
    </properties>
   </object>
   <object id="12" name="level1" type="city" gid="80" x="342.642" y="1403.71" width="31.9252" height="31.4859">
    <properties>
-    <property name="name" value="Strassbourg"/>
+    <property name="name_en" value="Strassbourg"/>
+    <property name="name_ru" value="Страсбург"/>
    </properties>
   </object>
   <object id="13" name="level1" type="city" gid="80" x="400.886" y="1239.73" width="33.2433" height="30.1678">
    <properties>
-    <property name="name" value="Deutsch Eylau"/>
+    <property name="name_en" value="Deutsch Eylau"/>
+    <property name="name_ru" value="Дойч-Эйлау"/>
    </properties>
   </object>
   <object id="14" name="level1" type="city" gid="80" x="292.354" y="923.43" width="25.335" height="26.2137">
    <properties>
-    <property name="name" value="Marienburg"/>
+    <property name="name_en" value="Marienburg"/>
+    <property name="name_ru" value="Мариенбург"/>
    </properties>
   </object>
   <object id="17" name="level1" type="city" gid="80" x="508.894" y="1627.99" width="33.6826" height="31.4859">
    <properties>
-    <property name="name" value="Sierpe"/>
+    <property name="name_en" value="Sierpe"/>
+    <property name="name_ru" value="Шерпе"/>
    </properties>
   </object>
   <object id="18" name="level1" type="city" gid="80" x="618.322" y="474.648" width="34.8014" height="33.9867">
    <properties>
-    <property name="name" value="Marienwerder"/>
+    <property name="name_en" value="Pillau"/>
+    <property name="name_ru" value="Пиллау"/>
    </properties>
   </object>
   <object id="20" name="level1" type="city" gid="80" x="947.032" y="343.231" width="27.4686" height="27.8759">
    <properties>
-    <property name="name" value="Laatau"/>
+    <property name="name_en" value="Laatau"/>
+    <property name="name_ru" value="Лаатау"/>
    </properties>
   </object>
   <object id="22" name="level1" type="city" gid="80" x="563.982" y="634.909" width="31.5424" height="28.2833">
    <properties>
-    <property name="name" value="Heiligenbell"/>
+    <property name="name_en" value="Heiligenbell"/>
+    <property name="name_ru" value="Браунсберг"/>
    </properties>
   </object>
   <object id="23" name="level1" type="city" gid="80" x="787.54" y="826.519" width="37.2181" height="35.3484">
    <properties>
-    <property name="name" value="Heilsberg"/>
+    <property name="name_en" value="Heilsberg"/>
+    <property name="name_ru" value="Гейльсберг"/>
    </properties>
   </object>
   <object id="24" name="level1" type="city" gid="80" x="729.55" y="1051.8" width="32.7645" height="30.3202">
    <properties>
-    <property name="name" value="Allenstein"/>
+    <property name="name_en" value="Allenstein"/>
+    <property name="name_ru" value="Алленштайн"/>
    </properties>
   </object>
   <object id="25" name="level1" type="city" gid="80" x="618.891" y="1114.29" width="29.9129" height="29.0981">
    <properties>
-    <property name="name" value="Osterode"/>
+    <property name="name_en" value="Osterode"/>
+    <property name="name_ru" value="Остероде"/>
    </properties>
   </object>
   <object id="26" name="level1" type="city" gid="80" x="1055.97" y="862.125" width="40.0869" height="38.2923">
    <properties>
-    <property name="name" value="Rastenburg"/>
+    <property name="name_en" value="Rastenburg"/>
+    <property name="name_ru" value="Растенбург"/>
    </properties>
   </object>
   <object id="27" name="level1" type="city" gid="80" x="950.989" y="1181.37" width="35.9716" height="34.1019">
    <properties>
-    <property name="name" value="Offelsburg"/>
+    <property name="name_en" value="Offelsburg"/>
+    <property name="name_ru" value="Оффельсбург"/>
    </properties>
   </object>
   <object id="28" name="level1" type="city" gid="80" x="840.166" y="1627.1" width="29.7391" height="31.6089">
    <properties>
-    <property name="name" value="Ciechanow"/>
+    <property name="name_en" value="Ciechanow"/>
+    <property name="name_ru" value="Цеханув"/>
    </properties>
   </object>
   <object id="29" name="level1" type="city" gid="80" x="1279.33" y="1625.56" width="29.1159" height="27.8694">
    <properties>
-    <property name="name" value="Ostrow"/>
+    <property name="name_en" value="Ostrow"/>
+    <property name="name_ru" value="Остров"/>
    </properties>
   </object>
   <object id="30" name="level1" type="city" gid="80" x="1113.91" y="1467.35" width="32.2321" height="29.7391">
    <properties>
-    <property name="name" value="Ostrolenka"/>
+    <property name="name_en" value="Ostrolenka"/>
+    <property name="name_ru" value="Остроленка"/>
    </properties>
   </object>
   <object id="31" name="level1" type="city" gid="80" x="1224.23" y="893.102" width="36.5949" height="34.1019">
    <properties>
-    <property name="name" value="Lulzen"/>
+    <property name="name_en" value="Luzen"/>
+    <property name="name_ru" value="Люцен"/>
    </properties>
   </object>
   <object id="32" name="level1" type="city" gid="80" x="1166.05" y="795.199" width="36.5949" height="35.3484">
    <properties>
-    <property name="name" value="Angerburg"/>
+    <property name="name_en" value="Angerburg"/>
+    <property name="name_ru" value="Ангербург"/>
    </properties>
   </object>
   <object id="33" name="level1" type="city" gid="80" x="1336.78" y="697.49" width="32.2321" height="30.9856">
    <properties>
-    <property name="name" value="Goldap"/>
+    <property name="name_en" value="Goldap"/>
+    <property name="name_ru" value="Голдап"/>
    </properties>
   </object>
   <object id="34" name="level1" type="city" gid="80" x="1170.62" y="537.132" width="32.2321" height="30.9856">
    <properties>
-    <property name="name" value="Insterburg"/>
+    <property name="name_en" value="Insterburg"/>
+    <property name="name_ru" value="Инстербург"/>
    </properties>
   </object>
   <object id="35" name="level1" type="city" gid="80" x="1335.82" y="507.879" width="27.8694" height="27.8694">
    <properties>
-    <property name="name" value="Gumbinnen"/>
+    <property name="name_en" value="Gumbinnen"/>
+    <property name="name_ru" value="Гумбиннен"/>
    </properties>
   </object>
   <object id="36" name="level1" type="city" gid="80" x="1606.86" y="989.524" width="40.9576" height="40.3343">
    <properties>
-    <property name="name" value="Agustow"/>
+    <property name="name_en" value="Agustow"/>
+    <property name="name_ru" value="Августов"/>
    </properties>
   </object>
   <object id="37" name="level1" type="city" gid="80" x="1283.84" y="284.998" width="32.3571" height="31.135">
    <properties>
-    <property name="name" value="Ragnit"/>
+    <property name="name_en" value="Ragnit"/>
+    <property name="name_ru" value="Рагнит"/>
    </properties>
   </object>
   <object id="38" name="level1" type="city" gid="80" x="1167.73" y="220.899" width="32.3571" height="33.5793">
    <properties>
-    <property name="name" value="Tilset"/>
+    <property name="name_en" value="Tilset"/>
+    <property name="name_ru" value="Тильзит"/>
    </properties>
   </object>
   <object id="39" name="russia" type="ownershipRegion" x="1579.8" y="59.108">
@@ -214,17 +242,20 @@
   </object>
   <object id="41" name="level2" type="city" gid="81" x="785.602" y="443.527" width="33.8885" height="31.4442">
    <properties>
-    <property name="name" value="Koningsberg"/>
+    <property name="name_en" value="Koningsberg"/>
+    <property name="name_ru" value="Кёнигсберг"/>
    </properties>
   </object>
   <object id="42" name="level1" type="factory" gid="76" x="397.913" y="795.539" width="32.3049" height="30.6754">
    <properties>
-    <property name="name" value="Elbing"/>
+    <property name="name_en" value="Elbing"/>
+    <property name="name_ru" value="Эльблонг"/>
    </properties>
   </object>
   <object id="43" name="level1" type="factory" gid="76" x="125.98" y="952.603" width="29.2689" height="29.2689">
    <properties>
-    <property name="name" value="Statgard"/>
+    <property name="name_en" value="Stargard"/>
+    <property name="name_ru" value="Старгард"/>
    </properties>
   </object>
   <object id="44" name="trench" type="terrainModifier" gid="67" x="1081.66" y="952.928" width="30.5236" height="34.8155"/>

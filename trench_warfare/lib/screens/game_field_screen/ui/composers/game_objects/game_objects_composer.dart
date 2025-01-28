@@ -7,6 +7,7 @@ import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
@@ -28,10 +29,17 @@ class GameObjectsComposer {
 
   late final GameFieldViewModelInput _viewModelInput;
 
-  GameObjectsComposer(TiledComponent mapComponent, TextureAtlas spritesAtlas, {required Image animationAtlas})
-      : _spritesAtlas = spritesAtlas,
+  final AppLocale _locale;
+
+  GameObjectsComposer(
+    TiledComponent mapComponent,
+    TextureAtlas spritesAtlas,
+    AppLocale locale, {
+    required Image animationAtlas,
+  })  : _spritesAtlas = spritesAtlas,
         _animationAtlas = animationAtlas,
-        _mapComponent = mapComponent;
+        _mapComponent = mapComponent,
+        _locale = locale;
 
   void init(GameFieldRead gameField, GameFieldViewModelInput viewModelInput) {
     _gameField = gameField;
@@ -94,6 +102,7 @@ class GameObjectsComposer {
             cell,
             _viewModelInput.isHumanPlayer,
             _gameField,
+            _locale,
           ),
           _getCellComponentKey(cell));
     }
@@ -108,6 +117,7 @@ class GameObjectsComposer {
               updateBorderCell,
               _viewModelInput.isHumanPlayer,
               _gameField,
+              _locale,
             ),
             _getCellComponentKey(updateBorderCell));
       }

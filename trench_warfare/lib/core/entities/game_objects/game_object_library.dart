@@ -9,6 +9,7 @@ import 'package:trench_warfare/core/enums/unit_experience_rank.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/core/game_constants.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 
