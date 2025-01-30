@@ -57,6 +57,7 @@ class FromReadyForInputOnCardsButtonClick {
         _mapSpecialStrikes(SpecialStrikeType.airBombardment, specialStrikesBuildCalculator),
         _mapSpecialStrikes(SpecialStrikeType.propaganda, specialStrikesBuildCalculator),
       ],
+      nation: _context.nation,
     );
 
     _context.controlsState.update(cards);

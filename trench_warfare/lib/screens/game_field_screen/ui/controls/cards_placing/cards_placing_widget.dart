@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/card_photos.dart';
 import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
@@ -10,11 +11,15 @@ class CardPlacingWidget extends StatelessWidget {
 
   final GameFieldForControls _gameField;
 
+  final Nation _nation;
+
   const CardPlacingWidget({
     required this.state,
     required GameFieldForControls gameField,
+    required Nation nation,
     super.key,
-  }) : _gameField = gameField;
+  })  : _gameField = gameField,
+        _nation = nation;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class CardPlacingWidget extends StatelessWidget {
         ),
         GameFieldGeneralPanel(
           money: state.totalMoney,
+          nation: _nation,
           left: 15,
           top: 0,
         ),

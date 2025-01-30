@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
@@ -9,11 +10,17 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 class MainControlsWidget extends StatelessWidget {
   final MainControls state;
 
-  late final GameFieldForControls _gameField;
+  final GameFieldForControls _gameField;
 
-  MainControlsWidget({required this.state, required GameFieldForControls gameField, super.key}) {
-    _gameField = gameField;
-  }
+  final Nation _nation;
+
+  const MainControlsWidget({
+    required this.state,
+    required GameFieldForControls gameField,
+    required Nation nation,
+    super.key,
+  })  : _gameField = gameField,
+        _nation = nation;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +59,7 @@ class MainControlsWidget extends StatelessWidget {
       ),
       GameFieldGeneralPanel(
         money: state.totalSum,
+        nation: _nation,
         left: 15,
         top: 0,
       ),

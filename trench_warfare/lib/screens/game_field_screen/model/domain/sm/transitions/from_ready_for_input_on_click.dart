@@ -29,6 +29,7 @@ class FromReadyForInputOnClick {
         cellInfo: null,
         armyInfo: armyInfo,
         carrierInfo: carrierInfo,
+        nation: _context.nation,
       ),
     );
 

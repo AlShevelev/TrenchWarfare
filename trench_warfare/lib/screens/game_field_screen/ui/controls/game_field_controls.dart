@@ -42,17 +42,20 @@ class _GameFieldControlsState extends State<GameFieldControls> {
 
             return switch (value.data) {
               Invisible() => const SizedBox.shrink(),
-              MainControls() => MainControlsWidget(
+              MainControls(nation: final nation) => MainControlsWidget(
                   state: value.data as MainControls,
                   gameField: widget._gameField,
+                  nation: nation,
                 ),
-              CardsSelectionControls() => CardsSelectionScreen(
+              CardsSelectionControls(nation: final nation) => CardsSelectionScreen(
                   state: value.data as CardsSelectionControls,
                   gameField: widget._gameField,
+                  nation: nation,
                 ),
-              CardsPlacingControls() => CardPlacingWidget(
+              CardsPlacingControls(nation: final nation) => CardPlacingWidget(
                   state: value.data as CardsPlacingControls,
                   gameField: widget._gameField,
+                  nation: nation,
                 ),
               StartTurnControls(nation: final nation, day: final day) => WinDefeatTurnDialog(
                   type: WinDefeatTurnDialogType.turn,

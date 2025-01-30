@@ -61,6 +61,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
         cellInfo: null,
         armyInfo: null,
         carrierInfo: null,
+        nation: _context.nation,
       ),
     );
 

@@ -3,11 +3,17 @@ part of card_controls;
 class CardsSelectionScreen extends StatefulWidget {
   final CardsSelectionControls state;
 
-  late final GameFieldForControls _gameField;
+  final GameFieldForControls _gameField;
 
-  CardsSelectionScreen({required this.state, required GameFieldForControls gameField, super.key}) {
-    _gameField = gameField;
-  }
+  final Nation _nation;
+
+  const CardsSelectionScreen({
+    required this.state,
+    required GameFieldForControls gameField,
+    required Nation nation,
+    super.key,
+  })  : _gameField = gameField,
+        _nation = nation;
 
   @override
   State<CardsSelectionScreen> createState() => _CardsSelectionScreenState();
@@ -100,6 +106,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
               ),
               GameFieldGeneralPanel(
                 money: widget.state.totalMoney,
+                nation: widget._nation,
                 left: 15,
                 top: 0,
               ),

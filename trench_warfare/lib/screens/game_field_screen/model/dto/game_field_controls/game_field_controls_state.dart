@@ -11,11 +11,14 @@ class MainControls extends GameFieldControlsState {
   final GameFieldControlsArmyInfo? armyInfo;
   final GameFieldControlsArmyInfo? carrierInfo;
 
+  final Nation nation;
+
   MainControls({
     required this.totalSum,
     required this.cellInfo,
     required this.armyInfo,
     required this.carrierInfo,
+    required this.nation,
   });
 
   MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
@@ -23,6 +26,7 @@ class MainControls extends GameFieldControlsState {
         cellInfo: cellInfo,
         armyInfo: armyInfo,
         carrierInfo: carrierInfo,
+        nation: nation,
       );
 }
 
@@ -39,6 +43,8 @@ class CardsSelectionControls extends GameFieldControlsState {
 
   final List<GameFieldControlsSpecialStrikesCard> specialStrikes;
 
+  final Nation nation;
+
   CardsSelectionControls({
     required this.totalMoney,
     required this.units,
@@ -46,6 +52,7 @@ class CardsSelectionControls extends GameFieldControlsState {
     required this.terrainModifiers,
     required this.unitBoosters,
     required this.specialStrikes,
+    required this.nation,
   });
 }
 
@@ -54,7 +61,13 @@ class CardsPlacingControls extends GameFieldControlsState {
 
   final GameFieldControlsCard card;
 
-  CardsPlacingControls({required this.totalMoney, required this.card});
+  final Nation nation;
+
+  CardsPlacingControls({
+    required this.totalMoney,
+    required this.card,
+    required this.nation,
+  });
 }
 
 class StartTurnControls extends GameFieldControlsState {

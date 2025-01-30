@@ -97,7 +97,7 @@ class WinDefeatTurnDialog extends StatelessWidget {
           '${_imagesPath}photos/photo_new_turn_${RandomGen.randomInt(4) + 1}.webp',
       };
 
-  String _getBanner() => '${_imagesPath}banners/${nation.name}.webp';
+  String _getBanner() => 'assets/images/screens/game_field/banners/${nation.name}.webp';
 
   String _getTitle() => switch (type) {
         WinDefeatTurnDialogType.win => tr('victory_dialog'),

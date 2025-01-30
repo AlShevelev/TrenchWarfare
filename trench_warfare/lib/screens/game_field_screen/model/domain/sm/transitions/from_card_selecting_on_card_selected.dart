@@ -9,6 +9,7 @@ class FromCardSelectingOnCardsSelected {
     _context.controlsState.update(CardsPlacingControls(
       totalMoney: _context.money.totalSum,
       card: card,
+      nation: _context.nation,
     ));
 
     final cellsImpossibleToBuild = switch (card) {

@@ -35,6 +35,7 @@ class FromCardPlacingInProgressOnAnimationCompleted {
       _context.controlsState.update(CardsPlacingControls(
         totalMoney: _context.money.totalSum,
         card: _card,
+        nation: _context.nation,
       ));
 
       if (!_context.isAI) {
