@@ -94,9 +94,9 @@ class Unit extends GameObject {
 
     id = RandomGen.generateId();
 
-    _boost1 = _boost1;
-    _boost2 = _boost2;
-    _boost3 = _boost3;
+    _boost1 = boost1;
+    _boost2 = boost2;
+    _boost3 = boost3;
 
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(experienceRank);
     _health = _getMaxHealth(type) * health;
