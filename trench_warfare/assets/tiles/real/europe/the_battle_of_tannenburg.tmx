@@ -222,7 +222,7 @@
     <property name="name_ru" value="Августов"/>
    </properties>
   </object>
-  <object id="37" name="level1" type="city" gid="80" x="1283.84" y="284.998" width="32.3571" height="31.135">
+  <object id="37" name="level1" type="city" gid="80" x="1272.39" y="286.429" width="32.3571" height="31.135">
    <properties>
     <property name="name_en" value="Ragnit"/>
     <property name="name_ru" value="Рагнит"/>
@@ -728,7 +728,7 @@
   </object>
   <object id="97" name="russia" type="ownership" gid="102" x="1166.18" y="396.517" width="45.9005" height="42.8839">
    <properties>
-    <property name="productionCenter" type="object" value="37"/>
+    <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="54"/>
     <property name="unit2" type="object" value="54"/>
@@ -738,7 +738,7 @@
   </object>
   <object id="98" name="russia" type="ownership" gid="102" x="1167.48" y="464.284" width="45.9005" height="42.8839">
    <properties>
-    <property name="productionCenter" type="object" value="37"/>
+    <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="92"/>
     <property name="unit2" type="object" value="92"/>
@@ -748,7 +748,7 @@
   </object>
   <object id="99" name="russia" type="ownership" gid="102" x="1122.18" y="578.704" width="45.9005" height="42.8839">
    <properties>
-    <property name="productionCenter" type="object" value="37"/>
+    <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="92"/>
     <property name="unit2" type="object" value="92"/>
@@ -758,7 +758,7 @@
   </object>
   <object id="100" name="russia" type="ownership" gid="102" x="1167.69" y="664.971" width="45.9005" height="42.8839">
    <properties>
-    <property name="productionCenter" type="object" value="37"/>
+    <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="92"/>
     <property name="unit2" type="object" value="92"/>
@@ -768,7 +768,7 @@
   </object>
   <object id="101" name="russia" type="ownership" gid="102" x="1224.33" y="814.704" width="45.9005" height="42.8839">
    <properties>
-    <property name="productionCenter" type="object" value="37"/>
+    <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="94"/>
     <property name="unit2" type="object" value="94"/>
