@@ -109,6 +109,16 @@ class TurnIsEnded implements State {
   String toString() => 'TURN_IS_ENDED';
 }
 
+class TurnEndConfirmationNeeded implements State {
+  final GameFieldCellRead cellToMoveCamera;
+
+  TurnEndConfirmationNeeded(this.cellToMoveCamera);
+
+  @override
+  String toString() => 'TURN_END_CONFIRMATION_NEEDED: {cellToMoveCamera: $cellToMoveCamera';
+}
+
+
 class VictoryDefeatConfirmation implements State {
   /// The player is win and game must be over
   final bool isVictory;

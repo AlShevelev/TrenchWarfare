@@ -134,3 +134,17 @@ class OnSettingsClosed implements Event {
   String toString() => 'ON_SETTINGS_CLOSED: {music: ${result.music}; sounds: ${result.sounds}; '
       'myUnitsSpeed: ${result.humanUnitsSpeed}; enemyUnitsSpeed: ${result.aiUnitsSpeed};}';
 }
+
+class OnTurnCompletedConfirmed implements Event {
+  OnTurnCompletedConfirmed();
+
+  @override
+  String toString() => 'ON_TURN_COMPLETED_CONFIRMED';
+}
+
+class OnTurnCompletedDeclined implements Event {
+  OnTurnCompletedDeclined();
+
+  @override
+  String toString() => 'ON_TURN_COMPLETED_DECLINED';
+}

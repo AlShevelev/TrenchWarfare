@@ -108,6 +108,7 @@
   "settings_menu_dialog": "Settings",
   "quit_menu_dialog": "Quit",
   "objectives_menu_dialog": "Objectives",
+  "ask_turn_completed_dialog": "Some units can still move.\nEnd the turn?",
 
   "objectives_text": "Capture or destroy all enemy cities and factories.",
 

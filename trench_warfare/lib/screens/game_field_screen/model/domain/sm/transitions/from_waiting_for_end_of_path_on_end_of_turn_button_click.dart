@@ -12,8 +12,7 @@ class FromWaitingForEndOfPathOnEndOfTurnButtonClick {
     unit.setState(UnitState.enabled);
     _context.updateGameObjectsEvent.update([UpdateCell(startCell, updateBorderCells: [])]);
 
-    // todo there will be a model switch here
-    return TurnIsEnded();
+    return TransitionUtils(_context).processEndOfTurn();
   }
 
   void _hideArmyPanel() => TransitionUtils(_context).closeUI();

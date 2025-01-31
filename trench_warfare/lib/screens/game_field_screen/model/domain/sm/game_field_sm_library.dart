@@ -71,6 +71,8 @@ part 'transitions/from_save_slot_selection_on_save_slot_selected.dart';
 part 'transitions/from_settings_are_visible_on_settings_closed.dart';
 part 'transitions/from_start_turn_confirmation_on_star_turn_confirmed.dart';
 part 'transitions/from_start_turn_initial_confirmation_on_star_turn_confirmed.dart';
+part 'transitions/from_turn_end_confirmation_needed_on_turn_completed_confirmed.dart';
+part 'transitions/from_turn_end_confirmation_needed_on_turn_completed_declined.dart';
 part 'transitions/from_turn_is_ended_on_start_turn.dart';
 part 'transitions/from_victory_defeat_confirmation_on_popup_dialog_closed.dart';
 part 'transitions/from_waiting_for_end_of_path_on_cards_button_click.dart';

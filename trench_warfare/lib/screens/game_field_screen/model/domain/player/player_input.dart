@@ -46,4 +46,8 @@ abstract interface class PlayerInput {
   void onSaveSlotSelected(GameSlot slot);
 
   void onSettingsClosed(SettingsResult result);
+
+  void onTurnCompletedConfirmed();
+
+  void onTurnCompletedDeclined();
 }

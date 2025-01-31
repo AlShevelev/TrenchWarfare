@@ -114,3 +114,7 @@ class ObjectivesControls extends GameFieldControlsState {
 class SettingsControls extends GameFieldControlsState {
   SettingsControls();
 }
+
+class EndOfTurnConfirmationControls extends GameFieldControlsState {
+  EndOfTurnConfirmationControls();
+}

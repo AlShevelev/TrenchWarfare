@@ -66,7 +66,7 @@ class GameFieldStateMachine {
           OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
             FromReadyForInputOnResortUnit(_context).process(cellId, unitsId, isCarrier: isCarrier),
           OnCardsButtonClick() => FromReadyForInputOnCardsButtonClick(_context).process(),
-          OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick().process(),
+          OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick(_context).process(),
           OnMenuButtonClick() => FromReadyForInputOnMenuButtonClick(_context).process(),
           OnPhoneBackAction() => FromReadyForInputOnMenuButtonClick(_context).process(),
           _ => _currentState,
@@ -182,7 +182,15 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       SettingsAreVisible() => switch (event) {
-          OnSettingsClosed(result: var result) => FromSettingsAreVisibleOnSettingsClosed(_context).process(result),
+          OnSettingsClosed(result: var result) =>
+            FromSettingsAreVisibleOnSettingsClosed(_context).process(result),
+          _ => _currentState,
+        },
+      TurnEndConfirmationNeeded(cellToMoveCamera: var cellToMoveCamera) => switch (event) {
+          OnTurnCompletedConfirmed() =>
+            FromTurnEndConfirmationNeededOnTurnCompletedConfirmed(_context).process(),
+          OnTurnCompletedDeclined() =>
+            FromTurnEndConfirmationNeededOnTurnCompletedDeclined(_context).process(cellToMoveCamera),
           _ => _currentState,
         },
     };

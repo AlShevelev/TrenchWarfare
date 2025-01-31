@@ -61,6 +61,10 @@ abstract interface class GameFieldForControls {
   void onSaveSlotSelected(GameSlot slot);
 
   void onSettingsClosed(SettingsResult result);
+
+  void onTurnCompletedConfirmed();
+
+  void onTurnCompletedDeclined();
 }
 
 class GameField extends FlameGame
@@ -250,4 +254,10 @@ class GameField extends FlameGame
 
   @override
   void onSettingsClosed(SettingsResult result) => _viewModel.input.onSettingsClosed(result);
+
+  @override
+  void onTurnCompletedConfirmed() => _viewModel.input.onTurnCompletedConfirmed();
+
+  @override
+  void onTurnCompletedDeclined() => _viewModel.input.onTurnCompletedDeclined();
 }

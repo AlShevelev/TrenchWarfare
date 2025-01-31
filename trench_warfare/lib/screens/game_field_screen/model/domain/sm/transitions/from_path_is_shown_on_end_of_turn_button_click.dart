@@ -17,7 +17,7 @@ class FromPathIsShownOnEndOfTurnButtonClick {
 
     _resetPath(pathToProcess);
 
-    return TurnIsEnded();
+    return TransitionUtils(_context).processEndOfTurn();
   }
 
   /// Clear the old path

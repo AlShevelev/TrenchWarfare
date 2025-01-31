@@ -43,4 +43,22 @@ class TransitionUtils {
       }
     }
   }
+
+  State processEndOfTurn() {
+    if (_context.isAI) {
+      return TurnIsEnded();
+    }
+
+    final activeUnitCell = _context.gameField.cells.firstWhereOrNull((c) =>
+    c.nation == _context.nation &&
+        c.units.isNotEmpty &&
+        c.units.any((u) => u.state == UnitState.active || u.state == UnitState.enabled));
+
+    if (activeUnitCell == null) {
+      return TurnIsEnded();
+    } else {
+      _context.controlsState.update(EndOfTurnConfirmationControls());
+      return TurnEndConfirmationNeeded(activeUnitCell);
+    }
+  }
 }
