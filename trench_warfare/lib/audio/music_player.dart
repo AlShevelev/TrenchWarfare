@@ -7,7 +7,7 @@ class MusicPlayer {
 
   final _tracksToPlay = ['1_cover.ogg', '2.ogg', '3.ogg', '4.ogg', '5.ogg'];
 
-  static const _musicReduceVolumeFactor = 0.5;
+  static const _musicReduceVolumeFactor = 0.25;
 
   MusicPlayer() {
     _player.onPlayerComplete.listen((_) => _playNextMusicTrack());

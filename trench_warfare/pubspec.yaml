@@ -65,7 +65,6 @@ flutter:
     - assets/images/screens/game_field/cards/troop_boosters/
     - assets/images/screens/game_field/cards/units/
     - assets/images/screens/game_field/dialogs/win_defeat_turn/
-    - assets/images/screens/game_field/dialogs/win_defeat_turn/banners/
     - assets/images/screens/game_field/dialogs/win_defeat_turn/photos/
     - assets/images/screens/new_game/
     - assets/images/screens/new_game/maps/europe/
