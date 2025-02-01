@@ -90,7 +90,7 @@ class _CoverScreenState extends State<CoverScreen> {
                   onPress: () {
                     Navigator.of(context).pushNamed(Routes.fromMapSelectionToGameFieldNewGame,
                         arguments: NewGameToGameFieldNavArg(
-                          mapName: 'assets/tiles/test/15x15_sounds.tmx',
+                          mapName: 'assets/tiles/test/7x7_win_defeat_conditions.tmx',
                           selectedNation: Nation.russia,
                         ));
                   },

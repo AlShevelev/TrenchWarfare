@@ -23,7 +23,7 @@ class GameGesturesComposer {
     _mapSize = mapSize;
     _camera = camera;
 
-    _minZoom = _calculateMinZoom();
+    _minZoom = _calculateMinZoom().let((z) => z < ZoomConstants.maxZoom ? z : ZoomConstants.maxZoom)!;
 
     _checkBorders();
   }

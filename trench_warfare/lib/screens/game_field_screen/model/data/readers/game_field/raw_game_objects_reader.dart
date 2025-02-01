@@ -13,7 +13,7 @@ import 'package:trench_warfare/shared/utils/math.dart';
 extension _PropertyHelper on Map<String, Property<Object>> {
   double getFloat(String name) => (this[name] as FloatProperty).value;
 
-  String getString(String name) => (this[name] as StringProperty).value;
+  String getString(String name) => containsKey(name) ? (this[name] as StringProperty).value : '';
 
   /// Returns an object id
   int? getObject(String name) {
