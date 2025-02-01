@@ -269,7 +269,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
     // Show damage - case 2 - the defending unit doesn't strike back
     if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
