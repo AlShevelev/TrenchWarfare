@@ -39,6 +39,6 @@ class _MoneyConstants {
   static final gasAttackCost = MoneyUnit(currency: 90, industryPoints: 18);
   static final flechettesCost = MoneyUnit(currency: 45, industryPoints: 10);
   static final airBombardmentCost = MoneyUnit(currency: 350, industryPoints: 70);
-  static final flameTroopersCost = MoneyUnit(currency: 30, industryPoints: 6);
+  static final flameTroopersCost = MoneyUnit(currency: 60, industryPoints: 12);
   static final propagandaCost = MoneyUnit(currency: 100, industryPoints: 0);
 }
