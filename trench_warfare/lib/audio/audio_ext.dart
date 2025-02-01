@@ -13,13 +13,33 @@ extension UnitsAudioExt on Iterable<Unit> {
 }
 
 extension UnitAudioExt on Unit {
-  SoundType getDeathSoundType() {
-    if (isShip) {
-      return SoundType.battleResultShipDestroyed;
-    } else if (isMechanical) {
-      return SoundType.battleResultMechanicalDestroyed;
-    } else {
-      return SoundType.battleResultManDeath;
-    }
-  }
+  SoundType getDeathSoundType() =>
+    switch (type) {
+      UnitType.armoredCar => SoundType.battleResultMechanicalDestroyed,
+      UnitType.artillery => SoundType.battleResultMechanicalDestroyed,
+      UnitType.infantry => SoundType.battleResultManDeath,
+      UnitType.cavalry => SoundType.battleResultManDeath,
+      UnitType.machineGunnersCart => SoundType.battleResultMechanicalDestroyed,
+      UnitType.machineGuns => SoundType.battleResultManDeath,
+      UnitType.tank => SoundType.battleResultMechanicalDestroyed,
+      UnitType.destroyer => SoundType.battleResultShipDestroyed,
+      UnitType.cruiser => SoundType.battleResultShipDestroyed,
+      UnitType.battleship => SoundType.battleResultShipDestroyed,
+      UnitType.carrier => SoundType.battleResultShipDestroyed,
+    };
+
+  SoundType getProductionSoundType() =>
+    switch (type) {
+      UnitType.armoredCar => SoundType.productionMechanical,
+      UnitType.artillery => SoundType.productionMechanical,
+      UnitType.infantry => SoundType.productionInfantry,
+      UnitType.cavalry => SoundType.productionCavalry,
+      UnitType.machineGunnersCart => SoundType.productionMechanical,
+      UnitType.machineGuns => SoundType.productionInfantry,
+      UnitType.tank => SoundType.productionMechanical,
+      UnitType.destroyer => SoundType.productionShip,
+      UnitType.cruiser => SoundType.productionShip,
+      UnitType.battleship => SoundType.productionShip,
+      UnitType.carrier => SoundType.productionShip,
+    };
 }

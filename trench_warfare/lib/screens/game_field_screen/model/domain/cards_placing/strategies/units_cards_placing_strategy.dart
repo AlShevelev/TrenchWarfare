@@ -23,21 +23,5 @@ class UnitsCardsPlacingStrategy extends CardsPlacingStrategy<GameFieldControlsCa
   }
 
   @override
-  PlaySound? getSoundForUnit() {
-    final unit = Unit.byType(_type);
-
-    if (unit.isShip) {
-      return PlaySound(type: SoundType.productionShip);
-    }
-
-    if (unit.isMechanical) {
-      return PlaySound(type: SoundType.productionMechanical);
-    }
-
-    if (unit.type == UnitType.cavalry) {
-      return PlaySound(type: SoundType.productionCavalry);
-    }
-
-    return PlaySound(type: SoundType.productionInfantry);
-  }
+  PlaySound? getSoundForUnit() => PlaySound(type: Unit.byType(_type).getProductionSoundType());
 }

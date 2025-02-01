@@ -77,19 +77,5 @@ class FromPathIsShownOnClick {
 
   void _hideArmyPanel() => TransitionUtils(_context).closeUI();
 
-  PlaySound _getSoundForUnit(Unit unit) {
-    if (unit.isShip) {
-      return PlaySound(type: SoundType.productionShip);
-    }
-
-    if (unit.isMechanical) {
-      return PlaySound(type: SoundType.productionMechanical);
-    }
-
-    if (unit.type == UnitType.cavalry) {
-      return PlaySound(type: SoundType.productionCavalry);
-    }
-
-    return PlaySound(type: SoundType.productionInfantry);
-  }
+  PlaySound _getSoundForUnit(Unit unit) => PlaySound(type: unit.getProductionSoundType());
 }

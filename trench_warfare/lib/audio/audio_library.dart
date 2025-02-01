@@ -6,9 +6,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/core/settings_constants.dart';
 import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
-import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 part 'audio_controller.dart';
