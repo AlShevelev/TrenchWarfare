@@ -22,6 +22,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/game_object_componen
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objects/game_objects_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
@@ -83,6 +84,8 @@ class GameField extends FlameGame
   late final GameObjectsComposer _gameObjectsComposer;
   late final GameGesturesComposer _gameGesturesComposer;
 
+  late final GamePause _gamePause;
+
   final AppLocale _locale;
 
   StreamSubscription? _updateGameObjectsSubscription;
@@ -103,9 +106,11 @@ class GameField extends FlameGame
   })  : _mapFileName = mapFileName,
         _selectedNation = selectedNation,
         _slot = slot,
-        _viewModel = GameFieldViewModel(),
         _locale = locale,
-        super();
+        super() {
+    _gamePause = GamePause();
+    _viewModel = GameFieldViewModel(_gamePause);
+  }
 
   @override
   Color backgroundColor() => const Color(0x00000000); // Must be transparent to show the background
@@ -160,6 +165,10 @@ class GameField extends FlameGame
   @override
   void onAttach() {
     _audioComposer.setAudioController(gameRef.buildContext?.read<AudioController>());
+
+    gameRef.buildContext
+        ?.read<ValueNotifier<AppLifecycleState>>()
+        .let((n) => _gamePause.attachLifecycleNotifier(n));
   }
 
   @override
@@ -189,6 +198,7 @@ class GameField extends FlameGame
 
   @override
   void onDispose() {
+    _gamePause.dispose();
     _updateGameObjectsSubscription?.cancel();
     _gameFieldStateSubscription?.cancel();
     _viewModel.dispose();

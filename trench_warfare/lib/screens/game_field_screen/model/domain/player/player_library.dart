@@ -15,6 +15,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 

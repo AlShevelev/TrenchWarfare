@@ -32,6 +32,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/money/mone
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';

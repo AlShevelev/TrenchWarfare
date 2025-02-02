@@ -5,7 +5,7 @@ class GameFieldStateMachine {
 
   late final GameFieldStateMachineContext _context;
 
-  final bool _isGameLoaded;
+  final GamePauseWait? _gamePauseWait;
 
   State _currentState = Initial();
 
@@ -20,10 +20,11 @@ class GameFieldStateMachine {
     DayStorage dayStorage,
     GameOverConditionsCalculator gameOverConditionsCalculator,
     AnimationTimeFacade animationTimeFacade,
+    GamePauseWait? gamePauseWait,
     this._modelCallback, {
     required bool isAI,
     required bool isGameLoaded,
-  }) : _isGameLoaded = isGameLoaded {
+  }) : _gamePauseWait = gamePauseWait {
     _context = GameFieldStateMachineContext(
       gameField: gameField,
       nation: nation,
@@ -44,11 +45,13 @@ class GameFieldStateMachine {
     }
   }
 
-  void process(Event event) {
+  Future<void> process(Event event) async {
     Logger.info(
       'Start. nation: ${_context.nation}; incomingEvent $event; currentState: $_currentState',
       tag: 'STATE_MACHINE',
     );
+
+    await _gamePauseWait?.wait();
 
     final newState = switch (_currentState) {
       Initial() => switch (event) {

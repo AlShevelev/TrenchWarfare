@@ -20,6 +20,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_st
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
@@ -73,7 +74,9 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   late final DayStorage _humanDayStorage;
 
-  GameFieldModel() {
+  final GamePauseWait _gamePauseWait;
+
+  GameFieldModel(GamePauseWait gamePauseWait) : _gamePauseWait = gamePauseWait {
     _gameFieldState.update(Loading());
   }
 
@@ -110,6 +113,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         money: gameBuildResult.money,
         isGameLoaded: gameBuildResult.isGameLoaded,
         animationTimeFacade: animationTimeFacade,
+        gamePauseWait: _gamePauseWait,
       );
     }
 
@@ -168,6 +172,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required Map<Nation, MoneyStorage> money,
     required bool isGameLoaded,
     required AnimationTimeFacade animationTimeFacade,
+    required GamePauseWait gamePauseWait,
   }) {
     final isHuman = index == _humanIndex;
 
@@ -189,6 +194,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       gameOverConditionsCalculator,
       money[nationRecord.code]!,
       animationTimeFacade,
+      gamePauseWait: isHuman ? null : gamePauseWait,  // We don't need to pause the app for a human player
       isAI: !isHuman,
       isGameLoaded: isGameLoaded,
     );

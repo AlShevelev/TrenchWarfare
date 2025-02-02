@@ -8,6 +8,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
 
 abstract interface class GameFieldViewModelInput {
@@ -38,8 +39,8 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
 
   GameFieldRead get gameField => _model.gameField;
 
-  GameFieldViewModel() {
-    _model = GameFieldModel();
+  GameFieldViewModel(GamePauseWait gamePauseWait) {
+    _model = GameFieldModel(gamePauseWait);
   }
 
   Future<void> initNewGame({
