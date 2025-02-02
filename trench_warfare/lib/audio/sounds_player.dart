@@ -135,7 +135,10 @@ class SoundsPlayer {
 
   Future<void> _switchToNextSound() async {
     await _player.stop();
-    _soundsQueue.removeFirst();
+
+    if (_soundsQueue.isNotEmpty) {
+      _soundsQueue.removeFirst();
+    }
     await _playNextSound();
   }
 
