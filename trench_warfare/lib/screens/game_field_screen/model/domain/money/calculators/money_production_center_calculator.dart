@@ -48,10 +48,10 @@ class MoneyProductionCenterCalculator {
 
     final levelFactor = switch (level) {
       ProductionCenterLevel.level1 => 1.0,
-      ProductionCenterLevel.level2 => 2.0,
-      ProductionCenterLevel.level3 => 3.0,
-      ProductionCenterLevel.level4 => 4.0,
-      ProductionCenterLevel.capital => 5.0,
+      ProductionCenterLevel.level2 => 1.0,//2.0,
+      ProductionCenterLevel.level3 => 1.0,//3.0,
+      ProductionCenterLevel.level4 => 1.0,//4.0,
+      ProductionCenterLevel.capital => 1.0,//5.0,
     };
 
     return baseCost.multiplyBy(levelFactor);
