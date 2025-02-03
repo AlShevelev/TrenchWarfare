@@ -19,7 +19,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   Unit? updateGameField() {
     Unit? killedUnitCandidate;
 
-    killedUnitCandidate = updateCell(_cell, chanceToKill: 0.2, chanceToReduceHealth: 0.4);
+    killedUnitCandidate = updateCell(_cell, chanceToKill: 0.4, chanceToReduceHealth: 0.8);
 
     final allCellsAround = _gameField
         .findCellsAround(_cell)
@@ -27,8 +27,8 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
         .toList(growable: false);
 
     for (var cell in allCellsAround) {
-      if (RandomGen.randomDouble(0, 1) <= 0.25) {
-        final killedUnit = updateCell(cell, chanceToKill: 0.1, chanceToReduceHealth: 0.2);
+      if (RandomGen.randomDouble(0, 1) <= 0.5) {
+        final killedUnit = updateCell(cell, chanceToKill: 0.3, chanceToReduceHealth: 0.6);
         killedUnitCandidate ??= killedUnit;
       }
     }
