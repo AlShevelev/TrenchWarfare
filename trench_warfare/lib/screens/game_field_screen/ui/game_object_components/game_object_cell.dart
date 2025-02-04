@@ -31,6 +31,8 @@ final class GameObjectCell extends GameObjectComponentBase {
     final root = SnapshotComponent();
     add(root);
 
+    _addBorder(root: root);
+
     _addTerrainModifierSprites(root: root);
     _addProductionCenterSprites(root: root);
     _addUnitsSprites(root: root);
@@ -39,8 +41,6 @@ final class GameObjectCell extends GameObjectComponentBase {
     if (_isHuman) {
       _addPathSprites(root: root);
     }
-
-    _addBorder(root: root);
   }
 
   void _addTerrainModifierSprites({Component? root}) {
