@@ -8,6 +8,8 @@ import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 
 class MainControlsWidget extends StatelessWidget {
+  static const generalPadding = 15.0;
+
   final MainControls state;
 
   final GameFieldForControls _gameField;
@@ -30,10 +32,20 @@ class MainControlsWidget extends StatelessWidget {
     final List<Widget> widgets = [];
 
     widgets.addAll([
+      // Disband unit button
+      CornerButton(
+        left: generalPadding,
+        bottom: CornerButton.size + 2 * generalPadding,
+        image: const AssetImage('assets/images/screens/game_field/main/button_disband_unit.webp'),
+        onPress: () {
+          //_gameField.onCardsButtonClick();
+        },
+      ),
+
       // Cards buttons
       CornerButton(
-        left: 15,
-        bottom: 15,
+        left: generalPadding,
+        bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_cards.webp'),
         onPress: () {
           _gameField.onCardsButtonClick();
@@ -41,8 +53,8 @@ class MainControlsWidget extends StatelessWidget {
       ),
       // Next turn button
       CornerButton(
-        right: 15,
-        bottom: 15,
+        right: generalPadding,
+        bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_next_turn.webp'),
         onPress: () {
           _gameField.onEndOfTurnButtonClick();
@@ -50,8 +62,8 @@ class MainControlsWidget extends StatelessWidget {
       ),
       // Menu button
       CornerButton(
-        right: 15,
-        top: 15,
+        right: generalPadding,
+        top: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_menu.webp'),
         onPress: () {
           _gameField.onMenuButtonClick();
@@ -60,7 +72,7 @@ class MainControlsWidget extends StatelessWidget {
       GameFieldGeneralPanel(
         money: state.totalSum,
         nation: _nation,
-        left: 15,
+        left: generalPadding,
         top: 0,
       ),
     ]);
@@ -70,7 +82,7 @@ class MainControlsWidget extends StatelessWidget {
         GameFieldCellInfoPanel(
           cellInfo: state.cellInfo!,
           spritesAtlas: _gameField.spritesAtlas,
-          left: 15,
+          left: generalPadding,
           top: 30,
         ),
       );

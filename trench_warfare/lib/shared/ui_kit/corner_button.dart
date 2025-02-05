@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/shared/ui_kit/image_button.dart';
 
 class CornerButton extends StatelessWidget {
-  static const _size = 40.0;
+  static const size = 40.0;
 
   final double? left;
   final double? top;
@@ -33,12 +33,12 @@ class CornerButton extends StatelessWidget {
       top: top,
       right: right,
       bottom: bottom,
-      width: _size,
-      height: _size,
+      width: size,
+      height: size,
       child: ImageButton.forImages(
         image: image,
-        imageWidth: _size,
-        imageHeight: _size,
+        imageWidth: size,
+        imageHeight: size,
         enabled: enabled,
         onPress: onPress,
       ),
