@@ -6,7 +6,7 @@ import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 import 'package:trench_warfare/shared/ui_kit/image_button.dart';
 
 class AskTurnCompletedDialog extends StatelessWidget {
-  static const _iconSize = 40.0;
+  static const _iconSize = 35.0;
 
   final GameFieldForControls _gameField;
 
@@ -44,8 +44,8 @@ class AskTurnCompletedDialog extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 24, 0),
-                          child: ImageButton(
-                            imageAsset: _getIcon('icon_yes'),
+                          child: ImageButton.forBlackIcons(
+                            image: AssetImage(_getIcon('icon_yes')),
                             imageWidth: _iconSize,
                             imageHeight: _iconSize,
                             onPress: () => _gameField.onTurnCompletedConfirmed(),
@@ -53,8 +53,8 @@ class AskTurnCompletedDialog extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(24, 0, 0, 0),
-                          child: ImageButton(
-                            imageAsset: _getIcon('icon_no'),
+                          child: ImageButton.forBlackIcons(
+                            image: AssetImage(_getIcon('icon_no')),
                             imageWidth: _iconSize,
                             imageHeight: _iconSize,
                             onPress: () => _gameField.onTurnCompletedDeclined(),
