@@ -33,14 +33,15 @@ class MainControlsWidget extends StatelessWidget {
 
     widgets.addAll([
       // Disband unit button
-      CornerButton(
-        left: generalPadding,
-        bottom: CornerButton.size + 2 * generalPadding,
-        image: const AssetImage('assets/images/screens/game_field/main/button_disband_unit.webp'),
-        onPress: () {
-          //_gameField.onCardsButtonClick();
-        },
-      ),
+      if (state.showDismissButton)
+        CornerButton(
+          left: generalPadding,
+          bottom: CornerButton.size + 2 * generalPadding,
+          image: const AssetImage('assets/images/screens/game_field/main/button_disband_unit.webp'),
+          onPress: () {
+            //_gameField.onCardsButtonClick();
+          },
+        ),
 
       // Cards buttons
       CornerButton(

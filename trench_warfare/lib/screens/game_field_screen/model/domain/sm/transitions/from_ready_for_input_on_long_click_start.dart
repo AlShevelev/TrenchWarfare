@@ -18,6 +18,7 @@ class FromReadyForInputOnLongClickStart {
         armyInfo: null,
         carrierInfo: null,
         nation: _context.nation,
+        showDismissButton: false,
       ),
     );
 

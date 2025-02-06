@@ -13,12 +13,15 @@ class MainControls extends GameFieldControlsState {
 
   final Nation nation;
 
+  final bool showDismissButton;
+
   MainControls({
     required this.totalSum,
     required this.cellInfo,
     required this.armyInfo,
     required this.carrierInfo,
     required this.nation,
+    required this.showDismissButton,
   });
 
   MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
@@ -27,6 +30,7 @@ class MainControls extends GameFieldControlsState {
         armyInfo: armyInfo,
         carrierInfo: carrierInfo,
         nation: nation,
+        showDismissButton: showDismissButton,
       );
 }
 

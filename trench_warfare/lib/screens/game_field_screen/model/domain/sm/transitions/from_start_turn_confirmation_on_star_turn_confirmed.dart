@@ -62,6 +62,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
         armyInfo: null,
         carrierInfo: null,
         nation: _context.nation,
+        showDismissButton: false,
       ),
     );
 
