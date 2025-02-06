@@ -118,7 +118,6 @@ class TurnEndConfirmationNeeded implements State {
   String toString() => 'TURN_END_CONFIRMATION_NEEDED: {cellToMoveCamera: $cellToMoveCamera';
 }
 
-
 class VictoryDefeatConfirmation implements State {
   /// The player is win and game must be over
   final bool isVictory;
@@ -157,4 +156,16 @@ class ObjectivesAreVisible implements State {
 class SettingsAreVisible implements State {
   @override
   String toString() => 'SETTINGS_ARE_VISIBLE';
+}
+
+class DisbandUnitConfirmationNeeded implements State {
+  final GameFieldCellRead cellWithUnitToDisband;
+
+  final Iterable<GameFieldCellRead> pathOfUnit;
+
+  DisbandUnitConfirmationNeeded({required this.cellWithUnitToDisband, required this.pathOfUnit});
+
+  @override
+  String toString() =>
+      'DISBAND_UNIT_CONFIRMATION_NEEDED: {cellWithUnitToDisband: $cellWithUnitToDisband, pathOfUnit total cells: ${pathOfUnit.length}';
 }

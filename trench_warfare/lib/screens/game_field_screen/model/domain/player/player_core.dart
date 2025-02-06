@@ -151,4 +151,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
 
   @override
   void onTurnCompletedDeclined() => _stateMachine.process(OnTurnCompletedDeclined());
+
+  @override
+  void onDisbandUnitButtonClick() => _stateMachine.process(OnDisbandUnitButtonClick());
 }

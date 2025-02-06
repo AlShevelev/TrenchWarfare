@@ -92,6 +92,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
               EndOfTurnConfirmationControls() => AskTurnCompletedDialog(
                 gameField: widget._gameField,
               ),
+              DisbandUnitConfirmationControls() => AskTurnCompletedDialog(
+                gameField: widget._gameField,
+              ),
               _ => const SizedBox.shrink(),
             };
           }),

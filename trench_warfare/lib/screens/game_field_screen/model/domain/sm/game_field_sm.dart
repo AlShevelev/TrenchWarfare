@@ -86,6 +86,7 @@ class GameFieldStateMachine {
             FromWaitingForEndOfPathOnCardsButtonClick(_context, startPathCell).process(),
           OnMenuButtonClick() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
           OnPhoneBackAction() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
+          OnDisbandUnitButtonClick() => FromWaitingForEndOfPathOnDisbandUnitButtonClick(_context, startPathCell).process(),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -95,6 +96,7 @@ class GameFieldStateMachine {
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(_context).process(path),
           OnMenuButtonClick() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
           OnPhoneBackAction() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
+          OnDisbandUnitButtonClick() => FromPathIsShownOnDisbandUnitButtonClick(_context, path).process(),
           _ => _currentState,
         },
       MovingInProgress(
@@ -196,6 +198,7 @@ class GameFieldStateMachine {
             FromTurnEndConfirmationNeededOnTurnCompletedDeclined(_context).process(cellToMoveCamera),
           _ => _currentState,
         },
+      DisbandUnitConfirmationNeeded() => throw UnimplementedError(),  // Rename and reuse here OnTurnCompletedConfirmed/OnTurnCompletedDeclined
     };
 
     _currentState = newState;

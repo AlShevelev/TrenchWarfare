@@ -66,6 +66,8 @@ abstract interface class GameFieldForControls {
   void onTurnCompletedConfirmed();
 
   void onTurnCompletedDeclined();
+
+  void onDisbandUnitButtonClick();
 }
 
 class GameField extends FlameGame
@@ -270,4 +272,7 @@ class GameField extends FlameGame
 
   @override
   void onTurnCompletedDeclined() => _viewModel.input.onTurnCompletedDeclined();
+
+  @override
+  void onDisbandUnitButtonClick() => _viewModel.input.onDisbandUnitButtonClick();
 }

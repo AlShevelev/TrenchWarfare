@@ -148,3 +148,10 @@ class OnTurnCompletedDeclined implements Event {
   @override
   String toString() => 'ON_TURN_COMPLETED_DECLINED';
 }
+
+class OnDisbandUnitButtonClick implements Event {
+  OnDisbandUnitButtonClick();
+
+  @override
+  String toString() => 'ON_DISBAND_UNIT_BUTTON_CLICK';
+}

@@ -50,4 +50,6 @@ abstract interface class PlayerInput {
   void onTurnCompletedConfirmed();
 
   void onTurnCompletedDeclined();
+
+  void onDisbandUnitButtonClick();
 }

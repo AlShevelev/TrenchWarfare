@@ -122,3 +122,7 @@ class SettingsControls extends GameFieldControlsState {
 class EndOfTurnConfirmationControls extends GameFieldControlsState {
   EndOfTurnConfirmationControls();
 }
+
+class DisbandUnitConfirmationControls extends GameFieldControlsState {
+  DisbandUnitConfirmationControls();
+}
