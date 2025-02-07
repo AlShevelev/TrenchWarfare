@@ -86,7 +86,8 @@ class GameFieldStateMachine {
             FromWaitingForEndOfPathOnCardsButtonClick(_context, startPathCell).process(),
           OnMenuButtonClick() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
           OnPhoneBackAction() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
-          OnDisbandUnitButtonClick() => FromWaitingForEndOfPathOnDisbandUnitButtonClick(_context, startPathCell).process(),
+          OnDisbandUnitButtonClick() =>
+            FromWaitingForEndOfPathOnDisbandUnitButtonClick(_context, startPathCell).process(),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -192,13 +193,27 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       TurnEndConfirmationNeeded(cellToMoveCamera: var cellToMoveCamera) => switch (event) {
-          OnUserConfirmed() =>
-            FromTurnEndConfirmationNeededOnTurnCompletedConfirmed(_context).process(),
-          OnUserDeclined() =>
-            FromTurnEndConfirmationNeededOnTurnCompletedDeclined(_context).process(cellToMoveCamera),
+          OnUserConfirmed() => FromTurnEndConfirmationNeededOnUserConfirmed(_context).process(),
+          OnUserDeclined() => FromTurnEndConfirmationNeededOnUserDeclined(_context).process(cellToMoveCamera),
           _ => _currentState,
         },
-      DisbandUnitConfirmationNeeded() => throw UnimplementedError(),  // Rename and reuse here OnTurnCompletedConfirmed/OnTurnCompletedDeclined
+      DisbandUnitConfirmationNeeded(
+        cellWithUnitToDisband: final cellWithUnitToDisband,
+        pathOfUnit: final pathOfUnit,
+      ) =>
+        switch (event) {
+          OnUserConfirmed() => FromDisbandUnitConfirmationNeededOnUserConfirmed(
+              context: _context,
+              cellWithUnitToDisband: cellWithUnitToDisband,
+              pathOfUnit: pathOfUnit,
+            ).process(),
+          OnUserDeclined() => FromDisbandUnitConfirmationNeededOnUserDeclined(
+              context: _context,
+              cellWithUnitToDisband: cellWithUnitToDisband,
+              pathOfUnit: pathOfUnit,
+            ).process(),
+          _ => _currentState,
+        },
     };
 
     _currentState = newState;

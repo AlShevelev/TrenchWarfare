@@ -24,7 +24,7 @@ class MainControls extends GameFieldControlsState {
     required this.showDismissButton,
   });
 
-  MainControls copyCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
+  MainControls setCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
         totalSum: totalSum,
         cellInfo: cellInfo,
         armyInfo: armyInfo,
@@ -32,6 +32,15 @@ class MainControls extends GameFieldControlsState {
         nation: nation,
         showDismissButton: showDismissButton,
       );
+
+  MainControls setShowDismissButton(bool showDismissButton) => MainControls(
+    totalSum: totalSum,
+    cellInfo: cellInfo,
+    armyInfo: armyInfo,
+    carrierInfo: carrierInfo,
+    nation: nation,
+    showDismissButton: showDismissButton,
+  );
 }
 
 class CardsSelectionControls extends GameFieldControlsState {

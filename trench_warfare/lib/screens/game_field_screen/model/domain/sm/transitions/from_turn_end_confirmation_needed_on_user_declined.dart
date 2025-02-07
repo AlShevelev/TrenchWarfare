@@ -1,9 +1,9 @@
 part of game_field_sm;
 
-class FromTurnEndConfirmationNeededOnTurnCompletedDeclined {
+class FromTurnEndConfirmationNeededOnUserDeclined {
   final GameFieldStateMachineContext _context;
 
-  FromTurnEndConfirmationNeededOnTurnCompletedDeclined(this._context);
+  FromTurnEndConfirmationNeededOnUserDeclined(this._context);
 
   State process(GameFieldCellRead cellToMoveCamera) {
     TransitionUtils(_context).closeUI();

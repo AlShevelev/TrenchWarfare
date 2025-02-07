@@ -27,7 +27,7 @@ class CarrierPanelCalculator {
     final state = (controlsState.current as MainControls);
 
     if (newActiveUnit.type != UnitType.carrier && state.carrierInfo != null) {
-      controlsState.update(state.copyCarrierInfo(null));
+      controlsState.update(state.setCarrierInfo(null));
     } else if (newActiveUnit.type == UnitType.carrier) {
       final carrier = (newActiveUnit as Carrier);
 
@@ -40,7 +40,7 @@ class CarrierPanelCalculator {
             )
           : null;
 
-      controlsState.update(state.copyCarrierInfo(carrierInfo));
+      controlsState.update(state.setCarrierInfo(carrierInfo));
     }
   }
 }

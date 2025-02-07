@@ -1,9 +1,9 @@
 part of game_field_sm;
 
-class FromTurnEndConfirmationNeededOnTurnCompletedConfirmed {
+class FromTurnEndConfirmationNeededOnUserConfirmed {
   final GameFieldStateMachineContext _context;
 
-  FromTurnEndConfirmationNeededOnTurnCompletedConfirmed(this._context);
+  FromTurnEndConfirmationNeededOnUserConfirmed(this._context);
 
   State process() {
     TransitionUtils(_context).closeUI();
