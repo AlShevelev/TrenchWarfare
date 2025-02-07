@@ -124,5 +124,9 @@ class EndOfTurnConfirmationControls extends GameFieldControlsState {
 }
 
 class DisbandUnitConfirmationControls extends GameFieldControlsState {
-  DisbandUnitConfirmationControls();
+  final Unit unitToShow;
+
+  final Nation nation;
+
+  DisbandUnitConfirmationControls({required this.unitToShow, required this.nation});
 }

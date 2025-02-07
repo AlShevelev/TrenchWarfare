@@ -8,7 +8,10 @@ class FromWaitingForEndOfPathOnDisbandUnitButtonClick {
   FromWaitingForEndOfPathOnDisbandUnitButtonClick(this._context, this._startPathCell);
 
   State process() {
-    _context.controlsState.update(DisbandUnitConfirmationControls());
+    _context.controlsState.update(DisbandUnitConfirmationControls(
+      unitToShow: _startPathCell.activeUnit!,
+      nation: _startPathCell.nation!,
+    ));
 
     return DisbandUnitConfirmationNeeded(cellWithUnitToDisband: _startPathCell, pathOfUnit: []);
   }

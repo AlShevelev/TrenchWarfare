@@ -8,7 +8,11 @@ class FromPathIsShownOnDisbandUnitButtonClick {
   FromPathIsShownOnDisbandUnitButtonClick(this._context, this._path);
 
   State process() {
-    _context.controlsState.update(DisbandUnitConfirmationControls());
+    final cell = _path.first;
+    _context.controlsState.update(DisbandUnitConfirmationControls(
+      unitToShow: cell.activeUnit!,
+      nation: cell.nation!,
+    ));
 
     return DisbandUnitConfirmationNeeded(cellWithUnitToDisband: _path.first, pathOfUnit: _path);
   }

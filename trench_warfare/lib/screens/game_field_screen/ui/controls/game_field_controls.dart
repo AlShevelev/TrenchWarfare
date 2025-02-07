@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placing/cards_placing_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/ask_turn_completed_dialog.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/disband/ask_to_disband_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/menu_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/objectives/objectives_dialog.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/win_defeat_turn_dialog.dart';
@@ -87,14 +88,17 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   gameField: widget._gameField,
                 ),
               SettingsControls() => SettingsScreen(
-                gameField: widget._gameField,
-              ),
+                  gameField: widget._gameField,
+                ),
               EndOfTurnConfirmationControls() => AskTurnCompletedDialog(
-                gameField: widget._gameField,
-              ),
-              DisbandUnitConfirmationControls() => AskTurnCompletedDialog(
-                gameField: widget._gameField,
-              ),
+                  gameField: widget._gameField,
+                ),
+              DisbandUnitConfirmationControls(unitToShow: final unitToShow, nation: final nation) =>
+                AskToDisbandDialog(
+                  gameField: widget._gameField,
+                  nation: nation,
+                  unitToShow: unitToShow,
+                ),
               _ => const SizedBox.shrink(),
             };
           }),

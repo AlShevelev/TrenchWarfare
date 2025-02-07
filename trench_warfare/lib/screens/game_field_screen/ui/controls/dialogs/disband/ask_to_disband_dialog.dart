@@ -1,19 +1,31 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
+import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/disband/ask_to_disband_dialog_unit_painter.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 import 'package:trench_warfare/shared/ui_kit/image_button.dart';
 
-class AskTurnCompletedDialog extends StatelessWidget {
+class AskToDisbandDialog extends StatelessWidget {
   static const _iconSize = 35.0;
+  static const _unitIconSize = 65.0;
 
   final GameFieldForControls _gameField;
 
-  const AskTurnCompletedDialog({
+  final Unit _unitToShow;
+
+  final Nation _nation;
+
+  const AskToDisbandDialog({
     super.key,
     required GameFieldForControls gameField,
-  }) : _gameField = gameField;
+    required Unit unitToShow,
+    required Nation nation,
+  })  : _gameField = gameField,
+        _unitToShow = unitToShow,
+        _nation = nation;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +46,21 @@ class AskTurnCompletedDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      tr('ask_turn_completed_dialog'),
+                      tr('ask_to_disband_dialog'),
                       style: AppTypography.s18w600,
                       textAlign: TextAlign.center,
+                    ),
+                    CustomPaint(
+                      painter: AskToDisbandDialogUnitPainter(
+                        unit: _unitToShow,
+                        nation: _nation,
+                        spritesAtlas: _gameField.spritesAtlas,
+                      ),
+                      child: const SizedBox(
+                        width: _unitIconSize,
+                        height: _unitIconSize,
+                        child: null,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),

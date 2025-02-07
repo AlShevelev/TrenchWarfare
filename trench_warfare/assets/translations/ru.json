@@ -109,6 +109,7 @@
   "quit_menu_dialog": "Выход",
   "objectives_menu_dialog": "Цели",
   "ask_turn_completed_dialog": "Некоторые подразделения еще могут передвигаться.\nЗавершить ход?",
+  "ask_to_disband_dialog": "Распустить это подразделение?",
 
   "objectives_text": "Захватите или уничтожьте все города и фабрики противника.",
 
