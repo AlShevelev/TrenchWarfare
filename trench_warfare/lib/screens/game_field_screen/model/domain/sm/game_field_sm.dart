@@ -192,9 +192,9 @@ class GameFieldStateMachine {
           _ => _currentState,
         },
       TurnEndConfirmationNeeded(cellToMoveCamera: var cellToMoveCamera) => switch (event) {
-          OnTurnCompletedConfirmed() =>
+          OnUserConfirmed() =>
             FromTurnEndConfirmationNeededOnTurnCompletedConfirmed(_context).process(),
-          OnTurnCompletedDeclined() =>
+          OnUserDeclined() =>
             FromTurnEndConfirmationNeededOnTurnCompletedDeclined(_context).process(cellToMoveCamera),
           _ => _currentState,
         },

@@ -50,7 +50,7 @@ class AskTurnCompletedDialog extends StatelessWidget {
                               image: AssetImage(_getIcon('icon_yes')),
                               imageWidth: _iconSize,
                               imageHeight: _iconSize,
-                              onPress: () => _gameField.onTurnCompletedConfirmed(),
+                              onPress: () => _gameField.onUserConfirmed(),
                             ),
                           ),
                           Padding(
@@ -59,7 +59,7 @@ class AskTurnCompletedDialog extends StatelessWidget {
                               image: AssetImage(_getIcon('icon_no')),
                               imageWidth: _iconSize,
                               imageHeight: _iconSize,
-                              onPress: () => _gameField.onTurnCompletedDeclined(),
+                              onPress: () => _gameField.onUserDeclined(),
                             ),
                           ),
                         ],

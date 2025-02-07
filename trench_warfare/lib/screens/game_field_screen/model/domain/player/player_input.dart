@@ -47,9 +47,9 @@ abstract interface class PlayerInput {
 
   void onSettingsClosed(SettingsResult result);
 
-  void onTurnCompletedConfirmed();
+  void onUserConfirmed();
 
-  void onTurnCompletedDeclined();
+  void onUserDeclined();
 
   void onDisbandUnitButtonClick();
 }

@@ -135,18 +135,18 @@ class OnSettingsClosed implements Event {
       'myUnitsSpeed: ${result.humanUnitsSpeed}; enemyUnitsSpeed: ${result.aiUnitsSpeed};}';
 }
 
-class OnTurnCompletedConfirmed implements Event {
-  OnTurnCompletedConfirmed();
+class OnUserConfirmed implements Event {
+  OnUserConfirmed();
 
   @override
-  String toString() => 'ON_TURN_COMPLETED_CONFIRMED';
+  String toString() => 'ON_USER_CONFIRMED';
 }
 
-class OnTurnCompletedDeclined implements Event {
-  OnTurnCompletedDeclined();
+class OnUserDeclined implements Event {
+  OnUserDeclined();
 
   @override
-  String toString() => 'ON_TURN_COMPLETED_DECLINED';
+  String toString() => 'ON_USER_DECLINED';
 }
 
 class OnDisbandUnitButtonClick implements Event {

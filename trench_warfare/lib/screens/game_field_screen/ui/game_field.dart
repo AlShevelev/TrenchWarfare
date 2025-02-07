@@ -63,9 +63,9 @@ abstract interface class GameFieldForControls {
 
   void onSettingsClosed(SettingsResult result);
 
-  void onTurnCompletedConfirmed();
+  void onUserConfirmed();
 
-  void onTurnCompletedDeclined();
+  void onUserDeclined();
 
   void onDisbandUnitButtonClick();
 }
@@ -268,10 +268,10 @@ class GameField extends FlameGame
   void onSettingsClosed(SettingsResult result) => _viewModel.input.onSettingsClosed(result);
 
   @override
-  void onTurnCompletedConfirmed() => _viewModel.input.onTurnCompletedConfirmed();
+  void onUserConfirmed() => _viewModel.input.onUserConfirmed();
 
   @override
-  void onTurnCompletedDeclined() => _viewModel.input.onTurnCompletedDeclined();
+  void onUserDeclined() => _viewModel.input.onUserDeclined();
 
   @override
   void onDisbandUnitButtonClick() => _viewModel.input.onDisbandUnitButtonClick();

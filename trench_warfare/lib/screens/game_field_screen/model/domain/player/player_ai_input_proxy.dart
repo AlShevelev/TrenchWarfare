@@ -111,12 +111,12 @@ class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   }
 
   @override
-  void onTurnCompletedConfirmed() {
+  void onUserConfirmed() {
     // do nothing
   }
 
   @override
-  void onTurnCompletedDeclined() {
+  void onUserDeclined() {
     // do nothing
   }
 
