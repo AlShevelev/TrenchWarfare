@@ -66,7 +66,7 @@ class GameFieldStateMachine {
           OnCellClick(cell: var cell) => FromReadyForInputOnClick(_context).process(cell),
           OnLongCellClickStart(cell: var cell) => FromReadyForInputOnLongClickStart(_context).process(cell),
           OnLongCellClickEnd() => FromReadyForInputOnLongClickEnd(_context).process(),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isInCarrierMode: var isCarrier) =>
             FromReadyForInputOnResortUnit(_context).process(cellId, unitsId, isCarrier: isCarrier),
           OnCardsButtonClick() => FromReadyForInputOnCardsButtonClick(_context).process(),
           OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick(_context).process(),
@@ -79,9 +79,9 @@ class GameFieldStateMachine {
             FromWaitingForEndOfPathOnClick(_context).process(startPathCell, cell),
           OnEndOfTurnButtonClick() =>
             FromWaitingForEndOfPathOnEndOfTurnButtonClick(_context).process(startPathCell),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isInCarrierMode: var isInCarrierMode) =>
             FromWaitingForEndOfPathOnResortUnit(_context)
-                .process(startPathCell, cellId, unitsId, isCarrier: isCarrier),
+                .process(startPathCell, cellId, unitsId, isInCarrierMode: isInCarrierMode),
           OnCardsButtonClick() =>
             FromWaitingForEndOfPathOnCardsButtonClick(_context, startPathCell).process(),
           OnMenuButtonClick() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
@@ -92,8 +92,13 @@ class GameFieldStateMachine {
         },
       PathIsShown(path: var path) => switch (event) {
           OnCellClick(cell: var cell) => FromPathIsShownOnClick(_context).process(path, cell),
-          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isCarrier: var isCarrier) =>
-            FromPathIsShownOnResortUnit(_context).process(path, cellId, unitsId, isCarrier: isCarrier),
+          OnUnitsResorted(cellId: var cellId, unitsId: var unitsId, isInCarrierMode: var isInCarrierMode) =>
+            FromPathIsShownOnResortUnit(_context).process(
+              path,
+              cellId,
+              unitsId,
+              isInCarrierMode: isInCarrierMode,
+            ),
           OnEndOfTurnButtonClick() => FromPathIsShownOnEndOfTurnButtonClick(_context).process(path),
           OnMenuButtonClick() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
           OnPhoneBackAction() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
@@ -200,6 +205,7 @@ class GameFieldStateMachine {
       DisbandUnitConfirmationNeeded(
         cellWithUnitToDisband: final cellWithUnitToDisband,
         pathOfUnit: final pathOfUnit,
+        priorUiState: final priorUiState,
       ) =>
         switch (event) {
           OnUserConfirmed() => FromDisbandUnitConfirmationNeededOnUserConfirmed(
@@ -211,6 +217,7 @@ class GameFieldStateMachine {
               context: _context,
               cellWithUnitToDisband: cellWithUnitToDisband,
               pathOfUnit: pathOfUnit,
+              priorUiState: priorUiState,
             ).process(),
           _ => _currentState,
         },

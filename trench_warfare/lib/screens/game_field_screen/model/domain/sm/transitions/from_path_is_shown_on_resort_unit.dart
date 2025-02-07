@@ -5,31 +5,30 @@ class FromPathIsShownOnResortUnit {
 
   FromPathIsShownOnResortUnit(this._context);
 
-  State process(Iterable<GameFieldCellRead> path, int cellId, Iterable<String> unitsId, {required bool isCarrier}) {
+  State process(
+    Iterable<GameFieldCellRead> path,
+    int cellId,
+    Iterable<String> unitsId, {
+    required bool isInCarrierMode,
+  }) {
     final pathToProcess = path.map((i) => i as GameFieldCell).toList(growable: false);
 
     final cell = _context.gameField.getCellById(cellId);
 
-    final activeUnit = cell.activeUnit!;
+    final activeUnit = cell.activeUnit;
 
-    if (activeUnit.state == UnitState.active) {
-      activeUnit.setState(UnitState.enabled);
-    }
-
-    if (isCarrier) {
+    if (isInCarrierMode) {
       (activeUnit as Carrier).resortUnits(unitsId);
+
+      return PathIsShown(path);
     } else {
+      if (activeUnit != null && activeUnit.state == UnitState.active) {
+        activeUnit.setState(UnitState.enabled);
+
+        TransitionUtils(_context).closeUI();
+      }
+
       cell.resortUnits(unitsId);
-
-      final newActiveUnit = cell.activeUnit!;
-
-      CarrierPanelCalculator.updateCarrierPanel(
-        cellId,
-        cell.nation!,
-        _context.controlsState,
-        oldActiveUnit: activeUnit,
-        newActiveUnit: newActiveUnit,
-      );
     }
 
     for (var pathCell in pathToProcess) {

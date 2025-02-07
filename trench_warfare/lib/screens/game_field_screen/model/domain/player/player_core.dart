@@ -72,7 +72,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
-      _stateMachine.process(OnUnitsResorted(cellId, unitsId, isCarrier: isCarrier));
+      _stateMachine.process(OnUnitsResorted(cellId, unitsId, isInCarrierMode: isCarrier));
 
   @override
   void onCardsButtonClick() => _stateMachine.process(OnCardsButtonClick());

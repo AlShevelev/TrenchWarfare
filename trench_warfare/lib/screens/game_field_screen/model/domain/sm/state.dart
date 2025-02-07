@@ -163,7 +163,13 @@ class DisbandUnitConfirmationNeeded implements State {
 
   final Iterable<GameFieldCellRead> pathOfUnit;
 
-  DisbandUnitConfirmationNeeded({required this.cellWithUnitToDisband, required this.pathOfUnit});
+  final GameFieldControlsState priorUiState;
+
+  DisbandUnitConfirmationNeeded({
+    required this.cellWithUnitToDisband,
+    required this.pathOfUnit,
+    required this.priorUiState,
+  });
 
   @override
   String toString() =>

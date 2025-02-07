@@ -35,12 +35,12 @@ class OnUnitsResorted implements Event {
 
   final Iterable<String> unitsId;
 
-  final bool isCarrier;
+  final bool isInCarrierMode;
 
-  OnUnitsResorted(this.cellId, this.unitsId, {required this.isCarrier});
+  OnUnitsResorted(this.cellId, this.unitsId, {required this.isInCarrierMode});
 
   @override
-  String toString() => 'ON_UNITS_RESORTED: {cellId: $cellId: isCarrier: $isCarrier; unitsId: [${unitsId.join('|')}]}';
+  String toString() => 'ON_UNITS_RESORTED: {cellId: $cellId: isInCarrierMode: $isInCarrierMode; unitsId: [${unitsId.join('|')}]}';
 }
 
 class OnCardsButtonClick implements Event {
