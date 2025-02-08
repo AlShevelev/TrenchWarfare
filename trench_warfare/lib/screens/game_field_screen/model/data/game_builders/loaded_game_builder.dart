@@ -13,7 +13,7 @@ class LoadedGameBuilder implements GameBuilder {
   Future<GameBuildResult> build() async {
     final slotDb = _dao.readSlot(_slot.index)!;
 
-    final metadataRecord = await MapMetadataDecoder.decodeFromFile(slotDb.mapFileName);
+    final metadataRecord = (await MapDecoder.openFile(slotDb.mapFileName)).getMetadata();
     final metadata = MapMetadata(metadataRecord!);
 
     final dbUnits = _dao.readAllUnits(slotDb.dbId);

@@ -9,16 +9,23 @@ class _Card extends StatelessWidget {
 
   final MapSelectionUserActions _userActions;
 
+  final int _mapRows;
+  final int _mapCols;
+
   const _Card({
     super.key,
     required bool selected,
     required TabCode tabCode,
     required MapCardDto card,
     required MapSelectionUserActions userActions,
+    required int mapCols,
+    required int mapRows,
   })  : _tabCode = tabCode,
         _card = card,
         _userActions = userActions,
-        _selected = selected;
+        _selected = selected,
+        _mapRows = mapRows,
+        _mapCols = mapCols;
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +50,14 @@ class _Card extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                       child: Text(
                         _card.title[locale]!,
                         style: AppTypography.s20w600,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Padding(
@@ -56,6 +65,7 @@ class _Card extends StatelessWidget {
                       child: Text(
                         _getDatesText(),
                         style: AppTypography.s16w600,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Padding(
@@ -70,12 +80,17 @@ class _Card extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(2, 0, 2, 3),
+                      padding: const EdgeInsets.fromLTRB(2, 0, 2, 10),
                       child: Text(
                         _card.description[locale]!,
                         style: AppTypography.s14w400,
                         textAlign: TextAlign.justify,
                       ),
+                    ),
+                    Text(
+                      '${tr('new_game_map_size')}: ${_getMapSize()}',
+                      style: AppTypography.s16w600,
+                      textAlign: TextAlign.end,
                     ),
                   ],
                 ),
@@ -124,4 +139,12 @@ class _Card extends StatelessWidget {
 
   String _getPhoto() =>
       'assets/images/screens/new_game/maps/${_tabCode.uiString}/${_card.mapName}.webp';
+
+  String _getMapSize() => switch (_mapRows * _mapCols) {
+    <= 100 => tr('new_game_tiny'),    // 10x10
+    <= 225 => tr('new_game_small'),   // 15x15
+    <= 400 => tr('new_game_medium'),  // 20x20
+    <= 625 => tr('new_game_large'),   // 25x25
+    _ => tr('new_game_huge')
+  };
 }

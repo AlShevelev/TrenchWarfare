@@ -15,6 +15,9 @@ class MapCardDto {
 
   final DateTime to;
 
+  final int mapRows;
+  final int mapCols;
+
   final List<SideOfConflictDto> _opponents;
   Iterable<SideOfConflictDto> get opponents => _opponents;
 
@@ -33,6 +36,8 @@ class MapCardDto {
     required this.description,
     required List<SideOfConflictDto> opponents,
     required this.neutrals,
+    required this.mapRows,
+    required this.mapCols,
     required bool selected,
   }) : _selected = selected,
     _opponents = opponents;

@@ -39,6 +39,8 @@ class _MapsList extends StatelessWidget {
             tabCode: _selectedTab,
             card: card,
             userActions: _userActions,
+            mapRows: card.mapRows,
+            mapCols: card.mapCols,
           );
         });
   }

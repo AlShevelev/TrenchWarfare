@@ -89,7 +89,7 @@ class _SaveLoadViewModel extends ViewModelBase implements _SaveLoadUserActions {
   Future<_DataSlotDto> _mapSlotDbToDto(SaveSlotDbEntity slotDbEntity) async {
     final nations = _dao.readAllNations(slotDbEntity.dbId);
 
-    final metadataRecord = await MapMetadataDecoder.decodeFromFile(slotDbEntity.mapFileName);
+    final metadataRecord = (await MapDecoder.openFile(slotDbEntity.mapFileName)).getMetadata();
 
     final slotNumber = GameSlot.createFromIndex(slotDbEntity.slotNumber);
 

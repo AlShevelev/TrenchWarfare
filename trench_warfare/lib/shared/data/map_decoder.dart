@@ -7,21 +7,45 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:tuple/tuple.dart';
 import 'package:xml/xml.dart';
 import 'package:xml/xpath.dart';
 
-class MapMetadataDecoder {
-  static Future<MapMetadataRecord?> decodeFromFile(String mapFileName) async {
-    final rawMetadata = await _extractMetadata(mapFileName);
+abstract interface class MapDataExtractor {
+  MapMetadataRecord? getMetadata();
 
-    if (rawMetadata == null) {
-      return null;
-    }
+  /// Returns weight and height of the map (in cells)
+  Tuple2<int, int> getSize();
+}
 
-    return decode(rawMetadata);
+class MapDecoder implements MapDataExtractor {
+  final XmlDocument _mapAsDocument;
+
+  MapDecoder._(XmlDocument mapAsDocument): _mapAsDocument = mapAsDocument;
+
+  static Future<MapDataExtractor> openFile(String mapFileName) async {
+    final content = await _extractContentAsXml(mapFileName);
+    return MapDecoder._(content);
   }
 
-  static MapMetadataRecord decode(String rawMetadataString) {
+  @override
+  MapMetadataRecord? getMetadata() {
+    final nodes = _mapAsDocument.xpath('/map/properties/property[@name = "metadata"]');
+    final rawMetadata = nodes.firstOrNull?.getAttribute('value');
+
+    return rawMetadata?.let((m) => decodeMetadataFromRawString(m));
+  }
+
+  @override
+  Tuple2<int, int> getSize() {
+    final nodes = _mapAsDocument.xpath('/map');
+    final width = int.parse(nodes.first.getAttribute('width')!);
+    final height = int.parse(nodes.first.getAttribute('height')!);
+
+    return Tuple2<int, int>(width, height);
+  }
+
+  static MapMetadataRecord decodeMetadataFromRawString(String rawMetadataString) {
     final decodedMetadata = jsonDecode(rawMetadataString) as Map<String, dynamic>;
 
     final dates = decodedMetadata['dates'] as Map<String, dynamic>?;
@@ -74,13 +98,9 @@ class MapMetadataDecoder {
         .toList();
   }
 
-  static Future<String?> _extractMetadata(String mapFileName) async {
+  static Future<XmlDocument> _extractContentAsXml(String mapFileName) async {
     final rawText = await rootBundle.loadString(mapFileName);
 
-    final document = XmlDocument.parse(rawText);
-    final nodes = document.xpath('/map/properties/property[@name = "metadata"]');
-    final rawMetadata = nodes.firstOrNull?.getAttribute('value');
-
-    return rawMetadata;
+    return XmlDocument.parse(rawText);
   }
 }

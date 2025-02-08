@@ -123,6 +123,12 @@
   "new_game_list_empty": "Скоро появится",
   "new_game_opponents": "Противники",
   "new_game_neutrals": "Нейтральные",
+  "new_game_map_size": "Размер карты",
+  "new_game_tiny": "Крошечная",
+  "new_game_small": "Маленькая",
+  "new_game_medium": "Средняя",
+  "new_game_large": "Большая",
+  "new_game_huge": "Огромная",
 
   "save_load_autosave": "Автосохранение",
   "save_load_empty_load": "Нечего загружать",

@@ -123,6 +123,12 @@
   "new_game_list_empty": "Coming soon",
   "new_game_opponents": "Opponents",
   "new_game_neutrals": "Neutrals",
+  "new_game_map_size": "Map size",
+  "new_game_tiny": "Tiny",
+  "new_game_small": "Small",
+  "new_game_medium": "Medium",
+  "new_game_large": "Large",
+  "new_game_huge": "Huge",
 
   "save_load_autosave": "Autosave",
   "save_load_empty_load": "Nothing to load",

@@ -31,7 +31,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/money/mone
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';
-import 'package:trench_warfare/shared/data/map_metadata_decoder.dart';
+import 'package:trench_warfare/shared/data/map_decoder.dart';
 import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:tuple/tuple.dart';

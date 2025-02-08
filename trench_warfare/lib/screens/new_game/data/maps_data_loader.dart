@@ -3,9 +3,10 @@ import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.da
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
-import 'package:trench_warfare/shared/data/map_metadata_decoder.dart';
+import 'package:trench_warfare/shared/data/map_decoder.dart';
 import 'package:trench_warfare/shared/helpers/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
+import 'package:tuple/tuple.dart';
 
 class MapsDataLoader {
   List<String>? _allAssets;
@@ -18,14 +19,18 @@ class MapsDataLoader {
     for (var i = 0; i < mapsFileNames.length; i++) {
       final mapFileName = mapsFileNames[i];
 
-      final metadataRecord = await MapMetadataDecoder.decodeFromFile(mapFileName);
+      final mapFile = await MapDecoder.openFile(mapFileName);
+
+      final metadataRecord = mapFile.getMetadata();
+      final mapSize = mapFile.getSize();
 
       if (metadataRecord != null) {
         cards.add(
           _metadataToCard(
-            metadataRecord,
-            mapFileName,
-            tabCode,
+            metadata: metadataRecord,
+            mapFileName: mapFileName,
+            tabCode: tabCode,
+            mapSize: mapSize,
             index: i,
             selected: i == 0,
           ),
@@ -51,10 +56,12 @@ class MapsDataLoader {
     return _allAssets!;
   }
 
-  MapCardDto _metadataToCard(
-    MapMetadataRecord metadata,
-    String mapFileName,
-    TabCode tabCode, {
+  /// [mapSize] weight and height of the map (in cells)
+  MapCardDto _metadataToCard({
+    required MapMetadataRecord metadata,
+    required String mapFileName,
+    required TabCode tabCode,
+    required Tuple2<int, int> mapSize,
     required int index,
     required bool selected,
   }) {
@@ -81,6 +88,8 @@ class MapsDataLoader {
       opponents: opponents,
       neutrals: neutrals,
       selected: selected,
+      mapRows: mapSize.item2,
+      mapCols: mapSize.item1,
     );
   }
 }
