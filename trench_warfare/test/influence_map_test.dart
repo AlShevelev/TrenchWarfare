@@ -39,7 +39,7 @@ void assertLand(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getSea(nation));
 
   if (power != null) {
-    Assert.equalsDouble(expected: item.getLand(nation)!, actual: power);
+    Assert.equalsDouble(expected: power, actual: item.getLand(nation)!);
   } else {
     Assert.isNull(item.getLand(nation));
   }
@@ -50,7 +50,7 @@ void assertSea(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getLand(nation));
 
   if (power != null) {
-    Assert.equalsDouble(expected: item.getSea(nation)!, actual: power);
+    Assert.equalsDouble(expected: power, actual: item.getSea(nation)!);
   } else {
     Assert.isNull(item.getSea(nation));
   }
@@ -61,7 +61,7 @@ void assertCarrier(InfluenceMapItemRead item, Nation nation, {double? power}) {
   Assert.isNull(item.getSea(nation));
 
   if (power != null) {
-    Assert.equalsDouble(expected: item.getCarrier(nation)!, actual: power);
+    Assert.equalsDouble(expected: power, actual: item.getCarrier(nation)!);
   } else {
     Assert.isNull(item.getCarrier(nation));
   }
@@ -84,16 +84,16 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertLand(map.getItem(3, 3), nation, power: 6);
+      assertLand(map.getItem(3, 3), nation, power: 12);
 
       final radius1Cells = gameField.findCellsAround(unitCell);
       for (final cell in radius1Cells) {
-        assertLand(map.getItem(cell.row, cell.col), nation, power: 4);
+        assertLand(map.getItem(cell.row, cell.col), nation, power: 8);
       }
 
       final radius2Cells = gameField.findCellsAroundR(unitCell, radius: 2);
       for (final cell in radius2Cells) {
-        assertLand(map.getItem(cell.row, cell.col), nation, power: 2);
+        assertLand(map.getItem(cell.row, cell.col), nation, power: 4);
       }
 
       final radius3Cells = gameField.findCellsAroundR(unitCell, radius: 3);
@@ -118,16 +118,16 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertLand(map.getItem(3, 3), nation, power: 12);
+      assertLand(map.getItem(3, 3), nation, power: 24);
 
       final radius1Cells = gameField.findCellsAround(unitCell);
       for (final cell in radius1Cells) {
-        assertLand(map.getItem(cell.row, cell.col), nation, power: 8);
+        assertLand(map.getItem(cell.row, cell.col), nation, power: 16);
       }
 
       final radius2Cells = gameField.findCellsAroundR(unitCell, radius: 2);
       for (final cell in radius2Cells) {
-        assertLand(map.getItem(cell.row, cell.col), nation, power: 4);
+        assertLand(map.getItem(cell.row, cell.col), nation, power: 8);
       }
 
       final radius3Cells = gameField.findCellsAroundR(unitCell, radius: 3);
@@ -155,13 +155,13 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertLand(map.getItem(2, 3), nation, power: 6);
-      assertLand(map.getItem(3, 1), nation, power: 4);
-      assertLand(map.getItem(3, 2), nation, power: 8);
-      assertLand(map.getItem(3, 3), nation, power: 8);
-      assertLand(map.getItem(3, 4), nation, power: 8);
-      assertLand(map.getItem(3, 5), nation, power: 4);
-      assertLand(map.getItem(4, 4), nation, power: 6);
+      assertLand(map.getItem(2, 3), nation, power: 16);
+      assertLand(map.getItem(3, 1), nation, power: 8);
+      assertLand(map.getItem(3, 2), nation, power: 16);
+      assertLand(map.getItem(3, 3), nation, power: 16);
+      assertLand(map.getItem(3, 4), nation, power: 16);
+      assertLand(map.getItem(3, 5), nation, power: 8);
+      assertLand(map.getItem(4, 4), nation, power: 12);
     });
 
     test('two land units of different nations', () {
@@ -183,16 +183,16 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertLand(map.getItem(unit1Cell.row, unit1Cell.col), nation1, power: 6);
+      assertLand(map.getItem(unit1Cell.row, unit1Cell.col), nation1, power: 12);
 
       final radius1Cells1 = gameField.findCellsAround(unit1Cell);
       for (final cell in radius1Cells1) {
-        assertLand(map.getItem(cell.row, cell.col), nation1, power: 4);
+        assertLand(map.getItem(cell.row, cell.col), nation1, power: 8);
       }
 
       final radius2Cells1 = gameField.findCellsAroundR(unit1Cell, radius: 2);
       for (final cell in radius2Cells1) {
-        assertLand(map.getItem(cell.row, cell.col), nation1, power: 2);
+        assertLand(map.getItem(cell.row, cell.col), nation1, power: 4);
       }
 
       final radius3Cells1 = gameField.findCellsAroundR(unit1Cell, radius: 3);
@@ -201,16 +201,16 @@ void main() {
       }
 
 
-      assertLand(map.getItem(unit2Cell.row, unit2Cell.col), nation2, power: 6);
+      assertLand(map.getItem(unit2Cell.row, unit2Cell.col), nation2, power: 12);
 
       final radius1Cells2 = gameField.findCellsAround(unit2Cell);
       for (final cell in radius1Cells2) {
-        assertLand(map.getItem(cell.row, cell.col), nation2, power: 4);
+        assertLand(map.getItem(cell.row, cell.col), nation2, power: 8);
       }
 
       final radius2Cells2 = gameField.findCellsAroundR(unit2Cell, radius: 2);
       for (final cell in radius2Cells2) {
-        assertLand(map.getItem(cell.row, cell.col), nation2, power: 2);
+        assertLand(map.getItem(cell.row, cell.col), nation2, power: 4);
       }
 
       final radius3Cells2 = gameField.findCellsAroundR(unit2Cell, radius: 3);
@@ -234,20 +234,25 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertSea(map.getItem(3, 3), nation, power: 85);
+      assertSea(map.getItem(3, 3), nation, power: 170);
 
       final radius1Cells = gameField.findCellsAround(unitCell);
       for (final cell in radius1Cells) {
-        assertSea(map.getItem(cell.row, cell.col), nation, power: 85 * 2.0 / 3);
+        assertSea(map.getItem(cell.row, cell.col), nation, power: 127.5);
       }
 
       final radius2Cells = gameField.findCellsAroundR(unitCell, radius: 2);
       for (final cell in radius2Cells) {
-        assertSea(map.getItem(cell.row, cell.col), nation, power: 85 / 3.0);
+        assertSea(map.getItem(cell.row, cell.col), nation, power: 85);
       }
 
       final radius3Cells = gameField.findCellsAroundR(unitCell, radius: 3);
       for (final cell in radius3Cells) {
+        assertSea(map.getItem(cell.row, cell.col), nation, power: 42.5);
+      }
+
+      final radius4Cells = gameField.findCellsAroundR(unitCell, radius: 4);
+      for (final cell in radius4Cells) {
         assertSea(map.getItem(cell.row, cell.col), nation, power: null);
       }
     });
@@ -314,21 +319,21 @@ void main() {
       map.calculate(gameField);
 
       // Assert
-      assertCarrier(map.getItem(3, 3), nation, power: 24);
+      assertCarrier(map.getItem(3, 3), nation, power: 48);
 
       final radius1Cells = gameField.findCellsAround(unitCell);
       for (final cell in radius1Cells) {
-        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 18);
+        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 36);
       }
 
       final radius2Cells = gameField.findCellsAroundR(unitCell, radius: 2);
       for (final cell in radius2Cells) {
-        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 12);
+        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 24);
       }
 
       final radius3Cells = gameField.findCellsAroundR(unitCell, radius: 3);
       for (final cell in radius3Cells) {
-        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 6);
+        assertCarrier(map.getItem(cell.row, cell.col), nation, power: 12);
       }
 
       final radius4Cells = gameField.findCellsAroundR(unitCell, radius: 4);

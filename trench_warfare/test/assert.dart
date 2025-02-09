@@ -22,6 +22,7 @@ class Assert {
   }
 
   static void equalsDouble({required double actual, required double expected, double precision = 0.0001}) {
+    print('equalsDouble(actual: $actual, expected: $expected)');
     isTrue((1.0 - (actual / expected)).abs() < precision);
   }
 }
