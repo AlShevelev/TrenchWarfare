@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="10" height="10" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="5" nextobjectid="59">
+ <properties>
+  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
+ </properties>
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="64" columns="8">
+  <image source="../images/tiles/terrain_atlas_new.png" width="592" height="512"/>
+ </tileset>
+ <tileset firstgid="65" source="game_objects.tsx"/>
+ <layer id="4" name="Terrain" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJyTYWBgkBnFgwYDAKNoCvE=
+  </data>
+ </layer>
+ <layer id="1" name="RoadsAndRivers" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwkAAAGQAAE=
+  </data>
+ </layer>
+ <objectgroup id="3" name="GameObjects">
+  <object id="53" name="austriaHungary" type="ownership" gid="115" x="4.48477" y="643.761" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="57"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="54" name="russia" type="ownership" gid="102" x="499.409" y="99.6624" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="55"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="55" name="level1" type="city" gid="80" x="616.794" y="67.9365" width="64" height="64">
+   <properties>
+    <property name="name" value=""/>
+   </properties>
+  </object>
+  <object id="56" name="cavalry" type="unit" gid="90" x="174.218" y="783.355" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="57" name="level1" type="city" gid="80" x="52.0736" y="783.355" width="64" height="64">
+   <properties>
+    <property name="name" value=""/>
+   </properties>
+  </object>
+  <object id="58" name="austriaHungary" type="ownership" gid="115" x="55.2462" y="613.622" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="56"/>
+    <property name="unit2" type="object" value="56"/>
+    <property name="unit3" type="object" value="56"/>
+    <property name="unit4" type="object" value="56"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

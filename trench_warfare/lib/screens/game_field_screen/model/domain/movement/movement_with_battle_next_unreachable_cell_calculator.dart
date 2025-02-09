@@ -164,6 +164,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     var updateEvents = [
       CreateUntiedUnit(path.first, attackingUnit),
       UpdateCell(path.first, updateBorderCells: []),
+      MoveCameraToCell(path.first),
     ];
 
     final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
