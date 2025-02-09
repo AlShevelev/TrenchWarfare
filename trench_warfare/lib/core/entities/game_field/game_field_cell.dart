@@ -112,6 +112,12 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
     _units.addAll(units);
   }
 
+  void makeActiveUnitLast() {
+    if (_units.isNotEmpty && _units.length > 1) {
+      _units.add(_units.removeAt(0));
+    }
+  }
+
   Unit removeActiveUnit() => _units.removeAt(0);
 
   void removeUnit(Unit unit) => _units.remove(unit);

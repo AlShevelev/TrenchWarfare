@@ -23,10 +23,15 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     final lastReachableCell = reachableCells.last;
 
     if (lastReachableCell == path.first) {
-      _attachUnit(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, unit);
 
       unit.setMovementPoints(0);
       unit.setState(UnitState.disabled);
+
+      // We must make the unit very last to prevent blocking all units on the cell
+      if (unit.state == UnitState.disabled) {
+        lastReachableCell.makeActiveUnitLast();
+      }
 
       for (var cell in path) {
         cell.setPathItem(null);
@@ -49,7 +54,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         cell.setNation(_nation);
       }
 
-      _attachUnit(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, unit);
 
       unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
 
@@ -65,6 +70,11 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         unit.setState(state);
       } else {
         unit.setState(UnitState.disabled);
+      }
+
+      // We must make the unit very last to prevent blocking all units on the cell
+      if (unit.state == UnitState.disabled) {
+        lastReachableCell.makeActiveUnitLast();
       }
 
       Logger.info('WITHOUT_OBSTACLES; new unit state is: ${unit.state}', tag: 'MOVEMENT');

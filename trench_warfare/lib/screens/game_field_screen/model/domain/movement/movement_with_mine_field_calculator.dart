@@ -26,7 +26,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final lastReachableCell = reachableCells.last;
 
     if (lastReachableCell == path.first) {
-      _attachUnit(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, unit);
 
       unit.setMovementPoints(0);
       unit.setState(UnitState.disabled);

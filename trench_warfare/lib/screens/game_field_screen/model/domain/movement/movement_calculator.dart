@@ -58,7 +58,7 @@ abstract class MovementCalculator {
   }
 
   @protected
-  void _attachUnit(GameFieldCell cell, Unit unit) {
+  void _attachUnitAsActive(GameFieldCell cell, Unit unit) {
     if (cell.activeUnit is Carrier && unit.isLand) {
       (cell.activeUnit as Carrier).addUnitAsActive(unit);
     } else {
