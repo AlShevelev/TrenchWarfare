@@ -148,6 +148,10 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
   void _addAttackingUnitToCell(Unit attackingUnit, GameFieldCell attackingUnitCell) {
     attackingUnitCell.addUnitAsActive(attackingUnit);
     attackingUnit.setState(attackingUnit.movementPoints == 0 ? UnitState.disabled : UnitState.enabled);
+
+    if (attackingUnit.state == UnitState.disabled) {
+      attackingUnitCell.makeActiveUnitLast();
+    }
   }
 
   void _updateUI({

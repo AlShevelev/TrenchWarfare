@@ -204,6 +204,9 @@ class MovementWithBattleCalculator extends MovementCalculator {
       movingUnit.addUnitAsActive(attackingUnit);
     } else {
       newAttackingUnitCell.addUnitAsActive(attackingUnit);
+      if (attackingUnit.state == UnitState.disabled) {
+        newAttackingUnitCell.makeActiveUnitLast();
+      }
     }
   }
 
