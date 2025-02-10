@@ -39,20 +39,25 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   Unit? updateCell(GameFieldCell cell, {required double chanceToKill, required double chanceToReduceHealth}) {
     final random = RandomGen.randomDouble(0, 1);
 
+    final isPcOnCell = cell.productionCenter != null;
+    final newChanceToKill = chanceToKill * (isPcOnCell ? 0.5 : 1.0);
+    final newChanceToReduceHealth = chanceToReduceHealth * (isPcOnCell ? 0.5 : 1.0);
+
     Logger.info(
-        'GAS_ATTACK; cell: $cell; chanceToKill: $chanceToKill; chanceToReduceHealth: $chanceToReduceHealth; '
+        'GAS_ATTACK; cell: $cell; '
+        'chanceToKill: $newChanceToKill; chanceToReduceHealth: $newChanceToReduceHealth; '
         'random: $random',
         tag: 'SPECIAL_STRIKE');
 
     for (var unit in cell.units) {
-      if (random <= chanceToKill) {
+      if (random <= newChanceToKill) {
         unit.setHealth(0);
 
         Logger.info('GAS_ATTACK; killed unit: $unit killed;', tag: 'SPECIAL_STRIKE');
-      } else if (random <= chanceToReduceHealth) {
+      } else if (random <= newChanceToReduceHealth) {
         unit.setHealth(unit.health / 2);
 
-        Logger.info('GAS_ATTACK; health halved for unit: $unit killed', tag: 'SPECIAL_STRIKE');
+        Logger.info('GAS_ATTACK; health halved for unit: $unit', tag: 'SPECIAL_STRIKE');
       }
     }
 

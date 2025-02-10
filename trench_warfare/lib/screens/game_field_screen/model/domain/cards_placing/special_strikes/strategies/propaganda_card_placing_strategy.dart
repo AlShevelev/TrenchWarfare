@@ -40,7 +40,7 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     Unit? affectedUnit = activeUnit;
 
-    final chanceToSuccess = _calculateChanceToSuccess(activeUnit);
+    final chanceToSuccess = _calculateChanceToSuccess(activeUnit, _cell);
 
     final random = RandomGen.randomDouble(0, 1);
 
@@ -86,10 +86,13 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     return affectedUnit;
   }
 
-  double _calculateChanceToSuccess(Unit unit) {
+  double _calculateChanceToSuccess(Unit unit, GameFieldCellRead cell) {
     final experienceFactor = UnitExperienceRank.asNumber(unit.experienceRank);
+    final isPcOnCell = cell.productionCenter != null;
 
-    return ((1 - experienceFactor * 0.2) + (1 - unit.health / unit.maxHealth)) / 2;
+    final calculatedChance = ((1 - experienceFactor * 0.2) + (1 - unit.health / unit.maxHealth)) / 2;
+
+    return calculatedChance * (isPcOnCell ? 0.5 : 1.0);
   }
 
   List<_PropagandaEffect> _calculatePossibleEffects() {

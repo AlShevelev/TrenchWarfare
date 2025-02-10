@@ -11,7 +11,8 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
   /// [return] killed units (or hit by propaganda)
   @override
   Unit? updateGameField() {
-    final hasAntiAir = _cell.terrainModifier?.type == TerrainModifierType.antiAirGun;
+    final hasAntiAir =
+        _cell.terrainModifier?.type == TerrainModifierType.antiAirGun || _cell.productionCenter != null;
 
     Logger.info('AIR_BOMBARDMENT; hasAntiAir: $hasAntiAir', tag: 'SPECIAL_STRIKE');
 

@@ -11,12 +11,13 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
   @override
   Unit? updateGameField() {
     final unit = _cell.activeUnit!;
+    final isPcOnCell = _cell.productionCenter != null;
 
     final chanceToDevastate = switch (unit.type) {
       UnitType.infantry => 0.75,
       UnitType.tank => 0.075,
       _ => 0,
-    };
+    } * (isPcOnCell ? 0.5 : 1.0);
 
     final random = RandomGen.randomDouble(0, 1);
 
