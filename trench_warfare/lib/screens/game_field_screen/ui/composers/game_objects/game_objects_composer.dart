@@ -51,16 +51,16 @@ class GameObjectsComposer {
 
     switch (event) {
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
-        _updateCell(cell, updateBorderCells);
+        await _updateCell(cell, updateBorderCells);
 
       case UpdateCellInactivity(
           oldInactiveCells: var oldInactiveCells,
           newInactiveCells: var newInactiveCells
         ):
-        _updateCellInactivity(oldInactiveCells, newInactiveCells);
+        await _updateCellInactivity(oldInactiveCells, newInactiveCells);
 
       case CreateUntiedUnit(cell: var cell, unit: var unit):
-        _createUntiedUnit(cell, unit);
+        await _createUntiedUnit(cell, unit);
 
       case RemoveUntiedUnit(unit: var unit):
         _removeUntiedUnit(unit);
@@ -92,14 +92,14 @@ class GameObjectsComposer {
     }
   }
 
-  void _updateCell(GameFieldCellRead cell, Iterable<GameFieldCellRead> updateBorderCells) {
+  Future<void> _updateCell(GameFieldCellRead cell, Iterable<GameFieldCellRead> updateBorderCells) async {
     _removeGameObject(_getCellComponentKey(cell));
 
     for (var updateBorderCell in updateBorderCells) {
       _removeGameObject(_getCellComponentKey(updateBorderCell));
 
       if (GameObjectCell.needToDrawCell(updateBorderCell, _gameField)) {
-        _addGameObject(
+        await _addGameObject(
             GameObjectCell(
               _spritesAtlas,
               updateBorderCell,
@@ -112,7 +112,7 @@ class GameObjectsComposer {
     }
 
     if (GameObjectCell.needToDrawCell(cell, _gameField)) {
-      _addGameObject(
+      await _addGameObject(
           GameObjectCell(
             _spritesAtlas,
             cell,
@@ -124,8 +124,8 @@ class GameObjectsComposer {
     }
   }
 
-  void _updateCellInactivity(
-      Map<int, GameFieldCellRead> oldInactiveCells, Map<int, GameFieldCellRead> newInactiveCells) {
+  Future<void> _updateCellInactivity(
+      Map<int, GameFieldCellRead> oldInactiveCells, Map<int, GameFieldCellRead> newInactiveCells) async {
     for (var o in oldInactiveCells.entries) {
       if (!newInactiveCells.containsKey(o.key)) {
         _removeGameObject(_getInactivityComponentKey(o.value));
@@ -134,12 +134,12 @@ class GameObjectsComposer {
 
     for (var n in newInactiveCells.entries) {
       if (!oldInactiveCells.containsKey(n.key)) {
-        _addGameObject(GameCellInactive(n.value), _getInactivityComponentKey(n.value));
+        await _addGameObject(GameCellInactive(n.value), _getInactivityComponentKey(n.value));
       }
     }
   }
 
-  void _createUntiedUnit(GameFieldCellRead cell, Unit unit) {
+  Future<void> _createUntiedUnit(GameFieldCellRead cell, Unit unit) async {
     final gameObject = GameObjectUntiedUnit(
       spritesAtlas: _spritesAtlas,
       position: cell.center,
@@ -148,7 +148,7 @@ class GameObjectsComposer {
       isHuman: _viewModelInput.isHumanPlayer,
     );
 
-    _addGameObject(gameObject, unit.id);
+    await _addGameObject(gameObject, unit.id);
   }
 
   void _removeUntiedUnit(Unit unit) {
@@ -202,8 +202,8 @@ class GameObjectsComposer {
     await Future.delayed(Duration(milliseconds: time));
   }
 
-  void _addGameObject(PositionComponent gameObject, String id) {
-    _mapComponent.add(gameObject);
+  Future<void> _addGameObject(PositionComponent gameObject, String id) async {
+    await _mapComponent.add(gameObject);
     _gameObjects[id] = gameObject;
   }
 

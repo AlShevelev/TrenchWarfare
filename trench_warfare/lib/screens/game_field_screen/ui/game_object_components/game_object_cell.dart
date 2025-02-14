@@ -27,23 +27,23 @@ final class GameObjectCell extends GameObjectComponentBase {
   }
 
   @override
-  void _addChildObjects() {
+  Future<void> _addChildObjects() async {
     final root = SnapshotComponent();
-    add(root);
+    await add(root);
 
-    _addBorder(root: root);
+    await _addBorder(root: root);
 
-    _addTerrainModifierSprites(root: root);
-    _addProductionCenterSprites(root: root);
-    _addUnitsSprites(root: root);
-    _addNationBannerSprites(root: root);
+    await _addTerrainModifierSprites(root: root);
+    await _addProductionCenterSprites(root: root);
+    await _addUnitsSprites(root: root);
+    await _addNationBannerSprites(root: root);
 
     if (_isHuman) {
-      _addPathSprites(root: root);
+      await _addPathSprites(root: root);
     }
   }
 
-  void _addTerrainModifierSprites({Component? root}) {
+  Future<void> _addTerrainModifierSprites({Component? root}) async {
     final terrainModifier = _cell.terrainModifier;
 
     if (terrainModifier == null) {
@@ -52,10 +52,10 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final name = SpriteAtlasNames.getTerrainModifier(terrainModifier.type);
 
-    _addSprite(name, root: root);
+    await _addSprite(name, root: root);
   }
 
-  void _addProductionCenterSprites({Component? root}) {
+  Future<void> _addProductionCenterSprites({Component? root}) async {
     final productionCenter = _cell.productionCenter;
 
     if (productionCenter == null) {
@@ -66,17 +66,17 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final levelName = SpriteAtlasNames.getProductionCenterLevel(productionCenter);
 
-    _addSprite(bodyName, root: root);
-    _addSprite(levelName, root: root);
-    _addText(productionCenter.name[_locale], root: root);
+    await _addSprite(bodyName, root: root);
+    await _addSprite(levelName, root: root);
+    await _addText(productionCenter.name[_locale], root: root);
   }
 
-  void _addUnitsSprites({Component? root}) {
+  Future<void> _addUnitsSprites({Component? root}) async {
     if (_cell.units.isEmpty) {
       return;
     }
 
-    _addUnitSprites(
+    await _addUnitSprites(
       unit: _cell.activeUnit!,
       nation: _cell.nation,
       unitsTotal: _cell.units.length,
@@ -84,15 +84,15 @@ final class GameObjectCell extends GameObjectComponentBase {
     );
   }
 
-  void _addNationBannerSprites({Component? root}) {
+  Future<void> _addNationBannerSprites({Component? root}) async {
     if (_cell.isEmpty) {
       return;
     }
 
-    _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!), root: root);
+    await _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!), root: root);
   }
 
-  void _addPathSprites({Component? root}) {
+  Future<void> _addPathSprites({Component? root}) async {
     final pathItem = _cell.pathItem;
 
     if (pathItem == null) {
@@ -101,14 +101,14 @@ final class GameObjectCell extends GameObjectComponentBase {
 
     final pathSprite = SpriteAtlasNames.getPath(pathItem.type);
 
-    _addSprite(
+    await _addSprite(
       pathSprite,
       decorator: pathItem.isActive ? null : _getDisabledDecorator(),
       root: root,
     );
   }
 
-  void _addText(String? text, {Component? root}) {
+  Future<void> _addText(String? text, {Component? root}) async {
     if (text == null || text.isEmpty) {
       return;
     }
@@ -134,16 +134,16 @@ final class GameObjectCell extends GameObjectComponentBase {
       ..position = Vector2(0, ComponentConstants.cellRealSize.y * 0.3)
       ..priority = 2;
 
-    (root ?? this).add(textComponent);
+    await (root ?? this).add(textComponent);
   }
 
-  _addBorder({Component? root}) {
+  Future<void> _addBorder({Component? root}) async {
     if (!GameCellBorder.needToDrawBorders(_cell, _gameField)) {
       return;
     }
 
     // The low priority (-1000) moves this component to back
     final border = GameCellBorder(_cell, _gameField)..priority = -1000;
-    (root ?? this).add(border);
+    await (root ?? this).add(border);
   }
 }

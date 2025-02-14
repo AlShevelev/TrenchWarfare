@@ -36,22 +36,22 @@ abstract base class GameObjectComponentBase extends PositionComponent {
 
   @override
   @mustCallSuper
-  void onLoad() {
+  Future<void> onLoad() async {
     super.onLoad();
-    _addChildObjects();
+    await _addChildObjects();
   }
 
   @protected
-  void _addChildObjects() {}
+  Future<void> _addChildObjects() async {}
 
   @protected
-  void _addUnitSprites({
+  Future<void> _addUnitSprites({
     required Unit unit,
     required Nation? nation,
     required int? unitsTotal,
     bool alwaysEnabled = false,
     Component? root,
-  }) {
+  }) async {
     final quantityName = SpriteAtlasNames.getUnitQuantity(unitsTotal);
 
     final healthName = SpriteAtlasNames.getUnitHealth(unit);
@@ -67,13 +67,13 @@ abstract base class GameObjectComponentBase extends PositionComponent {
 
     final state = alwaysEnabled ? UnitState.enabled : unit.state;
     if (state == UnitState.disabled) {
-      _addSprite(
+      await _addSprite(
         primaryUnitName,
         decorator: _getDisabledDecorator(),
         size: _SpriteSize.base,
         root: root,
       );
-      _addSprite(
+      await _addSprite(
         secondaryUnitName,
         decorator: _getDisabledDecorator(),
         size: _SpriteSize.base,
@@ -81,53 +81,53 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       );
     } else {
       if (state == UnitState.active && _isHuman) {
-        _addSprite(
+        await _addSprite(
           SpriteAtlasNames.getSelectionFrame(),
           size: _SpriteSize.base,
           root: root,
         );
       }
 
-      _addSprite(
+      await _addSprite(
         primaryUnitName,
         size: _SpriteSize.base,
         root: root,
       );
-      _addSprite(
+      await _addSprite(
         secondaryUnitName,
         size: _SpriteSize.base,
         root: root,
       );
     }
 
-    _addSprite(
+    await _addSprite(
       healthName,
       size: _SpriteSize.base,
       root: root,
     );
     if (quantityName != null) {
-      _addSprite(
+      await _addSprite(
         quantityName,
         size: _SpriteSize.base,
         root: root,
       );
     }
-    _addSprite(
+    await _addSprite(
       experienceRankName,
       size: _SpriteSize.base,
       root: root,
     );
-    _addSprite(
+    await _addSprite(
       boost1Name,
       size: _SpriteSize.base,
       root: root,
     );
-    _addSprite(
+    await _addSprite(
       boost2Name,
       size: _SpriteSize.base,
       root: root,
     );
-    _addSprite(
+    await _addSprite(
       boost3Name,
       size: _SpriteSize.base,
       root: root,
@@ -135,12 +135,12 @@ abstract base class GameObjectComponentBase extends PositionComponent {
   }
 
   @protected
-  void _addSprite(
+  Future<void> _addSprite(
     String? spriteName, {
     _SpriteSize size = _SpriteSize.small,
     Decorator? decorator,
     Component? root,
-  }) {
+  }) async {
     if (spriteName == null) {
       return;
     }
@@ -163,7 +163,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       sprite.decorator.removeLast();
     }
 
-    (root ?? this).add(sprite);
+    await (root ?? this).add(sprite);
   }
 
   /// See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale

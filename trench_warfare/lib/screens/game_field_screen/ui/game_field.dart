@@ -207,7 +207,7 @@ class GameField extends FlameGame
     super.onDispose();
   }
 
-  void _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
+  Future<void> _onUpdateGameEvent(Iterable<UpdateGameEvent> events) async {
     for (var event in events) {
       await _audioComposer.onUpdateGameEvent(event);
       await _gameObjectsComposer.onUpdateGameEvent(event);
@@ -215,7 +215,7 @@ class GameField extends FlameGame
     }
   }
 
-  void _onGameFieldStateUpdate(GameFieldState state) async {
+  Future<void> _onGameFieldStateUpdate(GameFieldState state) async {
     if (state is Completed) {
       Logger.info('pop to the cover screen', tag: 'NAVIGATION');
       gameRef.buildContext?.let((context) => Navigator.of(context).pushNamedAndRemoveUntil(
