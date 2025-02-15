@@ -77,7 +77,7 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
 
       for (var i = 0; i < cell.units.length; i++) {
         final unit = cell.units.elementAt(i);
-        if (buildCalculator.canBuildForUnit(unit, _type)) {
+        if (UnitBoosterBuildCalculator.canBuildForUnit(unit, _type)) {
           cellsPossibleToBuildExt.add(_AttackDefenceCellWithFactors(
             cell: cell,
             unitIndex: i,

@@ -12,7 +12,7 @@ class UnitBoosterBuildCalculator {
 
   BuildRestriction getError() => AppropriateUnit();
 
-  bool canBuildForUnit(Unit unit, UnitBoost type) {
+  static bool canBuildForUnit(Unit unit, UnitBoost type) {
     if (unit.boost1 != null && unit.boost2 != null && unit.boost3 != null) {
       return false;
     }

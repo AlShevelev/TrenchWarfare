@@ -29,7 +29,12 @@ class InfluenceMapRepresentation implements InfluenceMapRepresentationRead {
 
         for (final unit in gameCell.units) {
           final processedUnit = unit is Carrier ? Carrier.copy(unit) : Unit.copy(unit);
+
           processedUnit.setMovementPoints(processedUnit.maxMovementPoints);
+
+          if (UnitBoosterBuildCalculator.canBuildForUnit(processedUnit, UnitBoost.transport)) {
+            processedUnit.setBoost(UnitBoost.transport);
+          }
 
           final basePower = UnitPowerEstimation.estimate(processedUnit);
 

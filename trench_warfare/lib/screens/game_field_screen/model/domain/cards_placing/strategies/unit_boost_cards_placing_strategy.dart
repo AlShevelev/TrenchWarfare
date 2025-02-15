@@ -18,18 +18,7 @@ class UnitBoostCardsPlacingStrategy
       .getAllCellsImpossibleToBuild(_type, _nationMoney.totalSum);
 
   @override
-  void updateCell() {
-    final activeUnit = _cell.activeUnit!;
-
-    // Set the boost
-    if (activeUnit.boost1 == null) {
-      activeUnit.setBoost1(_type);
-    } else if (activeUnit.boost2 == null) {
-      activeUnit.setBoost2(_type);
-    } else if (activeUnit.boost3 == null) {
-      activeUnit.setBoost3(_type);
-    }
-  }
+  void updateCell() => _cell.activeUnit?.setBoost(_type);
 
   @override
   PlaySound? getSoundForUnit() => PlaySound(type: SoundType.dingUniversal);

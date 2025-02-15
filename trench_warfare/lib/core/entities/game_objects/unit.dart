@@ -186,19 +186,27 @@ class Unit extends GameObject {
 
   void setTookPartInBattles(int tookPartInBattles) => _tookPartInBattles = tookPartInBattles;
 
-  void setBoost1(UnitBoost boost) {
-    _boost1 = boost;
-    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
-  }
+  void setBoost(UnitBoost boost) {
+    if (hasBoost(boost)) {
+      return;
+    }
 
-  void setBoost2(UnitBoost boost) {
-    _boost2 = boost;
-    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
-  }
+    var boostSet = false;
 
-  void setBoost3(UnitBoost boost) {
-    _boost3 = boost;
-    _movementPoints *= hasBoost(UnitBoost.transport) ? 2 : 1;
+    if (_boost1 == null) {
+      boostSet = true;
+      _boost1 = boost;
+    } else if (_boost2 == null) {
+      boostSet = true;
+      _boost2 = boost;
+    } else if (_boost3 == null) {
+      boostSet = true;
+      _boost3 = boost;
+    }
+
+    if (boostSet) {
+      _movementPoints *= boost == UnitBoost.transport ? 2 : 1;
+    }
   }
 
   bool hasBoost(UnitBoost boost) => _boost1 == boost || _boost2 == boost || _boost3 == boost;
