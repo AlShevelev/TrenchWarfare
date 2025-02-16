@@ -78,7 +78,7 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
     final myInfluence = _getMyInfluence(influenceCell);
     final enemyInfluence = _getOpponentsInfluence(influenceCell);
 
-    weight *= math.sqrt(enemyInfluence - myInfluence);
+    weight *= 5.0 * math.sqrt(enemyInfluence - myInfluence);
 
     if (cell.productionCenter!.type == ProductionCenterType.airField) {
       weight /= 2.0;
