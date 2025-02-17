@@ -14,7 +14,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     final isPcOnCell = _cell.productionCenter != null;
 
     final chanceToDevastate = switch (unit.type) {
-      UnitType.infantry => 0.75,
+      UnitType.infantry => 0.5,
       UnitType.tank => 0.075,
       _ => 0,
     } * (isPcOnCell ? 0.5 : 1.0);
