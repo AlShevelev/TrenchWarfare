@@ -34,13 +34,13 @@ class MainControls extends GameFieldControlsState {
       );
 
   MainControls setShowDismissButton(bool showDismissButton) => MainControls(
-    totalSum: totalSum,
-    cellInfo: cellInfo,
-    armyInfo: armyInfo,
-    carrierInfo: carrierInfo,
-    nation: nation,
-    showDismissButton: showDismissButton,
-  );
+        totalSum: totalSum,
+        cellInfo: cellInfo,
+        armyInfo: armyInfo,
+        carrierInfo: carrierInfo,
+        nation: nation,
+        showDismissButton: showDismissButton,
+      );
 }
 
 class CardsSelectionControls extends GameFieldControlsState {
@@ -138,4 +138,22 @@ class DisbandUnitConfirmationControls extends GameFieldControlsState {
   final Nation nation;
 
   DisbandUnitConfirmationControls({required this.unitToShow, required this.nation});
+}
+
+class AiTurnProgress extends GameFieldControlsState {
+  final double moneySpending;
+  final double carriers;
+  final double unitMovement;
+
+  AiTurnProgress({
+    required this.moneySpending,
+    required this.carriers,
+    required this.unitMovement,
+  });
+
+  AiTurnProgress copy({double? moneySpending, double? carriers, double? unitMovement}) => AiTurnProgress(
+        moneySpending: moneySpending ?? this.moneySpending,
+        carriers: carriers ?? this.carriers,
+        unitMovement: unitMovement ?? this.unitMovement,
+      );
 }
