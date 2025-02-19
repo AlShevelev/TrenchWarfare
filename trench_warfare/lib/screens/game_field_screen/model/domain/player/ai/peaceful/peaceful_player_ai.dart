@@ -11,6 +11,8 @@ class PeacefulPlayerAi extends PlayerAi {
 
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
+  final SimpleStream<GameFieldControlsState> _aiProgressState;
+
   PeacefulPlayerAi(
     GameFieldRead gameField,
     super.player,
@@ -18,14 +20,22 @@ class PeacefulPlayerAi extends PlayerAi {
     MoneyStorageRead nationMoney,
     MapMetadataRead metadata,
     GameOverConditionsCalculator gameOverConditionsCalculator,
+    SimpleStream<GameFieldControlsState> aiProgressState,
   )   : _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
         _metadata = metadata,
-        _gameOverConditionsCalculator = gameOverConditionsCalculator;
+        _gameOverConditionsCalculator = gameOverConditionsCalculator,
+        _aiProgressState = aiProgressState;
 
   @override
   Future<void> start() async {
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    final startMoney = _nationMoney.totalSum.currency.toDouble();
+
     // If I lost - do nothing
     while (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
@@ -83,6 +93,7 @@ class PeacefulPlayerAi extends PlayerAi {
       playerCore.registerOnAnimationCompleted(() {
         selectedProcessor.onAnimationCompleted();
       });
+
       try {
         await selectedProcessor.process();
       } catch (e, s) {
@@ -90,7 +101,17 @@ class PeacefulPlayerAi extends PlayerAi {
       } finally {
         playerCore.registerOnAnimationCompleted(null);
       }
+
+      _aiProgressState.update(
+        AiTurnProgress(
+          moneySpending: 1.0 - _nationMoney.totalSum.currency / startMoney,
+          carriers: 0.0,
+          unitMovement: 0.0,
+        ),
+      );
     }
+
+    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, carriers: 0.0, unitMovement: 0.0));
 
     await Future.delayed(const Duration(seconds: 1));
     player.onEndOfTurnButtonClick();

@@ -42,7 +42,7 @@ class AiTurnProgressPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 
   double _getStrokeWidth(double height) => height / 5.0;
 

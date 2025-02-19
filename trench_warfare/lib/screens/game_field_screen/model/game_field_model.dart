@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
@@ -42,6 +43,12 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final List<PlayerAi?> _playersAi = [];
 
+  AiTurnProgress _lastAiProgressEvent = AiTurnProgress(
+    moneySpending: 0.0,
+    carriers: 0.0,
+    unitMovement: 0.0,
+  );
+
   bool get isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
 
   PlayerInput get uiInput => _players[_currentPlayerIndex];
@@ -58,8 +65,26 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState =>
-      _controlsState.output.map((event) => isHumanPlayer || event is DefeatControls ? event : Invisible());
+  final SingleStream<GameFieldControlsState> _aiProgressState = SingleStream<GameFieldControlsState>();
+  Stream<GameFieldControlsState> get controlsState => StreamGroup.merge([
+        _controlsState.output,
+        _aiProgressState.output,
+      ]).map((event) {
+        if (isHumanPlayer) {
+          return event;
+        }
+
+        // AI
+        if (event is DefeatControls) {
+          return event;
+        }
+
+        if (event is AiTurnProgress) {
+          _lastAiProgressEvent = event;
+        }
+
+        return _lastAiProgressEvent;
+      });
 
   final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
   Stream<GameFieldState> get gameFieldState => _gameFieldState.output;
@@ -139,6 +164,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       'new turn is started for player $_currentPlayerIndex (isHuman = $isHumanPlayer)',
       tag: 'GAME_GENERAL',
     );
+
     _players[_currentPlayerIndex].onStartTurn();
 
     if (_currentPlayerIndex != _humanIndex) {
@@ -152,6 +178,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     Logger.info('disposed', tag: 'GAME_GENERAL');
 
     _updateGameObjectsEvent.close();
+    _aiProgressState.close();
     _controlsState.close();
     _gameFieldState.close();
   }
@@ -194,7 +221,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       gameOverConditionsCalculator,
       money[nationRecord.code]!,
       animationTimeFacade,
-      gamePauseWait: isHuman ? null : gamePauseWait,  // We don't need to pause the app for a human player
+      gamePauseWait: isHuman ? null : gamePauseWait, // We don't need to pause the app for a human player
       isAI: !isHuman,
       isGameLoaded: isGameLoaded,
     );
@@ -213,6 +240,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             core.money,
             metadata,
             gameOverConditionsCalculator,
+            _aiProgressState,
           ),
         Aggressiveness.aggressive => AggressivePlayerAi(
             gameField,
@@ -222,6 +250,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             metadata,
             gameOverConditionsCalculator,
             initialTransfers[nationRecord.code] ?? [],
+            _aiProgressState,
           )
       };
 

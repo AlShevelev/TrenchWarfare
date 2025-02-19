@@ -50,6 +50,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
       myNation: _myNation,
       metadata: _metadata,
       iterator: StableUnitsIterator.fromCell(unitCells),
+      aiProgressState: null,
     ).start();
     Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: Units movement phase is completed', tag: 'CARRIER');
     return _TransitionResult.completed();

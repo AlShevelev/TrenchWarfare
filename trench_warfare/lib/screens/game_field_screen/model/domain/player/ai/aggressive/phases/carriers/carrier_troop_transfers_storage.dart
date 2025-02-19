@@ -21,14 +21,18 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   @override
   Iterable<TroopTransferRead> get allTransfers => _troopTransfers;
 
+  final SimpleStream<GameFieldControlsState> _aiProgressState;
+
   CarrierTroopTransfersStorage({
     required GameFieldRead gameField,
     required Nation myNation,
     required MapMetadataRead metadata,
     required Iterable<TroopTransferReadForSaving> initialTransfers,
+    required SimpleStream<GameFieldControlsState> aiProgressState,
   })  : _gameField = gameField,
         _myNation = myNation,
-        _metadata = metadata {
+        _metadata = metadata,
+        _aiProgressState = aiProgressState {
     for (final initialTransfer in initialTransfers) {
       _troopTransfers.add(_TroopTransfer.fromSaving(
         saving: initialTransfer,
@@ -61,8 +65,16 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   }
 
   Future<void> processAll() async {
+    _updateControlStateProgress(0.0);
+
+    int counter = 0;
     for (final transfer in _troopTransfers) {
+      _updateControlStateProgress(++counter / _troopTransfers.length.toDouble());
       await transfer.process();
+    }
+
+    if (_troopTransfers.isNotEmpty) {
+      _updateControlStateProgress(1.0);
     }
 
     _troopTransfers.removeWhere((t) => t.isCompleted);
@@ -71,4 +83,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   @override
   Iterable<TroopTransferRead> getAllTransfersExcept(String exceptionTransferId) =>
       _troopTransfers.where((t) => t.id != exceptionTransferId).toList(growable: false);
+
+  void _updateControlStateProgress(double value) => _aiProgressState.current
+      ?.let((c) => _aiProgressState.update((c as AiTurnProgress).copy(carriers: value)));
 }

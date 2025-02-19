@@ -11,20 +11,27 @@ class MoneySpendingPhase implements TurnPhase {
 
   final MapMetadataRead _metadata;
 
+  final SimpleStream<GameFieldControlsState> _aiProgressState;
+
   MoneySpendingPhase({
     required PlayerInput player,
     required GameFieldRead gameField,
     required Nation myNation,
     required MoneyStorageRead nationMoney,
     required MapMetadataRead metadata,
+    required SimpleStream<GameFieldControlsState> aiProgressState,
   })  : _player = player,
         _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
-        _metadata = metadata;
+        _metadata = metadata,
+        _aiProgressState = aiProgressState;
 
   @override
   Future<void> start() async {
+    final startMoney = _nationMoney.totalSum.currency.toDouble();
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+
     while (true) {
       Logger.info('loop started', tag: 'MONEY_SPENDING');
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
@@ -118,6 +125,7 @@ class MoneySpendingPhase implements TurnPhase {
       playerCore.registerOnAnimationCompleted(() {
         selectedProcessor.onAnimationCompleted();
       });
+
       try {
         Logger.info('selectedProcessor.process() started', tag: 'MONEY_SPENDING');
         await selectedProcessor.process();
@@ -127,6 +135,16 @@ class MoneySpendingPhase implements TurnPhase {
       } finally {
         playerCore.registerOnAnimationCompleted(null);
       }
+
+      _aiProgressState.update(
+        AiTurnProgress(
+          moneySpending: 1.0 - _nationMoney.totalSum.currency / startMoney,
+          carriers: 0.0,
+          unitMovement: 0.0,
+        ),
+      );
     }
+
+    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, carriers: 0.0, unitMovement: 0.0));
   }
 }

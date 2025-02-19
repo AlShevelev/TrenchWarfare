@@ -11,17 +11,21 @@ class UnitsMovingPhase implements TurnPhase {
 
   final StableUnitsIterator _iterator;
 
+  final SimpleStream<GameFieldControlsState>? _aiProgressState;
+
   UnitsMovingPhase({
     required PlayerInput player,
     required GameFieldRead gameField,
     required Nation myNation,
     required StableUnitsIterator iterator,
     required MapMetadataRead metadata,
+    required SimpleStream<GameFieldControlsState>? aiProgressState,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
-        _actions = PlayerActions(player: player) {
+        _actions = PlayerActions(player: player),
+        _aiProgressState = aiProgressState {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {
@@ -35,14 +39,20 @@ class UnitsMovingPhase implements TurnPhase {
     required StableUnitsIterator iterator,
     required MapMetadataRead metadata,
     required PlayerActions actions,
+    required SimpleStream<GameFieldControlsState>? aiProgressState,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
-        _actions = actions;
+        _actions = actions,
+        _aiProgressState = aiProgressState;
 
   @override
   Future<void> start() async {
+    final totalItems = _iterator.getTotalItems().toDouble();
+    var counter = 0;
+    _updateControlStateProgress(0.0);
+
     while (_iterator.moveNext()) {
       final unit = _iterator.current.unit;
 
@@ -67,7 +77,7 @@ class UnitsMovingPhase implements TurnPhase {
 
         Logger.info(
           'estimators: Attack[0]; CarrierInterception[1]; DoNothing[2]; MoveToEnemyPc[3]; '
-              'MoveToMyPc[4]; Resort[5]',
+          'MoveToMyPc[4]; Resort[5]',
           tag: 'UNITS_MOVING',
         );
 
@@ -91,7 +101,8 @@ class UnitsMovingPhase implements TurnPhase {
           break;
         }
 
-        Logger.info('selected estimator index is: ${indexedWeights[weightIndex].item1}', tag: 'MONEY_SPENDING');
+        Logger.info('selected estimator index is: ${indexedWeights[weightIndex].item1}',
+            tag: 'MONEY_SPENDING');
 
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
         await selectedEstimator.processAction();
@@ -102,7 +113,10 @@ class UnitsMovingPhase implements TurnPhase {
           break;
         }
       }
+
+      _updateControlStateProgress(++counter / totalItems);
     }
+    _updateControlStateProgress(1.0);
   }
 
   List<_UnitEstimationProcessorBase> _createEstimators({
@@ -166,4 +180,7 @@ class UnitsMovingPhase implements TurnPhase {
           gameField: _gameField,
         ),
       ];
+
+  void _updateControlStateProgress(double value) => _aiProgressState?.current
+      ?.let((c) => _aiProgressState?.update((c as AiTurnProgress).copy(unitMovement: value)));
 }

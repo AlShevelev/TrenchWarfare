@@ -15,6 +15,8 @@ class AggressivePlayerAi extends PlayerAi {
   final CarrierTroopTransfersStorage _transfersStorage;
   CarrierTroopTransfersStorageRead get transfersStorage => _transfersStorage;
 
+  final SimpleStream<GameFieldControlsState> _aiProgressState;
+
   AggressivePlayerAi(
     GameFieldRead gameField,
     super.player,
@@ -23,6 +25,7 @@ class AggressivePlayerAi extends PlayerAi {
     MapMetadataRead metadata,
     GameOverConditionsCalculator gameOverConditionsCalculator,
     Iterable<TroopTransferReadForSaving> initialTransfers,
+    SimpleStream<GameFieldControlsState> aiProgressState,
   )   : _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
@@ -33,10 +36,16 @@ class AggressivePlayerAi extends PlayerAi {
           myNation: myNation,
           metadata: metadata,
           initialTransfers: initialTransfers,
-        );
+          aiProgressState: aiProgressState,
+        ),
+        _aiProgressState = aiProgressState;
 
   @override
-  void start() async {
+  Future<void> start() async {
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
     // If I lost - do nothing
     if (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       Logger.info('MoneySpendingPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
@@ -46,6 +55,7 @@ class AggressivePlayerAi extends PlayerAi {
         myNation: _myNation,
         nationMoney: _nationMoney,
         metadata: _metadata,
+        aiProgressState: _aiProgressState,
       ).start();
       Logger.info('MoneySpendingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
@@ -71,6 +81,7 @@ class AggressivePlayerAi extends PlayerAi {
         gameField: _gameField,
         myNation: _myNation,
         metadata: _metadata,
+        aiProgressState: _aiProgressState,
         iterator: StableUnitsIterator(
           gameField: _gameField,
           myNation: _myNation,
