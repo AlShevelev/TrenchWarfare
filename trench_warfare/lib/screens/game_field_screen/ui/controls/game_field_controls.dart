@@ -50,14 +50,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   gameField: widget._gameField,
                   nation: nation,
                 ),
-              AiTurnProgress(
-                moneySpending: final moneySpending,
-                carriers: final carriers,
-                unitMovement: final unitMovement,
-              ) =>
+              AiTurnProgress(moneySpending: final moneySpending, unitMovement: final unitMovement) =>
                 AiTurnProgressWidget(
                   moneySpending: moneySpending,
-                  carriers: carriers,
                   unitMovement: unitMovement,
                 ),
               CardsSelectionControls(nation: final nation) => CardsSelectionScreen(

@@ -142,18 +142,15 @@ class DisbandUnitConfirmationControls extends GameFieldControlsState {
 
 class AiTurnProgress extends GameFieldControlsState {
   final double moneySpending;
-  final double carriers;
   final double unitMovement;
 
   AiTurnProgress({
     required this.moneySpending,
-    required this.carriers,
     required this.unitMovement,
   });
 
-  AiTurnProgress copy({double? moneySpending, double? carriers, double? unitMovement}) => AiTurnProgress(
+  AiTurnProgress copy({double? moneySpending, double? unitMovement}) => AiTurnProgress(
         moneySpending: moneySpending ?? this.moneySpending,
-        carriers: carriers ?? this.carriers,
         unitMovement: unitMovement ?? this.unitMovement,
       );
 }

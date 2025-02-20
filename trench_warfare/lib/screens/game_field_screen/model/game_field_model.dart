@@ -43,11 +43,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final List<PlayerAi?> _playersAi = [];
 
-  AiTurnProgress _lastAiProgressEvent = AiTurnProgress(
-    moneySpending: 0.0,
-    carriers: 0.0,
-    unitMovement: 0.0,
-  );
+  AiTurnProgress _lastAiProgressEvent = AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0);
 
   bool get isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
 

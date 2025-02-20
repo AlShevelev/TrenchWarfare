@@ -36,13 +36,12 @@ class AggressivePlayerAi extends PlayerAi {
           myNation: myNation,
           metadata: metadata,
           initialTransfers: initialTransfers,
-          aiProgressState: aiProgressState,
         ),
         _aiProgressState = aiProgressState;
 
   @override
   Future<void> start() async {
-    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0));
 
     await Future.delayed(const Duration(milliseconds: 500));
 

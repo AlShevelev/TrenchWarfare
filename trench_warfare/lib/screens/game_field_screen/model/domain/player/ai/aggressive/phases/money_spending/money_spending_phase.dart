@@ -30,7 +30,7 @@ class MoneySpendingPhase implements TurnPhase {
   @override
   Future<void> start() async {
     final startMoney = _nationMoney.totalSum.currency.toDouble();
-    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0));
 
     while (true) {
       Logger.info('loop started', tag: 'MONEY_SPENDING');
@@ -139,12 +139,11 @@ class MoneySpendingPhase implements TurnPhase {
       _aiProgressState.update(
         AiTurnProgress(
           moneySpending: 1.0 - _nationMoney.totalSum.currency / startMoney,
-          carriers: 0.0,
           unitMovement: 0.0,
         ),
       );
     }
 
-    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, carriers: 0.0, unitMovement: 0.0));
+    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, unitMovement: 0.0));
   }
 }

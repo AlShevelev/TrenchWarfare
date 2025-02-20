@@ -30,7 +30,7 @@ class PeacefulPlayerAi extends PlayerAi {
 
   @override
   Future<void> start() async {
-    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, carriers: 0.0, unitMovement: 0.0));
+    _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0));
 
     await Future.delayed(const Duration(milliseconds: 500));
 
@@ -105,13 +105,12 @@ class PeacefulPlayerAi extends PlayerAi {
       _aiProgressState.update(
         AiTurnProgress(
           moneySpending: 1.0 - _nationMoney.totalSum.currency / startMoney,
-          carriers: 0.0,
           unitMovement: 0.0,
         ),
       );
     }
 
-    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, carriers: 0.0, unitMovement: 0.0));
+    _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, unitMovement: 0.0));
 
     await Future.delayed(const Duration(seconds: 1));
     player.onEndOfTurnButtonClick();
