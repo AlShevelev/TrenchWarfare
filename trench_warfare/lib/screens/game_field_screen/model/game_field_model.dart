@@ -1,4 +1,3 @@
-import 'package:async/async.dart';
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
@@ -43,8 +42,6 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
 
   final List<PlayerAi?> _playersAi = [];
 
-  AiTurnProgress _lastAiProgressEvent = AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0);
-
   bool get isHumanPlayer => _playersAi[_currentPlayerIndex] == null;
 
   PlayerInput get uiInput => _players[_currentPlayerIndex];
@@ -61,26 +58,11 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
+  Stream<GameFieldControlsState> get controlsState =>
+      _controlsState.output.map((event) => isHumanPlayer || event is DefeatControls ? event : Invisible());
+
   final SingleStream<GameFieldControlsState> _aiProgressState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState => StreamGroup.merge([
-        _controlsState.output,
-        _aiProgressState.output,
-      ]).map((event) {
-        if (isHumanPlayer) {
-          return event;
-        }
-
-        // AI
-        if (event is DefeatControls) {
-          return event;
-        }
-
-        if (event is AiTurnProgress) {
-          _lastAiProgressEvent = event;
-        }
-
-        return _lastAiProgressEvent;
-      });
+  Stream<GameFieldControlsState> get aiProgressState => _aiProgressState.output;
 
   final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
   Stream<GameFieldState> get gameFieldState => _gameFieldState.output;

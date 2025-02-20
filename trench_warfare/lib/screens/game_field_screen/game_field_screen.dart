@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:trench_warfare/core/enums/game_slot.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls_ai_progress.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
@@ -43,6 +44,9 @@ class GameFieldScreen extends StatelessWidget {
           overlayBuilderMap: {
             GameFieldControls.overlayKey: (BuildContext context, GameField gameField) {
               return GameFieldControls(gameField);
+            },
+            GameFieldControlsAiProgress.overlayKey: (BuildContext context, GameField gameField) {
+              return GameFieldControlsAiProgress(gameField);
             },
           },
         ),

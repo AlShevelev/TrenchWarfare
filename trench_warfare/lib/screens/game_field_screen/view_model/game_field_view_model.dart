@@ -22,6 +22,8 @@ abstract interface class GameFieldViewModelInput {
 class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInput {
   Stream<GameFieldControlsState> get controlsState => _model.controlsState;
 
+  Stream<GameFieldControlsState> get aiProgressState => _model.aiProgressState;
+
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _model.updateGameObjectsEvent;
 
   Stream<GameFieldState> get gameFieldState => _model.gameFieldState;

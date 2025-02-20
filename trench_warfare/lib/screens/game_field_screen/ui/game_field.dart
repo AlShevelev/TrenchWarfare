@@ -18,6 +18,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_e
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/audio/audio_composer.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/game_gestures_composer_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/zoom_constants.dart';
+import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls_ai_progress.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/game_field_controls.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/composers/game_objects/game_objects_composer.dart';
@@ -30,6 +31,8 @@ import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class GameFieldForControls {
   Stream<GameFieldControlsState> get controlsState;
+
+  Stream<GameFieldControlsState> get aiProgressState;
 
   TextureAtlas get spritesAtlas;
 
@@ -95,6 +98,9 @@ class GameField extends FlameGame
 
   @override
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;
+
+  @override
+  Stream<GameFieldControlsState> get aiProgressState => _viewModel.aiProgressState;
 
   late final TextureAtlas _spritesAtlas;
   @override
@@ -162,6 +168,7 @@ class GameField extends FlameGame
     _gameGesturesComposer.init(_viewModel);
 
     overlays.add(GameFieldControls.overlayKey);
+    overlays.add(GameFieldControlsAiProgress.overlayKey);
   }
 
   @override

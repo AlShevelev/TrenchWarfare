@@ -113,6 +113,9 @@ class PeacefulPlayerAi extends PlayerAi {
     _aiProgressState.update(AiTurnProgress(moneySpending: 1.0, unitMovement: 0.0));
 
     await Future.delayed(const Duration(seconds: 1));
+
+    _aiProgressState.update(Invisible());
+
     player.onEndOfTurnButtonClick();
   }
 }

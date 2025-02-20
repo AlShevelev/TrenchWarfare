@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/screens/game_field_screen/ui/controls/ai_progress/ai_turn_progress_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards/cards_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/cards_placing/cards_placing_widget.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/ask_turn_completed_dialog.dart';
@@ -49,11 +48,6 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   state: value.data as MainControls,
                   gameField: widget._gameField,
                   nation: nation,
-                ),
-              AiTurnProgress(moneySpending: final moneySpending, unitMovement: final unitMovement) =>
-                AiTurnProgressWidget(
-                  moneySpending: moneySpending,
-                  unitMovement: unitMovement,
                 ),
               CardsSelectionControls(nation: final nation) => CardsSelectionScreen(
                   state: value.data as CardsSelectionControls,
