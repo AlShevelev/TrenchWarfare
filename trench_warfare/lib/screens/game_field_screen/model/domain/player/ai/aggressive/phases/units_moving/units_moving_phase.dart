@@ -50,8 +50,9 @@ class UnitsMovingPhase implements TurnPhase {
   @override
   Future<void> start() async {
     final totalItems = _iterator.getTotalItems().toDouble();
-    var counter = 0;
     _updateControlStateProgress(0.0);
+
+    final movedUnitIds = <String>{};
 
     while (_iterator.moveNext()) {
       final unit = _iterator.current.unit;
@@ -114,7 +115,10 @@ class UnitsMovingPhase implements TurnPhase {
         }
       }
 
-      _updateControlStateProgress(++counter / totalItems);
+      if (!movedUnitIds.contains(unit.id)) {
+        movedUnitIds.add(unit.id);
+        _updateControlStateProgress(movedUnitIds.length / totalItems);
+      }
     }
     _updateControlStateProgress(1.0);
   }
