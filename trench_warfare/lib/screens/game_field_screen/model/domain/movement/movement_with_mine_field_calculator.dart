@@ -11,14 +11,17 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
+    required super.movementResultBridge
   });
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
-    final unit = _detachActiveUnit(path);
+    final startUnit = path.first.activeUnit!;
+
+    final detachResult = _detachActiveUnit(path);
 
     Logger.info(
-      'MINE_FIELD; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: $unit',
+      'MINE_FIELD; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: ${detachResult.unit}',
       tag: 'MOVEMENT',
     );
 
@@ -26,10 +29,10 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     final lastReachableCell = reachableCells.last;
 
     if (lastReachableCell == path.first) {
-      _attachUnitAsActive(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, detachResult.unit);
 
-      unit.setMovementPoints(0);
-      unit.setState(UnitState.disabled);
+      detachResult.unit.setMovementPoints(0);
+      detachResult.unit.setState(UnitState.disabled);
 
       for (var cell in path) {
         cell.setPathItem(null);
@@ -38,7 +41,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       _updateUIForStandingUnit(
         path: path,
         reachableCells: reachableCells,
-        unit: unit,
+        unit: detachResult.unit,
       );
 
       Logger.info(
@@ -46,16 +49,22 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         tag: 'MOVEMENT',
       );
     } else {
+      _movementResultBridge?.addBefore(
+        nation: _nation,
+        unit: Unit.copy(startUnit),
+        cell: path.first,
+      );
+
       for (var cell in reachableCells) {
         cell.setNation(_nation);
       }
 
-      final damage = _calculateExplosionDamage(unit);
+      final damage = _calculateExplosionDamage(detachResult.unit);
 
       // the mine field is removed
       lastReachableCell.setTerrainModifier(null);
 
-      final isUnitAlive = damage < unit.health;
+      final isUnitAlive = damage < detachResult.unit.health;
 
       Logger.info(
         'MINE_FIELD; isUnitAlive: $isUnitAlive',
@@ -63,21 +72,27 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       );
 
       if (isUnitAlive) {
-        lastReachableCell.addUnitAsActive(unit);
+        lastReachableCell.addUnitAsActive(detachResult.unit);
 
-        unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
-        unit.setHealth(unit.health - damage);
+        detachResult.unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
+        detachResult.unit.setHealth(detachResult.unit.health - damage);
 
-        if (unit.movementPoints > 0) {
+        if (detachResult.unit.movementPoints > 0) {
           final state = _canMove(startCell: lastReachableCell) ? UnitState.enabled : UnitState.disabled;
-          unit.setState(state);
+          detachResult.unit.setState(state);
         } else {
-          unit.setState(UnitState.disabled);
+          detachResult.unit.setState(UnitState.disabled);
         }
 
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.unit),
+          cell: lastReachableCell,
+        );
+
         Logger.info(
-          'MINE_FIELD; unit.health: ${unit.health}; unit.movementPoints: ${unit.movementPoints}; '
-          'unit.state: ${unit.state}',
+          'MINE_FIELD; unit.health: ${detachResult.unit.health}; unit.movementPoints: ${detachResult.unit.movementPoints}; '
+          'unit.state: ${detachResult.unit.state}',
           tag: 'MOVEMENT',
         );
       }
@@ -86,10 +101,18 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         cell.setPathItem(null);
       }
 
+      if (detachResult.detachedFrom != null) {
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.detachedFrom!),
+          cell: path.first,
+        );
+      }
+
       _updateUIForMovingUnit(
         path: path,
         reachableCells: reachableCells,
-        unit: unit,
+        unit: detachResult.unit,
         isUnitAlive: isUnitAlive,
       );
     }

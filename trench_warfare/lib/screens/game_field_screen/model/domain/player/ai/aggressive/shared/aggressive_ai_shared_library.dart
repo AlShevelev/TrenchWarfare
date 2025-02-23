@@ -7,6 +7,7 @@ import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/shared/architecture/async_signal.dart';

@@ -5,16 +5,26 @@ class PlayerActions {
 
   final PlayerInput _player;
 
+  final MovementResultBridgeRead? _movementResultBridge;
+
   AsyncSignal? _signal;
 
-  PlayerActions({required PlayerInput player}) : _player = player;
+  PlayerActions({
+    required PlayerInput player,
+    required MovementResultBridgeRead? movementResultBridge,
+  })  : _player = player,
+        _movementResultBridge = movementResultBridge;
 
-  Future<void> move(Unit unit, {required GameFieldCellRead from, required GameFieldCellRead to}) async {
+  Future<List<MovementResultItem>?> move(
+    Unit unit, {
+    required GameFieldCellRead from,
+    required GameFieldCellRead to,
+  }) async {
     _signal?.unlockAndClose();
     _signal = AsyncSignal(locked: true);
 
     if (from.id == to.id) {
-      return;
+      return null;
     }
 
     if (from.activeUnit != unit) {
@@ -22,20 +32,22 @@ class PlayerActions {
       resort(from, resortedUnitIds);
     }
 
-    _player.onClick(from.center);   // select a unit...
+    _player.onClick(from.center); // select a unit...
 
     // We have to add a tiny pause here to let the updated cells to redraw.
     // Without the pause we'll get some weird visual effects due to redraw
     // race conditions
     await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
 
-    _player.onClick(to.center);     // make a path...
+    _player.onClick(to.center); // make a path...
 
     await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
 
-    _player.onClick(to.center);     // go!
+    _player.onClick(to.center); // go!
 
-    await _signal?.wait();           // waiting for animation to complete
+    await _signal?.wait(); // waiting for animation to complete
+
+    return _movementResultBridge?.extractResult();
   }
 
   void resort(GameFieldCellRead cell, Iterable<String> unitIds) =>

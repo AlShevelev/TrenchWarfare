@@ -1,5 +1,13 @@
 part of movement;
 
+class _DetachActiveUnitResult {
+  final Carrier? detachedFrom;
+
+  final Unit unit;
+
+  _DetachActiveUnitResult({required this.detachedFrom, required this.unit});
+}
+
 abstract class MovementCalculator {
   @protected
   final GameFieldRead _gameField;
@@ -19,18 +27,23 @@ abstract class MovementCalculator {
   @protected
   final AnimationTime _animationTime;
 
+  @protected
+  final MovementResultBridge? _movementResultBridge;
+
   MovementCalculator({
     required GameFieldRead gameField,
     required Nation nation,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
+    required MovementResultBridge? movementResultBridge,
   })  : _gameField = gameField,
         _nation = nation,
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _pathFacade = PathFacade(gameField),
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
-        _animationTime = animationTime;
+        _animationTime = animationTime,
+        _movementResultBridge = movementResultBridge;
 
   State startMovement(Iterable<GameFieldCell> path);
 
@@ -45,15 +58,18 @@ abstract class MovementCalculator {
       _pathFacade.canMoveForUnit(startCell, unit);
 
   @protected
-  Unit _detachActiveUnit(Iterable<GameFieldCell> path) {
+  _DetachActiveUnitResult _detachActiveUnit(Iterable<GameFieldCell> path) {
     final activeUnit = path.first.activeUnit!;
     final secondPathCell = path.elementAt(1);
 
     if (activeUnit is Carrier && secondPathCell.isLand && !secondPathCell.hasRiver) {
       activeUnit.setState(UnitState.enabled);
-      return activeUnit.removeActiveUnit();
+
+      final detachedUnit = activeUnit.removeActiveUnit();
+      return _DetachActiveUnitResult(detachedFrom: activeUnit, unit: detachedUnit);
     } else {
-      return path.first.removeActiveUnit();
+      final detachedUnit = path.first.removeActiveUnit();
+      return _DetachActiveUnitResult(detachedFrom: null, unit: detachedUnit);
     }
   }
 

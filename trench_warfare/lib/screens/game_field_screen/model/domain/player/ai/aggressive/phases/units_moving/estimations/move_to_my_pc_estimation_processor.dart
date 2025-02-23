@@ -53,8 +53,8 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<void> processAction() async {
-    await _actions.move(_unit, from: _cell, to: _nearestPcInDanger!);
+  Future<List<MovementResultItem>?> processAction() async {
+    return await _actions.move(_unit, from: _cell, to: _nearestPcInDanger!);
   }
 
   double _getMyInfluence(InfluenceMapItemRead influenceItem) =>

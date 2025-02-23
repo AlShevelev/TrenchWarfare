@@ -17,6 +17,8 @@ class AggressivePlayerAi extends PlayerAi {
 
   final SimpleStream<GameFieldControlsState> _aiProgressState;
 
+  final MovementResultBridgeRead _movementResultBridge;
+
   AggressivePlayerAi(
     GameFieldRead gameField,
     super.player,
@@ -26,6 +28,7 @@ class AggressivePlayerAi extends PlayerAi {
     GameOverConditionsCalculator gameOverConditionsCalculator,
     Iterable<TroopTransferReadForSaving> initialTransfers,
     SimpleStream<GameFieldControlsState> aiProgressState,
+    MovementResultBridgeRead movementResultBridge,
   )   : _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
@@ -37,7 +40,8 @@ class AggressivePlayerAi extends PlayerAi {
           metadata: metadata,
           initialTransfers: initialTransfers,
         ),
-        _aiProgressState = aiProgressState;
+        _aiProgressState = aiProgressState,
+        _movementResultBridge = movementResultBridge;
 
   @override
   Future<void> start() async {
@@ -81,6 +85,7 @@ class AggressivePlayerAi extends PlayerAi {
         myNation: _myNation,
         metadata: _metadata,
         aiProgressState: _aiProgressState,
+        movementResultBridge: _movementResultBridge,
         iterator: StableUnitsIterator(
           gameField: _gameField,
           myNation: _myNation,

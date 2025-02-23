@@ -22,7 +22,7 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
 
       final sumDangerInfluence = _allEnemies.map((o) => influenceCell.getCombined(o)).sum;
       final mySafeInfluence = influenceCell.getCombined(_myNation);
-      
+
       if (sumDangerInfluence > 0) {
         if (mySafeInfluence != 0) {
           return 25.0 * (sumDangerInfluence / mySafeInfluence) + 1;
@@ -40,7 +40,8 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<void> processAction() async {
+  Future<List<MovementResultItem>?> processAction() async {
     _unit.setState(UnitState.disabled);
+    return null;
   }
 }

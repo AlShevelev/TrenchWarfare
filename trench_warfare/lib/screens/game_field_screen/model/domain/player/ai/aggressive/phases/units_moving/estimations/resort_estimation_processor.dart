@@ -34,7 +34,7 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<void> processAction() async {
+  Future<List<MovementResultItem>?> processAction() async {
     final firstId = _cell.activeUnit!.id;
 
     final cellUnitsIds = _cell.units.map((u) => u.id).toList(growable: true)
@@ -44,6 +44,8 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
     _actions.resort(_cell, cellUnitsIds);
 
     _unit.setState(UnitState.disabled);
+
+    return null;
   }
 
   double _getWeightForArtillery() {

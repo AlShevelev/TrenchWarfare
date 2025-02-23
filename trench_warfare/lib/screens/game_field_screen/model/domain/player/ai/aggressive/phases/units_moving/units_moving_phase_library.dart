@@ -12,6 +12,7 @@ import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/shared/aggressive_ai_shared_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
@@ -33,6 +34,5 @@ part 'estimations/resort_estimation_processor.dart';
 part 'estimations/unit_estimation_processor_base.dart';
 
 part 'units_iterator/stable_units_iterator.dart';
-part 'units_iterator/unit_on_cell.dart';
 
 part 'units_moving_phase.dart';

@@ -48,7 +48,7 @@ abstract class _UnitEstimationProcessorBase {
   double estimate() => _balanceFactor * _estimateInternal();
 
   /// Returns a target cell for the action
-  Future<void> processAction();
+  Future<List<MovementResultItem>?> processAction();
 
   @protected
   double _estimateInternal();

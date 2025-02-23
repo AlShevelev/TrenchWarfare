@@ -14,3 +14,4 @@ part 'game_field.dart';
 part 'game_field_cell.dart';
 part 'path_item.dart';
 part 'path_item_type.dart';
+part 'unit_on_cell.dart';

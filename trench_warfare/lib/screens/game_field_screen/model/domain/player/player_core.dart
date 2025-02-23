@@ -29,7 +29,8 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
     GameOverConditionsCalculator gameOverConditionsCalculator,
     MoneyStorage money,
     AnimationTimeFacade animationTimeFacade, {
-    GamePauseWait? gamePauseWait,
+    required GamePauseWait? gamePauseWait,
+    required MovementResultBridge? movementResultBridge,
     required bool isAI,
     required bool isGameLoaded,
   }) {
@@ -49,6 +50,7 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
       gameOverConditionsCalculator,
       animationTimeFacade,
       gamePauseWait,
+      movementResultBridge,
       modelCallback,
       isAI: isAI,
       isGameLoaded: isGameLoaded,

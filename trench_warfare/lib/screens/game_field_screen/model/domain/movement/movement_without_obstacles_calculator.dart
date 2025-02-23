@@ -8,14 +8,17 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
+    required super.movementResultBridge,
   });
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
-    final unit = _detachActiveUnit(path);
+    final startUnit = path.first.activeUnit!;
+
+    final detachResult = _detachActiveUnit(path);
 
     Logger.info(
-      'WITHOUT_OBSTACLES; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: $unit',
+      'WITHOUT_OBSTACLES; from: ${path.first}; to: ${path.last}; total: ${path.length}; unit: ${detachResult.unit}',
       tag: 'MOVEMENT',
     );
 
@@ -23,13 +26,13 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     final lastReachableCell = reachableCells.last;
 
     if (lastReachableCell == path.first) {
-      _attachUnitAsActive(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, detachResult.unit);
 
-      unit.setMovementPoints(0);
-      unit.setState(UnitState.disabled);
+      detachResult.unit.setMovementPoints(0);
+      detachResult.unit.setState(UnitState.disabled);
 
       // We must make the unit very last to prevent blocking all units on the cell
-      if (unit.state == UnitState.disabled) {
+      if (detachResult.unit.state == UnitState.disabled) {
         lastReachableCell.makeActiveUnitLast();
       }
 
@@ -37,13 +40,19 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         cell.setPathItem(null);
       }
 
-      _updateUIForStandingUnit(path: path, reachableCells: reachableCells, unit: unit);
+      _updateUIForStandingUnit(path: path, reachableCells: reachableCells, unit: detachResult.unit);
 
       Logger.info(
         'WITHOUT_OBSTACLES; lastReachableCell == path.first; Canceled',
         tag: 'MOVEMENT',
       );
     } else {
+      _movementResultBridge?.addBefore(
+        nation: _nation,
+        unit: Unit.copy(startUnit),
+        cell: path.first,
+      );
+
       GameFieldCell? cellWithCapturedPC;
 
       for (var cell in reachableCells) {
@@ -54,40 +63,54 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         cell.setNation(_nation);
       }
 
-      _attachUnitAsActive(lastReachableCell, unit);
+      _attachUnitAsActive(lastReachableCell, detachResult.unit);
 
-      unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
+      detachResult.unit.setMovementPoints(lastReachableCell.pathItem!.movementPointsLeft);
 
       Logger.info(
-        'WITHOUT_OBSTACLES; unit.movementPoints: ${unit.movementPoints}',
+        'WITHOUT_OBSTACLES; unit.movementPoints: ${detachResult.unit.movementPoints}',
         tag: 'MOVEMENT',
       );
 
-      if (unit.movementPoints > 0) {
+      if (detachResult.unit.movementPoints > 0) {
         final state = _canMove(startCell: lastReachableCell) && lastReachableCell == path.last
             ? UnitState.enabled
             : UnitState.disabled;
-        unit.setState(state);
+        detachResult.unit.setState(state);
       } else {
-        unit.setState(UnitState.disabled);
+        detachResult.unit.setState(UnitState.disabled);
       }
 
       // We must make the unit very last to prevent blocking all units on the cell
-      if (unit.state == UnitState.disabled) {
+      if (detachResult.unit.state == UnitState.disabled) {
         lastReachableCell.makeActiveUnitLast();
       }
 
-      Logger.info('WITHOUT_OBSTACLES; new unit state is: ${unit.state}', tag: 'MOVEMENT');
+      Logger.info('WITHOUT_OBSTACLES; new unit state is: ${detachResult.unit.state}', tag: 'MOVEMENT');
 
       for (var cell in path) {
         cell.setPathItem(null);
+      }
+
+      _movementResultBridge?.addAfter(
+        nation: _nation,
+        unit: Unit.copy(detachResult.unit),
+        cell: lastReachableCell,
+      );
+
+      if (detachResult.detachedFrom != null) {
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.detachedFrom!),
+          cell: path.first,
+        );
       }
 
       _updateUIForMovingUnit(
         path: path,
         reachableCells: reachableCells,
         cellWithCapturedPC: cellWithCapturedPC,
-        unit: unit,
+        unit: detachResult.unit,
       );
     }
 

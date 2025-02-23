@@ -11,17 +11,21 @@ class MovementFacade {
 
   final AnimationTime _animationTime;
 
+  final MovementResultBridge? _movementResultBridge;
+
   MovementFacade({
     required Nation nation,
     required GameFieldRead gameField,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
+    required MovementResultBridge? movementResultBridge,
   })  : _nation = nation,
         _gameField = gameField,
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
-        _animationTime = animationTime;
+        _animationTime = animationTime,
+        _movementResultBridge = movementResultBridge;
 
   State startMovement(Iterable<GameFieldCell> path) {
     final activePathItems = path.map((e) => e.pathItem!).where((e) => e.isActive).toList();
@@ -33,6 +37,7 @@ class MovementFacade {
             updateGameObjectsEvent: _updateGameObjectsEvent,
             gameOverConditionsCalculator: _gameOverConditionsCalculator,
             animationTime: _animationTime,
+            movementResultBridge: _movementResultBridge,
           )
         : activePathItems.any((e) => e.type == PathItemType.battle)
             ? MovementWithBattleCalculator(
@@ -41,6 +46,7 @@ class MovementFacade {
                 updateGameObjectsEvent: _updateGameObjectsEvent,
                 gameOverConditionsCalculator: _gameOverConditionsCalculator,
                 animationTime: _animationTime,
+                movementResultBridge: _movementResultBridge,
               )
             : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
                 ? MovementWithBattleNextUnreachableCell(
@@ -49,6 +55,7 @@ class MovementFacade {
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,
                     animationTime: _animationTime,
+                    movementResultBridge: _movementResultBridge,
                   )
                 : MovementWithoutObstaclesCalculator(
                     nation: _nation,
@@ -56,6 +63,7 @@ class MovementFacade {
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,
                     animationTime: _animationTime,
+                    movementResultBridge: _movementResultBridge,
                   );
 
     return calculator.startMovement(path);

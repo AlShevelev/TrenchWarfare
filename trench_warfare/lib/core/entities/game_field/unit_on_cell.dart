@@ -1,4 +1,4 @@
-part of units_moving_phase_library;
+part of game_field;
 
 class UnitOnCell {
   final GameFieldCellRead cell;

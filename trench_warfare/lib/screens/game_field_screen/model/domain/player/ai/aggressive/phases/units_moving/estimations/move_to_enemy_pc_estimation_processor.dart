@@ -45,8 +45,8 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<void> processAction() async {
-    await _actions.move(_unit, from: _cell, to: _nearestEnemyPc!);
+  Future<List<MovementResultItem>?> processAction() async {
+    return await _actions.move(_unit, from: _cell, to: _nearestEnemyPc!);
   }
 
   double _calculateWeight(GameFieldCellRead cell) {

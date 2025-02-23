@@ -7,29 +7,46 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
+    required super.movementResultBridge,
   });
 
   @override
   State startMovement(Iterable<GameFieldCell> path) {
-    final attackingUnit = _detachActiveUnit(path);
-
-    final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
-
     final defendingCell = path.last;
     final attackingCell = path.first;
 
+    final startUnit = attackingCell.activeUnit!;
+
+    final detachResult = _detachActiveUnit(path);
+
+    final reachableCells = path.where((e) => e.pathItem != null && e.pathItem!.isActive).toList();
+
     final defendingUnit = defendingCell.activeUnit!;
+
+    final enemyNation = defendingCell.nation!;
+
+    _movementResultBridge?.addBefore(
+      nation: _nation,
+      unit: Unit.copy(startUnit),
+      cell: attackingCell,
+    );
+
+    _movementResultBridge?.addBefore(
+      nation: enemyNation,
+      unit: Unit.copy(defendingUnit),
+      cell: defendingCell,
+    );
 
     Logger.info(
       'BATTLE_WITH_UNREACHABLE; from: ${path.first}; to: ${path.last}; total: ${path.length}; '
-      'attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
+      'attackingUnit: ${detachResult.unit}; defendingUnit: $defendingUnit; '
       'attackingCell: $attackingCell; defendingCell: $defendingCell',
       tag: 'MOVEMENT',
     );
 
     // The battle calculation
     final battleResult =
-        _calculateBattleResult(attackingUnit, attackingCell: attackingCell, defendingCell: defendingCell);
+        _calculateBattleResult(detachResult.unit, attackingCell: attackingCell, defendingCell: defendingCell);
 
     Logger.info('BATTLE_WITH_UNREACHABLE; result: $battleResult', tag: 'MOVEMENT');
 
@@ -48,10 +65,32 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     GameFieldCell? newDefendingUnitCell;
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is Died) {
       defendingCell.removeActiveUnit();
+
+      if (detachResult.detachedFrom != null) {
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.detachedFrom!),
+          cell: attackingCell,
+        );
+      }
     }
 
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is Alive) {
       _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info, resetMovementPoints: false);
+
+      if (detachResult.detachedFrom != null) {
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.detachedFrom!),
+          cell: attackingCell,
+        );
+      }
+
+      _movementResultBridge?.addAfter(
+        nation: enemyNation,
+        unit: Unit.copy(defendingUnit),
+        cell: defendingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Died && battleResult.defendingUnit is InPanic) {
@@ -61,25 +100,57 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
         newDefendingUnitCell = _gameField.getCellById(battleResult.defendingUnitCellId!);
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
+
+      if (detachResult.detachedFrom != null) {
+        _movementResultBridge?.addAfter(
+          nation: _nation,
+          unit: Unit.copy(detachResult.detachedFrom!),
+          cell: attackingCell,
+        );
+      }
+
+      _movementResultBridge?.addAfter(
+        nation: enemyNation,
+        unit: Unit.copy(defendingUnit),
+        cell: newDefendingUnitCell ?? defendingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is Died) {
       defendingCell.removeActiveUnit();
 
-      _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
+      _updateUnit(detachResult.unit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
 
-      _addAttackingUnitToCell(attackingUnit, attackingCell);
+      _addAttackingUnitToCell(detachResult.unit, attackingCell);
+
+      _movementResultBridge?.addAfter(
+        nation: _nation,
+        unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
+        cell: attackingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is Alive) {
-      _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
+      _updateUnit(detachResult.unit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
       _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info, resetMovementPoints: false);
 
-      _addAttackingUnitToCell(attackingUnit, attackingCell);
+      _addAttackingUnitToCell(detachResult.unit, attackingCell);
+
+      _movementResultBridge?.addAfter(
+        nation: _nation,
+        unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
+        cell: attackingCell,
+      );
+
+      _movementResultBridge?.addAfter(
+        nation: enemyNation,
+        unit: Unit.copy(defendingUnit),
+        cell: defendingCell,
+      );
     }
 
     if (battleResult.attackingUnit is Alive && battleResult.defendingUnit is InPanic) {
-      _updateUnit(attackingUnit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
+      _updateUnit(detachResult.unit, (battleResult.attackingUnit as Alive).info, resetMovementPoints: true);
       _updateUnit(defendingUnit, (battleResult.defendingUnit as InPanic).info, resetMovementPoints: false);
 
       if (battleResult.defendingUnitCellId != defendingCell.id) {
@@ -87,13 +158,25 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
 
-      _addAttackingUnitToCell(attackingUnit, attackingCell);
+      _addAttackingUnitToCell(detachResult.unit, attackingCell);
+
+      _movementResultBridge?.addAfter(
+        nation: _nation,
+        unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
+        cell: attackingCell,
+      );
+
+      _movementResultBridge?.addAfter(
+        nation: enemyNation,
+        unit: Unit.copy(defendingUnit),
+        cell: newDefendingUnitCell ?? defendingCell,
+      );
     }
 
     // Collect dead units
     final deadUnits = <Unit>[];
     if (battleResult.attackingUnit is Died) {
-      deadUnits.add(attackingUnit);
+      deadUnits.add(detachResult.unit);
     }
     if (battleResult.defendingUnit is Died) {
       deadUnits.add(defendingUnit);
@@ -107,7 +190,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     _updateUI(
       path: path,
       reachableCells: reachableCells,
-      attackingUnit: attackingUnit,
+      attackingUnit: detachResult.unit,
       defendingUnit: defendingUnit,
       attackingCell: attackingCell,
       defendingCell: defendingCell,

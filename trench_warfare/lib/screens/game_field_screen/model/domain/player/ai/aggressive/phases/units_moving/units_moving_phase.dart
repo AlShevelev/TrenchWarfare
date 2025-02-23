@@ -20,11 +20,12 @@ class UnitsMovingPhase implements TurnPhase {
     required StableUnitsIterator iterator,
     required MapMetadataRead metadata,
     required SimpleStream<GameFieldControlsState>? aiProgressState,
+    required MovementResultBridgeRead movementResultBridge,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
-        _actions = PlayerActions(player: player),
+        _actions = PlayerActions(player: player, movementResultBridge: movementResultBridge),
         _aiProgressState = aiProgressState {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
@@ -106,7 +107,13 @@ class UnitsMovingPhase implements TurnPhase {
             tag: 'MONEY_SPENDING');
 
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
-        await selectedEstimator.processAction();
+        final processingResult = await selectedEstimator.processAction();
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // update the influence map here
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 
         // check the unit is dead or not (cellWithUnit == null - is dead)
         cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);
