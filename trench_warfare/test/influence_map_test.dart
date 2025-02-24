@@ -67,6 +67,23 @@ void assertCarrier(InfluenceMapItemRead item, Nation nation, {double? power}) {
   }
 }
 
+void assertLandEquals(InfluenceMapItemRead item1, InfluenceMapItemRead item2, Nation nation) {
+  final land1Value = item1.getLand(nation);
+  final land2Value = item2.getLand(nation);
+
+  if ((land1Value == null && land2Value != null) || (land1Value != null && land2Value == null)) {
+    Assert.isTrue(false);
+    return;
+  }
+
+  if (land1Value == null && land2Value == null) {
+    Assert.isTrue(true);
+    return;
+  }
+
+  Assert.equalsDouble(expected: land1Value!, actual: land2Value!);
+}
+
 void main() {
   group('Influence map tests', () {
     test('one land unit', () {
@@ -339,6 +356,42 @@ void main() {
       final radius4Cells = gameField.findCellsAroundR(unitCell, radius: 4);
       for (final cell in radius4Cells) {
         assertCarrier(map.getItem(cell.row, cell.col), nation, power: null);
+      }
+    });
+  });
+
+  group('recalculation', () {
+    test('two land units on different cells', () {
+      // Arrange
+      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
+
+      const nation = Nation.usa;
+
+      final unit = Unit.byType(UnitType.infantry);
+
+      final unitCell = gameField.getCell(3, 2);
+      unitCell.addUnit(unit);
+      unitCell.setNation(nation);
+
+      final unit2Cell = gameField.getCell(3, 4);
+      unit2Cell.addUnit(unit);
+      unit2Cell.setNation(nation);
+
+      // Act
+      final map1 = _createEmptyInfluenceMap()..calculateFull(gameField);
+
+      final map2 = _createEmptyInfluenceMap()..calculateFull(gameField);
+      map2.removeUnit(Unit.copy(unit), nation, unitCell);
+      map2.addUnit(Unit.copy(unit), nation, unitCell);
+
+      // Assert
+      for (var row = 0; row < gameField.rows; row++) {
+        for (var col = 0; col < gameField.cols; col++) {
+          final item1 = map1.getItem(row, col);
+          final item2 = map2.getItem(row, col);
+
+          assertLandEquals(item1, item2, nation);
+        }
       }
     });
   });
