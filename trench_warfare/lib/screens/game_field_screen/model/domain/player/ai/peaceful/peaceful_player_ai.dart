@@ -39,7 +39,7 @@ class PeacefulPlayerAi extends PlayerAi {
     // If I lost - do nothing
     while (!_gameOverConditionsCalculator.isDefeated(_myNation)) {
       final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
-          (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+          (data) => InfluenceMapRepresentation()..calculateFull(data), _gameField);
 
       final List<EstimationProcessor> processors = [
         ProductionCenterEstimationProcessor(

@@ -81,7 +81,7 @@ void main() {
       unitCell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertLand(map.getItem(3, 3), nation, power: 12);
@@ -115,7 +115,7 @@ void main() {
       unitCell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertLand(map.getItem(3, 3), nation, power: 24);
@@ -152,7 +152,7 @@ void main() {
       unit2Cell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertLand(map.getItem(2, 3), nation, power: 19.2);
@@ -180,7 +180,7 @@ void main() {
       unit2Cell.setNation(nation2);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertLand(map.getItem(unit1Cell.row, unit1Cell.col), nation1, power: 12);
@@ -231,7 +231,7 @@ void main() {
       unitCell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertSea(map.getItem(3, 3), nation, power: 170);
@@ -269,7 +269,7 @@ void main() {
       unitCell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertCarrier(map.getItem(3, 3), nation, power: 1);
@@ -316,7 +316,7 @@ void main() {
       unitCell.setNation(nation);
 
       // Act
-      map.calculate(gameField);
+      map.calculateFull(gameField);
 
       // Assert
       assertCarrier(map.getItem(3, 3), nation, power: 48);

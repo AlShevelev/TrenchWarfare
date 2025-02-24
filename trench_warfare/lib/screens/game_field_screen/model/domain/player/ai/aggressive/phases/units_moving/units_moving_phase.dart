@@ -67,7 +67,7 @@ class UnitsMovingPhase implements TurnPhase {
         Logger.info('processing unit: $unit on cell: $cellWithUnit', tag: 'UNITS_MOVING');
 
         influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
-            (data) => InfluenceMapRepresentation()..calculate(data), _gameField);
+            (data) => InfluenceMapRepresentation()..calculateFull(data), _gameField);
 
         Logger.info('influence map is recalculated', tag: 'UNITS_MOVING');
 
