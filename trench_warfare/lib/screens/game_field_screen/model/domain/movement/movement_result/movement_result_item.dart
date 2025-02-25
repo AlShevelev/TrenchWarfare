@@ -20,4 +20,7 @@ class MovementResultItem {
     required this.cell,
     required this.type,
   });
+
+  @override
+  String toString() => 'MOVEMENT_RESULT_ITEM: { unit: ${unit.toStringBrief()}; cell: ${cell.toStringBrief()}; nation: $nation';
 }

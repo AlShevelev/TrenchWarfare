@@ -39,6 +39,7 @@ class Carrier extends Unit {
           movementPoints: carrier.movementPoints,
           type: carrier.type,
         ) {
+    id = RandomGen.generateId();
     _tookPartInBattles = carrier._tookPartInBattles;
     _health = carrier._health;
     _fatigue = carrier._fatigue;

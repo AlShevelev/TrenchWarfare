@@ -162,6 +162,7 @@ class Unit extends GameObject {
   }
 
   Unit.copy(Unit unit) {
+    id = RandomGen.generateId();
     _boost1 = unit.boost1;
     _boost2 = unit.boost2;
     _boost3 = unit.boost3;
@@ -373,4 +374,6 @@ class Unit extends GameObject {
   @override
   String toString() => 'UNIT: {id: $id; type: $type; state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
       'level: $experienceRank; health: $health; movementPoints: $movementPoints}';
+
+  String toStringBrief() => 'UNIT: {id: $id; type: $type; state: $state; health: $health; movementPoints: $movementPoints}';
 }

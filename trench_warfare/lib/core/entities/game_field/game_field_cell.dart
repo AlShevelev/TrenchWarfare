@@ -29,6 +29,8 @@ abstract interface class GameFieldCellRead {
   bool get isLand;
 
   bool get isEmpty;
+
+  String toStringBrief();
 }
 
 class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
@@ -154,5 +156,6 @@ class GameFieldCell extends HexMatrixItem implements GameFieldCellRead {
           'production: [type: ${productionCenter?.type}; level: ${productionCenter?.level}]; '
           'hasRoad: $hasRoad; hasRiver: $hasRiver}; pathItem: $pathItem; nation: $_nation';
 
+  @override
   String toStringBrief() => 'CELL: {id: $id; row: $row; col: $col';
 }

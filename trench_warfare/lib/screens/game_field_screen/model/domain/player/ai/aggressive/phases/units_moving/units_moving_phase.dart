@@ -60,9 +60,8 @@ class UnitsMovingPhase implements TurnPhase {
 
       GameFieldCellRead? cellWithUnit = _iterator.current.cell;
 
-      final InfluenceMapRepresentation influences =
-          await compute<GameFieldRead, InfluenceMapRepresentation>(
-              (data) => InfluenceMapRepresentation()..calculateFull(data), _gameField);
+      final InfluenceMapRepresentation influences = await compute<GameFieldRead, InfluenceMapRepresentation>(
+          (data) => InfluenceMapRepresentation()..calculateFull(data), _gameField);
 
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled) {
@@ -111,9 +110,13 @@ class UnitsMovingPhase implements TurnPhase {
         // updates the influence map
         if (processingResult != null) {
           Logger.info(
-            'We need to update the influence map',
+            'We need to update the influence map. Processing result has ${processingResult.length} items',
             tag: 'INFLUENCE_MAP',
           );
+
+          for (final resultItem in processingResult) {
+            Logger.info(resultItem.toString(), tag: 'INFLUENCE_MAP');
+          }
 
           for (final resultItem in processingResult) {
             if (resultItem.type == MovementResulType.before) {
