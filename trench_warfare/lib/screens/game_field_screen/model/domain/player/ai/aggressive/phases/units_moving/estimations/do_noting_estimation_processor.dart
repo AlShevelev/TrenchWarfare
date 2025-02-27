@@ -27,7 +27,7 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
         if (mySafeInfluence != 0) {
           return 50.0 * (sumDangerInfluence / mySafeInfluence) + 1;
         } else {
-          return 500;
+          return 1000;
         }
       }
     }
