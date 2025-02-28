@@ -50,12 +50,12 @@ class RegionOwnershipRaw extends GameObjectRaw {
   final Rect bounds;
 
   RegionOwnershipRaw(
-      super.id, {
-        required this.nation,
-        required this.vertices,
-        required this.bounds,
-        required super.center,
-      });
+    super.id, {
+    required this.nation,
+    required this.vertices,
+    required this.bounds,
+    required super.center,
+  });
 }
 
 class ProductionCenterRaw extends GameObjectRaw {
@@ -106,6 +106,8 @@ class UnitRaw extends GameObjectRaw {
 
   final UnitType unit;
 
+  final bool isInDefenceMode;
+
   bool get isLand =>
       unit == UnitType.armoredCar ||
       unit == UnitType.artillery ||
@@ -126,6 +128,7 @@ class UnitRaw extends GameObjectRaw {
     required this.movementPoints,
     required this.unit,
     required super.center,
+    required this.isInDefenceMode,
   });
 }
 
@@ -150,5 +153,6 @@ class CarrierRaw extends UnitRaw {
     required super.movementPoints,
     required super.unit,
     required super.center,
+    required super.isInDefenceMode,
   });
 }

@@ -21,6 +21,7 @@ class Carrier extends Unit {
     required super.health,
     required super.movementPoints,
     required List<Unit> units,
+    super.isInDefenceMode = false,
   }) : super(
           experienceRank: UnitExperienceRank.rookies,
           type: UnitType.carrier,

@@ -80,6 +80,7 @@ class GameFieldAssembler {
         health: raw.health,
         movementPoints: raw.movementPoints,
         type: raw.unit,
+        isInDefenceMode: raw.isInDefenceMode,
       );
     } else {
       final carrierRaw = raw as CarrierRaw;
@@ -91,6 +92,7 @@ class GameFieldAssembler {
           fatigue: raw.fatigue,
           health: raw.health,
           movementPoints: raw.movementPoints,
+          isInDefenceMode: raw.isInDefenceMode,
           units: _getUnits(allGameObjects,
               [carrierRaw.unit1Id, carrierRaw.unit2Id, carrierRaw.unit3Id, carrierRaw.unit4Id]));
     }

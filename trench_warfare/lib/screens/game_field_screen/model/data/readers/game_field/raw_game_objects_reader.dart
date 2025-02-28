@@ -11,6 +11,8 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game
 import 'package:trench_warfare/shared/utils/math.dart';
 
 extension _PropertyHelper on Map<String, Property<Object>> {
+  bool getBool(String name) => containsKey(name) ? (this[name] as BoolProperty).value : false;
+
   double getFloat(String name) => (this[name] as FloatProperty).value;
 
   String getString(String name) => containsKey(name) ? (this[name] as StringProperty).value : '';
@@ -109,6 +111,7 @@ class RawGameObjectReader {
         movementPoints: properties.getFloat("movementPoints"),
         unit: unitType,
         center: _calculateCenter(tiledObject),
+        isInDefenceMode: properties.getBool('isDefence'),
       );
     } else {
       return UnitRaw(
@@ -122,6 +125,7 @@ class RawGameObjectReader {
         movementPoints: properties.getFloat("movementPoints"),
         unit: unitType,
         center: _calculateCenter(tiledObject),
+        isInDefenceMode: properties.getBool('isDefence'),
       );
     }
   }
