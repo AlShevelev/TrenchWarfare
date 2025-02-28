@@ -1,7 +1,7 @@
 part of game_objects;
 
 class Unit extends GameObject {
-  late final String id;
+  final String id;
 
   UnitBoost? _boost1;
   UnitBoost? get boost1 => _boost1;
@@ -40,8 +40,9 @@ class Unit extends GameObject {
 
   Range<double> get damage => _getDamage();
 
-  late final UnitType _type;
-  UnitType get type => _type;
+  final UnitType type;
+
+  final bool isInDefenceMode;
 
   UnitState _state = UnitState.enabled;
   UnitState get state => _state;
@@ -88,92 +89,75 @@ class Unit extends GameObject {
     required double fatigue,
     required double health,
     required double movementPoints,
-    required UnitType type,
-  }) {
-    _type = type;
-
-    id = RandomGen.generateId();
-
-    _boost1 = boost1;
-    _boost2 = boost2;
-    _boost3 = boost3;
-
+    required this.type,
+    this.isInDefenceMode = false,
+  })  : id = RandomGen.generateId(),
+        _boost1 = boost1,
+        _boost2 = boost2,
+        _boost3 = boost3,
+        _fatigue = fatigue,
+        _health = _getMaxHealth(type) * health,
+        _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled {
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(experienceRank);
-    _health = _getMaxHealth(type) * health;
-    _fatigue = fatigue;
 
     _defence = _getDefence();
 
     _movementPoints = movementPoints * _getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
-
-    _state = movementPoints == 0 ? UnitState.disabled : UnitState.enabled;
   }
 
-  Unit.byType(UnitType type) {
-    _type = type;
-
-    id = RandomGen.generateId();
-
-    _boost1 = null;
-    _boost2 = null;
-    _boost3 = null;
-
+  Unit.byType(this.type)
+      : id = RandomGen.generateId(),
+        isInDefenceMode = false,
+        _boost1 = null,
+        _boost2 = null,
+        _boost3 = null,
+        _health = _getMaxHealth(type),
+        // well rested
+        _fatigue = 1,
+        _state = UnitState.enabled {
     _tookPartInBattles = _calculateStartTookPartInBattlesValue(UnitExperienceRank.rookies);
-    _health = _getMaxHealth(type);
-    _fatigue = 1; // well rested
 
     _defence = _getDefence();
 
     _movementPoints = _getMaxMovementPoints(type);
-
-    _state = UnitState.enabled;
   }
 
-  Unit.restoreAfterSaving(
-      {
-        required this.id,
-        required UnitBoost? boost1,
-        required UnitBoost? boost2,
-        required UnitBoost? boost3,
-        required int tookPartInBattles,
-        required double fatigue,
-        required double health,
-        required double movementPoints,
-        required double defence,
-        required UnitType type,
-        required UnitState state,
-      }
-      ) {
-    _type = type;
+  Unit.restoreAfterSaving({
+    required this.id,
+    required UnitBoost? boost1,
+    required UnitBoost? boost2,
+    required UnitBoost? boost3,
+    required int tookPartInBattles,
+    required double fatigue,
+    required double health,
+    required double movementPoints,
+    required double defence,
+    required this.type,
+    required UnitState state,
+    required this.isInDefenceMode,
+  })  : _boost1 = boost1,
+        _boost2 = boost2,
+        _boost3 = boost3,
+        _tookPartInBattles = tookPartInBattles,
+        _health = health,
+        _fatigue = fatigue,
+        _defence = defence,
+        _movementPoints = movementPoints,
+        _state = state;
 
-    _boost1 = boost1;
-    _boost2 = boost2;
-    _boost3 = boost3;
-
-    _tookPartInBattles = tookPartInBattles;
-    _health = health;
-    _fatigue = fatigue;
-
-    _defence = defence;
-
-    _movementPoints = movementPoints;
-
-    _state = state;
-  }
-
-  Unit.copy(Unit unit) {
-    id = RandomGen.generateId();
-    _boost1 = unit.boost1;
-    _boost2 = unit.boost2;
-    _boost3 = unit.boost3;
-    _tookPartInBattles = unit._tookPartInBattles;
-    _health = unit._health;
-    _fatigue = unit._fatigue;
-    _defence = unit._defence;
-    _movementPoints = unit._movementPoints;
-    _state = unit._state;
-    _type = unit.type;
-  }
+  Unit.copy(Unit unit)
+      : type = unit.type,
+        id = RandomGen.generateId(),
+        isInDefenceMode = false,
+        _boost1 = unit.boost1,
+        _boost2 = unit.boost2,
+        _boost3 = unit.boost3,
+        _tookPartInBattles = unit._tookPartInBattles,
+        _health = unit._health,
+        _fatigue = unit._fatigue,
+        _defence = unit._defence,
+        _movementPoints = unit._movementPoints,
+        _state = unit._state;
 
   void setState(UnitState state) => _state = state;
 
@@ -277,18 +261,18 @@ class Unit extends GameObject {
   static const double absoluteMaxMovementPoints = 4.0;
 
   static double _getMaxMovementPoints(UnitType type) => switch (type) {
-      UnitType.armoredCar => 3 * GameConstants.landMovementSpeedFactor,
-      UnitType.artillery => 1 * GameConstants.landMovementSpeedFactor,
-      UnitType.infantry => 2 * GameConstants.landMovementSpeedFactor,
-      UnitType.cavalry => 4 * GameConstants.landMovementSpeedFactor,
-      UnitType.machineGunnersCart => 3 * GameConstants.landMovementSpeedFactor,
-      UnitType.machineGuns => 1 * GameConstants.landMovementSpeedFactor,
-      UnitType.tank => 2 * GameConstants.landMovementSpeedFactor,
-      UnitType.destroyer => 5,
-      UnitType.cruiser => 4,
-      UnitType.battleship => 3,
-      UnitType.carrier => 3,
-    };
+        UnitType.armoredCar => 3 * GameConstants.landMovementSpeedFactor,
+        UnitType.artillery => 1 * GameConstants.landMovementSpeedFactor,
+        UnitType.infantry => 2 * GameConstants.landMovementSpeedFactor,
+        UnitType.cavalry => 4 * GameConstants.landMovementSpeedFactor,
+        UnitType.machineGunnersCart => 3 * GameConstants.landMovementSpeedFactor,
+        UnitType.machineGuns => 1 * GameConstants.landMovementSpeedFactor,
+        UnitType.tank => 2 * GameConstants.landMovementSpeedFactor,
+        UnitType.destroyer => 5,
+        UnitType.cruiser => 4,
+        UnitType.battleship => 3,
+        UnitType.carrier => 3,
+      };
 
   double _getAttack() {
     switch (type) {
@@ -372,8 +356,10 @@ class Unit extends GameObject {
   }
 
   @override
-  String toString() => 'UNIT: {id: $id; type: $type; state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
+  String toString() =>
+      'UNIT: {id: $id; type: $type; state: $state; boost1: $boost1; boost2: $boost2; boost3: $boost3; '
       'level: $experienceRank; health: $health; movementPoints: $movementPoints}';
 
-  String toStringBrief() => 'UNIT: {id: $id; type: $type; state: $state; health: $health; movementPoints: $movementPoints}';
+  String toStringBrief() =>
+      'UNIT: {id: $id; type: $type; state: $state; health: $health; movementPoints: $movementPoints}';
 }

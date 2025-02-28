@@ -39,7 +39,6 @@ class Carrier extends Unit {
           movementPoints: carrier.movementPoints,
           type: carrier.type,
         ) {
-    id = RandomGen.generateId();
     _tookPartInBattles = carrier._tookPartInBattles;
     _health = carrier._health;
     _fatigue = carrier._fatigue;
@@ -61,6 +60,7 @@ class Carrier extends Unit {
     required super.defence,
     required super.type,
     required super.state,
+    required super.isInDefenceMode,
   }) : super.restoreAfterSaving() {
     _units = [];
   }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="30" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="133">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="30" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="134">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Battle of Tannenberg&quot;, &quot;ru&quot;: &quot;Битва при Танненберге&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Battle of Tannenberg was fought between Russia and Germany between 23 and 30 August 1914, the first month of World War I.\n\nThe battle resulted in the almost complete destruction of half of the Russian Second Army and the suicide of its commanding general, Alexander Samsonov. A series of follow-up battles destroyed most of the Russian First Army.&quot;, &quot;ru&quot;: &quot;Битва при Танненберге произошла между Россией и Германией с 23 по 30 августа 1914 года, в первый месяц Первой мировой войны.\n\nБитва привела к почти полному уничтожению половины русской Второй армии и самоубийству ее командующего генерала Александра Самсонова. Серия последующих сражений уничтожила большую часть русской Первой армии.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1914-08-23&quot;, &quot;to&quot;: &quot;1914-08-30&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 3000 }, { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 3000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;russia&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
@@ -267,7 +267,8 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
-    <property name="movementPoints" type="float" value="0"/>
+    <property name="isDefence" type="bool" value="true"/>
+    <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
   <object id="50" name="germany" type="ownership" gid="110" x="1156.31" y="933.781" width="64" height="64">
@@ -318,6 +319,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -375,7 +377,7 @@
    <properties>
     <property name="productionCenter" type="object" value="32"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="94"/>
+    <property name="unit1" type="object" value="49"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -385,7 +387,7 @@
    <properties>
     <property name="productionCenter" type="object" value="31"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="94"/>
+    <property name="unit1" type="object" value="49"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -435,7 +437,7 @@
    <properties>
     <property name="productionCenter" type="object" value="27"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="94"/>
+    <property name="unit1" type="object" value="49"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -445,7 +447,7 @@
    <properties>
     <property name="productionCenter" type="object" value="26"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="94"/>
+    <property name="unit1" type="object" value="49"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -465,7 +467,7 @@
    <properties>
     <property name="productionCenter" type="object" value="33"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -475,7 +477,7 @@
    <properties>
     <property name="productionCenter" type="object" value="34"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -485,7 +487,7 @@
    <properties>
     <property name="productionCenter" type="object" value="35"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -495,7 +497,7 @@
    <properties>
     <property name="productionCenter" type="object" value="37"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -505,7 +507,7 @@
    <properties>
     <property name="productionCenter" type="object" value="38"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -679,6 +681,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -690,10 +693,11 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="true"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="94" name="infantry" type="unit" gid="91" x="1065.57" y="921.898" width="64" height="64">
+  <object id="94" name="infantry" type="unit" gid="91" x="1353.86" y="817.903" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -701,6 +705,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -712,6 +717,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="true"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -723,6 +729,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="true"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -784,6 +791,7 @@
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -805,6 +813,7 @@
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -818,7 +827,7 @@
     <property name="unit4" type="object" value="104"/>
    </properties>
   </object>
-  <object id="106" name="infantry" type="unit" gid="91" x="533.148" y="831.28" width="64" height="64">
+  <object id="106" name="infantry" type="unit" gid="91" x="610.157" y="937.908" width="64" height="64">
    <properties>
     <property name="boost1" value="commander"/>
     <property name="boost2" value=""/>
@@ -826,6 +835,7 @@
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -847,6 +857,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -888,6 +899,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -969,6 +981,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -980,6 +993,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -991,6 +1005,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -1022,6 +1037,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -1033,6 +1049,7 @@
     <property name="experienceRank" value="rookies"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
@@ -1040,10 +1057,22 @@
    <properties>
     <property name="productionCenter" type="object" value="20"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="92"/>
+    <property name="unit1" type="object" value="133"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="133" name="infantry" type="unit" gid="91" x="1157.36" y="298.415" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="true"/>
+    <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
  </objectgroup>
