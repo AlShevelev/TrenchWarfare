@@ -22,6 +22,10 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
 
   @override
   double _estimateInternal() {
+    if (_unit.isInDefenceMode) {
+      return 0;
+    }
+
     if (_unit.type != UnitType.destroyer ||
         _unit.type != UnitType.cruiser ||
         _unit.type != UnitType.battleship) {

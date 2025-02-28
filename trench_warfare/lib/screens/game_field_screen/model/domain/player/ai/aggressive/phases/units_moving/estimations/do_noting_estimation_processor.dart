@@ -13,6 +13,10 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
 
   @override
   double _estimateInternal() {
+    if (_unit.isInDefenceMode) {
+      return 10000;
+    }
+
     if (_unit.type == UnitType.carrier) {
       return 0;
     }

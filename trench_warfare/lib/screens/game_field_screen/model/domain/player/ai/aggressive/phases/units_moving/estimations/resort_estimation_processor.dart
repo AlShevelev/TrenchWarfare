@@ -14,6 +14,10 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
   @override
   double _estimateInternal() {
+    if (_unit.isInDefenceMode) {
+      return 0;
+    }
+
     if (_unit.type == UnitType.carrier) {
       return 0;
     }
