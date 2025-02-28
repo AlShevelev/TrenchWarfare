@@ -284,6 +284,7 @@ class GameSaver implements GameSaverBuilder {
         defence: unit.defence,
         type: unit.type.index,
         state: unit.state.index,
+        isInDefenceMode: unit.isInDefenceMode,
       );
 
   SaveTroopTransferDbEntity _mapTransferToDbEntity(

@@ -150,7 +150,7 @@ class LoadedGameBuilder implements GameBuilder {
         tookPartInBattles: dbUnit.tookPartInBattles,
         type: unitType,
         state: UnitState.createFromIndex(dbUnit.state),
-        isInDefenceMode: false,
+        isInDefenceMode: dbUnit.isInDefenceMode,
       );
 
       final carrierUnits = allUnits
@@ -175,7 +175,7 @@ class LoadedGameBuilder implements GameBuilder {
         defence: dbUnit.defence,
         type: unitType,
         state: UnitState.createFromIndex(dbUnit.state),
-        isInDefenceMode: false,
+        isInDefenceMode: dbUnit.isInDefenceMode,
       );
     }
   }

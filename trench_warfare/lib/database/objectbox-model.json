@@ -379,7 +379,7 @@
     },
     {
       "id": "15:2175914356507412232",
-      "lastPropertyId": "17:7961012675947139287",
+      "lastPropertyId": "18:2395540779890927160",
       "name": "SaveUnitDbEntity",
       "properties": [
         {
@@ -467,6 +467,11 @@
           "id": "17:7961012675947139287",
           "name": "state",
           "type": 6
+        },
+        {
+          "id": "18:2395540779890927160",
+          "name": "isInDefenceMode",
+          "type": 1
         }
       ],
       "relations": []

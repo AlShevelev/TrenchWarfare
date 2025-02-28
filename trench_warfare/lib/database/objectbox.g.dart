@@ -403,7 +403,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(15, 2175914356507412232),
       name: 'SaveUnitDbEntity',
-      lastPropertyId: const obx_int.IdUid(17, 7961012675947139287),
+      lastPropertyId: const obx_int.IdUid(18, 2395540779890927160),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -490,6 +490,11 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(17, 7961012675947139287),
             name: 'state',
             type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 2395540779890927160),
+            name: 'isInDefenceMode',
+            type: 1,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -1079,7 +1084,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
         },
         objectToFB: (SaveUnitDbEntity object, fb.Builder fbb) {
           final unitIdOffset = fbb.writeString(object.unitId);
-          fbb.startTable(18);
+          fbb.startTable(19);
           fbb.addInt64(0, object.dbId);
           fbb.addInt64(1, object.slotDbId);
           fbb.addInt64(2, object.cellDbId);
@@ -1097,6 +1102,7 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addFloat64(14, object.defence);
           fbb.addInt64(15, object.type);
           fbb.addInt64(16, object.state);
+          fbb.addBool(17, object.isInDefenceMode);
           fbb.finish(fbb.endTable());
           return object.dbId;
         },
@@ -1137,6 +1143,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 34, 0);
           final stateParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 36, 0);
+          final isInDefenceModeParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 38, false);
           final object = SaveUnitDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
@@ -1154,7 +1162,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
               movementPoints: movementPointsParam,
               defence: defenceParam,
               type: typeParam,
-              state: stateParam);
+              state: stateParam,
+              isInDefenceMode: isInDefenceModeParam);
 
           return object;
         }),
@@ -1554,6 +1563,10 @@ class SaveUnitDbEntity_ {
   /// See [SaveUnitDbEntity.state].
   static final state =
       obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[16]);
+
+  /// See [SaveUnitDbEntity.isInDefenceMode].
+  static final isInDefenceMode =
+      obx.QueryBooleanProperty<SaveUnitDbEntity>(_entities[6].properties[17]);
 }
 
 /// [KeyValueDbEntity] entity fields to define ObjectBox queries.

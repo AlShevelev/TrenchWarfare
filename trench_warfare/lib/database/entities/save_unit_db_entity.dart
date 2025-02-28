@@ -48,6 +48,8 @@ class SaveUnitDbEntity {
   /// An item's index in [UnitState] enum
   int state;
 
+  bool isInDefenceMode;
+
   SaveUnitDbEntity({
     this.dbId = 0,
     required this.slotDbId,
@@ -66,5 +68,6 @@ class SaveUnitDbEntity {
     required this.defence,
     required this.type,
     required this.state,
+    required this.isInDefenceMode,
   });
 }
