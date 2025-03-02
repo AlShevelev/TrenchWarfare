@@ -351,13 +351,16 @@ class MovementWithBattleCalculator extends MovementCalculator {
       priorCell = cell;
     }
 
+    final defendingUnitHasArtillery =
+        defendingUnit.hasArtillery || defendingCell.terrainModifier?.type == TerrainModifierType.landFort;
+
     final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
     final defendingDamageType = defendingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
 
     // Show damage - case 1 - simultaneously
-    if (!attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
+    if (!attackingUnit.hasArtillery && !defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion || defendingDamageType == DamageType.explosion
+        type: attackingUnit.hasArtillery || defendingUnitHasArtillery
             ? SoundType.attackExplosion
             : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
@@ -375,9 +378,9 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     // Show damage - case 2 - the defending unit doesn't strike back
-    if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
+    if (attackingUnit.hasArtillery && !defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: attackingUnit.hasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 
@@ -391,9 +394,9 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     // Show damage - case 3 - the attacking artillery strikes first, then the defending troop fires back.
-    if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
+    if (attackingUnit.hasArtillery && defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: attackingUnit.hasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
         duration: _animationTime.damageAnimationTime,
       ));
 
@@ -406,7 +409,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       );
 
       updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: defendingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
         ignoreIfPlayed: false,
       ));
@@ -421,9 +424,9 @@ class MovementWithBattleCalculator extends MovementCalculator {
     }
 
     // Show damage - case 4 - the defending artillery strikes first, and the attacking troop strikes in the second place
-    if (!attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
+    if (!attackingUnit.hasArtillery && defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
-        type: attackingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: defendingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
         duration: _animationTime.damageAnimationTime,
       ));
 
@@ -436,7 +439,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       );
 
       updateEvents.add(PlaySound(
-        type: defendingDamageType == DamageType.explosion ? SoundType.attackExplosion : SoundType.attackShot,
+        type: attackingUnit.hasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
       ));
 

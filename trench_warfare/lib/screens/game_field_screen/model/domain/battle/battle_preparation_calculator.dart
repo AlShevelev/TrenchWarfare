@@ -84,6 +84,7 @@ class UnitInBattlePreparationCalculator {
         isMechanical: unit.isMechanical,
         hasMachineGun: unit.hasMachineGun,
         hasArtillery: unit.hasArtillery,
+        takeHalfDamage: false,
       );
 
   double _getTerrainAttackFactor(
@@ -286,7 +287,7 @@ class UnitInBattlePreparationCalculator {
       defending.updateDefence(1.2);
       defending.updateHasArtillery(true);
       defending.updateHasMachineGun(true);
-      defending.increaseHealth(defending.health);
+      defending.setTakeHalfDamage(true);
     }
 
     return defending;

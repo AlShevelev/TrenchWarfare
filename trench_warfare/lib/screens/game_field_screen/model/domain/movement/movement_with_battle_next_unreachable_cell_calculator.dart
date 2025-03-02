@@ -254,11 +254,14 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       MoveCameraToCell(path.first),
     ];
 
+    final defendingUnitHasArtillery =
+        defendingUnit.hasArtillery || defendingCell.terrainModifier?.type == TerrainModifierType.landFort;
+
     final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
     final defendingDamageType = defendingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
 
     // Show damage - case 1 - the defending unit doesn't strike back
-    if (attackingUnit.hasArtillery && !defendingUnit.hasArtillery) {
+    if (attackingUnit.hasArtillery && !defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
         type: SoundType.attackExplosion,
         duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
@@ -274,7 +277,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     }
 
     // Show damage - case 2 - the attacking artillery strikes first, then the defending troop fires back.
-    if (attackingUnit.hasArtillery && defendingUnit.hasArtillery) {
+    if (attackingUnit.hasArtillery && defendingUnitHasArtillery) {
       updateEvents.add(PlaySound(
         type: SoundType.attackExplosion,
         duration: _animationTime.damageAnimationTime,

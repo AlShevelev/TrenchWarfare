@@ -34,6 +34,9 @@ class UnitInBattle {
   bool _hasArtillery;
   bool get hasArtillery => _hasArtillery;
 
+  bool _takeHalfDamage;
+  bool get takeHalfDamage => _takeHalfDamage;
+
   UnitInBattle({
     required this.type,
     required this.damage,
@@ -47,13 +50,15 @@ class UnitInBattle {
     required this.isMechanical,
     required bool hasMachineGun,
     required bool hasArtillery,
+    required bool takeHalfDamage,
   })  : _tookPartInBattles = tookPartInBattles,
         _fatigue = fatigue,
         _health = health,
         _hasArtillery = hasArtillery,
         _hasMachineGun = hasMachineGun,
         _defence = defence,
-        _attack = attack;
+        _attack = attack,
+        _takeHalfDamage = takeHalfDamage;
 
   void updateAttack(double valueToAdd) => _attack *= valueToAdd;
 
@@ -63,9 +68,9 @@ class UnitInBattle {
 
   void updateHasMachineGun(bool hasMachineGun) => _hasMachineGun = hasMachineGun;
 
-  void reduceHealth(double valueToReduce) => _health -= valueToReduce;
+  void reduceHealth(double valueToReduce) => _health -= valueToReduce * (_takeHalfDamage ? 0.5 : 1.0);
 
-  void increaseHealth(double valueToIncrease) => _health += valueToIncrease;
+  void setTakeHalfDamage(bool takeHalfDamage) => _takeHalfDamage = takeHalfDamage;
 
   void reduceFatigue(double valueToReduce) {
     _fatigue -= valueToReduce;
