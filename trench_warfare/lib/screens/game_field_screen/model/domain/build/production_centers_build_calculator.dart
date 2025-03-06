@@ -73,7 +73,7 @@ class ProductionCentersBuildCalculator {
             canBuildOrUpgrade = false;
           }
 
-          if (cell.hasRiver || cell.hasRoad) {
+          if (cell.hasRiver) {
             canBuildOrUpgrade = false;
           }
 
@@ -87,7 +87,7 @@ class ProductionCentersBuildCalculator {
             canBuildOrUpgrade = false;
           }
 
-          if (cell.hasRiver || cell.hasRoad) {
+          if (cell.hasRiver) {
             canBuildOrUpgrade = false;
           }
 
@@ -104,7 +104,7 @@ class ProductionCentersBuildCalculator {
             canBuildOrUpgrade = false;
           }
 
-          if (cell.hasRiver || cell.hasRoad) {
+          if (cell.hasRiver) {
             canBuildOrUpgrade = false;
           }
 
