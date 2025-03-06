@@ -3,8 +3,8 @@
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
- <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="64" columns="8">
-  <image source="../images/tiles/terrain_atlas_new.png" width="592" height="512"/>
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
+  <image source="../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
  </tileset>
  <tileset firstgid="65" source="game_objects.tsx"/>
  <layer id="4" name="Terrain" width="10" height="10">

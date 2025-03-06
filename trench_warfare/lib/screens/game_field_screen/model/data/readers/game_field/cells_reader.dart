@@ -27,8 +27,8 @@ class CellsReader {
             hasRiver: _hasRiver(roadsAndRiversLayer.data![i]),
             hasRoad: _hasRoad(roadsAndRiversLayer.data![i]),
             center: Vector2(
-                (tileSize.x / 2) + (col * (b + c)),
-                a + (row * tileSize.y) + (col.isOdd ? a : 0),
+              (tileSize.x / 2) + (col * (b + c)),
+              a + (row * tileSize.y) + (col.isOdd ? a : 0),
             ),
             row: row,
             col: col,
@@ -53,8 +53,12 @@ class CellsReader {
         _ => throw FormatException('This tile index is unsupported: $terrainTileIndex')
       };
 
-  static bool _hasRiver(int terrainTileIndex) => terrainTileIndex >= 29 && terrainTileIndex <= 47;
+  static bool _hasRiver(int terrainTileIndex) =>
+      (terrainTileIndex >= 29 && terrainTileIndex <= 47) ||
+      (terrainTileIndex >= 64 && terrainTileIndex <= 67);
 
   static bool _hasRoad(int terrainTileIndex) =>
-      terrainTileIndex >= 48 && terrainTileIndex <= 63 || terrainTileIndex >= 29 && terrainTileIndex <= 31;
+      (terrainTileIndex >= 48 && terrainTileIndex <= 63) ||
+      (terrainTileIndex >= 29 && terrainTileIndex <= 31) ||
+      (terrainTileIndex >= 68 && terrainTileIndex <= 71);
 }

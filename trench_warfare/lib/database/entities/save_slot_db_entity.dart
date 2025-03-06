@@ -8,7 +8,7 @@ class SaveSlotDbEntity {
   /// [0-9]
   int slotNumber;
 
-  /// Full name of the map (for example: assets/tiles/real/europe/the_battle_of_tannenburg.tmx)
+  /// Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
   String mapFileName;
 
   bool isAutosave;
