@@ -19,7 +19,6 @@ class BattleResultCalculator {
         attackingUnitCellId: null,
         defendingUnitCellId: null,
         isDefendingCellTerrainModifierDestroyed: false,
-        isDefendingCellProductionCenterDestroyed: false,
         defendingCellProductionCenterNewLevel: null,
       );
     }
@@ -31,7 +30,6 @@ class BattleResultCalculator {
         attackingUnitCellId: null,
         defendingUnitCellId: defendingCell.id,
         isDefendingCellTerrainModifierDestroyed: false,
-        isDefendingCellProductionCenterDestroyed: false,
         defendingCellProductionCenterNewLevel: null,
       );
     }
@@ -45,7 +43,6 @@ class BattleResultCalculator {
         attackingUnitCellId: null,
         defendingUnitCellId: cellIdToWithdraw ?? defendingCell.id,
         isDefendingCellTerrainModifierDestroyed: false,
-        isDefendingCellProductionCenterDestroyed: false,
         defendingCellProductionCenterNewLevel: null,
       );
     }
@@ -59,9 +56,8 @@ class BattleResultCalculator {
         attackingUnitCellId: canBeCaptured ? defendingCell.id : attackingCell.id,
         defendingUnitCellId: null,
         isDefendingCellTerrainModifierDestroyed: canBeCaptured && defendingCell.terrainModifier != null,
-        isDefendingCellProductionCenterDestroyed:
-            canBeCaptured && defendingCell.productionCenter?.level == ProductionCenterLevel.level1,
-        defendingCellProductionCenterNewLevel: canBeCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
+        defendingCellProductionCenterNewLevel:
+            canBeCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
       );
     }
 
@@ -72,7 +68,6 @@ class BattleResultCalculator {
         attackingUnitCellId: attackingCell.id,
         defendingUnitCellId: defendingCell.id,
         isDefendingCellTerrainModifierDestroyed: false,
-        isDefendingCellProductionCenterDestroyed: false,
         defendingCellProductionCenterNewLevel: null,
       );
     }
@@ -89,9 +84,8 @@ class BattleResultCalculator {
         attackingUnitCellId: isCaptured ? defendingCell.id : attackingCell.id,
         defendingUnitCellId: cellIdToWithdraw ?? defendingCell.id,
         isDefendingCellTerrainModifierDestroyed: isCaptured && defendingCell.terrainModifier != null,
-        isDefendingCellProductionCenterDestroyed:
-            isCaptured && defendingCell.productionCenter?.level == ProductionCenterLevel.level1,
-        defendingCellProductionCenterNewLevel: isCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
+        defendingCellProductionCenterNewLevel:
+            isCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
       );
     }
 
@@ -126,13 +120,15 @@ class BattleResultCalculator {
       (cell1.isLand && cell2.isLand) || (!cell1.isLand && !cell2.isLand);
 
   bool _haveMinefield(GameFieldCell cell) =>
-      cell.terrainModifier?.type == TerrainModifierType.landMine || cell.terrainModifier?.type == TerrainModifierType.seaMine;
+      cell.terrainModifier?.type == TerrainModifierType.landMine ||
+      cell.terrainModifier?.type == TerrainModifierType.seaMine;
 
   bool _canBeCaptured(GameFieldCell cell) => cell.units.length == 1;
 
-  ProductionCenterLevel? _getProductionCenterLevelForCapturedCell(GameFieldCell cell) => switch (cell.productionCenter?.level) {
+  ProductionCenterLevel? _getProductionCenterLevelForCapturedCell(GameFieldCell cell) =>
+      switch (cell.productionCenter?.level) {
         null => null,
-        ProductionCenterLevel.level1 => null,
+        ProductionCenterLevel.level1 => ProductionCenterLevel.level1,
         ProductionCenterLevel.level2 => ProductionCenterLevel.level1,
         ProductionCenterLevel.level3 => ProductionCenterLevel.level2,
         ProductionCenterLevel.level4 => ProductionCenterLevel.level3,

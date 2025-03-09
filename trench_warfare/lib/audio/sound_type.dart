@@ -12,7 +12,6 @@ enum SoundType {
   battleResultVictory,
   battleResultDefeat,
   battleResultPcCaptured,
-  battleResultPcDestroyed,
   battleResultManDeath,
   battleResultMechanicalDestroyed,
   battleResultShipDestroyed,

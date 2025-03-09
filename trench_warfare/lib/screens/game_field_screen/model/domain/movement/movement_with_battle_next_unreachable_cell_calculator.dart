@@ -55,9 +55,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       defendingCell.setTerrainModifier(null);
     }
 
-    if (battleResult.isDefendingCellProductionCenterDestroyed) {
-      defendingCell.setProductionCenter(null);
-    } else if (battleResult.defendingCellProductionCenterNewLevel != null) {
+    if (battleResult.defendingCellProductionCenterNewLevel != null) {
       defendingCell.productionCenter?.setLevel(battleResult.defendingCellProductionCenterNewLevel!);
     }
 

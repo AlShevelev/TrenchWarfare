@@ -107,7 +107,6 @@ class SoundsPlayer {
       SoundType.battleResultVictory => 'battle_result/victory',
       SoundType.battleResultDefeat => 'battle_result/defeat',
       SoundType.battleResultPcCaptured => 'battle_result/pc_captured',
-      SoundType.battleResultPcDestroyed => 'battle_result/pc_destroyed',
       SoundType.battleResultManDeath => 'battle_result/man_death',
       SoundType.battleResultMechanicalDestroyed => 'battle_result/mechanical_destroyed',
       SoundType.battleResultShipDestroyed => 'battle_result/ship_destroyed',

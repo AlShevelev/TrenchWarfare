@@ -12,8 +12,6 @@ class BattleResult {
 
   final bool isDefendingCellTerrainModifierDestroyed;
 
-  final bool isDefendingCellProductionCenterDestroyed;
-
   // The value is null if the defending cell hasn't got a production center or the defending cell is not captured
   final ProductionCenterLevel? defendingCellProductionCenterNewLevel;
 
@@ -21,7 +19,7 @@ class BattleResult {
   String toString() => 'BATTLE_RESULT: {attackingUnit: $attackingUnit; defendingUnit: $defendingUnit; '
       'attackingUnitCellId: $attackingUnitCellId; defendingUnitCellId: $defendingUnitCellId; '
       'isDefendingCellTerrainModifierDestroyed: $isDefendingCellTerrainModifierDestroyed; '
-      'isDefendingCellProductionCenterDestroyed: $isDefendingCellProductionCenterDestroyed}';
+      'defendingCellProductionCenterNewLevel: $defendingCellProductionCenterNewLevel}';
 
   BattleResult({
     required this.attackingUnit,
@@ -29,7 +27,6 @@ class BattleResult {
     required this.attackingUnitCellId,
     required this.defendingUnitCellId,
     required this.isDefendingCellTerrainModifierDestroyed,
-    required this.isDefendingCellProductionCenterDestroyed,
     required this.defendingCellProductionCenterNewLevel,
   });
 }

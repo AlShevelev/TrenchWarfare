@@ -63,9 +63,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
       defendingCell.setTerrainModifier(null);
     }
 
-    if (battleResult.isDefendingCellProductionCenterDestroyed) {
-      defendingCell.setProductionCenter(null);
-    } else if (battleResult.defendingCellProductionCenterNewLevel != null) {
+    if (battleResult.defendingCellProductionCenterNewLevel != null) {
       defendingCell.productionCenter?.setLevel(battleResult.defendingCellProductionCenterNewLevel!);
     }
 
@@ -255,7 +253,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
       attackingCell: attackingCell,
       defendingCell: defendingCell,
       pcCaptured: battleResult.defendingCellProductionCenterNewLevel != null,
-      pcDestroyed: battleResult.isDefendingCellProductionCenterDestroyed,
       newDefendingUnitCell: newDefendingUnitCell,
       deadUnits: deadUnits,
     );
@@ -322,7 +319,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     required GameFieldCell defendingCell,
     required GameFieldCell? newDefendingUnitCell,
     required bool pcCaptured,
-    required bool pcDestroyed,
     required Unit attackingUnit,
     required Unit defendingUnit,
     required Iterable<Unit> deadUnits,
@@ -470,11 +466,6 @@ class MovementWithBattleCalculator extends MovementCalculator {
     if (pcCaptured) {
       updateEvents.add(PlaySound(
         type: SoundType.battleResultPcCaptured,
-        strategy: SoundStrategy.putToQueue,
-      ));
-    } else if (pcDestroyed) {
-      updateEvents.add(PlaySound(
-        type: SoundType.battleResultPcDestroyed,
         strategy: SoundStrategy.putToQueue,
       ));
     }
