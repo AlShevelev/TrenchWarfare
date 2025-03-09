@@ -26,7 +26,7 @@ class _MoneyConstants {
 
   static final antiAirGunBuildCost = MoneyUnit(currency: 105, industryPoints: 21);
   static final barbedWireBuildCost = MoneyUnit(currency: 20, industryPoints: 4);
-  static final landFortBuildCost = MoneyUnit(currency: 150, industryPoints: 30);
+  static final landFortBuildCost = MoneyUnit(currency: 250, industryPoints: 50);
   static final landMineBuildCost = MoneyUnit(currency: 36, industryPoints: 7);
   static final seaMineBuildCost = MoneyUnit(currency: 48, industryPoints: 12);
   static final trenchBuildCost = MoneyUnit(currency: 20, industryPoints: 4);

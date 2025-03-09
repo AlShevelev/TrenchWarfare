@@ -84,7 +84,7 @@
   "barbed_wire_card_name": "Barbed wire",
   "barbed_wire_card_description": "Barbed wire is a cheap but versatile means of defense. It not only reduces the speed of enemy units (except tanks) but also decreases the enemy's attack capabilities.",
   "land_fort_card_name": "Land fort",
-  "land_fort_card_description": "The Ground Fort can make even the weakest unit invincible. It increases attack and defense capabilities, doubles health, and provides the unit with machine gun and artillery support.",
+  "land_fort_card_description": "The land fort can make even the weakest unit invincible. It increases attack and defense capabilities, doubles health, and provides the unit with machine gun, artillery and anti-air support.",
   "land_mine_field_card_name": "Land mine field",
   "land_mine_field_card_description": "A minefield is a cheap way to disrupt an enemy attack. Unfortunately, minefields don't care who is friend or foe.",
   "sea_mine_field_card_name": "Sea mine field",

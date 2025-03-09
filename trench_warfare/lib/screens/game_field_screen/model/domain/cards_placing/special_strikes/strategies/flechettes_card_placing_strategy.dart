@@ -10,8 +10,9 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
   @override
   Unit? updateGameField() {
-    final hasAntiAir =
-        _cell.terrainModifier?.type == TerrainModifierType.antiAirGun || _cell.productionCenter != null;
+    final hasAntiAir = _cell.terrainModifier?.type == TerrainModifierType.antiAirGun ||
+        _cell.terrainModifier?.type == TerrainModifierType.landFort ||
+        _cell.productionCenter != null;
 
     Logger.info('FLECHETTES; hasAntiAir: $hasAntiAir', tag: 'SPECIAL_STRIKE');
 
