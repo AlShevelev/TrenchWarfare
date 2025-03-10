@@ -2,8 +2,8 @@ part of movement;
 
 /// Move through a mine field
 class MovementWithMineFieldCalculator extends MovementCalculator {
-  static const minPossibleDamage = 0.1; // of a unit's max health value
-  static const maxPossibleDamage = 0.5; // of a unit's max health value
+  static const minPossibleDamage = 0.5; // of a unit's max health value
+  static const maxPossibleDamage = 1.0; // of a unit's max health value
 
   MovementWithMineFieldCalculator({
     required super.nation,
