@@ -9,11 +9,14 @@ class _TransportCellWithFactors {
 
   final double unitMaxMovementPoints;
 
+  final UnitType type;
+
   _TransportCellWithFactors({
     required this.cell,
     required this.unitIndex,
     required this.unitPower,
     required this.unitMaxMovementPoints,
+    required this.type,
   });
 }
 
@@ -59,6 +62,7 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
             unitIndex: i,
             unitPower: UnitPowerEstimation.estimate(unit),
             unitMaxMovementPoints: unit.maxMovementPoints,
+            type: unit.type,
           ));
         }
       }
@@ -73,7 +77,8 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
     Logger.info('_TransportEstimator: ready to calculate a result', tag: 'MONEY_SPENDING');
     final result = cellsPossibleToBuildExt
         .map((c) => EstimationResult<_UnitBoosterEstimationData>(
-              weight: 1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints),
+              weight: _typeFactor(c.type) *
+                  (1.0 + c.unitPower + _maxMovementPointsToWeight(c.unitMaxMovementPoints)),
               data: _UnitBoosterEstimationData(
                 cell: c.cell,
                 type: _type,
@@ -89,5 +94,7 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
   double _maxMovementPointsToWeight(double maxMovementPoints) =>
       maxMovementPoints > Unit.absoluteMaxMovementPoints
           ? 0.0
-          : math.pow(Unit.absoluteMaxMovementPoints - maxMovementPoints, 1.5).toDouble();
+          : math.pow(Unit.absoluteMaxMovementPoints - maxMovementPoints, 3.0).toDouble();
+
+  double _typeFactor(UnitType type) => type == UnitType.artillery || type == UnitType.machineGuns ? 2.0 : 1.0;
 }
