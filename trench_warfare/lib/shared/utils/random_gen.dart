@@ -74,7 +74,7 @@ class RandomGen {
     return weights.length - 1;
   }
 
-  static void shiftItems<T>(List<T> itemsToShift) {
+  static Iterable<T> shiftItems<T>(List<T> itemsToShift) {
     if (itemsToShift.length > 2) {
       for (var i = 0; i < itemsToShift.length; i++) {
         final index1 = randomInt(itemsToShift.length);
@@ -85,5 +85,7 @@ class RandomGen {
         itemsToShift[index2] = a;
       }
     }
+
+    return itemsToShift;
   }
 }

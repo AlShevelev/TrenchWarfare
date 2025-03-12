@@ -32,27 +32,31 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
       return 0;
     }
 
+    const cellsMax = 5;
+
     final allEnemies = _metadata.getMyEnemies(_myNation);
 
     final pathFacade = PathFacade(_gameField);
 
-    _estimationResult = _gameField.cells
-        .where((c) => c.activeUnit?.type == UnitType.carrier && allEnemies.contains(c.nation))
-        .map((c) {
-          final pathLen = pathFacade.calculatePath(startCell: _cell, endCell: c).length;
+    for(final c in _gameField.cells) {
+      if (c.activeUnit?.type == UnitType.carrier && allEnemies.contains(c.nation)) {
+        final pathLen = pathFacade.calculatePath(startCell: _cell, endCell: c).length;
 
-          // Can't reach
-          if (pathLen == 0) {
-            return _CarrierInterceptionEstimationUnit(cell: c, weight: 0);
-          }
+        // Can't reach
+        if (pathLen == 0) {
+          continue;
+        }
 
-          final carrierStrength = UnitPowerEstimation.estimate(c.activeUnit!);
+        final carrierStrength = UnitPowerEstimation.estimate(c.activeUnit!);
 
-          final weight = _unit.maxMovementPoints * carrierStrength * (1.0 / pathLen);
-          return _CarrierInterceptionEstimationUnit(cell: c, weight: weight);
-        })
-        .where((c) => c.weight != 0)
-        .toList(growable: false);
+        final weight = _unit.maxMovementPoints * carrierStrength * (1.0 / pathLen);
+        _estimationResult.add(_CarrierInterceptionEstimationUnit(cell: c, weight: weight));
+
+        if (_estimationResult.length == cellsMax) {
+          break;
+        }
+      }
+    }
 
     return _estimationResult.map((i) => i.weight).average();
   }

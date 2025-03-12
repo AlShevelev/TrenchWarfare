@@ -23,21 +23,45 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    final allEnemyReachablePCs = _gameField.cells.where(
-        (c) => c.productionCenter != null && _unit.isLand == c.isLand && _allEnemies.contains(c.nation));
-
-    if (allEnemyReachablePCs.isEmpty) {
-      return 0;
-    }
-
     final pathFacade = PathFacade(_gameField);
 
-    final nearestEnemyPc = allEnemyReachablePCs
-        .map((c) => Tuple2(c, pathFacade.calculatePath(startCell: _cell, endCell: c).length))
-        .where((i) => i.item2 > 0)
-        .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
-        .firstOrNull
-        ?.item1;
+    const candidatesMax = 5;
+    var candidateCounter = 0;
+
+    GameFieldCellRead? nearestEnemyPc;
+    var minDistance = 1000000;
+
+    var radius = 1;
+
+    var cells = RandomGen.shiftItems(
+      _gameField.findCellsAroundR(_cell, radius: radius) as List<GameFieldCell>,
+    );
+
+    while(cells.isNotEmpty) {
+      for (final c in cells) {
+        if (c.productionCenter != null && _unit.isLand == c.isLand && _allEnemies.contains(c.nation)) {
+          final path = pathFacade.calculatePath(startCell: _cell, endCell: c);
+          if (path.isEmpty) {
+            continue;
+          }
+
+          if (path.length < minDistance) {
+            minDistance = path.length;
+            nearestEnemyPc = c;
+            candidateCounter++;
+          }
+        }
+      }
+
+      if (candidateCounter >= candidatesMax) {
+        break;
+      }
+
+      radius++;
+      cells = RandomGen.shiftItems(
+        _gameField.findCellsAroundR(_cell, radius: radius) as List<GameFieldCell>,
+      );
+    }
 
     if (nearestEnemyPc == null) {
       return 0;

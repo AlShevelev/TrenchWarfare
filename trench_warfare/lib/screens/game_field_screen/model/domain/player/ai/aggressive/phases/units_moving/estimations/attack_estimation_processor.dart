@@ -56,20 +56,32 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   Iterable<GameFieldCellRead> _getAllVictimCells() {
-    final allCellsAround = <GameFieldCellRead>[];
-    for (var r = 1; r <= _unit.maxMovementPoints; r++) {
-      allCellsAround.addAll(_gameField.findCellsAroundR(_cell, radius: r));
-    }
+    const cellsMax = 5;
 
     final pathFacade = PathFacade(_gameField);
 
-    return allCellsAround
-        .where((c) =>
-            c.activeUnit != null &&
+    final cellCandidates = <GameFieldCellRead>[];
+
+    for (var r = 1; r <= _unit.maxMovementPoints; r++) {
+      final cells = RandomGen.shiftItems(
+        _gameField.findCellsAroundR(_cell, radius: r) as List<GameFieldCell>,
+      );
+
+      for (final c in cells) {
+        if (c.activeUnit != null &&
             c.nation != _myNation &&
             _isEnemyCell(c) &&
-            pathFacade.canReach(_unit, startCell: _cell, endCell: c) != null)
-        .toList(growable: false);
+            pathFacade.canReach(_unit, startCell: _cell, endCell: c) != null) {
+          cellCandidates.add(c);
+
+          if (cellCandidates.length == cellsMax) {
+            return cellCandidates;
+          }
+        }
+      }
+    }
+
+    return cellCandidates;
   }
 
   double _calculateWeight(

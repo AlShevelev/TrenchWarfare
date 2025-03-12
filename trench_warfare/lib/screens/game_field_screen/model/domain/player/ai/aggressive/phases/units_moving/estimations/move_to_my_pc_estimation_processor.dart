@@ -23,29 +23,51 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    final allMyReachablePCsInDanger = _gameField.cells
-        .where((c) => c.nation == _myNation && c.productionCenter != null && _unit.isLand == c.isLand)
-        .where((c) {
-      final influenceCell = _influences.getItem(c.row, c.col);
-
-      final myInfluence = _getMyInfluence(influenceCell);
-      final enemyInfluence = _getOpponentsInfluence(influenceCell);
-
-      return enemyInfluence > 0 && enemyInfluence >= myInfluence;
-    });
-
-    if (allMyReachablePCsInDanger.isEmpty) {
-      return 0;
-    }
-
     final pathFacade = PathFacade(_gameField);
 
-    final nearestPcInDanger = allMyReachablePCsInDanger
-        .map((c) => Tuple2(c, pathFacade.calculatePath(startCell: _cell, endCell: c).length))
-        .where((i) => i.item2 > 0)
-        .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
-        .firstOrNull
-        ?.item1;
+    const candidatesMax = 5;
+    var candidateCounter = 0;
+
+    GameFieldCellRead? nearestPcInDanger;
+    var minDistance = 1000000;
+
+    var radius = 1;
+
+    var cells = RandomGen.shiftItems(
+      _gameField.findCellsAroundR(_cell, radius: radius) as List<GameFieldCell>,
+    );
+
+    while(cells.isNotEmpty) {
+      for (final c in cells) {
+        if (c.nation == _myNation && c.productionCenter != null && _unit.isLand == c.isLand) {
+          final influenceCell = _influences.getItem(c.row, c.col);
+          final myInfluence = _getMyInfluence(influenceCell);
+          final enemyInfluence = _getOpponentsInfluence(influenceCell);
+
+          if (enemyInfluence > 0 && enemyInfluence >= myInfluence) {
+            final path = pathFacade.calculatePath(startCell: _cell, endCell: c);
+            if (path.isEmpty) {
+              continue;
+            }
+
+            if (path.length < minDistance) {
+              minDistance = path.length;
+              nearestPcInDanger = c;
+              candidateCounter++;
+            }
+          }
+        }
+      }
+
+      if (candidateCounter >= candidatesMax) {
+        break;
+      }
+
+      radius++;
+      cells = RandomGen.shiftItems(
+        _gameField.findCellsAroundR(_cell, radius: radius) as List<GameFieldCell>,
+      );
+    }
 
     if (nearestPcInDanger == null) {
       return 0;
