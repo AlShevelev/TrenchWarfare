@@ -46,7 +46,7 @@ class StableUnitsIterator implements Iterator<UnitOnCell> {
     }
   }
 
-  int getTotalItems() => _gameFieldCells.map((c) => c.units.length).sum;
+  int getTotalItems() => _gameFieldCells.map((c) => c.units.length).sum - _excludedUnits.length;
 
   @override
   bool moveNext() {

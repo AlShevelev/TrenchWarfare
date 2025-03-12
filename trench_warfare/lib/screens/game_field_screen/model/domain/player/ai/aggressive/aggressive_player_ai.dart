@@ -76,7 +76,17 @@ class AggressivePlayerAi extends PlayerAi {
           .map((t) => t.transportingUnits)
           .expand((i) => i)
           .map((u) => u)
-          .toList(growable: false);
+          .toList(growable: true);
+
+      for (final c in _gameField.cells) {
+        if (c.nation == _myNation && c.activeUnit != null) {
+          for (final u in c.units) {
+            if (u.isInDefenceMode) {
+              unitsExcludedToMove.add(u);
+            }
+          }
+        }
+      }
 
       Logger.info('UnitsMovingPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
       await UnitsMovingPhase(

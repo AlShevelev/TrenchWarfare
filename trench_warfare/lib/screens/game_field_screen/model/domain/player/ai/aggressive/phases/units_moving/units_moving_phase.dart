@@ -64,7 +64,7 @@ class UnitsMovingPhase implements TurnPhase {
           (data) => InfluenceMapRepresentation()..calculateFull(data), _gameField);
 
       // the unit is not dead and can move
-      while (cellWithUnit != null && unit.state != UnitState.disabled) {
+      while (cellWithUnit != null && unit.state != UnitState.disabled && !unit.isInDefenceMode) {
         Logger.info('processing unit: $unit on cell: $cellWithUnit', tag: 'UNITS_MOVING');
 
         Logger.info('influence map is recalculated', tag: 'UNITS_MOVING');
