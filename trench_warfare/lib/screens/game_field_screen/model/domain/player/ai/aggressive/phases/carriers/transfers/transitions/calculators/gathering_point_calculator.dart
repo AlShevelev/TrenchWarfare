@@ -90,7 +90,7 @@ class _GatheringPointCalculator {
 
         for (final cellWithUnit in allMyCellWithUnitsSorted) {
           for (final unitCandidate in cellWithUnit.units) {
-            if (!unitCandidate.isLand) {
+            if (!unitCandidate.isLand || unitCandidate.isInDefenceMode) {
               continue;
             }
 
@@ -155,7 +155,7 @@ class _GatheringPointCalculator {
 
     for (final cellWithUnit in allMyCellWithUnitsSorted) {
       for (final unitCandidate in cellWithUnit.units) {
-        if (!unitCandidate.isLand) {
+        if (!unitCandidate.isLand || unitCandidate.isInDefenceMode) {
           continue;
         }
 
