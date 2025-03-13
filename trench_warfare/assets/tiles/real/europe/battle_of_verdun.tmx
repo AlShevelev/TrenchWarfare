@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="25" height="20" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="141">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="25" height="20" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="144">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Battle of Verdun&quot;, &quot;ru&quot;: &quot;Битва при Вердене&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Battle of Verdun was a series of military actions by German and French troops during World War I on the Western Front. It was one of the largest and one of the bloodiest military operations in World War I.\n\nDuring the battle, French troops managed to repel a large-scale offensive by German troops in the vicinity of the city of Verdun.&quot;, &quot;ru&quot;: &quot;Битва при Вердене — совокупность боевых действий немецких и французских войск во время Первой мировой войны на Западном фронте. Это одна из крупнейших и одна из самых кровопролитных военных операций в Первой мировой войне.\n\nВ ходе сражения французские войска сумели отразить широкомасштабное наступление немецких войск в окрестностях города Вердена.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1916-02-21&quot;, &quot;to&quot;: &quot;1916-12-18&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 3000 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 3000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
@@ -1069,30 +1069,10 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="32"/>
-    <property name="unit1" type="object" value="45"/>
-    <property name="unit2" type="object" value="45"/>
-    <property name="unit3" type="object" value="45"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="130" name="france" type="ownership" gid="119" x="721.487" y="608.799" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="32"/>
-    <property name="unit1" type="object" value="45"/>
-    <property name="unit2" type="object" value="45"/>
-    <property name="unit3" type="object" value="45"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="131" name="france" type="ownership" gid="119" x="772.045" y="642.91" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="32"/>
-    <property name="unit1" type="object" value="45"/>
-    <property name="unit2" type="object" value="45"/>
-    <property name="unit3" type="object" value="45"/>
-    <property name="unit4" type="object" value="0"/>
+    <property name="unit1" type="object" value="141"/>
+    <property name="unit2" type="object" value="141"/>
+    <property name="unit3" type="object" value="141"/>
+    <property name="unit4" type="object" value="45"/>
    </properties>
   </object>
   <object id="134" name="france" type="ownership" gid="119" x="166.167" y="866.611" width="64" height="64">
@@ -1165,6 +1145,38 @@
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="141" name="infantry" type="unit" gid="99" x="728.549" y="670.151" width="47.6793" height="49.8254">
+   <properties>
+    <property name="boost1" value="defence"/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="142" name="france" type="ownership" gid="119" x="718" y="614.497" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="32"/>
+    <property name="unit1" type="object" value="141"/>
+    <property name="unit2" type="object" value="141"/>
+    <property name="unit3" type="object" value="141"/>
+    <property name="unit4" type="object" value="45"/>
+   </properties>
+  </object>
+  <object id="143" name="france" type="ownership" gid="119" x="776.121" y="647.14" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="32"/>
+    <property name="unit1" type="object" value="141"/>
+    <property name="unit2" type="object" value="141"/>
+    <property name="unit3" type="object" value="141"/>
+    <property name="unit4" type="object" value="45"/>
    </properties>
   </object>
  </objectgroup>
