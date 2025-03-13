@@ -7,6 +7,7 @@ import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/cover/cover_screen_button.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 class CoverScreen extends StatefulWidget {
   const CoverScreen({super.key});
@@ -96,7 +97,7 @@ class _CoverScreenState extends State<CoverScreen> {
                   },
                 ),
               ),
-            if (kDebugMode)
+            if (!Logger.turnedOff)
               Padding(
                 padding: buttonsPadding,
                 child: CoverScreenButton(

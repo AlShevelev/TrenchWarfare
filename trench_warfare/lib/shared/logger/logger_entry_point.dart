@@ -3,8 +3,10 @@ part of logger;
 class Logger {
   static late final Talker talkerFlutter;
 
+  static const bool turnedOff = appFlavor != 'withLog';
+
   static void init() {
-    if (!kDebugMode) return;
+    if (turnedOff) return;
 
     talkerFlutter = Talker(
       history: _TalkerDbHistory(dao: Database.talkerHistoryDao),
@@ -66,7 +68,7 @@ class Logger {
     StackTrace? stackTrace,
     required LogLevel level,
   }) {
-    if (!kDebugMode) return;
+    if (turnedOff) return;
 
     final resultMessage = tag == null ? message : '[$tag] $message';
     talkerFlutter.log(resultMessage, logLevel: level, exception: exception, stackTrace: stackTrace);

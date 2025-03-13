@@ -58,6 +58,16 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    flavorDimensions "logging"
+    productFlavors {
+        withLog {
+            dimension "logging"
+        }
+        withoutLog {
+            dimension "logging"
+        }
+    }
 }
 
 flutter {

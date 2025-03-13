@@ -1,6 +1,6 @@
 library logger;
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:trench_warfare/database/dao/talker_history_dao.dart';
 import 'package:trench_warfare/database/database.dart';
