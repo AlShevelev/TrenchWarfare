@@ -3,11 +3,13 @@ part of pathfinding;
 class SeaFindPathSettings implements FindPathSettings {
   final GameFieldCellRead _startCell;
 
-  final UnitType _unit;
+  final Unit _unit;
+
+  UnitType get _unitType => _unit.type;
 
   SeaFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
       : _startCell = startCell,
-        _unit = calculatedUnit.type;
+        _unit = calculatedUnit;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
@@ -17,7 +19,7 @@ class SeaFindPathSettings implements FindPathSettings {
 
     // Try to avoid mine fields
     if (nextCell.terrainModifier?.type == TerrainModifierType.seaMine) {
-      return 8;
+      return _getMineFactor();
     }
 
     // Try to avoid enemy formations
@@ -30,7 +32,7 @@ class SeaFindPathSettings implements FindPathSettings {
 
   @override
   bool isCellReachable(GameFieldCellRead cell) =>
-      SeaFindPathSettings.isCellReachableStatic(_unit, cell: cell, startCell: _startCell);
+      SeaFindPathSettings.isCellReachableStatic(_unitType, cell: cell, startCell: _startCell);
 
   static bool canContainSeaUnit(GameFieldCellRead cell) => !(cell.isLand && !cell.hasRiver);
 
@@ -54,5 +56,22 @@ class SeaFindPathSettings implements FindPathSettings {
     }
 
     return true;
+  }
+
+  double _getMineFactor() {
+    const minValue = 1.0;
+    const maxValue = 8.0;
+
+    final factor = UnitPowerEstimation.estimate(_unit) * maxValue / UnitPowerEstimation.maxSeaPower;
+
+    if (factor < minValue) {
+      return minValue;
+    }
+
+    if (factor > maxValue) {
+      return maxValue;
+    }
+
+    return factor;
   }
 }

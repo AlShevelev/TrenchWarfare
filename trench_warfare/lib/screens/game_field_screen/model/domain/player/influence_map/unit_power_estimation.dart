@@ -1,6 +1,10 @@
-part of  influence_map;
+part of influence_map;
 
 class UnitPowerEstimation {
+  static final maxLandPower = _estimateUnit(_getMostPowerfulLandUnit());
+
+  static final maxSeaPower = _estimateUnit(_getMostPowerfulSeaUnit());
+
   static double estimate(Unit unit) {
     if (unit is Carrier) {
       return _estimateCarrier(unit);
@@ -19,7 +23,7 @@ class UnitPowerEstimation {
 
     result += unit.attack * boostFactor;
     result += unit.defence * boostFactor;
-    result += boostFactor * (unit.damage.min + unit.damage.max) /  2;
+    result += boostFactor * (unit.damage.min + unit.damage.max) / 2;
 
     if (unit.hasBoost(UnitBoost.attack)) {
       result += boostFactor;
@@ -41,14 +45,37 @@ class UnitPowerEstimation {
       result += boostFactor;
     }
 
-    result += boostFactor * switch(unit.experienceRank) {
-      UnitExperienceRank.rookies => 0,
-      UnitExperienceRank.fighters => 0.5,
-      UnitExperienceRank.proficients => 1,
-      UnitExperienceRank.veterans => 1.5,
-      UnitExperienceRank.elite => 2,
-    };
+    result += boostFactor *
+        switch (unit.experienceRank) {
+          UnitExperienceRank.rookies => 0,
+          UnitExperienceRank.fighters => 0.5,
+          UnitExperienceRank.proficients => 1,
+          UnitExperienceRank.veterans => 1.5,
+          UnitExperienceRank.elite => 2,
+        };
 
     return result;
   }
+
+  static Unit _getMostPowerfulLandUnit() => Unit(
+      boost1: UnitBoost.attack,
+      boost2: UnitBoost.defence,
+      boost3: UnitBoost.commander,
+      experienceRank: UnitExperienceRank.elite,
+      fatigue: 1.0,
+      health: 1.0,
+      movementPoints: 1.0,
+      type: UnitType.tank,
+    );
+
+  static Unit _getMostPowerfulSeaUnit() => Unit(
+    boost1: UnitBoost.attack,
+    boost2: UnitBoost.defence,
+    boost3: UnitBoost.commander,
+    experienceRank: UnitExperienceRank.elite,
+    fatigue: 1.0,
+    health: 1.0,
+    movementPoints: 1.0,
+    type: UnitType.battleship,
+  );
 }

@@ -3,11 +3,13 @@ part of pathfinding;
 class LandFindPathSettings implements FindPathSettings {
   final GameFieldCellRead _startCell;
 
-  final UnitType _unit;
+  final Unit _unit;
+
+  UnitType get _unitType => _unit.type;
 
   LandFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
       : _startCell = startCell,
-        _unit = calculatedUnit.type;
+        _unit = calculatedUnit;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
@@ -29,7 +31,7 @@ class LandFindPathSettings implements FindPathSettings {
     // Try to avoid mine fields
     final terrainModifier = nextCell.terrainModifier?.type;
     if (terrainModifier == TerrainModifierType.landMine) {
-      return 8;
+      return _getMineFactor();
     }
 
     // Try to avoid trenches
@@ -39,7 +41,7 @@ class LandFindPathSettings implements FindPathSettings {
     }
 
     // Try to avoid barbed wire
-    if (nextCellIsEnemy && terrainModifier == TerrainModifierType.barbedWire && _unit != UnitType.tank) {
+    if (nextCellIsEnemy && terrainModifier == TerrainModifierType.barbedWire && _unitType != UnitType.tank) {
       return 8;
     }
 
@@ -69,7 +71,7 @@ class LandFindPathSettings implements FindPathSettings {
 
   @override
   bool isCellReachable(GameFieldCellRead cell) => LandFindPathSettings.isCellReachableStatic(
-        _unit,
+        _unitType,
         startCell: _startCell,
         cell: cell,
       );
@@ -139,7 +141,7 @@ class LandFindPathSettings implements FindPathSettings {
   double? _calculateForTerrain(GameFieldCellRead nextCell) {
     return switch (nextCell.terrain) {
       CellTerrain.plain => 1,
-      CellTerrain.wood => switch (_unit) {
+      CellTerrain.wood => switch (_unitType) {
           UnitType.infantry => 1.25,
           UnitType.machineGuns => 2,
           UnitType.cavalry => 1.4,
@@ -149,13 +151,13 @@ class LandFindPathSettings implements FindPathSettings {
           UnitType.tank => 2,
           _ => null,
         },
-      CellTerrain.marsh => switch (_unit) {
+      CellTerrain.marsh => switch (_unitType) {
           UnitType.infantry => 2,
           UnitType.machineGuns => 2,
           UnitType.cavalry => 2,
           _ => null,
         },
-      CellTerrain.sand => switch (_unit) {
+      CellTerrain.sand => switch (_unitType) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.4,
@@ -165,7 +167,7 @@ class LandFindPathSettings implements FindPathSettings {
           UnitType.tank => 1.25,
           _ => null,
         },
-      CellTerrain.hills => switch (_unit) {
+      CellTerrain.hills => switch (_unitType) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.25,
@@ -175,8 +177,8 @@ class LandFindPathSettings implements FindPathSettings {
           UnitType.tank => 1.25,
           _ => null,
         },
-      CellTerrain.mountains => switch (_unit) { UnitType.infantry => 2, _ => null },
-      CellTerrain.snow => switch (_unit) {
+      CellTerrain.mountains => switch (_unitType) { UnitType.infantry => 2, _ => null },
+      CellTerrain.snow => switch (_unitType) {
           UnitType.infantry => 1.4,
           UnitType.machineGuns => 1.7,
           UnitType.cavalry => 1.25,
@@ -188,5 +190,22 @@ class LandFindPathSettings implements FindPathSettings {
         },
       _ => null,
     };
+  }
+
+  double _getMineFactor() {
+    const minValue = 1.0;
+    const maxValue = 8.0;
+
+    final factor = UnitPowerEstimation.estimate(_unit) * maxValue / UnitPowerEstimation.maxLandPower;
+
+    if (factor < minValue) {
+      return minValue;
+    }
+
+    if (factor > maxValue) {
+      return maxValue;
+    }
+
+    return factor;
   }
 }
