@@ -193,7 +193,7 @@ class PathFacade {
 
     if (calculatedUnit.isLand && startCell.isLand) {
       return !LandFindPathSettings.isCellReachableStatic(
-        startCell.activeUnit!.type,
+        calculatedUnit.type,
         startCell: startCell,
         cell: endCell,
       );

@@ -22,5 +22,5 @@ class MovementResultItem {
   });
 
   @override
-  String toString() => 'MOVEMENT_RESULT_ITEM: { unit: ${unit.toStringBrief()}; cell: ${cell.toStringBrief()}; nation: $nation';
+  String toString() => 'MOVEMENT_RESULT_ITEM: { unit: ${unit.toStringBrief()}; cell: ${cell.toStringBrief()}; nation: $nation; type: $type';
 }
