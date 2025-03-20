@@ -8,6 +8,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
     required super.actions,
     required super.myNation,
     required super.gameField,
+    required super.pathFacade,
   }) : _state = state;
 
   @override
@@ -40,8 +41,7 @@ class _LoadingToCarrierTransition extends _TroopTransferTransition {
 
     // An empty path means something weird happened (for example, the carrier has flown away due to
     // attack by some enemy unit)
-    final pathFacade = PathFacade(_gameField);
-    final paths = unitsOnCells.map((u) => pathFacade.calculatePathForUnit(
+    final paths = unitsOnCells.map((u) => _pathFacade.calculatePathForUnit(
           startCell: u.item2!,
           endCell: cellWithSelectedCarrier,
           calculatedUnit: u.item1,

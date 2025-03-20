@@ -13,7 +13,7 @@ class FromMovingInProgressOnAnimationCompleted {
         ]);
 
         _context.controlsState.update(DefeatControls(
-          nation: _context.nation,
+          nation: _context.myNation,
           isGlobal: true,
         ));
       } else {
@@ -22,7 +22,7 @@ class FromMovingInProgressOnAnimationCompleted {
         ]);
 
         _context.controlsState.update(WinControls(
-          nation: _context.nation,
+          nation: _context.myNation,
         ));
       }
 

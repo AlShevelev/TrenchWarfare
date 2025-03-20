@@ -1,97 +1,109 @@
 import 'package:flame/components.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/cell_terrain.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/influence_map/influence_map_library.dart';
 
 import 'assert.dart';
+import 'influence_map_test.mocks.dart';
 
-GameField _createEmptyGameField(CellTerrain Function(int, int) terrainAction) {
-  const rows = 7;
-  const cols = 7;
+@GenerateMocks([MapMetadataRead])
+void main() {
+  GameField createEmptyGameField(CellTerrain Function(int, int) terrainAction) {
+    const rows = 7;
+    const cols = 7;
 
-  final List<GameFieldCell> cells = [];
-  for (var i = 0; i < rows; i++) {
-    for (var j = 0; j < cols; j++) {
-      cells.add(
-          GameFieldCell(
-            terrain: terrainAction(i, j),
-            hasRiver: false,
-            hasRoad: false,
-            center: Vector2.zero(),
-            row: i,
-            col: j,
-          )
-      );
+    final List<GameFieldCell> cells = [];
+    for (var i = 0; i < rows; i++) {
+      for (var j = 0; j < cols; j++) {
+        cells.add(GameFieldCell(
+          terrain: terrainAction(i, j),
+          hasRiver: false,
+          hasRoad: false,
+          center: Vector2.zero(),
+          row: i,
+          col: j,
+        ));
+      }
+    }
+
+    return GameField(cells, rows: rows, cols: cols);
+  }
+
+  InfluenceMapRepresentation createEmptyInfluenceMap(Nation nation, MapMetadataRead metadata) =>
+    InfluenceMapRepresentation(
+        myNation: nation,
+        metadata: metadata,
+    );
+
+  void assertLand(InfluenceMapItemRead item, Nation nation, {double? power}) {
+    Assert.isNull(item.getCarrier(nation));
+    Assert.isNull(item.getSea(nation));
+
+    if (power != null) {
+      Assert.equalsDouble(expected: power, actual: item.getLand(nation)!);
+    } else {
+      Assert.isNull(item.getLand(nation));
     }
   }
 
-  return GameField(cells, rows: rows, cols: cols);
-}
-
-InfluenceMapRepresentation _createEmptyInfluenceMap() => InfluenceMapRepresentation();
-
-void assertLand(InfluenceMapItemRead item, Nation nation, {double? power}) {
-  Assert.isNull(item.getCarrier(nation));
-  Assert.isNull(item.getSea(nation));
-
-  if (power != null) {
-    Assert.equalsDouble(expected: power, actual: item.getLand(nation)!);
-  } else {
-    Assert.isNull(item.getLand(nation));
-  }
-}
-
-void assertSea(InfluenceMapItemRead item, Nation nation, {double? power}) {
-  Assert.isNull(item.getCarrier(nation));
-  Assert.isNull(item.getLand(nation));
-
-  if (power != null) {
-    Assert.equalsDouble(expected: power, actual: item.getSea(nation)!);
-  } else {
-    Assert.isNull(item.getSea(nation));
-  }
-}
-
-void assertCarrier(InfluenceMapItemRead item, Nation nation, {double? power}) {
-  Assert.isNull(item.getLand(nation));
-  Assert.isNull(item.getSea(nation));
-
-  if (power != null) {
-    Assert.equalsDouble(expected: power, actual: item.getCarrier(nation)!);
-  } else {
+  void assertSea(InfluenceMapItemRead item, Nation nation, {double? power}) {
     Assert.isNull(item.getCarrier(nation));
-  }
-}
+    Assert.isNull(item.getLand(nation));
 
-void assertLandEquals(InfluenceMapItemRead item1, InfluenceMapItemRead item2, Nation nation) {
-  final land1Value = item1.getLand(nation);
-  final land2Value = item2.getLand(nation);
-
-  if ((land1Value == null && land2Value != null) || (land1Value != null && land2Value == null)) {
-    Assert.isTrue(false);
-    return;
+    if (power != null) {
+      Assert.equalsDouble(expected: power, actual: item.getSea(nation)!);
+    } else {
+      Assert.isNull(item.getSea(nation));
+    }
   }
 
-  if (land1Value == null && land2Value == null) {
-    Assert.isTrue(true);
-    return;
+  void assertCarrier(InfluenceMapItemRead item, Nation nation, {double? power}) {
+    Assert.isNull(item.getLand(nation));
+    Assert.isNull(item.getSea(nation));
+
+    if (power != null) {
+      Assert.equalsDouble(expected: power, actual: item.getCarrier(nation)!);
+    } else {
+      Assert.isNull(item.getCarrier(nation));
+    }
   }
 
-  Assert.equalsDouble(expected: land1Value!, actual: land2Value!);
-}
+  void assertLandEquals(InfluenceMapItemRead item1, InfluenceMapItemRead item2, Nation nation) {
+    final land1Value = item1.getLand(nation);
+    final land2Value = item2.getLand(nation);
 
-void main() {
+    if ((land1Value == null && land2Value != null) || (land1Value != null && land2Value == null)) {
+      Assert.isTrue(false);
+      return;
+    }
+
+    if (land1Value == null && land2Value == null) {
+      Assert.isTrue(true);
+      return;
+    }
+
+    Assert.equalsDouble(expected: land1Value!, actual: land2Value!);
+  }
+
   group('Influence map tests', () {
     test('one land unit', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.plain);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
 
       final unitCell = gameField.getCell(3, 3);
       unitCell.addUnit(Unit.byType(UnitType.infantry));
@@ -121,10 +133,15 @@ void main() {
 
     test('two land units on the same cell', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.plain);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
 
       final unitCell = gameField.getCell(3, 3);
       unitCell.addUnit(Unit.byType(UnitType.infantry));
@@ -155,10 +172,15 @@ void main() {
 
     test('two land units on different cells', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.plain);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
 
       final unitCell = gameField.getCell(3, 2);
       unitCell.addUnit(Unit.byType(UnitType.infantry));
@@ -183,15 +205,22 @@ void main() {
 
     test('two land units of different nations', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.plain);
 
       const nation1 = Nation.usNorth;
+      const nation2 = Nation.usSouth;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation1, null)).thenReturn(false);
+      when(metadata.isAlly(nation1, nation1)).thenReturn(false);
+      when(metadata.isAlly(nation1, nation2)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation1, metadata);
+
       final unit1Cell = gameField.getCell(3, 2);
       unit1Cell.addUnit(Unit.byType(UnitType.infantry));
       unit1Cell.setNation(nation1);
 
-      const nation2 = Nation.usSouth;
       final unit2Cell = gameField.getCell(3, 4);
       unit2Cell.addUnit(Unit.byType(UnitType.infantry));
       unit2Cell.setNation(nation2);
@@ -217,7 +246,6 @@ void main() {
         assertLand(map.getItem(cell.row, cell.col), nation1, power: 4.8);
       }
 
-
       assertLand(map.getItem(unit2Cell.row, unit2Cell.col), nation2, power: 12);
 
       final radius1Cells2 = gameField.findCellsAround(unit2Cell);
@@ -238,10 +266,15 @@ void main() {
 
     test('one sea unit', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.water);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
 
       final unitCell = gameField.getCell(3, 3);
       unitCell.addUnit(Unit.byType(UnitType.battleship));
@@ -276,10 +309,15 @@ void main() {
 
     test('one empty carrier', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.water);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
 
       final unitCell = gameField.getCell(3, 3);
       unitCell.addUnit(Carrier.create());
@@ -314,22 +352,23 @@ void main() {
 
     test('two carriers with units', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.water);
-      final map = _createEmptyInfluenceMap();
+      final gameField = createEmptyGameField((row, col) => CellTerrain.water);
 
       const nation = Nation.usa;
 
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
+
+      final map = createEmptyInfluenceMap(nation, metadata);
+
       final unitCell = gameField.getCell(3, 3);
-      unitCell.addUnit(
-          Carrier.create()
-            ..addUnitAsActive(Unit.byType(UnitType.infantry))
-            ..addUnitAsActive(Unit.byType(UnitType.infantry))
-      );
-      unitCell.addUnit(
-          Carrier.create()
-            ..addUnitAsActive(Unit.byType(UnitType.infantry))
-            ..addUnitAsActive(Unit.byType(UnitType.infantry))
-      );
+      unitCell.addUnit(Carrier.create()
+        ..addUnitAsActive(Unit.byType(UnitType.infantry))
+        ..addUnitAsActive(Unit.byType(UnitType.infantry)));
+      unitCell.addUnit(Carrier.create()
+        ..addUnitAsActive(Unit.byType(UnitType.infantry))
+        ..addUnitAsActive(Unit.byType(UnitType.infantry)));
       unitCell.setNation(nation);
 
       // Act
@@ -363,9 +402,13 @@ void main() {
   group('recalculation', () {
     test('two land units on different cells', () {
       // Arrange
-      final gameField = _createEmptyGameField((row, col) => CellTerrain.plain);
+      final gameField = createEmptyGameField((row, col) => CellTerrain.plain);
 
       const nation = Nation.usa;
+
+      final metadata = MockMapMetadataRead();
+      when(metadata.isAlly(nation, nation)).thenReturn(false);
+      when(metadata.isAlly(nation, null)).thenReturn(false);
 
       final unit = Unit.byType(UnitType.infantry);
 
@@ -378,9 +421,9 @@ void main() {
       unit2Cell.setNation(nation);
 
       // Act
-      final map1 = _createEmptyInfluenceMap()..calculateFull(gameField);
+      final map1 = createEmptyInfluenceMap(nation, metadata)..calculateFull(gameField);
 
-      final map2 = _createEmptyInfluenceMap()..calculateFull(gameField);
+      final map2 = createEmptyInfluenceMap(nation, metadata)..calculateFull(gameField);
       map2.removeUnit(Unit.copy(unit), nation, unitCell);
       map2.addUnit(Unit.copy(unit), nation, unitCell);
 

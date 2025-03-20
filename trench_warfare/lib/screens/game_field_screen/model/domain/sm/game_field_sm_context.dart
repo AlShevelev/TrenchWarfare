@@ -3,7 +3,7 @@ part of game_field_sm;
 class GameFieldStateMachineContext {
   final GameFieldRead gameField;
 
-  final Nation nation;
+  final Nation myNation;
 
   final MoneyStorage money;
 
@@ -29,7 +29,7 @@ class GameFieldStateMachineContext {
 
   GameFieldStateMachineContext({
     required this.gameField,
-    required this.nation,
+    required this.myNation,
     required this.money,
     required this.mapMetadata,
     required this.gameFieldSettingsStorage,

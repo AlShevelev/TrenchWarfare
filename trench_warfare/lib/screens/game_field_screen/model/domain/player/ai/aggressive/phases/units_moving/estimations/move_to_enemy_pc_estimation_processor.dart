@@ -23,8 +23,6 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    final pathFacade = PathFacade(_gameField);
-
     const candidatesMax = 5;
     var candidateCounter = 0;
 
@@ -40,7 +38,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
     while(cells.isNotEmpty) {
       for (final c in cells) {
         if (c.productionCenter != null && _unit.isLand == c.isLand && _allEnemies.contains(c.nation)) {
-          final path = pathFacade.calculatePath(startCell: _cell, endCell: c);
+          final path = _pathFacade.calculatePath(startCell: _cell, endCell: c);
           if (path.isEmpty) {
             continue;
           }

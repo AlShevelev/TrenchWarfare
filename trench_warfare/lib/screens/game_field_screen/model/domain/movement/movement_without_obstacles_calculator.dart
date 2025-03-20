@@ -3,12 +3,13 @@ part of movement;
 /// Move from the start to the end without obstacles
 class MovementWithoutObstaclesCalculator extends MovementCalculator {
   MovementWithoutObstaclesCalculator({
-    required super.nation,
+    required super.myNation,
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
     required super.movementResultBridge,
+    required super.pathFacade,
   });
 
   @override
@@ -48,7 +49,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       );
     } else {
       _movementResultBridge?.addBefore(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(startUnit),
         cell: path.first,
       );
@@ -56,11 +57,11 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       GameFieldCell? cellWithCapturedPC;
 
       for (var cell in reachableCells) {
-        if (cell.nation != _nation && cell.productionCenter != null) {
+        if (cell.nation != _myNation && cell.productionCenter != null) {
           cellWithCapturedPC = cell;
         }
 
-        cell.setNation(_nation);
+        cell.setNation(_myNation);
       }
 
       _attachUnitAsActive(lastReachableCell, detachResult.unit);
@@ -93,14 +94,14 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
       }
 
       _movementResultBridge?.addAfter(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(detachResult.unit),
         cell: lastReachableCell,
       );
 
       if (detachResult.detachedFrom != null) {
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );

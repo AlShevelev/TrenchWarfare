@@ -3,11 +3,12 @@ part of movement;
 class MovementWithBattleNextUnreachableCell extends MovementCalculator {
   MovementWithBattleNextUnreachableCell({
     required super.gameField,
-    required super.nation,
+    required super.myNation,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
     required super.movementResultBridge,
+    required super.pathFacade,
   });
 
   @override
@@ -26,7 +27,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     final enemyNation = defendingCell.nation!;
 
     _movementResultBridge?.addBefore(
-      nation: _nation,
+      nation: _myNation,
       unit: Unit.copy(startUnit),
       cell: attackingCell,
     );
@@ -66,7 +67,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
       if (detachResult.detachedFrom != null) {
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: attackingCell,
         );
@@ -78,7 +79,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
       if (detachResult.detachedFrom != null) {
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: attackingCell,
         );
@@ -101,7 +102,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
 
       if (detachResult.detachedFrom != null) {
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: attackingCell,
         );
@@ -122,7 +123,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       _addAttackingUnitToCell(detachResult.unit, attackingCell);
 
       _movementResultBridge?.addAfter(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
         cell: attackingCell,
       );
@@ -135,7 +136,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       _addAttackingUnitToCell(detachResult.unit, attackingCell);
 
       _movementResultBridge?.addAfter(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
         cell: attackingCell,
       );
@@ -159,7 +160,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       _addAttackingUnitToCell(detachResult.unit, attackingCell);
 
       _movementResultBridge?.addAfter(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(detachResult.detachedFrom ?? detachResult.unit),
         cell: attackingCell,
       );
@@ -207,7 +208,7 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
     final rawBattleResult =
         UnitsBattleCalculator.calculateBattle(attacking: attackingUnit, defendingCell: defendingCell);
 
-    final battleResult = BattleResultCalculator(_gameField).calculateBattle(
+    final battleResult = BattleResultCalculator(_pathFacade).calculateBattle(
       attackingCell: attackingCell,
       defendingCell: defendingCell,
       battleResult: rawBattleResult,

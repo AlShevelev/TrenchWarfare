@@ -23,8 +23,6 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    final pathFacade = PathFacade(_gameField);
-
     const candidatesMax = 5;
     var candidateCounter = 0;
 
@@ -45,7 +43,7 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
           final enemyInfluence = _getOpponentsInfluence(influenceCell);
 
           if (enemyInfluence > 0 && enemyInfluence >= myInfluence) {
-            final path = pathFacade.calculatePath(startCell: _cell, endCell: c);
+            final path = _pathFacade.calculatePath(startCell: _cell, endCell: c);
             if (path.isEmpty) {
               continue;
             }

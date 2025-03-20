@@ -28,6 +28,9 @@ abstract class _UnitEstimationProcessorBase {
   @protected
   double get _balanceFactor => 1.0;
 
+  @protected
+  final PathFacade _pathFacade;
+
   _UnitEstimationProcessorBase({
     required PlayerActions actions,
     required InfluenceMapRepresentationRead influences,
@@ -42,7 +45,8 @@ abstract class _UnitEstimationProcessorBase {
         _cell = cell,
         _myNation = myNation,
         _metadata = metadata,
-        _gameField = gameField;
+        _gameField = gameField,
+        _pathFacade = PathFacade(gameField, myNation, metadata);
 
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
   double estimate() => _balanceFactor * _estimateInternal();

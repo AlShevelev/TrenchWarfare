@@ -7,9 +7,19 @@ class SeaFindPathSettings implements FindPathSettings {
 
   UnitType get _unitType => _unit.type;
 
-  SeaFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
-      : _startCell = startCell,
-        _unit = calculatedUnit;
+  final Nation _myNation;
+
+  final MapMetadataRead _metadata;
+
+  SeaFindPathSettings({
+    required GameFieldCellRead startCell,
+    required Unit calculatedUnit,
+    required Nation myNation,
+    required MapMetadataRead metadata,
+  })  : _startCell = startCell,
+        _unit = calculatedUnit,
+        _myNation = myNation,
+        _metadata = metadata;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
@@ -31,13 +41,20 @@ class SeaFindPathSettings implements FindPathSettings {
   }
 
   @override
-  bool isCellReachable(GameFieldCellRead cell) =>
-      SeaFindPathSettings.isCellReachableStatic(_unitType, cell: cell, startCell: _startCell);
+  bool isCellReachable(GameFieldCellRead cell) => SeaFindPathSettings.isCellReachableStatic(
+        _unitType,
+        _myNation,
+        _metadata,
+        cell: cell,
+        startCell: _startCell,
+      );
 
   static bool canContainSeaUnit(GameFieldCellRead cell) => !(cell.isLand && !cell.hasRiver);
 
   static bool isCellReachableStatic(
-    UnitType calculatedUnitType, {
+    UnitType calculatedUnitType,
+    Nation myNation,
+    MapMetadataRead metadata, {
     required GameFieldCellRead startCell,
     required GameFieldCellRead cell,
   }) {
@@ -52,6 +69,10 @@ class SeaFindPathSettings implements FindPathSettings {
     if (calculatedUnitType == UnitType.carrier &&
         cell.activeUnit != null &&
         startCell.nation != cell.nation) {
+      return false;
+    }
+
+    if (metadata.isAlly(myNation, cell.nation) && (cell.units.isNotEmpty || cell.productionCenter != null)) {
       return false;
     }
 

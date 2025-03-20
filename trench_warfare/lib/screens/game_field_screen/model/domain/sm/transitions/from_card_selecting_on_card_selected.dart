@@ -9,27 +9,27 @@ class FromCardSelectingOnCardsSelected {
     _context.controlsState.update(CardsPlacingControls(
       totalMoney: _context.money.totalSum,
       card: card,
-      nation: _context.nation,
+      nation: _context.myNation,
     ));
 
     final cellsImpossibleToBuild = switch (card) {
       GameFieldControlsUnitCard() ||
       GameFieldControlsUnitCardBrief() =>
-        UnitBuildCalculator(_context.gameField, _context.nation).getAllCellsImpossibleToBuild(
+        UnitBuildCalculator(_context.gameField, _context.myNation).getAllCellsImpossibleToBuild(
           card.type,
           _context.money.totalSum,
         ),
       GameFieldControlsProductionCentersCard() ||
       GameFieldControlsProductionCentersCardBrief() =>
-        ProductionCentersBuildCalculator(_context.gameField, _context.nation)
+        ProductionCentersBuildCalculator(_context.gameField, _context.myNation)
             .getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       GameFieldControlsTerrainModifiersCard() ||
       GameFieldControlsTerrainModifiersCardBrief() =>
-        TerrainModifierBuildCalculator(_context.gameField, _context.nation)
+        TerrainModifierBuildCalculator(_context.gameField, _context.myNation)
             .getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       GameFieldControlsUnitBoostersCard() ||
       GameFieldControlsUnitBoostersCardBrief() =>
-        UnitBoosterBuildCalculator(_context.gameField, _context.nation).getAllCellsImpossibleToBuild(
+        UnitBoosterBuildCalculator(_context.gameField, _context.myNation).getAllCellsImpossibleToBuild(
           card.type,
           _context.money.totalSum,
         ),
@@ -37,7 +37,7 @@ class FromCardSelectingOnCardsSelected {
       GameFieldControlsSpecialStrikesCardBrief() =>
         SpecialStrikesBuildCalculator(
           _context.gameField,
-          _context.nation,
+          _context.myNation,
           _context.mapMetadata,
         ).getAllCellsImpossibleToBuild(card.type, _context.money.totalSum),
       _ => throw UnsupportedError(''),

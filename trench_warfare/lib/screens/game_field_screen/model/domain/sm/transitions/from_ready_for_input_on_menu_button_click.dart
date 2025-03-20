@@ -7,7 +7,7 @@ class FromReadyForInputOnMenuButtonClick {
 
   State process() {
     _context.controlsState.update(MenuControls(
-      nation: _context.nation,
+      nation: _context.myNation,
       day: _context.dayStorage.day,
     ));
 

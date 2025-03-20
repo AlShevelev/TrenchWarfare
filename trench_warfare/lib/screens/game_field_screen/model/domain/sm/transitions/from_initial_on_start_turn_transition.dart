@@ -11,7 +11,7 @@ class FromInitialOnStarTurnTransition {
     }
 
     _context.controlsState.update(StartTurnControls(
-      nation: _context.nation,
+      nation: _context.myNation,
       day: _context.dayStorage.day,
     ));
 

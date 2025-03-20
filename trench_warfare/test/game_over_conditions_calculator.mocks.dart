@@ -245,6 +245,38 @@ class MockMapMetadataRead extends _i1.Mock implements _i6.MapMetadataRead {
       ) as bool);
 
   @override
+  bool isNeutral(
+    _i5.Nation? nation1,
+    _i5.Nation? nation2,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #isNeutral,
+          [
+            nation1,
+            nation2,
+          ],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  bool isAlly(
+    _i5.Nation? nation1,
+    _i5.Nation? nation2,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #isAlly,
+          [
+            nation1,
+            nation2,
+          ],
+        ),
+        returnValue: false,
+      ) as bool);
+
+  @override
   List<_i5.Nation> getAllAggressive() => (super.noSuchMethod(
         Invocation.method(
           #getAllAggressive,
@@ -263,9 +295,10 @@ class MockMapMetadataRead extends _i1.Mock implements _i6.MapMetadataRead {
       ) as List<_i5.Nation>);
 
   @override
-  List<_i5.Nation> getAlliedAndNeutral(_i5.Nation? myNation) => (super.noSuchMethod(
+  List<_i5.Nation> getAlliedAndNeutral(_i5.Nation? myNation) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #getMyNotEnemies,
+          #getAlliedAndNeutral,
           [myNation],
         ),
         returnValue: <_i5.Nation>[],

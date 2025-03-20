@@ -8,7 +8,7 @@ class FromReadyForInputOnClick {
   State process(GameFieldCell cell) {
     final unit = cell.activeUnit;
 
-    if (cell.nation != _context.nation) {
+    if (cell.nation != _context.myNation) {
       return ReadyForInput();
     }
 
@@ -27,15 +27,15 @@ class FromReadyForInputOnClick {
       _context.updateGameObjectsEvent.update(events);
     }
 
-    final armyInfo = cell.nation == _context.nation && cell.units.length > 1
+    final armyInfo = cell.nation == _context.myNation && cell.units.length > 1
         ? GameFieldControlsArmyInfo(
       cellId: cell.id,
       units: cell.units.toList(growable: true),
-      nation: _context.nation,
+      nation: _context.myNation,
     )
         : null;
 
-    final carrierInfo = cell.nation == _context.nation &&
+    final carrierInfo = cell.nation == _context.myNation &&
         unit.type == UnitType.carrier &&
         (unit as Carrier).hasUnits
         ? CarrierPanelCalculator.calculatePanel(unit, cell)
@@ -47,7 +47,7 @@ class FromReadyForInputOnClick {
         cellInfo: null,
         armyInfo: armyInfo,
         carrierInfo: carrierInfo,
-        nation: _context.nation,
+        nation: _context.myNation,
         showDismissButton: true,
       ),
     );

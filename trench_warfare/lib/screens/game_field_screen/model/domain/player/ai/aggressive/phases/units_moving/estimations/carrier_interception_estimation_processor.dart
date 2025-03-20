@@ -36,11 +36,9 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
 
     final allEnemies = _metadata.getMyEnemies(_myNation);
 
-    final pathFacade = PathFacade(_gameField);
-
     for(final c in _gameField.cells) {
       if (c.activeUnit?.type == UnitType.carrier && allEnemies.contains(c.nation)) {
-        final pathLen = pathFacade.calculatePath(startCell: _cell, endCell: c).length;
+        final pathLen = _pathFacade.calculatePath(startCell: _cell, endCell: c).length;
 
         // Can't reach
         if (pathLen == 0) {

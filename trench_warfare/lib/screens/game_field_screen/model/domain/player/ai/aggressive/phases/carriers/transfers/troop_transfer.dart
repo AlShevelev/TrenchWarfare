@@ -32,6 +32,7 @@ abstract interface class TroopTransferReadForSaving {
 
 class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
   final GameFieldCellRead _targetCell;
+
   @override
   GameFieldCellRead get targetCell => _targetCell;
 
@@ -51,6 +52,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
   String get stateAlias => _currentState.stateAlias;
 
   final String _id;
+
   @override
   String get id => _id;
 
@@ -171,6 +173,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
             myNation: _myNation,
             transfersStorage: _transfersStorage,
             myTransferId: _id,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateGathering() => _GatheringTransition(
             state: _currentState as _StateGathering,
@@ -179,24 +182,28 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
             gameField: _gameField,
             myTransferId: _id,
             transfersStorage: _transfersStorage,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateLoadingToCarrier() => _LoadingToCarrierTransition(
             state: _currentState as _StateLoadingToCarrier,
             actions: _actions,
             myNation: _myNation,
             gameField: _gameField,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateTransporting() => _TransportingTransition(
             state: _currentState as _StateTransporting,
             actions: _actions,
             gameField: _gameField,
             myNation: _myNation,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateLanding() => _LandingTransition(
             state: _currentState as _StateLanding,
             actions: _actions,
             gameField: _gameField,
             myNation: _myNation,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateMoveUnitsAfterLanding() => _MovementAfterLadingTransition(
             state: _currentState as _StateMoveUnitsAfterLanding,
@@ -204,6 +211,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
             gameField: _gameField,
             myNation: _myNation,
             metadata: _metadata,
+            pathFacade: PathFacade(_gameField, _myNation, _metadata),
           ),
         _StateCompleted() => throw UnsupportedError('This state is not supported'),
       };

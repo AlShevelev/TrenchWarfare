@@ -16,7 +16,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
     final List<UpdateGameEvent> events = [];
 
     final cellsToIterate = _context.gameField.cells
-        .where((c) => c.nation == _context.nation && c.units.isNotEmpty)
+        .where((c) => c.nation == _context.myNation && c.units.isNotEmpty)
         .toList(growable: false);
 
     RandomGen.shiftItems(cellsToIterate);
@@ -61,7 +61,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
         cellInfo: null,
         armyInfo: null,
         carrierInfo: null,
-        nation: _context.nation,
+        nation: _context.myNation,
         showDismissButton: false,
       ),
     );

@@ -6,12 +6,13 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
   static const maxPossibleDamage = 1.0; // of a unit's max health value
 
   MovementWithMineFieldCalculator({
-    required super.nation,
+    required super.myNation,
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
-    required super.movementResultBridge
+    required super.movementResultBridge,
+    required super.pathFacade,
   });
 
   @override
@@ -50,13 +51,13 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       );
     } else {
       _movementResultBridge?.addBefore(
-        nation: _nation,
+        nation: _myNation,
         unit: Unit.copy(startUnit),
         cell: path.first,
       );
 
       for (var cell in reachableCells) {
-        cell.setNation(_nation);
+        cell.setNation(_myNation);
       }
 
       final damage = _calculateExplosionDamage(detachResult.unit);
@@ -85,7 +86,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         }
 
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.unit),
           cell: lastReachableCell,
         );
@@ -103,7 +104,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
 
       if (detachResult.detachedFrom != null) {
         _movementResultBridge?.addAfter(
-          nation: _nation,
+          nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );

@@ -11,7 +11,7 @@ class GameFieldStateMachine {
 
   GameFieldStateMachine(
     GameFieldRead gameField,
-    Nation nation,
+    Nation myNation,
     MoneyStorage money,
     MapMetadataRead mapMetadata,
     GameFieldSettingsStorageRead gameFieldSettingsStorage,
@@ -28,7 +28,7 @@ class GameFieldStateMachine {
   }) : _gamePauseWait = gamePauseWait {
     _context = GameFieldStateMachineContext(
       gameField: gameField,
-      nation: nation,
+      myNation: myNation,
       money: money,
       mapMetadata: mapMetadata,
       gameFieldSettingsStorage: gameFieldSettingsStorage,
@@ -49,7 +49,7 @@ class GameFieldStateMachine {
 
   Future<void> process(Event event) async {
     Logger.info(
-      'Start. nation: ${_context.nation}; incomingEvent $event; currentState: $_currentState',
+      'Start. nation: ${_context.myNation}; incomingEvent $event; currentState: $_currentState',
       tag: 'STATE_MACHINE',
     );
 
@@ -228,7 +228,7 @@ class GameFieldStateMachine {
     _currentState = newState;
 
     Logger.info(
-      'Finish. nation: ${_context.nation}; newState: $_currentState',
+      'Finish. nation: ${_context.myNation}; newState: $_currentState',
       tag: 'STATE_MACHINE',
     );
 

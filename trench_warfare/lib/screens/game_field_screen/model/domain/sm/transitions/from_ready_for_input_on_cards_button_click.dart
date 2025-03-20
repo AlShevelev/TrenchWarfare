@@ -6,14 +6,14 @@ class FromReadyForInputOnCardsButtonClick {
   FromReadyForInputOnCardsButtonClick(this._context);
 
   State process() {
-    final unitBuildCalculator = UnitBuildCalculator(_context.gameField, _context.nation);
+    final unitBuildCalculator = UnitBuildCalculator(_context.gameField, _context.myNation);
     final terrainModifiersBuildCalculator =
-        TerrainModifierBuildCalculator(_context.gameField, _context.nation);
-    final unitBoosterBuildCalculator = UnitBoosterBuildCalculator(_context.gameField, _context.nation);
+        TerrainModifierBuildCalculator(_context.gameField, _context.myNation);
+    final unitBoosterBuildCalculator = UnitBoosterBuildCalculator(_context.gameField, _context.myNation);
     final specialStrikesBuildCalculator =
-        SpecialStrikesBuildCalculator(_context.gameField, _context.nation, _context.mapMetadata);
+        SpecialStrikesBuildCalculator(_context.gameField, _context.myNation, _context.mapMetadata);
     final productionCentersBuildCalculator =
-        ProductionCentersBuildCalculator(_context.gameField, _context.nation);
+        ProductionCentersBuildCalculator(_context.gameField, _context.myNation);
 
     final cards = CardsSelectionControls(
       totalMoney: _context.money.totalSum,
@@ -57,7 +57,7 @@ class FromReadyForInputOnCardsButtonClick {
         _mapSpecialStrikes(SpecialStrikeType.airBombardment, specialStrikesBuildCalculator),
         _mapSpecialStrikes(SpecialStrikeType.propaganda, specialStrikesBuildCalculator),
       ],
-      nation: _context.nation,
+      nation: _context.myNation,
     );
 
     _context.controlsState.update(cards);

@@ -27,12 +27,13 @@ class FromPathIsShownOnClick {
       _context.updateGameObjectsEvent.update([_getSoundForUnit(unit)]);
 
       return MovementFacade(
-        nation: _context.nation,
+        myNation: _context.myNation,
         gameField: _context.gameField,
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
         gameOverConditionsCalculator: _context.gameOverConditionsCalculator,
         animationTime: _context.animationTimeFacade.getAnimationTime(!_context.isAI),
         movementResultBridge: _context.movementResultBridge,
+        metadata: _context.mapMetadata,
       ).startMovement(pathToProcess);
     }
 

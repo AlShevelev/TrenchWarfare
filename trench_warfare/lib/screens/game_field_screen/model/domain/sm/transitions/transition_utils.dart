@@ -3,7 +3,11 @@ part of game_field_sm;
 class TransitionUtils {
   final GameFieldStateMachineContext _context;
 
-  late final PathFacade _pathFacade = PathFacade(_context.gameField);
+  late final PathFacade _pathFacade = PathFacade(
+    _context.gameField,
+    _context.myNation,
+    _context.mapMetadata,
+  );
 
   TransitionUtils(GameFieldStateMachineContext context) : _context = context;
 
@@ -13,7 +17,7 @@ class TransitionUtils {
       cellInfo: null,
       armyInfo: null,
       carrierInfo: null,
-      nation: _context.nation,
+      nation: _context.myNation,
       showDismissButton: false,
     ));
   }
@@ -38,7 +42,7 @@ class TransitionUtils {
 
     if (cameraPosition == null) {
       final cellToMove = _context.gameField.cells
-          .firstWhereOrNull((c) => c.nation == _context.nation && c.isLand && c.productionCenter != null);
+          .firstWhereOrNull((c) => c.nation == _context.myNation && c.isLand && c.productionCenter != null);
       if (cellToMove != null) {
         events.add(MoveCameraToCell(cellToMove));
       }
@@ -51,7 +55,7 @@ class TransitionUtils {
     }
 
     final activeUnitCell = _context.gameField.cells.firstWhereOrNull((c) =>
-    c.nation == _context.nation &&
+        c.nation == _context.myNation &&
         c.units.isNotEmpty &&
         c.units.any((u) => u.state == UnitState.active || u.state == UnitState.enabled));
 

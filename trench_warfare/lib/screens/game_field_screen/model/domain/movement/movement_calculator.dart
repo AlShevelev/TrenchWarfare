@@ -13,7 +13,7 @@ abstract class MovementCalculator {
   final GameFieldRead _gameField;
 
   @protected
-  final Nation _nation;
+  final Nation _myNation;
 
   @protected
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
@@ -32,15 +32,16 @@ abstract class MovementCalculator {
 
   MovementCalculator({
     required GameFieldRead gameField,
-    required Nation nation,
+    required Nation myNation,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
     required MovementResultBridge? movementResultBridge,
+    required PathFacade pathFacade,
   })  : _gameField = gameField,
-        _nation = nation,
+        _myNation = myNation,
         _updateGameObjectsEvent = updateGameObjectsEvent,
-        _pathFacade = PathFacade(gameField),
+        _pathFacade = pathFacade,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
         _animationTime = animationTime,
         _movementResultBridge = movementResultBridge;
@@ -83,7 +84,7 @@ abstract class MovementCalculator {
   }
 
   State _getNextState() {
-    final gameOverConditions = _gameOverConditionsCalculator.calculate(_nation);
+    final gameOverConditions = _gameOverConditionsCalculator.calculate(_myNation);
 
     return switch (gameOverConditions) {
       GlobalVictory() => MovingInProgress(isVictory: true, defeated: null, cellsToUpdate: []),

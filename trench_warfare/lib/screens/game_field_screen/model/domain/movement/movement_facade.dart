@@ -1,7 +1,7 @@
 part of movement;
 
 class MovementFacade {
-  final Nation _nation;
+  final Nation _myNation;
 
   final GameFieldRead _gameField;
 
@@ -13,57 +13,65 @@ class MovementFacade {
 
   final MovementResultBridge? _movementResultBridge;
 
+  final PathFacade _pathFacade;
+
   MovementFacade({
-    required Nation nation,
+    required Nation myNation,
     required GameFieldRead gameField,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
     required MovementResultBridge? movementResultBridge,
-  })  : _nation = nation,
+    required MapMetadataRead metadata,
+  })  : _myNation = myNation,
         _gameField = gameField,
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
         _animationTime = animationTime,
-        _movementResultBridge = movementResultBridge;
+        _movementResultBridge = movementResultBridge,
+        _pathFacade = PathFacade(gameField, myNation, metadata);
 
   State startMovement(Iterable<GameFieldCell> path) {
     final activePathItems = path.map((e) => e.pathItem!).where((e) => e.isActive).toList();
 
     final calculator = activePathItems.any((e) => e.type == PathItemType.explosion)
         ? MovementWithMineFieldCalculator(
-            nation: _nation,
+            myNation: _myNation,
             gameField: _gameField,
             updateGameObjectsEvent: _updateGameObjectsEvent,
             gameOverConditionsCalculator: _gameOverConditionsCalculator,
             animationTime: _animationTime,
             movementResultBridge: _movementResultBridge,
+            pathFacade: _pathFacade,
           )
         : activePathItems.any((e) => e.type == PathItemType.battle)
             ? MovementWithBattleCalculator(
-                nation: _nation,
+                myNation: _myNation,
                 gameField: _gameField,
                 updateGameObjectsEvent: _updateGameObjectsEvent,
                 gameOverConditionsCalculator: _gameOverConditionsCalculator,
                 animationTime: _animationTime,
                 movementResultBridge: _movementResultBridge,
+                pathFacade: _pathFacade,
               )
             : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
                 ? MovementWithBattleNextUnreachableCell(
-                    nation: _nation,
+                    myNation: _myNation,
                     gameField: _gameField,
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,
                     animationTime: _animationTime,
                     movementResultBridge: _movementResultBridge,
+                    pathFacade: _pathFacade,
                   )
                 : MovementWithoutObstaclesCalculator(
-                    nation: _nation,
+                    myNation: _myNation,
                     gameField: _gameField,
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,
                     animationTime: _animationTime,
                     movementResultBridge: _movementResultBridge,
+                    pathFacade: _pathFacade,
                   );
 
     return calculator.startMovement(path);

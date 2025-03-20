@@ -5,11 +5,21 @@ class LandFindPathSettings implements FindPathSettings {
 
   final Unit _unit;
 
+  final Nation _myNation;
+
+  final MapMetadataRead _metadata;
+
   UnitType get _unitType => _unit.type;
 
-  LandFindPathSettings({required GameFieldCellRead startCell, required Unit calculatedUnit})
-      : _startCell = startCell,
-        _unit = calculatedUnit;
+  LandFindPathSettings({
+    required GameFieldCellRead startCell,
+    required Unit calculatedUnit,
+    required Nation myNation,
+    required MapMetadataRead metadata,
+  })  : _startCell = startCell,
+        _unit = calculatedUnit,
+        _myNation = myNation,
+        _metadata = metadata;
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
@@ -72,15 +82,23 @@ class LandFindPathSettings implements FindPathSettings {
   @override
   bool isCellReachable(GameFieldCellRead cell) => LandFindPathSettings.isCellReachableStatic(
         _unitType,
+        _myNation,
+        _metadata,
         startCell: _startCell,
         cell: cell,
       );
 
   static bool isCellReachableStatic(
-    UnitType unit, {
+    UnitType unit,
+    Nation myNation,
+    MapMetadataRead metadata, {
     required GameFieldCellRead startCell,
     required GameFieldCellRead cell,
   }) {
+    if (metadata.isAlly(myNation, cell.nation) && (cell.units.isNotEmpty || cell.productionCenter != null)) {
+      return false;
+    }
+
     if (cell.activeUnit is Carrier) {
       return _isCellReachableCarrier(cell: cell, startCell: startCell);
     } else {

@@ -8,6 +8,7 @@ class _LandingTransition extends _TroopTransferTransition {
     required super.gameField,
     required super.myNation,
     required _StateLanding state,
+    required super.pathFacade,
   }) : _state = state;
 
   @override

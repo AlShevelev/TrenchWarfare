@@ -3,9 +3,17 @@ part of pathfinding;
 class PathFacade {
   late final GameFieldRead _gameField;
 
-  PathFacade(GameFieldRead gameField) {
-    _gameField = gameField;
-  }
+  final Nation _myNation;
+
+  final MapMetadataRead _metadata;
+
+  PathFacade(
+    GameFieldRead gameField,
+    Nation myNation,
+    MapMetadataRead metadata,
+  )   : _gameField = gameField,
+        _myNation = myNation,
+        _metadata = metadata;
 
   /// Calculates a path without estimation
   Iterable<GameFieldCellRead> calculatePath({
@@ -126,17 +134,29 @@ class PathFacade {
     }
 
     if (calculatedUnit.isLand) {
-      return LandFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit);
+      return LandFindPathSettings(
+        startCell: startCell,
+        calculatedUnit: calculatedUnit,
+        myNation: _myNation,
+        metadata: _metadata,
+      );
     }
 
     if (_checkUnloadConditions(calculatedUnit, endCell)) {
       return LandFindPathSettings(
         startCell: startCell,
         calculatedUnit: (calculatedUnit as Carrier).activeUnit!,
+        myNation: _myNation,
+        metadata: _metadata,
       );
     }
 
-    return SeaFindPathSettings(startCell: startCell, calculatedUnit: calculatedUnit);
+    return SeaFindPathSettings(
+      startCell: startCell,
+      calculatedUnit: calculatedUnit,
+      myNation: _myNation,
+      metadata: _metadata,
+    );
   }
 
   PathCostCalculator _getPathCostCalculator(
@@ -194,6 +214,8 @@ class PathFacade {
     if (calculatedUnit.isLand && startCell.isLand) {
       return !LandFindPathSettings.isCellReachableStatic(
         calculatedUnit.type,
+        _myNation,
+        _metadata,
         startCell: startCell,
         cell: endCell,
       );
@@ -203,6 +225,8 @@ class PathFacade {
       if (!startCell.isLand || (startCell.isLand && startCell.hasRiver)) {
         return !SeaFindPathSettings.isCellReachableStatic(
           calculatedUnit.type,
+          _myNation,
+          _metadata,
           startCell: startCell,
           cell: endCell,
         );

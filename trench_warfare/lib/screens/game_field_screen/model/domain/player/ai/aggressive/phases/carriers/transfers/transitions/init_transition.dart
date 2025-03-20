@@ -14,6 +14,7 @@ class _InitTransition extends _TroopTransferTransition {
     required super.myNation,
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
+    required super.pathFacade,
   })  : _transferTargetCell = transferTargetCell,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
@@ -46,6 +47,7 @@ class _InitTransition extends _TroopTransferTransition {
         allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
         transferTargetCell: _transferTargetCell,
+        pathFacade: _pathFacade,
       ).calculate();
 
       // We didn't manage to find a gathering point of units
@@ -123,8 +125,6 @@ class _InitTransition extends _TroopTransferTransition {
     var radius = 1;
     var cellsAroundTarget = _gameField.findCellsAroundR(_transferTargetCell, radius: radius);
 
-    final pathFacade = PathFacade(_gameField);
-
     final selectedCarrierCopy = Carrier.copy(selectedCarrier)
       ..addUnitAsActive(Unit.byType(UnitType.infantry));
 
@@ -136,7 +136,7 @@ class _InitTransition extends _TroopTransferTransition {
         }
 
         // We try to find a path for our carrier - from cell to cell
-        final path = pathFacade.calculatePathForUnit(
+        final path = _pathFacade.calculatePathForUnit(
           startCell: selectedCarrierCell,
           endCell: carrierLastCellCandidate,
           calculatedUnit: selectedCarrierCopy,
@@ -152,7 +152,7 @@ class _InitTransition extends _TroopTransferTransition {
         final cellsAroundLastCarrierCell = _gameField.findCellsAround(carrierLastCellCandidate);
         final ladingPointCandidates = <LandingPoint>[];
         for (final landingCellCandidate in cellsAroundLastCarrierCell) {
-          final path = pathFacade.calculatePathForUnit(
+          final path = _pathFacade.calculatePathForUnit(
             startCell: carrierLastCellCandidate,
             endCell: landingCellCandidate,
             calculatedUnit: selectedCarrierCopy,
@@ -162,7 +162,7 @@ class _InitTransition extends _TroopTransferTransition {
             continue;
           }
 
-          final estimatedPath = pathFacade.estimatePathForUnit(
+          final estimatedPath = _pathFacade.estimatePathForUnit(
             path: path,
             unit: selectedCarrierCopy,
           );

@@ -22,13 +22,18 @@ abstract interface class _TroopTransferTransition {
   @protected
   final GameFieldRead _gameField;
 
+  @protected
+  final PathFacade _pathFacade;
+
   _TroopTransferTransition({
     required PlayerActions actions,
     required Nation myNation,
     required GameFieldRead gameField,
+    required PathFacade pathFacade,
   })  : _actions = actions,
         _myNation = myNation,
-        _gameField = gameField;
+        _gameField = gameField,
+        _pathFacade = pathFacade;
 
   Future<_TransitionResult> process();
 

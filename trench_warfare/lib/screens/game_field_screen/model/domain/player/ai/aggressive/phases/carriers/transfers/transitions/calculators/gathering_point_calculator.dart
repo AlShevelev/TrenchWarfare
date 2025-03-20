@@ -13,6 +13,8 @@ class _GatheringPointCalculator {
 
   final GameFieldCellRead _transferTargetCell;
 
+  final PathFacade _pathFacade;
+
   _GatheringPointCalculator({
     required GameFieldRead gameField,
     required Carrier selectedCarrier,
@@ -20,12 +22,14 @@ class _GatheringPointCalculator {
     required CarrierTroopTransfersStorageRead allTransfers,
     required String myTransferId,
     required GameFieldCellRead transferTargetCell,
+    required PathFacade pathFacade,
   })  : _gameField = gameField,
         _selectedCarrier = selectedCarrier,
         _myNation = myNation,
         _allTransfers = allTransfers,
         _myTransferId = myTransferId,
-        _transferTargetCell = transferTargetCell;
+        _transferTargetCell = transferTargetCell,
+        _pathFacade = pathFacade;
 
   /// Returns gathering point and units
   Tuple2<LandingPoint, List<Unit>>? calculate() {
@@ -65,8 +69,6 @@ class _GatheringPointCalculator {
         .map((i) => i.item1)
         .toList(growable: false);
 
-    final pathFacade = PathFacade(_gameField);
-
     for (final carrierCellCandidate in allCellsAshore) {
       final allLandCellsAround = _gameField
           .findCellsAround(carrierCellCandidate)
@@ -95,7 +97,7 @@ class _GatheringPointCalculator {
             }
 
             // Check a path to the landing cell
-            final pathToLandCell = pathFacade.calculatePathForUnit(
+            final pathToLandCell = _pathFacade.calculatePathForUnit(
               startCell: cellWithUnit,
               endCell: landCellCandidate,
               calculatedUnit: unitCandidate,
@@ -103,7 +105,7 @@ class _GatheringPointCalculator {
 
             if (pathToLandCell.isNotEmpty && !allTransportingUnis.contains(unitCandidate)) {
               // Check a path to the target cell
-              final pathToTargetCell = pathFacade.calculatePathForUnit(
+              final pathToTargetCell = _pathFacade.calculatePathForUnit(
                 startCell: cellWithUnit,
                 endCell: _transferTargetCell,
                 calculatedUnit: unitCandidate,
@@ -151,8 +153,6 @@ class _GatheringPointCalculator {
         .map((i) => i.item1)
         .toList(growable: false);
 
-    final pathFacade = PathFacade(_gameField);
-
     for (final cellWithUnit in allMyCellWithUnitsSorted) {
       for (final unitCandidate in cellWithUnit.units) {
         if (!unitCandidate.isLand || unitCandidate.isInDefenceMode) {
@@ -160,7 +160,7 @@ class _GatheringPointCalculator {
         }
 
         // Check a path to the gathering cell
-        final path = pathFacade.calculatePathForUnit(
+        final path = _pathFacade.calculatePathForUnit(
           startCell: cellWithUnit,
           endCell: gatheringCell,
           calculatedUnit: unitCandidate,
@@ -168,7 +168,7 @@ class _GatheringPointCalculator {
 
         if (path.isNotEmpty && !allTransportingUnis.contains(unitCandidate)) {
           // Check a path to the target cell
-          final pathToTargetCell = pathFacade.calculatePathForUnit(
+          final pathToTargetCell = _pathFacade.calculatePathForUnit(
             startCell: cellWithUnit,
             endCell: _transferTargetCell,
             calculatedUnit: unitCandidate,
@@ -192,9 +192,9 @@ class _GatheringPointCalculator {
 
   static bool isPointValid(LandingPoint point) =>
       point.carrierCell.terrainModifier?.type != TerrainModifierType.seaMine &&
-          point.unitsCell.terrainModifier?.type != TerrainModifierType.landMine &&
-          point.carrierCell.productionCenter == null &&
-          point.unitsCell.productionCenter == null;
+      point.unitsCell.terrainModifier?.type != TerrainModifierType.landMine &&
+      point.carrierCell.productionCenter == null &&
+      point.unitsCell.productionCenter == null;
 
   Iterable<Unit> _getAllTransportingUnits(Iterable<TroopTransferRead> transfers) =>
       transfers.map((t) => t.transportingUnits).expand((i) => i).map((u) => u).toList(growable: false);

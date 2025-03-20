@@ -67,7 +67,7 @@ class CarriersTargetCalculator {
 
     // Calculates a path between PCs by land for some infantry unit
     // (an infantry unit can move through all types of territory)
-    final pathFacade = PathFacade(_gameField);
+    final pathFacade = PathFacade(_gameField, _myNation, _metadata);
     final path = pathFacade.calculatePathForUnit(
       startCell: mySelectedPcCell,
       endCell: enemySelectedPcCell,

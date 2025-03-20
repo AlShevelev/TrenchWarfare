@@ -11,10 +11,20 @@ class InfluenceMapRepresentation implements InfluenceMapRepresentationRead {
 
   late final GameFieldRead _gameField;
 
+  final Nation _myNation;
+
+  final MapMetadataRead _metadata;
+
+  InfluenceMapRepresentation({
+    required Nation myNation,
+    required MapMetadataRead metadata,
+  })  : _myNation = myNation,
+        _metadata = metadata;
+
   Future<void> calculateFull(GameFieldRead gameField) async {
     _gameField = gameField;
 
-    _pathFacade = PathFacade(_gameField);
+    _pathFacade = PathFacade(_gameField, _myNation, _metadata);
 
     _map = InfluenceMap(
       gameField.cells.map((e) => InfluenceMapItem(row: e.row, col: e.col)).toList(),

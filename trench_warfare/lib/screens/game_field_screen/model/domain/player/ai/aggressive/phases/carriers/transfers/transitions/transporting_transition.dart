@@ -8,6 +8,7 @@ class _TransportingTransition extends _TroopTransferTransition {
     required super.actions,
     required super.myNation,
     required super.gameField,
+    required super.pathFacade,
   }) : _state = state;
 
   @override
@@ -31,8 +32,7 @@ class _TransportingTransition extends _TroopTransferTransition {
       return _TransitionResult(newState: _state, canContinue: false);
     }
 
-    final pathFacade = PathFacade(_gameField);
-    final carrierPath = pathFacade.calculatePathForUnit(
+    final carrierPath = _pathFacade.calculatePathForUnit(
       startCell: cellWithSelectedCarrier,
       endCell: _state.landingPoint.carrierCell,
       calculatedUnit: _state.selectedCarrier,

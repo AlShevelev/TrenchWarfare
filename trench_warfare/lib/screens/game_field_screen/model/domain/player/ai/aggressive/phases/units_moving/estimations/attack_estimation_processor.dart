@@ -58,8 +58,6 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
   Iterable<GameFieldCellRead> _getAllVictimCells() {
     const cellsMax = 5;
 
-    final pathFacade = PathFacade(_gameField);
-
     final cellCandidates = <GameFieldCellRead>[];
 
     for (var r = 1; r <= _unit.maxMovementPoints; r++) {
@@ -71,7 +69,7 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
         if (c.activeUnit != null &&
             c.nation != _myNation &&
             _isEnemyCell(c) &&
-            pathFacade.canReach(_unit, startCell: _cell, endCell: c) != null) {
+            _pathFacade.canReach(_unit, startCell: _cell, endCell: c) != null) {
           cellCandidates.add(c);
 
           if (cellCandidates.length == cellsMax) {

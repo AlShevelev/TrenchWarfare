@@ -14,6 +14,7 @@ class _GatheringTransition extends _TroopTransferTransition {
     required super.gameField,
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
+    required super.pathFacade,
   })  : _state = state,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
@@ -44,14 +45,12 @@ class _GatheringTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
-    final pathFacade = PathFacade(_gameField);
-
     var carrierReachedTargetCell = false;
 
     // We are moving the carrier here
     if (cellWithSelectedCarrier != state.gatheringPoint.carrierCell) {
       // Check - can the carrier reach the target cell?
-      final carrierPath = pathFacade.calculatePathForUnit(
+      final carrierPath = _pathFacade.calculatePathForUnit(
         startCell: cellWithSelectedCarrier,
         endCell: state.gatheringPoint.carrierCell,
         calculatedUnit: state.selectedCarrier,
@@ -132,7 +131,7 @@ class _GatheringTransition extends _TroopTransferTransition {
 
       // The unit can't move - skip it
       if (unitToGather.state == UnitState.disabled ||
-          !pathFacade.canMoveForUnit(unitToGatherCell, unitToGather)) {
+          !_pathFacade.canMoveForUnit(unitToGatherCell, unitToGather)) {
         Logger.info('GATHERING_TRANSITION: the unit can\'t move', tag: 'CARRIER');
         continue;
       }
@@ -195,5 +194,6 @@ class _GatheringTransition extends _TroopTransferTransition {
         allTransfers: _transfersStorage,
         myTransferId: _myTransferId,
         transferTargetCell: transferTargetCell,
+        pathFacade: _pathFacade,
       ).calculateUnits(quantity, gatheringCell);
 }

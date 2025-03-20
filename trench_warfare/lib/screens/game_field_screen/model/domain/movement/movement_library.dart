@@ -7,6 +7,7 @@ import 'package:trench_warfare/core/entities/game_objects/game_object_library.da
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/battle/battle_library.dart';

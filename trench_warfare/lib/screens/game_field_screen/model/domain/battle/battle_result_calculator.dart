@@ -3,9 +3,7 @@ part of battle;
 class BattleResultCalculator {
   late final PathFacade _pathFacade;
 
-  BattleResultCalculator(GameFieldRead gameField) {
-    _pathFacade = PathFacade(gameField);
-  }
+  BattleResultCalculator(PathFacade pathFacade) : _pathFacade = pathFacade;
 
   BattleResult calculateBattle({
     required GameFieldCell attackingCell,

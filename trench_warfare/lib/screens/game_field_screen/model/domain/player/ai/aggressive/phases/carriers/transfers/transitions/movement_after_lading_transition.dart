@@ -11,6 +11,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
     required super.gameField,
     required super.myNation,
     required MapMetadataRead metadata,
+    required super.pathFacade,
   })  : _state = state,
         _metadata = metadata;
 
