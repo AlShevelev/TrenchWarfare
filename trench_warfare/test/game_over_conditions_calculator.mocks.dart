@@ -263,7 +263,7 @@ class MockMapMetadataRead extends _i1.Mock implements _i6.MapMetadataRead {
       ) as List<_i5.Nation>);
 
   @override
-  List<_i5.Nation> getMyNotEnemies(_i5.Nation? myNation) => (super.noSuchMethod(
+  List<_i5.Nation> getAlliedAndNeutral(_i5.Nation? myNation) => (super.noSuchMethod(
         Invocation.method(
           #getMyNotEnemies,
           [myNation],

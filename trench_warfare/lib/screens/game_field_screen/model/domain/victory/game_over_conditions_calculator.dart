@@ -52,7 +52,8 @@ class GameOverConditionsCalculator {
       return GlobalVictory(nation: nation);
     }
 
-    final allOpposite = _metadata.getMyNotEnemies(nation) + allEnemies;
+    // Can I use all nations except me here?
+    final allOpposite = _metadata.getAlliedAndNeutral(nation) + allEnemies;
 
     final firstOppositeDefeatedNow =
         allOpposite.firstWhereOrNull((a) => defeatedNow.contains(a) && !_defeated.contains(a));

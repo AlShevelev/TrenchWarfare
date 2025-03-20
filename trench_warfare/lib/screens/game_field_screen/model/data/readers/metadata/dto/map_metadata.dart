@@ -7,11 +7,15 @@ import 'package:trench_warfare/core/localization/app_locale.dart';
 abstract interface class MapMetadataRead {
   bool isInWar(Nation? nation1, Nation? nation2);
 
+  bool isNeutral(Nation? nation1, Nation? nation2);
+
+  bool isAlly(Nation? nation1, Nation? nation2);
+
   List<Nation> getAllAggressive();
 
   List<Nation> getMyEnemies(Nation myNation);
 
-  List<Nation> getMyNotEnemies(Nation myNation);
+  List<Nation> getAlliedAndNeutral(Nation myNation);
 
   List<Nation> getAll();
 }
@@ -29,26 +33,17 @@ class MapMetadata implements MapMetadataRead {
 
   List<DiplomacyRecord> get diplomacy => _record.diplomacy;
 
-  MapMetadata(MapMetadataRecord record): _record = record;
+  MapMetadata(MapMetadataRecord record) : _record = record;
 
   @override
-  bool isInWar(Nation? nation1, Nation? nation2) {
-    if (nation1 == null || nation2 == null) {
-      return false;
-    }
+  bool isInWar(Nation? nation1, Nation? nation2) => _hasRelationship(nation1, nation2, Relationship.war);
 
-    if (nation1 == nation2) {
-      return false;
-    }
+  @override
+  bool isNeutral(Nation? nation1, Nation? nation2) =>
+      _hasRelationship(nation1, nation2, Relationship.neutral);
 
-    final relationship = diplomacy
-            .singleWhere((e) =>
-                (e.firstNation == nation1 && e.secondNation == nation2) ||
-                (e.firstNation == nation2 && e.secondNation == nation1))
-            .relationship;
-
-    return relationship == Relationship.war;
-  }
+  @override
+  bool isAlly(Nation? nation1, Nation? nation2) => _hasRelationship(nation1, nation2, Relationship.allied);
 
   @override
   List<Nation> getAllAggressive() => nations
@@ -63,15 +58,28 @@ class MapMetadata implements MapMetadataRead {
       .toList(growable: false);
 
   @override
-  List<Nation> getMyNotEnemies(Nation myNation) {
-    final allEnemies = getMyEnemies(myNation);
-
-    return nations
-        .where((n) => n.code != myNation && !allEnemies.contains(n.code))
-        .map((n) => n.code)
-        .toList(growable: false);
-  }
+  List<Nation> getAlliedAndNeutral(Nation myNation) => nations
+      .where((n) => n.code != myNation && (isAlly(myNation, n.code) || isNeutral(myNation, n.code)))
+      .map((n) => n.code)
+      .toList(growable: false);
 
   @override
   List<Nation> getAll() => nations.map((n) => n.code).toList(growable: false);
+
+  bool _hasRelationship(Nation? nation1, Nation? nation2, Relationship relationship) {
+    if (nation1 == null || nation2 == null) {
+      return false;
+    }
+
+    if (nation1 == nation2) {
+      return false;
+    }
+
+    return diplomacy
+            .singleWhere((e) =>
+                (e.firstNation == nation1 && e.secondNation == nation2) ||
+                (e.firstNation == nation2 && e.secondNation == nation1))
+            .relationship ==
+        relationship;
+  }
 }
