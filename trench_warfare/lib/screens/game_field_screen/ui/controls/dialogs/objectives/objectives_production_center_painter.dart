@@ -4,23 +4,28 @@ import 'package:flame/game.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/production_center_level.dart';
 import 'package:trench_warfare/core/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/sprite_atlas/sprite_atlas_names.dart';
 
 class ObjectivesProductionCenterPainter extends CustomPainter {
-  late final ProductionCenterType _type;
+  final ProductionCenterType _type;
 
-  late final ProductionCenterLevel _level;
+  final ProductionCenterLevel _level;
 
-  late final TextureAtlas _spritesAtlas;
+  final Nation _nation;
+
+  final TextureAtlas _spritesAtlas;
 
   ObjectivesProductionCenterPainter({
     required ProductionCenterType type,
     required ProductionCenterLevel level,
+    required Nation nation,
     required TextureAtlas spritesAtlas,
   })  : _type = type,
         _level = level,
+        _nation = nation,
         _spritesAtlas = spritesAtlas;
 
   @override
@@ -52,6 +57,12 @@ class ObjectivesProductionCenterPainter extends CustomPainter {
 
     _draw(
       spriteName: SpriteAtlasNames.getProductionCenterLevel(productionCenter),
+      canvas: picCanvas,
+      drawingRect: drawingRect,
+    );
+
+    _draw(
+      spriteName: SpriteAtlasNames.getNationBanner(_nation),
       canvas: picCanvas,
       drawingRect: drawingRect,
     );

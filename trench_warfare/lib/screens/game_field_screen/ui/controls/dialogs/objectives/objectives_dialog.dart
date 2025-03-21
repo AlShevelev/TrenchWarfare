@@ -1,8 +1,10 @@
+import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/audio/audio_library.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/production_center_level.dart';
 import 'package:trench_warfare/core/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/objectives/objectives_production_center_painter.dart';
@@ -14,10 +16,14 @@ class ObjectivesDialog extends StatelessWidget {
 
   final GameFieldForControls _gameField;
 
+  final List<Nation> _nations;
+
   const ObjectivesDialog({
     super.key,
     required GameFieldForControls gameField,
-  }) : _gameField = gameField;
+    required List<Nation> nations,
+  })  : _gameField = gameField,
+        _nations = nations;
 
   @override
   Widget build(BuildContext context) {
@@ -37,59 +43,46 @@ class ObjectivesDialog extends StatelessWidget {
             child: Center(
               child: Cardboard(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          tr('objectives_text'),
-                          style: AppTypography.s18w600,
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                child: CustomPaint(
-                                  painter: ObjectivesProductionCenterPainter(
-                                    type: ProductionCenterType.city,
-                                    level: ProductionCenterLevel.level2,
-                                    spritesAtlas: _gameField.spritesAtlas,
-                                  ),
-                                  child: const SizedBox(
-                                    width: _iconSize,
-                                    height: _iconSize,
-                                    child: null,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                                child: CustomPaint(
-                                  painter: ObjectivesProductionCenterPainter(
-                                    type: ProductionCenterType.factory,
-                                    level: ProductionCenterLevel.level2,
-                                    spritesAtlas: _gameField.spritesAtlas,
-                                  ),
-                                  child: const SizedBox(
-                                    width: _iconSize,
-                                    height: _iconSize,
-                                    child: null,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      tr('objectives_text'),
+                      style: AppTypography.s18w600,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
                     ),
-                  )),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: _nations
+                            .map((n) => [n, n])
+                            .expand((n) => n)
+                            .mapIndexed((index, nation) => CustomPaint(
+                              painter: ObjectivesProductionCenterPainter(
+                                type: index.isOdd
+                                    ? ProductionCenterType.factory
+                                    : ProductionCenterType.city,
+                                level: ProductionCenterLevel.level2,
+                                spritesAtlas: _gameField.spritesAtlas,
+                                nation: nation,
+                              ),
+                              child: const SizedBox(
+                                width: _iconSize,
+                                height: _iconSize,
+                                child: null,
+                              ),
+                            ))
+                            .toList(growable: false),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
             ),
           ),
         ),

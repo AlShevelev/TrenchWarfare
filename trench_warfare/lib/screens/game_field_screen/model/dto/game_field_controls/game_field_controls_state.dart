@@ -121,7 +121,9 @@ class SaveControls extends GameFieldControlsState {
 }
 
 class ObjectivesControls extends GameFieldControlsState {
-  ObjectivesControls();
+  final List<Nation> nations;
+
+  ObjectivesControls({required this.nations});
 }
 
 class SettingsControls extends GameFieldControlsState {

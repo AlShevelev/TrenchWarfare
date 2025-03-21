@@ -6,7 +6,9 @@ class FromMenuIsVisibleOnMenuObjectivesButtonClick {
   FromMenuIsVisibleOnMenuObjectivesButtonClick(GameFieldStateMachineContext context) : _context = context;
 
   State process() {
-    _context.controlsState.update(ObjectivesControls());
+    _context.controlsState.update(ObjectivesControls(
+      nations: _context.mapMetadata.getMyEnemies(_context.myNation),
+    ));
 
     return ObjectivesAreVisible();
   }

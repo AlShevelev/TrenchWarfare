@@ -84,8 +84,9 @@ class _GameFieldControlsState extends State<GameFieldControls> {
                   isSave: true,
                   gameField: widget._gameField,
                 ),
-              ObjectivesControls() => ObjectivesDialog(
+              ObjectivesControls(nations: final nations) => ObjectivesDialog(
                   gameField: widget._gameField,
+                  nations: nations,
                 ),
               SettingsControls() => SettingsScreen(
                   gameField: widget._gameField,
