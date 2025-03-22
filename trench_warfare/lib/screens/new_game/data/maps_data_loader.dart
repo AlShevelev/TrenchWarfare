@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.dart';
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
+import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:trench_warfare/shared/data/map_decoder.dart';
@@ -67,10 +69,22 @@ class MapsDataLoader {
   }) {
     final mapName = mapFileName.replaceFirst('.tmx', '').let((s) => s.substring(s.lastIndexOf('/') + 1))!;
 
-    final opponents = metadata.nations
+    final allAggressive = metadata.nations
         .where((n) => n.aggressiveness == Aggressiveness.aggressive)
-        .mapIndexed((i, n) => SideOfConflictDto(nation: n.code, selected: i == 0))
+        .map((n) => n.code)
         .toList(growable: false);
+    final allAggressiveGrouped = _groupAllied(allAggressive, metadata.diplomacy);
+
+    final opponents = <SideOfConflictDto>[];
+    for (var i = 0; i < allAggressiveGrouped.length; i++) {
+      for (var j = 0; j < allAggressiveGrouped[i].length; j++) {
+        opponents.add(SideOfConflictDto(
+          nation: allAggressiveGrouped[i][j],
+          selected: i == 0 && j == 0,
+          groupId: i,
+        ));
+      }
+    }
 
     final neutrals = metadata.nations
         .where((n) => n.aggressiveness != Aggressiveness.aggressive)
@@ -91,5 +105,33 @@ class MapsDataLoader {
       mapRows: mapSize.item2,
       mapCols: mapSize.item1,
     );
+  }
+
+  List<List<Nation>> _groupAllied(List<Nation> nations, List<DiplomacyRecord> diplomacy) {
+    final result = <List<Nation>>[];
+
+    final firstAlly = nations[0];
+    final firstGroup = <Nation>[firstAlly] +
+        diplomacy
+            .where((d) =>
+                d.relationship == Relationship.allied &&
+                (d.firstNation == firstAlly || d.secondNation == firstAlly))
+            .map((d) => d.firstNation == firstAlly ? d.secondNation : d.firstNation)
+            .toList(growable: false);
+
+    result.add(firstGroup);
+
+    final secondAlly = nations.firstWhere((n) => !firstGroup.contains(n));
+    final secondGroup = <Nation>[secondAlly] +
+        diplomacy
+            .where((d) =>
+                d.relationship == Relationship.allied &&
+                (d.firstNation == secondAlly || d.secondNation == secondAlly))
+            .map((d) => d.firstNation == secondAlly ? d.secondNation : d.firstNation)
+            .toList(growable: false);
+
+    result.add(secondGroup);
+
+    return result;
   }
 }

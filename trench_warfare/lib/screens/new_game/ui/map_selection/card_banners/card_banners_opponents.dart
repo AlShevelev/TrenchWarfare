@@ -30,20 +30,35 @@ class _CardBannersOpponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final banners = _opponents
-        .mapIndexed((index, opponent) => Padding(
-              padding: EdgeInsets.fromLTRB(index > 0 ? 2 : 0, 0, 0, 0),
-              child: _CardBannersOpponent(
-                key: ObjectKey(opponent.nation),
-                nation: opponent.nation,
-                bannerSize: _bannerSize,
-                opponentSelectionWidth: _opponentSelectionWidth,
-                selected: opponent.nation == _selectedNation,
-                cardId: _cardId,
-                userActions: _userActions,
-              ),
-            ))
-        .toList(growable: false);
+    final banners = <Widget>[];
+
+    var groupId = -1;
+
+    for (var i = 0; i < _opponents.length; i++) {
+      final opponent = _opponents.elementAt(i);
+
+      var newGroupStarted = i != 0 && opponent.groupId != groupId;
+      groupId = opponent.groupId;
+
+      final padding = newGroupStarted
+          ? 20.0
+          : i > 0
+              ? 0.0
+              : 0.0;
+
+      banners.add(Padding(
+        padding: EdgeInsets.fromLTRB(padding, 0, 0, 0),
+        child: _CardBannersOpponent(
+          key: ObjectKey(opponent.nation),
+          nation: opponent.nation,
+          bannerSize: _bannerSize,
+          opponentSelectionWidth: _opponentSelectionWidth,
+          selected: opponent.nation == _selectedNation,
+          cardId: _cardId,
+          userActions: _userActions,
+        ),
+      ));
+    }
 
     return Row(
       mainAxisSize: MainAxisSize.min,
