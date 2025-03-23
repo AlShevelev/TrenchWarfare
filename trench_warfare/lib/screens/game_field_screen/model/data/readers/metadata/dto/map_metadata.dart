@@ -13,9 +13,11 @@ abstract interface class MapMetadataRead {
 
   List<Nation> getAllAggressive();
 
-  List<Nation> getMyEnemies(Nation myNation);
+  List<Nation> getEnemies(Nation myNation);
 
-  List<Nation> getAlliedAndNeutral(Nation myNation);
+  List<Nation> getAllied(Nation myNation);
+
+  List<Nation> getNeutral(Nation myNation);
 
   List<Nation> getAll();
 }
@@ -52,14 +54,20 @@ class MapMetadata implements MapMetadataRead {
       .toList(growable: false);
 
   @override
-  List<Nation> getMyEnemies(Nation myNation) => nations
+  List<Nation> getEnemies(Nation myNation) => nations
       .where((n) => n.code != myNation && isInWar(myNation, n.code))
       .map((n) => n.code)
       .toList(growable: false);
 
   @override
-  List<Nation> getAlliedAndNeutral(Nation myNation) => nations
-      .where((n) => n.code != myNation && (isAlly(myNation, n.code) || isNeutral(myNation, n.code)))
+  List<Nation> getAllied(Nation myNation) => nations
+      .where((n) => n.code != myNation && isAlly(myNation, n.code))
+      .map((n) => n.code)
+      .toList(growable: false);
+
+  @override
+  List<Nation> getNeutral(Nation myNation) => nations
+      .where((n) => n.code != myNation && isNeutral(myNation, n.code))
       .map((n) => n.code)
       .toList(growable: false);
 

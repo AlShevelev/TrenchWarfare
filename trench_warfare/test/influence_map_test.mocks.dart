@@ -87,19 +87,27 @@ class MockMapMetadataRead extends _i1.Mock implements _i2.MapMetadataRead {
       ) as List<_i3.Nation>);
 
   @override
-  List<_i3.Nation> getMyEnemies(_i3.Nation? myNation) => (super.noSuchMethod(
+  List<_i3.Nation> getEnemies(_i3.Nation? myNation) => (super.noSuchMethod(
         Invocation.method(
-          #getMyEnemies,
+          #getEnemies,
           [myNation],
         ),
         returnValue: <_i3.Nation>[],
       ) as List<_i3.Nation>);
 
   @override
-  List<_i3.Nation> getAlliedAndNeutral(_i3.Nation? myNation) =>
-      (super.noSuchMethod(
+  List<_i3.Nation> getAllied(_i3.Nation? myNation) => (super.noSuchMethod(
         Invocation.method(
-          #getAlliedAndNeutral,
+          #getAllied,
+          [myNation],
+        ),
+        returnValue: <_i3.Nation>[],
+      ) as List<_i3.Nation>);
+
+  @override
+  List<_i3.Nation> getNeutral(_i3.Nation? myNation) => (super.noSuchMethod(
+        Invocation.method(
+          #getNeutral,
           [myNation],
         ),
         returnValue: <_i3.Nation>[],

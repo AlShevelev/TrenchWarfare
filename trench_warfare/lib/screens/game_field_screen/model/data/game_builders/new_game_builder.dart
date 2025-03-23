@@ -18,13 +18,28 @@ class NewGameBuilder implements GameBuilder {
         _selectedNation = selectedNation;
 
   Iterable<NationRecord> _getPlayingNations(MapMetadata metadata) {
-    final result = <NationRecord>[...metadata.nations];
+    final result = <NationRecord>[];
 
-    final firstAggressive = result
-        .indexWhere((it) => it.aggressiveness == Aggressiveness.aggressive && it.code == _selectedNation);
+    final humanNation = metadata.nations.firstWhere((n) => n.code == _selectedNation);
 
-    if (firstAggressive != _humanIndex) {
-      result.insert(_humanIndex, result.removeAt(firstAggressive));
+    result.add(humanNation);    // we presume, _humanIndex is always zero
+
+    final allEnemies = metadata.getEnemies(humanNation.code);
+    final allAllies = metadata.getAllied(humanNation.code);
+    final allNeutrals = metadata.getAllied(humanNation.code);
+
+    for (var i = 0; i < metadata.nations.length; i++) {
+      if (i < allEnemies.length) {
+        result.add(metadata.nations.firstWhere((n) => n.code == allEnemies[i]));
+      }
+
+      if (i < allAllies.length) {
+        result.add(metadata.nations.firstWhere((n) => n.code == allAllies[i]));
+      }
+
+      if (i < allNeutrals.length) {
+        result.add(metadata.nations.firstWhere((n) => n.code == allNeutrals[i]));
+      }
     }
 
     return result;

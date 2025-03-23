@@ -77,7 +77,7 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allAggressors = _metadata.getEnemies(_myNation);
 
     final allCellsWithEnemyUnits = _getAllCellsWithEnemyUnits(allAggressors);
 

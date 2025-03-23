@@ -14,7 +14,8 @@ class _CarriersEstimationProcessor extends _EstimationProcessorBase<_CarriersBui
   });
 
   @override
-  Iterable<EstimationResult<_CarriersBuildingEstimationData>> _makeEstimations() => _CarriersBuildingEstimator(
+  Iterable<EstimationResult<_CarriersBuildingEstimationData>> _makeEstimations() =>
+      _CarriersBuildingEstimator(
         gameField: _gameField,
         myNation: _myNation,
         nationMoney: _nationMoney.totalSum,

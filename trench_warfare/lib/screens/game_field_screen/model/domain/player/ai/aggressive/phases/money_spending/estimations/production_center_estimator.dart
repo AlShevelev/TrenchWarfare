@@ -70,7 +70,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allAggressors = _metadata.getEnemies(_myNation);
 
     var allSafeCells = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);

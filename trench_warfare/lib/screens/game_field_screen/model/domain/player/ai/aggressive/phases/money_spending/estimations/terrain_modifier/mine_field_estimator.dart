@@ -47,7 +47,7 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allAggressors = _metadata.getEnemies(_myNation);
 
     final cellsPossibleToBuildExt = cellsPossibleToBuild.where((cell) {
       final cellFromMap = _influenceMap.getItem(cell.row, cell.col);

@@ -30,8 +30,9 @@ void main() {
       when(mockGameField.cells).thenReturn(cells);
 
       final mockMetadata = MockMapMetadataRead();
-      when(mockMetadata.getMyEnemies(nation)).thenReturn([]);
-      when(mockMetadata.getAlliedAndNeutral(nation)).thenReturn([]);
+      when(mockMetadata.getEnemies(nation)).thenReturn([]);
+      when(mockMetadata.getAllied(nation)).thenReturn([]);
+      when(mockMetadata.getNeutral(nation)).thenReturn([]);
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
@@ -196,8 +197,10 @@ void main() {
 
       final mockMetadata = MockMapMetadataRead();
       when(mockMetadata.getAll()).thenReturn([myNation, enemy1, enemy2, peaceful]);
-      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy1, enemy2]);
-      when(mockMetadata.getAlliedAndNeutral(myNation)).thenReturn([peaceful]);
+      when(mockMetadata.getEnemies(myNation)).thenReturn([enemy1, enemy2]);
+      when(mockMetadata.getAllied(myNation)).thenReturn([]);
+      when(mockMetadata.getNeutral(myNation)).thenReturn([peaceful]);
+
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
@@ -342,8 +345,9 @@ void main() {
 
       final mockMetadata = MockMapMetadataRead();
       when(mockMetadata.getAll()).thenReturn([myNation, enemy, peaceful]);
-      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
-      when(mockMetadata.getAlliedAndNeutral(myNation)).thenReturn([peaceful]);
+      when(mockMetadata.getEnemies(myNation)).thenReturn([enemy]);
+      when(mockMetadata.getAllied(myNation)).thenReturn([]);
+      when(mockMetadata.getNeutral(myNation)).thenReturn([peaceful]);
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
@@ -435,8 +439,9 @@ void main() {
 
       final mockMetadata = MockMapMetadataRead();
       when(mockMetadata.getAll()).thenReturn([myNation, enemy1, enemy2, peaceful]);
-      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy1, enemy2]);
-      when(mockMetadata.getAlliedAndNeutral(myNation)).thenReturn([peaceful]);
+      when(mockMetadata.getEnemies(myNation)).thenReturn([enemy1, enemy2]);
+      when(mockMetadata.getAllied(myNation)).thenReturn([]);
+      when(mockMetadata.getNeutral(myNation)).thenReturn([peaceful]);
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
@@ -582,8 +587,9 @@ void main() {
 
       final mockMetadata = MockMapMetadataRead();
       when(mockMetadata.getAll()).thenReturn([myNation, enemy, peaceful]);
-      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
-      when(mockMetadata.getAlliedAndNeutral(myNation)).thenReturn([peaceful]);
+      when(mockMetadata.getEnemies(myNation)).thenReturn([enemy]);
+      when(mockMetadata.getAllied(myNation)).thenReturn([]);
+      when(mockMetadata.getNeutral(myNation)).thenReturn([peaceful]);
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,
@@ -658,8 +664,9 @@ void main() {
 
       final mockMetadata = MockMapMetadataRead();
       when(mockMetadata.getAll()).thenReturn([myNation, enemy, peaceful]);
-      when(mockMetadata.getMyEnemies(myNation)).thenReturn([enemy]);
-      when(mockMetadata.getAlliedAndNeutral(myNation)).thenReturn([peaceful]);
+      when(mockMetadata.getEnemies(myNation)).thenReturn([enemy]);
+      when(mockMetadata.getAllied(myNation)).thenReturn([]);
+      when(mockMetadata.getNeutral(myNation)).thenReturn([peaceful]);
 
       final calculator = GameOverConditionsCalculator(
         gameField: mockGameField,

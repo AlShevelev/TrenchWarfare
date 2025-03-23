@@ -51,7 +51,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       return [];
     }
 
-    final allEnemies = _metadata.getMyEnemies(_myNation);
+    final allEnemies = _metadata.getEnemies(_myNation);
 
     var allSafeCells = allCellsPossibleToBuild.where((c) {
       final cellFromMap = _influenceMap.getItem(c.row, c.col);

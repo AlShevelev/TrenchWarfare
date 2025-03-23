@@ -7,7 +7,7 @@ class FromMenuIsVisibleOnMenuObjectivesButtonClick {
 
   State process() {
     _context.controlsState.update(ObjectivesControls(
-      nations: _context.mapMetadata.getMyEnemies(_context.myNation),
+      nations: _context.mapMetadata.getEnemies(_context.myNation),
     ));
 
     return ObjectivesAreVisible();

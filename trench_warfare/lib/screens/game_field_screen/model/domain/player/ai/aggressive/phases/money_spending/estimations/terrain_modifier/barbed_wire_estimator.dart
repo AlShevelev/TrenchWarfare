@@ -55,7 +55,7 @@ class _BarbedWireEstimator extends Estimator<_TerrainModifierEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allAggressors = _metadata.getEnemies(_myNation);
 
     final cellsWithFactors = cellsPossibleToBuild
         .map((cell) {

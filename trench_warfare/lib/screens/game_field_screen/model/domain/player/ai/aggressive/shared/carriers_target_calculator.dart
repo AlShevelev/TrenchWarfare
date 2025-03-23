@@ -28,7 +28,7 @@ class CarriersTargetCalculator {
   /// If M percent of the path is occupied by enemy armies/minefields - we should build carriers
   /// [return] the target cell or null if the target is not found
   GameFieldCellRead? getTarget() {
-    final myEnemies = _metadata.getMyEnemies(_myNation);
+    final myEnemies = _metadata.getEnemies(_myNation);
 
     final allMyPcCells = <GameFieldCellRead>[];
     final allEnemyPcCells = <GameFieldCellRead>[];

@@ -34,7 +34,7 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
 
     const cellsMax = 5;
 
-    final allEnemies = _metadata.getMyEnemies(_myNation);
+    final allEnemies = _metadata.getEnemies(_myNation);
 
     for(final c in _gameField.cells) {
       if (c.activeUnit?.type == UnitType.carrier && allEnemies.contains(c.nation)) {

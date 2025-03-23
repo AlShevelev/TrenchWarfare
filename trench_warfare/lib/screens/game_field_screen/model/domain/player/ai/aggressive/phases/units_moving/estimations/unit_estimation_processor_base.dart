@@ -23,7 +23,7 @@ abstract class _UnitEstimationProcessorBase {
   final GameFieldRead _gameField;
 
   @protected
-  late final _allEnemies = _metadata.getMyEnemies(_myNation);
+  late final _allEnemies = _metadata.getEnemies(_myNation);
 
   @protected
   double get _balanceFactor => 1.0;

@@ -64,7 +64,7 @@ class _AttackDefenceEstimator extends Estimator<_UnitBoosterEstimationData> {
       return [];
     }
 
-    final allAggressors = _metadata.getMyEnemies(_myNation);
+    final allAggressors = _metadata.getEnemies(_myNation);
 
     final List<_AttackDefenceCellWithFactors> cellsPossibleToBuildExt = [];
 
