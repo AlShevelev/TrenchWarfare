@@ -4,6 +4,7 @@ class MovementWithBattleCalculator extends MovementCalculator {
   MovementWithBattleCalculator({
     required super.gameField,
     required super.myNation,
+    required super.humanNation,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,

@@ -31,6 +31,6 @@ part 'estimations/mine_fields_estimation.dart';
 part 'estimations/production_center_estimation.dart';
 part 'estimations/units_estimation.dart';
 part 'processing/estimation_processor_base.dart';
-part 'processing/mine_fields_center_estimation_processor.dart';
+part 'processing/mine_fields_estimation_processor.dart';
 part 'processing/production_center_estimation_processor.dart';
 part 'processing/units_estimation_processor.dart';

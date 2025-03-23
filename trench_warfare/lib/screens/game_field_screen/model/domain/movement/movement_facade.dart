@@ -3,6 +3,8 @@ part of movement;
 class MovementFacade {
   final Nation _myNation;
 
+  final Nation _humanNation;
+
   final GameFieldRead _gameField;
 
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent;
@@ -17,6 +19,7 @@ class MovementFacade {
 
   MovementFacade({
     required Nation myNation,
+    required Nation humanNation,
     required GameFieldRead gameField,
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
@@ -24,6 +27,7 @@ class MovementFacade {
     required MovementResultBridge? movementResultBridge,
     required MapMetadataRead metadata,
   })  : _myNation = myNation,
+        _humanNation = humanNation,
         _gameField = gameField,
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
@@ -37,6 +41,7 @@ class MovementFacade {
     final calculator = activePathItems.any((e) => e.type == PathItemType.explosion)
         ? MovementWithMineFieldCalculator(
             myNation: _myNation,
+            humanNation: _humanNation,
             gameField: _gameField,
             updateGameObjectsEvent: _updateGameObjectsEvent,
             gameOverConditionsCalculator: _gameOverConditionsCalculator,
@@ -47,6 +52,7 @@ class MovementFacade {
         : activePathItems.any((e) => e.type == PathItemType.battle)
             ? MovementWithBattleCalculator(
                 myNation: _myNation,
+                humanNation: _humanNation,
                 gameField: _gameField,
                 updateGameObjectsEvent: _updateGameObjectsEvent,
                 gameOverConditionsCalculator: _gameOverConditionsCalculator,
@@ -57,6 +63,7 @@ class MovementFacade {
             : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
                 ? MovementWithBattleNextUnreachableCell(
                     myNation: _myNation,
+                    humanNation: _humanNation,
                     gameField: _gameField,
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,
@@ -66,6 +73,7 @@ class MovementFacade {
                   )
                 : MovementWithoutObstaclesCalculator(
                     myNation: _myNation,
+                    humanNation: _humanNation,
                     gameField: _gameField,
                     updateGameObjectsEvent: _updateGameObjectsEvent,
                     gameOverConditionsCalculator: _gameOverConditionsCalculator,

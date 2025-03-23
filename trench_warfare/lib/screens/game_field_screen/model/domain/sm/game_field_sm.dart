@@ -11,7 +11,6 @@ class GameFieldStateMachine {
 
   GameFieldStateMachine(
     GameFieldRead gameField,
-    Nation myNation,
     MoneyStorage money,
     MapMetadataRead mapMetadata,
     GameFieldSettingsStorageRead gameFieldSettingsStorage,
@@ -25,10 +24,13 @@ class GameFieldStateMachine {
     this._modelCallback, {
     required bool isAI,
     required bool isGameLoaded,
+    required Nation myNation,
+    required Nation humanNation,
   }) : _gamePauseWait = gamePauseWait {
     _context = GameFieldStateMachineContext(
       gameField: gameField,
       myNation: myNation,
+      humanNation: humanNation,
       money: money,
       mapMetadata: mapMetadata,
       gameFieldSettingsStorage: gameFieldSettingsStorage,

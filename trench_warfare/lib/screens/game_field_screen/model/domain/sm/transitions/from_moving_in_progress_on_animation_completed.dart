@@ -7,7 +7,8 @@ class FromMovingInProgressOnAnimationCompleted {
 
   State process(bool isVictory, Nation? defeated, Iterable<GameFieldCellRead> cellsToUpdate) {
     if (isVictory) {
-      if (_context.isAI) {
+      // Enemy nation is win
+      if (_context.isAI && _context.mapMetadata.isInWar(_context.humanNation, _context.myNation)) {
         _context.updateGameObjectsEvent.update([
           PlaySound(type: SoundType.battleResultDefeat),
         ]);
@@ -16,7 +17,7 @@ class FromMovingInProgressOnAnimationCompleted {
           nation: _context.myNation,
           isGlobal: true,
         ));
-      } else {
+      } else {    // Numan nation or one of its ally is win
         _context.updateGameObjectsEvent.update([
           PlaySound(type: SoundType.battleResultVictory),
         ]);

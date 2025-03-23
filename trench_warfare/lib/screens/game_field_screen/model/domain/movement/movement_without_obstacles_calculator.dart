@@ -4,6 +4,7 @@ part of movement;
 class MovementWithoutObstaclesCalculator extends MovementCalculator {
   MovementWithoutObstaclesCalculator({
     required super.myNation,
+    required super.humanNation,
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,

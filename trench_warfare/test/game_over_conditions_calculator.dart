@@ -40,7 +40,7 @@ void main() {
       );
 
       // Act
-      final result = calculator.calculate(nation);
+      final result = calculator.calculate(myNation: nation, humanNation: Nation.russia);
 
       // Assert
       Assert.isNull(result);
@@ -206,7 +206,7 @@ void main() {
       );
 
       // Act
-      final result = calculator.calculate(myNation);
+      final result = calculator.calculate(myNation: myNation, humanNation: enemy1);
 
       // Assert
       Assert.isNotNull(result);
@@ -352,7 +352,7 @@ void main() {
       );
 
       // Act
-      final result = calculator.calculate(myNation);
+      final result = calculator.calculate(myNation: myNation, humanNation: enemy);
 
       // Assert
       Assert.isNotNull(result);
@@ -445,7 +445,7 @@ void main() {
       );
 
       // Act
-      final result = calculator.calculate(myNation);
+      final result = calculator.calculate(myNation: myNation, humanNation: enemy1);
 
       // Assert
       Assert.isNotNull(result);
@@ -592,8 +592,8 @@ void main() {
       );
 
       // Act
-      calculator.calculate(myNation);
-      final result = calculator.calculate(myNation);
+      calculator.calculate(myNation: myNation, humanNation: enemy);
+      final result = calculator.calculate(myNation: myNation, humanNation: enemy);
 
       // Assert
       Assert.isNull(result);
@@ -668,7 +668,7 @@ void main() {
       );
 
       // Act
-      final result = calculator.calculate(myNation);
+      final result = calculator.calculate(myNation: myNation, humanNation: enemy);
 
       // Assert
       Assert.isNull(result);

@@ -7,6 +7,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
 
   MovementWithMineFieldCalculator({
     required super.myNation,
+    required super.humanNation,
     required super.gameField,
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,

@@ -7,11 +7,13 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
 
   final GameFieldSettingsStorage _gameFieldSettingsStorage;
 
-  late final Nation _nation;
+  late final Nation _myNation;
+
   @override
-  Nation get nation => _nation;
+  Nation get nation => _myNation;
 
   late final MoneyStorage _money;
+
   @override
   MoneyStorageRead get money => _money;
 
@@ -20,7 +22,6 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   PlayerCore(
     this._gameField,
     this._gameFieldSettingsStorage,
-    NationRecord playerNation,
     MapMetadataRead mapMetadata,
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     SimpleStream<GameFieldControlsState> controlsState,
@@ -33,14 +34,17 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
     required MovementResultBridge? movementResultBridge,
     required bool isAI,
     required bool isGameLoaded,
+    required Nation myNation,
+    required Nation humanNation,
   }) {
     _money = money;
 
-    _nation = playerNation.code;
+    _myNation = myNation;
 
     _stateMachine = GameFieldStateMachine(
       _gameField,
-      playerNation.code,
+      myNation: _myNation,
+      humanNation: humanNation,
       _money,
       mapMetadata,
       _gameFieldSettingsStorage,

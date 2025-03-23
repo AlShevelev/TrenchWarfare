@@ -5,6 +5,8 @@ class GameFieldStateMachineContext {
 
   final Nation myNation;
 
+  final Nation humanNation;
+
   final MoneyStorage money;
 
   final MapMetadataRead mapMetadata;
@@ -30,6 +32,7 @@ class GameFieldStateMachineContext {
   GameFieldStateMachineContext({
     required this.gameField,
     required this.myNation,
+    required this.humanNation,
     required this.money,
     required this.mapMetadata,
     required this.gameFieldSettingsStorage,

@@ -28,6 +28,7 @@ class FromPathIsShownOnClick {
 
       return MovementFacade(
         myNation: _context.myNation,
+        humanNation: _context.humanNation,
         gameField: _context.gameField,
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
         gameOverConditionsCalculator: _context.gameOverConditionsCalculator,

@@ -23,7 +23,7 @@ class GameOverConditionsCalculator {
         _metadata = metadata,
         _defeated = defeated.toSet();
 
-  GameOverConditions? calculate(Nation nation) {
+  GameOverConditions? calculate({required Nation myNation, required Nation humanNation}) {
     if (_gameField.cells.isEmpty) {
       return null;
     }
@@ -44,16 +44,17 @@ class GameOverConditionsCalculator {
       pcTotal[cell.nation!] = (pcTotal[cell.nation!] ?? 0) + 1;
     }
 
+    // Defeated nations
     final defeatedNow = pcTotal.entries.where((e) => e.value == 0).map((e) => e.key).toSet();
 
-    final allEnemies = _metadata.getMyEnemies(nation);
+    final allEnemies = _metadata.getMyEnemies(myNation);
 
-    if (defeatedNow.containsAll(allEnemies)) {
-      return GlobalVictory(nation: nation);
+    if (defeatedNow.contains(humanNation) || defeatedNow.containsAll(allEnemies)) {
+      return GlobalVictory(nation: myNation);
     }
 
     // Can I use all nations except me here?
-    final allOpposite = _metadata.getAlliedAndNeutral(nation) + allEnemies;
+    final allOpposite = _metadata.getAlliedAndNeutral(myNation) + allEnemies;
 
     final firstOppositeDefeatedNow =
         allOpposite.firstWhereOrNull((a) => defeatedNow.contains(a) && !_defeated.contains(a));
