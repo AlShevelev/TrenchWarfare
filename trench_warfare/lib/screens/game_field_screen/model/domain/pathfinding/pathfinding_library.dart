@@ -19,4 +19,5 @@ part 'find/find_path.dart';
 part 'find/land_find_path_settings.dart';
 part 'find/next_cell_path_settings.dart';
 part 'find/sea_find_path_settings.dart';
+part 'find/unreachable_cell_path_settings.dart';
 part 'path_facade.dart';

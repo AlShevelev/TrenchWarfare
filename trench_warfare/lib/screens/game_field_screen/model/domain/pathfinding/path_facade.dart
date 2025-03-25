@@ -129,6 +129,11 @@ class PathFacade {
     required GameFieldCellRead startCell,
     required GameFieldCellRead endCell,
   }) {
+    if (_metadata.isAlly(startCell.nation, endCell.nation) &&
+        (endCell.units.isNotEmpty || endCell.productionCenter != null)) {
+      return UnreachableCellPathSettings();
+    }
+
     if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
       return NextCellPathSettings();
     }
