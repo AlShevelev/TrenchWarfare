@@ -50,22 +50,27 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
   PlayerGameObjectCallback get gameObjectCallback => _players[_currentPlayerIndex];
 
   late final GameFieldRead _gameField;
+
   GameFieldRead get gameField => _gameField;
 
   late final String _mapFileName;
 
   final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent =
       SingleStream<Iterable<UpdateGameEvent>>();
+
   Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
 
   final SingleStream<GameFieldControlsState> _controlsState = SingleStream<GameFieldControlsState>();
-  Stream<GameFieldControlsState> get controlsState =>
-      _controlsState.output.map((event) => isHumanPlayer || event is DefeatControls ? event : Invisible());
+
+  Stream<GameFieldControlsState> get controlsState => _controlsState.output
+      .map((event) => isHumanPlayer || event is DefeatControls || event is WinControls ? event : Invisible());
 
   final SingleStream<GameFieldControlsState> _aiProgressState = SingleStream<GameFieldControlsState>();
+
   Stream<GameFieldControlsState> get aiProgressState => _aiProgressState.output;
 
   final SingleStream<GameFieldState> _gameFieldState = SingleStream<GameFieldState>();
+
   Stream<GameFieldState> get gameFieldState => _gameFieldState.output;
 
   late final MapMetadata _metadata;
@@ -207,7 +212,8 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       gameOverConditionsCalculator,
       money[nationRecord.code]!,
       animationTimeFacade,
-      gamePauseWait: isHuman ? null : gamePauseWait, // We don't need to pause the app for a human player
+      gamePauseWait: isHuman ? null : gamePauseWait,
+      // We don't need to pause the app for a human player
       movementResultBridge: isHuman ? null : movementResultBridge,
       isAI: !isHuman,
       isGameLoaded: isGameLoaded,
