@@ -34,12 +34,18 @@ class MoneySpendingPhase implements TurnPhase {
 
     while (true) {
       Logger.info('loop started', tag: 'MONEY_SPENDING');
-      final influences = await compute<GameFieldRead, InfluenceMapRepresentationRead>(
+
+      final influences = await compute<InfluenceMapComputeData, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation(
-                myNation: _myNation,
-                metadata: _metadata,
-              )..calculateFull(data),
-          _gameField);
+                myNation: data.myNation,
+                metadata: data.metadata,
+              )..calculateFull(data.gameField),
+          InfluenceMapComputeData(
+            myNation: _myNation,
+            metadata: _metadata,
+            gameField: _gameField,
+          ));
+
       Logger.info('influences map is calculated', tag: 'MONEY_SPENDING');
 
       final List<_EstimationProcessor> processors = [

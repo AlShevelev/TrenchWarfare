@@ -60,12 +60,17 @@ class UnitsMovingPhase implements TurnPhase {
 
       GameFieldCellRead? cellWithUnit = _iterator.current.cell;
 
-      final InfluenceMapRepresentation influences = await compute<GameFieldRead, InfluenceMapRepresentation>(
-          (data) => InfluenceMapRepresentation(
+      final InfluenceMapRepresentation influences =
+          await compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
+              (data) => InfluenceMapRepresentation(
+                    myNation: data.myNation,
+                    metadata: data.metadata,
+                  )..calculateFull(data.gameField),
+              InfluenceMapComputeData(
                 myNation: _myNation,
                 metadata: _metadata,
-              )..calculateFull(data),
-          _gameField);
+                gameField: _gameField,
+              ));
 
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled && !unit.isInDefenceMode) {

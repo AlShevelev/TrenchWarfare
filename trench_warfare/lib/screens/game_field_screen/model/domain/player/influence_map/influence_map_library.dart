@@ -16,5 +16,6 @@ import 'package:tuple/tuple.dart';
 
 part 'unit_power_estimation.dart';
 part 'influence_map.dart';
+part 'influence_map_compute_data.dart';
 part 'influence_map_representation.dart';
 part 'influence_map_item.dart';
