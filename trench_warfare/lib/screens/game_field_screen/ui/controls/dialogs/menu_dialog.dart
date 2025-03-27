@@ -22,7 +22,7 @@ class MenuDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _gameField.onPopupDialogClosed();
+        _gameField.onPopupDialogClosed(fireCallbackForAi: false);
       },
       child: Container(
         color: Colors.black.withOpacity(0.5),

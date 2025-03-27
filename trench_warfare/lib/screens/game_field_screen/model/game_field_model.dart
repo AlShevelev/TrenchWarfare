@@ -156,7 +156,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     _players[_currentPlayerIndex].onStartTurn();
 
     if (_currentPlayerIndex != _humanIndex) {
-      _players[_currentPlayerIndex].onPopupDialogClosed();
+      _players[_currentPlayerIndex].onPopupDialogClosed(fireCallbackForAi: false);
     }
     _playersAi[_currentPlayerIndex]?.start();
   }

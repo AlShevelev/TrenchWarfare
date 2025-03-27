@@ -32,7 +32,7 @@ class ObjectivesDialog extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         audioController.playSound(SoundType.buttonClick);
-        _gameField.onPopupDialogClosed();
+        _gameField.onPopupDialogClosed(fireCallbackForAi: false);
       },
       child: Container(
         color: Colors.black.withOpacity(0.5),

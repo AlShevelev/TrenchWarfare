@@ -60,7 +60,8 @@ class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   }
 
   @override
-  void onPopupDialogClosed() => _playerCore.onPopupDialogClosed();
+  void onPopupDialogClosed({required bool fireCallbackForAi}) =>
+      _playerCore.onPopupDialogClosed(fireCallbackForAi: fireCallbackForAi);
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) {

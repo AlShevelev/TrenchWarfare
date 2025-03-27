@@ -30,13 +30,13 @@
 </data>
  </layer>
  <objectgroup id="4" name="GameObjects">
-  <object id="1" name="russia" type="ownership" gid="110" x="113.712" y="259.437" width="64" height="64">
+  <object id="1" name="russia" type="ownership" gid="110" x="6.62269" y="258.009" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="2"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
-    <property name="unit2" type="object" value="3"/>
-    <property name="unit3" type="object" value="3"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
@@ -56,12 +56,12 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="5" name="japan" type="ownership" gid="116" x="224.477" y="258.846" width="64" height="64">
+  <object id="5" name="japan" type="ownership" gid="116" x="278.022" y="228.147" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="2"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
+    <property name="unit1" type="object" value="3"/>
+    <property name="unit2" type="object" value="3"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
    </properties>
@@ -71,36 +71,6 @@
     <property name="productionCenter" type="object" value="2"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="8" name="bulgaria" type="ownership" gid="121" x="221.872" y="127.642" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="9" name="bulgaria" type="ownership" gid="121" x="222.843" y="71.1916" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="10" name="japan" type="ownership" gid="116" x="286.385" y="229.198" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -116,36 +86,6 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="11"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="15" name="japan" type="ownership" gid="116" x="281.02" y="293.561" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="11"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="16" name="japan" type="ownership" gid="116" x="339.723" y="319.34" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="17" name="japan" type="ownership" gid="116" x="336.99" y="259.336" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="12"/>
-    <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="0"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
@@ -213,16 +153,6 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="26" name="japan" type="ownership" gid="116" x="61.5247" y="95.7932" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="30"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
   <object id="28" name="level2" type="airField" gid="83" x="-95.5397" y="200.027" width="64" height="64">
    <properties>
     <property name="name" value=""/>
@@ -280,35 +210,5 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="35" name="japan" type="ownership" gid="116" x="4.41037" y="319.967" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="19"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="36" name="bulgaria" type="ownership" gid="121" x="113.641" y="195.029" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="2"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="0"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
-  <object id="37" name="bulgaria" type="ownership" gid="121" x="167.9" y="225.014" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
-    <property name="unit4" type="object" value="0"/>
-   </properties>
-  </object>
  </objectgroup>
-</map>
+ </map>

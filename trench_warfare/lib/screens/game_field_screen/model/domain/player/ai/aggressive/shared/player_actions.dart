@@ -53,7 +53,7 @@ class PlayerActions {
   void resort(GameFieldCellRead cell, Iterable<String> unitIds) =>
       _player.onResortUnits(cell.id, unitIds, isCarrier: false);
 
-  void onAnimationCompleted() {
+  void canContinue() {
     _signal?.unlockAndClose();
     _signal = null;
   }

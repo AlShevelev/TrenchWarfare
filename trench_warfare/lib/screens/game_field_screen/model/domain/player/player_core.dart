@@ -17,7 +17,11 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   @override
   MoneyStorageRead get money => _money;
 
+  late final bool _isAI;
+
   void Function()? _onAnimationCompleted;
+
+  void Function()? _onPopupDialogClosed;
 
   PlayerCore(
     this._gameField,
@@ -36,30 +40,27 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
     required bool isGameLoaded,
     required Nation myNation,
     required Nation humanNation,
-  }) {
-    _money = money;
-
-    _myNation = myNation;
-
-    _stateMachine = GameFieldStateMachine(
-      _gameField,
-      myNation: _myNation,
-      humanNation: humanNation,
-      _money,
-      mapMetadata,
-      _gameFieldSettingsStorage,
-      updateGameObjectsEvent,
-      controlsState,
-      dayStorage,
-      gameOverConditionsCalculator,
-      animationTimeFacade,
-      gamePauseWait,
-      movementResultBridge,
-      modelCallback,
-      isAI: isAI,
-      isGameLoaded: isGameLoaded,
-    );
-  }
+  })  : _money = money,
+        _myNation = myNation,
+        _isAI = isAI,
+        _stateMachine = GameFieldStateMachine(
+          _gameField,
+          myNation: myNation,
+          humanNation: humanNation,
+          money,
+          mapMetadata,
+          _gameFieldSettingsStorage,
+          updateGameObjectsEvent,
+          controlsState,
+          dayStorage,
+          gameOverConditionsCalculator,
+          animationTimeFacade,
+          gamePauseWait,
+          movementResultBridge,
+          modelCallback,
+          isAI: isAI,
+          isGameLoaded: isGameLoaded,
+        );
 
   @override
   void onClick(Vector2 position) {
@@ -126,7 +127,20 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   }
 
   @override
-  void onPopupDialogClosed() => _stateMachine.process(OnPopupDialogClosed());
+  void onPopupDialogClosed({required bool fireCallbackForAi}) {
+    _stateMachine.process(OnPopupDialogClosed());
+
+    if (fireCallbackForAi && _isAI) {
+      final onPopupDialogClosed = _onPopupDialogClosed;
+      if (onPopupDialogClosed != null) {
+        onPopupDialogClosed();
+      }
+    }
+  }
+
+  void registerOnPopupDialogClosed(void Function()? onPopupDialogClosed) {
+    _onPopupDialogClosed = onPopupDialogClosed;
+  }
 
   @override
   void onMenuButtonClick() => _stateMachine.process(OnMenuButtonClick());

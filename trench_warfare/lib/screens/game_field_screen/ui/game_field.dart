@@ -50,7 +50,7 @@ abstract interface class GameFieldForControls {
 
   void onCardsPlacingCancelled();
 
-  void onPopupDialogClosed();
+  void onPopupDialogClosed({required bool fireCallbackForAi});
 
   void onPhoneBackAction();
 
@@ -248,7 +248,8 @@ class GameField extends FlameGame
   void onEndOfTurnButtonClick() => _viewModel.input.onEndOfTurnButtonClick();
 
   @override
-  void onPopupDialogClosed() => _viewModel.input.onPopupDialogClosed();
+  void onPopupDialogClosed({required bool fireCallbackForAi}) =>
+      _viewModel.input.onPopupDialogClosed(fireCallbackForAi: fireCallbackForAi);
 
   @override
   void onMenuButtonClick() => _viewModel.input.onMenuButtonClick();

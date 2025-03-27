@@ -28,7 +28,7 @@ class CarriersPhase implements TurnPhase {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {
-      _actions.onAnimationCompleted();
+      _actions.canContinue();
     });
 
     _transfersStorage.setPlayerActions(_actions);

@@ -30,7 +30,11 @@ class UnitsMovingPhase implements TurnPhase {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {
-      _actions.onAnimationCompleted();
+      _actions.canContinue();
+    });
+
+    playerCore.registerOnPopupDialogClosed(() {
+      _actions.canContinue();
     });
   }
 
