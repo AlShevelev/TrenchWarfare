@@ -90,7 +90,7 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
+    <property name="unit1" type="object" value="0"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
@@ -106,13 +106,13 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="9" name="bulgaria" type="ownership" gid="121" x="222.843" y="71.1916" width="64" height="64">
+  <object id="9" name="bulgaria" type="ownership" gid="121" x="226.096" y="193.51" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="3"/>
-    <property name="unit2" type="object" value="0"/>
-    <property name="unit3" type="object" value="0"/>
+    <property name="unit2" type="object" value="3"/>
+    <property name="unit3" type="object" value="3"/>
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
@@ -120,7 +120,7 @@
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
-    <property name="unit1" type="object" value="3"/>
+    <property name="unit1" type="object" value="0"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
