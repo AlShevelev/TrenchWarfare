@@ -31,7 +31,7 @@ class Unit extends GameObject {
   late double _movementPoints;
   double get movementPoints => _movementPoints;
 
-  double get maxMovementPoints => Unit._getMaxMovementPoints(type) * (hasBoost(UnitBoost.transport) ? 2 : 1);
+  double get maxMovementPoints => _calculateMaxMovementPoints();
 
   double get attack => _getAttack();
 
@@ -362,4 +362,14 @@ class Unit extends GameObject {
 
   String toStringBrief() =>
       'UNIT: {id: $id; type: $type; state: $state; health: $health; movementPoints: $movementPoints}';
+
+  double _calculateMaxMovementPoints() {
+    final basePoints = Unit._getMaxMovementPoints(type);
+
+    if (hasBoost(UnitBoost.transport)) {
+      return basePoints * (type == UnitType.infantry ? 1.5 : 2.0);
+    } else {
+      return basePoints;
+    }
+  }
 }
