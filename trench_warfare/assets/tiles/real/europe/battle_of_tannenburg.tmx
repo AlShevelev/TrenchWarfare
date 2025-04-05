@@ -25,7 +25,7 @@
 14,26,26,26,26,26,26,28,28,28,26,26,26,26,26,26,26,26,26,21,21,21,26,4,6,26,26,26,26,26,
 26,26,26,26,26,26,26,26,28,5,28,5,26,26,26,26,26,26,21,21,21,21,4,21,5,5,6,6,26,26,
 26,26,26,26,26,26,26,26,26,26,28,5,26,26,5,26,26,5,21,21,21,6,21,21,5,5,5,5,26,26,
-26,26,26,26,26,26,26,26,5,5,5,26,26,5,26,5,5,5,4,21,6,5,5,21,21,26,5,26,26,26,
+26,26,26,26,26,26,26,26,5,5,28,26,26,5,26,5,5,5,4,21,6,5,5,21,21,26,5,26,26,26,
 26,26,26,26,26,26,26,26,26,26,26,26,26,5,5,5,5,26,4,21,21,21,21,21,21,26,26,26,26,28,
 26,26,26,26,26,16,26,26,26,26,26,26,26,26,5,6,26,26,26,21,21,21,21,21,21,28,28,28,28,26,
 26,26,26,26,26,26,26,26,26,26,26,26,26,26,6,26,26,26,26,26,21,21,21,26,28,28,28,28,28,28,
@@ -72,7 +72,7 @@
     <property name="name_ru" value="Гдыня"/>
    </properties>
   </object>
-  <object id="7" name="level1" type="city" gid="88" x="123.275" y="699.446" width="30.6436" height="29.6481">
+  <object id="7" name="level1" type="city" gid="88" x="119.029" y="732.201" width="30.6436" height="29.6481">
    <properties>
     <property name="name_en" value="Danzig"/>
     <property name="name_ru" value="Данциг"/>
@@ -102,7 +102,7 @@
     <property name="name_ru" value="Страсбург"/>
    </properties>
   </object>
-  <object id="13" name="level1" type="city" gid="88" x="400.886" y="1239.73" width="33.2433" height="30.1678">
+  <object id="13" name="level1" type="city" gid="88" x="358.426" y="1223.35" width="33.2433" height="30.1678">
    <properties>
     <property name="name_en" value="Deutsch Eylau"/>
     <property name="name_ru" value="Дойч-Эйлау"/>
@@ -132,7 +132,7 @@
     <property name="name_ru" value="Лаатау"/>
    </properties>
   </object>
-  <object id="22" name="level1" type="city" gid="88" x="563.982" y="634.909" width="31.5424" height="28.2833">
+  <object id="22" name="level1" type="city" gid="88" x="626.459" y="610.039" width="31.5424" height="28.2833">
    <properties>
     <property name="name_en" value="Heiligenbell"/>
     <property name="name_ru" value="Браунсберг"/>
@@ -144,13 +144,13 @@
     <property name="name_ru" value="Гейльсберг"/>
    </properties>
   </object>
-  <object id="24" name="level1" type="city" gid="88" x="729.55" y="1051.8" width="32.7645" height="30.3202">
+  <object id="24" name="level1" type="city" gid="88" x="736.222" y="1005.09" width="32.7645" height="30.3202">
    <properties>
     <property name="name_en" value="Allenstein"/>
     <property name="name_ru" value="Алленштайн"/>
    </properties>
   </object>
-  <object id="25" name="level1" type="city" gid="88" x="618.891" y="1114.29" width="29.9129" height="29.0981">
+  <object id="25" name="level1" type="city" gid="88" x="574.611" y="1089.42" width="29.9129" height="29.0981">
    <properties>
     <property name="name_en" value="Osterode"/>
     <property name="name_ru" value="Остероде"/>
@@ -204,7 +204,7 @@
     <property name="name_ru" value="Голдап"/>
    </properties>
   </object>
-  <object id="34" name="level1" type="city" gid="88" x="1170.62" y="537.132" width="32.2321" height="30.9856">
+  <object id="34" name="level1" type="city" gid="88" x="1146.36" y="506.197" width="32.2321" height="30.9856">
    <properties>
     <property name="name_en" value="Insterburg"/>
     <property name="name_ru" value="Инстербург"/>
@@ -222,13 +222,13 @@
     <property name="name_ru" value="Августов"/>
    </properties>
   </object>
-  <object id="37" name="level1" type="city" gid="88" x="1272.39" y="286.429" width="32.3571" height="31.135">
+  <object id="37" name="level1" type="city" gid="88" x="1281.81" y="161.751" width="32.3571" height="31.135">
    <properties>
     <property name="name_en" value="Ragnit"/>
     <property name="name_ru" value="Рагнит"/>
    </properties>
   </object>
-  <object id="38" name="level1" type="city" gid="88" x="1167.73" y="220.899" width="32.3571" height="33.5793">
+  <object id="38" name="level1" type="city" gid="88" x="1118.6" y="192.39" width="32.3571" height="33.5793">
    <properties>
     <property name="name_en" value="Tilset"/>
     <property name="name_ru" value="Тильзит"/>
@@ -240,19 +240,19 @@
   <object id="40" name="germany" type="ownershipRegion" x="939.011" y="14.777">
    <polygon points="41.518,-9.67228 55.4327,235.232 63.9466,534.229 41.8122,681.59 22.0595,785.849 -42.1806,895.425 -54.6523,919.108 -66.0165,960.142 -100.765,992.578 -170.757,1076.41 -213.437,1133.26 -240.963,1176.24 -300.068,1267.44 -489.489,1541.51 -507.37,1575.6 -508.811,1611.6 -918.861,1601.29 -916.174,1.34336"/>
   </object>
-  <object id="41" name="level2" type="city" gid="89" x="785.602" y="443.527" width="33.8885" height="31.4442">
+  <object id="41" name="level2" type="city" gid="89" x="735.863" y="412.592" width="33.8885" height="31.4442">
    <properties>
     <property name="name_en" value="Koningsberg"/>
     <property name="name_ru" value="Кёнигсберг"/>
    </properties>
   </object>
-  <object id="42" name="level1" type="factory" gid="84" x="397.913" y="795.539" width="32.3049" height="30.6754">
+  <object id="42" name="level1" type="factory" gid="84" x="447.652" y="824.655" width="32.3049" height="30.6754">
    <properties>
     <property name="name_en" value="Elbing"/>
     <property name="name_ru" value="Эльблонг"/>
    </properties>
   </object>
-  <object id="43" name="level1" type="factory" gid="84" x="125.98" y="952.603" width="29.2689" height="29.2689">
+  <object id="43" name="level1" type="factory" gid="84" x="90.7986" y="974.44" width="29.2689" height="29.2689">
    <properties>
     <property name="name_en" value="Stargard"/>
     <property name="name_ru" value="Старгард"/>
@@ -473,7 +473,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="70" name="russia" type="ownership" gid="110" x="1175.44" y="518.052" width="45.9005" height="42.8839">
+  <object id="70" name="russia" type="ownership" gid="110" x="1113.57" y="505.314" width="45.9005" height="42.8839">
    <properties>
     <property name="productionCenter" type="object" value="34"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -493,7 +493,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="72" name="russia" type="ownership" gid="110" x="1287.23" y="261.258" width="45.9005" height="42.8839">
+  <object id="72" name="russia" type="ownership" gid="110" x="1295.03" y="143.612" width="45.9005" height="42.8839">
    <properties>
     <property name="productionCenter" type="object" value="37"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -503,7 +503,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="73" name="russia" type="ownership" gid="110" x="1177.26" y="198.92" width="45.9005" height="42.8839">
+  <object id="73" name="russia" type="ownership" gid="110" x="1115.39" y="167.985" width="45.9005" height="42.8839">
    <properties>
     <property name="productionCenter" type="object" value="38"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -513,7 +513,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="75" name="germany" type="ownership" gid="118" x="797.798" y="418.199" width="39.6387" height="39.0446">
+  <object id="75" name="germany" type="ownership" gid="118" x="722.583" y="387.264" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="41"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -543,7 +543,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="78" name="germany" type="ownership" gid="118" x="575.286" y="610.095" width="39.6387" height="39.0446">
+  <object id="78" name="germany" type="ownership" gid="118" x="615.32" y="583.406" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="22"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -553,7 +553,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="79" name="germany" type="ownership" gid="118" x="409.681" y="771.773" width="39.6387" height="39.0446">
+  <object id="79" name="germany" type="ownership" gid="118" x="461.24" y="804.528" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="42"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -573,7 +573,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="81" name="germany" type="ownership" gid="118" x="138.262" y="673.637" width="39.6387" height="39.0446">
+  <object id="81" name="germany" type="ownership" gid="118" x="135.836" y="768.263" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="7"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -593,7 +593,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="83" name="germany" type="ownership" gid="118" x="135.558" y="932.095" width="39.6387" height="39.0446">
+  <object id="83" name="germany" type="ownership" gid="118" x="56.7032" y="975.162" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="43"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -623,7 +623,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="86" name="germany" type="ownership" gid="118" x="409.464" y="1217.21" width="39.6387" height="39.0446">
+  <object id="86" name="germany" type="ownership" gid="118" x="354.266" y="1199.01" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="13"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -653,7 +653,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="89" name="germany" type="ownership" gid="118" x="633.023" y="1092.65" width="39.6387" height="39.0446">
+  <object id="89" name="germany" type="ownership" gid="118" x="569.939" y="1060.5" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="25"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -663,7 +663,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="90" name="germany" type="ownership" gid="118" x="741.167" y="1025.59" width="39.6387" height="39.0446">
+  <object id="90" name="germany" type="ownership" gid="118" x="733.888" y="984.343" width="39.6387" height="39.0446">
    <properties>
     <property name="productionCenter" type="object" value="24"/>
     <property name="terrainModifier" type="object" value="0"/>
