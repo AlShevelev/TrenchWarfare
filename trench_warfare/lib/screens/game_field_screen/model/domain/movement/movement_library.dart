@@ -28,3 +28,4 @@ part 'movement_with_battle_calculator.dart';
 part 'movement_with_battle_next_unreachable_cell_calculator.dart';
 part 'movement_with_mine_field_calculator.dart';
 part 'movement_without_obstacles_calculator.dart';
+part 'show_damage_calculator.dart';

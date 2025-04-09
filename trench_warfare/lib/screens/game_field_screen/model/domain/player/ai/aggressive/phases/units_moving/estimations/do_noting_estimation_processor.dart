@@ -14,7 +14,16 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
   @override
   double _estimateInternal() {
     if (_unit.isInDefenceMode) {
-      return 10000;
+      final allEnemiesCellsAround = _gameField
+          .findCellsAround(_cell)
+          .where((c) => c.nation != _myNation && c.units.isNotEmpty && _isEnemyCell(c))
+          .toList(growable: false);
+
+      if (allEnemiesCellsAround.isEmpty) {
+        return 100000;
+      } else {
+        return 0; // _AttackUnitInDefenceModeEstimationProcessor will be used
+      }
     }
 
     if (_unit.type == UnitType.carrier) {

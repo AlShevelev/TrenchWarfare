@@ -38,49 +38,66 @@ class MovementFacade {
   State startMovement(Iterable<GameFieldCell> path) {
     final activePathItems = path.map((e) => e.pathItem!).where((e) => e.isActive).toList();
 
-    final calculator = activePathItems.any((e) => e.type == PathItemType.explosion)
-        ? MovementWithMineFieldCalculator(
-            myNation: _myNation,
-            humanNation: _humanNation,
-            gameField: _gameField,
-            updateGameObjectsEvent: _updateGameObjectsEvent,
-            gameOverConditionsCalculator: _gameOverConditionsCalculator,
-            animationTime: _animationTime,
-            movementResultBridge: _movementResultBridge,
-            pathFacade: _pathFacade,
-          )
-        : activePathItems.any((e) => e.type == PathItemType.battle)
-            ? MovementWithBattleCalculator(
-                myNation: _myNation,
-                humanNation: _humanNation,
-                gameField: _gameField,
-                updateGameObjectsEvent: _updateGameObjectsEvent,
-                gameOverConditionsCalculator: _gameOverConditionsCalculator,
-                animationTime: _animationTime,
-                movementResultBridge: _movementResultBridge,
-                pathFacade: _pathFacade,
-              )
-            : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
-                ? MovementWithBattleNextUnreachableCell(
-                    myNation: _myNation,
-                    humanNation: _humanNation,
-                    gameField: _gameField,
-                    updateGameObjectsEvent: _updateGameObjectsEvent,
-                    gameOverConditionsCalculator: _gameOverConditionsCalculator,
-                    animationTime: _animationTime,
-                    movementResultBridge: _movementResultBridge,
-                    pathFacade: _pathFacade,
-                  )
-                : MovementWithoutObstaclesCalculator(
-                    myNation: _myNation,
-                    humanNation: _humanNation,
-                    gameField: _gameField,
-                    updateGameObjectsEvent: _updateGameObjectsEvent,
-                    gameOverConditionsCalculator: _gameOverConditionsCalculator,
-                    animationTime: _animationTime,
-                    movementResultBridge: _movementResultBridge,
-                    pathFacade: _pathFacade,
-                  );
+    late MovementCalculator calculator;
+
+    if (_myNation != _humanNation && path.first.activeUnit?.isInDefenceMode == true) {
+      // The only action for AI-played unit in defence mode is attacking an enemy on the next cell without
+      // movement to the cell - so, we should use MovementWithBattleNextUnreachableCell
+      calculator = MovementWithBattleNextUnreachableCell(
+        myNation: _myNation,
+        humanNation: _humanNation,
+        gameField: _gameField,
+        updateGameObjectsEvent: _updateGameObjectsEvent,
+        gameOverConditionsCalculator: _gameOverConditionsCalculator,
+        animationTime: _animationTime,
+        movementResultBridge: _movementResultBridge,
+        pathFacade: _pathFacade,
+      );
+    } else {
+      calculator = activePathItems.any((e) => e.type == PathItemType.explosion)
+          ? MovementWithMineFieldCalculator(
+              myNation: _myNation,
+              humanNation: _humanNation,
+              gameField: _gameField,
+              updateGameObjectsEvent: _updateGameObjectsEvent,
+              gameOverConditionsCalculator: _gameOverConditionsCalculator,
+              animationTime: _animationTime,
+              movementResultBridge: _movementResultBridge,
+              pathFacade: _pathFacade,
+            )
+          : activePathItems.any((e) => e.type == PathItemType.battle)
+              ? MovementWithBattleCalculator(
+                  myNation: _myNation,
+                  humanNation: _humanNation,
+                  gameField: _gameField,
+                  updateGameObjectsEvent: _updateGameObjectsEvent,
+                  gameOverConditionsCalculator: _gameOverConditionsCalculator,
+                  animationTime: _animationTime,
+                  movementResultBridge: _movementResultBridge,
+                  pathFacade: _pathFacade,
+                )
+              : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
+                  ? MovementWithBattleNextUnreachableCell(
+                      myNation: _myNation,
+                      humanNation: _humanNation,
+                      gameField: _gameField,
+                      updateGameObjectsEvent: _updateGameObjectsEvent,
+                      gameOverConditionsCalculator: _gameOverConditionsCalculator,
+                      animationTime: _animationTime,
+                      movementResultBridge: _movementResultBridge,
+                      pathFacade: _pathFacade,
+                    )
+                  : MovementWithoutObstaclesCalculator(
+                      myNation: _myNation,
+                      humanNation: _humanNation,
+                      gameField: _gameField,
+                      updateGameObjectsEvent: _updateGameObjectsEvent,
+                      gameOverConditionsCalculator: _gameOverConditionsCalculator,
+                      animationTime: _animationTime,
+                      movementResultBridge: _movementResultBridge,
+                      pathFacade: _pathFacade,
+                    );
+    }
 
     return calculator.startMovement(path);
   }

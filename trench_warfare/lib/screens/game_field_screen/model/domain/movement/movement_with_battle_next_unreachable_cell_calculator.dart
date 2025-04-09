@@ -1,6 +1,6 @@
 part of movement;
 
-class MovementWithBattleNextUnreachableCell extends MovementCalculator {
+class MovementWithBattleNextUnreachableCell extends MovementCalculator with ShowDamageCalculator {
   MovementWithBattleNextUnreachableCell({
     required super.gameField,
     required super.myNation,
@@ -254,66 +254,15 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator {
       MoveCameraToCell(path.first),
     ];
 
-    final defendingUnitHasArtillery =
-        defendingUnit.hasArtillery || defendingCell.terrainModifier?.type == TerrainModifierType.landFort;
-
-    final attackingDamageType = attackingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
-    final defendingDamageType = defendingUnit.isMechanical ? DamageType.explosion : DamageType.bloodSplash;
-
-    // Show damage - case 1 - the defending unit doesn't strike back
-    if (attackingUnit.hasArtillery && !defendingUnitHasArtillery) {
-      updateEvents.add(PlaySound(
-        type: SoundType.attackExplosion,
-        duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
-      ));
-
-      updateEvents.add(
-        ShowDamage(
-          cell: defendingCell,
-          damageType: defendingDamageType,
-          time: _animationTime.damageAnimationTime,
-        ),
-      );
-    }
-
-    // Show damage - case 2 - the attacking artillery strikes first, then the defending troop fires back.
-    if (attackingUnit.hasArtillery && defendingUnitHasArtillery) {
-      updateEvents.add(PlaySound(
-        type: SoundType.attackExplosion,
-        duration: _animationTime.damageAnimationTime,
-      ));
-
-      updateEvents.add(
-        ShowDamage(
-          cell: defendingCell,
-          damageType: defendingDamageType,
-          time: _animationTime.damageAnimationTime,
-        ),
-      );
-
-      updateEvents.add(
-        PlaySound(
-          type: SoundType.attackExplosion,
-          duration: deadUnits.isNotEmpty ? _animationTime.damageAnimationTime : null,
-          ignoreIfPlayed: false,
-        ),
-      );
-
-      updateEvents.add(
-        ShowDamage(
-          cell: attackingCell,
-          damageType: attackingDamageType,
-          time: _animationTime.damageAnimationTime,
-        ),
-      );
-    }
-
-    if (deadUnits.isNotEmpty) {
-      updateEvents.add(PlaySound(
-        type: deadUnits.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
-      ));
-    }
+    final damageEvents = calculateDamageEvents(
+      attackingCell: attackingCell,
+      defendingCell: defendingCell,
+      attackingUnit: attackingUnit,
+      defendingUnit: defendingUnit,
+      deadUnits: deadUnits,
+      animationTime: _animationTime,
+    );
+    updateEvents.addAll(damageEvents);
 
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));

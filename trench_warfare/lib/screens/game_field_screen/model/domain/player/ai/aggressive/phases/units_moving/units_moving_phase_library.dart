@@ -8,6 +8,7 @@ import 'package:trench_warfare/core/entities/game_objects/game_object_library.da
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/production_center_level.dart';
 import 'package:trench_warfare/core/enums/production_center_type.dart';
+import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
@@ -26,6 +27,7 @@ import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
 part 'estimations/attack_estimation_processor.dart';
+part 'estimations/attack_unit_in_defence_mode_estimation_processor.dart';
 part 'estimations/carrier_interception_estimation_processor.dart';
 part 'estimations/do_noting_estimation_processor.dart';
 part 'estimations/move_to_enemy_pc_estimation_processor.dart';

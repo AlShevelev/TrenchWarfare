@@ -1,14 +1,14 @@
 part of units_moving_phase_library;
 
-class _AttackEstimationUnit {
+class _AttackEstimationItem {
   final GameFieldCellRead cell;
   final double weight;
 
-  _AttackEstimationUnit({required this.cell, required this.weight});
+  _AttackEstimationItem({required this.cell, required this.weight});
 }
 
 class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
-  late final List<_AttackEstimationUnit> _estimationResult;
+  late final List<_AttackEstimationItem> _estimationResult;
 
   _AttackEstimationProcessor({
     required super.actions,
@@ -37,7 +37,7 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
     }
 
     _estimationResult = allVictimCells
-        .map((c) => _AttackEstimationUnit(
+        .map((c) => _AttackEstimationItem(
               cell: c,
               weight: _calculateWeight(c, attacker: _unit, defender: c.activeUnit!),
             ))
@@ -101,6 +101,6 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
       weight *= 1.5;
     }
 
-    return weight++;
+    return weight + 1;
   }
 }

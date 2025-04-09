@@ -271,6 +271,14 @@ class UnitInBattlePreparationCalculator {
       }
     }
 
+    if (terrainModifier == TerrainModifierType.landFort) {
+      attacking.updateAttack(1.2);
+      attacking.updateDefence(1.2);
+      attacking.updateHasArtillery(true);
+      attacking.updateHasMachineGun(true);
+      attacking.setTakeHalfDamage(true);
+    }
+
     return attacking;
   }
 

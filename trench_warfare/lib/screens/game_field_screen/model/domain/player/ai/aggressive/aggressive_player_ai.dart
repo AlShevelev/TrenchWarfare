@@ -4,6 +4,7 @@ class AggressivePlayerAi extends PlayerAi {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
+
   Nation get myNation => _myNation;
 
   final MoneyStorageRead _nationMoney;
@@ -13,6 +14,7 @@ class AggressivePlayerAi extends PlayerAi {
   final GameOverConditionsCalculator _gameOverConditionsCalculator;
 
   final CarrierTroopTransfersStorage _transfersStorage;
+
   CarrierTroopTransfersStorageRead get transfersStorage => _transfersStorage;
 
   final SimpleStream<GameFieldControlsState> _aiProgressState;
@@ -80,10 +82,19 @@ class AggressivePlayerAi extends PlayerAi {
 
       for (final c in _gameField.cells) {
         if (c.nation == _myNation && c.activeUnit != null) {
-          for (final u in c.units) {
-            if (u.isInDefenceMode) {
-              unitsExcludedToMove.add(u);
+          final defenceUnits = c.units.where((u) => u.isInDefenceMode).toList(growable: false);
+
+          if (defenceUnits.isNotEmpty) {
+            // There are several enemy units around - our defence units can attack them
+            if (_gameField
+                .findCellsAround(c)
+                .where((c) =>
+                    c.nation != _myNation && c.units.isNotEmpty && _metadata.isInWar(_myNation, c.nation))
+                .isNotEmpty) {
+              continue;
             }
+
+            unitsExcludedToMove.addAll(defenceUnits);
           }
         }
       }
