@@ -18,7 +18,7 @@ class TerrainModifierBuildCalculator {
     }
 
     // bridge
-    if (cell.hasRoad && cell.hasRiver) {
+    if (cell.hasRoad && cell.hasRiver && type != TerrainModifierType.landMine) {
       return false;
     }
 
