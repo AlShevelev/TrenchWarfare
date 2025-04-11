@@ -38,6 +38,7 @@ class _CardBannersOpponent extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           audioController.playSound(SoundType.buttonClick);
+          _userActions.onCardSelected(_cardId);
           _userActions.onOpponentSelected(_cardId, _nation);
         },
         child: _getUnselectedBanner(),
