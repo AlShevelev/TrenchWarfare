@@ -26,7 +26,7 @@ class NewGameBuilder implements GameBuilder {
 
     final allEnemies = metadata.getEnemies(humanNation.code);
     final allAllies = metadata.getAllied(humanNation.code);
-    final allNeutrals = metadata.getAllied(humanNation.code);
+    final allNeutrals = metadata.getNeutral(humanNation.code);
 
     for (var i = 0; i < metadata.nations.length; i++) {
       if (i < allEnemies.length) {
