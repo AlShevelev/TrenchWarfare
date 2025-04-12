@@ -23,7 +23,7 @@ abstract class _UnitEstimationProcessorBase {
   final GameFieldRead _gameField;
 
   @protected
-  late final _allEnemies = _metadata.getEnemies(_myNation);
+  late final List<Nation> _allEnemies;
 
   @protected
   double get _balanceFactor => 1.0;
@@ -46,7 +46,9 @@ abstract class _UnitEstimationProcessorBase {
         _myNation = myNation,
         _metadata = metadata,
         _gameField = gameField,
-        _pathFacade = PathFacade(gameField, myNation, metadata);
+        _pathFacade = PathFacade(gameField, myNation, metadata) {
+    _allEnemies = _metadata.getEnemies(_myNation);
+  }
 
   /// Returns a weight of the estimation. Zero value means - the estimation is impossible
   double estimate() => _balanceFactor * _estimateInternal();

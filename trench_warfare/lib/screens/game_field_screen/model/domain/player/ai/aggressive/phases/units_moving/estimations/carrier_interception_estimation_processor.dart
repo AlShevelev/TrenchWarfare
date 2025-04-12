@@ -32,12 +32,10 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
       return 0;
     }
 
-    const cellsMax = 5;
-
-    final allEnemies = _metadata.getEnemies(_myNation);
+    const cellsMax = 3;
 
     for(final c in _gameField.cells) {
-      if (c.activeUnit?.type == UnitType.carrier && allEnemies.contains(c.nation)) {
+      if (c.activeUnit?.type == UnitType.carrier && _isEnemyCell(c)) {
         final pathLen = _pathFacade.calculatePath(startCell: _cell, endCell: c).length;
 
         // Can't reach

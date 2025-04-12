@@ -23,7 +23,7 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    const candidatesMax = 5;
+    const candidatesMax = 2;
     var candidateCounter = 0;
 
     GameFieldCellRead? nearestPcInDanger;

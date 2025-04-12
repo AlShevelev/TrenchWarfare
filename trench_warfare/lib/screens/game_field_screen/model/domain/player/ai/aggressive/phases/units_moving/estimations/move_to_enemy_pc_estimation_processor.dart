@@ -23,7 +23,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
-    const candidatesMax = 5;
+    const candidatesMax = 2;
     var candidateCounter = 0;
 
     GameFieldCellRead? nearestEnemyPc;
@@ -37,7 +37,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
 
     while(cells.isNotEmpty) {
       for (final c in cells) {
-        if (c.productionCenter != null && _unit.isLand == c.isLand && _allEnemies.contains(c.nation)) {
+        if (c.productionCenter != null && _unit.isLand == c.isLand && _isEnemyCell(c)) {
           final path = _pathFacade.calculatePath(startCell: _cell, endCell: c);
           if (path.isEmpty) {
             continue;

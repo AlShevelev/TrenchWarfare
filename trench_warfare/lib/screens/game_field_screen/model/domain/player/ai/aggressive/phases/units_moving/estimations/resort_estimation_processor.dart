@@ -26,6 +26,10 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
       return 0;
     }
 
+    if (_unit.health / _unit.maxHealth > 0.75) {
+      return 0;
+    }
+
     if (_unit.type == UnitType.artillery) {
       return _getWeightForArtillery();
     }

@@ -56,11 +56,11 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   Iterable<GameFieldCellRead> _getAllVictimCells() {
-    const cellsMax = 5;
+    const cellsMax = 3;
 
     final cellCandidates = <GameFieldCellRead>[];
 
-    for (var r = 1; r <= _unit.maxMovementPoints; r++) {
+    for (var r = 1; r <= _unit.maxMovementPoints.toInt(); r++) {
       final cells = RandomGen.shiftItems(
         _gameField.findCellsAroundR(_cell, radius: r) as List<GameFieldCell>,
       );
