@@ -6,7 +6,7 @@ import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:trench_warfare/shared/data/map_decoder.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:tuple/tuple.dart';
 

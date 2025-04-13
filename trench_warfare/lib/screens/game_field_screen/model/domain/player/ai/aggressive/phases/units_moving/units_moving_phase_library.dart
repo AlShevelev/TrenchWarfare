@@ -20,7 +20,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/inf
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';

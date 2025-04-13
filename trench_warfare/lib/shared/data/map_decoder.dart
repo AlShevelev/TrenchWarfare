@@ -6,7 +6,7 @@ import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:tuple/tuple.dart';
 import 'package:xml/xml.dart';
 import 'package:xml/xpath.dart';

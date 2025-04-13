@@ -26,7 +26,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class GameFieldForControls {

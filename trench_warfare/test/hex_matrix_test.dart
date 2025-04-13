@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:trench_warfare/core/entities/hex_matrix/hex_matrix_library.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 
 import 'assert.dart';
 

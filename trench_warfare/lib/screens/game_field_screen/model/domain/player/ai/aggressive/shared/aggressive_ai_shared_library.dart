@@ -11,7 +11,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/m
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
 import 'package:trench_warfare/shared/architecture/async_signal.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 
 part 'carriers_target_calculator.dart';
 part 'player_actions.dart';

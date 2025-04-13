@@ -1,7 +1,7 @@
 import 'package:trench_warfare/database/dao/dao_base.dart';
 import 'package:trench_warfare/database/entities/key_value_db_entity.dart';
 import 'package:trench_warfare/database/objectbox.g.dart';
-import 'package:trench_warfare/shared/helpers/extensions.dart';
+import 'package:trench_warfare/shared/utils/extensions.dart';
 
 class KeyValueDao extends DaoBase {
   final Box<KeyValueDbEntity> _box;
