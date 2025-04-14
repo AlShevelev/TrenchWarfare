@@ -24,7 +24,7 @@ class CarriersPhase implements TurnPhase {
         _myNation = myNation,
         _metadata = metadata,
         _transfersStorage = transfersStorage,
-        _actions = PlayerActions(player: player, movementResultBridge: null) {
+        _actions = PlayerActions(player: player, unitUpdateResultBridge: null) {
     // It's a dirty, but necessary hack
     final playerCore = _player as PlayerCore;
     playerCore.registerOnAnimationCompleted(() {

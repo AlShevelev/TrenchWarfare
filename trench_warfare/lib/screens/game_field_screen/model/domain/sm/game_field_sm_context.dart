@@ -27,7 +27,7 @@ class GameFieldStateMachineContext {
 
   final AnimationTimeFacade animationTimeFacade;
 
-  final MovementResultBridge? movementResultBridge;
+  final UnitUpdateResultBridge? unitUpdateResultBridge;
 
   GameFieldStateMachineContext({
     required this.gameField,
@@ -43,6 +43,6 @@ class GameFieldStateMachineContext {
     required this.gameOverConditionsCalculator,
     required this.modelCallback,
     required this.animationTimeFacade,
-    required this.movementResultBridge,
+    required this.unitUpdateResultBridge,
   });
 }

@@ -33,7 +33,7 @@ class FromPathIsShownOnClick {
         updateGameObjectsEvent: _context.updateGameObjectsEvent,
         gameOverConditionsCalculator: _context.gameOverConditionsCalculator,
         animationTime: _context.animationTimeFacade.getAnimationTime(!_context.isAI),
-        movementResultBridge: _context.movementResultBridge,
+        unitUpdateResultBridge: _context.unitUpdateResultBridge,
         metadata: _context.mapMetadata,
       ).startMovement(pathToProcess);
     }

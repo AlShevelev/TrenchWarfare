@@ -9,6 +9,7 @@ import 'package:trench_warfare/core/enums/terrain_modifier_type.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_time/animation_time_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/unit_update_result/unit_update_result_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/pathfinding/pathfinding_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/battle/battle_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/sm/game_field_sm_library.dart';
@@ -20,8 +21,6 @@ import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:tuple/tuple.dart';
 
-part 'movement_result/movement_result_bridge.dart';
-part 'movement_result/movement_result_item.dart';
 part 'movement_calculator.dart';
 part 'movement_facade.dart';
 part 'movement_with_battle_calculator.dart';

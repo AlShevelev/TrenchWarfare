@@ -20,7 +20,7 @@ class GameFieldStateMachine {
     GameOverConditionsCalculator gameOverConditionsCalculator,
     AnimationTimeFacade animationTimeFacade,
     GamePauseWait? gamePauseWait,
-    MovementResultBridge? movementResultBridge,
+    UnitUpdateResultBridge? unitUpdateResultBridge,
     this._modelCallback, {
     required bool isAI,
     required bool isGameLoaded,
@@ -41,7 +41,7 @@ class GameFieldStateMachine {
       gameOverConditionsCalculator: gameOverConditionsCalculator,
       modelCallback: _modelCallback,
       animationTimeFacade: animationTimeFacade,
-      movementResultBridge: movementResultBridge,
+      unitUpdateResultBridge: unitUpdateResultBridge,
     );
 
     if (isGameLoaded && isAI) {

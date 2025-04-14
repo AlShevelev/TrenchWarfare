@@ -52,7 +52,7 @@ class _AttackUnitInDefenceModeEstimationProcessor extends _UnitEstimationProcess
   }
 
   @override
-  Future<List<MovementResultItem>?> processAction() async {
+  Future<List<UnitUpdateResultItem>?> processAction() async {
     final weightIndex =
         RandomGen.randomWeight(_estimationResult.map((i) => i.weight).toList(growable: false));
     final target = _estimationResult[weightIndex!];

@@ -22,6 +22,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/meta
 import 'package:trench_warfare/screens/game_field_screen/model/domain/build/build_calculators_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/cards_placing/cards_placing_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/carriers/carrier_panel_calculator.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/unit_update_result/unit_update_result_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_model.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/game_field_storage/game_field_settings_storage.dart';

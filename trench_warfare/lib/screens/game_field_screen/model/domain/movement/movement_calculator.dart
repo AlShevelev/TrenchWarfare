@@ -30,7 +30,7 @@ abstract class MovementCalculator {
   final AnimationTime _animationTime;
 
   @protected
-  final MovementResultBridge? _movementResultBridge;
+  final UnitUpdateResultBridge? _unitUpdateResultBridge;
 
   MovementCalculator({
     required GameFieldRead gameField,
@@ -39,7 +39,7 @@ abstract class MovementCalculator {
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
-    required MovementResultBridge? movementResultBridge,
+    required UnitUpdateResultBridge? unitUpdateResultBridge,
     required PathFacade pathFacade,
   })  : _gameField = gameField,
         _myNation = myNation,
@@ -48,7 +48,7 @@ abstract class MovementCalculator {
         _pathFacade = pathFacade,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
         _animationTime = animationTime,
-        _movementResultBridge = movementResultBridge;
+        _unitUpdateResultBridge = unitUpdateResultBridge;
 
   State startMovement(Iterable<GameFieldCell> path);
 

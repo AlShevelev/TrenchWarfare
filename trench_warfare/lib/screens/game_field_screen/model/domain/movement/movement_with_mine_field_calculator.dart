@@ -12,7 +12,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
-    required super.movementResultBridge,
+    required super.unitUpdateResultBridge,
     required super.pathFacade,
   });
 
@@ -51,7 +51,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
         tag: 'MOVEMENT',
       );
     } else {
-      _movementResultBridge?.addBefore(
+      _unitUpdateResultBridge?.addBefore(
         nation: _myNation,
         unit: Unit.copy(startUnit),
         cell: path.first,
@@ -86,7 +86,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
           detachResult.unit.setState(UnitState.disabled);
         }
 
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.unit),
           cell: lastReachableCell,
@@ -104,7 +104,7 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       }
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,

@@ -1,20 +1,20 @@
-part of movement;
+part of unit_udpate_result;
 
-enum MovementResulType {
+enum UnitUpdateResulType {
   before,
   after,
 }
 
-class MovementResultItem {
+class UnitUpdateResultItem {
   final Nation nation;
 
   final Unit unit;
 
   final GameFieldCellRead cell;
 
-  final MovementResulType type;
+  final UnitUpdateResulType type;
 
-  MovementResultItem({
+  UnitUpdateResultItem({
     required this.nation,
     required this.unit,
     required this.cell,

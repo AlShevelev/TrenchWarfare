@@ -5,17 +5,17 @@ class PlayerActions {
 
   final PlayerInput _player;
 
-  final MovementResultBridgeRead? _movementResultBridge;
+  final UnitUpdateResultBridgeRead? _unitUpdateResultBridge;
 
   AsyncSignal? _signal;
 
   PlayerActions({
     required PlayerInput player,
-    required MovementResultBridgeRead? movementResultBridge,
+    required UnitUpdateResultBridgeRead? unitUpdateResultBridge,
   })  : _player = player,
-        _movementResultBridge = movementResultBridge;
+        _unitUpdateResultBridge = unitUpdateResultBridge;
 
-  Future<List<MovementResultItem>?> move(
+  Future<List<UnitUpdateResultItem>?> move(
     Unit unit, {
     required GameFieldCellRead from,
     required GameFieldCellRead to,
@@ -47,7 +47,7 @@ class PlayerActions {
 
     await _signal?.wait(); // waiting for animation to complete
 
-    return _movementResultBridge?.extractResult();
+    return _unitUpdateResultBridge?.extractResult();
   }
 
   void resort(GameFieldCellRead cell, Iterable<String> unitIds) =>

@@ -9,7 +9,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
-    required super.movementResultBridge,
+    required super.unitUpdateResultBridge,
     required super.pathFacade,
   });
 
@@ -49,7 +49,7 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         tag: 'MOVEMENT',
       );
     } else {
-      _movementResultBridge?.addBefore(
+      _unitUpdateResultBridge?.addBefore(
         nation: _myNation,
         unit: Unit.copy(startUnit),
         cell: path.first,
@@ -94,14 +94,14 @@ class MovementWithoutObstaclesCalculator extends MovementCalculator {
         cell.setPathItem(null);
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: _myNation,
         unit: Unit.copy(detachResult.unit),
         cell: lastReachableCell,
       );
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,

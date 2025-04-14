@@ -9,13 +9,13 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/animation_
 import 'package:trench_warfare/screens/game_field_screen/model/domain/day/day_storage.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/money/money_storage.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/domain/movement/movement_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/aggressive_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/aggressive/phases/carriers/carriers_phase_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/passive/passive_player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/peaceful/peaceful_player_ai_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/ai/player_ai.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/player/player_library.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/domain/unit_update_result/unit_update_result_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/domain/victory/game_over_conditions_calculator.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
@@ -110,7 +110,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       aiUnitsSpeed: gameBuildResult.aiUnitsSpeed,
     );
 
-    final movementResultBridge = MovementResultBridgeImpl();
+    final movementResultBridge = UnitUpdateResultBridgeImpl();
 
     for (var i = 0; i < _sortedPlayers.length; i++) {
       _createPlayer(
@@ -126,7 +126,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
         isGameLoaded: gameBuildResult.isGameLoaded,
         animationTimeFacade: animationTimeFacade,
         gamePauseWait: _gamePauseWait,
-        movementResultBridge: movementResultBridge,
+        unitUpdateResultBridge: movementResultBridge,
       );
     }
 
@@ -189,7 +189,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     required bool isGameLoaded,
     required AnimationTimeFacade animationTimeFacade,
     required GamePauseWait gamePauseWait,
-    required MovementResultBridgeImpl movementResultBridge,
+    required UnitUpdateResultBridgeImpl unitUpdateResultBridge,
   }) {
     final isHuman = index == _humanIndex;
 
@@ -214,7 +214,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       animationTimeFacade,
       gamePauseWait: isHuman ? null : gamePauseWait,
       // We don't need to pause the app for a human player
-      movementResultBridge: isHuman ? null : movementResultBridge,
+      unitUpdateResultBridge: isHuman ? null : unitUpdateResultBridge,
       isAI: !isHuman,
       isGameLoaded: isGameLoaded,
     );
@@ -244,7 +244,7 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
             gameOverConditionsCalculator,
             initialTransfers[nationRecord.code] ?? [],
             _aiProgressState,
-            movementResultBridge,
+            unitUpdateResultBridge,
           )
       };
 

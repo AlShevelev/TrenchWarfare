@@ -1,10 +1,10 @@
-part of movement;
+part of unit_udpate_result;
 
-abstract interface class MovementResultBridgeRead {
-  List<MovementResultItem> extractResult();
+abstract interface class UnitUpdateResultBridgeRead {
+  List<UnitUpdateResultItem> extractResult();
 }
 
-abstract interface class MovementResultBridge {
+abstract interface class UnitUpdateResultBridge {
   void addBefore({
     required Nation nation,
     required Unit unit,
@@ -19,8 +19,8 @@ abstract interface class MovementResultBridge {
 }
 
 /// Passes a movement result between components
-class MovementResultBridgeImpl implements MovementResultBridge, MovementResultBridgeRead {
-  final List<MovementResultItem> _result = [];
+class UnitUpdateResultBridgeImpl implements UnitUpdateResultBridge, UnitUpdateResultBridgeRead {
+  final List<UnitUpdateResultItem> _result = [];
 
   @override
   void addBefore({
@@ -28,9 +28,9 @@ class MovementResultBridgeImpl implements MovementResultBridge, MovementResultBr
     required Unit unit,
     required GameFieldCellRead cell,
   }) {
-    _result.add(MovementResultItem(
+    _result.add(UnitUpdateResultItem(
       nation: nation,
-      type: MovementResulType.before,
+      type: UnitUpdateResulType.before,
       unit: unit,
       cell: cell,
     ));
@@ -42,16 +42,16 @@ class MovementResultBridgeImpl implements MovementResultBridge, MovementResultBr
     required Unit unit,
     required GameFieldCellRead cell,
   }) {
-    _result.add(MovementResultItem(
+    _result.add(UnitUpdateResultItem(
       nation: nation,
-      type: MovementResulType.after,
+      type: UnitUpdateResulType.after,
       unit: unit,
       cell: cell,
     ));
   }
 
   @override
-  List<MovementResultItem> extractResult() {
+  List<UnitUpdateResultItem> extractResult() {
     final result = _result.toList(growable: false);
     _result.clear();
     return result;

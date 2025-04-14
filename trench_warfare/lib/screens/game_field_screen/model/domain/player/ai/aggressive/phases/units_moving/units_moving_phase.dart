@@ -22,12 +22,12 @@ class UnitsMovingPhase implements TurnPhase {
     required StableUnitsIterator iterator,
     required MapMetadataRead metadata,
     required SimpleStream<GameFieldControlsState>? aiProgressState,
-    required MovementResultBridgeRead movementResultBridge,
+    required UnitUpdateResultBridgeRead unitUpdateResultBridge,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
-        _actions = PlayerActions(player: player, movementResultBridge: movementResultBridge),
+        _actions = PlayerActions(player: player, unitUpdateResultBridge: unitUpdateResultBridge),
         _aiProgressState = aiProgressState {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
@@ -133,7 +133,7 @@ class UnitsMovingPhase implements TurnPhase {
           }
 
           for (final resultItem in processingResult) {
-            if (resultItem.type == MovementResulType.before) {
+            if (resultItem.type == UnitUpdateResulType.before) {
               influences.removeUnit(resultItem.unit, resultItem.nation, resultItem.cell);
             } else {
               influences.addUnit(resultItem.unit, resultItem.nation, resultItem.cell);

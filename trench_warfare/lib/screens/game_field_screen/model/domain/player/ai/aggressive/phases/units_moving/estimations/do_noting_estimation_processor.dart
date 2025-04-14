@@ -53,7 +53,7 @@ class _DoNothingEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<List<MovementResultItem>?> processAction() async {
+  Future<List<UnitUpdateResultItem>?> processAction() async {
     _unit.setState(UnitState.disabled);
     return null;
   }

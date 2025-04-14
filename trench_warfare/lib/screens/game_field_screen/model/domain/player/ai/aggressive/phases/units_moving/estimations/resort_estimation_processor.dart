@@ -42,7 +42,7 @@ class _ResortEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<List<MovementResultItem>?> processAction() async {
+  Future<List<UnitUpdateResultItem>?> processAction() async {
     final firstId = _cell.activeUnit!.id;
 
     final cellUnitsIds = _cell.units.map((u) => u.id).toList(growable: true)

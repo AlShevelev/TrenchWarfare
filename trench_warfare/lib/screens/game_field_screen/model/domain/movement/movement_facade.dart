@@ -13,7 +13,7 @@ class MovementFacade {
 
   final AnimationTime _animationTime;
 
-  final MovementResultBridge? _movementResultBridge;
+  final UnitUpdateResultBridge? _unitUpdateResultBridge;
 
   final PathFacade _pathFacade;
 
@@ -24,7 +24,7 @@ class MovementFacade {
     required SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     required GameOverConditionsCalculator gameOverConditionsCalculator,
     required AnimationTime animationTime,
-    required MovementResultBridge? movementResultBridge,
+    required UnitUpdateResultBridge? unitUpdateResultBridge,
     required MapMetadataRead metadata,
   })  : _myNation = myNation,
         _humanNation = humanNation,
@@ -32,7 +32,7 @@ class MovementFacade {
         _updateGameObjectsEvent = updateGameObjectsEvent,
         _gameOverConditionsCalculator = gameOverConditionsCalculator,
         _animationTime = animationTime,
-        _movementResultBridge = movementResultBridge,
+        _unitUpdateResultBridge = unitUpdateResultBridge,
         _pathFacade = PathFacade(gameField, myNation, metadata);
 
   State startMovement(Iterable<GameFieldCell> path) {
@@ -50,7 +50,7 @@ class MovementFacade {
         updateGameObjectsEvent: _updateGameObjectsEvent,
         gameOverConditionsCalculator: _gameOverConditionsCalculator,
         animationTime: _animationTime,
-        movementResultBridge: _movementResultBridge,
+        unitUpdateResultBridge: _unitUpdateResultBridge,
         pathFacade: _pathFacade,
       );
     } else {
@@ -62,7 +62,7 @@ class MovementFacade {
               updateGameObjectsEvent: _updateGameObjectsEvent,
               gameOverConditionsCalculator: _gameOverConditionsCalculator,
               animationTime: _animationTime,
-              movementResultBridge: _movementResultBridge,
+              unitUpdateResultBridge: _unitUpdateResultBridge,
               pathFacade: _pathFacade,
             )
           : activePathItems.any((e) => e.type == PathItemType.battle)
@@ -73,7 +73,7 @@ class MovementFacade {
                   updateGameObjectsEvent: _updateGameObjectsEvent,
                   gameOverConditionsCalculator: _gameOverConditionsCalculator,
                   animationTime: _animationTime,
-                  movementResultBridge: _movementResultBridge,
+                  unitUpdateResultBridge: _unitUpdateResultBridge,
                   pathFacade: _pathFacade,
                 )
               : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
@@ -84,7 +84,7 @@ class MovementFacade {
                       updateGameObjectsEvent: _updateGameObjectsEvent,
                       gameOverConditionsCalculator: _gameOverConditionsCalculator,
                       animationTime: _animationTime,
-                      movementResultBridge: _movementResultBridge,
+                      unitUpdateResultBridge: _unitUpdateResultBridge,
                       pathFacade: _pathFacade,
                     )
                   : MovementWithoutObstaclesCalculator(
@@ -94,7 +94,7 @@ class MovementFacade {
                       updateGameObjectsEvent: _updateGameObjectsEvent,
                       gameOverConditionsCalculator: _gameOverConditionsCalculator,
                       animationTime: _animationTime,
-                      movementResultBridge: _movementResultBridge,
+                      unitUpdateResultBridge: _unitUpdateResultBridge,
                       pathFacade: _pathFacade,
                     );
     }

@@ -71,7 +71,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   @override
-  Future<List<MovementResultItem>?> processAction() async {
+  Future<List<UnitUpdateResultItem>?> processAction() async {
     return await _actions.move(_unit, from: _cell, to: _nearestEnemyPc!);
   }
 

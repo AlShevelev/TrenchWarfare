@@ -8,7 +8,7 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
     required super.updateGameObjectsEvent,
     required super.gameOverConditionsCalculator,
     required super.animationTime,
-    required super.movementResultBridge,
+    required super.unitUpdateResultBridge,
     required super.pathFacade,
   });
 
@@ -27,13 +27,13 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
 
     final enemyNation = defendingCell.nation!;
 
-    _movementResultBridge?.addBefore(
+    _unitUpdateResultBridge?.addBefore(
       nation: _myNation,
       unit: Unit.copy(startUnit),
       cell: path.first,
     );
 
-    _movementResultBridge?.addBefore(
+    _unitUpdateResultBridge?.addBefore(
       nation: enemyNation,
       unit: Unit.copy(defendingUnit),
       cell: defendingCell,
@@ -75,7 +75,7 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       defendingCell.removeActiveUnit();
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
@@ -87,14 +87,14 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       _updateUnit(defendingUnit, (battleResult.defendingUnit as Alive).info);
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: enemyNation,
         unit: Unit.copy(defendingUnit),
         cell: defendingCell,
@@ -110,14 +110,14 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       }
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: enemyNation,
         unit: Unit.copy(defendingUnit),
         cell: newDefendingUnitCell ?? defendingCell,
@@ -143,14 +143,14 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       );
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: _myNation,
         unit: Unit.copy(detachResult.unit),
         cell: newAttackingUnitCell,
@@ -170,20 +170,20 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       );
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: _myNation,
         unit: Unit.copy(detachResult.unit),
         cell: attackingCell,
       );
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: enemyNation,
         unit: Unit.copy(defendingUnit),
         cell: defendingCell,
@@ -213,20 +213,20 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       );
 
       if (detachResult.detachedFrom != null) {
-        _movementResultBridge?.addAfter(
+        _unitUpdateResultBridge?.addAfter(
           nation: _myNation,
           unit: Unit.copy(detachResult.detachedFrom!),
           cell: path.first,
         );
       }
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: _myNation,
         unit: Unit.copy(detachResult.unit),
         cell: newAttackingUnitCell,
       );
 
-      _movementResultBridge?.addAfter(
+      _unitUpdateResultBridge?.addAfter(
         nation: enemyNation,
         unit: Unit.copy(defendingUnit),
         cell: newDefendingUnitCell ?? defendingCell,
