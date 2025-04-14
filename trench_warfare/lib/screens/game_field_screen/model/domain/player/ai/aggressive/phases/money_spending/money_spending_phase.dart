@@ -13,6 +13,8 @@ class MoneySpendingPhase implements TurnPhase {
 
   final SimpleStream<GameFieldControlsState> _aiProgressState;
 
+  static const String tag = 'MONEY_SPENDING';
+
   MoneySpendingPhase({
     required PlayerInput player,
     required GameFieldRead gameField,
@@ -33,7 +35,7 @@ class MoneySpendingPhase implements TurnPhase {
     _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0));
 
     while (true) {
-      Logger.info('loop started', tag: 'MONEY_SPENDING');
+      Logger.info('loop started', tag: tag);
 
       final influences = await compute<InfluenceMapComputeData, InfluenceMapRepresentationRead>(
           (data) => InfluenceMapRepresentation(
@@ -46,7 +48,7 @@ class MoneySpendingPhase implements TurnPhase {
             gameField: _gameField,
           ));
 
-      Logger.info('influences map is calculated', tag: 'MONEY_SPENDING');
+      Logger.info('influences map is calculated', tag: tag);
 
       final List<_EstimationProcessor> processors = [
         _ProductionCenterEstimationProcessor(
@@ -115,12 +117,12 @@ class MoneySpendingPhase implements TurnPhase {
         'SpecialStrike: ${averageWeights[2]}; TerrainModifier: ${averageWeights[3]}; '
         'UnitBooster: ${averageWeights[4]}; Units: ${averageWeights[5]}; '
         'Carriers: ${averageWeights[6]};',
-        tag: 'MONEY_SPENDING',
+        tag: tag,
       );
 
       final generalActionIndex = RandomGen.randomWeight(averageWeights);
 
-      Logger.info('selected index is: $generalActionIndex', tag: 'MONEY_SPENDING');
+      Logger.info('selected index is: $generalActionIndex', tag: tag);
 
       // We can't make a general decision. The presumable reason - we're short of money, or build
       // everything we can
@@ -137,9 +139,9 @@ class MoneySpendingPhase implements TurnPhase {
       });
 
       try {
-        Logger.info('selectedProcessor.process() started', tag: 'MONEY_SPENDING');
+        Logger.info('selectedProcessor.process() started', tag: tag);
         await selectedProcessor.process();
-        Logger.info('selectedProcessor.process() completed', tag: 'MONEY_SPENDING');
+        Logger.info('selectedProcessor.process() completed', tag: tag);
       } catch (e, s) {
         Logger.error(e.toString(), stackTrace: s);
       } finally {

@@ -13,6 +13,8 @@ class UnitsMovingPhase implements TurnPhase {
 
   final SimpleStream<GameFieldControlsState>? _aiProgressState;
 
+  static const String tag = 'UNITS_MOVING';
+
   UnitsMovingPhase({
     required PlayerInput player,
     required GameFieldRead gameField,
@@ -59,28 +61,28 @@ class UnitsMovingPhase implements TurnPhase {
 
     final movedUnitIds = <String>{};
 
+    final InfluenceMapRepresentation influences =
+        await compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
+            (data) => InfluenceMapRepresentation(
+                  myNation: data.myNation,
+                  metadata: data.metadata,
+                )..calculateFull(data.gameField),
+            InfluenceMapComputeData(
+              myNation: _myNation,
+              metadata: _metadata,
+              gameField: _gameField,
+            ));
+
     while (_iterator.moveNext()) {
       final unit = _iterator.current.unit;
 
       GameFieldCellRead? cellWithUnit = _iterator.current.cell;
 
-      final InfluenceMapRepresentation influences =
-          await compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
-              (data) => InfluenceMapRepresentation(
-                    myNation: data.myNation,
-                    metadata: data.metadata,
-                  )..calculateFull(data.gameField),
-              InfluenceMapComputeData(
-                myNation: _myNation,
-                metadata: _metadata,
-                gameField: _gameField,
-              ));
-
       // the unit is not dead and can move
       while (cellWithUnit != null && unit.state != UnitState.disabled) {
-        Logger.info('processing unit: $unit on cell: $cellWithUnit', tag: 'UNITS_MOVING');
+        Logger.info('processing unit: $unit on cell: $cellWithUnit', tag: tag);
 
-        Logger.info('influence map is recalculated', tag: 'UNITS_MOVING');
+        Logger.info('influence map is recalculated', tag: tag);
 
         final estimators = _createEstimators(
           influences: influences,
@@ -91,7 +93,7 @@ class UnitsMovingPhase implements TurnPhase {
         Logger.info(
           'estimators: Attack[0]; CarrierInterception[1]; DoNothing[2]; MoveToEnemyPc[3]; '
           'MoveToMyPc[4]; Resort[5]',
-          tag: 'UNITS_MOVING',
+          tag: tag,
         );
 
         final List<Tuple2<int, double>> indexedWeights = estimators
@@ -103,7 +105,7 @@ class UnitsMovingPhase implements TurnPhase {
 
         Logger.info(
           'estimation result: ${indexedWeights.map((e) => '[${e.item1} : ${e.item2}]').join(' | ')};',
-          tag: 'UNITS_MOVING',
+          tag: tag,
         );
 
         final weightIndex =
@@ -114,8 +116,7 @@ class UnitsMovingPhase implements TurnPhase {
           break;
         }
 
-        Logger.info('selected estimator index is: ${indexedWeights[weightIndex].item1}',
-            tag: 'MONEY_SPENDING');
+        Logger.info('selected estimator index is: ${indexedWeights[weightIndex].item1}', tag: tag);
 
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
         final processingResult = await selectedEstimator.processAction();
