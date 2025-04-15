@@ -11,6 +11,7 @@ class _UnitBoosterEstimationProcessor extends _EstimationProcessorBase<_UnitBoos
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

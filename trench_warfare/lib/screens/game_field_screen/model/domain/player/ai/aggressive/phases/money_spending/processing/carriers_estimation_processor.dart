@@ -11,6 +11,7 @@ class _CarriersEstimationProcessor extends _EstimationProcessorBase<_CarriersBui
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

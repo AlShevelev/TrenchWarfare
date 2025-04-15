@@ -1,6 +1,6 @@
 part of units_moving_phase_library;
 
-class UnitsMovingPhase implements TurnPhase {
+class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
@@ -61,17 +61,7 @@ class UnitsMovingPhase implements TurnPhase {
 
     final movedUnitIds = <String>{};
 
-    final InfluenceMapRepresentation influences =
-        await compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
-            (data) => InfluenceMapRepresentation(
-                  myNation: data.myNation,
-                  metadata: data.metadata,
-                )..calculateFull(data.gameField),
-            InfluenceMapComputeData(
-              myNation: _myNation,
-              metadata: _metadata,
-              gameField: _gameField,
-            ));
+    final influences = await calculateFullInfluenceMap(_myNation, _metadata, _gameField);
 
     while (_iterator.moveNext()) {
       final unit = _iterator.current.unit;
@@ -121,25 +111,7 @@ class UnitsMovingPhase implements TurnPhase {
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
         final processingResult = await selectedEstimator.processAction();
 
-        // updates the influence map
-        if (processingResult != null) {
-          Logger.info(
-            'We need to update the influence map. Processing result has ${processingResult.length} items',
-            tag: 'INFLUENCE_MAP',
-          );
-
-          for (final resultItem in processingResult) {
-            Logger.info(resultItem.toString(), tag: 'INFLUENCE_MAP');
-          }
-
-          for (final resultItem in processingResult) {
-            if (resultItem.type == UnitUpdateResulType.before) {
-              influences.removeUnit(resultItem.unit, resultItem.nation, resultItem.cell);
-            } else {
-              influences.addUnit(resultItem.unit, resultItem.nation, resultItem.cell);
-            }
-          }
-        }
+        updateInfluenceMap(influences, processingResult);
 
         // check the unit is dead or not (cellWithUnit == null - is dead)
         cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);

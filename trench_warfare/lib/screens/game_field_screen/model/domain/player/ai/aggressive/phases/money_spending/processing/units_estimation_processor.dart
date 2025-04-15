@@ -11,6 +11,7 @@ class _UnitsEstimationProcessor extends _EstimationProcessorBase<_UnitsBuildingE
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

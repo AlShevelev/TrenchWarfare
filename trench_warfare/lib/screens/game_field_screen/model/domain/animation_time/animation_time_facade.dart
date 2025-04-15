@@ -12,7 +12,7 @@ class AnimationTimeFacade {
   static const int damageAnimationTime = 500;
 
   /// A pause in milliseconds just after building something (unit, PC, etc.)
-  static const int pauseAfterBuildingAi = 350;
+  static const int pauseAfterBuildingAi = 550;
   static const int pauseAfterBuildingHuman = 10;
 
   late final _AnimationTimeCalculator _humanCalculator;

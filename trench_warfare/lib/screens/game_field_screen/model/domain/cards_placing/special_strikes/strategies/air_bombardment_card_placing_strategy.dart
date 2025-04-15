@@ -6,6 +6,8 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     super.cell,
     super.isAI,
     super.animationTime,
+    super.unitUpdateResultBridge,
+    super.myNation,
   );
 
   /// [return] killed units (or hit by propaganda)
@@ -17,14 +19,22 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
 
     Logger.info('AIR_BOMBARDMENT; hasAntiAir: $hasAntiAir', tag: 'SPECIAL_STRIKE');
 
+    final killedUnits = <Unit>[];
     for (var unit in _cell.units) {
+      _unitUpdateResultBridge?.addBefore(nation: _cell.nation!, unit: Unit.copy(unit), cell: _cell);
+
       final damage = RandomGen.randomDouble(unit.maxHealth * 0.5, unit.maxHealth) * (hasAntiAir ? 0.5 : 1);
       unit.setHealth(unit.health - damage);
 
       Logger.info('AIR_BOMBARDMENT; strike result. damage: $damage; unit: $unit', tag: 'SPECIAL_STRIKE');
+
+      if (unit.health <= 0) {
+        killedUnits.add(unit);
+      } else {
+        _unitUpdateResultBridge?.addAfter(nation: _cell.nation!, unit: Unit.copy(unit), cell: _cell);
+      }
     }
 
-    final killedUnits = _cell.units.where((u) => u.health <= 0).toList(growable: false);
     // ignore: avoid_function_literals_in_foreach_calls
     killedUnits.forEach((u) => _cell.removeUnit(u));
 

@@ -5,7 +5,7 @@ class PassivePlayerAi extends PlayerAi {
 
   @override
   void start() async {
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
     player.onEndOfTurnButtonClick();
   }
 }

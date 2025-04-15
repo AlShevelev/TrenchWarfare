@@ -6,7 +6,7 @@ abstract interface class _EstimationProcessor {
   double estimate();
 
   /// Process estimation result
-  Future<void> process();
+  Future<List<UnitUpdateResultItem>?> process();
 
   /// Called when animation is completed
   void onAnimationCompleted();
@@ -36,6 +36,8 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
   /// Allows you to increase the probability of a particular processor triggering
   double get _averageWeightBalanceFactor;
 
+  final UnitUpdateResultBridgeRead? _unitUpdateResultBridge;
+
   final _signal = AsyncSignal(locked: true);
 
   _EstimationProcessorBase({
@@ -45,12 +47,14 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
     required MoneyStorageRead nationMoney,
     required MapMetadataRead metadata,
     required InfluenceMapRepresentationRead influenceMap,
+    required UnitUpdateResultBridgeRead? unitUpdateResultBridge,
   })  : _player = player,
         _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
         _metadata = metadata,
-        _influenceMap = influenceMap;
+        _influenceMap = influenceMap,
+        _unitUpdateResultBridge = unitUpdateResultBridge;
 
   /// Makes estimation
   /// [result] average weight of the estimated factors
@@ -62,17 +66,17 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
 
   /// Process estimation result
   @override
-  Future<void> process() async {
+  Future<List<UnitUpdateResultItem>?> process() async {
     final allWeights = _estimationResult.map((e) => e.weight).toList(growable: false);
 
     final caseIndex = RandomGen.randomWeight(allWeights);
 
     if (caseIndex == null) {
-      return;
+      return null;
     }
 
     // User action simulation
-    await _simulateCardSelection(
+    return await _simulateCardSelection(
       card: _toCard(_estimationResult.elementAt(caseIndex)),
       cell: _estimationResult.elementAt(caseIndex).data.cell,
     );
@@ -89,7 +93,7 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
           .let((v) => v == 0 ? 0.0 : _averageWeightBalanceFactor * InGameMath.log10(v))!;
 
   @protected
-  Future<void> _simulateCardSelection({
+  Future<List<UnitUpdateResultItem>?> _simulateCardSelection({
     required GameFieldControlsCard card,
     required GameFieldCellRead cell,
   }) async {
@@ -97,6 +101,8 @@ abstract class _EstimationProcessorBase<D extends EstimationData> implements _Es
     _player.onCardSelected(card);
     _player.onClick(cell.center);
     await _signal.wait();
+
+    return _unitUpdateResultBridge?.extractResult();
   }
 
   @protected

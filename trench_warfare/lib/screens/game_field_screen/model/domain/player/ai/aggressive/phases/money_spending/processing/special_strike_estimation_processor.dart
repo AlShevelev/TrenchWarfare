@@ -11,6 +11,7 @@ class _SpecialStrikeEstimationProcessor extends _EstimationProcessorBase<_Specia
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

@@ -13,15 +13,25 @@ abstract interface class SpecialStrikesCardsPlacingStrategy {
   @protected
   final AnimationTime _animationTime;
 
+  @protected
+  final UnitUpdateResultBridge? _unitUpdateResultBridge;
+
+  @protected
+  final Nation _myNation;
+
   SpecialStrikesCardsPlacingStrategy(
     SingleStream<Iterable<UpdateGameEvent>> updateGameObjectsEvent,
     GameFieldCell cell,
     bool isAI,
     AnimationTime animationTime,
+    UnitUpdateResultBridge? unitUpdateResultBridge,
+    Nation myNation,
   )   : _updateGameObjectsEvent = updateGameObjectsEvent,
         _cell = cell,
         _isAI = isAI,
-        _animationTime = animationTime;
+        _animationTime = animationTime,
+        _unitUpdateResultBridge = unitUpdateResultBridge,
+        _myNation = myNation;
 
   /// [return] killed units (or hit by propaganda)
   @protected

@@ -6,6 +6,8 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     super.cell,
     super.isAI,
     super.animationTime,
+    super.unitUpdateResultBridge,
+    super.myNation,
   );
 
   @override
@@ -16,20 +18,27 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     Logger.info('FLECHETTES; hasAntiAir: $hasAntiAir', tag: 'SPECIAL_STRIKE');
 
+    final killedUnits = <Unit>[];
     for (var unit in _cell.units) {
       if (unit.isMechanical) {
         Logger.info('FLECHETTES; unit isMechanical - skip', tag: 'SPECIAL_STRIKE');
         continue;
       }
 
+      _unitUpdateResultBridge?.addBefore(nation: _cell.nation!, unit: Unit.copy(unit), cell: _cell);
+
       final damage =
           RandomGen.randomDouble(unit.maxHealth * 0.25, unit.maxHealth * 0.5) * (hasAntiAir ? 0.5 : 1);
       unit.setHealth(unit.health - damage);
 
       Logger.info('FLECHETTES; strike result. damage: $damage; unit: $unit', tag: 'SPECIAL_STRIKE');
-    }
 
-    final killedUnits = _cell.units.where((u) => u.health <= 0).toList(growable: false);
+      if (unit.health <= 0) {
+        killedUnits.add(unit);
+      } else {
+        _unitUpdateResultBridge?.addAfter(nation: _cell.nation!, unit: Unit.copy(unit), cell: _cell);
+      }
+    }
 
     // ignore: avoid_function_literals_in_foreach_calls
     killedUnits.forEach((u) => _cell.removeUnit(u));

@@ -11,6 +11,7 @@ class _ProductionCenterEstimationProcessor extends _EstimationProcessorBase<_Pro
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

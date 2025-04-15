@@ -6,6 +6,8 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     super.cell,
     super.isAI,
     super.animationTime,
+    super.unitUpdateResultBridge,
+    super.myNation,
   );
 
   @override
@@ -14,10 +16,11 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     final isPcOnCell = _cell.productionCenter != null;
 
     final chanceToDevastate = switch (unit.type) {
-      UnitType.infantry => 0.5,
-      UnitType.tank => 0.075,
-      _ => 0,
-    } * (isPcOnCell ? 0.5 : 1.0);
+          UnitType.infantry => 0.5,
+          UnitType.tank => 0.075,
+          _ => 0,
+        } *
+        (isPcOnCell ? 0.5 : 1.0);
 
     final random = RandomGen.randomDouble(0, 1);
 
@@ -28,6 +31,8 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
 
     Unit? killedUnit;
     if (random <= chanceToDevastate) {
+      _unitUpdateResultBridge?.addBefore(nation: _cell.nation!, unit: Unit.copy(unit), cell: _cell);
+
       killedUnit = _cell.removeActiveUnit();
 
       Logger.info('FLAME_TROOPERS; unit is dead', tag: 'SPECIAL_STRIKE');

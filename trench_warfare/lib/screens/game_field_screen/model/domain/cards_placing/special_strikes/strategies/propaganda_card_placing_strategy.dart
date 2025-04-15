@@ -18,21 +18,17 @@ class _Convert implements _PropagandaEffect {}
 class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   late final GameFieldRead _gameField;
 
-  late final Nation _myNation;
-
   _PropagandaEffect? _effect;
 
   PropagandaCardPlacingStrategy(
     super.updateGameObjectsEvent,
     super.cell,
     GameFieldRead gameField,
-    Nation myNation,
     super.isAI,
     super.animationTime,
-  ) {
-    _gameField = gameField;
-    _myNation = myNation;
-  }
+    super.unitUpdateResultBridge,
+    super.myNation,
+  ) : _gameField = gameField;
 
   @override
   Unit? updateGameField() {
@@ -57,23 +53,70 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
       switch (_effect) {
         case _DecreaseDefense():
           {
+            _unitUpdateResultBridge?.addBefore(
+              nation: _cell.nation!,
+              unit: Unit.copy(activeUnit),
+              cell: _cell,
+            );
+
             activeUnit.setDefence((activeUnit.defence ~/ 2).toDouble());
+
+            _unitUpdateResultBridge?.addAfter(
+              nation: _cell.nation!,
+              unit: Unit.copy(activeUnit),
+              cell: _cell,
+            );
             Logger.info('PROPAGANDA; effect is DecreaseDefense', tag: 'SPECIAL_STRIKE');
           }
         case _Deserting():
           {
+            _unitUpdateResultBridge?.addBefore(
+              nation: _cell.nation!,
+              unit: Unit.copy(activeUnit),
+              cell: _cell,
+            );
+
             _cell.removeActiveUnit();
             Logger.info('PROPAGANDA; effect is Deserting', tag: 'SPECIAL_STRIKE');
           }
         case _RunAway(newCell: var newCell):
           {
+            _unitUpdateResultBridge?.addBefore(
+              nation: _cell.nation!,
+              unit: Unit.copy(activeUnit),
+              cell: _cell,
+            );
+
             _cell.removeActiveUnit();
             newCell.addUnitAsActive(activeUnit);
+
+            _unitUpdateResultBridge?.addAfter(
+              nation: newCell.nation!,
+              unit: Unit.copy(activeUnit),
+              cell: newCell,
+            );
+
             Logger.info('PROPAGANDA; effect is RunAway to: $newCell', tag: 'SPECIAL_STRIKE');
           }
         case _Convert():
           {
+            for (final unit in _cell.units) {
+              _unitUpdateResultBridge?.addBefore(
+                nation: _cell.nation!,
+                unit: Unit.copy(unit),
+                cell: _cell,
+              );
+            }
+
             _cell.setNation(_myNation);
+
+            for (final unit in _cell.units) {
+              _unitUpdateResultBridge?.addAfter(
+                nation: _cell.nation!,
+                unit: Unit.copy(unit),
+                cell: _cell,
+              );
+            }
             Logger.info('PROPAGANDA; effect is Convert', tag: 'SPECIAL_STRIKE');
           }
       }

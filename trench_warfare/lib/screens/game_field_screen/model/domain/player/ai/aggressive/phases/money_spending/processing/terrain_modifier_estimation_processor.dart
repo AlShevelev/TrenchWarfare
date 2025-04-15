@@ -11,6 +11,7 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

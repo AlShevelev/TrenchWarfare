@@ -11,6 +11,8 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     GameFieldRead gameField,
     super.isAI,
     super.animationTime,
+    super.unitUpdateResultBridge,
+    super.myNation,
   ) {
     _gameField = gameField;
   }
@@ -51,11 +53,14 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     for (var unit in cell.units) {
       if (random <= newChanceToKill) {
+        _unitUpdateResultBridge?.addBefore(nation: cell.nation!, unit: Unit.copy(unit), cell: cell);
         unit.setHealth(0);
 
         Logger.info('GAS_ATTACK; killed unit: $unit killed;', tag: 'SPECIAL_STRIKE');
       } else if (random <= newChanceToReduceHealth) {
+        _unitUpdateResultBridge?.addBefore(nation: cell.nation!, unit: Unit.copy(unit), cell: cell);
         unit.setHealth(unit.health / 2);
+        _unitUpdateResultBridge?.addAfter(nation: cell.nation!, unit: Unit.copy(unit), cell: cell);
 
         Logger.info('GAS_ATTACK; health halved for unit: $unit', tag: 'SPECIAL_STRIKE');
       }

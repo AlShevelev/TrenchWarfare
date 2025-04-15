@@ -61,6 +61,7 @@ class AggressivePlayerAi extends PlayerAi {
         nationMoney: _nationMoney,
         metadata: _metadata,
         aiProgressState: _aiProgressState,
+        unitUpdateResultBridge: _unitUpdateResultBridge,
       ).start();
       Logger.info('MoneySpendingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
@@ -116,7 +117,7 @@ class AggressivePlayerAi extends PlayerAi {
       Logger.info('UnitsMovingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
     }
 
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 500));
 
     _aiProgressState.update(Invisible());
 

@@ -11,6 +11,7 @@ class _AirFieldEstimationProcessor extends _EstimationProcessorBase<_AirFieldEst
     required super.nationMoney,
     required super.metadata,
     required super.influenceMap,
+    required super.unitUpdateResultBridge,
   });
 
   @override

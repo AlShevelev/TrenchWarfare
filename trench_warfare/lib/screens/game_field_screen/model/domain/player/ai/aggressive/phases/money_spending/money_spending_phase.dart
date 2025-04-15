@@ -1,6 +1,6 @@
 part of money_spending_phase_library;
 
-class MoneySpendingPhase implements TurnPhase {
+class MoneySpendingPhase with InfluenceMapPhases implements TurnPhase {
   final PlayerInput _player;
 
   final GameFieldRead _gameField;
@@ -13,6 +13,8 @@ class MoneySpendingPhase implements TurnPhase {
 
   final SimpleStream<GameFieldControlsState> _aiProgressState;
 
+  final UnitUpdateResultBridgeRead _unitUpdateResultBridge;
+
   static const String tag = 'MONEY_SPENDING';
 
   MoneySpendingPhase({
@@ -22,31 +24,24 @@ class MoneySpendingPhase implements TurnPhase {
     required MoneyStorageRead nationMoney,
     required MapMetadataRead metadata,
     required SimpleStream<GameFieldControlsState> aiProgressState,
+    required UnitUpdateResultBridgeRead unitUpdateResultBridge,
   })  : _player = player,
         _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
         _metadata = metadata,
-        _aiProgressState = aiProgressState;
+        _aiProgressState = aiProgressState,
+        _unitUpdateResultBridge = unitUpdateResultBridge;
 
   @override
   Future<void> start() async {
     final startMoney = _nationMoney.totalSum.currency.toDouble();
     _aiProgressState.update(AiTurnProgress(moneySpending: 0.0, unitMovement: 0.0));
 
+    final influences = await calculateFullInfluenceMap(_myNation, _metadata, _gameField);
+
     while (true) {
       Logger.info('loop started', tag: tag);
-
-      final influences = await compute<InfluenceMapComputeData, InfluenceMapRepresentationRead>(
-          (data) => InfluenceMapRepresentation(
-                myNation: data.myNation,
-                metadata: data.metadata,
-              )..calculateFull(data.gameField),
-          InfluenceMapComputeData(
-            myNation: _myNation,
-            metadata: _metadata,
-            gameField: _gameField,
-          ));
 
       Logger.info('influences map is calculated', tag: tag);
 
@@ -58,6 +53,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _AirFieldEstimationProcessor(
           player: _player,
@@ -66,6 +62,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _SpecialStrikeEstimationProcessor(
           player: _player,
@@ -74,6 +71,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _TerrainModifierEstimationProcessor(
           player: _player,
@@ -82,6 +80,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _UnitBoosterEstimationProcessor(
           player: _player,
@@ -90,6 +89,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _UnitsEstimationProcessor(
           player: _player,
@@ -98,6 +98,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
         _CarriersEstimationProcessor(
           player: _player,
@@ -106,6 +107,7 @@ class MoneySpendingPhase implements TurnPhase {
           nationMoney: _nationMoney,
           metadata: _metadata,
           influenceMap: influences,
+          unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
       ];
 
@@ -140,8 +142,10 @@ class MoneySpendingPhase implements TurnPhase {
 
       try {
         Logger.info('selectedProcessor.process() started', tag: tag);
-        await selectedProcessor.process();
+        final processingResult = await selectedProcessor.process();
         Logger.info('selectedProcessor.process() completed', tag: tag);
+
+        updateInfluenceMap(influences, processingResult);
       } catch (e, s) {
         Logger.error(e.toString(), stackTrace: s);
       } finally {
