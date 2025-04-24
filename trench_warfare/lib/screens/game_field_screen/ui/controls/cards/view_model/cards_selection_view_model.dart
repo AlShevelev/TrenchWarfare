@@ -1,17 +1,30 @@
 part of card_controls;
 
 class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionUserActions {
+  static _TabCode? _lastSelectedTab;
+
+  static int? _lastGameFieldId;
+
   final SingleStream<_CardsScreenState> _cardsState = SingleStream<_CardsScreenState>();
+
   Stream<_CardsScreenState> get cardsState => _cardsState.output;
 
-  _CardsSelectionViewModel(CardsSelectionControls state) {
+  _CardsSelectionViewModel(
+    CardsSelectionControls state,
+    int gameFieldId,
+  ) {
+    if (_lastGameFieldId != gameFieldId) {
+      _lastGameFieldId = gameFieldId;
+      _lastSelectedTab = _TabCode.units;
+    }
+
     _cardsState.update(_DataIsReady(tabs: [
       state.units.let<_TabDto<UnitType>>((cards) {
         final firstSelectedIndex = _getFirstSelectedIndex(cards);
 
         return _TabDto<UnitType>(
           code: _TabCode.units,
-          selected: true,
+          selected: _lastSelectedTab == _TabCode.units,
           cards: cards
               .mapIndexed((i, c) => _CardDto<UnitType>(
                     indexInTab: i,
@@ -28,7 +41,7 @@ class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionU
 
         return _TabDto<ProductionCenterType>(
           code: _TabCode.productionCenters,
-          selected: false,
+          selected: _lastSelectedTab == _TabCode.productionCenters,
           cards: cards
               .mapIndexed((i, c) => _CardDto<ProductionCenterType>(
                     indexInTab: i,
@@ -45,7 +58,7 @@ class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionU
 
         return _TabDto<TerrainModifierType>(
           code: _TabCode.terrainModifiers,
-          selected: false,
+          selected: _lastSelectedTab == _TabCode.terrainModifiers,
           cards: cards
               .mapIndexed((i, c) => _CardDto<TerrainModifierType>(
                     indexInTab: i,
@@ -62,7 +75,7 @@ class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionU
 
         return _TabDto<UnitBoost>(
           code: _TabCode.unitBoosters,
-          selected: false,
+          selected: _lastSelectedTab == _TabCode.unitBoosters,
           cards: cards
               .mapIndexed((i, c) => _CardDto<UnitBoost>(
                     indexInTab: i,
@@ -79,7 +92,7 @@ class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionU
 
         return _TabDto<SpecialStrikeType>(
           code: _TabCode.specialStrikes,
-          selected: false,
+          selected: _lastSelectedTab == _TabCode.specialStrikes,
           cards: cards
               .mapIndexed((i, c) => _CardDto<SpecialStrikeType>(
                     indexInTab: i,
@@ -134,11 +147,15 @@ class _CardsSelectionViewModel extends ViewModelBase implements _CardsSelectionU
       });
 
   @override
-  void onTabSelected(_TabCode tabCode) => _updateState((oldState) {
-        for (var tab in oldState.tabs) {
-          tab.setSelected(tab.code == tabCode);
-        }
-      });
+  void onTabSelected(_TabCode tabCode) {
+    _lastSelectedTab = tabCode;
+
+    _updateState((oldState) {
+      for (var tab in oldState.tabs) {
+        tab.setSelected(tab.code == tabCode);
+      }
+    });
+  }
 
   GameFieldControlsCard? getSelectedCard() {
     final state = _cardsState.current;

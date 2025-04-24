@@ -30,6 +30,8 @@ import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class GameFieldForControls {
+  int get gameFieldId;
+
   Stream<GameFieldControlsState> get controlsState;
 
   Stream<GameFieldControlsState> get aiProgressState;
@@ -95,6 +97,9 @@ class GameField extends FlameGame
 
   StreamSubscription? _updateGameObjectsSubscription;
   StreamSubscription? _gameFieldStateSubscription;
+
+  @override
+  int get gameFieldId => hashCode;
 
   @override
   Stream<GameFieldControlsState> get controlsState => _viewModel.controlsState;

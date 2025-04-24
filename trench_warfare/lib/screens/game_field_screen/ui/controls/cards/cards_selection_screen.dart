@@ -26,7 +26,7 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
   void initState() {
     super.initState();
 
-    _viewModel = _CardsSelectionViewModel(widget.state);
+    _viewModel = _CardsSelectionViewModel(widget.state, widget._gameField.gameFieldId);
   }
 
   @override
