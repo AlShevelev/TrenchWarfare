@@ -147,7 +147,12 @@ class PropagandaCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     final cellToRunAway = _gameField
         .findCellsAround(_cell)
-        .where((c) => c.nation == _cell.nation && c.units.isEmpty && c.isLand == _cell.isLand)
+        .where((c) =>
+            c.nation == _cell.nation &&
+            c.units.isEmpty &&
+            c.isLand == _cell.isLand &&
+            _cell.terrainModifier?.type != TerrainModifierType.landMine &&
+            _cell.terrainModifier?.type != TerrainModifierType.seaMine)
         .firstOrNull;
 
     if (cellToRunAway != null) {
