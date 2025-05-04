@@ -19,7 +19,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  static const _maxFractionCellWithPCs = 0.075;
+  static const _maxFractionCellWithPCs = 90;
 
   static const _type = ProductionCenterType.airField;
 
@@ -91,7 +91,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
     Logger.info('_AirFieldEstimator: estimate() allOurCells are calculated', tag: 'MONEY_SPENDING');
 
     // We don't need too many production centers.
-    if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
+    if (allOurCellsCount.toDouble() / allOurCellsWithPC.length < _maxFractionCellWithPCs) {
       final pcWithoutMaxLevel = allOurCellsWithPC
           .where((c) =>
               c.productionCenter!.level != ProductionCenter.getMaxLevel(c.productionCenter!.type) &&
