@@ -14,7 +14,7 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
 
   final MapMetadataRead _metadata;
 
-  static const _weight = 2.0;
+  static const _weight = 3.0;
 
   _MineFieldsEstimator({
     required GameFieldRead gameField,
@@ -49,17 +49,31 @@ class _MineFieldsEstimator extends Estimator<_TerrainModifierEstimationData> {
 
     final allAggressors = _metadata.getEnemies(_myNation);
 
+    // Our rivals are nearby, but we are not
     final cellsPossibleToBuildExt = cellsPossibleToBuild.where((cell) {
       final cellFromMap = _influenceMap.getItem(cell.row, cell.col);
 
-      if (cellFromMap.hasAny(_myNation)) {
-        return false;
+      if (_type == TerrainModifierType.landMine) {
+        if (cellFromMap.getLand(_myNation) != null) {
+          return false;
+        }
+      } else {
+        // TerrainModifierType.seaMine
+        if (cellFromMap.getSea(_myNation) != null || cellFromMap.getCarrier(_myNation) != null) {
+          return false;
+        }
       }
 
-      return allAggressors.any((a) => cellFromMap.hasAny(a));
+      return allAggressors.any((a)  {
+        if (_type == TerrainModifierType.landMine) {
+          return cellFromMap.getLand(a) != null;
+        } else {
+          // TerrainModifierType.seaMine
+          return cellFromMap.getSea(a) != null || cellFromMap.getCarrier(a) != null;
+        }
+      });
     }).toList(growable: false);
 
-    // Our rivals are nearby, but we are not
     if (cellsPossibleToBuildExt.isEmpty) {
       Logger.info('_MineFieldsEstimator: estimate() completed [cellsPossibleToBuildExt.isEmpty]',
           tag: 'MONEY_SPENDING');
