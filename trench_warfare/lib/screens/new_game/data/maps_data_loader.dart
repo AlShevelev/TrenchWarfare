@@ -102,6 +102,7 @@ class MapsDataLoader {
       opponents: opponents,
       neutrals: neutrals,
       selected: selected,
+      expanded: false,
       mapRows: mapSize.item2,
       mapCols: mapSize.item1,
     );

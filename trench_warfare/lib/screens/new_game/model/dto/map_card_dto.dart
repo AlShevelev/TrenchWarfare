@@ -19,12 +19,18 @@ class MapCardDto {
   final int mapCols;
 
   final List<SideOfConflictDto> _opponents;
+
   Iterable<SideOfConflictDto> get opponents => _opponents;
 
   final Iterable<Nation> neutrals;
 
   bool _selected;
+
   bool get selected => _selected;
+
+  bool _expanded;
+
+  bool get expanded => _expanded;
 
   MapCardDto({
     required this.id,
@@ -39,10 +45,14 @@ class MapCardDto {
     required this.mapRows,
     required this.mapCols,
     required bool selected,
-  }) : _selected = selected,
-    _opponents = opponents;
+    required bool expanded,
+  })  : _selected = selected,
+        _expanded = expanded,
+        _opponents = opponents;
 
   void setSelected(bool selected) => _selected = selected;
+
+  void switchExpanded() => _expanded = !_expanded;
 
   void setSelectedOpponent(Nation opponentNation) {
     for (var opponent in _opponents) {

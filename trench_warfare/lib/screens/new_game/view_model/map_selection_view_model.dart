@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
@@ -71,6 +72,13 @@ class MapSelectionViewModel extends ViewModelBase implements MapSelectionUserAct
           card.setSelected(card.id == cardId);
         }
       });
+
+  @override
+  void onCardExpanded(String cardId) => _updateState((oldState) {
+    final selectedTab = oldState.selectedTab;
+
+    selectedTab.cards.firstWhereOrNull((c) => c.id == cardId)?.switchExpanded();
+  });
 
   @override
   void onOpponentSelected(String cardId, Nation opponentNation) => _updateState((oldState) =>

@@ -94,7 +94,7 @@ abstract class _CardBase<T> extends StatelessWidget {
           },
           child: Image.asset(
             '$_imagesPath${!_card.expanded ? 'icon_expand.webp' : 'icon_collapse.webp'}',
-            scale: 1.1,
+            scale: 1.25,
           ),
         ),
       ],

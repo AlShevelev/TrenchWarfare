@@ -6,5 +6,7 @@ abstract interface class MapSelectionUserActions {
 
   void onCardSelected(String cardId);
 
+  void onCardExpanded(String cardId);
+
   void onOpponentSelected(String cardId, Nation opponent);
 }
