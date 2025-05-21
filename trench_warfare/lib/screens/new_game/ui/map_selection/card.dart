@@ -12,6 +12,8 @@ class _Card extends StatelessWidget {
   final int _mapRows;
   final int _mapCols;
 
+  static const _imagesPath = 'assets/images/screens/game_field/cards/';
+
   const _Card({
     super.key,
     required bool selected,
@@ -79,18 +81,37 @@ class _Card extends StatelessWidget {
                         userActions: _userActions,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(2, 0, 2, 10),
-                      child: Text(
-                        _card.description[locale]!,
-                        style: AppTypography.s14w400,
-                        textAlign: TextAlign.justify,
+                    if (_card.expanded)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(2, 0, 2, 10),
+                        child: Text(
+                          _card.description[locale]!,
+                          style: AppTypography.s14w400,
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
-                    ),
-                    Text(
-                      '${tr('new_game_map_size')}: ${_getMapSize()}',
-                      style: AppTypography.s16w600,
-                      textAlign: TextAlign.end,
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, _card.expanded ? 0 : 10, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${tr('new_game_map_size')}: ${_getMapSize()}',
+                            style: AppTypography.s16w600,
+                            textAlign: TextAlign.end,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              audioController.playSound(SoundType.buttonClick);
+                              _userActions.onCardExpanded(_card.id);
+                            },
+                            child: Image.asset(
+                              '$_imagesPath${!_card.expanded ? 'icon_expand.webp' : 'icon_collapse.webp'}',
+                              scale: 1.25,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -101,10 +122,10 @@ class _Card extends StatelessWidget {
   }
 
   CardboardStyle _getCardStyle() => switch (_tabCode) {
-    TabCode.europe => CardboardStyle.red,
-    TabCode.asia => CardboardStyle.blue,
-    TabCode.newWorld => CardboardStyle.green,
-  };
+        TabCode.europe => CardboardStyle.red,
+        TabCode.asia => CardboardStyle.blue,
+        TabCode.newWorld => CardboardStyle.green,
+      };
 
   String _getDatesText() {
     String dateToText(DateTime date) {
@@ -137,14 +158,13 @@ class _Card extends StatelessWidget {
     }
   }
 
-  String _getPhoto() =>
-      'assets/images/screens/new_game/maps/${_tabCode.uiString}/${_card.mapName}.webp';
+  String _getPhoto() => 'assets/images/screens/new_game/maps/${_tabCode.uiString}/${_card.mapName}.webp';
 
   String _getMapSize() => switch (_mapRows * _mapCols) {
-    <= 100 => tr('new_game_tiny'),    // 10x10
-    <= 225 => tr('new_game_small'),   // 15x15
-    <= 400 => tr('new_game_medium'),  // 20x20
-    <= 625 => tr('new_game_large'),   // 25x25
-    _ => tr('new_game_huge')
-  };
+        <= 100 => tr('new_game_tiny'), // 10x10
+        <= 225 => tr('new_game_small'), // 15x15
+        <= 400 => tr('new_game_medium'), // 20x20
+        <= 625 => tr('new_game_large'), // 25x25
+        _ => tr('new_game_huge')
+      };
 }
