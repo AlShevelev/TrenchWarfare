@@ -21,7 +21,7 @@ abstract interface class MapDataExtractor {
 class MapDecoder implements MapDataExtractor {
   final XmlDocument _mapAsDocument;
 
-  MapDecoder._(XmlDocument mapAsDocument): _mapAsDocument = mapAsDocument;
+  MapDecoder._(XmlDocument mapAsDocument) : _mapAsDocument = mapAsDocument;
 
   static Future<MapDataExtractor> openFile(String mapFileName) async {
     final content = await _extractContentAsXml(mapFileName);
@@ -52,6 +52,9 @@ class MapDecoder implements MapDataExtractor {
     final from = dates?.let((d) => DateTime.parse(d['from'] as String)) ?? DateTime.now();
     final to = dates?.let((d) => DateTime.parse(d['to'] as String)) ?? DateTime.now();
 
+    final params = decodedMetadata['params'] as Map<String, dynamic>?;
+    final landOnlyAi = params?.let((p) => p['land_only_ai'] as bool) ?? true;
+
     return MapMetadataRecord(
       version: decodedMetadata['version'] as int,
       title: _readLocale(decodedMetadata, 'title'),
@@ -60,6 +63,7 @@ class MapDecoder implements MapDataExtractor {
       diplomacy: _readDiplomacy(decodedMetadata),
       from: from,
       to: to,
+      landOnlyAi: landOnlyAi,
     );
   }
 

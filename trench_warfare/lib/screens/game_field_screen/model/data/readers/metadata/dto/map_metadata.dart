@@ -5,6 +5,8 @@ import 'package:trench_warfare/core/enums/relationship.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
 
 abstract interface class MapMetadataRead {
+  bool get landOnlyAi;
+
   bool isInWar(Nation? nation1, Nation? nation2);
 
   bool isNeutral(Nation? nation1, Nation? nation2);
@@ -34,6 +36,9 @@ class MapMetadata implements MapMetadataRead {
   List<NationRecord> get nations => _record.nations;
 
   List<DiplomacyRecord> get diplomacy => _record.diplomacy;
+
+  @override
+  bool get landOnlyAi => _record.landOnlyAi;
 
   MapMetadata(MapMetadataRecord record) : _record = record;
 

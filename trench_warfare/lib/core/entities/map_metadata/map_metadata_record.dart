@@ -11,6 +11,7 @@ class MapMetadataRecord {
   final List<DiplomacyRecord> diplomacy;
   final DateTime from;
   final DateTime to;
+  final bool landOnlyAi;
 
   MapMetadataRecord({
     required this.version,
@@ -20,6 +21,7 @@ class MapMetadataRecord {
     required this.diplomacy,
     required this.from,
     required this.to,
+    required this.landOnlyAi,
   });
 }
 
