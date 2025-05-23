@@ -26,10 +26,13 @@ class _UnitsEstimationProcessor extends _EstimationProcessorBase<_UnitsBuildingE
       UnitType.machineGunnersCart,
       UnitType.machineGuns,
       UnitType.tank,
-      UnitType.destroyer,
-      UnitType.cruiser,
-      UnitType.battleship
     ];
+
+    if (!_metadata.landOnlyAi) {
+      types.add(UnitType.destroyer);
+      types.add(UnitType.cruiser);
+      types.add(UnitType.battleship);
+    }
 
     for (final type in types) {
       final estimator = _UnitsBuildingEstimator(

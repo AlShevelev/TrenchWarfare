@@ -1,5 +1,6 @@
 library aggressive_player_ai;
 
+import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/metadata/dto/map_metadata.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';

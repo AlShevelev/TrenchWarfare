@@ -65,37 +65,41 @@ class AggressivePlayerAi extends PlayerAi {
       ).start();
       Logger.info('MoneySpendingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
-      Logger.info('CarriersPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
-      await CarriersPhase(
-        player: player,
-        gameField: _gameField,
-        myNation: _myNation,
-        metadata: _metadata,
-        transfersStorage: _transfersStorage,
-      ).start();
-      Logger.info('CarriersPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
+      var unitsExcludedToMove = <Unit>[];
 
-      final unitsExcludedToMove = _transfersStorage.allTransfers
-          .map((t) => t.transportingUnits)
-          .expand((i) => i)
-          .map((u) => u)
-          .toList(growable: true);
+      if (!_metadata.landOnlyAi) {
+        Logger.info('CarriersPhase started', tag: 'AI_PLAYER_AGGRESSIVE');
+        await CarriersPhase(
+          player: player,
+          gameField: _gameField,
+          myNation: _myNation,
+          metadata: _metadata,
+          transfersStorage: _transfersStorage,
+        ).start();
+        Logger.info('CarriersPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
-      for (final c in _gameField.cells) {
-        if (c.nation == _myNation && c.activeUnit != null) {
-          final defenceUnits = c.units.where((u) => u.isInDefenceMode).toList(growable: false);
+        final unitsExcludedToMove = _transfersStorage.allTransfers
+            .map((t) => t.transportingUnits)
+            .expand((i) => i)
+            .map((u) => u)
+            .toList(growable: true);
 
-          if (defenceUnits.isNotEmpty) {
-            // There are several enemy units around - our defence units can attack them
-            if (_gameField
-                .findCellsAround(c)
-                .where((c) =>
-                    c.nation != _myNation && c.units.isNotEmpty && _metadata.isInWar(_myNation, c.nation))
-                .isNotEmpty) {
-              continue;
+        for (final c in _gameField.cells) {
+          if (c.nation == _myNation && c.activeUnit != null) {
+            final defenceUnits = c.units.where((u) => u.isInDefenceMode).toList(growable: false);
+
+            if (defenceUnits.isNotEmpty) {
+              // There are several enemy units around - our defence units can attack them
+              if (_gameField
+                  .findCellsAround(c)
+                  .where((c) =>
+              c.nation != _myNation && c.units.isNotEmpty && _metadata.isInWar(_myNation, c.nation))
+                  .isNotEmpty) {
+                continue;
+              }
+
+              unitsExcludedToMove.addAll(defenceUnits);
             }
-
-            unitsExcludedToMove.addAll(defenceUnits);
           }
         }
       }

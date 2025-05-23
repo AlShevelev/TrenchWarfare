@@ -100,25 +100,26 @@ class MoneySpendingPhase with InfluenceMapPhases implements TurnPhase {
           influenceMap: influences,
           unitUpdateResultBridge: _unitUpdateResultBridge,
         ),
-        _CarriersEstimationProcessor(
-          player: _player,
-          gameField: _gameField,
-          myNation: _myNation,
-          nationMoney: _nationMoney,
-          metadata: _metadata,
-          influenceMap: influences,
-          unitUpdateResultBridge: _unitUpdateResultBridge,
-        ),
       ];
+
+      if (!_metadata.landOnlyAi) {
+        processors.add(
+          _CarriersEstimationProcessor(
+            player: _player,
+            gameField: _gameField,
+            myNation: _myNation,
+            nationMoney: _nationMoney,
+            metadata: _metadata,
+            influenceMap: influences,
+            unitUpdateResultBridge: _unitUpdateResultBridge,
+          ),
+        );
+      }
 
       final averageWeights = processors.map((p) => p.estimate()).toList(growable: false);
 
       Logger.info(
-        'calculated weights are: '
-        'ProductionCenter: ${averageWeights[0]}; _AirField: ${averageWeights[1]}; '
-        'SpecialStrike: ${averageWeights[2]}; TerrainModifier: ${averageWeights[3]}; '
-        'UnitBooster: ${averageWeights[4]}; Units: ${averageWeights[5]}; '
-        'Carriers: ${averageWeights[6]};',
+        'calculated weights are: ${averageWeights.map((e) => e.toString()).join(' ,')}',
         tag: tag,
       );
 

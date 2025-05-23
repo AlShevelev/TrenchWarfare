@@ -19,10 +19,13 @@ class _ProductionCenterEstimationProcessor extends _EstimationProcessorBase<_Pro
     final List<EstimationResult<_ProductionCenterEstimationData>> result = [];
 
     final types = [
-      ProductionCenterType.navalBase,
       ProductionCenterType.city,
       ProductionCenterType.factory,
     ];
+
+    if (!_metadata.landOnlyAi) {
+      types.add(ProductionCenterType.navalBase);
+    }
 
     for (final type in types) {
       final estimator = _ProductionCenterEstimator(

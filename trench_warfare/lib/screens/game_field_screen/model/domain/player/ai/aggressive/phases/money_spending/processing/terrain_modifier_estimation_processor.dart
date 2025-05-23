@@ -58,16 +58,18 @@ class _TerrainModifierEstimationProcessor extends _EstimationProcessorBase<_Terr
       ).estimate(),
     );
 
-    result.addAll(
-      _MineFieldsEstimator(
-        gameField: _gameField,
-        myNation: _myNation,
-        nationMoney: _nationMoney.totalSum,
-        influenceMap: _influenceMap,
-        metadata: _metadata,
-        type: TerrainModifierType.seaMine,
-      ).estimate(),
-    );
+    if (!_metadata.landOnlyAi) {
+      result.addAll(
+        _MineFieldsEstimator(
+          gameField: _gameField,
+          myNation: _myNation,
+          nationMoney: _nationMoney.totalSum,
+          influenceMap: _influenceMap,
+          metadata: _metadata,
+          type: TerrainModifierType.seaMine,
+        ).estimate(),
+      );
+    }
 
     result.addAll(
       _TrenchEstimator(
