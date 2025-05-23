@@ -34,7 +34,7 @@ class MapsDataLoader {
             tabCode: tabCode,
             mapSize: mapSize,
             index: i,
-            selected: i == 0,
+            selected: false,
           ),
         );
       } else {
@@ -42,10 +42,13 @@ class MapsDataLoader {
       }
     }
 
+    final sortedCards = cards.sorted((c1, c2) => c1.from.compareTo(c2.from));
+    sortedCards.firstOrNull?.setSelected(true);
+
     return MapTabDto(
       code: tabCode,
       selected: selected,
-      cards: cards.sorted((c1, c2) => c1.from.compareTo(c2.from)),
+      cards: sortedCards,
     );
   }
 
