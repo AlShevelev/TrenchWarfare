@@ -1,3 +1,13 @@
+/*
+ * Trench Warfare - turn-based strategy game in the WWI setting
+ * ---
+ * Copyright (c) 2025 by Alexander Shevelev
+ * ---
+ * https://github.com/AlShevelev
+ * https://medium.com/@al-e-shevelev
+ * al.e.shevelev@gmail.com
+ */
+
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game_field/cells_raw_game_object_merger.dart';
