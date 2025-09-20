@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-down" width="7" height="7" tilewidth="64" tileheight="74" infinite="0" hexsidelength="37" staggeraxis="y" staggerindex="odd" nextlayerid="3" nextobjectid="55">
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="64" tileheight="74" tilecount="121" columns="11">
+  <image source="../../images/tiles/terrain_atlas_new.png" width="704" height="814"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="7" height="7">
+  <data encoding="csv">
+4,4,4,4,4,4,4,
+4,3,3,3,3,3,4,
+4,3,2,2,2,2,3,
+3,2,1,7,1,2,3,
+4,3,2,2,2,2,3,
+4,3,3,3,3,3,4,
+4,4,4,4,4,4,4
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="5" x="20.8828" y="26.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">0, 0</text>
+  </object>
+  <object id="7" x="83.8828" y="26.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">0, 1</text>
+  </object>
+  <object id="8" x="144.883" y="24.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">0, 2</text>
+  </object>
+  <object id="9" x="214.883" y="26.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">0, 3</text>
+  </object>
+  <object id="10" x="274.883" y="27.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">0, 4</text>
+  </object>
+  <object id="11" x="338.883" y="27.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">0, 5</text>
+  </object>
+  <object id="12" x="399.883" y="25.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">0, 6</text>
+  </object>
+  <object id="13" x="48.8828" y="81.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">1, 0</text>
+  </object>
+  <object id="14" x="113.883" y="82.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">1, 1</text>
+  </object>
+  <object id="15" x="180.883" y="79.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">1, 2</text>
+  </object>
+  <object id="16" x="242.883" y="80.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">1, 3</text>
+  </object>
+  <object id="17" x="304.883" y="80.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">1, 4</text>
+  </object>
+  <object id="18" x="371.883" y="80.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">1, 5</text>
+  </object>
+  <object id="19" x="432.883" y="80.5781" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">1, 6</text>
+  </object>
+  <object id="20" x="20.8828" y="134.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">2, 0</text>
+  </object>
+  <object id="21" x="83.8828" y="135.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">2, 1</text>
+  </object>
+  <object id="22" x="147.883" y="134.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">2, 2</text>
+  </object>
+  <object id="23" x="208.883" y="135.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">2, 3</text>
+  </object>
+  <object id="24" x="274.883" y="134.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">2, 4</text>
+  </object>
+  <object id="25" x="338.883" y="137.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">2, 5</text>
+  </object>
+  <object id="26" x="401.883" y="136.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">2, 6</text>
+  </object>
+  <object id="27" x="49.8828" y="188.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 0</text>
+  </object>
+  <object id="28" x="114.883" y="188.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 1</text>
+  </object>
+  <object id="29" x="179.883" y="188.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 2</text>
+  </object>
+  <object id="30" x="240.883" y="189.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 3</text>
+  </object>
+  <object id="31" x="306.883" y="189.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 4</text>
+  </object>
+  <object id="32" x="372.883" y="190.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 5</text>
+  </object>
+  <object id="33" x="433.883" y="189.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">3, 6</text>
+  </object>
+  <object id="34" x="21.8828" y="245.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">4, 0</text>
+  </object>
+  <object id="35" x="86.8828" y="244.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">4, 1</text>
+  </object>
+  <object id="36" x="142.883" y="246.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">4, 2</text>
+  </object>
+  <object id="37" x="209.883" y="246.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">4, 3</text>
+  </object>
+  <object id="38" x="273.883" y="245.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">4, 4</text>
+  </object>
+  <object id="39" x="341.883" y="244.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">4, 5</text>
+  </object>
+  <object id="40" x="402.883" y="244.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">4, 6</text>
+  </object>
+  <object id="41" x="56.8828" y="303.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">5, 0</text>
+  </object>
+  <object id="42" x="111.883" y="300.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">5, 1</text>
+  </object>
+  <object id="43" x="175.883" y="300.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">5, 2</text>
+  </object>
+  <object id="44" x="242.883" y="301.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">5, 3</text>
+  </object>
+  <object id="45" x="303.883" y="302.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">5, 4</text>
+  </object>
+  <object id="46" x="369.883" y="299.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">5, 5</text>
+  </object>
+  <object id="47" x="434.883" y="299.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">5, 6</text>
+  </object>
+  <object id="48" x="23.8828" y="355.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">6, 0</text>
+  </object>
+  <object id="49" x="82.8828" y="355.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">6, 1</text>
+  </object>
+  <object id="50" x="145.883" y="354.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">6, 2</text>
+  </object>
+  <object id="51" x="209.883" y="356.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">6, 3</text>
+  </object>
+  <object id="52" x="278.883" y="354.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" color="#ff2600" bold="1">6, 4</text>
+  </object>
+  <object id="53" x="337.883" y="356.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">6, 5</text>
+  </object>
+  <object id="54" x="401.883" y="355.578" width="80.2344" height="18.8438">
+   <text pixelsize="20" wrap="1" bold="1">6, 6</text>
+  </object>
+ </objectgroup>
+</map>

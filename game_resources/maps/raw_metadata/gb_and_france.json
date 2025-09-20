@@ -1,0 +1,67 @@
+{
+    "version": 1,
+    "title": {
+        "en": "First Battle of the Marne (1914)"
+    },
+    "description": {
+        "en": "First Battle of the Marne, (September 6–12, 1914), an offensive during World War I by the French army and the British Expeditionary Force (BEF) against the advancing Germans who had invaded Belgium and northeastern France and were within 30 miles (48 km) of Paris. The French threw back the massive German advance and thwarted German plans for a quick and total victory on the Western Front."
+    },
+    "nations": [
+        {
+            "code": "germany",
+            "aggressiveness": "aggressive",
+            "startMoney": 0,
+            "startIndustryPoints": 0
+        },
+        {
+            "code": "france",
+            "aggressiveness": "aggressive",
+            "startMoney": 0,
+            "startIndustryPoints": 0
+        },
+        {
+            "code": "greatBritain",
+            "aggressiveness": "aggressive",
+            "startMoney": 0,
+            "startIndustryPoints": 0
+        },
+        {
+            "code": "belgium",
+            "aggressiveness": "passive",
+            "startMoney": 0,
+            "startIndustryPoints": 0
+        }
+    ],
+    "diplomacy": [
+        {
+            "firstNation": "germany",
+            "secondNation": "france",
+            "relationship": "war"
+        },
+        {
+            "firstNation": "germany",
+            "secondNation": "greatBritain",
+            "relationship": "war"
+        },
+        {
+            "firstNation": "germany",
+            "secondNation": "belgium",
+            "relationship": "neutral"
+        },
+        {
+            "firstNation": "france",
+            "secondNation": "greatBritain",
+            "relationship": "allied"
+        },
+        {
+            "firstNation": "france",
+            "secondNation": "belgium",
+            "relationship": "neutral"
+        },
+        {
+            "firstNation": "greatBritain",
+            "secondNation": "belgium",
+            "relationship": "neutral"
+        }
+    ]
+}

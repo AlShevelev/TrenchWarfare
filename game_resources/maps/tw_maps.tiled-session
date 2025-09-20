@@ -1,0 +1,1229 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "tiles/real/europe/the_first_battle_of_the_somme.tmx",
+    "expandedProjectPaths": [
+        "tiles/game_objects/atlas",
+        "tiles/help",
+        "tiles/templates/units",
+        ".",
+        "tiles",
+        "tiles/game_objects/templates",
+        "tiles/test",
+        "tiles/game_objects",
+        "tiles/templates",
+        "tiles/real/europe",
+        "tiles_source_metadata",
+        "tiles/real"
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 0.5797,
+            "scaleInEditor": 1
+        },
+        "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/game_objects.tsx": {
+            "scaleInDock": 1
+        },
+        "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/tiles/15x15_carriers_mine_fields.tmx": {
+            "scale": 0.7259072580645162,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 495.9311206776837,
+                "y": 420.85265935286765
+            }
+        },
+        "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/tiles/15x15_carriers_mine_fields.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/7x7.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.5596,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.44626827391642,
+                "y": 201.65427032572455
+            }
+        },
+        "tiles/7x7.tmx#terrain_atlas": {
+            "scaleInDock": 0.5
+        },
+        "tiles/Armored car.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/Phisical map.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tiles/etalon.tmx": {
+            "scale": 0.3861,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 233.10023310023314,
+                "y": 198.13519813519815
+            }
+        },
+        "tiles/etalon.tmx#terrain_atlas": {
+            "scaleInDock": 0.56
+        },
+        "tiles/game_objects.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5647,
+            "scaleInEditor": 1
+        },
+        "tiles/gb_and_france.tmx": {
+            "expandedObjectLayers": [
+                6,
+                7
+            ],
+            "scale": 0.5433,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 1295.7850174857354,
+                "y": 1107.1231363887355
+            }
+        },
+        "tiles/gb_and_france.tmx#Phisical map": {
+            "dynamicWrapping": true
+        },
+        "tiles/gb_and_france.tmx#ggggg": {
+            "dynamicWrapping": true
+        },
+        "tiles/gb_and_france.tmx#terrain_atlas": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5
+        },
+        "tiles/help/12x12.tmx": {
+            "scale": 1.0902,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 260.5026600623739,
+                "y": 348.10126582278485
+            }
+        },
+        "tiles/help/12x12.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/help/7x7.tmx": {
+            "scale": 1.0902,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 238.4883507613282,
+                "y": 311.41075032104203
+            }
+        },
+        "tiles/help/7x7.tmx#terrain_atlas": {
+            "scaleInDock": 0.6263
+        },
+        "tiles/land_test.tmx": {
+            "scale": 0.3453,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 918.0422820735592,
+                "y": 667.5354763973357
+            }
+        },
+        "tiles/land_test.tmx#terrain_atlas": {
+            "scaleInDock": 0.56
+        },
+        "tiles/real/europe/_the_battle_of_tannenburg.tmx": {
+            "expandedObjectLayers": [
+                5,
+                8,
+                3
+            ],
+            "scale": 1.3346,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 306.0842199910086,
+                "y": 1477.2216394425295
+            }
+        },
+        "tiles/real/europe/_the_battle_of_tannenburg.tmx#TempBackground": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/_the_battle_of_tannenburg.tmx#terrain_atlas": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.4738
+        },
+        "tiles/real/europe/battle_of_passchendaele.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.4353,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 558.2356995175742,
+                "y": 655.8695152768207
+            }
+        },
+        "tiles/real/europe/battle_of_passchendaele.tmx#TempBackground": {
+            "scaleInDock": 0.2266
+        },
+        "tiles/real/europe/battle_of_passchendaele.tmx#terrain_atlas": {
+            "scaleInDock": 0.5689
+        },
+        "tiles/real/europe/battle_of_tannenburg.tmx": {
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 0.3637,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 835.8537255980203,
+                "y": 2445.69700302447
+            }
+        },
+        "tiles/real/europe/battle_of_tannenburg.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/battle_of_tannenburg.tmx#terrain_atlas": {
+            "scaleInDock": 0.5644
+        },
+        "tiles/real/europe/battle_of_verdun.tmx": {
+            "expandedObjectLayers": [
+                4,
+                5
+            ],
+            "scale": 0.4262,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 696.855936180197,
+                "y": 655.7954012200846
+            }
+        },
+        "tiles/real/europe/battle_of_verdun.tmx#TempBackground": {
+            "scaleInDock": 0.476
+        },
+        "tiles/real/europe/battle_of_verdun.tmx#terrain_atlas": {
+            "scaleInDock": 0.7097
+        },
+        "tiles/real/europe/brusilov_offensive.tmx": {
+            "expandedObjectLayers": [
+                3,
+                5
+            ],
+            "scale": 0.3636,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 365.7865786578658,
+                "y": 1189.4939493949398
+            }
+        },
+        "tiles/real/europe/brusilov_offensive.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/brusilov_offensive.tmx#terrain_atlas": {
+            "scaleInDock": 0.5981
+        },
+        "tiles/real/europe/first_battle_of_the_marne.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.3216,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 764.9253731343284,
+                "y": 685.6343283582089
+            }
+        },
+        "tiles/real/europe/first_battle_of_the_marne.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/first_battle_of_the_marne.tmx#terrain_atlas": {
+            "scaleInDock": 0.5853
+        },
+        "tiles/real/europe/german_spring_offensive.tmx": {
+            "expandedObjectLayers": [
+                8,
+                3
+            ],
+            "scale": 0.3509,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 803.6477628954118,
+                "y": 787.9737817041892
+            }
+        },
+        "tiles/real/europe/german_spring_offensive.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/german_spring_offensive.tmx#terrain_atlas": {
+            "scaleInDock": 0.5692
+        },
+        "tiles/real/europe/the_battle_of_tannenburg.tmx": {
+            "scale": 0.419,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 909.3078758949881,
+                "y": 772.0763723150359
+            }
+        },
+        "tiles/real/europe/the_battle_of_tannenburg.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/the_battle_of_tannenburg.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 0.311,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 697.749196141479,
+                "y": 815.1125401929261
+            }
+        },
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx#terrain_atlas": {
+            "scaleInDock": 0.5354
+        },
+        "tiles/test/10x10_ai_protect_pc_check.tmx": {
+            "expandedObjectLayers": [
+                2,
+                3
+            ],
+            "scale": 0.8224,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 358.70622568093387,
+                "y": 353.2344357976653
+            }
+        },
+        "tiles/test/10x10_ai_protect_pc_check.tmx#terrain_atlas": {
+            "scaleInDock": 0.65
+        },
+        "tiles/test/10x10_disble_attacking_unit.tmx": {
+            "scale": 0.8921,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 275.75383925568883,
+                "y": 466.8759107723349
+            }
+        },
+        "tiles/test/10x10_disble_attacking_unit.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/10x10_is_defence.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1.0904929577464788,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 284.2751049402648,
+                "y": 336.08653535679696
+            }
+        },
+        "tiles/test/10x10_is_defence.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/10x10_is_defence_attack.tmx": {
+            "expandedObjectLayers": [
+                3,
+                2
+            ],
+            "scale": 1.0904929577464788,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 276.0219567323216,
+                "y": 323.2483048111076
+            }
+        },
+        "tiles/test/10x10_is_defence_attack.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/10x10_land_fort_checking.tmx": {
+            "scale": 1.0904929577464788,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 47.684856312560555,
+                "y": 467.2198902163384
+            }
+        },
+        "tiles/test/10x10_land_fort_checking.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_balance_general.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.5654,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 422.7095861337106,
+                "y": 494.3402900601344
+            }
+        },
+        "tiles/test/15x15_balance_general.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx": {
+            "scale": 0.5994959677419355,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 448.7102740877754,
+                "y": 381.1535227845973
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_on_a_river_bank.tmx": {
+            "scale": 0.7067,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 75.70397622753643,
+                "y": 355.87943964907316
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_on_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 0.857
+        },
+        "tiles/test/15x15_carriers_enemy_pc_one_cell_away_from_a_river_bank.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8886,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 468.71483232050423,
+                "y": 440.58068872383524
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_one_cell_away_from_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_is_too_dungerous.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7443,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 388.28429396748624,
+                "y": 434.6365712750236
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_is_too_dungerous.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_is_too_long.tmx": {
+            "scale": 0.9008,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 481.7939609236235,
+                "y": 397.9795737122558
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_is_too_long.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_unpassable.tmx": {
+            "scale": 0.9426,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 494.3772544027159,
+                "y": 419.58412900488014
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_path_unpassable.tmx#terrain_atlas": {
+            "scaleInDock": 0.6235
+        },
+        "tiles/test/15x15_carriers_enemy_pc_reachable_by_water_only.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.9005,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 405.3303720155469,
+                "y": 416.9905607995558
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_reachable_by_water_only.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_bridge.tmx": {
+            "scale": 0.8997,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 490.16338779593207,
+                "y": 412.9154162498611
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_bridge.tmx#terrain_atlas": {
+            "scaleInDock": 0.707
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_land_mine.tmx": {
+            "expandedObjectLayers": [
+                8,
+                4
+            ],
+            "scale": 0.7885,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 496.51236525047557,
+                "y": 421.6867469879518
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_land_mine.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_land_unit.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.774,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 476.7441860465116,
+                "y": 424.4186046511628
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_land_unit.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_sea_mine.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8622,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 495.82463465553235,
+                "y": 415.79679888656915
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_sea_mine.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_sea_unit.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7564,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 453.4637757800107,
+                "y": 390.66631411951346
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_river_blocked_by_sea_unit.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_enemy_pc_two_cells_away_from_a_river_bank.tmx": {
+            "scale": 0.7053,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 502.6229973061108,
+                "y": 401.95661420672053
+            }
+        },
+        "tiles/test/15x15_carriers_enemy_pc_two_cells_away_from_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_has_carriers.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.2519,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -83.36641524414449,
+                "y": -148.86859865025804
+            }
+        },
+        "tiles/test/15x15_carriers_has_carriers.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_has_one_partly_full_carrier.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7021,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 415.89517162797335,
+                "y": 439.3960974220197
+            }
+        },
+        "tiles/test/15x15_carriers_has_one_partly_full_carrier.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_interseption.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8244,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 514.3134400776322,
+                "y": 376.63755458515277
+            }
+        },
+        "tiles/test/15x15_carriers_interseption.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_mine_fields.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7259072580645162,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 533.12595472851,
+                "y": 378.14747951673377
+            }
+        },
+        "tiles/test/15x15_carriers_mine_fields.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_carriers_not_enough_units.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.6498,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 471.68359495229305,
+                "y": 319.3290243151738
+            }
+        },
+        "tiles/test/15x15_carriers_not_enough_units.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_mines.tmx": {
+            "scale": 0.3119,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 625.2003847386984,
+                "y": 867.2651490862456
+            }
+        },
+        "tiles/test/15x15_mines.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/15x15_path_artefacts_bug.tmx": {
+            "scale": 1.0968,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 346.4624361779723,
+                "y": 170.95185995623632
+            }
+        },
+        "tiles/test/15x15_path_artefacts_bug.tmx#terrain_atlas": {
+            "scaleInDock": 0.5203
+        },
+        "tiles/test/15x15_sounds.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8383,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 468.8059167362519,
+                "y": 500.4175116306811
+            }
+        },
+        "tiles/test/15x15_sounds.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/40x40_land.tmx": {
+            "expandedObjectLayers": [
+                6
+            ],
+            "scale": 0.4032,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1138.392857142857,
+                "y": 1010.6646825396825
+            }
+        },
+        "tiles/test/40x40_land.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_expenses_test_1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.0241,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.72268333170592,
+                "y": 62.98213065130358
+            }
+        },
+        "tiles/test/7x7_expenses_test_1.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_infantry_rocks_movement_bug.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.2825,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 246.0038986354776,
+                "y": 235.86744639376218
+            }
+        },
+        "tiles/test/7x7_infantry_rocks_movement_bug.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_peaceful_animation.tmx": {
+            "scale": 1.3992708333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.76773617211347,
+                "y": 201.17620784634852
+            }
+        },
+        "tiles/test/7x7_peaceful_animation.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_win_defeat_conditions.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.4071874999999998,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 240.1954252720409,
+                "y": 201.46568954030653
+            }
+        },
+        "tiles/test/7x7_win_defeat_conditions.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_1.tmx": {
+            "scale": 1.2508,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 186.2807803006076,
+                "y": 128.3178765590023
+            }
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_1.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2.tmx": {
+            "scale": 1.53697270471464,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 314.2541168873103,
+                "y": 239.75702292541177
+            }
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2_1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.4007,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 179.19611622760044,
+                "y": 117.79824373527521
+            }
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2_1.tmx#terrain_atlas": {
+            "scaleInDock": 0.5822
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2_2.tmx": {
+            "scale": 1.53697270471464,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 89.13626089764291,
+                "y": 239.75702292541177
+            }
+        },
+        "tiles/test/7x7_win_defeat_conditions_ally_2_2.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_balance_general.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.5635,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 389.52972493345163,
+                "y": 430.34605146406386
+            }
+        },
+        "tiles/test/_15x15_balance_general.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_and_air_field.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7223606168446026,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 401.46153214549634,
+                "y": 481.06166351917227
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_and_air_field.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_on_a_river_bank.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7223606168446026,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 139.12718614007719,
+                "y": 486.5990639625585
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_on_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 0.6
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_one_cell_away_from_a_river_bank.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7918,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 423.08663803990913,
+                "y": 460.34352109118464
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_one_cell_away_from_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_is_too_dungerous.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7672,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 389.7288842544316,
+                "y": 441.21480709071955
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_is_too_dungerous.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_is_too_long.tmx": {
+            "scale": 0.886,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 445.82392776523704,
+                "y": 485.89164785553044
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_is_too_long.tmx#terrain_atlas": {
+            "scaleInDock": 0.5848
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_unpassable.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8554,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 467.6174888940846,
+                "y": 491.5828851999064
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_path_unpassable.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_reachable_by_water_only.tmx": {
+            "scale": 0.8632,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 471.50139017608905,
+                "y": 514.9443929564412
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_reachable_by_water_only.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_bridge.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8813,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 443.6627709066152,
+                "y": 488.4829229547259
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_bridge.tmx#terrain_atlas": {
+            "scaleInDock": 0.5523
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_land_mine.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8384,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 469.94274809160305,
+                "y": 471.7318702290076
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_land_mine.tmx#terrain_atlas": {
+            "scaleInDock": 0.7315
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_land_unit.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8198,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 485.484264454745,
+                "y": 512.9299829226641
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_land_unit.tmx#terrain_atlas": {
+            "scaleInDock": 0.7127
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_sea_mine.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7987,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 514.5862025791912,
+                "y": 480.155252284963
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_sea_mine.tmx#terrain_atlas": {
+            "scaleInDock": 0.4886
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_sea_unit.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.6722,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 355.548943766736,
+                "y": 521.4221957750669
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_river_blocked_by_sea_unit.tmx#terrain_atlas": {
+            "scaleInDock": 0.6631
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_two_cells_away_from_a_river_bank.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.6668,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 470.9058188362329,
+                "y": 515.146970605879
+            }
+        },
+        "tiles/test/_15x15_carriers_enemy_pc_two_cells_away_from_a_river_bank.tmx#terrain_atlas": {
+            "scaleInDock": 0.5466
+        },
+        "tiles/test/_15x15_carriers_has_carriers.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.8955,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 387.4930206588498,
+                "y": 506.4209938581798
+            }
+        },
+        "tiles/test/_15x15_carriers_has_carriers.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_has_one_partly_full_carrier.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7697,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 456.02182668572175,
+                "y": 487.85241002988175
+            }
+        },
+        "tiles/test/_15x15_carriers_has_one_partly_full_carrier.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_interseption.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.6622,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 481.7275747508305,
+                "y": 518.7254605859257
+            }
+        },
+        "tiles/test/_15x15_carriers_interseption.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_15x15_carriers_mine_fields.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.7455,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 469.48356807511743,
+                "y": 487.5922199865861
+            }
+        },
+        "tiles/test/_15x15_carriers_mine_fields.tmx#terrain_atlas": {
+            "scaleInDock": 0.6211
+        },
+        "tiles/test/_15x15_carriers_not_enough_units.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 0.6116,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 461.085676913015,
+                "y": 389.9607586657945
+            }
+        },
+        "tiles/test/_15x15_carriers_not_enough_units.tmx#terrain_atlas": {
+            "scaleInDock": 0.522
+        },
+        "tiles/test/_15x15_sounds.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.8451,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 700.7750257438622,
+                "y": 447.40122486586097
+            }
+        },
+        "tiles/test/_15x15_sounds.tmx#terrain_atlas": {
+            "scaleInDock": 0.5626
+        },
+        "tiles/test/_40x40_land.tmx": {
+            "scale": 0.19059963931469792,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2560.340626848019,
+                "y": 1298.5334121821406
+            }
+        },
+        "tiles/test/_40x40_land.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_7x7_expenses_test_1.tmx": {
+            "scale": 1.3992708333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.76773617211347,
+                "y": 201.17620784634852
+            }
+        },
+        "tiles/test/_7x7_expenses_test_1.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_7x7_infantry_rocks_movement_bug.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.6666253101736972,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 221.1054864884985,
+                "y": 206.70512915953253
+            }
+        },
+        "tiles/test/_7x7_infantry_rocks_movement_bug.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_7x7_peaceful_animation.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.2388,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 161.8501775912173,
+                "y": 278.8989344526962
+            }
+        },
+        "tiles/test/_7x7_peaceful_animation.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/_7x7_win_defeat_conditions.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 201.66666666666663,
+                "y": 239.66666666666669
+            }
+        },
+        "tiles/test/_7x7_win_defeat_conditions.tmx#terrain_atlas": {
+            "scaleInDock": 0.6
+        },
+        "tiles/test/game_objects.tsx": {
+            "scaleInDock": 1
+        },
+        "tiles/test/test_40x40_land.tmx": {
+            "scale": 0.27195216049382714,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1294.3452972052776,
+                "y": 1108.6508724641794
+            }
+        },
+        "tiles/test/test_40x40_land.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/test_7x7_win_defeat_conditions.tmx": {
+            "scale": 1.4685416666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 239.69357355653287,
+                "y": 201.22003121010073
+            }
+        },
+        "tiles/test/test_7x7_win_defeat_conditions.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test_7x7_1.tmx": {
+            "expandedObjectLayers": [
+                4,
+                8
+            ],
+            "scale": 0.6479,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 206.8220404383393,
+                "y": -118.07377681741013
+            }
+        },
+        "tiles/test_7x7_1.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test_7x7_win_defeat_conditions.tmx": {
+            "expandedObjectLayers": [
+                4,
+                8
+            ],
+            "scale": 0.6479,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 239.23444976076559,
+                "y": 201.41997221793486
+            }
+        },
+        "tiles/test_7x7_win_defeat_conditions.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/the_battle_of_tannenburg.tmx": {
+            "expandedObjectLayers": [
+                8,
+                6
+            ],
+            "scale": 0.371,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1296.4959568733152,
+                "y": 1109.164420485175
+            }
+        },
+        "tiles/the_battle_of_tannenburg.tmx#Temp background": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.25
+        },
+        "tiles/the_battle_of_tannenburg.tmx#terrain_atlas": {
+            "dynamicWrapping": false,
+            "scaleInDock": 0.5332
+        },
+        "tiles/water_test.tmx": {
+            "expandedObjectLayers": [
+                6,
+                7
+            ],
+            "scale": 0.6667,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 1016.9491525423729,
+                "y": 804.7097645117744
+            }
+        },
+        "tiles/water_test.tmx#terrain_atlas": {
+            "scaleInDock": 0.4849
+        }
+    },
+    "last.externalTilesetPath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/maps/tiles",
+    "last.imagePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfare/maps/images/temp_backgrounds",
+    "last.objectTemplatePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/tiles/game_objects/templates/units",
+    "map.height": 25,
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": "5",
+    "map.orientation": "4",
+    "map.renderOrder": "1",
+    "map.tileHeight": 64,
+    "map.tileWidth": 74,
+    "map.width": 32,
+    "openFiles": [
+        "tiles/real/europe/german_spring_offensive.tmx",
+        "tiles/real/europe/battle_of_tannenburg.tmx",
+        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/brusilov_offensive.tmx",
+        "tiles/real/europe/first_battle_of_the_marne.tmx",
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
+    ],
+    "project": "tw_maps.tiled-project",
+    "property.type": "object",
+    "recentFiles": [
+        "tiles/real/europe/german_spring_offensive.tmx",
+        "tiles/real/europe/battle_of_tannenburg.tmx",
+        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/brusilov_offensive.tmx",
+        "tiles/real/europe/first_battle_of_the_marne.tmx",
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx",
+        "tiles/real/europe/battle_of_verdun.tmx",
+        "tiles/test/15x15_mines.tmx",
+        "tiles/test/15x15_sounds.tmx",
+        "tiles/test/10x10_is_defence.tmx",
+        "tiles/test/10x10_is_defence_attack.tmx",
+        "tiles/test/7x7_win_defeat_conditions_ally_2_1.tmx"
+    ],
+    "textEdit.monospace": true,
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 74
+    },
+    "tileset.type": 0
+}
