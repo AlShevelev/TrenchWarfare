@@ -34,6 +34,8 @@ class SoundsPlayer {
 
   bool get _notReadyToPlay => _player.state == PlayerState.paused || _player.state == PlayerState.disposed;
 
+  static const _musicReduceVolumeFactor = 0.5;
+
   SoundsPlayer() {
     _player.onPlayerComplete.listen((_) => _switchToNextSound());
 
@@ -59,7 +61,9 @@ class SoundsPlayer {
   }
 
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
-  void setVolume(double value) => _player.setVolume(value / SettingsConstants.maxValue);
+  void setVolume(double value) => _player.setVolume(
+        _musicReduceVolumeFactor * value / SettingsConstants.maxValue,
+      );
 
   Future<void> play({
     required SoundType type,
