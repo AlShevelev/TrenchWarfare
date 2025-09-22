@@ -10,7 +10,7 @@
 
 part of pathfinding;
 
-class LandPathCostCalculator extends SeaPathCostCalculator {
+class LandPathCostCalculator extends PathCostCalculatorBase {
   bool _unloadUnitPathItemExists = false;
 
   bool _explosionOrBattlePathItemExists = false;
@@ -22,6 +22,27 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
     required super.calculatedUnit,
     Carrier? calculatedCarrier,
   }) : _calculatedCarrier = calculatedCarrier;
+
+  @override
+  bool isEndOfPathReachable() {
+    var movementPointsLeft = _calculatedUnit.movementPoints;
+
+    for (var cell in _calculatedPath) {
+      if (cell == _calculatedPath.first) {
+        continue;
+      }
+
+      final moveToCellCost = getMoveToCellCost(cell);
+
+      if (mustResetMovementPoints(cell) && movementPointsLeft > moveToCellCost) {
+        movementPointsLeft = 0;
+      } else {
+        movementPointsLeft -= moveToCellCost;
+      }
+    }
+
+    return movementPointsLeft >= 0;
+  }
 
   @override
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
@@ -151,7 +172,7 @@ class LandPathCostCalculator extends SeaPathCostCalculator {
     } * GameConstants.landMovementSpeedFactor;
   }
 
-  @override
+  @protected
   bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.landMine;
 
   @protected

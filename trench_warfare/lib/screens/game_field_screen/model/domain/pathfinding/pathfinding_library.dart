@@ -24,6 +24,8 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/player/inf
 
 part 'cost/land_path_cost_calculator.dart';
 part 'cost/next_cell_path_cost_calculator.dart';
+part 'cost/path_cost_calculator.dart';
+part 'cost/path_cost_calculator_base.dart';
 part 'cost/sea_path_cost_calculator.dart';
 part 'find/find_path.dart';
 part 'find/land_find_path_settings.dart';
