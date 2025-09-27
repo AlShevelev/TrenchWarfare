@@ -138,5 +138,6 @@
   "settings_sounds": "Звуки",
   "settings_my_units": "Моя скорость",
   "settings_enemy_units": "Скорость противника",
-  "settings_title": "Настройки"
+  "settings_title": "Настройки",
+  "settings_show_borders": "Показывать границы"
 }

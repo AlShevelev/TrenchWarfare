@@ -301,4 +301,10 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
       playingNations: _sortedPlayers.map((p) => p.code).toList(growable: false),
     ).addTroopTransfers(transfers).addMoney(allMoney).save();
   }
+
+  void onSettingsClosed(bool showBordersUpdated) {
+    if (showBordersUpdated) {
+      _updateGameObjectsEvent.update(_gameField.cells.map((cell) => UpdateCell(cell, updateBorderCells: [])));
+    }
+  }
 }

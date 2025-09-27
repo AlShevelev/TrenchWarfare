@@ -51,6 +51,10 @@ class GameCellBorder extends PositionComponent {
 
   @override
   void render(Canvas canvas) {
+    if (!SettingsStorageFacade.showBorders) {
+      return;
+    }
+
     for (var i = 0; i < _sidesToDraw.length; i++) {
       if (!_sidesToDraw[i]) {
         continue;

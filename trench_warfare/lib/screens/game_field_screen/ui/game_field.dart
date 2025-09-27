@@ -288,7 +288,10 @@ class GameField extends FlameGame
   void onSaveSlotSelected(GameSlot slot) => _viewModel.input.onSaveSlotSelected(slot);
 
   @override
-  void onSettingsClosed(SettingsResult result) => _viewModel.input.onSettingsClosed(result);
+  void onSettingsClosed(SettingsResult result) {
+    _viewModel.onSettingsClosed(result.showBordersUpdated);
+    _viewModel.input.onSettingsClosed(result);
+  }
 
   @override
   void onUserConfirmed() => _viewModel.input.onUserConfirmed();

@@ -14,6 +14,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   final SingleStream<_SettingsScreenState> _uiState = SingleStream<_SettingsScreenState>();
   Stream<_SettingsScreenState> get uiState => _uiState.output;
 
+  _DataIsLoaded? _startState;
   _DataIsLoaded? _state;
 
   AudioController? _audioController;
@@ -24,6 +25,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
         sounds: _state?.sounds ?? SettingsConstants.defaultSoundsValue,
         humanUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultHumanUnitsSpeedValue,
         aiUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultAiUnitsSpeedValue,
+        showBordersUpdated: _state?.showBorders != _startState?.showBorders,
       );
 
   _SettingsViewModel() {
@@ -38,8 +40,10 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
       enemyUnitsSpeed: SettingsStorageFacade.aiUnitsSpeed,
       minValue: SettingsConstants.minValue,
       maxValue: SettingsConstants.maxValue,
+      showBorders: SettingsStorageFacade.showBorders,
     );
 
+    _startState = dataState;
     _state = dataState;
 
     _uiState.update(dataState.copy());
@@ -74,6 +78,12 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
 
     _audioController?.setSoundsVolume(value);
     _audioController?.playSound(SoundType.buttonClick);
+  }
+
+  @override
+  void onShowBorderUpdated(bool value) {
+    _state = _state?.copy(showBorders: value);
+    SettingsStorageFacade.setShowBorders(value);
   }
 
   @override

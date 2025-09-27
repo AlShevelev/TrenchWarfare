@@ -23,10 +23,13 @@ class SettingsResult {
   /// [SettingsConstants.minValue - SettingsConstants.maxValue]
   final double aiUnitsSpeed;
 
+  final bool showBordersUpdated;
+
   SettingsResult({
     required this.music,
     required this.sounds,
     required this.humanUnitsSpeed,
     required this.aiUnitsSpeed,
+    required this.showBordersUpdated,
   });
 }

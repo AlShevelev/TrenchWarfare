@@ -20,4 +20,6 @@ abstract interface class _SettingsUserActions {
   void onMyUnitsSpeedUpdated(double value);
 
   void onEnemyUnitsSpeedUpdated(double value);
+
+  void onShowBorderUpdated(bool value);
 }

@@ -18,6 +18,7 @@ class SettingsStorageFacade {
   static const String _soundsKey = 'soundsSettingsKey';
   static const String _humanUnitsSpeedKey = 'humanUnitsSpeedSettingsKey';
   static const String _aiUnitsSpeedKey = 'aiUnitsSpeedSettingsKey';
+  static const String _showBorderKey = 'showBorderKey';
 
   static double _music = _dao.readDouble(_musicKey) ?? SettingsConstants.defaultMusicValue;
   static double _sounds = _dao.readDouble(_soundsKey) ?? SettingsConstants.defaultSoundsValue;
@@ -25,6 +26,7 @@ class SettingsStorageFacade {
       _dao.readDouble(_humanUnitsSpeedKey) ?? SettingsConstants.defaultHumanUnitsSpeedValue;
   static double _aiUnitsSpeed =
       _dao.readDouble(_aiUnitsSpeedKey) ?? SettingsConstants.defaultAiUnitsSpeedValue;
+  static bool _showBorders = _dao.readBool(_showBorderKey) ?? true;
 
   static double get music => _music;
 
@@ -33,6 +35,8 @@ class SettingsStorageFacade {
   static double get humanUnitsSpeed => _humanUnitsSpeed;
 
   static double get aiUnitsSpeed => _aiUnitsSpeed;
+
+  static bool get showBorders => _showBorders;
 
   static void setMusic(double value) {
     _dao.putDouble(_musicKey, value);
@@ -52,5 +56,10 @@ class SettingsStorageFacade {
   static void setAiUnitsSpeed(double value) {
     _dao.putDouble(_aiUnitsSpeedKey, value);
     _aiUnitsSpeed = value;
+  }
+
+  static void setShowBorders(bool value) {
+    _dao.putBool(_showBorderKey, value);
+    _showBorders = value;
   }
 }

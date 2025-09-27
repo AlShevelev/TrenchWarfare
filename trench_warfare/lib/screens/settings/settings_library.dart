@@ -34,4 +34,5 @@ part 'view_model/settings_user_actions.dart';
 part 'view_model/settings_view_model.dart';
 part 'ui/bookmark.dart';
 part 'ui/settings.dart';
+part 'ui/settings_checkbox.dart';
 part 'ui/settings_slider.dart';

@@ -115,6 +115,8 @@ class _SettingsState extends State<Settings> with ImageLoading {
     const loudIcon = AssetImage('assets/images/screens/settings/icon_sound_max.webp');
     const slowIcon = AssetImage('assets/images/screens/settings/icon_slow.webp');
     const fastIcon = AssetImage('assets/images/screens/settings/icon_fast.webp');
+    const checkedIcon = AssetImage('assets/images/screens/settings/icon_check_on.webp');
+    const uncheckedIcon = AssetImage('assets/images/screens/settings/icon_check_off.webp');
 
     const paddingBetween = 24.0;
 
@@ -171,6 +173,16 @@ class _SettingsState extends State<Settings> with ImageLoading {
               leftIcon: slowIcon,
               rightIcon: fastIcon,
               onValueChanged: (value) => _viewModel.onEnemyUnitsSpeedUpdated(value),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, paddingBetween),
+            child: SettingsCheckbox(
+              startValue: dataState.showBorders,
+              title: localization.tr('settings_show_borders'),
+              checkedIcon: checkedIcon,
+              uncheckedIcon: uncheckedIcon,
+              onValueChanged: (value) => _viewModel.onShowBorderUpdated(value),
             ),
           ),
         ],
