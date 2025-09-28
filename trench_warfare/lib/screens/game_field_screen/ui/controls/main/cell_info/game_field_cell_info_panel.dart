@@ -10,45 +10,68 @@
 
 part of game_field_cell_info;
 
-class GameFieldCellInfoPanel extends StatelessWidget {
-  static const _width = 162.0;
-  static const _height = 83.0;
+enum _PanelType {
+  brief,
+  pcOrTerrainModifier,
+  army,
+  pcOrTerrainModifierAndArmy,
+}
 
+class GameFieldCellInfoPanel extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
-  late final TextureAtlas _spritesAtlas;
+  final TextureAtlas _spritesAtlas;
 
   final double left;
   final double top;
 
-  GameFieldCellInfoPanel({
-    super.key,
-    required this.cellInfo,
-    required this.left,
-    required this.top,
-    required TextureAtlas spritesAtlas
-  }) {
-    _spritesAtlas = spritesAtlas;
+  late final _PanelType? _type;
+
+  static const String _backgroundPath = 'assets/images/screens/game_field/main/';
+
+  GameFieldCellInfoPanel(
+      {super.key,
+      required this.cellInfo,
+      required this.left,
+      required this.top,
+      required TextureAtlas spritesAtlas})
+      : _spritesAtlas = spritesAtlas {
+    _type = _getPanelType(cellInfo);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      left: left,
-      top: top,
-      width: _width,
-      height: _height,
-      child: Background(
-          imagePath: 'assets/images/screens/game_field/main/panel_cell_info.webp',
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
-            child: DefaultTextStyle(
-              style: AppTypography.s20w600,
-              child: cellInfo.terrainModifier == null && cellInfo.productionCenter == null
-                  ? GameFieldCellInfoBrief(cellInfo: cellInfo)
-                  : GameFieldCellInfoFull(cellInfo: cellInfo, spritesAtlas: _spritesAtlas,)
-            ),
-          )),
-    );
+    return switch (_type) {
+      _PanelType.brief => GameFieldCellInfoBrief(
+          cellInfo: cellInfo,
+          left: left,
+          top: top,
+          backgroundPath: _backgroundPath,
+        ),
+      _PanelType.pcOrTerrainModifier => GameFieldCellInfoPcOrTerrainModifier(
+        cellInfo: cellInfo,
+        spritesAtlas: _spritesAtlas,
+        left: left,
+        top: top,
+        backgroundPath: _backgroundPath,
+      ),
+      _ => const SizedBox.shrink(),
+    };
+  }
+
+  _PanelType? _getPanelType(GameFieldControlsCellInfo cellInfo) {
+    if (cellInfo.units.isNotEmpty) {
+      if (cellInfo.terrainModifier != null || cellInfo.productionCenter != null) {
+        return _PanelType.pcOrTerrainModifierAndArmy;
+      } else {
+        return _PanelType.army;
+      }
+    } else {
+      if (cellInfo.terrainModifier != null || cellInfo.productionCenter != null) {
+        return _PanelType.pcOrTerrainModifier;
+      } else {
+        return _PanelType.brief;
+      }
+    }
   }
 }

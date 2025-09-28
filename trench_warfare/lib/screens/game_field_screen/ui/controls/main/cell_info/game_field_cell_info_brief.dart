@@ -13,22 +13,53 @@ part of game_field_cell_info;
 class GameFieldCellInfoBrief extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
+  static const _width = 192.0;
+  static const _height = 52.0;
+
+  final double _left;
+  final double _top;
+
+  final String _backgroundPath;
+
   const GameFieldCellInfoBrief({
     super.key,
     required this.cellInfo,
-  });
+    required double left,
+    required double top,
+    required String backgroundPath,
+  })  : _left = left,
+        _top = top,
+        _backgroundPath = backgroundPath;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        GameFieldCellInfoTitle(
-          cellInfo: cellInfo,
-        ),
-        MoneyPanel(money: cellInfo.income, smallFont: false, stretch: true,),
-      ],
+    return Positioned(
+      left: _left,
+      top: _top,
+      width: _width,
+      height: _height,
+      child: Background(
+          imagePath: '${_backgroundPath}panel_cell_info_brief.webp',
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
+            child: DefaultTextStyle(
+              style: AppTypography.s20w600,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GameFieldCellInfoTitle(
+                    cellInfo: cellInfo,
+                  ),
+                  MoneyPanel(
+                    money: cellInfo.income,
+                    smallFont: false,
+                    stretch: false,
+                  ),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
