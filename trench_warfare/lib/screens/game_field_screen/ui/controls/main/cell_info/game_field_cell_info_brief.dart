@@ -24,25 +24,11 @@ class GameFieldCellInfoBrief extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          _getTerrainName(cellInfo.terrain),
-          overflow: TextOverflow.fade,
+        GameFieldCellInfoTitle(
+          cellInfo: cellInfo,
         ),
         MoneyPanel(money: cellInfo.income, smallFont: false, stretch: true,),
       ],
     );
-  }
-
-  String _getTerrainName(CellTerrain terrain) {
-    return switch (terrain) {
-      CellTerrain.plain => tr('plain'),
-      CellTerrain.wood => tr('wood'),
-      CellTerrain.marsh => tr('marsh'),
-      CellTerrain.sand => tr('sand'),
-      CellTerrain.hills => tr('hills'),
-      CellTerrain.mountains => tr('mountains'),
-      CellTerrain.snow => tr('snow'),
-      CellTerrain.water => tr('water'),
-    };
   }
 }

@@ -19,11 +19,17 @@ class GameFieldControlsCellInfo {
 
   final ProductionCenter? productionCenter;
 
+  final Nation? nation;
+
+  final List<Unit> units;
+
   GameFieldControlsCellInfo({
     required this.income,
     required this.terrain,
     required this.terrainModifier,
     required this.productionCenter,
+    required this.nation,
+    required this.units,
   });
 }
 

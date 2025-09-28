@@ -24,6 +24,8 @@ class FromReadyForInputOnLongClickStart {
           terrain: cell.terrain,
           terrainModifier: cell.terrainModifier?.type,
           productionCenter: cell.productionCenter,
+          nation: cell.nation,
+          units: cell.units.toList(growable: false),
         ),
         armyInfo: null,
         carrierInfo: null,
