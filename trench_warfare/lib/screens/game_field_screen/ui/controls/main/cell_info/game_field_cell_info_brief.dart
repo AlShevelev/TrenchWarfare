@@ -39,27 +39,28 @@ class GameFieldCellInfoBrief extends StatelessWidget {
       width: _width,
       height: _height,
       child: Background(
-          imagePath: '${_backgroundPath}panel_cell_info_brief.webp',
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
-            child: DefaultTextStyle(
-              style: AppTypography.s20w600,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GameFieldCellInfoTitle(
-                    cellInfo: cellInfo,
-                  ),
-                  MoneyPanel(
-                    money: cellInfo.income,
-                    smallFont: false,
-                    stretch: false,
-                  ),
-                ],
-              ),
+        imagePath: '${_backgroundPath}panel_cell_info_brief.webp',
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
+          child: DefaultTextStyle(
+            style: AppTypography.s20w600,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GameFieldCellInfoTitle(
+                  cellInfo: cellInfo,
+                ),
+                MoneyPanel(
+                  money: cellInfo.income,
+                  smallFont: false,
+                  stretch: false,
+                ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -11,7 +11,7 @@
 part of game_field_army_info;
 
 class GameFieldArmyInfoPanel extends StatefulWidget {
-  static const width = 250.0;
+  static const width = 270.0;
   static const height = 70.0;
 
   late final int _cellId;

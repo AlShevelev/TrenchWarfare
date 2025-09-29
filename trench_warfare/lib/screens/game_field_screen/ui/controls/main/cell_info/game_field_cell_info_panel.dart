@@ -55,6 +55,13 @@ class GameFieldCellInfoPanel extends StatelessWidget {
         top: top,
         backgroundPath: _backgroundPath,
       ),
+      _PanelType.army => GameFieldCellInfoArmy(
+        cellInfo: cellInfo,
+        spritesAtlas: _spritesAtlas,
+        left: left,
+        top: top,
+        backgroundPath: _backgroundPath,
+      ),
       _ => const SizedBox.shrink(),
     };
   }

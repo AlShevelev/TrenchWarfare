@@ -11,6 +11,9 @@
 part of game_field_army_info;
 
 class GameFieldArmyInfoUnit extends StatelessWidget {
+  static const _width = 60.0;
+  static const _height = 60.0;
+
   final Unit _unit;
 
   final TextureAtlas _spritesAtlas;
@@ -42,8 +45,8 @@ class GameFieldArmyInfoUnit extends StatelessWidget {
           cache: _cache,
         ),
         child: const SizedBox(
-          width: 55,
-          height: 50,
+          width: _width,
+          height: _height,
           child: null,
         ),
       ),
