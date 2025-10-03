@@ -15,8 +15,8 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
 
   final TextureAtlas _spritesAtlas;
 
-  static const _width = 182.0;
-  static const _height = 83.0;
+  static const _width = 200.0;
+  static const _height = 132.0;
 
   final double _left;
   final double _top;
@@ -43,33 +43,25 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
       width: _width,
       height: _height,
       child: Background(
-          imagePath: '${_backgroundPath}panel_cell_info.webp',
+          imagePath: '${_backgroundPath}panel_cell_info_pc.webp',
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
             child: DefaultTextStyle(
               style: AppTypography.s20w600,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GameFieldCellInfoTitle(
-                        cellInfo: cellInfo,
-                      ),
-                      MoneyPanel(
-                        money: cellInfo.income,
-                        smallFont: true,
-                        stretch: false,
-                      ),
-                    ],
+                  GameFieldCellInfoTitleWithMoney(
+                    cellInfo: cellInfo,
                   ),
                   Expanded(
-                    child: CustomPaint(
-                      painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
-                      child: Container(
-                        child: null,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomPaint(
+                        painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
+                        child: Container(
+                          child: null,
+                        ),
                       ),
                     ),
                   ),

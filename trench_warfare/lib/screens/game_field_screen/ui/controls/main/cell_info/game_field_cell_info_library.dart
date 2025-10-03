@@ -35,3 +35,4 @@ part 'game_field_cell_info_game_object_painter.dart';
 part 'game_field_cell_info_pc_or_terrain_modifier.dart';
 part 'game_field_cell_info_pc_or_terrain_modifier_with_army.dart';
 part 'game_field_cell_info_title.dart';
+part 'game_field_cell_info_title_with_money.dart';

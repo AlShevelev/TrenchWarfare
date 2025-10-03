@@ -52,19 +52,8 @@ class GameFieldCellInfoArmy extends StatelessWidget implements GameFieldArmyInfo
               style: AppTypography.s20w600,
               child: Column(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GameFieldCellInfoTitle(
-                        cellInfo: cellInfo,
-                      ),
-                      MoneyPanel(
-                        money: cellInfo.income,
-                        smallFont: false,
-                        stretch: false,
-                      ),
-                    ],
+                  GameFieldCellInfoTitleWithMoney(
+                    cellInfo: cellInfo,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),

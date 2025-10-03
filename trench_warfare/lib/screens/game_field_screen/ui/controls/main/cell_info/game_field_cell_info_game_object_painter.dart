@@ -75,6 +75,6 @@ class GameFieldCellInfoGameObjectPainter extends CustomPainter {
     }
 
     final sideSize = size.width > size.height ? size.height : size.width;
-    return Rect.fromLTWH(size.width - sideSize, (size.height - sideSize) / 2, sideSize, sideSize);
+    return Rect.fromLTWH(0, 0, sideSize, sideSize);
   }
 }
