@@ -10,3 +10,90 @@
 
 part of game_field_cell_info;
 
+class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
+    implements GameFieldArmyInfoUnitsCache {
+
+  final Map<String, Picture> _cachedUnitPictures = {};
+
+  final GameFieldControlsCellInfo cellInfo;
+
+  final TextureAtlas _spritesAtlas;
+
+  static const _width = 280.0;
+  static const _height = 214.0;
+
+  final double _left;
+  final double _top;
+
+  final String _backgroundPath;
+
+  GameFieldCellInfoPcOrTerrainModifierWithArmy({
+    super.key,
+    required this.cellInfo,
+    required TextureAtlas spritesAtlas,
+    required double left,
+    required double top,
+    required String backgroundPath,
+  })  : _spritesAtlas = spritesAtlas,
+        _left = left,
+        _top = top,
+        _backgroundPath = backgroundPath;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: _left,
+      top: _top,
+      width: _width,
+      height: _height,
+      child: Background(
+          imagePath: '${_backgroundPath}panel_cell_info_army_pc.webp',
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 14, 8, 14),
+            child: DefaultTextStyle(
+              style: AppTypography.s20w600,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GameFieldCellInfoTitleWithMoney(
+                    cellInfo: cellInfo,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                    child: CustomPaint(
+                      painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
+                      child: const SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: null,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                    child: Row(
+                      children: <Widget>[
+                        for (var i = 0; i < cellInfo.units.length; i++)
+                          GameFieldArmyInfoUnit(
+                            unit: cellInfo.units[i],
+                            nation: cellInfo.nation!,
+                            spritesAtlas: _spritesAtlas,
+                            cache: this,
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )),
+    );
+  }
+
+  @override
+  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
+
+  @override
+  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
+}
