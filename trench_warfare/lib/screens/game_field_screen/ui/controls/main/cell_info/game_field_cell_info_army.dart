@@ -10,9 +10,7 @@
 
 part of game_field_cell_info;
 
-class GameFieldCellInfoArmy extends StatelessWidget implements GameFieldArmyInfoUnitsCache {
-  final Map<String, Picture> _cachedUnitPictures = {};
-
+class GameFieldCellInfoArmy extends StatelessWidget with GameFieldArmyInfoUnitsCache {
   final GameFieldControlsCellInfo cellInfo;
 
   final TextureAtlas _spritesAtlas;
@@ -75,10 +73,4 @@ class GameFieldCellInfoArmy extends StatelessWidget implements GameFieldArmyInfo
           )),
     );
   }
-
-  @override
-  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
-
-  @override
-  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
 }

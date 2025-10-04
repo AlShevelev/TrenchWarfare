@@ -11,9 +11,7 @@
 part of game_field_cell_info;
 
 class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
-    implements GameFieldArmyInfoUnitsCache {
-
-  final Map<String, Picture> _cachedUnitPictures = {};
+    with GameFieldArmyInfoUnitsCache {
 
   final GameFieldControlsCellInfo cellInfo;
 
@@ -90,10 +88,4 @@ class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
           )),
     );
   }
-
-  @override
-  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
-
-  @override
-  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
 }

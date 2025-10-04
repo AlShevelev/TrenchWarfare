@@ -51,14 +51,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
 }
 
 class _GameFieldArmyInfoPanelState extends State<GameFieldArmyInfoPanel>
-    implements GameFieldArmyInfoUnitsCache {
-  final Map<String, Picture> _cachedUnitPictures = {};
-
-  @override
-  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
-
-  @override
-  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
+    with GameFieldArmyInfoUnitsCache {
 
   @override
   Widget build(BuildContext context) {

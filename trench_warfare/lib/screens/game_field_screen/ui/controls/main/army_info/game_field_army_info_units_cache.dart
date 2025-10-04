@@ -10,8 +10,10 @@
 
 part of game_field_army_info;
 
-abstract interface class GameFieldArmyInfoUnitsCache {
-  Picture? getUnitPicture(String key);
+mixin GameFieldArmyInfoUnitsCache {
+  final Map<String, Picture> _cachedUnitPictures = {};
 
-  void putUnitPicture(String key, Picture picture);
+  Picture? getUnitPicture(String key) => _cachedUnitPictures[key];
+
+  void putUnitPicture(String key, Picture picture) => _cachedUnitPictures.addAll({key: picture});
 }
