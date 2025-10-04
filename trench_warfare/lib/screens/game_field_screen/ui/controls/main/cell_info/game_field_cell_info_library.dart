@@ -31,6 +31,7 @@ import 'package:trench_warfare/shared/utils/extensions.dart';
 part 'game_field_cell_info_army.dart';
 part 'game_field_cell_info_brief.dart';
 part 'game_field_cell_info_panel.dart';
+part 'game_field_cell_info_pc.dart';
 part 'game_field_cell_info_game_object_painter.dart';
 part 'game_field_cell_info_pc_or_terrain_modifier.dart';
 part 'game_field_cell_info_pc_or_terrain_modifier_with_army.dart';

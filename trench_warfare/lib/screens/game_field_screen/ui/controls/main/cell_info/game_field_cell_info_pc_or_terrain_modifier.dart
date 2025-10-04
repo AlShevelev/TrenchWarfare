@@ -15,7 +15,7 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
 
   final TextureAtlas _spritesAtlas;
 
-  static const _width = 200.0;
+  static const _width = 220.0;
   static const _height = 132.0;
 
   final double _left;
@@ -50,21 +50,18 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
               style: AppTypography.s20w600,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GameFieldCellInfoTitleWithMoney(
                     cellInfo: cellInfo,
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomPaint(
-                        painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
-                        child: Container(
-                          child: null,
-                        ),
-                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GameFieldCellInfoPc(
+                      cellInfo: cellInfo,
+                      spritesAtlas: _spritesAtlas,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

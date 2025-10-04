@@ -59,13 +59,9 @@ class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                    child: CustomPaint(
-                      painter: GameFieldCellInfoGameObjectPainter(cellInfo, _spritesAtlas),
-                      child: const SizedBox(
-                        width: 60,
-                        height: 60,
-                        child: null,
-                      ),
+                    child: GameFieldCellInfoPc(
+                      cellInfo: cellInfo,
+                      spritesAtlas: _spritesAtlas,
                     ),
                   ),
                   Padding(
