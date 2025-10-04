@@ -10,15 +10,13 @@
 
 part of game_field_cell_info;
 
-class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
-    with GameFieldArmyInfoUnitsCache {
-
+class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget with GameFieldArmyInfoUnitsCache {
   final GameFieldControlsCellInfo cellInfo;
 
   final TextureAtlas _spritesAtlas;
 
   static const _width = 280.0;
-  static const _height = 214.0;
+  static const _height = 200.0;
 
   final double _left;
   final double _top;
@@ -66,16 +64,9 @@ class GameFieldCellInfoPcOrTerrainModifierWithArmy extends StatelessWidget
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                    child: Row(
-                      children: <Widget>[
-                        for (var i = 0; i < cellInfo.units.length; i++)
-                          GameFieldArmyInfoUnit(
-                            unit: cellInfo.units[i],
-                            nation: cellInfo.nation!,
-                            spritesAtlas: _spritesAtlas,
-                            cache: this,
-                          ),
-                      ],
+                    child: GameFieldCellInfoUnits(
+                      cellInfo: cellInfo,
+                      spritesAtlas: _spritesAtlas,
                     ),
                   ),
                 ],

@@ -55,17 +55,10 @@ class GameFieldCellInfoArmy extends StatelessWidget with GameFieldArmyInfoUnitsC
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-                    child: Row(
-                      children: <Widget>[
-                        for (var i = 0; i < cellInfo.units.length; i++)
-                          GameFieldArmyInfoUnit(
-                            unit: cellInfo.units[i],
-                            nation: cellInfo.nation!,
-                            spritesAtlas: _spritesAtlas,
-                            cache: this,
-                          ),
-                      ],
-                    ),
+                      child: GameFieldCellInfoUnits(
+                        cellInfo: cellInfo,
+                        spritesAtlas: _spritesAtlas,
+                      ),
                   ),
                 ],
               ),

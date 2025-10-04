@@ -56,7 +56,7 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
                     cellInfo: cellInfo,
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: GameFieldCellInfoPc(
                       cellInfo: cellInfo,
                       spritesAtlas: _spritesAtlas,
