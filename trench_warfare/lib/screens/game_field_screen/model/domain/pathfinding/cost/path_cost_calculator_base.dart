@@ -64,10 +64,7 @@ abstract class PathCostCalculatorBase implements PathCostCalculator {
   }
 
   @override
-  bool isEndOfPathReachable() {
-    // TODO: implement isEndOfPathReachable
-    throw UnimplementedError();
-  }
+  bool isEndOfPathReachable();
 
   @protected
   PathItemType getPathItemType(GameFieldCell nextCell, bool isLast);
