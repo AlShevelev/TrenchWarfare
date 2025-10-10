@@ -109,6 +109,10 @@ class SpecialStrikesBuildCalculator {
             return false;
           }
 
+          if (cell.terrainModifier?.type == TerrainModifierType.landFort) {
+            return false;
+          }
+
           return cell.units.any((u) => u.type == UnitType.infantry || u.type == UnitType.tank);
         }
       case SpecialStrikeType.propaganda:

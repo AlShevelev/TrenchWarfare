@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/the_first_battle_of_the_somme.tmx",
+    "activeFile": "tiles/real/europe/german_spring_offensive.tmx",
     "expandedProjectPaths": [
+        "tiles/test",
         "tiles/game_objects/atlas",
         "tiles/help",
-        "tiles/templates/units",
         ".",
-        "tiles",
-        "tiles/game_objects/templates",
-        "tiles/test",
         "tiles/game_objects",
-        "tiles/templates",
-        "tiles/real/europe",
+        "tiles",
         "tiles_source_metadata",
-        "tiles/real"
+        "tiles/templates/units",
+        "tiles/real/europe",
+        "tiles/real",
+        "tiles/game_objects/templates",
+        "tiles/templates"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -177,8 +177,8 @@
             "scale": 0.3637,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 835.8537255980203,
-                "y": 2445.69700302447
+                "x": 833.1042067638163,
+                "y": 815.2323343414902
             }
         },
         "tiles/real/europe/battle_of_tannenburg.tmx#TempBackground": {
@@ -207,14 +207,14 @@
         },
         "tiles/real/europe/brusilov_offensive.tmx": {
             "expandedObjectLayers": [
-                3,
-                5
+                5,
+                3
             ],
             "scale": 0.3636,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 365.7865786578658,
-                "y": 1189.4939493949398
+                "x": 420.79207920792084,
+                "y": 878.7128712871288
             }
         },
         "tiles/real/europe/brusilov_offensive.tmx#TempBackground": {
@@ -230,8 +230,8 @@
             "scale": 0.3216,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 764.9253731343284,
-                "y": 685.6343283582089
+                "x": 696.5174129353234,
+                "y": 654.539800995025
             }
         },
         "tiles/real/europe/first_battle_of_the_marne.tmx#TempBackground": {
@@ -245,11 +245,11 @@
                 8,
                 3
             ],
-            "scale": 0.3509,
+            "scale": 0.7346,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 803.6477628954118,
-                "y": 787.9737817041892
+                "x": 1376.2591886741084,
+                "y": 982.1671658045195
             }
         },
         "tiles/real/europe/german_spring_offensive.tmx#TempBackground": {
@@ -1195,12 +1195,7 @@
     "map.tileWidth": 74,
     "map.width": 32,
     "openFiles": [
-        "tiles/real/europe/german_spring_offensive.tmx",
-        "tiles/real/europe/battle_of_tannenburg.tmx",
-        "tiles/real/europe/battle_of_passchendaele.tmx",
-        "tiles/real/europe/brusilov_offensive.tmx",
-        "tiles/real/europe/first_battle_of_the_marne.tmx",
-        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
+        "tiles/real/europe/german_spring_offensive.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "object",
