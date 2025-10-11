@@ -106,5 +106,5 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
           ? 0.0
           : math.pow(Unit.absoluteMaxMovementPoints - maxMovementPoints, 3.0).toDouble();
 
-  double _typeFactor(UnitType type) => type == UnitType.artillery || type == UnitType.machineGuns ? 2.0 : 1.0;
+  double _typeFactor(UnitType type) => type == UnitType.artillery || type == UnitType.machineGuns ? 4.0 : 2.0;
 }
