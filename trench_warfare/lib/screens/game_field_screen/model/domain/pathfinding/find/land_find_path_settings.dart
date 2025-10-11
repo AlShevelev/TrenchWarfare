@@ -129,6 +129,10 @@ class LandFindPathSettings implements FindPathSettings {
       return false;
     }
 
+    if (cell.hasRoad) {
+      return true;
+    }
+
     //terrain type
     final terrain = cell.terrain;
 
