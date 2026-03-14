@@ -26,7 +26,8 @@ import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
 
-part 'carriers_target_calculator.dart';
+part 'carriers_target_calculator_brief.dart';
+part 'carriers_target_calculator_full.dart';
 part 'influence_map_phases.dart';
 part 'player_actions.dart';
 part 'turn_phase.dart';

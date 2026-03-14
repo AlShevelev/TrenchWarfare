@@ -59,18 +59,21 @@ class CarriersPhase implements TurnPhase {
 
     // We've got free carriers
     if (carriersCount > _transfersStorage.totalTransfers) {
-      final target = CarriersTargetCalculator(
-        gameField: _gameField,
-        myNation: _myNation,
-        metadata: _metadata,
-      ).getTarget();
+      final totalTransfers = _transfersStorage.totalTransfers;
+      for (var i=0; i < carriersCount - totalTransfers; i++) {
+        final target = CarriersTargetCalculatorBrief(
+          gameField: _gameField,
+          myNation: _myNation,
+          metadata: _metadata,
+        ).getTarget();
 
-      Logger.info('Target is: $target', tag: 'CARRIER');
+        Logger.info('Target is: $target', tag: 'CARRIER');
 
-      // And have a target for them
-      if (target != null) {
-        Logger.info('New transfer is added', tag: 'CARRIER');
-        _transfersStorage.addNewTransfer(targetCell: target);
+        // And have a target for them
+        if (target != null) {
+          Logger.info('New transfer is added', tag: 'CARRIER');
+          _transfersStorage.addNewTransfer(targetCell: target);
+        }
       }
     }
 

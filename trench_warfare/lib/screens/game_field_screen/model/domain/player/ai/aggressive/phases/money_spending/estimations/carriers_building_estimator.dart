@@ -69,7 +69,7 @@ class _CarriersBuildingEstimator extends Estimator<_CarriersBuildingEstimationDa
       return [];
     }
 
-    final targetCalculator = CarriersTargetCalculator(
+    final targetCalculator = CarriersTargetCalculatorFull(
       gameField: _gameField,
       myNation: _myNation,
       metadata: _metadata,

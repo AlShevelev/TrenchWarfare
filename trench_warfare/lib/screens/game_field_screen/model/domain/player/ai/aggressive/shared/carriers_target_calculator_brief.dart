@@ -10,18 +10,14 @@
 
 part of aggressive_ai_shared_library;
 
-class CarriersTargetCalculator {
+class CarriersTargetCalculatorBrief {
   final GameFieldRead _gameField;
 
   final Nation _myNation;
 
   final MapMetadataRead _metadata;
 
-  static const _pathIsTooLongFactor = 2.0;
-
-  static const _pathIsTooDangerousFactor = 0.2;
-
-  CarriersTargetCalculator({
+  CarriersTargetCalculatorBrief({
     required GameFieldRead gameField,
     required Nation myNation,
     required MapMetadataRead metadata,
@@ -71,38 +67,14 @@ class CarriersTargetCalculator {
       }
     }
 
-    if (mySelectedPcCell == null || enemySelectedPcCell == null) {
+    if (mySelectedPcCell == null) {
       return null;
     }
 
-    // Calculates a path between PCs by land for some infantry unit
-    // (an infantry unit can move through all types of territory)
-    final pathFacade = PathFacade(_gameField, _myNation, _metadata);
-    final path = pathFacade.calculatePathForUnit(
-      startCell: mySelectedPcCell,
-      endCell: enemySelectedPcCell,
-      calculatedUnit: Unit.byType(UnitType.infantry),
-    );
-
-    // The land path doesn't exist - we should build carriers
-    if (path.isEmpty) {
-      return enemySelectedPcCell;
+    if (enemySelectedPcCell == null) {
+      return null;
     }
 
-    /// The land path is too long - we should build carriers
-    if (path.length / minDistance >= _pathIsTooLongFactor) {
-      return enemySelectedPcCell;
-    }
-
-    final dangerousCellsQuantity = path.count((cell) =>
-        cell.terrainModifier?.type == TerrainModifierType.landMine ||
-        (cell.nation != _myNation && cell.units.isNotEmpty));
-
-    /// The land path is too dangerous - we should build carriers
-    if (dangerousCellsQuantity / path.length > _pathIsTooDangerousFactor) {
-      return enemySelectedPcCell;
-    }
-
-    return null;
+    return enemySelectedPcCell;
   }
 }
