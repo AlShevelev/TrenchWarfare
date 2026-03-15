@@ -46,34 +46,35 @@ class CarriersPhase implements TurnPhase {
 
   @override
   Future<void> start() async {
-    Logger.info('Start the phase', tag: 'CARRIER');
-    final carriersCount = _gameField.cells
-        .where((c) => c.nation == _myNation && c.units.isNotEmpty)
-        .map((c) => c.units.count((u) => u.type == UnitType.carrier))
-        .sum;
+    final busyCarriersIds = _transfersStorage.allTransfers
+        .where((t) => t.selectedCarrierId != null)
+        .map((t) => t.selectedCarrierId);
 
-    Logger.info(
-      'Carriers count: $carriersCount; Total transfers: ${_transfersStorage.totalTransfers}',
-      tag: 'CARRIER',
+    final List<Tuple2<Carrier, GameFieldCellRead>> freeCarriersCells = _gameField.cells
+        .where((c) => c.nation == _myNation && c.units.isNotEmpty)
+        .expand((c) => c.units
+            .where((u) => u.type == UnitType.carrier && !busyCarriersIds.contains(u.id))
+            .map((u) => Tuple2(u as Carrier , c)))
+        .toList(growable: false);
+
+    final calculator = CarriersTargetCalculatorBrief(
+      gameField: _gameField,
+      myNation: _myNation,
+      metadata: _metadata,
     );
 
-    // We've got free carriers
-    if (carriersCount > _transfersStorage.totalTransfers) {
-      final totalTransfers = _transfersStorage.totalTransfers;
-      for (var i=0; i < carriersCount - totalTransfers; i++) {
-        final target = CarriersTargetCalculatorBrief(
-          gameField: _gameField,
-          myNation: _myNation,
-          metadata: _metadata,
-        ).getTarget();
+    for (var freeCarrier in freeCarriersCells) {
+      final targetCell = calculator.getTarget(freeCarrier.item2);
 
-        Logger.info('Target is: $target', tag: 'CARRIER');
+      Logger.info('Target is: $targetCell', tag: 'CARRIER');
 
-        // And have a target for them
-        if (target != null) {
-          Logger.info('New transfer is added', tag: 'CARRIER');
-          _transfersStorage.addNewTransfer(targetCell: target);
-        }
+      // And have a target for them
+      if (targetCell != null) {
+        Logger.info('New transfer is added', tag: 'CARRIER');
+        _transfersStorage.addNewTransfer(
+          targetCell: targetCell,
+          selectedCarrier: freeCarrier.item1,
+        );
       }
     }
 

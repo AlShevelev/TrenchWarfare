@@ -24,6 +24,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
   late PlayerActions _actions;
 
   final List<_TroopTransfer> _troopTransfers = [];
+
   int get totalTransfers => _troopTransfers.length;
 
   final MapMetadataRead _metadata;
@@ -58,7 +59,10 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
     }
   }
 
-  void addNewTransfer({required GameFieldCellRead targetCell}) {
+  void addNewTransfer({
+    required GameFieldCellRead targetCell,
+    required Carrier selectedCarrier,
+  }) {
     final transfer = _TroopTransfer(
       targetCell: targetCell,
       transfersStorage: this,
@@ -66,6 +70,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
       myNation: _myNation,
       actions: _actions,
       metadata: _metadata,
+      selectedCarrier: selectedCarrier,
     );
     _troopTransfers.add(transfer);
   }

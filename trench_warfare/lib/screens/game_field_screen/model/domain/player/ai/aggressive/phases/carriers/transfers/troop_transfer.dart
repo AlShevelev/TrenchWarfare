@@ -88,6 +88,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
     required Nation myNation,
     required PlayerActions actions,
     required MapMetadataRead metadata,
+    required Carrier selectedCarrier,
   })  : _targetCell = targetCell,
         _transfersStorage = transfersStorage,
         _gameField = gameField,
@@ -95,7 +96,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
         _actions = actions,
         _metadata = metadata,
         _id = RandomGen.generateId(),
-        _currentState = _StateInit();
+        _currentState = _StateInit(selectedCarrier: selectedCarrier);
 
   _TroopTransfer.fromSaving({
     required TroopTransferReadForSaving saving,
@@ -110,7 +111,9 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
         _id = saving.id,
         _metadata = metadata {
     _currentState = switch (saving.stateAlias) {
-      _StateInit._stateAlias => _StateInit(),
+      _StateInit._stateAlias => _StateInit(
+          selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
+      ),
       _StateGathering._stateAlias => _StateGathering(
           selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
           landingPoint: saving.landingPoint!,
@@ -177,6 +180,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
 
   _TroopTransferTransition _getTransition() => switch (_currentState) {
         _StateInit() => _InitTransition(
+          state: _currentState as _StateInit,
             transferTargetCell: _targetCell,
             actions: _actions,
             gameField: _gameField,
@@ -230,7 +234,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
     final currentState = _currentState;
 
     return switch (currentState) {
-      _StateInit() => null,
+      _StateInit() => currentState.selectedCarrier.id,
       _StateGathering() => currentState.selectedCarrier.id,
       _StateLoadingToCarrier() => currentState.selectedCarrier.id,
       _StateTransporting() => currentState.selectedCarrier.id,

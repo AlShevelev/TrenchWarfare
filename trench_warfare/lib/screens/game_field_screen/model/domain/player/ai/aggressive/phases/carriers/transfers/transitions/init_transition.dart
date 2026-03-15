@@ -11,6 +11,8 @@
 part of carriers_phase_library;
 
 class _InitTransition extends _TroopTransferTransition {
+  final _StateInit _state;
+
   final GameFieldCellRead _transferTargetCell;
 
   final CarrierTroopTransfersStorageRead _transfersStorage;
@@ -18,6 +20,7 @@ class _InitTransition extends _TroopTransferTransition {
   final String _myTransferId;
 
   _InitTransition({
+    required _StateInit state,
     required GameFieldCellRead transferTargetCell,
     required super.actions,
     required super.gameField,
@@ -25,21 +28,15 @@ class _InitTransition extends _TroopTransferTransition {
     required CarrierTroopTransfersStorageRead transfersStorage,
     required String myTransferId,
     required super.pathFacade,
-  })  : _transferTargetCell = transferTargetCell,
+  })  : _state = state,
+        _transferTargetCell = transferTargetCell,
         _transfersStorage = transfersStorage,
         _myTransferId = myTransferId;
 
   @override
   Future<_TransitionResult> process() async {
-    final freeCarriers = _getFreeCarriers();
-
-    // If we haven't got a free carrier - we are powerless to do anything
-    if (freeCarriers.isEmpty) {
-      Logger.info('INIT_TRANSITION: return. carrierPath.isEmpty', tag: 'CARRIER');
-      return _TransitionResult.completed();
-    }
-
-    final selectedCarrier = _selectCarrier(freeCarriers);
+    final selectedCarrierCell = _gameField.getCellWithUnit(_state.selectedCarrier, _myNation);
+    final selectedCarrier = Tuple2<Carrier, GameFieldCellRead>(_state.selectedCarrier, selectedCarrierCell!);
 
     // The landing point calculation
     final landingPoint = _calculateLandingPoint(selectedCarrier);
@@ -87,46 +84,6 @@ class _InitTransition extends _TroopTransferTransition {
             canContinue: true,
           );
   }
-
-  /// return a list of free (unused in other transportations) carriers
-  /// as a list of cells and values
-  List<Tuple2<Carrier, GameFieldCellRead>> _getFreeCarriers() {
-    var allMyCarries = <Tuple2<Carrier, GameFieldCellRead>>[];
-
-    final busyCarrierId = _transfersStorage
-        .getAllTransfersExcept(_myTransferId)
-        .where((t) => !t.isCompleted)
-        .map((t) => t.selectedCarrierId)
-        .where((id) => id != null)
-        .toList(growable: false);
-
-    for (final cell in _gameField.cells) {
-      if (cell.nation == _myNation && cell.units.isNotEmpty) {
-        allMyCarries.addAll(
-          cell.units
-              .where((u) => u.type == UnitType.carrier && !busyCarrierId.contains(u.id))
-              .map((u) => Tuple2(u as Carrier, cell)),
-        );
-      }
-    }
-
-    return allMyCarries;
-  }
-
-  Tuple2<Carrier, GameFieldCellRead> _selectCarrier(
-    List<Tuple2<Carrier, GameFieldCellRead>> freeCarriers,
-  ) =>
-      freeCarriers
-          .map(
-            (c) => Tuple2(
-              c,
-              UnitPowerEstimation.estimate(c.item1) *
-                  (1.0 / _gameField.calculateDistance(_transferTargetCell, c.item2)),
-            ),
-          )
-          .sorted((i1, i2) => i1.item2.compareTo(i2.item2))
-          .last
-          .item1;
 
   LandingPoint? _calculateLandingPoint(Tuple2<Carrier, GameFieldCellRead> selectedCarrierOnCell) {
     final selectedCarrier = selectedCarrierOnCell.item1;

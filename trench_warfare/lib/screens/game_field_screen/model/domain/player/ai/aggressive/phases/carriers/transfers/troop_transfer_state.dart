@@ -17,7 +17,12 @@ sealed class _TroopTransferState {
 }
 
 class _StateInit extends _TroopTransferState {
+  final Carrier selectedCarrier;
+
+  _StateInit({required this.selectedCarrier});
+
   static const _stateAlias = 'INIT';
+
   @override
   String get stateAlias => _stateAlias;
 

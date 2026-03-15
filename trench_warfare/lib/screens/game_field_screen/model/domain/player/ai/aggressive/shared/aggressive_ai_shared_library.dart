@@ -25,6 +25,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/domain/unit_updat
 import 'package:trench_warfare/shared/architecture/async_signal.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
+import 'package:trench_warfare/shared/utils/random_gen.dart';
 
 part 'carriers_target_calculator_brief.dart';
 part 'carriers_target_calculator_full.dart';
