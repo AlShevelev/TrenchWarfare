@@ -20,6 +20,7 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
   LandPathCostCalculator(
     super.sourcePath, {
     required super.calculatedUnit,
+    required super.settings,
     Carrier? calculatedCarrier,
   }) : _calculatedCarrier = calculatedCarrier;
 
@@ -32,9 +33,11 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
         continue;
       }
 
-      final moveToCellCost = getMoveToCellCost(cell);
+      final isLast = cell == _sourcePath.last;
 
-      if (mustResetMovementPoints(cell) && movementPointsLeft > moveToCellCost) {
+      final moveToCellCost = getMoveToCellCost(cell, isLast: isLast);
+
+      if (mustResetMovementPoints(cell, isLast: isLast) && movementPointsLeft > moveToCellCost) {
         movementPointsLeft = 0;
       } else {
         movementPointsLeft -= moveToCellCost;
@@ -45,7 +48,7 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
   }
 
   @override
-  PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
+  PathItemType getPathItemType(GameFieldCell nextCell, {required bool isLast}) {
     if (isMineField(nextCell)) {
       _explosionOrBattlePathItemExists = true;
       return PathItemType.explosion;
@@ -58,6 +61,11 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
     if (isBattleCell(nextCell)) {
       _explosionOrBattlePathItemExists = true;
       return PathItemType.battle;
+    }
+
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      _explosionOrBattlePathItemExists = true;
+      return PathItemType.battleNextUnreachableCell;
     }
 
     if (_calculatedCarrier != null && !_unloadUnitPathItemExists && !_explosionOrBattlePathItemExists) {
@@ -73,8 +81,13 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
   }
 
   // rivers (without bridges), enemy trench, enemy barbed wire (except tanks), carriers
+  // & when an unreachable cell is attacked by our artillery
   @override
-  bool mustResetMovementPoints(GameFieldCell nextCell) {
+  bool mustResetMovementPoints(GameFieldCell nextCell, {required bool isLast}) {
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return true;
+    }
+
     if (nextCell.hasRiver && !nextCell.hasRoad) {
       return true;
     }
@@ -83,7 +96,7 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
       return true;
     }
 
-    if (nextCell.nation != nation) {
+    if (nextCell.nation != myNation) {
       if (nextCell.terrainModifier?.type == TerrainModifierType.trench) {
         return true;
       }
@@ -103,7 +116,7 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
 
   // terrain & units, what else?
   @override
-  double getMoveToCellCost(GameFieldCell nextCell) {
+  double getMoveToCellCost(GameFieldCell nextCell, {required bool isLast}) {
     if (nextCell.hasRoad) {
       return 1;
     }
@@ -116,7 +129,7 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
       return 1;
     }
 
-    return switch (nextCell.terrain) {
+    final cost = switch (nextCell.terrain) {
       CellTerrain.plain => 1,
       CellTerrain.wood => switch (_calculatedUnit.type) {
           UnitType.infantry => 1.25,
@@ -169,12 +182,18 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
           _ => double.maxFinite,
         },
       _ => double.maxFinite,
-    } * GameConstants.landMovementSpeedFactor;
+    };
+
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 0;
+    }
+
+    return cost * GameConstants.landMovementSpeedFactor;
   }
 
   @protected
   bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.landMine;
 
   @protected
-  bool _isMyCarrier(GameFieldCell cell) => cell.nation == nation && cell.activeUnit is Carrier;
+  bool _isMyCarrier(GameFieldCell cell) => cell.nation == myNation && cell.activeUnit is Carrier;
 }

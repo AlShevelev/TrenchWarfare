@@ -19,12 +19,17 @@ abstract class PathCostCalculatorBase implements PathCostCalculator {
   late final _calculatedPath = _sourcePath.map((c) => c as GameFieldCell).toList(growable: false);
 
   @protected
-  Nation get nation => _sourcePath.first.nation!;
+  Nation get myNation => _sourcePath.first.nation!;
+
+  @protected
+  final FindPathSettings _settings;
 
   PathCostCalculatorBase(
-      Iterable<GameFieldCellRead> sourcePath, {
-        required Unit calculatedUnit,
-      })  : _sourcePath = sourcePath,
+    Iterable<GameFieldCellRead> sourcePath, {
+    required Unit calculatedUnit,
+    required FindPathSettings settings,
+  })  : _sourcePath = sourcePath,
+        _settings = settings,
         _calculatedUnit = calculatedUnit;
 
   @override
@@ -43,12 +48,14 @@ abstract class PathCostCalculatorBase implements PathCostCalculator {
         continue;
       }
 
-      final pathItemType = getPathItemType(cell, cell == _sourcePath.last);
+      final isLast = cell == _sourcePath.last;
 
-      if (mustResetMovementPoints(cell) && movementPointsLeft > 0) {
+      final pathItemType = getPathItemType(cell, isLast: isLast);
+
+      if (mustResetMovementPoints(cell, isLast: isLast) && movementPointsLeft > 0) {
         movementPointsLeft = 0;
       } else {
-        movementPointsLeft -= getMoveToCellCost(cell);
+        movementPointsLeft -= getMoveToCellCost(cell, isLast: isLast);
       }
 
       cell.setPathItem(PathItem(
@@ -67,18 +74,18 @@ abstract class PathCostCalculatorBase implements PathCostCalculator {
   bool isEndOfPathReachable();
 
   @protected
-  PathItemType getPathItemType(GameFieldCell nextCell, bool isLast);
+  PathItemType getPathItemType(GameFieldCell nextCell, {required bool isLast});
 
   @protected
-  bool mustResetMovementPoints(GameFieldCell nextCell);
+  bool mustResetMovementPoints(GameFieldCell nextCell, {required bool isLast});
 
   @protected
-  double getMoveToCellCost(GameFieldCell nextCell);
+  double getMoveToCellCost(GameFieldCell nextCell, {required bool isLast});
 
   @protected
   bool mustDeactivateNextPath(GameFieldCell nextCell);
 
   @protected
   bool isBattleCell(GameFieldCell cell) =>
-      _calculatedUnit.type != UnitType.carrier && cell.activeUnit != null && cell.nation != nation;
+      _calculatedUnit.type != UnitType.carrier && cell.activeUnit != null && cell.nation != myNation;
 }

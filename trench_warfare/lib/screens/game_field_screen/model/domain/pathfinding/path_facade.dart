@@ -144,10 +144,6 @@ class PathFacade {
       return UnreachableCellPathSettings();
     }
 
-    if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
-      return NextCellPathSettings();
-    }
-
     if (calculatedUnit.isLand) {
       return LandFindPathSettings(
         startCell: startCell,
@@ -180,14 +176,11 @@ class PathFacade {
     required GameFieldCellRead startCell,
     required GameFieldCellRead endCell,
   }) {
-    if (_checkBattleNextUnreachableCellConditions(calculatedUnit, startCell, endCell)) {
-      return NextCellPathCostCalculator(path);
-    }
-
     if (calculatedUnit.isLand) {
       return LandPathCostCalculator(
         path,
         calculatedUnit: calculatedUnit,
+        settings: _getFindPathSettings(calculatedUnit, startCell: startCell, endCell: endCell),
       );
     }
 
@@ -196,11 +189,16 @@ class PathFacade {
       return LandPathCostCalculator(
         path,
         calculatedUnit: calculatedCarrier.activeUnit!,
+        settings: _getFindPathSettings(calculatedUnit, startCell: startCell, endCell: endCell),
         calculatedCarrier: calculatedCarrier,
       );
     }
 
-    return SeaPathCostCalculator(path, calculatedUnit: calculatedUnit);
+    return SeaPathCostCalculator(
+      path,
+      calculatedUnit: calculatedUnit,
+      settings: _getFindPathSettings(calculatedUnit, startCell: startCell, endCell: endCell),
+    );
   }
 
   bool _checkUnloadConditions(Unit calculatedUnit, GameFieldCellRead endCell) =>
@@ -213,41 +211,4 @@ class PathFacade {
           endCell.terrain == CellTerrain.sand ||
           endCell.terrain == CellTerrain.hills ||
           endCell.terrain == CellTerrain.snow);
-
-  bool _checkBattleNextUnreachableCellConditions(
-    Unit calculatedUnit,
-    GameFieldCellRead startCell,
-    GameFieldCellRead endCell,
-  ) {
-    if (endCell.nation == startCell.nation ||
-        endCell.activeUnit == null ||
-        !calculatedUnit.hasArtillery ||
-        !_gameField.findCellsAround(startCell).contains(endCell)) {
-      return false;
-    }
-
-    if (calculatedUnit.isLand && startCell.isLand) {
-      return !LandFindPathSettings.isCellReachableStatic(
-        calculatedUnit.type,
-        _myNation,
-        _metadata,
-        startCell: startCell,
-        cell: endCell,
-      );
-    }
-
-    if (!calculatedUnit.isLand) {
-      if (!startCell.isLand || (startCell.isLand && startCell.hasRiver)) {
-        return !SeaFindPathSettings.isCellReachableStatic(
-          calculatedUnit.type,
-          _myNation,
-          _metadata,
-          startCell: startCell,
-          cell: endCell,
-        );
-      }
-    }
-
-    return false;
-  }
 }

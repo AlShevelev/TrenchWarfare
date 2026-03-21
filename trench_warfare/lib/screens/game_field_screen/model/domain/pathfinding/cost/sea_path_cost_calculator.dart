@@ -15,6 +15,7 @@ class SeaPathCostCalculator extends PathCostCalculatorBase {
   SeaPathCostCalculator(
     super.sourcePath, {
     required super.calculatedUnit,
+    required super.settings,
   });
 
   @override
@@ -26,10 +27,14 @@ class SeaPathCostCalculator extends PathCostCalculatorBase {
         continue;
       }
 
-      if (mustResetMovementPoints(cell) && movementPointsLeft > 0) {
+      final isLast = cell == _sourcePath.last;
+
+      final moveToCellCost = getMoveToCellCost(cell, isLast: isLast);
+
+      if (mustResetMovementPoints(cell, isLast: isLast) && movementPointsLeft > moveToCellCost) {
         movementPointsLeft = 0;
       } else {
-        movementPointsLeft -= getMoveToCellCost(cell);
+        movementPointsLeft -= moveToCellCost;
       }
     }
 
@@ -37,13 +42,17 @@ class SeaPathCostCalculator extends PathCostCalculatorBase {
   }
 
   @override
-  PathItemType getPathItemType(GameFieldCell nextCell, bool isLast) {
+  PathItemType getPathItemType(GameFieldCell nextCell, {required bool isLast}) {
     if (isMineField(nextCell)) {
       return PathItemType.explosion;
     }
 
     if (isBattleCell(nextCell)) {
       return PathItemType.battle;
+    }
+
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return PathItemType.battleNextUnreachableCell;
     }
 
     if (isLast) {
@@ -54,13 +63,25 @@ class SeaPathCostCalculator extends PathCostCalculatorBase {
   }
 
   @override
-  bool mustResetMovementPoints(GameFieldCell nextCell) => false;
+  bool mustResetMovementPoints(GameFieldCell nextCell, {required bool isLast}) {
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return true;
+    }
+
+    return false;
+  }
 
   @override
   bool mustDeactivateNextPath(GameFieldCell nextCell) => isMineField(nextCell) || isBattleCell(nextCell);
 
   @override
-  double getMoveToCellCost(GameFieldCell nextCell) => 1;
+  double getMoveToCellCost(GameFieldCell nextCell, {required bool isLast}) {
+    if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 0;
+    }
+
+    return 1;
+  }
 
   @protected
   bool isMineField(GameFieldCell cell) => cell.terrainModifier?.type == TerrainModifierType.seaMine;

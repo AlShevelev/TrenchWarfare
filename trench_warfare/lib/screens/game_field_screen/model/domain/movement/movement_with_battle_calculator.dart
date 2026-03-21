@@ -139,8 +139,9 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
 
       _updateUnit(detachResult.unit, (battleResult.attackingUnit as Alive).info);
 
-      final newAttackingUnitCell =
-          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
+      final newAttackingUnitCell = path.last.pathItem?.type == PathItemType.battleNextUnreachableCell
+          ? attackingCell
+          : (battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell);
 
       newAttackingUnitCell.setNation(_myNation);
 
@@ -209,8 +210,9 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
 
-      final newAttackingUnitCell =
-          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
+      final newAttackingUnitCell = path.last.pathItem?.type == PathItemType.battleNextUnreachableCell
+          ? attackingCell
+          : (battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell);
 
       newAttackingUnitCell.setNation(_myNation);
 
@@ -359,7 +361,6 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       priorCell = cell;
     }
 
-
     final damageEvents = calculateDamageEvents(
       attackingCell: attackingCell,
       defendingCell: defendingCell,
@@ -369,7 +370,6 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
       animationTime: _animationTime,
     );
     updateEvents.addAll(damageEvents);
-
 
     // Remove the attacking troop as a separate unit
     updateEvents.add(RemoveUntiedUnit(attackingUnit));

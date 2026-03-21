@@ -75,7 +75,8 @@ class MovementFacade {
               unitUpdateResultBridge: _unitUpdateResultBridge,
               pathFacade: _pathFacade,
             )
-          : activePathItems.any((e) => e.type == PathItemType.battle)
+          : activePathItems.any(
+                  (e) => e.type == PathItemType.battle || e.type == PathItemType.battleNextUnreachableCell)
               ? MovementWithBattleCalculator(
                   myNation: _myNation,
                   humanNation: _humanNation,
@@ -86,27 +87,16 @@ class MovementFacade {
                   unitUpdateResultBridge: _unitUpdateResultBridge,
                   pathFacade: _pathFacade,
                 )
-              : activePathItems.any((e) => e.type == PathItemType.battleNextUnreachableCell)
-                  ? MovementWithBattleNextUnreachableCell(
-                      myNation: _myNation,
-                      humanNation: _humanNation,
-                      gameField: _gameField,
-                      updateGameObjectsEvent: _updateGameObjectsEvent,
-                      gameOverConditionsCalculator: _gameOverConditionsCalculator,
-                      animationTime: _animationTime,
-                      unitUpdateResultBridge: _unitUpdateResultBridge,
-                      pathFacade: _pathFacade,
-                    )
-                  : MovementWithoutObstaclesCalculator(
-                      myNation: _myNation,
-                      humanNation: _humanNation,
-                      gameField: _gameField,
-                      updateGameObjectsEvent: _updateGameObjectsEvent,
-                      gameOverConditionsCalculator: _gameOverConditionsCalculator,
-                      animationTime: _animationTime,
-                      unitUpdateResultBridge: _unitUpdateResultBridge,
-                      pathFacade: _pathFacade,
-                    );
+              : MovementWithoutObstaclesCalculator(
+                  myNation: _myNation,
+                  humanNation: _humanNation,
+                  gameField: _gameField,
+                  updateGameObjectsEvent: _updateGameObjectsEvent,
+                  gameOverConditionsCalculator: _gameOverConditionsCalculator,
+                  animationTime: _animationTime,
+                  unitUpdateResultBridge: _unitUpdateResultBridge,
+                  pathFacade: _pathFacade,
+                );
     }
 
     return calculator.startMovement(path);

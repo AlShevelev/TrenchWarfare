@@ -16,4 +16,7 @@ class UnreachableCellPathSettings implements FindPathSettings {
 
   @override
   bool isCellReachable(GameFieldCellRead cell) => false;
+
+  @override
+  bool isUnreachableEnemyCellReachableForArtilleryStrike(GameFieldCellRead nextCell) => false;
 }

@@ -33,6 +33,10 @@ class LandFindPathSettings implements FindPathSettings {
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
+    if (isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 1;
+    }
+
     if (!isCellReachable(nextCell)) {
       return null;
     }
@@ -90,33 +94,20 @@ class LandFindPathSettings implements FindPathSettings {
   }
 
   @override
-  bool isCellReachable(GameFieldCellRead cell) => LandFindPathSettings.isCellReachableStatic(
-        _unitType,
-        _myNation,
-        _metadata,
-        startCell: _startCell,
-        cell: cell,
-      );
-
-  static bool isCellReachableStatic(
-    UnitType unit,
-    Nation myNation,
-    MapMetadataRead metadata, {
-    required GameFieldCellRead startCell,
-    required GameFieldCellRead cell,
-  }) {
-    if (metadata.isAlly(myNation, cell.nation) && (cell.units.isNotEmpty || cell.productionCenter != null)) {
+  bool isCellReachable(GameFieldCellRead cell) {
+    if (_metadata.isAlly(_myNation, cell.nation) &&
+        (cell.units.isNotEmpty || cell.productionCenter != null)) {
       return false;
     }
 
     if (cell.activeUnit is Carrier) {
-      return _isCellReachableCarrier(cell: cell, startCell: startCell);
+      return _isCellReachableCarrier(cell: cell, startCell: _startCell);
     } else {
-      return _isCellReachableLand(unit, startCell: startCell, cell: cell);
+      return _isCellReachableLand(_unitType, startCell: _startCell, cell: cell);
     }
   }
 
-  static bool _isCellReachableLand(
+  bool _isCellReachableLand(
     UnitType unit, {
     required GameFieldCellRead startCell,
     required GameFieldCellRead cell,
@@ -157,7 +148,7 @@ class LandFindPathSettings implements FindPathSettings {
     return true;
   }
 
-  static bool _isCellReachableCarrier({
+  bool _isCellReachableCarrier({
     required GameFieldCellRead startCell,
     required GameFieldCellRead cell,
   }) {
@@ -168,6 +159,23 @@ class LandFindPathSettings implements FindPathSettings {
     }
 
     return carrier.hasPlaceForUnit;
+  }
+
+  @override
+  bool isUnreachableEnemyCellReachableForArtilleryStrike(GameFieldCellRead nextCell) {
+    if (nextCell.nation == _startCell.nation || _metadata.isAlly(_myNation, nextCell.nation)) {
+      return false; // Not an enemy cell
+    }
+
+    if (nextCell.activeUnit == null) {
+      return false; // No unit to attack
+    }
+
+    if (!_unit.hasArtillery) {
+      return false; // Our unit doesn't have artillery
+    }
+
+    return !isCellReachable(nextCell);
   }
 
   double? _calculateForTerrain(GameFieldCellRead nextCell) {

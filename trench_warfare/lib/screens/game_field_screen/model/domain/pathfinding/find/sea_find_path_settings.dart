@@ -33,6 +33,10 @@ class SeaFindPathSettings implements FindPathSettings {
 
   @override
   double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
+    if (isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 1;
+    }
+
     if (!isCellReachable(nextCell)) {
       return null;
     }
@@ -51,42 +55,44 @@ class SeaFindPathSettings implements FindPathSettings {
   }
 
   @override
-  bool isCellReachable(GameFieldCellRead cell) => SeaFindPathSettings.isCellReachableStatic(
-        _unitType,
-        _myNation,
-        _metadata,
-        cell: cell,
-        startCell: _startCell,
-      );
-
-  static bool canContainSeaUnit(GameFieldCellRead cell) => !(cell.isLand && !cell.hasRiver);
-
-  static bool isCellReachableStatic(
-    UnitType calculatedUnitType,
-    Nation myNation,
-    MapMetadataRead metadata, {
-    required GameFieldCellRead startCell,
-    required GameFieldCellRead cell,
-  }) {
+  bool isCellReachable(GameFieldCellRead cell) {
     if (cell.isLand && !cell.hasRiver) {
       return false;
     }
 
-    if (cell.nation == startCell.nation && cell.units.length == GameConstants.maxUnitsInCell) {
+    if (cell.nation == _startCell.nation && cell.units.length == GameConstants.maxUnitsInCell) {
       return false;
     }
 
-    if (calculatedUnitType == UnitType.carrier &&
-        cell.activeUnit != null &&
-        startCell.nation != cell.nation) {
+    if (_unitType == UnitType.carrier && cell.activeUnit != null && _startCell.nation != cell.nation) {
       return false;
     }
 
-    if (metadata.isAlly(myNation, cell.nation) && (cell.units.isNotEmpty || cell.productionCenter != null)) {
+    if (_metadata.isAlly(_myNation, cell.nation) &&
+        (cell.units.isNotEmpty || cell.productionCenter != null)) {
       return false;
     }
 
     return true;
+  }
+
+  static bool canContainSeaUnit(GameFieldCellRead cell) => !(cell.isLand && !cell.hasRiver);
+
+  @override
+  bool isUnreachableEnemyCellReachableForArtilleryStrike(GameFieldCellRead nextCell) {
+    if (nextCell.nation == _startCell.nation || _metadata.isAlly(_myNation, nextCell.nation)) {
+      return false; // Not an enemy cell
+    }
+
+    if (nextCell.activeUnit == null) {
+      return false; // No unit to attack
+    }
+
+    if (!_unit.hasArtillery) {
+      return false; // Our unit doesn't have artillery
+    }
+
+    return !isCellReachable(nextCell);
   }
 
   double _getMineFactor() {

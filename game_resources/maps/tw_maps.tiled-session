@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
+    "activeFile": "tiles/test/10x10_attack_unreachable_unit_land.tmx",
     "expandedProjectPaths": [
-        "tiles/game_objects/atlas",
-        ".",
         "tiles/templates",
+        "tiles/templates/units",
+        "tiles/test",
+        "tiles/game_objects/templates",
+        "tiles",
+        "tiles/game_objects/atlas",
+        "tiles/real",
         "tiles_source_metadata",
         "tiles/help",
-        "tiles/test",
-        "tiles",
-        "tiles/templates/units",
-        "tiles/real/europe",
-        "tiles/game_objects/templates",
         "tiles/game_objects",
-        "tiles/real"
+        "tiles/real/europe",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -207,8 +207,8 @@
         },
         "tiles/real/europe/brusilov_offensive.tmx": {
             "expandedObjectLayers": [
-                5,
-                3
+                3,
+                5
             ],
             "scale": 0.3636,
             "selectedLayer": 3,
@@ -321,6 +321,31 @@
         },
         "tiles/test/10x10_ai_protect_pc_check.tmx#terrain_atlas": {
             "scaleInDock": 0.65
+        },
+        "tiles/test/10x10_attack_unreachable_unit_land.tmx": {
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 1.0904929577464788,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 177.9011947045528,
+                "y": 366.34807878592187
+            }
+        },
+        "tiles/test/10x10_attack_unreachable_unit_land.tmx#terrain_atlas": {
+            "scaleInDock": 0.6586
+        },
+        "tiles/test/10x10_disable_attacking_unit.tmx": {
+            "scale": 1.0904929577464788,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 267.76880852437847,
+                "y": 372.76719405876656
+            }
+        },
+        "tiles/test/10x10_disable_attacking_unit.tmx#terrain_atlas": {
+            "scaleInDock": 0.5958
         },
         "tiles/test/10x10_disble_attacking_unit.tmx": {
             "scale": 0.8921,
@@ -1213,12 +1238,15 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/brusilov_offensive.tmx"
+        "tiles/test/10x10_attack_unreachable_unit_land.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "tiles/test/10x10_attack_unreachable_unit_land.tmx",
+        "tiles/test/15x15_balance_general.tmx",
+        "tiles/test/10x10_ai_protect_pc_check.tmx",
+        "tiles/test/10x10_disable_attacking_unit.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
@@ -1226,11 +1254,7 @@
         "tiles/real/europe/battle_of_passchendaele.tmx",
         "tiles/test/10x10_land_fort_checking.tmx",
         "tiles/real/europe/battle_of_tannenburg.tmx",
-        "tiles/real/europe/the_first_battle_of_the_somme.tmx",
-        "tiles/real/europe/battle_of_verdun.tmx",
-        "tiles/test/15x15_mines.tmx",
-        "tiles/test/15x15_sounds.tmx",
-        "tiles/test/10x10_is_defence.tmx"
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
