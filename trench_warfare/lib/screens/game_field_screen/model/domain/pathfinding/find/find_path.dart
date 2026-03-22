@@ -45,7 +45,9 @@ class FindPath {
     _gScore.clear();
     _fScore.clear();
 
-    if (startCell == endCell || !_settings.isCellReachable(endCell)) {
+    if (startCell == endCell ||
+        (!_settings.isCellReachable(endCell) &&
+            !_settings.isUnreachableEnemyCellReachableForArtilleryStrike(endCell))) {
       return List<GameFieldCell>.empty();
     }
 
@@ -56,7 +58,7 @@ class FindPath {
 
     while (_open.isNotEmpty) {
       final currentIndex = _getOpenCellWithMinFIndex();
-      final current =  _open[currentIndex];
+      final current = _open[currentIndex];
 
       if (current == endCell) {
         return _reconstructPath(current);
@@ -96,7 +98,7 @@ class FindPath {
   /// Calculates the H part of the F factor
   /// In our case it is a Euclidean distance between the cells
   double _calculateHFactor(GameFieldCellRead givenCell, GameFieldCellRead finalCell) =>
-    _gameField.calculateDistance(givenCell, finalCell);
+      _gameField.calculateDistance(givenCell, finalCell);
 
   int _getOpenCellWithMinFIndex() {
     var minF = double.maxFinite;
