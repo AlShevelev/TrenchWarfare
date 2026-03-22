@@ -5,18 +5,18 @@
     },
     "activeFile": "tiles/test/10x10_attack_unreachable_unit_land.tmx",
     "expandedProjectPaths": [
+        "tiles/real/europe",
+        "tiles",
+        "tiles/game_objects",
+        "tiles/templates",
+        "tiles/real",
+        "tiles/game_objects/templates",
+        "tiles/test",
+        ".",
         "tiles/templates/units",
         "tiles/game_objects/atlas",
-        ".",
-        "tiles/game_objects/templates",
-        "tiles/templates",
-        "tiles/real/europe",
-        "tiles_source_metadata",
-        "tiles/real",
-        "tiles/game_objects",
-        "tiles",
         "tiles/help",
-        "tiles/test"
+        "tiles_source_metadata"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -326,11 +326,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 1.0904929577464788,
+            "scale": 1.203,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 254.01356151113984,
-                "y": 405.77978689053924
+                "x": 162.0947630922693,
+                "y": 153.3665835411471
             }
         },
         "tiles/test/10x10_attack_unreachable_unit_land.tmx#terrain_atlas": {

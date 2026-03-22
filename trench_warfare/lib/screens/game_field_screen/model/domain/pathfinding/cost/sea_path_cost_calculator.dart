@@ -47,12 +47,12 @@ class SeaPathCostCalculator extends PathCostCalculatorBase {
       return PathItemType.explosion;
     }
 
-    if (isBattleCell(nextCell)) {
-      return PathItemType.battle;
-    }
-
     if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
       return PathItemType.battleNextUnreachableCell;
+    }
+
+    if (isBattleCell(nextCell)) {
+      return PathItemType.battle;
     }
 
     if (isLast) {
