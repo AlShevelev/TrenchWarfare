@@ -58,14 +58,14 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
       return PathItemType.loadUnit;
     }
 
-    if (isBattleCell(nextCell)) {
-      _explosionOrBattlePathItemExists = true;
-      return PathItemType.battle;
-    }
-
     if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
       _explosionOrBattlePathItemExists = true;
       return PathItemType.battleNextUnreachableCell;
+    }
+
+    if (isBattleCell(nextCell)) {
+      _explosionOrBattlePathItemExists = true;
+      return PathItemType.battle;
     }
 
     if (_calculatedCarrier != null && !_unloadUnitPathItemExists && !_explosionOrBattlePathItemExists) {
