@@ -32,8 +32,12 @@ class SeaFindPathSettings implements FindPathSettings {
         _metadata = metadata;
 
   @override
-  double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell) {
-    if (isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+  double? calculateGFactorHeuristic({
+    required GameFieldCellRead priorCell,
+    required GameFieldCellRead nextCell,
+    required GameFieldCellRead lastCell,
+  }) {
+    if (nextCell == lastCell && isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
       return 1;
     }
 

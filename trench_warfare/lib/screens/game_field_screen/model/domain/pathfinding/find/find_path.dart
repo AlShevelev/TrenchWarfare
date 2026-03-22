@@ -13,7 +13,11 @@ part of pathfinding;
 /// Calculations for the G part of the F factor
 abstract class FindPathSettings {
   /// Null value means the [nextCell] is unreachable
-  double? calculateGFactorHeuristic(GameFieldCellRead priorCell, GameFieldCellRead nextCell);
+  double? calculateGFactorHeuristic({
+    required GameFieldCellRead priorCell,
+    required GameFieldCellRead nextCell,
+    required GameFieldCellRead lastCell,
+  });
 
   bool isCellReachable(GameFieldCellRead cell);
 
@@ -69,7 +73,11 @@ class FindPath {
       final neighbors = _gameField.findCellsAround(current);
 
       for (var neighbor in neighbors) {
-        final nextGScope = _settings.calculateGFactorHeuristic(current, neighbor);
+        final nextGScope = _settings.calculateGFactorHeuristic(
+          priorCell: current,
+          nextCell: neighbor,
+          lastCell: endCell,
+        );
 
         // An unreachable cell must be skipped
         if (nextGScope == null) {
