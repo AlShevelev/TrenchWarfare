@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/test/10x10_attack_unreachable_unit_land.tmx",
+    "activeFile": "tiles/real/europe/battle_of_verdun.tmx",
     "expandedProjectPaths": [
-        "tiles/real/europe",
-        "tiles",
-        "tiles/game_objects",
         "tiles/templates",
+        "tiles",
         "tiles/real",
-        "tiles/game_objects/templates",
-        "tiles/test",
-        ".",
         "tiles/templates/units",
-        "tiles/game_objects/atlas",
         "tiles/help",
-        "tiles_source_metadata"
+        ".",
+        "tiles/game_objects/templates",
+        "tiles/game_objects",
+        "tiles_source_metadata",
+        "tiles/test",
+        "tiles/game_objects/atlas",
+        "tiles/real/europe"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -192,11 +192,11 @@
                 4,
                 5
             ],
-            "scale": 0.4262,
+            "scale": 1.1411,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 696.855936180197,
-                "y": 655.7954012200846
+                "x": 455.7006397335904,
+                "y": 1007.3613180264657
             }
         },
         "tiles/real/europe/battle_of_verdun.tmx#TempBackground": {
@@ -322,6 +322,32 @@
         "tiles/test/10x10_ai_protect_pc_check.tmx#terrain_atlas": {
             "scaleInDock": 0.65
         },
+        "tiles/test/10x10_attack_unreachable_unit.tmx": {
+            "scale": 0.9148767605633802,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 277.6330222264986,
+                "y": 304.41258539401525
+            }
+        },
+        "tiles/test/10x10_attack_unreachable_unit.tmx#terrain_atlas": {
+            "scaleInDock": 1
+        },
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx": {
+            "expandedObjectLayers": [
+                2,
+                3
+            ],
+            "scale": 1.0670774647887322,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 187.42781719188253,
+                "y": 477.4723642963208
+            }
+        },
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx#terrain_atlas": {
+            "scaleInDock": 0.6248
+        },
         "tiles/test/10x10_attack_unreachable_unit_land.tmx": {
             "expandedObjectLayers": [
                 3
@@ -329,8 +355,8 @@
             "scale": 1.203,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 162.0947630922693,
-                "y": 153.3665835411471
+                "x": 277.2236076475478,
+                "y": 297.173732335827
             }
         },
         "tiles/test/10x10_attack_unreachable_unit_land.tmx#terrain_atlas": {
@@ -1238,11 +1264,15 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/test/10x10_attack_unreachable_unit_land.tmx"
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
+        "tiles/real/europe/battle_of_verdun.tmx"
     ],
     "project": "tw_maps.tiled-project",
-    "property.type": "string",
+    "property.type": "bool",
     "recentFiles": [
+        "tiles/real/europe/battle_of_verdun.tmx",
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
+        "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",
         "tiles/test/15x15_balance_general.tmx",
         "tiles/test/10x10_ai_protect_pc_check.tmx",
@@ -1251,10 +1281,7 @@
         "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
         "tiles/real/europe/german_spring_offensive.tmx",
-        "tiles/real/europe/battle_of_passchendaele.tmx",
-        "tiles/test/10x10_land_fort_checking.tmx",
-        "tiles/real/europe/battle_of_tannenburg.tmx",
-        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
+        "tiles/real/europe/battle_of_passchendaele.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
