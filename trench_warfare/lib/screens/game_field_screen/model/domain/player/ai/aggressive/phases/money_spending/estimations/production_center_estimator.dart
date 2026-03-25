@@ -43,7 +43,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
       };
 
   double get _maxFractionCellWithPCs => switch (_type) {
-        ProductionCenterType.navalBase => 0.05,
+        ProductionCenterType.navalBase => 0.025,
         ProductionCenterType.city => 0.1,
         ProductionCenterType.factory => 0.1,
         _ => 0.0,
@@ -118,7 +118,7 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
     }
     Logger.info('_ProductionCenterEstimator: estimate() allOurCells are calculated', tag: 'MONEY_SPENDING');
 
-    // We don't need too many production centers.
+    // We don't need too many production centers - but we can try to update our current PCs
     if (allOurCellsWithPC.length.toDouble() / allOurCellsCount > _maxFractionCellWithPCs) {
       final pcWithoutMaxLevel = allOurCellsWithPC
           .where((c) =>
