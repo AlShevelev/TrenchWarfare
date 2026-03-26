@@ -10,6 +10,7 @@
 
 library aggressive_ai_shared_library;
 
+import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';

@@ -44,7 +44,8 @@ class CarriersTargetCalculatorBrief {
 
     // Calculates the distances weights between an enemy PC and the carrier
     for (final enemyPcCell in allEnemyPcCells) {
-      distances.add(10.0 / _gameField.calculateDistance(carrierCell, enemyPcCell));
+      final d = 10.0 / _gameField.calculateDistance(carrierCell, enemyPcCell);
+      distances.add(math.pow(d, 3.0).toDouble());
     }
 
     final selectedIndex = RandomGen.randomWeight(distances);
