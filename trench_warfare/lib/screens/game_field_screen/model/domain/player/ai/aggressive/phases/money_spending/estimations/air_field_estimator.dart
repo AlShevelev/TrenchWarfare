@@ -29,7 +29,11 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
   final MapMetadataRead _metadata;
 
+  // How many free cells we've got for one PC
   static const _maxFractionCellWithPCs = 90;
+
+  // We can't build production centers too close to each other (within this radius) - it's not effective
+  static const _maxRadiusWithoutSamePCType = 2;
 
   static const _type = ProductionCenterType.airField;
 
@@ -118,6 +122,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
 
     Logger.info('_AirFieldEstimator: estimate() ready to calculate weightedCells', tag: 'MONEY_SPENDING');
     final List<({GameFieldCellRead cell, double weight})> weightedCells = [];
+
     for (final cellCandidateToBuild in allSafeCells) {
       var cellWithEnemyUnitsTotal = 0;
       var enemyCellsTotal = 0;
@@ -126,11 +131,20 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
           ? GameConstants.flechettesRadius
           : GameConstants.airBombardmentRadius;
 
+      var myPCNearby = false;
       // Calculates possible enemies inside a battle radius
       for (var i = 1; i <= battleRadius; i++) {
+        final allCellsAround = _gameField.findCellsAroundR(cellCandidateToBuild, radius: i);
+
+        if (battleRadius <= _maxRadiusWithoutSamePCType) {
+          if (allCellsAround.any((c) => c.nation == _myNation && c.productionCenter?.type == _type)) {
+            myPCNearby = true;
+            break;
+          }
+        }
+
         // All enemy cells with units
-        final allEnemyCellsAround = _gameField
-            .findCellsAroundR(cellCandidateToBuild, radius: i)
+        final allEnemyCellsAround = allCellsAround
             .where((c) => allEnemies.contains(c.nation))
             .toList(growable: false);
 
@@ -138,7 +152,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
         cellWithEnemyUnitsTotal += allEnemyCellsAround.where((c) => c.units.isNotEmpty).length;
       }
 
-      final weight = enemyCellsTotal == 0 ? 0.0 : cellWithEnemyUnitsTotal / enemyCellsTotal;
+      final weight = enemyCellsTotal == 0 || myPCNearby ? 0.0 : cellWithEnemyUnitsTotal / enemyCellsTotal;
       weightedCells.add((cell: cellCandidateToBuild, weight: weight));
     }
 

@@ -47,7 +47,10 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
         ProductionCenterType.city => 0.1,
         ProductionCenterType.factory => 0.1,
         _ => 0.0,
-  };
+      };
+
+  // We can't build production centers too close to each other (within this radius) - it's not effective
+  static const _maxRadiusWithoutSamePCType = 2;
 
   _ProductionCenterEstimator({
     required GameFieldRead gameField,
@@ -76,7 +79,8 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
     // We can't build shit
     if (allCellsPossibleToBuild.isEmpty) {
-      Logger.info('_ProductionCenterEstimator: estimate() completed [allCellsPossibleToBuild.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_ProductionCenterEstimator: estimate() completed [allCellsPossibleToBuild.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -96,7 +100,8 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
 
     // It's a dangerous time, we shouldn't build production centers in a moment
     if (allSafeCells.isEmpty) {
-      Logger.info('_ProductionCenterEstimator [$_type]: estimate() completed [allSafeCells.isEmpty]', tag: 'MONEY_SPENDING');
+      Logger.info('_ProductionCenterEstimator [$_type]: estimate() completed [allSafeCells.isEmpty]',
+          tag: 'MONEY_SPENDING');
       return [];
     }
 
@@ -134,25 +139,44 @@ class _ProductionCenterEstimator extends Estimator<_ProductionCenterEstimationDa
       }
     }
 
-    var resultWeight = allOurCellsWithPC.isEmpty
-        ? 100.0
-        : ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
+    final List<({GameFieldCellRead cell, double weight})> weightedCells = [];
+    for (final cellCandidateToBuild in allSafeCells) {
+      var myPCNearby = false;
+      for (var radius = 1; radius <= _maxRadiusWithoutSamePCType; radius++) {
+        final nearbyCells = _gameField.findCellsAroundR(cellCandidateToBuild, radius: radius);
+        if (nearbyCells.any((c) => c.nation == _myNation && c.productionCenter?.type == _type)) {
+          myPCNearby = true;
+          break;
+        }
+      }
 
-    resultWeight *= switch (_type) {
-      ProductionCenterType.city => getCityBuildBalancedFactor(_nationMoney),
-      ProductionCenterType.factory => getFactoryBuildBalancedFactor(_nationMoney),
-      _ => 1
-    };
+      if (myPCNearby) { // We shouldn't build PCs too close to each other - it's not effective
+        weightedCells.add((cell: cellCandidateToBuild, weight: 0.0));
+      } else {
+        var weight = allOurCellsWithPC.isEmpty
+            ? 100.0
+            : ((math.sqrt(allOurCellsCount.toDouble() / allOurCellsWithPC.length) - 1) / _correctionFactor);
 
-    resultWeight += 1;
+        weight *= switch (_type) {
+          ProductionCenterType.city => getCityBuildBalancedFactor(_nationMoney),
+          ProductionCenterType.factory => getFactoryBuildBalancedFactor(_nationMoney),
+          _ => 1
+        };
+
+        weight += 1;
+
+        weightedCells.add((cell: cellCandidateToBuild, weight: weight));
+      }
+    }
 
     Logger.info('_ProductionCenterEstimator: estimate() ready to calculate a result', tag: 'MONEY_SPENDING');
 
-    final result = allSafeCells
+    final result = weightedCells
+        .where((c) => c.weight != 0)
         .map((c) => EstimationResult<_ProductionCenterEstimationData>(
-              weight: resultWeight,
+              weight: c.weight,
               data: _ProductionCenterEstimationData(
-                cell: c,
+                cell: c.cell,
                 type: _type,
               ),
             ))
