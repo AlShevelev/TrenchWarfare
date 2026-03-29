@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
+    "activeFile": "tiles/test/10x10_withdraw_from_fort.tmx",
     "expandedProjectPaths": [
-        "tiles_source_metadata",
-        "tiles",
-        "tiles/templates",
-        "tiles/help",
         "tiles/templates/units",
-        "tiles/real/europe",
+        "tiles_source_metadata",
         "tiles/real",
-        "tiles/test",
-        "tiles/game_objects/atlas",
-        ".",
         "tiles/game_objects/templates",
-        "tiles/game_objects"
+        "tiles/templates",
+        "tiles/game_objects/atlas",
+        "tiles/game_objects",
+        "tiles/help",
+        "tiles/real/europe",
+        "tiles/test",
+        "tiles",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -242,8 +242,8 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 0.6401,
             "selectedLayer": 3,
@@ -423,6 +423,17 @@
         },
         "tiles/test/10x10_land_fort_checking.tmx#terrain_atlas": {
             "scaleInDock": 0.5246
+        },
+        "tiles/test/10x10_withdraw_from_fort.tmx": {
+            "scale": 1.0670774647887322,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 320.50156739811916,
+                "y": 449.35819171753843
+            }
+        },
+        "tiles/test/10x10_withdraw_from_fort.tmx#terrain_atlas": {
+            "scaleInDock": 1
         },
         "tiles/test/15x15_balance_general.tmx": {
             "expandedObjectLayers": [
@@ -1264,11 +1275,12 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx"
+        "tiles/test/10x10_withdraw_from_fort.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "tiles/test/10x10_withdraw_from_fort.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
@@ -1279,8 +1291,7 @@
         "tiles/test/10x10_disable_attacking_unit.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
-        "tiles/real/europe/german_spring_offensive.tmx",
-        "tiles/real/europe/battle_of_passchendaele.tmx"
+        "tiles/real/europe/german_spring_offensive.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,

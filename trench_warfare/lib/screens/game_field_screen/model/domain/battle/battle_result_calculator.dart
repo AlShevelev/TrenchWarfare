@@ -56,16 +56,18 @@ class BattleResultCalculator {
     }
 
     if (battleResult.attacking is Alive && battleResult.defending is Died) {
-      final canBeCaptured = _canBeCaptured(defendingCell: defendingCell);
+      final canBeCaptured = _cellCanBeCaptured(defendingCell: defendingCell);
+      final canLeaveCell = _canLeaveCell(attackingCell: attackingCell);
+      final isCaptured = canBeCaptured && canLeaveCell;
 
       return BattleResult(
         attackingUnit: battleResult.attacking,
         defendingUnit: battleResult.defending,
-        attackingUnitCellId: canBeCaptured ? defendingCell.id : attackingCell.id,
+        attackingUnitCellId: isCaptured ? defendingCell.id : attackingCell.id,
         defendingUnitCellId: null,
-        isDefendingCellTerrainModifierDestroyed: canBeCaptured && defendingCell.terrainModifier != null,
+        isDefendingCellTerrainModifierDestroyed: isCaptured && defendingCell.terrainModifier != null,
         defendingCellProductionCenterNewLevel:
-            canBeCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
+            isCaptured ? _getProductionCenterLevelForCapturedCell(defendingCell) : null,
       );
     }
 
@@ -82,9 +84,11 @@ class BattleResultCalculator {
 
     if (battleResult.attacking is Alive && battleResult.defending is InPanic) {
       final cellIdToWithdraw = _getCellToWithdraw((battleResult.defending as InPanic).info, defendingCell);
-      final canBeCaptured = _canBeCaptured(defendingCell: defendingCell);
 
-      final isCaptured = cellIdToWithdraw != null && canBeCaptured;
+      final canBeCaptured = _cellCanBeCaptured(defendingCell: defendingCell);
+      final canLeaveCell = _canLeaveCell(attackingCell: attackingCell);
+
+      final isCaptured = cellIdToWithdraw != null && canBeCaptured && canLeaveCell;
 
       return BattleResult(
         attackingUnit: battleResult.attacking,
@@ -100,7 +104,12 @@ class BattleResultCalculator {
     throw UnsupportedError('This case is not supported');
   }
 
-  int? _getCellToWithdraw(UnitInBattle unit, GameFieldCell cell) {
+  int? _getCellToWithdraw(UnitInBattle unit, GameFieldCell defendingCell) {
+    // We can leave a fort
+    if (defendingCell.terrainModifier?.type == TerrainModifierType.landFort) {
+      return null;
+    }
+
     final willTryToWithdraw = switch (unit.experienceRank) {
       UnitExperienceRank.rookies => RandomGen.randomDouble(0, 1) >= 0.2,
       UnitExperienceRank.fighters => RandomGen.randomDouble(0, 1) >= 0.4,
@@ -113,11 +122,11 @@ class BattleResultCalculator {
       return null;
     }
 
-    final allCellsAround = _pathFacade.getCellsAround(cell);
+    final allCellsAround = _pathFacade.getCellsAround(defendingCell);
 
     return allCellsAround
-        .where((c) => c.nation == cell.nation)
-        .where((c) => _haveTheSameType(c, cell))
+        .where((c) => c.nation == defendingCell.nation)
+        .where((c) => _haveTheSameType(c, defendingCell))
         .where((c) => !_haveMinefield(c))
         .where((c) => c.units.length < GameConstants.maxUnitsInCell)
         .firstOrNull
@@ -131,12 +140,16 @@ class BattleResultCalculator {
       cell.terrainModifier?.type == TerrainModifierType.landMine ||
       cell.terrainModifier?.type == TerrainModifierType.seaMine;
 
-  bool _canBeCaptured({required GameFieldCell defendingCell}) {
+  bool _cellCanBeCaptured({required GameFieldCell defendingCell}) {
     if (defendingCell.pathItem?.type == PathItemType.battleNextUnreachableCell) {
       return false;
     }
 
     return defendingCell.units.length == 1;
+  }
+
+  bool _canLeaveCell({required GameFieldCell attackingCell}) {
+    return attackingCell.terrainModifier?.type != TerrainModifierType.landFort;
   }
 
   ProductionCenterLevel? _getProductionCenterLevelForCapturedCell(GameFieldCell cell) =>
