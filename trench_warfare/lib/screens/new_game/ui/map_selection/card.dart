@@ -96,7 +96,7 @@ class _Card extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(2, 0, 2, 10),
                         child: Text(
                           _card.description[locale]!,
-                          style: AppTypography.s14w400,
+                          style: AppTypography.s18w400,
                           textAlign: TextAlign.justify,
                         ),
                       ),

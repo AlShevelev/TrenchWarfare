@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/battle_of_verdun.tmx",
+    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
     "expandedProjectPaths": [
-        "tiles/templates",
-        "tiles",
-        "tiles/real",
-        "tiles/templates/units",
-        "tiles/help",
-        ".",
-        "tiles/game_objects/templates",
-        "tiles/game_objects",
         "tiles_source_metadata",
+        "tiles",
+        "tiles/templates",
+        "tiles/help",
+        "tiles/templates/units",
+        "tiles/real/europe",
+        "tiles/real",
         "tiles/test",
         "tiles/game_objects/atlas",
-        "tiles/real/europe"
+        ".",
+        "tiles/game_objects/templates",
+        "tiles/game_objects"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -189,14 +189,14 @@
         },
         "tiles/real/europe/battle_of_verdun.tmx": {
             "expandedObjectLayers": [
-                4,
-                5
+                5,
+                4
             ],
-            "scale": 1.1411,
+            "scale": 0.5638,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 455.7006397335904,
-                "y": 1007.3613180264657
+                "x": 500.17736786094355,
+                "y": 1013.6573252926569
             }
         },
         "tiles/real/europe/battle_of_verdun.tmx#TempBackground": {
@@ -242,21 +242,21 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
-            "scale": 0.8384,
+            "scale": 0.6401,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 703.7213740458014,
-                "y": 1393.726145038168
+                "x": 81.23730667083271,
+                "y": 760.0374941415404
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
             "scaleInDock": 1
         },
         "tiles/real/europe/gallipoli_campaign.tmx#terrain_atlas": {
-            "scaleInDock": 0.6156
+            "scaleInDock": 0.5931
         },
         "tiles/real/europe/german_spring_offensive.tmx": {
             "expandedObjectLayers": [
@@ -341,7 +341,7 @@
             "scale": 1.0670774647887322,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 187.42781719188253,
+                "x": 18.742781719188258,
                 "y": 477.4723642963208
             }
         },
@@ -1264,21 +1264,20 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
-        "tiles/real/europe/battle_of_verdun.tmx"
+        "tiles/real/europe/gallipoli_campaign.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "tiles/real/europe/battle_of_verdun.tmx",
+        "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
+        "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",
         "tiles/test/15x15_balance_general.tmx",
         "tiles/test/10x10_ai_protect_pc_check.tmx",
         "tiles/test/10x10_disable_attacking_unit.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
-        "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
         "tiles/real/europe/german_spring_offensive.tmx",
         "tiles/real/europe/battle_of_passchendaele.tmx"
