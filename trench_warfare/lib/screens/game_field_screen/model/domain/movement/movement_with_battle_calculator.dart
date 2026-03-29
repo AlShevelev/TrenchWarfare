@@ -139,9 +139,8 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
 
       _updateUnit(detachResult.unit, (battleResult.attackingUnit as Alive).info);
 
-      final newAttackingUnitCell = path.last.pathItem?.type == PathItemType.battleNextUnreachableCell
-          ? attackingCell
-          : (battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell);
+      final newAttackingUnitCell =
+          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
 
       newAttackingUnitCell.setNation(_myNation);
 
@@ -210,9 +209,8 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
         newDefendingUnitCell.addUnitAsActive(defendingCell.removeActiveUnit());
       }
 
-      final newAttackingUnitCell = path.last.pathItem?.type == PathItemType.battleNextUnreachableCell
-          ? attackingCell
-          : (battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell);
+      final newAttackingUnitCell =
+          battleResult.attackingUnitCellId == attackingCell.id ? attackingCell : defendingCell;
 
       newAttackingUnitCell.setNation(_myNation);
 

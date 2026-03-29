@@ -56,7 +56,7 @@ class BattleResultCalculator {
     }
 
     if (battleResult.attacking is Alive && battleResult.defending is Died) {
-      final canBeCaptured = _canBeCaptured(defendingCell);
+      final canBeCaptured = _canBeCaptured(defendingCell: defendingCell);
 
       return BattleResult(
         attackingUnit: battleResult.attacking,
@@ -82,7 +82,7 @@ class BattleResultCalculator {
 
     if (battleResult.attacking is Alive && battleResult.defending is InPanic) {
       final cellIdToWithdraw = _getCellToWithdraw((battleResult.defending as InPanic).info, defendingCell);
-      final canBeCaptured = _canBeCaptured(defendingCell);
+      final canBeCaptured = _canBeCaptured(defendingCell: defendingCell);
 
       final isCaptured = cellIdToWithdraw != null && canBeCaptured;
 
@@ -131,7 +131,13 @@ class BattleResultCalculator {
       cell.terrainModifier?.type == TerrainModifierType.landMine ||
       cell.terrainModifier?.type == TerrainModifierType.seaMine;
 
-  bool _canBeCaptured(GameFieldCell cell) => cell.units.length == 1;
+  bool _canBeCaptured({required GameFieldCell defendingCell}) {
+    if (defendingCell.pathItem?.type == PathItemType.battleNextUnreachableCell) {
+      return false;
+    }
+
+    return defendingCell.units.length == 1;
+  }
 
   ProductionCenterLevel? _getProductionCenterLevelForCapturedCell(GameFieldCell cell) =>
       switch (cell.productionCenter?.level) {
