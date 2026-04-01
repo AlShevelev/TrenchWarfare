@@ -22,6 +22,11 @@ abstract class FindPathSettings {
   bool isCellReachable(GameFieldCellRead cell);
 
   bool isUnreachableEnemyCellReachableForArtilleryStrike(GameFieldCellRead nextCell);
+
+  bool isNextUnreachableEnemyCellReachableForFortStrike({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
+  });
 }
 
 /// Looks for a path from one cell to another
@@ -51,7 +56,11 @@ class FindPath {
 
     if (startCell == endCell ||
         (!_settings.isCellReachable(endCell) &&
-            !_settings.isUnreachableEnemyCellReachableForArtilleryStrike(endCell))) {
+            !_settings.isUnreachableEnemyCellReachableForArtilleryStrike(endCell) &&
+            !_settings.isNextUnreachableEnemyCellReachableForFortStrike(
+              startCell: startCell,
+              endCell: endCell,
+            ))) {
       return List<GameFieldCell>.empty();
     }
 

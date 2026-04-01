@@ -63,6 +63,14 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
       return PathItemType.battleNextUnreachableCell;
     }
 
+    if (_settings.isNextUnreachableEnemyCellReachableForFortStrike(
+      startCell: _sourcePath.first,
+      endCell: _sourcePath.last,
+    )) {
+      _explosionOrBattlePathItemExists = true;
+      return PathItemType.battleNextUnreachableCell;
+    }
+
     if (isBattleCell(nextCell)) {
       _explosionOrBattlePathItemExists = true;
       return PathItemType.battle;
@@ -85,6 +93,13 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
   @override
   bool mustResetMovementPoints(GameFieldCell nextCell, {required bool isLast}) {
     if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return true;
+    }
+
+    if (_settings.isNextUnreachableEnemyCellReachableForFortStrike(
+      startCell: _sourcePath.first,
+      endCell: _sourcePath.last,
+    )) {
       return true;
     }
 
@@ -185,6 +200,13 @@ class LandPathCostCalculator extends PathCostCalculatorBase {
     };
 
     if (isLast && _settings.isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 0;
+    }
+
+    if (_settings.isNextUnreachableEnemyCellReachableForFortStrike(
+      startCell: _sourcePath.first,
+      endCell: _sourcePath.last,
+    )) {
       return 0;
     }
 

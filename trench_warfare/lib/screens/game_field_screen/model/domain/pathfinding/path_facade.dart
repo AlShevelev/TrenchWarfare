@@ -150,6 +150,7 @@ class PathFacade {
         calculatedUnit: calculatedUnit,
         myNation: _myNation,
         metadata: _metadata,
+        gameField: _gameField,
       );
     }
 
@@ -159,6 +160,7 @@ class PathFacade {
         calculatedUnit: (calculatedUnit as Carrier).activeUnit!,
         myNation: _myNation,
         metadata: _metadata,
+        gameField: _gameField,
       );
     }
 

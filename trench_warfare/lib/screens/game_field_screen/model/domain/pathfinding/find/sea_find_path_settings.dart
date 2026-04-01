@@ -115,4 +115,10 @@ class SeaFindPathSettings implements FindPathSettings {
 
     return factor;
   }
+
+  @override
+  bool isNextUnreachableEnemyCellReachableForFortStrike({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
+  }) => false;  // There is no land fort on the sea, so this is always false
 }

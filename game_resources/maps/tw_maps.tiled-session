@@ -341,8 +341,8 @@
             "scale": 1.0670774647887322,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 18.742781719188258,
-                "y": 477.4723642963208
+                "x": 270.83319584227024,
+                "y": 435.3011054281472
             }
         },
         "tiles/test/10x10_attack_unreachable_unit_ai.tmx#terrain_atlas": {
@@ -428,7 +428,7 @@
             "scale": 1.0670774647887322,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 320.50156739811916,
+                "x": 151.8165319254249,
                 "y": 449.35819171753843
             }
         },
@@ -1280,9 +1280,9 @@
     "project": "tw_maps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
         "tiles/test/10x10_withdraw_from_fort.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",

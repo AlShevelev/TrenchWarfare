@@ -19,6 +19,8 @@ class LandFindPathSettings implements FindPathSettings {
 
   final MapMetadataRead _metadata;
 
+  final GameFieldRead _gameField;
+
   UnitType get _unitType => _unit.type;
 
   LandFindPathSettings({
@@ -26,10 +28,12 @@ class LandFindPathSettings implements FindPathSettings {
     required Unit calculatedUnit,
     required Nation myNation,
     required MapMetadataRead metadata,
+    required GameFieldRead gameField,
   })  : _startCell = startCell,
         _unit = calculatedUnit,
         _myNation = myNation,
-        _metadata = metadata;
+        _metadata = metadata,
+        _gameField = gameField;
 
   @override
   double? calculateGFactorHeuristic({
@@ -38,6 +42,10 @@ class LandFindPathSettings implements FindPathSettings {
     required GameFieldCellRead lastCell,
   }) {
     if (nextCell == lastCell && isUnreachableEnemyCellReachableForArtilleryStrike(nextCell)) {
+      return 1;
+    }
+
+    if (isNextUnreachableEnemyCellReachableForFortStrike(startCell: _startCell, endCell: lastCell)) {
       return 1;
     }
 
@@ -251,5 +259,31 @@ class LandFindPathSettings implements FindPathSettings {
     }
 
     return factor;
+  }
+
+  @override
+  bool isNextUnreachableEnemyCellReachableForFortStrike({
+    required GameFieldCellRead startCell,
+    required GameFieldCellRead endCell,
+  }) {
+    if (startCell.terrainModifier?.type != TerrainModifierType.landFort) {
+      return false; // Not a fort cell
+    }
+
+    if (endCell.activeUnit == null) {
+      return false; // No unit to attack
+    }
+
+    if (endCell.nation == startCell.nation || _metadata.isAlly(_myNation, endCell.nation)) {
+      return false; // Not an enemy cell
+    }
+
+    final nextCells = _gameField.findCellsAround(startCell);
+    if (!nextCells.contains(endCell)) {
+      return false; // Not a next cell
+    }
+
+
+    return !isCellReachable(endCell);
   }
 }
