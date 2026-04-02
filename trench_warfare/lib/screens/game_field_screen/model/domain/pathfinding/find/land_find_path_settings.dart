@@ -128,7 +128,7 @@ class LandFindPathSettings implements FindPathSettings {
       return false;
     }
 
-    if (cell.nation == startCell.nation! && cell.units.length == GameConstants.maxUnitsInCell) {
+    if (cell.nation == startCell.nation && cell.units.length == GameConstants.maxUnitsInCell) {
       return false;
     }
 
