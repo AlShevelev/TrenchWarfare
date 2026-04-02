@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-down" width="15" height="15" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="2" nextobjectid="18">
  <properties>
-  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Carriers - An enemy PCs are reachable by water only&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;Carriers - An enemy PCs are reachable by water only&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 4000 }, { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 4000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
+  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Carriers - An enemy PCs are reachable by water only&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;Carriers - An enemy PCs are reachable by water only&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: false },  &quot;nations&quot;: [ { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 4000 }, { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 4000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
   <image source="../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
  </tileset>
- <tileset firstgid="65" source="game_objects.tsx"/>
+ <tileset firstgid="73" source="game_objects.tsx"/>
  <layer id="1" name="Terrain" width="15" height="15">
   <data encoding="csv">
 26,26,26,26,26,2,2,2,2,2,26,26,26,26,26,
@@ -46,7 +46,7 @@
 </data>
  </layer>
  <objectgroup id="4" name="GameObjects">
-  <object id="3" name="russia" type="ownership" gid="102" x="276.421" y="411.907" width="64" height="64">
+  <object id="3" name="russia" type="ownership" gid="110" x="276.421" y="411.907" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="14"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -56,7 +56,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="4" name="russia" type="ownership" gid="102" x="59.9378" y="420.213" width="64" height="64">
+  <object id="4" name="russia" type="ownership" gid="110" x="59.9378" y="420.213" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="13"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -66,7 +66,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="5" name="austriaHungary" type="ownership" gid="115" x="773.717" y="393.732" width="64" height="64">
+  <object id="5" name="austriaHungary" type="ownership" gid="123" x="773.717" y="393.732" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="13"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -82,7 +82,7 @@
   <object id="7" name="austriaHungary" type="ownershipRegion" x="835.787" y="13.1146" visible="0">
    <polygon points="0,0 -5.37435,974.253 -380.235,962.723 -378.891,-3.84321"/>
   </object>
-  <object id="8" name="russia" type="ownership" gid="102" x="109.798" y="197.568" width="64" height="64">
+  <object id="8" name="russia" type="ownership" gid="110" x="109.798" y="197.568" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -92,7 +92,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="9" name="russia" type="ownership" gid="102" x="119.539" y="519.568" width="64" height="64">
+  <object id="9" name="russia" type="ownership" gid="110" x="119.539" y="519.568" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -102,7 +102,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="10" name="russia" type="ownership" gid="102" x="165.292" y="671.912" width="64" height="64">
+  <object id="10" name="russia" type="ownership" gid="110" x="165.292" y="671.912" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -112,7 +112,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="11" name="russia" type="ownership" gid="102" x="62.9201" y="293.128" width="64" height="64">
+  <object id="11" name="russia" type="ownership" gid="110" x="62.9201" y="293.128" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -122,17 +122,17 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="13" name="level1" type="city" gid="80" x="424.349" y="-61.447" width="64" height="64">
+  <object id="13" name="level1" type="city" gid="88" x="424.349" y="-61.447" width="64" height="64">
    <properties>
     <property name="name" value=""/>
    </properties>
   </object>
-  <object id="14" name="level1" type="navalBase" gid="71" x="498.588" y="-60.6081" width="64" height="64">
+  <object id="14" name="level1" type="navalBase" gid="79" x="498.588" y="-60.6081" width="64" height="64">
    <properties>
     <property name="name" value=""/>
    </properties>
   </object>
-  <object id="15" name="infantry" type="unit" gid="91" x="269.564" y="-41.6759" width="64" height="64">
+  <object id="15" name="infantry" type="unit" gid="99" x="269.564" y="-41.6759" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -143,12 +143,12 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="16" name="level2" type="airField" gid="75" x="593.525" y="-55.353" width="64" height="64">
+  <object id="16" name="level2" type="airField" gid="83" x="593.525" y="-55.353" width="64" height="64">
    <properties>
     <property name="name" value=""/>
    </properties>
   </object>
-  <object id="17" name="austriaHungary" type="ownership" gid="115" x="551.916" y="326.781" width="64" height="64">
+  <object id="17" name="austriaHungary" type="ownership" gid="123" x="551.916" y="326.781" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="16"/>
     <property name="terrainModifier" type="object" value="0"/>

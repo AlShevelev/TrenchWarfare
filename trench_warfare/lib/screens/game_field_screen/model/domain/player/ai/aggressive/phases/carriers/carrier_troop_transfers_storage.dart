@@ -41,13 +41,21 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
         _myNation = myNation,
         _metadata = metadata {
     for (final initialTransfer in initialTransfers) {
-      _troopTransfers.add(_TroopTransfer.fromSaving(
-        saving: initialTransfer,
-        transfersStorage: this,
-        gameField: gameField,
-        myNation: myNation,
-        metadata: metadata,
-      ));
+      try {
+        _troopTransfers.add(_TroopTransfer.fromSaving(
+          saving: initialTransfer,
+          transfersStorage: this,
+          gameField: gameField,
+          myNation: myNation,
+          metadata: metadata,
+        ));
+      } catch(ex, s) {
+        // An error is possible while transfer state restoration
+        // A typical example, when an AI carrier was destroyed during a human turn.
+        // Therefore, we can't restore a transfer ana must skip it.
+        // But we need to log the error for debugging purposes.
+        Logger.error(ex.toString(), exception: ex, stackTrace: s);
+      }
     }
   }
 

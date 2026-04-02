@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/test/10x10_withdraw_from_fort.tmx",
+    "activeFile": "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
     "expandedProjectPaths": [
-        "tiles/templates/units",
-        "tiles_source_metadata",
-        "tiles/real",
-        "tiles/game_objects/templates",
-        "tiles/templates",
         "tiles/game_objects/atlas",
-        "tiles/game_objects",
         "tiles/help",
+        "tiles/game_objects",
         "tiles/real/europe",
-        "tiles/test",
+        "tiles_source_metadata",
+        "tiles/game_objects/templates",
         "tiles",
-        "."
+        "tiles/templates",
+        "tiles/real",
+        "tiles/templates/units",
+        ".",
+        "tiles/test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -242,8 +242,8 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
             "scale": 0.6401,
             "selectedLayer": 3,
@@ -324,10 +324,10 @@
         },
         "tiles/test/10x10_attack_unreachable_unit.tmx": {
             "scale": 0.9148767605633802,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 277.6330222264986,
-                "y": 304.41258539401525
+                "x": 292.93562975079385,
+                "y": 426.8334455883769
             }
         },
         "tiles/test/10x10_attack_unreachable_unit.tmx#terrain_atlas": {
@@ -428,7 +428,7 @@
             "scale": 1.0670774647887322,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 151.8165319254249,
+                "x": 151.81653192542484,
                 "y": 449.35819171753843
             }
         },
@@ -450,11 +450,14 @@
             "scaleInDock": 1
         },
         "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 0.5994959677419355,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 448.7102740877754,
-                "y": 381.1535227845973
+                "x": 467.0590213553052,
+                "y": 352.79636791659664
             }
         },
         "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx#terrain_atlas": {
@@ -1275,23 +1278,24 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/test/10x10_withdraw_from_fort.tmx"
+        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
+        "tiles/real/europe/gallipoli_campaign.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
-        "tiles/test/10x10_withdraw_from_fort.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/battle_of_verdun.tmx",
+        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
+        "tiles/test/10x10_withdraw_from_fort.tmx",
         "tiles/test/10x10_attack_unreachable_unit.tmx",
+        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
+        "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",
         "tiles/test/15x15_balance_general.tmx",
         "tiles/test/10x10_ai_protect_pc_check.tmx",
         "tiles/test/10x10_disable_attacking_unit.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
-        "tiles/real/europe/first_battle_of_the_marne.tmx",
-        "tiles/real/europe/german_spring_offensive.tmx"
+        "tiles/real/europe/first_battle_of_the_marne.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
