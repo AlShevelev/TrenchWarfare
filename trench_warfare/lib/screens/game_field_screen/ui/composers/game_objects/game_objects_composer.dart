@@ -60,6 +60,9 @@ class GameObjectsComposer {
     Logger.debug('Root game objects total: ${_mapComponent.children.length}', tag: 'GAME_OBJ_TOTAL');
 
     switch (event) {
+      case UpdateCellWithDebugInfo(cell: var cell):
+        await _updateCellWithDebugInfo(cell);
+
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         await _updateCell(cell, updateBorderCells);
 
@@ -102,6 +105,13 @@ class GameObjectsComposer {
     }
   }
 
+  Future<void> _updateCellWithDebugInfo(GameFieldCellRead cell) async {
+    await _addGameObject(
+      GameObjectDebug(cell: cell),
+      _getCellComponentDebugKey(cell),
+    );
+  }
+
   Future<void> _updateCell(GameFieldCellRead cell, Iterable<GameFieldCellRead> updateBorderCells) async {
     _removeGameObject(_getCellComponentKey(cell));
 
@@ -110,27 +120,29 @@ class GameObjectsComposer {
 
       if (GameObjectCell.needToDrawCell(updateBorderCell, _gameField)) {
         await _addGameObject(
-            GameObjectCell(
-              _spritesAtlas,
-              updateBorderCell,
-              _viewModelInput.isHumanPlayer,
-              _gameField,
-              _locale,
-            ),
-            _getCellComponentKey(updateBorderCell));
+          GameObjectCell(
+            _spritesAtlas,
+            updateBorderCell,
+            _viewModelInput.isHumanPlayer,
+            _gameField,
+            _locale,
+          ),
+          _getCellComponentKey(updateBorderCell),
+        );
       }
     }
 
     if (GameObjectCell.needToDrawCell(cell, _gameField)) {
       await _addGameObject(
-          GameObjectCell(
-            _spritesAtlas,
-            cell,
-            _viewModelInput.isHumanPlayer,
-            _gameField,
-            _locale,
-          ),
-          _getCellComponentKey(cell));
+        GameObjectCell(
+          _spritesAtlas,
+          cell,
+          _viewModelInput.isHumanPlayer,
+          _gameField,
+          _locale,
+        ),
+        _getCellComponentKey(cell),
+      );
     }
   }
 
@@ -258,4 +270,6 @@ class GameObjectsComposer {
   String _getCellComponentKey(GameFieldCellRead cell) => '${cell.id}_cell';
 
   String _getInactivityComponentKey(GameFieldCellRead cell) => '${cell.id}_inactive';
+
+  String _getCellComponentDebugKey(GameFieldCellRead cell) => '${cell.id}_cell_debug';
 }

@@ -10,8 +10,6 @@
 
 library game_field_components;
 
-import 'dart:ui' as ui;
-import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flame/palette.dart';
@@ -38,6 +36,7 @@ part 'animation_frame_to_frame_component.dart';
 part 'game_cell_border.dart';
 part 'game_cell_inactive.dart';
 part 'game_object_component_base.dart';
+part 'game_object_debug.dart';
 part 'game_object_cell.dart';
 part 'game_object_untied_unit.dart';
 part 'snapshot_component.dart';
