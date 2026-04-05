@@ -11,41 +11,29 @@
 part of game_field_components;
 
 class GameObjectDebug extends PositionComponent {
-  final GameFieldCellRead _cell;
+  final GameFieldRead _gameField;
 
-  GameObjectDebug({
-    required GameFieldCellRead cell,
-  }) : _cell = cell {
+  GameObjectDebug(GameFieldRead gameField) : _gameField = gameField {
     priority = 1000;
   }
 
   @override
   void render(Canvas canvas) {
-    _paintText(
-      canvas,
-      '${_cell.row};${_cell.col}\n${_cell.id}',
-      fontSize: 12,
+    const textStyle = TextStyle(
       color: AppColors.white,
       backgroundColor: AppColors.black,
+      fontWeight: FontWeight.w700,
+      fontSize: 12,
     );
+
+    for (final cell in _gameField.cells) {
+      _paintText(canvas, cell, textStyle);
+    }
   }
 
-  void _paintText(
-    Canvas canvas,
-    String text, {
-    required double fontSize,
-    required Color color,
-    required Color backgroundColor,
-  }) {
-    final textStyle = TextStyle(
-      color: color,
-      backgroundColor: backgroundColor,
-      fontWeight: FontWeight.w700,
-      fontSize: fontSize,
-    );
-
+  void _paintText(Canvas canvas, GameFieldCellRead cell, TextStyle textStyle) {
     final textSpan = TextSpan(
-      text: text,
+      text: '${cell.row};${cell.col}\n${cell.id}',
       style: textStyle,
     );
 
@@ -57,8 +45,8 @@ class GameObjectDebug extends PositionComponent {
     textPainter.layout();
 
     final offset = Offset(
-      _cell.center.x - textPainter.width / 2,
-      _cell.center.y - textPainter.height / 2,
+      cell.center.x - textPainter.width / 2,
+      cell.center.y - textPainter.height / 2,
     );
 
     textPainter.paint(canvas, offset);
