@@ -19,9 +19,9 @@ class GameObjectDebug extends PositionComponent {
 
   @override
   void render(Canvas canvas) {
-    const textStyle = TextStyle(
-      color: AppColors.white,
-      backgroundColor: AppColors.black,
+    final textStyle = TextStyle(
+      color: AppColors.white.withOpacity(0.5),
+      backgroundColor: AppColors.black.withOpacity(0.5),
       fontWeight: FontWeight.w700,
       fontSize: 12,
     );
@@ -33,7 +33,7 @@ class GameObjectDebug extends PositionComponent {
 
   void _paintText(Canvas canvas, GameFieldCellRead cell, TextStyle textStyle) {
     final textSpan = TextSpan(
-      text: '${cell.row};${cell.col}\n${cell.id}',
+      text: '${cell.row};${cell.col};${cell.id}',
       style: textStyle,
     );
 
