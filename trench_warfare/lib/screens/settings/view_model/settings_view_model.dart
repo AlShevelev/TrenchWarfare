@@ -26,6 +26,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
         humanUnitsSpeed: _state?.myUnitsSpeed ?? SettingsConstants.defaultHumanUnitsSpeedValue,
         aiUnitsSpeed: _state?.enemyUnitsSpeed ?? SettingsConstants.defaultAiUnitsSpeedValue,
         showBordersUpdated: _state?.showBorders != _startState?.showBorders,
+        showDebugInfoUpdated: _state?.showDebugInfo != _startState?.showDebugInfo,
       );
 
   _SettingsViewModel() {
@@ -41,6 +42,7 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
       minValue: SettingsConstants.minValue,
       maxValue: SettingsConstants.maxValue,
       showBorders: SettingsStorageFacade.showBorders,
+      showDebugInfo: SettingsStorageFacade.showDebugInfo,
     );
 
     _startState = dataState;
@@ -84,6 +86,12 @@ class _SettingsViewModel extends ViewModelBase implements _SettingsUserActions {
   void onShowBorderUpdated(bool value) {
     _state = _state?.copy(showBorders: value);
     SettingsStorageFacade.setShowBorders(value);
+  }
+
+  @override
+  void onShowDebugInfoUpdated(bool value) {
+    _state = _state?.copy(showDebugInfo: value);
+    SettingsStorageFacade.setShowDebugInfo(value);
   }
 
   @override

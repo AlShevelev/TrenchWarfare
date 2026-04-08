@@ -22,6 +22,7 @@ import 'package:trench_warfare/core/settings_constants.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
 import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
+import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/shared/ui_kit/image_loading.dart';

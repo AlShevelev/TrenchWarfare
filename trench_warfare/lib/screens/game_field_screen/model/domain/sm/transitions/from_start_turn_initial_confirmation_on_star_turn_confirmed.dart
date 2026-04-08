@@ -22,9 +22,9 @@ class FromStartTurnInitialConfirmationOnStarTurnConfirmed {
 
     List<UpdateGameEvent> events = [];
 
-    // if (!Logger.turnedOff) {
-    //   events.add(ShowDebugInfoForCells());
-    // }
+    if (!Logger.turnedOff && SettingsStorageFacade.showDebugInfo) {
+      events.add(ShowDebugInfoForCells(true));
+    }
 
     // A human player turns first, so we can init a game field for the human only
     if (!_context.isAI) {

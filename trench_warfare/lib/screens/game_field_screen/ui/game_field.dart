@@ -289,7 +289,7 @@ class GameField extends FlameGame
 
   @override
   void onSettingsClosed(SettingsResult result) {
-    _viewModel.onSettingsClosed(result.showBordersUpdated);
+    _viewModel.onSettingsClosed(result.showBordersUpdated, result.showDebugInfoUpdated);
     _viewModel.input.onSettingsClosed(result);
   }
 

@@ -46,6 +46,7 @@ import 'package:trench_warfare/screens/game_field_screen/ui/composers/gestures/z
 import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:trench_warfare/shared/utils/range.dart';

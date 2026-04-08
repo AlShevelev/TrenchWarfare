@@ -37,6 +37,8 @@ class _DataIsLoaded extends _SettingsScreenState {
 
   final bool showBorders;
 
+  final bool showDebugInfo;
+
   final double minValue;
 
   final double maxValue;
@@ -49,6 +51,7 @@ class _DataIsLoaded extends _SettingsScreenState {
     required this.minValue,
     required this.maxValue,
     required this.showBorders,
+    required this.showDebugInfo,
   });
 
   _DataIsLoaded copy({
@@ -57,6 +60,7 @@ class _DataIsLoaded extends _SettingsScreenState {
     double? myUnitsSpeed,
     double? enemyUnitsSpeed,
     bool? showBorders,
+    bool? showDebugInfo,
   }) =>
       _DataIsLoaded(
         music: music ?? this.music,
@@ -66,5 +70,6 @@ class _DataIsLoaded extends _SettingsScreenState {
         minValue: minValue,
         maxValue: maxValue,
         showBorders: showBorders ?? this.showBorders,
+        showDebugInfo: showDebugInfo ?? this.showDebugInfo,
       );
 }

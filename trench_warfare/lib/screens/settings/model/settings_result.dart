@@ -25,11 +25,14 @@ class SettingsResult {
 
   final bool showBordersUpdated;
 
+  final bool showDebugInfoUpdated;
+
   SettingsResult({
     required this.music,
     required this.sounds,
     required this.humanUnitsSpeed,
     required this.aiUnitsSpeed,
     required this.showBordersUpdated,
+    required this.showDebugInfoUpdated,
   });
 }

@@ -75,7 +75,11 @@ class GameFieldViewModel extends ViewModelBase implements GameFieldViewModelInpu
     await _model.init(builder: builder);
   }
 
-  void onSettingsClosed(bool showBordersUpdated) => _model.onSettingsClosed(showBordersUpdated);
+  void onSettingsClosed(
+    bool showBordersUpdated,
+    bool showDebugInfoUpdated,
+  ) =>
+      _model.onSettingsClosed(showBordersUpdated, showDebugInfoUpdated);
 
   @override
   void dispose() {

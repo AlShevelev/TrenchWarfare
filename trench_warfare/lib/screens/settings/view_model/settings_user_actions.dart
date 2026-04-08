@@ -22,4 +22,6 @@ abstract interface class _SettingsUserActions {
   void onEnemyUnitsSpeedUpdated(double value);
 
   void onShowBorderUpdated(bool value);
+
+  void onShowDebugInfoUpdated(bool value);
 }

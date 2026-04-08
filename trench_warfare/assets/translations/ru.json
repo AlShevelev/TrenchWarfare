@@ -139,5 +139,6 @@
   "settings_my_units": "Моя скорость",
   "settings_enemy_units": "Скорость противника",
   "settings_title": "Настройки",
-  "settings_show_borders": "Показывать границы"
+  "settings_show_borders": "Показывать границы",
+  "settings_show_debug_info": "Показывать отладочную информацию"
 }

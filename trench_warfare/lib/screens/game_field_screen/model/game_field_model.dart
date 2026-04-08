@@ -34,6 +34,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/game_field_storag
 import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/shared/architecture/disposable.dart';
 import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 abstract interface class GameFieldModelCallback {
@@ -302,9 +303,17 @@ class GameFieldModel implements GameFieldModelCallback, Disposable {
     ).addTroopTransfers(transfers).addMoney(allMoney).save();
   }
 
-  void onSettingsClosed(bool showBordersUpdated) {
+  void onSettingsClosed(bool showBordersUpdated, bool showDebugInfoUpdated,) {
+    final events = <UpdateGameEvent>[];
+
     if (showBordersUpdated) {
-      _updateGameObjectsEvent.update(_gameField.cells.map((cell) => UpdateCell(cell, updateBorderCells: [])));
+      events.addAll(_gameField.cells.map((cell) => UpdateCell(cell, updateBorderCells: [])));
     }
+
+    if (showDebugInfoUpdated) {
+      events.add(ShowDebugInfoForCells(SettingsStorageFacade.showDebugInfo));
+    }
+
+    _updateGameObjectsEvent.update(events);
   }
 }

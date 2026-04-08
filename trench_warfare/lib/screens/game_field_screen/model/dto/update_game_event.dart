@@ -25,7 +25,9 @@ enum DamageType {
 sealed class UpdateGameEvent {}
 
 class ShowDebugInfoForCells implements UpdateGameEvent {
-  ShowDebugInfoForCells();
+  final bool show;
+
+  ShowDebugInfoForCells(this.show);
 }
 
 class UpdateCell implements UpdateGameEvent {

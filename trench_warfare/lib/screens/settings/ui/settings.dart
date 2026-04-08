@@ -185,6 +185,17 @@ class _SettingsState extends State<Settings> with ImageLoading {
               onValueChanged: (value) => _viewModel.onShowBorderUpdated(value),
             ),
           ),
+          if (!Logger.turnedOff)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, paddingBetween),
+              child: SettingsCheckbox(
+                startValue: dataState.showDebugInfo,
+                title: localization.tr('settings_show_debug_info'),
+                checkedIcon: checkedIcon,
+                uncheckedIcon: uncheckedIcon,
+                onValueChanged: (value) => _viewModel.onShowDebugInfoUpdated(value),
+              ),
+            ),
         ],
       ),
     );

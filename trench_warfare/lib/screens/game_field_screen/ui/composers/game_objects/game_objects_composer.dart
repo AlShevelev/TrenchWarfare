@@ -60,8 +60,8 @@ class GameObjectsComposer {
     Logger.debug('Root game objects total: ${_mapComponent.children.length}', tag: 'GAME_OBJ_TOTAL');
 
     switch (event) {
-      case ShowDebugInfoForCells():
-        await _updateCellWithDebugInfo();
+      case ShowDebugInfoForCells(show: var show):
+        await _updateCellWithDebugInfo(show);
 
       case UpdateCell(cell: var cell, updateBorderCells: var updateBorderCells):
         await _updateCell(cell, updateBorderCells);
@@ -105,11 +105,15 @@ class GameObjectsComposer {
     }
   }
 
-  Future<void> _updateCellWithDebugInfo() async {
-    await _addGameObject(
-      GameObjectDebug(_gameField),
-      _getDebugKey(),
-    );
+  Future<void> _updateCellWithDebugInfo(bool show) async {
+    if (show) {
+      await _addGameObject(
+        GameObjectDebug(_gameField),
+        _getDebugKey(),
+      );
+    } else {
+      _removeGameObject(_getDebugKey());
+    }
   }
 
   Future<void> _updateCell(GameFieldCellRead cell, Iterable<GameFieldCellRead> updateBorderCells) async {
