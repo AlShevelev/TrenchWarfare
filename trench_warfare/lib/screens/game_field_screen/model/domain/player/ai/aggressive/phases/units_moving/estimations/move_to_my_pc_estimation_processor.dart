@@ -53,7 +53,7 @@ class _MoveToMyPcEstimationProcessor extends _UnitEstimationProcessorBase {
           final enemyInfluence = _getOpponentsInfluence(influenceCell);
 
           if (enemyInfluence > 0 && enemyInfluence >= myInfluence) {
-            final path = _pathFacade.calculatePath(startCell: _cell, endCell: c);
+            final path = _pathFacade.calculatePathForUnit(startCell: _cell, endCell: c, calculatedUnit: _unit);
             if (path.isEmpty) {
               continue;
             }

@@ -44,9 +44,15 @@ class _CarrierInterceptionEstimationProcessor extends _UnitEstimationProcessorBa
 
     const cellsMax = 3;
 
-    for(final c in _gameField.cells) {
+    for (final c in _gameField.cells) {
       if (c.activeUnit?.type == UnitType.carrier && _isEnemyCell(c)) {
-        final pathLen = _pathFacade.calculatePath(startCell: _cell, endCell: c).length;
+        final pathLen = _pathFacade
+            .calculatePathForUnit(
+              startCell: _cell,
+              endCell: c,
+              calculatedUnit: _unit,
+            )
+            .length;
 
         // Can't reach
         if (pathLen == 0) {

@@ -45,10 +45,14 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
       _gameField.findCellsAroundR(_cell, radius: radius) as List<GameFieldCell>,
     );
 
-    while(cells.isNotEmpty) {
+    while (cells.isNotEmpty) {
       for (final c in cells) {
         if (c.productionCenter != null && _unit.isLand == c.isLand && _isEnemyCell(c)) {
-          final path = _pathFacade.calculatePath(startCell: _cell, endCell: c);
+          final path = _pathFacade.calculatePathForUnit(
+            startCell: _cell,
+            endCell: c,
+            calculatedUnit: _unit,
+          );
           if (path.isEmpty) {
             continue;
           }
@@ -86,7 +90,7 @@ class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   }
 
   double _calculateWeight(GameFieldCellRead cell) {
-    var weight = switch(cell.productionCenter!.level) {
+    var weight = switch (cell.productionCenter!.level) {
       ProductionCenterLevel.level1 => 2.0,
       ProductionCenterLevel.level2 => 4.0,
       ProductionCenterLevel.level3 => 6.0,

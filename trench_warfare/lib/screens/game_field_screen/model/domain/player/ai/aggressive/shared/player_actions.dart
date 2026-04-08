@@ -40,6 +40,7 @@ class PlayerActions {
     if (from.activeUnit != unit) {
       final resortedUnitIds = <String>[unit.id, ...from.units.where((u) => u != unit).map((u) => u.id)];
       resort(from, resortedUnitIds);
+      await Future.delayed(const Duration(milliseconds: _pauseToRedraw));
     }
 
     _player.onClick(from.center); // select a unit...
