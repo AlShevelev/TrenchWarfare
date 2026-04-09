@@ -104,7 +104,7 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
   double _maxMovementPointsToWeight(double maxMovementPoints) =>
       maxMovementPoints > Unit.absoluteMaxMovementPoints
           ? 0.0
-          : math.pow(Unit.absoluteMaxMovementPoints - maxMovementPoints, 3.0).toDouble();
+          : math.pow(Unit.absoluteMaxMovementPoints - maxMovementPoints + 1, 3.0).toDouble();
 
   double _typeFactor(UnitType type) => type == UnitType.artillery || type == UnitType.machineGuns ? 4.0 : 2.0;
 }
