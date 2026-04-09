@@ -33,7 +33,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
   static const _maxFractionCellWithPCs = 90;
 
   // We can't build production centers too close to each other (within this radius) - it's not effective
-  static const _maxRadiusWithoutSamePCType = 2;
+  static const _maxRadiusWithoutSamePCType = 3;
 
   static const _type = ProductionCenterType.airField;
 
@@ -136,7 +136,7 @@ class _AirFieldEstimator extends Estimator<_AirFieldEstimationData> {
       for (var i = 1; i <= battleRadius; i++) {
         final allCellsAround = _gameField.findCellsAroundR(cellCandidateToBuild, radius: i);
 
-        if (battleRadius <= _maxRadiusWithoutSamePCType) {
+        if (i <= _maxRadiusWithoutSamePCType) {
           if (allCellsAround.any((c) => c.nation == _myNation && c.productionCenter?.type == _type)) {
             myPCNearby = true;
             break;
