@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
+    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
     "expandedProjectPaths": [
-        "tiles/game_objects/atlas",
-        "tiles/help",
-        "tiles/game_objects",
-        "tiles/real/europe",
-        "tiles_source_metadata",
-        "tiles/game_objects/templates",
-        "tiles",
-        "tiles/templates",
         "tiles/real",
+        "tiles",
+        "tiles/real/europe",
+        "tiles/game_objects",
+        "tiles/help",
+        "tiles/game_objects/atlas",
+        "tiles/templates",
         "tiles/templates/units",
+        "tiles/game_objects/templates",
         ".",
+        "tiles_source_metadata",
         "tiles/test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -245,11 +245,11 @@
                 3,
                 4
             ],
-            "scale": 0.6401,
-            "selectedLayer": 3,
+            "scale": 1.8715,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 81.23730667083271,
-                "y": 760.0374941415404
+                "x": 503.8738979428266,
+                "y": 1165.1082019770238
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
@@ -456,7 +456,7 @@
             "scale": 0.5994959677419355,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 467.0590213553052,
+                "x": 467.05902135530516,
                 "y": 352.79636791659664
             }
         },
@@ -1278,7 +1278,6 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx"
     ],
     "project": "tw_maps.tiled-project",
