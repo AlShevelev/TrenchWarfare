@@ -8,9 +8,11 @@
  * al.e.shevelev@gmail.com
  */
 
+import 'package:trench_warfare/database/dao/completed_games_dao.dart';
 import 'package:trench_warfare/database/dao/key_value_dao.dart';
 import 'package:trench_warfare/database/dao/save_load_game_dao.dart';
 import 'package:trench_warfare/database/dao/talker_history_dao.dart';
+import 'package:trench_warfare/database/entities/completed_games_db_entity.dart';
 import 'package:trench_warfare/database/entities/key_value_db_entity.dart';
 import 'package:trench_warfare/database/entities/save_game_field_cell_db_entity.dart';
 import 'package:trench_warfare/database/entities/save_nation_db_entity.dart';
@@ -36,6 +38,9 @@ class Database {
   );
 
   static final KeyValueDao keyValueDao = KeyValueDao(box: Box<KeyValueDbEntity>(_store));
+
+  static final CompletedGamesDao completedGamesDao =
+      CompletedGamesDao(box: Box<CompletedGamesDbEntity>(_store));
 
   static Future<void> start() async {
     _store = await openStore();

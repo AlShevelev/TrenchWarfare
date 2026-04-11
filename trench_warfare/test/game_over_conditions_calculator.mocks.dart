@@ -229,6 +229,12 @@ class MockMapMetadataRead extends _i1.Mock implements _i6.MapMetadataRead {
   }
 
   @override
+  bool get landOnlyAi => (super.noSuchMethod(
+        Invocation.getter(#landOnlyAi),
+        returnValue: false,
+      ) as bool);
+
+  @override
   bool isInWar(
     _i5.Nation? nation1,
     _i5.Nation? nation2,
