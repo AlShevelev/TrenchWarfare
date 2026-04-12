@@ -61,7 +61,7 @@ class NewGameBuilder implements GameBuilder {
 
     final gameField = await compute(
       GameFieldReader.read,
-      Tuple2<Vector2, TiledMap>(_tileMap.destTileSize, _tileMap.map),
+      Tuple3<Vector2, TiledMap, String>(_tileMap.destTileSize, _tileMap.map, _mapFileName),
     );
 
     final playingNations = _getPlayingNations(metadata);

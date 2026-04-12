@@ -13,6 +13,7 @@ import 'package:trench_warfare/core/entities/map_metadata/map_metadata_record.da
 import 'package:trench_warfare/core/enums/aggressiveness.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/relationship.dart';
+import 'package:trench_warfare/database/entities/completed_games_db_entity.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:flutter/services.dart' show AssetManifest, rootBundle;
 import 'package:trench_warfare/shared/data/map_decoder.dart';
@@ -22,6 +23,10 @@ import 'package:tuple/tuple.dart';
 
 class MapsDataLoader {
   List<String>? _allAssets;
+
+  final List<CompletedGamesDbEntity> _completedInfo;
+
+  MapsDataLoader(List<CompletedGamesDbEntity> completedGames) : _completedInfo = completedGames;
 
   Future<MapTabDto> loadTab(String filter, TabCode tabCode, {required bool selected}) async {
     final mapsFileNames = (await _getAllAssets()).where((m) => m.contains(filter)).toList(growable: false);
@@ -95,6 +100,8 @@ class MapsDataLoader {
           nation: allAggressiveGrouped[i][j],
           selected: i == 0 && j == 0,
           groupId: i,
+          completed: _completedInfo
+              .any((c) => c.mapName == mapFileName && c.nation == allAggressiveGrouped[i][j].toString()),
         ));
       }
     }

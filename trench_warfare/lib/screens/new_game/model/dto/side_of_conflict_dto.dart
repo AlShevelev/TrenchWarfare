@@ -20,10 +20,15 @@ class SideOfConflictDto {
   /// To group allies
   final int groupId;
 
+  /// Completed by human on some map
+  final bool completed;
+
   SideOfConflictDto({
     required this.nation,
     required bool selected,
     required this.groupId,
+    required this.completed,
+
   }) : _selected = selected;
 
   void setSelected(bool selected) => _selected = selected;

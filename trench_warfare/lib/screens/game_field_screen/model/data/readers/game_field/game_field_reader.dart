@@ -19,15 +19,18 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game
 import 'package:tuple/tuple.dart';
 
 class GameFieldReader {
-  static GameField read(Tuple2<Vector2, TiledMap> source) {
+  static GameField read(Tuple3<Vector2, TiledMap, String> source) {
     final tileSize = source.item1;
     final map = source.item2;
+
+    // Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
+    final mapFileName = source.item3;
 
     final cells = CellsReader.read(tileSize, map);
     final gameObjects = RawGameObjectReader.read(map);
     final cellsWithObjects = CellsRawGameObjectMerger.merge(cells, gameObjects);
 
-    final gameField = GameFieldAssembler.assemble(cells, gameObjects, cellsWithObjects);
+    final gameField = GameFieldAssembler.assemble(cells, gameObjects, cellsWithObjects, mapFileName);
 
     GameFieldValidator.validate(gameField);
 

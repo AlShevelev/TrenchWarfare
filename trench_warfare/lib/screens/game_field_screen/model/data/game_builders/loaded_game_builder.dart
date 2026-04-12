@@ -98,7 +98,7 @@ class LoadedGameBuilder implements GameBuilder {
       cells.add(cell);
     }
 
-    return GameField(cells, rows: slotDb.rows, cols: slotDb.cols);
+    return GameField(cells, rows: slotDb.rows, cols: slotDb.cols, mapFileName: slotDb.mapFileName);
   }
 
   GameFieldCell _mapCellFromDb(SaveGameFieldCellDbEntity dbCell) {

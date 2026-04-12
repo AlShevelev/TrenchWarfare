@@ -19,6 +19,9 @@ class FromVictoryDefeatConfirmationOnPopupDialogClosed {
     TransitionUtils(_context).closeUI();
 
     if (isVictory) {
+      if (!_context.isAI) {
+        Database.completedGamesDao.markGameAsCompleted(_context.gameField.mapFileName, _context.myNation);
+      }
       return GameIsOver();
     }
 

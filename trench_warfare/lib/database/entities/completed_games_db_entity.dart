@@ -5,6 +5,7 @@ class CompletedGamesDbEntity {
   @Id()
   int dbId;
 
+  /// Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
   String mapName;
 
   String nation;

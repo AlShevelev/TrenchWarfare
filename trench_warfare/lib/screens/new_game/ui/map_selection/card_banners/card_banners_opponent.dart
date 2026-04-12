@@ -21,6 +21,8 @@ class _CardBannersOpponent extends StatelessWidget {
 
   final String _cardId;
 
+  final bool _completed;
+
   final MapSelectionUserActions _userActions;
 
   const _CardBannersOpponent({
@@ -30,12 +32,14 @@ class _CardBannersOpponent extends StatelessWidget {
     required double opponentSelectionWidth,
     required bool selected,
     required String cardId,
+    required bool completed,
     required MapSelectionUserActions userActions,
   })  : _nation = nation,
         _bannerSize = bannerSize,
         _opponentSelectionWidth = opponentSelectionWidth,
         _selected = selected,
         _cardId = cardId,
+        _completed = completed,
         _userActions = userActions;
 
   @override
@@ -43,7 +47,7 @@ class _CardBannersOpponent extends StatelessWidget {
     final audioController = context.read<AudioController>();
 
     if (_selected) {
-      return _getSelectedBanner();
+      return _getBanner(_getSelectedBanner());
     } else {
       return GestureDetector(
         onTap: () {
@@ -51,10 +55,21 @@ class _CardBannersOpponent extends StatelessWidget {
           _userActions.onCardSelected(_cardId);
           _userActions.onOpponentSelected(_cardId, _nation);
         },
-        child: _getUnselectedBanner(),
+        child: _getBanner(_getUnselectedBanner()),
       );
     }
   }
+
+  Widget _getBanner(innerWidget) => Stack(alignment: AlignmentDirectional.center, children: [
+        innerWidget,
+        if (_completed)
+          Image.asset(
+            'assets/images/screens/new_game/golden_checkmark.webp',
+            height: _bannerSize / 1.5,
+            width: _bannerSize / 1.5,
+            fit: BoxFit.scaleDown,
+          ),
+      ]);
 
   Widget _getUnselectedBanner() => Padding(
         padding: EdgeInsets.all(_opponentSelectionWidth),

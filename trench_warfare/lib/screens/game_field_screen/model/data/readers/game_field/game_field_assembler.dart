@@ -17,10 +17,12 @@ import 'package:trench_warfare/screens/game_field_screen/model/data/readers/game
 import 'package:trench_warfare/shared/utils/math.dart';
 
 class GameFieldAssembler {
+  /// [mapFileName] Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
   static GameField assemble(
     List<GameFieldCell> allCells,
     Map<int, GameObjectRaw> allGameObjects,
     Map<GameFieldCell, CellOwnershipRaw> cellOwnership,
+    String mapFileName,
   ) {
     final lastCell = allCells.last;
 
@@ -54,7 +56,12 @@ class GameFieldAssembler {
       }
     }
 
-    return GameField(allCells, rows: lastCell.row + 1, cols: lastCell.col + 1);
+    return GameField(
+      allCells,
+      rows: lastCell.row + 1,
+      cols: lastCell.col + 1,
+      mapFileName: mapFileName,
+    );
   }
 
   static Nation? _tryToFindOwnership(GameFieldCell cell, List<RegionOwnershipRaw> ownerships) {

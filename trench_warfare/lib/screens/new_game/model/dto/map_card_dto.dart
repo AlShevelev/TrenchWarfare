@@ -35,11 +35,9 @@ class MapCardDto {
   final Iterable<Nation> neutrals;
 
   bool _selected;
-
   bool get selected => _selected;
 
   bool _expanded;
-
   bool get expanded => _expanded;
 
   MapCardDto({

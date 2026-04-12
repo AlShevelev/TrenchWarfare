@@ -65,6 +65,7 @@ class _CardBannersOpponents extends StatelessWidget {
           opponentSelectionWidth: _opponentSelectionWidth,
           selected: opponent.nation == _selectedNation,
           cardId: _cardId,
+          completed: opponent.completed,
           userActions: _userActions,
         ),
       ));

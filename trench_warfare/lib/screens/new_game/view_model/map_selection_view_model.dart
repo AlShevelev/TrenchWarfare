@@ -11,6 +11,7 @@
 import 'package:collection/collection.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
+import 'package:trench_warfare/database/database.dart';
 import 'package:trench_warfare/screens/new_game/model/dto/map_selection_dto_library.dart';
 import 'package:trench_warfare/screens/new_game/data/maps_data_loader.dart';
 import 'package:trench_warfare/screens/new_game/view_model/map_selection_user_actions.dart';
@@ -27,7 +28,9 @@ class MapSelectionViewModel extends ViewModelBase implements MapSelectionUserAct
   }
 
   Future<void> init() async {
-    final dataLoader = MapsDataLoader();
+    final completedInfo = Database.completedGamesDao.readAll();
+
+    final dataLoader = MapsDataLoader(completedInfo);
 
     _gameFieldState.update(DataIsReady(
       tabs: [

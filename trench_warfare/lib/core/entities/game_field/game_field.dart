@@ -14,6 +14,9 @@ abstract interface class GameFieldRead {
   final int rows = 0;
   final int cols = 0;
 
+  /// Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
+  String get mapFileName;
+
   Iterable<GameFieldCell> get cells;
 
   GameFieldCell getCell(int row, int col);
@@ -46,10 +49,20 @@ abstract interface class GameFieldRead {
 }
 
 class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
+  /// Full name of the map (for example: assets/tiles/real/europe/battle_of_tannenburg.tmx)
+  final String _mapFileName;
+  @override
+  String get mapFileName => _mapFileName;
+
   @override
   Iterable<GameFieldCell> get cells => cellsRaw;
 
-  GameField(super._cells, {required super.rows, required super.cols});
+  GameField(
+    super._cells, {
+    required super.rows,
+    required super.cols,
+    required String mapFileName,
+  }) : _mapFileName = mapFileName;
 
   /// Returns  all cells around started from top-right, clockwise
   /// Out of the field cells are returned as null
@@ -76,7 +89,8 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
     GameFieldCell? targetCell;
 
     for (var cell in cells) {
-      final distance = math.sqrt(math.pow(cell.center.x - position.x, 2) + math.pow(cell.center.y - position.y, 2));
+      final distance =
+          math.sqrt(math.pow(cell.center.x - position.x, 2) + math.pow(cell.center.y - position.y, 2));
 
       if (distance < minDistance) {
         minDistance = distance;
@@ -93,11 +107,11 @@ class GameField extends HexMatrix<GameFieldCell> implements GameFieldRead {
   /// Calculates a logical (in terms of rows and cols) distance between the cells
   @override
   double calculateDistance(GameFieldCellRead cell1, GameFieldCellRead cell2) =>
-      super.calculateDistance(cell1 as GameFieldCell, cell2  as GameFieldCell);
+      super.calculateDistance(cell1 as GameFieldCell, cell2 as GameFieldCell);
 
   @override
   GameFieldCellRead? getCellWithUnit(Unit unit, Nation nation) =>
-    cells.firstWhereOrNull((c) => c.nation == nation && c.units.isNotEmpty && c.units.contains(unit));
+      cells.firstWhereOrNull((c) => c.nation == nation && c.units.isNotEmpty && c.units.contains(unit));
 
   @override
   Unit? findUnitById(String unitId, Nation nation) {
