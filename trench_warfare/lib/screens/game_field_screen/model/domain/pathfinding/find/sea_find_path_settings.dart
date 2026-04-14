@@ -51,8 +51,8 @@ class SeaFindPathSettings implements FindPathSettings {
     }
 
     // Try to avoid enemy formations
-    if (nextCell.nation != null && nextCell.nation != _startCell.nation && _startCell.units.isNotEmpty) {
-      return 8;
+    if (nextCell.nation != null && nextCell.nation != _startCell.nation && nextCell.units.isNotEmpty) {
+      return 32;
     }
 
     return 1;
@@ -101,7 +101,7 @@ class SeaFindPathSettings implements FindPathSettings {
 
   double _getMineFactor() {
     const minValue = 1.0;
-    const maxValue = 8.0;
+    const maxValue = 32.0;
 
     final factor = UnitPowerEstimation.estimate(_unit) * maxValue / UnitPowerEstimation.maxSeaPower;
 
