@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="38" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="143">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="38" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="145">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Gallipoli campaign&quot;, &quot;ru&quot;: &quot;Дарданелльская операция&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Gallipoli campaign was a large-scale military operation launched during World War I by the Entente powers at the initiative of Winston Churchill. The goal of the operation was to capture Istanbul, remove the Ottoman Empire from the war, and open a sea route to Russia. The Entente allies suffered a defeat during the operation.&quot;, &quot;ru&quot;: &quot;Дарданелльская операция — масштабная военная операция, развёрнутая в ходе Первой мировой войны странами Антанты по инициативе Уинстона Черчилля. Целью операции являлся захват Стамбула, вывод Османской империи из войны и открытие морского пути в Россию. В ходе операции союзники по Антанте потерпели поражение.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1915-02-19&quot;, &quot;to&quot;: &quot;1916-01-09&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: false }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;turkey&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 2000 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
  </properties>
@@ -434,7 +434,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="85" name="greatBritain" type="ownership" gid="107" x="554.588" y="1148.77" width="64" height="64">
+  <object id="85" name="greatBritain" type="ownership" gid="107" x="614.079" y="1115.89" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="4"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -566,9 +566,9 @@
   </object>
   <object id="98" name="infantry" type="unit" gid="99" x="919.144" y="975.868" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
@@ -578,9 +578,9 @@
   </object>
   <object id="99" name="machineGuns" type="unit" gid="95" x="867.637" y="953.578" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
@@ -590,9 +590,9 @@
   </object>
   <object id="100" name="infantry" type="unit" gid="99" x="893.39" y="1038.95" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
@@ -602,9 +602,9 @@
   </object>
   <object id="101" name="machineGuns" type="unit" gid="95" x="835.553" y="1017.74" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
@@ -1003,6 +1003,28 @@
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="143" name="armoredCar" type="unit" gid="93" x="448.626" y="1173.48" width="64" height="64">
+   <properties>
+    <property name="boost1" value="commander"/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="144" name="greatBritain" type="ownership" gid="107" x="556.65" y="1150" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="143"/>
+    <property name="unit2" type="object" value="143"/>
+    <property name="unit3" type="object" value="143"/>
+    <property name="unit4" type="object" value="143"/>
    </properties>
   </object>
  </objectgroup>
