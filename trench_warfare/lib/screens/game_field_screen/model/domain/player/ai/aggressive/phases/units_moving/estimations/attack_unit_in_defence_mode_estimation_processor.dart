@@ -36,7 +36,8 @@ class _AttackUnitInDefenceModeEstimationProcessor extends _UnitEstimationProcess
 
     final allVictimCells = _gameField
         .findCellsAround(_cell)
-        .where((c) => c.nation != _myNation && c.units.isNotEmpty && _isEnemyCell(c))
+        .where(
+            (c) => c.nation != _myNation && c.units.isNotEmpty && _canReachBrief(_unit, c) && _isEnemyCell(c))
         .toList(growable: false);
 
     if (allVictimCells.isEmpty) {
@@ -90,4 +91,7 @@ class _AttackUnitInDefenceModeEstimationProcessor extends _UnitEstimationProcess
     final result = math.exp(math.pow(weight + 1, 1.5));
     return result;
   }
+
+  bool _canReachBrief(Unit unit, GameFieldCellRead cell) =>
+      (unit.isLand && cell.isLand) || (!unit.isLand && !cell.isLand);
 }

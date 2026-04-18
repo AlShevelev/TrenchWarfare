@@ -92,7 +92,7 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
 
         Logger.info(
           'estimators: Attack[0]; CarrierInterception[1]; DoNothing[2]; MoveToEnemyPc[3]; '
-          'MoveToMyPc[4]; Resort[5]',
+          'MoveToMyPc[4]; Resort[5]; AttackUnitInDefenceMode[6]',
           tag: tag,
         );
 

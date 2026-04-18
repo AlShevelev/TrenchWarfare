@@ -5,18 +5,18 @@
     },
     "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
     "expandedProjectPaths": [
-        "tiles/real",
-        "tiles",
-        "tiles/real/europe",
-        "tiles/game_objects",
-        "tiles/help",
-        "tiles/game_objects/atlas",
-        "tiles/templates",
-        "tiles/templates/units",
         "tiles/game_objects/templates",
-        ".",
+        "tiles/real",
+        "tiles/templates",
+        "tiles/real/europe",
+        "tiles/test",
+        "tiles/game_objects",
         "tiles_source_metadata",
-        "tiles/test"
+        "tiles/help",
+        "tiles/templates/units",
+        "tiles",
+        "tiles/game_objects/atlas",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -245,11 +245,11 @@
                 3,
                 4
             ],
-            "scale": 1.8715,
-            "selectedLayer": 2,
+            "scale": 0.8818,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 503.8738979428266,
-                "y": 1165.1082019770238
+                "x": 643.0029485144023,
+                "y": 1630.1882513041505
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
