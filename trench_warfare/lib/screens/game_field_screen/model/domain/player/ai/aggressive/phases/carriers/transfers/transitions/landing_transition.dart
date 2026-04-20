@@ -43,6 +43,9 @@ class _LandingTransition extends _TroopTransferTransition {
         ? GameConstants.maxUnitsInCell - unitsCell.units.length // If a target cell has several my units
         : _state.selectedCarrier.units.length;
 
+    // We must process the situation when the carrier has'nt got enough units to full the cell completely
+    unitsToLandTotal = min(unitsToLandTotal, _state.selectedCarrier.units.length);
+
     // Landing
     for (var i = 0; i < unitsToLandTotal; i++) {
       await _actions.move(
