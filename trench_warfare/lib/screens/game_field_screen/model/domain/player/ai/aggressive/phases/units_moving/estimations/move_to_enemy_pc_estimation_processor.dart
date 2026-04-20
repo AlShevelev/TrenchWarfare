@@ -13,6 +13,9 @@ part of units_moving_phase_library;
 class _MoveToEnemyPcEstimationProcessor extends _UnitEstimationProcessorBase {
   GameFieldCellRead? _nearestEnemyPc;
 
+  @override
+  double get _balanceFactor => 1.5;
+
   _MoveToEnemyPcEstimationProcessor({
     required super.actions,
     required super.influences,

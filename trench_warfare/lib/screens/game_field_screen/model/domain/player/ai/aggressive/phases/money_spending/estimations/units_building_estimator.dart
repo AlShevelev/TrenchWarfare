@@ -57,6 +57,8 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
 
   double get _correctionFactor => _isLand ? 1.0 : 0.5;
 
+  final double _enemyUnitsWeightFactor = 2.0;
+
   _UnitsBuildingEstimator({
     required GameFieldRead gameField,
     required Nation myNation,
@@ -142,7 +144,8 @@ class _UnitsBuildingEstimator extends Estimator<_UnitsBuildingEstimationData> {
         unitPower *
             cell.dangerFactor *
             (maxDistance - (cell.minDistanceToEnemyUnit ?? maxDistance)) *
-            _correctionFactor,
+            _correctionFactor *
+            _enemyUnitsWeightFactor,
       );
 
       final nearestEnemyPcWeight = InGameMath.log10(
