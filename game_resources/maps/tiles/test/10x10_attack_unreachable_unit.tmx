@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="10" height="10" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="5" nextobjectid="99">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="10" height="10" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="5" nextobjectid="102">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;Checking an ability to protect a PC&quot; }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
@@ -13,7 +13,7 @@
 2,28,9,28,2,28,28,9,9,9,
 9,28,28,28,2,28,28,26,9,26,
 28,28,28,28,28,28,28,28,26,28,
-28,2,28,26,26,28,28,28,28,28,
+28,2,28,26,26,28,28,2,28,28,
 28,28,28,9,9,9,28,28,28,28,
 28,28,28,28,28,28,28,2,10,28,
 9,9,28,28,28,28,28,28,28,28,
@@ -427,6 +427,36 @@
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="60"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="99" name="level1" type="navalBase" gid="79" x="588.849" y="254.377" width="64" height="64">
+   <properties>
+    <property name="name" value=""/>
+   </properties>
+  </object>
+  <object id="100" name="carrier" type="unit" gid="103" x="586.663" y="319.96" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="movementPoints" type="float" value="1"/>
+    <property name="unit1" type="object" value="0"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="101" name="russia" type="ownership" gid="110" x="389.915" y="347.68" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="99"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="100"/>
     <property name="unit2" type="object" value="0"/>
     <property name="unit3" type="object" value="0"/>
     <property name="unit4" type="object" value="0"/>

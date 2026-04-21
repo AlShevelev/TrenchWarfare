@@ -15,9 +15,14 @@ class UnitsBattleCalculator {
 
   static UnitsBattleResult calculateBattle({
     required Unit attacking,
+    required GameFieldCell attackingCell,
     required GameFieldCell defendingCell,
   }) {
-    final preparationCalculator = UnitInBattlePreparationCalculator(attacking, defendingCell);
+    final preparationCalculator = UnitInBattlePreparationCalculator(
+      attacking,
+      attackingCell: attackingCell,
+      defendingCell: defendingCell,
+    );
     final attackingUnit = preparationCalculator.calculateAttackingUnit();
     final defendingUnit = preparationCalculator.calculateDefendingUnit();
 
@@ -84,6 +89,11 @@ class UnitsBattleCalculator {
 
   static double _calculateDamage(UnitInBattle attacking, UnitInBattle defending) {
     final startDamage = RandomGen.randomDouble(attacking.damage.min, attacking.damage.max);
+
+    // For carries (when a carrier is attacked by something the carrier return damage is 0)
+    if (startDamage == 0.0) {
+      return startDamage;
+    }
 
     var damageBase = startDamage;
 

@@ -216,8 +216,11 @@ class MovementWithBattleNextUnreachableCell extends MovementCalculator with Show
     required GameFieldCell attackingCell,
     required GameFieldCell defendingCell,
   }) {
-    final rawBattleResult =
-        UnitsBattleCalculator.calculateBattle(attacking: attackingUnit, defendingCell: defendingCell);
+    final rawBattleResult = UnitsBattleCalculator.calculateBattle(
+      attacking: attackingUnit,
+      attackingCell: attackingCell,
+      defendingCell: defendingCell,
+    );
 
     final battleResult = BattleResultCalculator(_pathFacade).calculateBattle(
       attackingCell: attackingCell,

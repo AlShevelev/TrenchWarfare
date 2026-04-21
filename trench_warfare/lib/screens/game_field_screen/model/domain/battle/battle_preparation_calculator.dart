@@ -12,14 +12,19 @@ part of battle;
 
 class UnitInBattlePreparationCalculator {
   late final Unit _attacking;
-  late final GameFieldCell _defendingCell;
+
+  late final GameFieldCellRead _attackingCell;
+  late final GameFieldCellRead _defendingCell;
 
   Unit get _defending => _defendingCell.activeUnit!;
 
-  UnitInBattlePreparationCalculator(Unit attacking, GameFieldCell defendingCell) {
-    _attacking = attacking;
-    _defendingCell = defendingCell;
-  }
+  UnitInBattlePreparationCalculator(
+    Unit attackingUnit, {
+    required GameFieldCellRead attackingCell,
+    required GameFieldCellRead defendingCell,
+  })  : _attacking = attackingUnit,
+        _attackingCell = attackingCell,
+        _defendingCell = defendingCell;
 
   UnitInBattle calculateAttackingUnit() {
     var base = _getBase(_attacking);
@@ -46,7 +51,11 @@ class UnitInBattlePreparationCalculator {
 
     base.updateDefence(_getProductionCenterDefenceFactor(_defendingCell.productionCenter));
 
-    base = _updateAttackingByTerrainModifier(base, _defendingCell.terrainModifier?.type);
+    base = _updateAttackingByTerrainModifier(
+      base,
+      attackingCellTerrainModifier: _attackingCell.terrainModifier?.type,
+      defendingCellTerrainModifier: _defendingCell.terrainModifier?.type,
+    );
 
     base = _updateUnitByRival(base, _defending);
 
@@ -274,14 +283,17 @@ class UnitInBattlePreparationCalculator {
   }
 
   UnitInBattle _updateAttackingByTerrainModifier(
-      UnitInBattle attacking, TerrainModifierType? terrainModifier) {
-    if (terrainModifier == TerrainModifierType.barbedWire) {
+    UnitInBattle attacking, {
+    required TerrainModifierType? attackingCellTerrainModifier,
+    required TerrainModifierType? defendingCellTerrainModifier,
+  }) {
+    if (defendingCellTerrainModifier == TerrainModifierType.barbedWire) {
       if (attacking.type != UnitType.tank && attacking.type != UnitType.artillery) {
         attacking.updateAttack(0.8);
       }
     }
 
-    if (terrainModifier == TerrainModifierType.landFort) {
+    if (attackingCellTerrainModifier == TerrainModifierType.landFort) {
       attacking.updateAttack(1.2);
       attacking.updateDefence(1.2);
       attacking.updateHasArtillery(true);
@@ -293,7 +305,9 @@ class UnitInBattlePreparationCalculator {
   }
 
   UnitInBattle _updateDefendingByTerrainModifier(
-      UnitInBattle defending, TerrainModifierType? terrainModifier) {
+    UnitInBattle defending,
+    TerrainModifierType? terrainModifier,
+  ) {
     if (terrainModifier == TerrainModifierType.trench) {
       if (defending.type == UnitType.infantry || defending.type == UnitType.machineGuns) {
         defending.updateDefence(1.2);
