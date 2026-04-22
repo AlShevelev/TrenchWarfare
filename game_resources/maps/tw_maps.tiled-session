@@ -3,19 +3,19 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/test/10x10_attack_unreachable_unit.tmx",
+    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
     "expandedProjectPaths": [
         "tiles/real",
-        "tiles/help",
-        "tiles/game_objects",
-        ".",
         "tiles/game_objects/templates",
+        ".",
         "tiles/real/europe",
+        "tiles_source_metadata",
+        "tiles/templates/units",
         "tiles/templates",
         "tiles/test",
+        "tiles/game_objects",
+        "tiles/help",
         "tiles",
-        "tiles/templates/units",
-        "tiles_source_metadata",
         "tiles/game_objects/atlas"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -245,11 +245,11 @@
                 3,
                 4
             ],
-            "scale": 1.2775,
+            "scale": 0.9547,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 558.9041095890411,
-                "y": 1181.9960861056752
+                "x": 553.0533151775427,
+                "y": 1402.0111029642821
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
@@ -1278,13 +1278,13 @@
     "map.tileWidth": 74,
     "map.width": 38,
     "openFiles": [
-        "tiles/test/10x10_attack_unreachable_unit.tmx"
+        "tiles/real/europe/gallipoli_campaign.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
         "tiles/test/10x10_withdraw_from_fort.tmx",
         "tiles/test/10x10_attack_unreachable_unit_ai.tmx",

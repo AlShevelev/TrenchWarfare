@@ -418,9 +418,9 @@
   </object>
   <object id="83" name="infantry" type="unit" gid="99" x="494.599" y="1311.02" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
@@ -430,9 +430,9 @@
   </object>
   <object id="84" name="machineGuns" type="unit" gid="95" x="443.092" y="1288.73" width="64" height="64">
    <properties>
-    <property name="boost1" value="attack"/>
-    <property name="boost2" value="defence"/>
-    <property name="boost3" value="commander"/>
+    <property name="boost1" value="transport"/>
+    <property name="boost2" value="commander"/>
+    <property name="boost3" value=""/>
     <property name="experienceRank" value="elite"/>
     <property name="fatigue" type="float" value="1"/>
     <property name="health" type="float" value="1"/>
