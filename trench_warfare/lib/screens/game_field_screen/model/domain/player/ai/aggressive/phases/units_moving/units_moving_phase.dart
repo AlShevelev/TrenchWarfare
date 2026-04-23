@@ -41,6 +41,7 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
         _aiProgressState = aiProgressState {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
+
     playerCore.registerOnAnimationCompleted(() {
       _actions.canContinue();
     });

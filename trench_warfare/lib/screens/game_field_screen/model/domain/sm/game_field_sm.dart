@@ -59,7 +59,7 @@ class GameFieldStateMachine {
     }
   }
 
-  Future<void> process(Event event) async {
+  Future<Result> process(Event event) async {
     Logger.info(
       'Start. nation: ${_context.myNation}; incomingEvent $event; currentState: $_currentState',
       tag: 'STATE_MACHINE',
@@ -244,10 +244,16 @@ class GameFieldStateMachine {
       tag: 'STATE_MACHINE',
     );
 
+    Result result = Done();
+
     if (_currentState is TurnIsEnded) {
       _modelCallback.onTurnCompleted();
     } else if (_currentState is GameIsOver) {
       _modelCallback.onGameIsOver();
+    } else if (_currentState is VictoryDefeatConfirmation) {
+      result = BlockedByDialog();
     }
+
+    return result;
   }
 }

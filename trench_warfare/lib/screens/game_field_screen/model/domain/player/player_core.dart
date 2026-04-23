@@ -123,12 +123,15 @@ class PlayerCore extends PlayerInputProxy implements PlayerMoney {
   void onStartTurn() => _stateMachine.process(OnStarTurn());
 
   @override
-  void onAnimationComplete() {
-    _stateMachine.process(OnAnimationCompleted());
+  Future<void> onAnimationComplete() async {
+    final result = await _stateMachine.process(OnAnimationCompleted());
 
-    final onAnimationCompleted = _onAnimationCompleted;
-    if (onAnimationCompleted != null) {
-      onAnimationCompleted();
+    //  If the SM is blocked by a modal dialog we have to wait for onPopupDialogClosed() call to unblock
+    if (result is! BlockedByDialog) {
+      final onAnimationCompleted = _onAnimationCompleted;
+      if (onAnimationCompleted != null) {
+        onAnimationCompleted();
+      }
     }
   }
 
