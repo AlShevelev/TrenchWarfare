@@ -23,6 +23,8 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
 
   final SimpleStream<GameFieldControlsState>? _aiProgressState;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   static const String tag = 'UNITS_MOVING';
 
   UnitsMovingPhase({
@@ -33,11 +35,13 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
     required MapMetadataRead metadata,
     required SimpleStream<GameFieldControlsState>? aiProgressState,
     required UnitUpdateResultBridgeRead unitUpdateResultBridge,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
         _actions = PlayerActions(player: player, unitUpdateResultBridge: unitUpdateResultBridge),
+        _gameOverConditionsCalculator = gameOverConditionsCalculator,
         _aiProgressState = aiProgressState {
     // It's a dirty, but necessary hack
     final playerCore = player as PlayerCore;
@@ -58,12 +62,14 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
     required MapMetadataRead metadata,
     required PlayerActions actions,
     required SimpleStream<GameFieldControlsState>? aiProgressState,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _gameField = gameField,
         _myNation = myNation,
         _metadata = metadata,
         _iterator = iterator,
         _actions = actions,
-        _aiProgressState = aiProgressState;
+        _aiProgressState = aiProgressState,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   @override
   Future<void> start() async {
@@ -122,7 +128,7 @@ class UnitsMovingPhase with InfluenceMapPhases implements TurnPhase {
         final selectedEstimator = estimators[indexedWeights[weightIndex].item1];
         final processingResult = await selectedEstimator.processAction();
 
-        updateInfluenceMap(influences, processingResult);
+        updateInfluenceMap(influences, processingResult, _gameOverConditionsCalculator.defeated);
 
         // check the unit is dead or not (cellWithUnit == null - is dead)
         cellWithUnit = _gameField.getCellWithUnit(unit, _myNation);

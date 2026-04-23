@@ -51,6 +51,7 @@ class AggressivePlayerAi extends PlayerAi {
           myNation: myNation,
           metadata: metadata,
           initialTransfers: initialTransfers,
+          gameOverConditionsCalculator: gameOverConditionsCalculator,
         ),
         _aiProgressState = aiProgressState,
         _unitUpdateResultBridge = unitUpdateResultBridge;
@@ -72,6 +73,7 @@ class AggressivePlayerAi extends PlayerAi {
         metadata: _metadata,
         aiProgressState: _aiProgressState,
         unitUpdateResultBridge: _unitUpdateResultBridge,
+        gameOverConditionsCalculator: _gameOverConditionsCalculator,
       ).start();
       Logger.info('MoneySpendingPhase completed', tag: 'AI_PLAYER_AGGRESSIVE');
 
@@ -122,6 +124,7 @@ class AggressivePlayerAi extends PlayerAi {
         metadata: _metadata,
         aiProgressState: _aiProgressState,
         unitUpdateResultBridge: _unitUpdateResultBridge,
+        gameOverConditionsCalculator: _gameOverConditionsCalculator,
         iterator: StableUnitsIterator(
           gameField: _gameField,
           myNation: _myNation,

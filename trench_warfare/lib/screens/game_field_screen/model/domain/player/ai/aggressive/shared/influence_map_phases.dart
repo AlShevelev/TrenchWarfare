@@ -15,18 +15,23 @@ mixin InfluenceMapPhases {
     Nation myNation,
     MapMetadataRead metadata,
     GameFieldRead gameField,
-  ) => compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
-            (data) => InfluenceMapRepresentation(
-          myNation: data.myNation,
-          metadata: data.metadata,
-        )..calculateFull(data.gameField),
-        InfluenceMapComputeData(
-          myNation: myNation,
-          metadata: metadata,
-          gameField: gameField,
-        ));
+  ) =>
+      compute<InfluenceMapComputeData, InfluenceMapRepresentation>(
+          (data) => InfluenceMapRepresentation(
+                myNation: data.myNation,
+                metadata: data.metadata,
+              )..calculateFull(data.gameField),
+          InfluenceMapComputeData(
+            myNation: myNation,
+            metadata: metadata,
+            gameField: gameField,
+          ));
 
-  void updateInfluenceMap(InfluenceMapRepresentation map, List<UnitUpdateResultItem>? updateData) {
+  void updateInfluenceMap(
+    InfluenceMapRepresentation map,
+    List<UnitUpdateResultItem>? updateData,
+    Set<Nation> defeatedNations,
+  ) {
     // updates the influence map
     if (updateData != null) {
       Logger.info(
@@ -36,12 +41,14 @@ mixin InfluenceMapPhases {
 
       for (final resultItem in updateData) {
         Logger.info(resultItem.toString(), tag: 'INFLUENCE_MAP');
-      }
 
-      for (final resultItem in updateData) {
         if (resultItem.type == UnitUpdateResulType.before) {
           map.removeUnit(resultItem.unit, resultItem.nation, resultItem.cell);
         } else {
+          if (defeatedNations.contains(resultItem.nation)) {
+            Logger.info('The nation is defeated - skip', tag: 'INFLUENCE_MAP');
+            continue;
+          }
           map.addUnit(resultItem.unit, resultItem.nation, resultItem.cell);
         }
       }

@@ -15,6 +15,8 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
 
   final MapMetadataRead _metadata;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   _MovementAfterLadingTransition({
     required _StateMoveUnitsAfterLanding state,
     required super.actions,
@@ -22,8 +24,10 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
     required super.myNation,
     required MapMetadataRead metadata,
     required super.pathFacade,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _state = state,
-        _metadata = metadata;
+        _metadata = metadata,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   @override
   Future<_TransitionResult> process() async {
@@ -62,6 +66,7 @@ class _MovementAfterLadingTransition extends _TroopTransferTransition {
       metadata: _metadata,
       iterator: StableUnitsIterator.fromCell(unitCells),
       aiProgressState: null,
+      gameOverConditionsCalculator: _gameOverConditionsCalculator,
     ).start();
     Logger.info('MOVEMENT_AFTER_LADING_TRANSITION: Units movement phase is completed', tag: 'CARRIER');
     return _TransitionResult.completed();

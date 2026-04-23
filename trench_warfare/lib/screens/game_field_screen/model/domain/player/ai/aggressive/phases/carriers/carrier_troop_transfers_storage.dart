@@ -29,6 +29,8 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
 
   final MapMetadataRead _metadata;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   @override
   Iterable<TroopTransferRead> get allTransfers => _troopTransfers;
 
@@ -37,9 +39,11 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
     required Nation myNation,
     required MapMetadataRead metadata,
     required Iterable<TroopTransferReadForSaving> initialTransfers,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _gameField = gameField,
         _myNation = myNation,
-        _metadata = metadata {
+        _metadata = metadata,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator {
     for (final initialTransfer in initialTransfers) {
       try {
         _troopTransfers.add(_TroopTransfer.fromSaving(
@@ -48,8 +52,9 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
           gameField: gameField,
           myNation: myNation,
           metadata: metadata,
+          gameOverConditionsCalculator: _gameOverConditionsCalculator,
         ));
-      } catch(ex, s) {
+      } catch (ex, s) {
         // An error is possible while transfer state restoration
         // A typical example, when an AI carrier was destroyed during a human turn.
         // Therefore, we can't restore a transfer ana must skip it.
@@ -79,6 +84,7 @@ class CarrierTroopTransfersStorage implements CarrierTroopTransfersStorageRead {
       actions: _actions,
       metadata: _metadata,
       selectedCarrier: selectedCarrier,
+      gameOverConditionsCalculator: _gameOverConditionsCalculator,
     );
     _troopTransfers.add(transfer);
   }

@@ -25,6 +25,8 @@ class MoneySpendingPhase with InfluenceMapPhases implements TurnPhase {
 
   final UnitUpdateResultBridgeRead _unitUpdateResultBridge;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   static const String tag = 'MONEY_SPENDING';
 
   MoneySpendingPhase({
@@ -35,13 +37,15 @@ class MoneySpendingPhase with InfluenceMapPhases implements TurnPhase {
     required MapMetadataRead metadata,
     required SimpleStream<GameFieldControlsState> aiProgressState,
     required UnitUpdateResultBridgeRead unitUpdateResultBridge,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _player = player,
         _gameField = gameField,
         _myNation = myNation,
         _nationMoney = nationMoney,
         _metadata = metadata,
         _aiProgressState = aiProgressState,
-        _unitUpdateResultBridge = unitUpdateResultBridge;
+        _unitUpdateResultBridge = unitUpdateResultBridge,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   @override
   Future<void> start() async {
@@ -156,7 +160,7 @@ class MoneySpendingPhase with InfluenceMapPhases implements TurnPhase {
         final processingResult = await selectedProcessor.process();
         Logger.info('selectedProcessor.process() completed', tag: tag);
 
-        updateInfluenceMap(influences, processingResult);
+        updateInfluenceMap(influences, processingResult, _gameOverConditionsCalculator.defeated);
       } catch (e, s) {
         Logger.error(e.toString(), stackTrace: s);
       } finally {

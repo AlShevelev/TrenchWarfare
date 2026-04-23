@@ -58,6 +58,8 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
 
   late _TroopTransferState _currentState;
 
+  final GameOverConditionsCalculator _gameOverConditionsCalculator;
+
   @override
   String get stateAlias => _currentState.stateAlias;
 
@@ -89,6 +91,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
     required PlayerActions actions,
     required MapMetadataRead metadata,
     required Carrier selectedCarrier,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _targetCell = targetCell,
         _transfersStorage = transfersStorage,
         _gameField = gameField,
@@ -96,7 +99,8 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
         _actions = actions,
         _metadata = metadata,
         _id = RandomGen.generateId(),
-        _currentState = _StateInit(selectedCarrier: selectedCarrier);
+        _currentState = _StateInit(selectedCarrier: selectedCarrier),
+        _gameOverConditionsCalculator = gameOverConditionsCalculator;
 
   _TroopTransfer.fromSaving({
     required TroopTransferReadForSaving saving,
@@ -104,16 +108,18 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
     required GameFieldRead gameField,
     required Nation myNation,
     required MapMetadataRead metadata,
+    required GameOverConditionsCalculator gameOverConditionsCalculator,
   })  : _targetCell = saving.targetCell,
         _transfersStorage = transfersStorage,
         _gameField = gameField,
         _myNation = myNation,
         _id = saving.id,
-        _metadata = metadata {
+        _metadata = metadata,
+        _gameOverConditionsCalculator = gameOverConditionsCalculator {
     _currentState = switch (saving.stateAlias) {
       _StateInit._stateAlias => _StateInit(
           selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
-      ),
+        ),
       _StateGathering._stateAlias => _StateGathering(
           selectedCarrier: _gameField.findUnitById(saving.selectedCarrierId!, _myNation) as Carrier,
           landingPoint: saving.landingPoint!,
@@ -180,7 +186,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
 
   _TroopTransferTransition _getTransition() => switch (_currentState) {
         _StateInit() => _InitTransition(
-          state: _currentState as _StateInit,
+            state: _currentState as _StateInit,
             transferTargetCell: _targetCell,
             actions: _actions,
             gameField: _gameField,
@@ -226,6 +232,7 @@ class _TroopTransfer implements TroopTransferRead, TroopTransferReadForSaving {
             myNation: _myNation,
             metadata: _metadata,
             pathFacade: PathFacade(_gameField, _myNation, _metadata),
+            gameOverConditionsCalculator: _gameOverConditionsCalculator,
           ),
         _StateCompleted() => throw UnsupportedError('This state is not supported'),
       };
