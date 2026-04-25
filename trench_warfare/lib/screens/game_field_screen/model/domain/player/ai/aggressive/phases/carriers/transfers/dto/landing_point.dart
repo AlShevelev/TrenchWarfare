@@ -18,5 +18,5 @@ class LandingPoint {
   LandingPoint({required this.carrierCell, required this.unitsCell});
 
   @override
-  String toString() => 'LANDING POINT: {carrier: $carrierCell; units: $unitsCell}';
+  String toString() => 'LANDING POINT: {carrier cell: $carrierCell;\nunits to land cell: $unitsCell}';
 }

@@ -37,6 +37,29 @@ class _LandingTransition extends _TroopTransferTransition {
       return _TransitionResult.completed();
     }
 
+    // Check - can we unload our units - part 1 - onloading path calculation.
+    final path = _pathFacade.calculatePathForUnit(
+      startCell: _state.landingPoint.carrierCell,
+      endCell: _state.landingPoint.unitsCell,
+      calculatedUnit: _state.selectedCarrier,
+    );
+
+    if (path.isEmpty) {
+      Logger.info('LANDING_TRANSITION: return. The landing point is unreachable', tag: 'CARRIER');
+      return _TransitionResult.completed();
+    }
+
+    final estimatedPath = _pathFacade.estimatePathForUnit(
+      path: path,
+      unit: _state.selectedCarrier,
+    );
+
+    // Check - can we unload our units - part 2 - trying to unload
+    if (estimatedPath.last.pathItem?.type != PathItemType.unloadUnit) {
+      Logger.info('LANDING_TRANSITION: return. The unit can\'n  be unloaded', tag: 'CARRIER');
+      return _TransitionResult.completed();
+    }
+
     final unitsCell = _state.landingPoint.unitsCell;
 
     var unitsToLandTotal = unitsCell.nation == _myNation
