@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="38" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="145">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="38" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="147">
  <properties>
-  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Gallipoli campaign&quot;, &quot;ru&quot;: &quot;Дарданелльская операция&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Gallipoli campaign was a large-scale military operation launched during World War I by the Entente powers at the initiative of Winston Churchill. The goal of the operation was to capture Istanbul, remove the Ottoman Empire from the war, and open a sea route to Russia. The Entente allies suffered a defeat during the operation.&quot;, &quot;ru&quot;: &quot;Дарданелльская операция — масштабная военная операция, развёрнутая в ходе Первой мировой войны странами Антанты по инициативе Уинстона Черчилля. Целью операции являлся захват Стамбула, вывод Османской империи из войны и открытие морского пути в Россию. В ходе операции союзники по Антанте потерпели поражение.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1915-02-19&quot;, &quot;to&quot;: &quot;1916-01-09&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: false }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;turkey&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 2000 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
+  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Gallipoli campaign&quot;, &quot;ru&quot;: &quot;Дарданелльская операция&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Gallipoli campaign was a large-scale military operation launched during World War I by the Entente powers at the initiative of Winston Churchill. The goal of the operation was to capture Istanbul, remove the Ottoman Empire from the war, and open a sea route to Russia. The Entente allies suffered a defeat during the operation.&quot;, &quot;ru&quot;: &quot;Дарданелльская операция — масштабная военная операция, развёрнутая в ходе Первой мировой войны странами Антанты по инициативе Уинстона Черчилля. Целью операции являлся захват Стамбула, вывод Османской империи из войны и открытие морского пути в Россию. В ходе операции союзники по Антанте потерпели поражение.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1915-02-19&quot;, &quot;to&quot;: &quot;1916-01-09&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: false }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;turkey&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 2000 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 1500 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 1500 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;turkey&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
   <image source="../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
@@ -1005,7 +1005,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="143" name="armoredCar" type="unit" gid="93" x="448.626" y="1173.48" width="64" height="64">
+  <object id="143" name="armoredCar" type="unit" gid="93" x="497.235" y="1120.64" width="64" height="64">
    <properties>
     <property name="boost1" value="commander"/>
     <property name="boost2" value=""/>
@@ -1017,14 +1017,36 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="144" name="greatBritain" type="ownership" gid="107" x="556.65" y="1150" width="64" height="64">
+  <object id="144" name="greatBritain" type="ownership" gid="107" x="663.73" y="1087.3" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="145"/>
+    <property name="unit2" type="object" value="145"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
+  <object id="145" name="tank" type="unit" gid="97" x="584.414" y="1179.69" width="64" height="64">
+   <properties>
+    <property name="boost1" value=""/>
+    <property name="boost2" value=""/>
+    <property name="boost3" value=""/>
+    <property name="experienceRank" value="rookies"/>
+    <property name="fatigue" type="float" value="1"/>
+    <property name="health" type="float" value="1"/>
+    <property name="isDefence" type="bool" value="false"/>
+    <property name="movementPoints" type="float" value="1"/>
+   </properties>
+  </object>
+  <object id="146" name="greatBritain" type="ownership" gid="107" x="611.889" y="1046.55" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
     <property name="unit1" type="object" value="143"/>
     <property name="unit2" type="object" value="143"/>
-    <property name="unit3" type="object" value="143"/>
-    <property name="unit4" type="object" value="143"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
  </objectgroup>
