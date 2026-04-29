@@ -3,25 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/gallipoli_campaign.tmx",
+    "activeFile": "tiles/real/europe/battle_of_amiens.tmx",
     "expandedProjectPaths": [
-        "tiles/game_objects/atlas",
-        "tiles",
         "tiles/game_objects/templates",
+        "tiles/game_objects/atlas",
+        "tiles/real/europe",
+        "tiles/test",
+        ".",
+        "tiles/templates",
+        "tiles",
+        "tiles/templates/units",
+        "tiles/real",
         "tiles_source_metadata",
         "tiles/help",
-        "tiles/templates",
-        ".",
-        "tiles/real/europe",
-        "tiles/game_objects",
-        "tiles/real",
-        "tiles/templates/units",
-        "tiles/test"
+        "tiles/game_objects"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.2195,
             "scaleInEditor": 1
         },
         "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/game_objects.tsx": {
@@ -74,7 +74,7 @@
         },
         "tiles/game_objects.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.5647,
+            "scaleInDock": 0.7,
             "scaleInEditor": 1
         },
         "tiles/gb_and_france.tmx": {
@@ -152,6 +152,24 @@
         "tiles/real/europe/_the_battle_of_tannenburg.tmx#terrain_atlas": {
             "dynamicWrapping": false,
             "scaleInDock": 0.4738
+        },
+        "tiles/real/europe/battle_of_amiens.tmx": {
+            "expandedObjectLayers": [
+                3,
+                4
+            ],
+            "scale": 1.6968,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 574.6110325318245,
+                "y": 811.2329090051862
+            }
+        },
+        "tiles/real/europe/battle_of_amiens.tmx#TempBackground": {
+            "scaleInDock": 0.1953
+        },
+        "tiles/real/europe/battle_of_amiens.tmx#terrain_atlas": {
+            "scaleInDock": 0.7
         },
         "tiles/real/europe/battle_of_passchendaele.tmx": {
             "expandedObjectLayers": [
@@ -242,18 +260,18 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
-            "scale": 1.4195,
+            "scale": 0.2301,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 617.8231771750616,
-                "y": 1178.2317717506164
+                "x": 1053.8896132116472,
+                "y": 814.8631029986961
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
-            "scaleInDock": 1
+            "scaleInDock": 0.2871
         },
         "tiles/real/europe/gallipoli_campaign.tmx#terrain_atlas": {
             "scaleInDock": 0.5931
@@ -1287,14 +1305,16 @@
     "map.renderOrder": "1",
     "map.tileHeight": 64,
     "map.tileWidth": 74,
-    "map.width": 38,
+    "map.width": 25,
     "openFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx"
+        "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/battle_of_amiens.tmx"
     ],
     "project": "tw_maps.tiled-project",
-    "property.type": "bool",
+    "property.type": "string",
     "recentFiles": [
         "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/battle_of_amiens.tmx",
         "tiles/test/10x10_ai_win_defeat_dialogs.tmx",
         "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
@@ -1304,8 +1324,7 @@
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",
         "tiles/test/15x15_balance_general.tmx",
         "tiles/test/10x10_ai_protect_pc_check.tmx",
-        "tiles/test/10x10_disable_attacking_unit.tmx",
-        "tiles/real/europe/brusilov_offensive.tmx"
+        "tiles/test/10x10_disable_attacking_unit.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
