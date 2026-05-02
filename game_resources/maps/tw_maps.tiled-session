@@ -5,18 +5,18 @@
     },
     "activeFile": "tiles/real/europe/battle_of_amiens.tmx",
     "expandedProjectPaths": [
-        "tiles/game_objects/templates",
-        "tiles/game_objects/atlas",
         "tiles/real/europe",
+        "tiles_source_metadata",
+        "tiles",
+        "tiles/help",
+        "tiles/real",
+        "tiles/templates/units",
         "tiles/test",
+        "tiles/game_objects/atlas",
         ".",
         "tiles/templates",
-        "tiles",
-        "tiles/templates/units",
-        "tiles/real",
-        "tiles_source_metadata",
-        "tiles/help",
-        "tiles/game_objects"
+        "tiles/game_objects",
+        "tiles/game_objects/templates"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -158,11 +158,11 @@
                 3,
                 4
             ],
-            "scale": 1.6968,
+            "scale": 1.2439,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 574.6110325318245,
-                "y": 811.2329090051862
+                "x": 679.315057480505,
+                "y": 671.6777876035051
             }
         },
         "tiles/real/europe/battle_of_amiens.tmx#TempBackground": {
@@ -266,7 +266,7 @@
             "scale": 0.2301,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1053.8896132116472,
+                "x": 1056.0625814863104,
                 "y": 814.8631029986961
             }
         },

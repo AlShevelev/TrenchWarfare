@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="25" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="136">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="25" height="25" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="6" nextobjectid="137">
  <properties>
-  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Battle of Amiens&quot;, &quot;ru&quot;: &quot;Дарданелльская операция&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Battle of Amiens was a major Allied victory on the Western Front. British and French forces attacked with surprise, tanks, artillery, and air support, breaking through German lines and advancing several miles on the first day.  The battle shocked German commanders so badly that Erich Ludendorff called 8 August “the black day of the German Army.”  Amiens helped push the Germans back toward the Hindenburg Line and set the stage for the end of World War I&quot;, &quot;ru&quot;: &quot;Битва при Амьене стала крупной победой союзников на Западном фронте. Британские и французские войска атаковали внезапно, используя танки, артиллерию и авиацию, прорвав немецкие линии и продвинувшись на несколько миль в первый же день. Битва настолько потрясла немецких командиров, что Эрих Людендорф назвал 8 августа «черным днем ​​немецкой армии». Амьен помог оттеснить немцев к линии Гинденбурга и подготовил почву для окончания Первой мировой войны.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1918-08-08&quot;, &quot;to&quot;: &quot;1918-08-12&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: true }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 2000 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
+  <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Battle of Amiens&quot;, &quot;ru&quot;: &quot;Дарданелльская операция&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Battle of Amiens was a major Allied victory on the Western Front. British and French forces attacked with surprise, tanks, artillery, and air support, breaking through German lines and advancing several miles on the first day.\n\nThe battle shocked German commanders so badly that Erich Ludendorff called 8 August “the black day of the German Army.”\n\nAmiens helped push the Germans back toward the Hindenburg Line and set the stage for the end of World War I&quot;, &quot;ru&quot;: &quot;Битва при Амьене стала крупной победой союзников на Западном фронте. Британские и французские войска атаковали внезапно, используя танки, артиллерию и авиацию, прорвав немецкие линии и продвинувшись на несколько миль в первый же день.\n\nБитва настолько потрясла немецких командиров, что Эрих Людендорф назвал 8 августа «черным днем ​​немецкой армии».\n\nАмьен помог оттеснить немцев к линии Гинденбурга и подготовил почву для окончания Первой мировой войны.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1918-08-08&quot;, &quot;to&quot;: &quot;1918-08-12&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: true }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 4000, &quot;startIndustryPoints&quot;: 2000 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 }, { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;france&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
  </properties>
  <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
   <image source="../../../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
@@ -684,7 +684,7 @@
   <object id="85" name="germany" type="ownership" gid="118" x="666.912" y="516.972" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="136"/>
     <property name="unit1" type="object" value="76"/>
     <property name="unit2" type="object" value="77"/>
     <property name="unit3" type="object" value="0"/>
@@ -694,7 +694,7 @@
   <object id="86" name="germany" type="ownership" gid="118" x="662.866" y="580.227" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="136"/>
     <property name="unit1" type="object" value="76"/>
     <property name="unit2" type="object" value="77"/>
     <property name="unit3" type="object" value="0"/>
@@ -1203,6 +1203,7 @@
     <property name="unit4" type="object" value="90"/>
    </properties>
   </object>
+  <object id="136" name="trench" type="terrainModifier" gid="75" x="715.649" y="481.707" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="5" name="Templates">
   <object id="460" name="level2" type="navalBase" gid="80" x="539.186" y="-923.591" width="64" height="64">
