@@ -3,25 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/battle_of_amiens.tmx",
+    "activeFile": "tiles/real/europe/battle_of_cantigny.tmx",
     "expandedProjectPaths": [
-        "tiles/real/europe",
-        "tiles_source_metadata",
-        "tiles",
-        "tiles/help",
+        ".",
         "tiles/real",
+        "tiles",
+        "tiles_source_metadata",
+        "tiles/real/europe",
+        "tiles/help",
+        "tiles/game_objects/templates",
         "tiles/templates/units",
         "tiles/test",
-        "tiles/game_objects/atlas",
-        ".",
         "tiles/templates",
         "tiles/game_objects",
-        "tiles/game_objects/templates"
+        "tiles/game_objects/atlas"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 0.2195,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/game_objects.tsx": {
@@ -74,7 +74,7 @@
         },
         "tiles/game_objects.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.7,
+            "scaleInDock": 0.6,
             "scaleInEditor": 1
         },
         "tiles/gb_and_france.tmx": {
@@ -158,11 +158,11 @@
                 3,
                 4
             ],
-            "scale": 1.2439,
+            "scale": 0.4619,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 679.315057480505,
-                "y": 671.6777876035051
+                "x": 697.1205888720502,
+                "y": 815.111495994804
             }
         },
         "tiles/real/europe/battle_of_amiens.tmx#TempBackground": {
@@ -170,6 +170,24 @@
         },
         "tiles/real/europe/battle_of_amiens.tmx#terrain_atlas": {
             "scaleInDock": 0.7
+        },
+        "tiles/real/europe/battle_of_cantigny.tmx": {
+            "expandedObjectLayers": [
+                5,
+                4
+            ],
+            "scale": 3.1801,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 415.71019779252225,
+                "y": 347.0016666142575
+            }
+        },
+        "tiles/real/europe/battle_of_cantigny.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/battle_of_cantigny.tmx#terrain_atlas": {
+            "scaleInDock": 0.7015
         },
         "tiles/real/europe/battle_of_passchendaele.tmx": {
             "expandedObjectLayers": [
@@ -1298,23 +1316,24 @@
     "last.externalTilesetPath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/maps/tiles",
     "last.imagePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfare/maps/images/temp_backgrounds",
     "last.objectTemplatePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/tiles/game_objects/templates/units",
-    "map.height": 25,
+    "map.height": 15,
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": "5",
     "map.orientation": "4",
     "map.renderOrder": "1",
     "map.tileHeight": 64,
     "map.tileWidth": 74,
-    "map.width": 25,
+    "map.width": 15,
     "openFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/battle_of_amiens.tmx"
+        "tiles/real/europe/battle_of_amiens.tmx",
+        "tiles/real/europe/battle_of_cantigny.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/battle_of_amiens.tmx",
+        "tiles/real/europe/battle_of_cantigny.tmx",
+        "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/test/10x10_ai_win_defeat_dialogs.tmx",
         "tiles/test/10x10_attack_unreachable_unit.tmx",
         "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
@@ -1323,8 +1342,7 @@
         "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/test/10x10_attack_unreachable_unit_land.tmx",
         "tiles/test/15x15_balance_general.tmx",
-        "tiles/test/10x10_ai_protect_pc_check.tmx",
-        "tiles/test/10x10_disable_attacking_unit.tmx"
+        "tiles/test/10x10_ai_protect_pc_check.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,

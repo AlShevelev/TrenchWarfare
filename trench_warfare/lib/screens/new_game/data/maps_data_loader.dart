@@ -36,6 +36,8 @@ class MapsDataLoader {
     for (var i = 0; i < mapsFileNames.length; i++) {
       final mapFileName = mapsFileNames[i];
 
+      Logger.debug('Map file name: $mapFileName');
+
       final mapFile = await MapDecoder.openFile(mapFileName);
 
       final metadataRecord = mapFile.getMetadata();
