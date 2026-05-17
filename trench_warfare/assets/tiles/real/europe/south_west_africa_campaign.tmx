@@ -3,40 +3,40 @@
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;South West Africa campaign&quot;, &quot;ru&quot;: &quot;Кампания в Юго-Западной Африке&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The South West Africa campaign was a World War I offensive in which Great Britain forces invaded German South-West Africa, to stop German use of its ports and wireless stations. After fighting in harsh desert conditions, british troops occupied Windhoek and pushed the Germans into the northwest corner of the territory.\n\nThe campaign ended with a German surrender, becoming one of the first major Allied successes of the war and a victory won with relatively low casualties.&quot;, &quot;ru&quot;: &quot;Юго-Западная Африканская кампания — это наступление в Первой мировой войне, в ходе которого британские войска вторглись в Германскую Юго-Западную Африку, чтобы помешать Германии использовать её порты и радиостанции. После боев в суровых условиях пустыни британские войска заняли Виндхук и оттеснили немцев в северо-западный угол территории.\n\nКампания завершилась капитуляцией Германии, став одним из первых крупных успехов союзников в войне и победой, одержанной с относительно небольшими потерями.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1914-09-15&quot;, &quot;to&quot;: &quot;1915-07-09&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: true }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1500, &quot;startIndustryPoints&quot;: 750 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2000, &quot;startIndustryPoints&quot;: 1000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;germany&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;war&quot; } ] }"/>
  </properties>
- <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
-  <image source="../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="88" columns="8">
+  <image source="../images/tiles/terrain_atlas_new.png" width="592" height="704"/>
  </tileset>
- <tileset firstgid="73" source="game_objects.tsx"/>
+ <tileset firstgid="89" source="game_objects.tsx"/>
  <layer id="4" name="Terrain" width="25" height="30">
   <data encoding="csv">
-2,3,3,3,3,3,3,3,26,21,26,26,26,26,26,20,26,26,26,26,26,26,26,28,26,
-2,2,3,3,3,3,3,3,26,26,26,26,28,26,20,22,21,26,26,27,22,26,27,21,26,
+2,3,3,3,3,3,3,3,26,18,26,26,26,26,26,20,26,26,26,26,26,26,26,28,26,
+2,2,3,3,3,3,3,3,26,26,26,26,28,26,20,19,19,26,26,27,18,26,27,19,26,
 2,2,2,3,3,3,3,3,3,3,3,3,26,26,26,26,26,20,26,27,26,26,26,26,26,
 2,2,2,2,3,3,3,3,3,3,3,3,3,3,26,3,26,26,26,26,26,26,26,26,26,
 2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,26,26,27,26,26,26,26,26,
-2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,26,26,20,26,26,22,26,26,21,
+2,2,2,2,3,3,3,3,23,3,3,3,3,3,3,3,26,26,20,26,26,19,26,26,18,
 2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,26,26,26,28,26,26,28,26,
 2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,26,26,26,26,26,26,26,
-2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,26,26,26,26,21,26,26,
+2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,26,26,26,26,18,26,26,
 2,2,2,2,2,2,3,3,3,3,3,3,28,3,3,3,3,3,3,3,3,3,26,3,26,
 2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,28,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,28,28,3,3,3,3,3,3,3,3,3,3,3,3,28,3,3,
-2,2,2,2,2,2,2,2,28,28,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,28,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,3,3,3,3,28,3,3,28,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+2,2,2,2,2,2,2,2,28,28,3,3,3,3,3,3,3,3,3,3,3,3,28,3,24,
+2,2,2,2,2,2,2,2,28,28,3,3,3,3,3,3,3,3,3,3,3,3,3,76,24,
+2,2,2,2,2,2,2,2,28,3,3,3,3,3,3,3,3,25,3,3,3,3,73,81,82,
+2,2,2,2,2,2,2,2,2,3,3,3,23,28,3,3,28,3,3,3,3,3,76,80,79,
+2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,77,73,82,
+2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,76,
 2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,28,3,3,3,28,3,3,3,
-2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,3,28,3,3,3,28,3,3,3,28,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,23,74,73,
+2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,73,75,80,78,
+2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,77,79,78,80,
+2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,23,3,3,3,3,3,75,80,82,80,
+2,2,2,2,2,2,2,2,2,2,3,28,3,3,24,28,3,3,25,28,3,3,74,73,79,
+2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,74,
 2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
 2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,
-2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,28,3,3,3,3,
+2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,24,3,3,3,
+2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,28,25,3,3,3,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,28,3,3,3,3,3,3,3,3
 </data>
@@ -76,7 +76,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="GameObjects">
-  <object id="1" name="greatBritain" type="ownership" gid="107" x="610.815" y="1507" width="64" height="64">
+  <object id="1" name="greatBritain" type="ownership" gid="123" x="610.815" y="1507" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="22"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -86,7 +86,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="2" name="greatBritain" type="ownership" gid="107" x="885.302" y="1916.39" width="64" height="64">
+  <object id="2" name="greatBritain" type="ownership" gid="123" x="885.302" y="1916.39" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="20"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -96,7 +96,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="3" name="greatBritain" type="ownership" gid="107" x="442.243" y="899.378" width="64" height="64">
+  <object id="3" name="greatBritain" type="ownership" gid="123" x="442.243" y="899.378" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="26"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -106,7 +106,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="4" name="greatBritain" type="ownership" gid="107" x="445.419" y="767.332" width="64" height="64">
+  <object id="4" name="greatBritain" type="ownership" gid="123" x="445.419" y="767.332" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="27"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -116,25 +116,25 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="20" name="level1" type="city" gid="88" x="879.777" y="2026.53" width="64" height="64">
+  <object id="20" name="level1" type="city" gid="104" x="879.777" y="2026.53" width="64" height="64">
    <properties>
     <property name="name_en" value="Port Nolloth"/>
     <property name="name_ru" value="Порт-Ноллот"/>
    </properties>
   </object>
-  <object id="22" name="level2" type="city" gid="89" x="545.221" y="1538.03" width="64" height="64">
+  <object id="22" name="level2" type="city" gid="105" x="545.221" y="1538.03" width="64" height="64">
    <properties>
     <property name="name_en" value="Lüderitz Bay"/>
     <property name="name_ru" value="Людерицбухта"/>
    </properties>
   </object>
-  <object id="24" name="level1" type="factory" gid="84" x="1116.49" y="1473.02" width="64" height="64">
+  <object id="24" name="level1" type="factory" gid="100" x="1116.49" y="1473.02" width="64" height="64">
    <properties>
     <property name="name_en" value="Keetmanshoop"/>
     <property name="name_ru" value="Китмансхуп"/>
    </properties>
   </object>
-  <object id="25" name="germany" type="ownership" gid="118" x="1105.61" y="1794.35" width="64" height="64">
+  <object id="25" name="germany" type="ownership" gid="134" x="1105.61" y="1794.35" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="47"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -144,19 +144,19 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="26" name="level1" type="factory" gid="84" x="386.918" y="929.541" width="64" height="64">
+  <object id="26" name="level1" type="factory" gid="100" x="386.918" y="929.541" width="64" height="64">
    <properties>
     <property name="name_en" value="Botha"/>
     <property name="name_ru" value="Бота"/>
    </properties>
   </object>
-  <object id="27" name="level2" type="factory" gid="85" x="384.876" y="806.273" width="64" height="64">
+  <object id="27" name="level2" type="factory" gid="101" x="384.876" y="806.273" width="64" height="64">
    <properties>
     <property name="name_en" value="Swakopmund"/>
     <property name="name_ru" value="Свакопмунд"/>
    </properties>
   </object>
-  <object id="28" name="germany" type="ownership" gid="118" x="1054.72" y="1510.88" width="64" height="64">
+  <object id="28" name="germany" type="ownership" gid="134" x="1054.72" y="1510.88" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="24"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -166,13 +166,13 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="29" name="level2" type="factory" gid="85" x="997.518" y="713.14" width="64" height="64">
+  <object id="29" name="level2" type="factory" gid="101" x="997.518" y="713.14" width="64" height="64">
    <properties>
     <property name="name_en" value="Windhuk"/>
     <property name="name_ru" value="Виндхук"/>
    </properties>
   </object>
-  <object id="30" name="germany" type="ownership" gid="118" x="834.586" y="1506.36" width="64" height="64">
+  <object id="30" name="germany" type="ownership" gid="134" x="834.586" y="1506.36" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="48"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -182,7 +182,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="31" name="germany" type="ownership" gid="118" x="943.062" y="1185.93" width="64" height="64">
+  <object id="31" name="germany" type="ownership" gid="134" x="943.062" y="1185.93" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="49"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -192,7 +192,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="32" name="germany" type="ownership" gid="118" x="1160.06" y="1185.92" width="64" height="64">
+  <object id="32" name="germany" type="ownership" gid="134" x="1160.06" y="1185.92" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="51"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -202,7 +202,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="35" name="germany" type="ownership" gid="118" x="723.072" y="995.811" width="64" height="64">
+  <object id="35" name="germany" type="ownership" gid="134" x="723.072" y="995.811" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="44"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -212,7 +212,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="36" name="germany" type="ownership" gid="118" x="885.641" y="958.192" width="64" height="64">
+  <object id="36" name="germany" type="ownership" gid="134" x="885.641" y="958.192" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="50"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -222,7 +222,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="37" name="germany" type="ownership" gid="118" x="884.297" y="704.262" width="64" height="64">
+  <object id="37" name="germany" type="ownership" gid="134" x="884.297" y="704.262" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="29"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -232,7 +232,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="38" name="germany" type="ownership" gid="118" x="1213.47" y="771.439" width="64" height="64">
+  <object id="38" name="germany" type="ownership" gid="134" x="1213.47" y="771.439" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="43"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -242,7 +242,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="39" name="germany" type="ownership" gid="118" x="671.051" y="643.991" width="64" height="64">
+  <object id="39" name="germany" type="ownership" gid="134" x="671.051" y="643.991" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="52"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -252,7 +252,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="40" name="germany" type="ownership" gid="118" x="942.07" y="483.921" width="64" height="64">
+  <object id="40" name="germany" type="ownership" gid="134" x="942.07" y="483.921" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="54"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -262,7 +262,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="41" name="germany" type="ownership" gid="118" x="938.039" y="289.107" width="64" height="64">
+  <object id="41" name="germany" type="ownership" gid="134" x="938.039" y="289.107" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="45"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -272,7 +272,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="42" name="germany" type="ownership" gid="118" x="1048.21" y="101.011" width="64" height="64">
+  <object id="42" name="germany" type="ownership" gid="134" x="1048.21" y="101.011" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="46"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -282,67 +282,67 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="43" name="level1" type="city" gid="88" x="1269.8" y="820.259" width="64" height="64">
+  <object id="43" name="level1" type="city" gid="104" x="1269.8" y="820.259" width="64" height="64">
    <properties>
     <property name="name_en" value="Gobabis"/>
     <property name="name_ru" value="Гобабис"/>
    </properties>
   </object>
-  <object id="44" name="level1" type="city" gid="88" x="668.07" y="1049.71" width="64" height="64">
+  <object id="44" name="level1" type="city" gid="104" x="668.07" y="1049.71" width="64" height="64">
    <properties>
     <property name="name_en" value="Nauchas"/>
     <property name="name_ru" value="Начас"/>
    </properties>
   </object>
-  <object id="45" name="level2" type="city" gid="89" x="885.818" y="232.575" width="64" height="64">
+  <object id="45" name="level2" type="city" gid="105" x="885.818" y="232.575" width="64" height="64">
    <properties>
     <property name="name_en" value="Otavi"/>
     <property name="name_ru" value="Отави"/>
    </properties>
   </object>
-  <object id="46" name="level1" type="city" gid="88" x="1062.63" y="-4.74792" width="64" height="64">
+  <object id="46" name="level1" type="city" gid="104" x="1062.63" y="-4.74792" width="64" height="64">
    <properties>
     <property name="name_en" value="Tsumeb"/>
     <property name="name_ru" value="Цумеб"/>
    </properties>
   </object>
-  <object id="47" name="level1" type="city" gid="88" x="1122.8" y="1875.66" width="64" height="64">
+  <object id="47" name="level1" type="city" gid="104" x="1122.8" y="1875.66" width="64" height="64">
    <properties>
     <property name="name_en" value="Warmbad"/>
     <property name="name_ru" value="Вармбад"/>
    </properties>
   </object>
-  <object id="48" name="level1" type="city" gid="88" x="828.538" y="1573.38" width="64" height="64">
+  <object id="48" name="level1" type="city" gid="104" x="828.538" y="1573.38" width="64" height="64">
    <properties>
     <property name="name_en" value="Bethanien"/>
     <property name="name_ru" value="Бетанен"/>
    </properties>
   </object>
-  <object id="49" name="level1" type="city" gid="88" x="892.695" y="1153.73" width="64" height="64">
+  <object id="49" name="level1" type="city" gid="104" x="892.695" y="1153.73" width="64" height="64">
    <properties>
     <property name="name_en" value="Gibeon"/>
     <property name="name_ru" value="Гибеон"/>
    </properties>
   </object>
-  <object id="50" name="level1" type="city" gid="88" x="944.884" y="992.755" width="64" height="64">
+  <object id="50" name="level1" type="city" gid="104" x="944.884" y="992.755" width="64" height="64">
    <properties>
     <property name="name_en" value="Rehoboth"/>
     <property name="name_ru" value="Рехобот"/>
    </properties>
   </object>
-  <object id="51" name="level1" type="city" gid="88" x="1214.7" y="1152.68" width="64" height="64">
+  <object id="51" name="level1" type="city" gid="104" x="1214.7" y="1152.68" width="64" height="64">
    <properties>
     <property name="name_en" value="Gochas"/>
     <property name="name_ru" value="Гочас"/>
    </properties>
   </object>
-  <object id="52" name="level1" type="city" gid="88" x="612.641" y="592.35" width="64" height="64">
+  <object id="52" name="level1" type="city" gid="104" x="612.641" y="592.35" width="64" height="64">
    <properties>
     <property name="name_en" value="Karibib"/>
     <property name="name_ru" value="Карибиб"/>
    </properties>
   </object>
-  <object id="54" name="level1" type="city" gid="88" x="998.863" y="512.306" width="64" height="64">
+  <object id="54" name="level1" type="city" gid="104" x="998.863" y="512.306" width="64" height="64">
    <properties>
     <property name="name_en" value="Waterberg"/>
     <property name="name_ru" value="Ватерберх"/>
@@ -357,7 +357,7 @@
   <object id="58" name="germany" type="ownershipRegion" x="1390.87" y="2.49439">
    <polygon points="0,0 -15.4949,1598.55 -112.186,1631.49 -110.892,1694.12 -16.7052,1723.42 -17.9596,1852.83 -102.27,1882.26 -138.189,1863.31 -179.097,1887.25 -220.504,1889.25 -278.374,1862.81 -518.833,1820.9 -554.253,1850.34 -592.667,1852.33 -652.532,1724.12 -726.865,1689.7 -730.357,1627.34 -780.743,1592.42 -767.274,1502.12 -728.86,1500.62 -711.399,1467.7 -729.359,1438.26 -768.77,1434.77 -799.202,1466.7 -842.105,1438.26 -838.613,1370.42 -840.11,1182.34 -894.487,1148.42 -894.986,894.986 -838.613,863.058 -837.116,732.851 -894.487,699.426 -934.398,699.426 -964.829,730.856 -1004.74,700.424 -1006.73,636.069 -1055.13,599.651 -1060.61,476.927 -1110.5,438.014 -1115.99,381.142 -1169.37,347.219 -1170.87,221.003 -1222.25,184.086 -1225.74,125.717 -1335.5,61.3619 -1318.53,30.9304 -1239.71,-2.49439"/>
   </object>
-  <object id="59" name="infantry" type="unit" gid="99" x="1161.74" y="294.672" width="64" height="64">
+  <object id="59" name="infantry" type="unit" gid="115" x="1161.74" y="294.672" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -369,7 +369,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="60" name="machineGuns" type="unit" gid="95" x="789.894" y="237.331" width="64" height="64">
+  <object id="60" name="machineGuns" type="unit" gid="111" x="789.894" y="237.331" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -381,7 +381,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="61" name="artillery" type="unit" gid="94" x="800.092" y="296.984" width="64" height="64">
+  <object id="61" name="artillery" type="unit" gid="110" x="800.092" y="296.984" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -393,7 +393,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="62" name="infantry" type="unit" gid="99" x="807.649" y="832.519" width="64" height="64">
+  <object id="62" name="infantry" type="unit" gid="115" x="807.649" y="832.519" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -405,7 +405,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="63" name="machineGunnersCart" type="unit" gid="96" x="351.704" y="992.396" width="64" height="64">
+  <object id="63" name="machineGunnersCart" type="unit" gid="112" x="351.704" y="992.396" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -417,7 +417,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="64" name="machineGunnersCart" type="unit" gid="96" x="1164.12" y="1537.16" width="64" height="64">
+  <object id="64" name="machineGunnersCart" type="unit" gid="112" x="1164.12" y="1537.16" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -429,7 +429,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="65" name="machineGuns" type="unit" gid="95" x="480.428" y="1527.47" width="64" height="64">
+  <object id="65" name="machineGuns" type="unit" gid="111" x="480.428" y="1527.47" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -441,7 +441,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="66" name="artillery" type="unit" gid="94" x="490.626" y="1587.12" width="64" height="64">
+  <object id="66" name="artillery" type="unit" gid="110" x="490.626" y="1587.12" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -456,7 +456,7 @@
   <object id="67" name="greatBritain" type="ownershipRegion" x="1375.93" y="1604.94">
    <polygon points="0,0 -94.2418,30.6286 -92.8282,89.5297 5.1833,120.158"/>
   </object>
-  <object id="68" name="infantry" type="unit" gid="99" x="944.741" y="1631.3" width="64" height="64">
+  <object id="68" name="infantry" type="unit" gid="115" x="944.741" y="1631.3" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -468,7 +468,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="69" name="cavalry" type="unit" gid="98" x="947.759" y="1709.19" width="64" height="64">
+  <object id="69" name="cavalry" type="unit" gid="114" x="947.759" y="1709.19" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -480,7 +480,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="70" name="machineGuns" type="unit" gid="95" x="1013.21" y="1628.62" width="64" height="64">
+  <object id="70" name="machineGuns" type="unit" gid="111" x="1013.21" y="1628.62" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -492,7 +492,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="71" name="artillery" type="unit" gid="94" x="1010.19" y="1694.75" width="64" height="64">
+  <object id="71" name="artillery" type="unit" gid="110" x="1010.19" y="1694.75" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -504,7 +504,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="72" name="greatBritain" type="ownership" gid="107" x="1275.02" y="1693.91" width="64" height="64">
+  <object id="72" name="greatBritain" type="ownership" gid="123" x="1275.02" y="1693.91" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -514,7 +514,7 @@
     <property name="unit4" type="object" value="69"/>
    </properties>
   </object>
-  <object id="73" name="greatBritain" type="ownership" gid="107" x="995.087" y="1918.46" width="64" height="64">
+  <object id="73" name="greatBritain" type="ownership" gid="123" x="995.087" y="1918.46" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -524,7 +524,7 @@
     <property name="unit4" type="object" value="69"/>
    </properties>
   </object>
-  <object id="74" name="greatBritain" type="ownership" gid="107" x="1327.38" y="1669.74" width="64" height="64">
+  <object id="74" name="greatBritain" type="ownership" gid="123" x="1327.38" y="1669.74" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -534,7 +534,7 @@
     <property name="unit4" type="object" value="71"/>
    </properties>
   </object>
-  <object id="75" name="greatBritain" type="ownership" gid="107" x="1325.39" y="1729.69" width="64" height="64">
+  <object id="75" name="greatBritain" type="ownership" gid="123" x="1325.39" y="1729.69" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -544,7 +544,7 @@
     <property name="unit4" type="object" value="71"/>
    </properties>
   </object>
-  <object id="76" name="greatBritain" type="ownership" gid="107" x="938.698" y="1953.7" width="64" height="64">
+  <object id="76" name="greatBritain" type="ownership" gid="123" x="938.698" y="1953.7" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -554,7 +554,7 @@
     <property name="unit4" type="object" value="71"/>
    </properties>
   </object>
-  <object id="77" name="greatBritain" type="ownership" gid="107" x="1047.45" y="1952.69" width="64" height="64">
+  <object id="77" name="greatBritain" type="ownership" gid="123" x="1047.45" y="1952.69" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -564,7 +564,7 @@
     <property name="unit4" type="object" value="71"/>
    </properties>
   </object>
-  <object id="78" name="greatBritain" type="ownership" gid="107" x="447.279" y="830.461" width="64" height="64">
+  <object id="78" name="greatBritain" type="ownership" gid="123" x="447.279" y="830.461" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -574,7 +574,7 @@
     <property name="unit4" type="object" value="69"/>
    </properties>
   </object>
-  <object id="79" name="greatBritain" type="ownership" gid="107" x="494.62" y="811.239" width="64" height="64">
+  <object id="79" name="greatBritain" type="ownership" gid="123" x="494.62" y="811.239" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -584,7 +584,7 @@
     <property name="unit4" type="object" value="71"/>
    </properties>
   </object>
-  <object id="80" name="greatBritain" type="ownership" gid="107" x="498.696" y="871.753" width="64" height="64">
+  <object id="80" name="greatBritain" type="ownership" gid="123" x="498.696" y="871.753" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>

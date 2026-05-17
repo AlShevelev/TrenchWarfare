@@ -3,15 +3,15 @@
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;Brusilov offensive&quot;, &quot;ru&quot;: &quot;Брусиловский прорыв&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;The Brusilov offensive was a series of operations by the Southwestern Front under the command of General A.A. Brusilov during World War I.\n\nDuring the operations, the Austro-German troops were thrown back 50-100 km and Bukovina and part of Galicia and Volyn were occupied.\n\nOne of the largest military operations of World War I in terms of total human losses.&quot;, &quot;ru&quot;: &quot;Брусиловский прорыв — ряд операций соединений Юго-Западного фронта под командованием генерала А.А. Брусилова во время Первой мировой войны.\n\nВ ходе операций австро-германские войска были отброшены на 50-100 км и были заняты Буковина и часть Галиции и Волыни.\n\nОдна из крупнейших военных операций Первой мировой войны по суммарным людским потерям.&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1916-06-04&quot;, &quot;to&quot;: &quot;1916-09-20&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: true }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;russia&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 3000, &quot;startIndustryPoints&quot;: 3000 }, { &quot;code&quot;: &quot;austriaHungary&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1500, &quot;startIndustryPoints&quot;: 1500 }, { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 1500, &quot;startIndustryPoints&quot;: 1500 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;austriaHungary&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;russia&quot;, &quot;secondNation&quot;: &quot;germany&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;austriaHungary&quot;, &quot;secondNation&quot;: &quot;germany&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
  </properties>
- <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="72" columns="8">
-  <image source="../../../images/tiles/terrain_atlas_new.png" width="592" height="576"/>
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="88" columns="8">
+  <image source="../../../images/tiles/terrain_atlas_new.png" width="592" height="704"/>
  </tileset>
- <tileset firstgid="73" source="../../game_objects.tsx"/>
- <tileset firstgid="127" name="TempBackground" tilewidth="690" tileheight="1421" tilecount="1" columns="1">
+ <tileset firstgid="89" source="../../game_objects.tsx"/>
+ <tileset firstgid="143" name="TempBackground" tilewidth="690" tileheight="1421" tilecount="1" columns="1">
   <image source="../../../images/temp_backgrounds/brusilov_offensive_without_legend.png" width="690" height="1421"/>
  </tileset>
  <objectgroup id="5" name="TempBackground" visible="0" locked="1">
-  <object id="1" gid="127" x="0.154474" y="1761.67" width="838.472" height="1761.64"/>
+  <object id="1" gid="143" x="0.154474" y="1761.67" width="838.472" height="1761.64"/>
  </objectgroup>
  <layer id="2" name="Terrain" width="15" height="27">
   <data encoding="csv">
@@ -29,19 +29,19 @@
 26,26,14,26,21,21,26,26,26,19,26,26,26,26,26,
 26,22,26,26,20,26,26,26,26,26,18,26,15,26,26,
 20,26,26,26,26,26,26,13,26,26,17,26,26,26,26,
-26,26,26,26,26,26,26,26,24,26,26,26,26,26,26,
+26,26,26,26,26,26,26,26,22,26,26,26,26,26,26,
 26,26,26,26,26,26,26,26,26,26,12,26,16,26,26,
 26,26,15,14,26,6,26,26,26,26,26,26,26,26,26,
 26,26,26,26,26,26,26,22,26,26,21,22,26,26,26,
 26,26,26,26,26,26,6,26,26,26,22,12,26,26,26,
-26,12,26,26,26,26,26,26,13,26,26,26,26,23,26,
-26,26,16,26,26,26,26,24,26,26,26,14,26,26,26,
+26,12,26,26,26,26,26,26,13,26,26,26,26,20,26,
+26,26,16,26,26,26,26,20,26,26,26,14,26,26,26,
 26,26,26,26,16,26,26,26,26,26,26,12,16,26,26,
 26,26,12,13,26,26,26,26,26,26,26,26,26,26,26,
 26,26,15,26,26,26,26,26,26,26,26,26,26,26,26,
-26,26,26,26,25,26,26,26,26,26,26,19,26,26,26,
-26,16,26,26,24,23,26,26,26,26,26,26,26,26,26,
-26,26,26,26,26,26,26,26,26,4,26,25,26,26,26
+26,26,26,26,21,26,26,26,26,26,26,19,26,26,26,
+26,16,26,26,22,21,26,26,26,26,26,26,26,26,26,
+26,26,26,26,26,26,26,26,26,4,26,20,26,26,26
 </data>
  </layer>
  <layer id="1" name="RoadsAndRivers" width="15" height="27">
@@ -85,7 +85,7 @@
   <object id="54" name="austriaHungary" type="ownershipRegion" x="628.324" y="1761.72" visible="0">
    <polygon points="0,0 -625.101,0.405647 -625.507,-1109.85 -564.66,-1168.26 -514.766,-1158.93 -456.352,-1130.13 -431.608,-1087.13 -396.722,-1044.95 -351.29,-1046.16 -298.556,-1024.66 -252.718,-986.533 -254.34,-930.553 -199.172,-869.706 -178.89,-806.02 -175.239,-737.06 -225.54,-639.299 -226.351,-507.464 -218.644,-318.838 -103.034,-242.577 -12.9807,-182.135 -40.5647,-95.7326"/>
   </object>
-  <object id="56" name="russia" type="ownership" gid="110" x="718.084" y="167.725" width="47.738" height="45.8471">
+  <object id="56" name="russia" type="ownership" gid="126" x="718.084" y="167.725" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="82"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -95,7 +95,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="58" name="russia" type="ownership" gid="110" x="662.952" y="647.107" width="47.8918" height="48.9656">
+  <object id="58" name="russia" type="ownership" gid="126" x="662.952" y="647.107" width="47.8918" height="48.9656">
    <properties>
     <property name="productionCenter" type="object" value="84"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -105,7 +105,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="59" name="russia" type="ownership" gid="110" x="662.548" y="968.936" width="50.3113" height="51.9217">
+  <object id="59" name="russia" type="ownership" gid="126" x="662.548" y="968.936" width="50.3113" height="51.9217">
    <properties>
     <property name="productionCenter" type="object" value="88"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -115,7 +115,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="60" name="russia" type="ownership" gid="110" x="500.05" y="872.173" width="41.3102" height="41.3102">
+  <object id="60" name="russia" type="ownership" gid="126" x="500.05" y="872.173" width="41.3102" height="41.3102">
    <properties>
     <property name="productionCenter" type="object" value="89"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -125,7 +125,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="61" name="russia" type="ownership" gid="110" x="497.692" y="1131.5" width="51.7393" height="51.0581">
+  <object id="61" name="russia" type="ownership" gid="126" x="497.692" y="1131.5" width="51.7393" height="51.0581">
    <properties>
     <property name="productionCenter" type="object" value="90"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -135,7 +135,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="64" name="russia" type="ownership" gid="110" x="662.236" y="1738.65" width="48.869" height="49.4093">
+  <object id="64" name="russia" type="ownership" gid="126" x="662.236" y="1738.65" width="48.869" height="49.4093">
    <properties>
     <property name="productionCenter" type="object" value="86"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -145,7 +145,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="65" name="russia" type="ownership" gid="110" x="664.737" y="1159.4" width="47.9073" height="46.8345">
+  <object id="65" name="russia" type="ownership" gid="126" x="664.737" y="1159.4" width="47.9073" height="46.8345">
    <properties>
     <property name="productionCenter" type="object" value="85"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -155,7 +155,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="66" name="russia" type="ownership" gid="110" x="499.057" y="1383.95" width="46.3955" height="47.0475">
+  <object id="66" name="russia" type="ownership" gid="126" x="499.057" y="1383.95" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="87"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -165,7 +165,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="67" name="germany" type="ownership" gid="118" x="277.003" y="171.989" width="51.8716" height="51.216">
+  <object id="67" name="germany" type="ownership" gid="134" x="277.003" y="171.989" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="101"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -175,7 +175,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="68" name="germany" type="ownership" gid="118" x="3.09802" y="330.621" width="49.9834" height="50.3957">
+  <object id="68" name="germany" type="ownership" gid="134" x="3.09802" y="330.621" width="49.9834" height="50.3957">
    <properties>
     <property name="productionCenter" type="object" value="102"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -185,7 +185,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="69" name="germany" type="ownership" gid="118" x="170.773" y="362.254" width="45.2588" height="46.1958">
+  <object id="69" name="germany" type="ownership" gid="134" x="170.773" y="362.254" width="45.2588" height="46.1958">
    <properties>
     <property name="productionCenter" type="object" value="100"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -195,7 +195,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="70" name="germany" type="ownership" gid="118" x="387.875" y="555.439" width="55.5163" height="53.9738">
+  <object id="70" name="germany" type="ownership" gid="134" x="387.875" y="555.439" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="99"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -205,7 +205,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="71" name="austriaHungary" type="ownership" gid="123" x="168.07" y="1449.05" width="49.8491" height="50.4387">
+  <object id="71" name="austriaHungary" type="ownership" gid="139" x="168.07" y="1449.05" width="49.8491" height="50.4387">
    <properties>
     <property name="productionCenter" type="object" value="95"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -215,7 +215,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="73" name="austriaHungary" type="ownership" gid="123" x="328.296" y="909.013" width="60.1747" height="60.9398">
+  <object id="73" name="austriaHungary" type="ownership" gid="139" x="328.296" y="909.013" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="98"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -225,7 +225,7 @@
     <property name="unit4" type="object" value="222"/>
    </properties>
   </object>
-  <object id="74" name="austriaHungary" type="ownership" gid="123" x="273.592" y="1070.08" width="54.2465" height="54.7884">
+  <object id="74" name="austriaHungary" type="ownership" gid="139" x="273.592" y="1070.08" width="54.2465" height="54.7884">
    <properties>
     <property name="productionCenter" type="object" value="97"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -235,7 +235,7 @@
     <property name="unit4" type="object" value="222"/>
    </properties>
   </object>
-  <object id="75" name="austriaHungary" type="ownership" gid="123" x="388.084" y="1643.21" width="46.1656" height="46.8025">
+  <object id="75" name="austriaHungary" type="ownership" gid="139" x="388.084" y="1643.21" width="46.1656" height="46.8025">
    <properties>
     <property name="productionCenter" type="object" value="94"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -245,7 +245,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="76" name="austriaHungary" type="ownership" gid="123" x="166.723" y="1645.68" width="53.528" height="53.9307">
+  <object id="76" name="austriaHungary" type="ownership" gid="139" x="166.723" y="1645.68" width="53.528" height="53.9307">
    <properties>
     <property name="productionCenter" type="object" value="92"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -255,7 +255,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="77" name="austriaHungary" type="ownership" gid="123" x="275.397" y="1196.02" width="53.1628" height="55.8721">
+  <object id="77" name="austriaHungary" type="ownership" gid="139" x="275.397" y="1196.02" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="96"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -265,7 +265,7 @@
     <property name="unit4" type="object" value="222"/>
    </properties>
   </object>
-  <object id="78" name="austriaHungary" type="ownership" gid="123" x="166.224" y="1003.04" width="54.3342" height="53.8255">
+  <object id="78" name="austriaHungary" type="ownership" gid="139" x="166.224" y="1003.04" width="54.3342" height="53.8255">
    <properties>
     <property name="productionCenter" type="object" value="93"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -275,7 +275,7 @@
     <property name="unit4" type="object" value="222"/>
    </properties>
   </object>
-  <object id="79" name="germany" type="ownership" gid="118" x="57.3169" y="554.58" width="51.9612" height="51.1845">
+  <object id="79" name="germany" type="ownership" gid="134" x="57.3169" y="554.58" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="103"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -285,7 +285,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="80" name="germany" type="ownership" gid="118" x="221.102" y="718.161" width="57.0097" height="56.233">
+  <object id="80" name="germany" type="ownership" gid="134" x="221.102" y="718.161" width="57.0097" height="56.233">
    <properties>
     <property name="productionCenter" type="object" value="104"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -295,7 +295,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="81" name="russia" type="ownership" gid="110" x="715.902" y="1515.22" width="51.7393" height="50.3769">
+  <object id="81" name="russia" type="ownership" gid="126" x="715.902" y="1515.22" width="51.7393" height="50.3769">
    <properties>
     <property name="productionCenter" type="object" value="91"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -305,154 +305,154 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="82" name="level1" type="city" gid="88" x="740.071" y="128.729" width="34.0789" height="31.6231">
+  <object id="82" name="level1" type="city" gid="104" x="740.071" y="128.729" width="34.0789" height="31.6231">
    <properties>
     <property name="name_en" value="Dubrovytsia"/>
     <property name="name_ru" value="Дубровица"/>
    </properties>
   </object>
-  <object id="84" name="level2" type="city" gid="89" x="682.082" y="615.401" width="39.3007" height="38.7637">
+  <object id="84" name="level2" type="city" gid="105" x="682.082" y="615.401" width="39.3007" height="38.7637">
    <properties>
     <property name="name_en" value="Rivne"/>
     <property name="name_ru" value="Ровно"/>
    </properties>
   </object>
-  <object id="85" name="level2" type="factory" gid="85" x="684.625" y="1124.33" width="38.156" height="34.9255">
+  <object id="85" name="level2" type="factory" gid="101" x="684.625" y="1124.33" width="38.156" height="34.9255">
    <properties>
     <property name="name_en" value="Volochysk"/>
     <property name="name_ru" value="Волочиск"/>
    </properties>
   </object>
-  <object id="86" name="level1" type="city" gid="88" x="685.462" y="1699.13" width="33.6793" height="32.8901">
+  <object id="86" name="level1" type="city" gid="104" x="685.462" y="1699.13" width="33.6793" height="32.8901">
    <properties>
     <property name="name_en" value="Boyan"/>
     <property name="name_ru" value="Боян"/>
    </properties>
   </object>
-  <object id="87" name="level1" type="factory" gid="84" x="518.955" y="1348.97" width="36.6152" height="36.6152">
+  <object id="87" name="level1" type="factory" gid="100" x="518.955" y="1348.97" width="36.6152" height="36.6152">
    <properties>
     <property name="name_en" value="Buchach"/>
     <property name="name_ru" value="Бучач"/>
    </properties>
   </object>
-  <object id="88" name="level2" type="city" gid="89" x="684.11" y="934.801" width="39.3007" height="38.7637">
+  <object id="88" name="level2" type="city" gid="105" x="684.11" y="934.801" width="39.3007" height="38.7637">
    <properties>
     <property name="name_en" value="Yampil"/>
     <property name="name_ru" value="Ямполь"/>
    </properties>
   </object>
-  <object id="89" name="level1" type="city" gid="88" x="518.027" y="840.624" width="39.0294" height="36.9861">
+  <object id="89" name="level1" type="city" gid="104" x="518.027" y="840.624" width="39.0294" height="36.9861">
    <properties>
     <property name="name_en" value="Sapanov"/>
     <property name="name_ru" value="Сапанов"/>
    </properties>
   </object>
-  <object id="90" name="level2" type="city" gid="89" x="519.822" y="1094.98" width="39.3007" height="38.7637">
+  <object id="90" name="level2" type="city" gid="105" x="519.822" y="1094.98" width="39.3007" height="38.7637">
    <properties>
     <property name="name_en" value="Ternopil"/>
     <property name="name_ru" value="Тернополь"/>
    </properties>
   </object>
-  <object id="91" name="level1" type="city" gid="88" x="741.401" y="1476.82" width="36.1688" height="35.262">
+  <object id="91" name="level1" type="city" gid="104" x="741.401" y="1476.82" width="36.1688" height="35.262">
    <properties>
     <property name="name_en" value="Kamianets-Podilskyi"/>
     <property name="name_ru" value="Каменец-Подольский"/>
    </properties>
   </object>
-  <object id="92" name="level1" type="factory" gid="84" x="191.133" y="1607.28" width="36.6152" height="36.6152">
+  <object id="92" name="level1" type="factory" gid="100" x="191.133" y="1607.28" width="36.6152" height="36.6152">
    <properties>
     <property name="name_en" value="Delyatyn"/>
     <property name="name_ru" value="Делятин"/>
    </properties>
   </object>
-  <object id="93" name="level2" type="city" gid="89" x="190.453" y="968.561" width="39.3007" height="38.7637">
+  <object id="93" name="level2" type="city" gid="105" x="190.453" y="968.561" width="39.3007" height="38.7637">
    <properties>
     <property name="name_en" value="Zolochiv"/>
     <property name="name_ru" value="Золочев"/>
    </properties>
   </object>
-  <object id="94" name="level1" type="city" gid="88" x="410.001" y="1606.5" width="37.9716" height="37.6593">
+  <object id="94" name="level1" type="city" gid="104" x="410.001" y="1606.5" width="37.9716" height="37.6593">
    <properties>
     <property name="name_en" value="Zabolotiv"/>
     <property name="name_ru" value="Заболотов"/>
    </properties>
   </object>
-  <object id="95" name="level1" type="city" gid="88" x="187.972" y="1413.95" width="37.9716" height="37.6593">
+  <object id="95" name="level1" type="city" gid="104" x="187.972" y="1413.95" width="37.9716" height="37.6593">
    <properties>
     <property name="name_en" value="Stanislav"/>
     <property name="name_ru" value="Станислав"/>
    </properties>
   </object>
-  <object id="96" name="level1" type="city" gid="88" x="300.169" y="1157.55" width="37.9716" height="37.6593">
+  <object id="96" name="level1" type="city" gid="104" x="300.169" y="1157.55" width="37.9716" height="37.6593">
    <properties>
     <property name="name_en" value="Berezhany"/>
     <property name="name_ru" value="Бережаны"/>
    </properties>
   </object>
-  <object id="97" name="level1" type="city" gid="88" x="299.627" y="1029.12" width="37.9716" height="37.6593">
+  <object id="97" name="level1" type="city" gid="104" x="299.627" y="1029.12" width="37.9716" height="37.6593">
    <properties>
     <property name="name_en" value="Ozerna"/>
     <property name="name_ru" value="Озерна"/>
    </properties>
   </object>
-  <object id="98" name="level1" type="city" gid="88" x="354.129" y="870.453" width="37.9716" height="37.6593">
+  <object id="98" name="level1" type="city" gid="104" x="354.129" y="870.453" width="37.9716" height="37.6593">
    <properties>
     <property name="name_en" value="Brody"/>
     <property name="name_ru" value="Броды"/>
    </properties>
   </object>
-  <object id="99" name="level3" type="city" gid="90" x="410.997" y="513.958" width="34.6388" height="33.3893">
+  <object id="99" name="level3" type="city" gid="106" x="410.997" y="513.958" width="34.6388" height="33.3893">
    <properties>
     <property name="name_en" value="Lutsk"/>
     <property name="name_ru" value="Луцк"/>
    </properties>
   </object>
-  <object id="100" name="level2" type="factory" gid="85" x="189.118" y="323.471" width="38.156" height="34.9255">
+  <object id="100" name="level2" type="factory" gid="101" x="189.118" y="323.471" width="38.156" height="34.9255">
    <properties>
     <property name="name_en" value="Kovel"/>
     <property name="name_ru" value="Ковель"/>
    </properties>
   </object>
-  <object id="101" name="level1" type="city" gid="88" x="297.462" y="130.981" width="36.4071" height="33.7082">
+  <object id="101" name="level1" type="city" gid="104" x="297.462" y="130.981" width="36.4071" height="33.7082">
    <properties>
     <property name="name_en" value="Kamin-Kashyrskyi"/>
     <property name="name_ru" value="Камень-Каширский"/>
    </properties>
   </object>
-  <object id="102" name="level1" type="city" gid="88" x="23.3595" y="293.582" width="39.0294" height="36.9861">
+  <object id="102" name="level1" type="city" gid="104" x="23.3595" y="293.582" width="39.0294" height="36.9861">
    <properties>
     <property name="name_en" value="Liuboml"/>
     <property name="name_ru" value="Любомль"/>
    </properties>
   </object>
-  <object id="103" name="level1" type="city" gid="88" x="76.4076" y="517.041" width="39.0294" height="36.9861">
+  <object id="103" name="level1" type="city" gid="104" x="76.4076" y="517.041" width="39.0294" height="36.9861">
    <properties>
     <property name="name_en" value="Vladimir-Volynsky"/>
     <property name="name_ru" value="Владимир-Волынский"/>
    </properties>
   </object>
-  <object id="104" name="level1" type="city" gid="88" x="244.563" y="678.983" width="39.0294" height="36.9861">
+  <object id="104" name="level1" type="city" gid="104" x="244.563" y="678.983" width="39.0294" height="36.9861">
    <properties>
     <property name="name_en" value="Horokhiv"/>
     <property name="name_ru" value="Горохов"/>
    </properties>
   </object>
-  <object id="106" name="landFort" type="terrainModifier" gid="76" x="495.812" y="316.516" width="64" height="64"/>
-  <object id="107" name="landFort" type="terrainModifier" gid="76" x="469.993" y="1546.39" width="64" height="64"/>
-  <object id="110" name="trench" type="terrainModifier" gid="75" x="386.676" y="608.833" width="64" height="64"/>
-  <object id="114" name="trench" type="terrainModifier" gid="75" x="335.072" y="1026.91" width="64" height="64"/>
-  <object id="116" name="trench" type="terrainModifier" gid="75" x="281.328" y="1437.71" width="64" height="64"/>
-  <object id="117" name="trench" type="terrainModifier" gid="75" x="503.502" y="1697.23" width="64" height="64"/>
-  <object id="122" name="landMine" type="terrainModifier" gid="74" x="447.639" y="1604.04" width="64" height="64"/>
-  <object id="124" name="landMine" type="terrainModifier" gid="74" x="280.85" y="1507.26" width="64" height="64"/>
-  <object id="126" name="landMine" type="terrainModifier" gid="74" x="444.961" y="320.469" width="64" height="64"/>
-  <object id="127" name="landFort" type="terrainModifier" gid="76" x="252.875" y="1293.33" width="64" height="64"/>
-  <object id="130" name="landMine" type="terrainModifier" gid="74" x="444.527" y="99.4082" width="64" height="64"/>
-  <object id="131" name="trench" type="terrainModifier" gid="75" x="445.943" y="386.55" width="64" height="64"/>
-  <object id="133" name="landMine" type="terrainModifier" gid="74" x="344.107" y="763.917" width="64" height="64"/>
-  <object id="134" name="trench" type="terrainModifier" gid="75" x="445.792" y="900.087" width="64" height="64"/>
-  <object id="135" name="landMine" type="terrainModifier" gid="74" x="335.533" y="1154.98" width="64" height="64"/>
-  <object id="136" name="germany" type="ownership" gid="118" x="443.943" y="331.279" width="51.8716" height="51.216">
+  <object id="106" name="landFort" type="terrainModifier" gid="92" x="495.812" y="316.516" width="64" height="64"/>
+  <object id="107" name="landFort" type="terrainModifier" gid="92" x="469.993" y="1546.39" width="64" height="64"/>
+  <object id="110" name="trench" type="terrainModifier" gid="91" x="386.676" y="608.833" width="64" height="64"/>
+  <object id="114" name="trench" type="terrainModifier" gid="91" x="335.072" y="1026.91" width="64" height="64"/>
+  <object id="116" name="trench" type="terrainModifier" gid="91" x="281.328" y="1437.71" width="64" height="64"/>
+  <object id="117" name="trench" type="terrainModifier" gid="91" x="503.502" y="1697.23" width="64" height="64"/>
+  <object id="122" name="landMine" type="terrainModifier" gid="90" x="447.639" y="1604.04" width="64" height="64"/>
+  <object id="124" name="landMine" type="terrainModifier" gid="90" x="280.85" y="1507.26" width="64" height="64"/>
+  <object id="126" name="landMine" type="terrainModifier" gid="90" x="444.961" y="320.469" width="64" height="64"/>
+  <object id="127" name="landFort" type="terrainModifier" gid="92" x="252.875" y="1293.33" width="64" height="64"/>
+  <object id="130" name="landMine" type="terrainModifier" gid="90" x="444.527" y="99.4082" width="64" height="64"/>
+  <object id="131" name="trench" type="terrainModifier" gid="91" x="445.943" y="386.55" width="64" height="64"/>
+  <object id="133" name="landMine" type="terrainModifier" gid="90" x="344.107" y="763.917" width="64" height="64"/>
+  <object id="134" name="trench" type="terrainModifier" gid="91" x="445.792" y="900.087" width="64" height="64"/>
+  <object id="135" name="landMine" type="terrainModifier" gid="90" x="335.533" y="1154.98" width="64" height="64"/>
+  <object id="136" name="germany" type="ownership" gid="134" x="443.943" y="331.279" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="126"/>
@@ -462,7 +462,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="138" name="germany" type="ownership" gid="118" x="442.999" y="394.144" width="51.8716" height="51.216">
+  <object id="138" name="germany" type="ownership" gid="134" x="442.999" y="394.144" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="131"/>
@@ -472,7 +472,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="139" name="germany" type="ownership" gid="118" x="499.638" y="362.044" width="51.8716" height="51.216">
+  <object id="139" name="germany" type="ownership" gid="134" x="499.638" y="362.044" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="106"/>
@@ -482,7 +482,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="140" name="germany" type="ownership" gid="118" x="444.646" y="141.057" width="51.8716" height="51.216">
+  <object id="140" name="germany" type="ownership" gid="134" x="444.646" y="141.057" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="130"/>
@@ -492,7 +492,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="141" name="germany" type="ownership" gid="118" x="446.403" y="69.9398" width="51.8716" height="51.216">
+  <object id="141" name="germany" type="ownership" gid="134" x="446.403" y="69.9398" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="130"/>
@@ -502,7 +502,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="142" name="germany" type="ownership" gid="118" x="441.548" y="525.171" width="55.5163" height="53.9738">
+  <object id="142" name="germany" type="ownership" gid="134" x="441.548" y="525.171" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="110"/>
@@ -512,7 +512,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="143" name="germany" type="ownership" gid="118" x="447.866" y="586.727" width="55.5163" height="53.9738">
+  <object id="143" name="germany" type="ownership" gid="134" x="447.866" y="586.727" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="110"/>
@@ -522,7 +522,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="144" name="germany" type="ownership" gid="118" x="443.113" y="652.615" width="55.5163" height="53.9738">
+  <object id="144" name="germany" type="ownership" gid="134" x="443.113" y="652.615" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="110"/>
@@ -532,7 +532,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="145" name="germany" type="ownership" gid="118" x="450.132" y="704.911" width="55.5163" height="53.9738">
+  <object id="145" name="germany" type="ownership" gid="134" x="450.132" y="704.911" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="110"/>
@@ -542,7 +542,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="146" name="austriaHungary" type="ownership" gid="123" x="326.116" y="844.578" width="60.1747" height="60.9398">
+  <object id="146" name="austriaHungary" type="ownership" gid="139" x="326.116" y="844.578" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="133"/>
@@ -552,7 +552,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="148" name="germany" type="ownership" gid="118" x="442.884" y="909.455" width="55.5163" height="53.9738">
+  <object id="148" name="germany" type="ownership" gid="134" x="442.884" y="909.455" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="134"/>
@@ -562,7 +562,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="149" name="austriaHungary" type="ownership" gid="123" x="383.614" y="1068.67" width="60.1747" height="60.9398">
+  <object id="149" name="austriaHungary" type="ownership" gid="139" x="383.614" y="1068.67" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="114"/>
@@ -572,7 +572,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="150" name="austriaHungary" type="ownership" gid="123" x="385.39" y="1004.84" width="60.1747" height="60.9398">
+  <object id="150" name="austriaHungary" type="ownership" gid="139" x="385.39" y="1004.84" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="114"/>
@@ -582,7 +582,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="151" name="austriaHungary" type="ownership" gid="123" x="329.121" y="1100.15" width="60.1747" height="60.9398">
+  <object id="151" name="austriaHungary" type="ownership" gid="139" x="329.121" y="1100.15" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="114"/>
@@ -592,7 +592,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="152" name="austriaHungary" type="ownership" gid="123" x="328.354" y="1166.75" width="60.1747" height="60.9398">
+  <object id="152" name="austriaHungary" type="ownership" gid="139" x="328.354" y="1166.75" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="114"/>
@@ -602,7 +602,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="154" name="austriaHungary" type="ownership" gid="123" x="220.766" y="1291.52" width="53.1628" height="55.8721">
+  <object id="154" name="austriaHungary" type="ownership" gid="139" x="220.766" y="1291.52" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="127"/>
@@ -612,7 +612,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="155" name="austriaHungary" type="ownership" gid="123" x="276.91" y="1324.55" width="53.1628" height="55.8721">
+  <object id="155" name="austriaHungary" type="ownership" gid="139" x="276.91" y="1324.55" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="127"/>
@@ -622,7 +622,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="156" name="austriaHungary" type="ownership" gid="123" x="275.91" y="1452.27" width="53.1628" height="55.8721">
+  <object id="156" name="austriaHungary" type="ownership" gid="139" x="275.91" y="1452.27" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="116"/>
@@ -632,7 +632,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="157" name="austriaHungary" type="ownership" gid="123" x="275.82" y="1517.13" width="53.1628" height="55.8721">
+  <object id="157" name="austriaHungary" type="ownership" gid="139" x="275.82" y="1517.13" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="124"/>
@@ -642,7 +642,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="158" name="austriaHungary" type="ownership" gid="123" x="443.837" y="1550.69" width="53.1628" height="55.8721">
+  <object id="158" name="austriaHungary" type="ownership" gid="139" x="443.837" y="1550.69" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="107"/>
@@ -652,7 +652,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="159" name="austriaHungary" type="ownership" gid="123" x="496.105" y="1580.56" width="53.1628" height="55.8721">
+  <object id="159" name="austriaHungary" type="ownership" gid="139" x="496.105" y="1580.56" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="107"/>
@@ -662,7 +662,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="160" name="austriaHungary" type="ownership" gid="123" x="385.518" y="1580.86" width="53.1628" height="55.8721">
+  <object id="160" name="austriaHungary" type="ownership" gid="139" x="385.518" y="1580.86" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="122"/>
@@ -672,7 +672,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="161" name="austriaHungary" type="ownership" gid="123" x="440.388" y="1611.91" width="53.1628" height="55.8721">
+  <object id="161" name="austriaHungary" type="ownership" gid="139" x="440.388" y="1611.91" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="122"/>
@@ -682,7 +682,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="162" name="austriaHungary" type="ownership" gid="123" x="495.442" y="1644.94" width="53.1628" height="55.8721">
+  <object id="162" name="austriaHungary" type="ownership" gid="139" x="495.442" y="1644.94" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="122"/>
@@ -692,7 +692,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="163" name="austriaHungary" type="ownership" gid="123" x="495.442" y="1708.94" width="53.1628" height="55.8721">
+  <object id="163" name="austriaHungary" type="ownership" gid="139" x="495.442" y="1708.94" width="53.1628" height="55.8721">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="117"/>
@@ -702,7 +702,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="164" name="infantry" type="unit" gid="99" x="160.308" y="228.546" width="64" height="64">
+  <object id="164" name="infantry" type="unit" gid="115" x="160.308" y="228.546" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -714,7 +714,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="165" name="infantry" type="unit" gid="99" x="400.865" y="349.858" width="64" height="64">
+  <object id="165" name="infantry" type="unit" gid="115" x="400.865" y="349.858" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -726,7 +726,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="166" name="infantry" type="unit" gid="99" x="388.865" y="636.037" width="64" height="64">
+  <object id="166" name="infantry" type="unit" gid="115" x="388.865" y="636.037" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -738,7 +738,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="167" name="infantry" type="unit" gid="99" x="224.41" y="1091.52" width="64" height="64">
+  <object id="167" name="infantry" type="unit" gid="115" x="224.41" y="1091.52" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -750,7 +750,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="168" name="infantry" type="unit" gid="99" x="282.999" y="1580.91" width="64" height="64">
+  <object id="168" name="infantry" type="unit" gid="115" x="282.999" y="1580.91" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -762,7 +762,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="169" name="infantry" type="unit" gid="99" x="775.453" y="383.065" width="64" height="64">
+  <object id="169" name="infantry" type="unit" gid="115" x="775.453" y="383.065" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -774,7 +774,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="170" name="infantry" type="unit" gid="99" x="577.287" y="1196.43" width="64" height="64">
+  <object id="170" name="infantry" type="unit" gid="115" x="577.287" y="1196.43" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -786,7 +786,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="171" name="infantry" type="unit" gid="99" x="716.299" y="1638.12" width="64" height="64">
+  <object id="171" name="infantry" type="unit" gid="115" x="716.299" y="1638.12" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -798,7 +798,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="172" name="germany" type="ownership" gid="118" x="498.346" y="297.157" width="51.8716" height="51.216">
+  <object id="172" name="germany" type="ownership" gid="134" x="498.346" y="297.157" width="51.8716" height="51.216">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="106"/>
@@ -808,7 +808,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="173" name="russia" type="ownership" gid="110" x="612.19" y="346.005" width="47.738" height="45.8471">
+  <object id="173" name="russia" type="ownership" gid="126" x="612.19" y="346.005" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -818,7 +818,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="174" name="infantry" type="unit" gid="99" x="853.427" y="246.062" width="64" height="64">
+  <object id="174" name="infantry" type="unit" gid="115" x="853.427" y="246.062" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -830,7 +830,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="177" name="machineGuns" type="unit" gid="95" x="849.328" y="294.261" width="64" height="64">
+  <object id="177" name="machineGuns" type="unit" gid="111" x="849.328" y="294.261" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -842,7 +842,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="178" name="artillery" type="unit" gid="94" x="884.855" y="257.986" width="64" height="64">
+  <object id="178" name="artillery" type="unit" gid="110" x="884.855" y="257.986" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -854,7 +854,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="179" name="russia" type="ownership" gid="110" x="610.824" y="289.299" width="47.738" height="45.8471">
+  <object id="179" name="russia" type="ownership" gid="126" x="610.824" y="289.299" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -864,7 +864,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="180" name="cavalry" type="unit" gid="98" x="860.943" y="341.71" width="64" height="64">
+  <object id="180" name="cavalry" type="unit" gid="114" x="860.943" y="341.71" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -876,7 +876,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="181" name="russia" type="ownership" gid="110" x="662.064" y="313.894" width="47.738" height="45.8471">
+  <object id="181" name="russia" type="ownership" gid="126" x="662.064" y="313.894" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -886,7 +886,7 @@
     <property name="unit4" type="object" value="180"/>
    </properties>
   </object>
-  <object id="182" name="infantry" type="unit" gid="99" x="862.992" y="1314.59" width="64" height="64">
+  <object id="182" name="infantry" type="unit" gid="115" x="862.992" y="1314.59" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -898,7 +898,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="183" name="machineGuns" type="unit" gid="95" x="858.893" y="1362.79" width="64" height="64">
+  <object id="183" name="machineGuns" type="unit" gid="111" x="858.893" y="1362.79" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -910,7 +910,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="184" name="artillery" type="unit" gid="94" x="894.42" y="1326.51" width="64" height="64">
+  <object id="184" name="artillery" type="unit" gid="110" x="894.42" y="1326.51" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -922,7 +922,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="185" name="cavalry" type="unit" gid="98" x="870.508" y="1410.24" width="64" height="64">
+  <object id="185" name="cavalry" type="unit" gid="114" x="870.508" y="1410.24" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -934,7 +934,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="186" name="russia" type="ownership" gid="110" x="502.183" y="1442.62" width="46.3955" height="47.0475">
+  <object id="186" name="russia" type="ownership" gid="126" x="502.183" y="1442.62" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -944,7 +944,7 @@
     <property name="unit4" type="object" value="184"/>
    </properties>
   </object>
-  <object id="187" name="russia" type="ownership" gid="110" x="561.622" y="1467.22" width="46.3955" height="47.0475">
+  <object id="187" name="russia" type="ownership" gid="126" x="561.622" y="1467.22" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -954,7 +954,7 @@
     <property name="unit4" type="object" value="184"/>
    </properties>
   </object>
-  <object id="188" name="russia" type="ownership" gid="110" x="558.206" y="1410.51" width="46.3955" height="47.0475">
+  <object id="188" name="russia" type="ownership" gid="126" x="558.206" y="1410.51" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -964,7 +964,7 @@
     <property name="unit4" type="object" value="185"/>
    </properties>
   </object>
-  <object id="189" name="russia" type="ownership" gid="110" x="396.97" y="1437.16" width="46.3955" height="47.0475">
+  <object id="189" name="russia" type="ownership" gid="126" x="396.97" y="1437.16" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -974,7 +974,7 @@
     <property name="unit4" type="object" value="184"/>
    </properties>
   </object>
-  <object id="192" name="germany" type="ownership" gid="118" x="393.776" y="794.903" width="55.5163" height="53.9738">
+  <object id="192" name="germany" type="ownership" gid="134" x="393.776" y="794.903" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="133"/>
@@ -984,7 +984,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="193" name="russia" type="ownership" gid="110" x="567.44" y="642.172" width="47.738" height="45.8471">
+  <object id="193" name="russia" type="ownership" gid="126" x="567.44" y="642.172" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -994,7 +994,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="194" name="russia" type="ownership" gid="110" x="566.074" y="585.466" width="47.738" height="45.8471">
+  <object id="194" name="russia" type="ownership" gid="126" x="566.074" y="585.466" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1004,7 +1004,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="195" name="russia" type="ownership" gid="110" x="617.314" y="610.061" width="47.738" height="45.8471">
+  <object id="195" name="russia" type="ownership" gid="126" x="617.314" y="610.061" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1014,7 +1014,7 @@
     <property name="unit4" type="object" value="180"/>
    </properties>
   </object>
-  <object id="196" name="infantry" type="unit" gid="99" x="-162.478" y="382.642" width="64" height="64">
+  <object id="196" name="infantry" type="unit" gid="115" x="-162.478" y="382.642" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1026,7 +1026,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="197" name="machineGuns" type="unit" gid="95" x="-166.577" y="430.841" width="64" height="64">
+  <object id="197" name="machineGuns" type="unit" gid="111" x="-166.577" y="430.841" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1038,7 +1038,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="198" name="artillery" type="unit" gid="94" x="-131.05" y="394.566" width="64" height="64">
+  <object id="198" name="artillery" type="unit" gid="110" x="-131.05" y="394.566" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1050,7 +1050,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="199" name="cavalry" type="unit" gid="98" x="-154.962" y="478.29" width="64" height="64">
+  <object id="199" name="cavalry" type="unit" gid="114" x="-154.962" y="478.29" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1062,7 +1062,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="200" name="germany" type="ownership" gid="118" x="115.728" y="506.771" width="51.9612" height="51.1845">
+  <object id="200" name="germany" type="ownership" gid="134" x="115.728" y="506.771" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1072,7 +1072,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="201" name="germany" type="ownership" gid="118" x="234.456" y="376.553" width="51.9612" height="51.1845">
+  <object id="201" name="germany" type="ownership" gid="134" x="234.456" y="376.553" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1082,7 +1082,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="203" name="germany" type="ownership" gid="118" x="344.567" y="186.012" width="51.9612" height="51.1845">
+  <object id="203" name="germany" type="ownership" gid="134" x="344.567" y="186.012" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1092,7 +1092,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="204" name="germany" type="ownership" gid="118" x="60.1933" y="415.81" width="51.9612" height="51.1845">
+  <object id="204" name="germany" type="ownership" gid="134" x="60.1933" y="415.81" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1102,7 +1102,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="205" name="germany" type="ownership" gid="118" x="118.6" y="638.904" width="51.9612" height="51.1845">
+  <object id="205" name="germany" type="ownership" gid="134" x="118.6" y="638.904" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1112,7 +1112,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="206" name="germany" type="ownership" gid="118" x="173.177" y="673.374" width="51.9612" height="51.1845">
+  <object id="206" name="germany" type="ownership" gid="134" x="173.177" y="673.374" width="51.9612" height="51.1845">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1122,7 +1122,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="208" name="infantry" type="unit" gid="99" x="-127.051" y="1201.29" width="64" height="64">
+  <object id="208" name="infantry" type="unit" gid="115" x="-127.051" y="1201.29" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1134,7 +1134,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="209" name="machineGuns" type="unit" gid="95" x="-131.15" y="1249.49" width="64" height="64">
+  <object id="209" name="machineGuns" type="unit" gid="111" x="-131.15" y="1249.49" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1146,7 +1146,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="210" name="artillery" type="unit" gid="94" x="-95.6229" y="1213.22" width="64" height="64">
+  <object id="210" name="artillery" type="unit" gid="110" x="-95.6229" y="1213.22" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1158,7 +1158,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="211" name="cavalry" type="unit" gid="98" x="-119.535" y="1296.94" width="64" height="64">
+  <object id="211" name="cavalry" type="unit" gid="114" x="-119.535" y="1296.94" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1170,7 +1170,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="212" name="austriaHungary" type="ownership" gid="123" x="231.682" y="1531.66" width="49.8491" height="50.4387">
+  <object id="212" name="austriaHungary" type="ownership" gid="139" x="231.682" y="1531.66" width="49.8491" height="50.4387">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1180,7 +1180,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="213" name="austriaHungary" type="ownership" gid="123" x="61.2493" y="1626.45" width="49.8491" height="50.4387">
+  <object id="213" name="austriaHungary" type="ownership" gid="139" x="61.2493" y="1626.45" width="49.8491" height="50.4387">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1190,7 +1190,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="214" name="austriaHungary" type="ownership" gid="123" x="292.004" y="1757.62" width="49.8491" height="50.4387">
+  <object id="214" name="austriaHungary" type="ownership" gid="139" x="292.004" y="1757.62" width="49.8491" height="50.4387">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1200,7 +1200,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="215" name="austriaHungary" type="ownership" gid="123" x="177.105" y="1570.91" width="49.8491" height="50.4387">
+  <object id="215" name="austriaHungary" type="ownership" gid="139" x="177.105" y="1570.91" width="49.8491" height="50.4387">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1210,7 +1210,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="216" name="austriaHungary" type="ownership" gid="123" x="231.307" y="897.336" width="60.1747" height="60.9398">
+  <object id="216" name="austriaHungary" type="ownership" gid="139" x="231.307" y="897.336" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1220,7 +1220,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="217" name="austriaHungary" type="ownership" gid="123" x="13.9571" y="971.062" width="60.1747" height="60.9398">
+  <object id="217" name="austriaHungary" type="ownership" gid="139" x="13.9571" y="971.062" width="60.1747" height="60.9398">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1230,7 +1230,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="218" name="germany" type="ownership" gid="118" x="446.253" y="827.582" width="55.5163" height="53.9738">
+  <object id="218" name="germany" type="ownership" gid="134" x="446.253" y="827.582" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="134"/>
@@ -1240,7 +1240,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="219" name="germany" type="ownership" gid="118" x="395.191" y="861.303" width="55.5163" height="53.9738">
+  <object id="219" name="germany" type="ownership" gid="134" x="395.191" y="861.303" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="134"/>
@@ -1250,7 +1250,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="220" name="germany" type="ownership" gid="118" x="449.143" y="770.415" width="55.5163" height="53.9738">
+  <object id="220" name="germany" type="ownership" gid="134" x="449.143" y="770.415" width="55.5163" height="53.9738">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="110"/>
@@ -1260,7 +1260,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="221" name="infantry" type="unit" gid="99" x="226.683" y="1032.6" width="64" height="64">
+  <object id="221" name="infantry" type="unit" gid="115" x="226.683" y="1032.6" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1272,7 +1272,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="222" name="machineGuns" type="unit" gid="95" x="265.645" y="1005.63" width="64" height="64">
+  <object id="222" name="machineGuns" type="unit" gid="111" x="265.645" y="1005.63" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1284,7 +1284,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="223" name="russia" type="ownership" gid="110" x="675.05" y="250.741" width="47.738" height="45.8471">
+  <object id="223" name="russia" type="ownership" gid="126" x="675.05" y="250.741" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1294,7 +1294,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="224" name="russia" type="ownership" gid="110" x="562.983" y="698.509" width="47.738" height="45.8471">
+  <object id="224" name="russia" type="ownership" gid="126" x="562.983" y="698.509" width="47.738" height="45.8471">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1304,7 +1304,7 @@
     <property name="unit4" type="object" value="178"/>
    </properties>
   </object>
-  <object id="225" name="russia" type="ownership" gid="110" x="618.687" y="1497.89" width="46.3955" height="47.0475">
+  <object id="225" name="russia" type="ownership" gid="126" x="618.687" y="1497.89" width="46.3955" height="47.0475">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1314,7 +1314,7 @@
     <property name="unit4" type="object" value="184"/>
    </properties>
   </object>
-  <object id="227" name="infantry" type="unit" gid="99" x="364.738" y="669.421" width="64" height="64">
+  <object id="227" name="infantry" type="unit" gid="115" x="364.738" y="669.421" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1328,96 +1328,96 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="Templates">
-  <object id="1" name="level2" type="navalBase" gid="80" x="-7.88605" y="-623.824" width="64" height="64">
+  <object id="1" name="level2" type="navalBase" gid="96" x="-7.88605" y="-623.824" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="2" name="level1" type="navalBase" gid="79" x="-7.88605" y="-705.164" width="64" height="64">
+  <object id="2" name="level1" type="navalBase" gid="95" x="-7.88605" y="-705.164" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="3" name="level3" type="navalBase" gid="81" x="-7.88605" y="-536.063" width="64" height="64">
+  <object id="3" name="level3" type="navalBase" gid="97" x="-7.88605" y="-536.063" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="4" name="level1" type="airField" gid="82" x="-84.7036" y="-623.744" width="64" height="64">
+  <object id="4" name="level1" type="airField" gid="98" x="-84.7036" y="-623.744" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="5" name="level2" type="airField" gid="83" x="-84.7066" y="-542.118" width="64" height="64">
+  <object id="5" name="level2" type="airField" gid="99" x="-84.7066" y="-542.118" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="6" name="level1" type="factory" gid="84" x="-163.714" y="-704.864" width="64" height="64">
+  <object id="6" name="level1" type="factory" gid="100" x="-163.714" y="-704.864" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="7" name="level2" type="factory" gid="85" x="-163.717" y="-627.174" width="64" height="64">
+  <object id="7" name="level2" type="factory" gid="101" x="-163.717" y="-627.174" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="8" name="level3" type="factory" gid="86" x="-163.717" y="-537.442" width="64" height="64">
+  <object id="8" name="level3" type="factory" gid="102" x="-163.717" y="-537.442" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="9" name="level4" type="factory" gid="87" x="-163.717" y="-459.875" width="64" height="64">
+  <object id="9" name="level4" type="factory" gid="103" x="-163.717" y="-459.875" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="10" name="level2" type="city" gid="89" x="-237.197" y="-626.344" width="64" height="64">
+  <object id="10" name="level2" type="city" gid="105" x="-237.197" y="-626.344" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="11" name="level1" type="city" gid="88" x="-237.202" y="-701.774" width="64" height="64">
+  <object id="11" name="level1" type="city" gid="104" x="-237.202" y="-701.774" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="12" name="level3" type="city" gid="90" x="-237.197" y="-547.941" width="64" height="64">
+  <object id="12" name="level3" type="city" gid="106" x="-237.197" y="-547.941" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="13" name="level4" type="city" gid="91" x="-237.197" y="-460.939" width="64" height="64">
+  <object id="13" name="level4" type="city" gid="107" x="-237.197" y="-460.939" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="14" name="capital" type="city" gid="92" x="-237.197" y="-384.885" width="64" height="64">
+  <object id="14" name="capital" type="city" gid="108" x="-237.197" y="-384.885" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="15" name="antiAirGun" type="terrainModifier" gid="78" x="143.003" y="-455.976" width="64" height="64"/>
-  <object id="16" name="trench" type="terrainModifier" gid="75" x="146.362" y="-713.214" width="64" height="64"/>
-  <object id="17" name="barbedWire" type="terrainModifier" gid="77" x="145.846" y="-537.755" width="64" height="64"/>
-  <object id="18" name="seaMine" type="terrainModifier" gid="73" x="142.663" y="-346.685" width="64" height="64"/>
-  <object id="19" name="landMine" type="terrainModifier" gid="74" x="143.515" y="-256.552" width="64" height="64"/>
-  <object id="20" name="infantry" type="unit" gid="99" x="332.266" y="-705.574" width="64" height="64">
+  <object id="15" name="antiAirGun" type="terrainModifier" gid="94" x="143.003" y="-455.976" width="64" height="64"/>
+  <object id="16" name="trench" type="terrainModifier" gid="91" x="146.362" y="-713.214" width="64" height="64"/>
+  <object id="17" name="barbedWire" type="terrainModifier" gid="93" x="145.846" y="-537.755" width="64" height="64"/>
+  <object id="18" name="seaMine" type="terrainModifier" gid="89" x="142.663" y="-346.685" width="64" height="64"/>
+  <object id="19" name="landMine" type="terrainModifier" gid="90" x="143.515" y="-256.552" width="64" height="64"/>
+  <object id="20" name="infantry" type="unit" gid="115" x="332.266" y="-705.574" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1429,7 +1429,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="21" name="cavalry" type="unit" gid="98" x="332.264" y="-592.44" width="64" height="64">
+  <object id="21" name="cavalry" type="unit" gid="114" x="332.264" y="-592.44" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1441,7 +1441,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="22" name="tank" type="unit" gid="97" x="332.264" y="-477.476" width="64" height="64">
+  <object id="22" name="tank" type="unit" gid="113" x="332.264" y="-477.476" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1453,7 +1453,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="23" name="machineGunnersCart" type="unit" gid="96" x="332.264" y="-388.06" width="64" height="64">
+  <object id="23" name="machineGunnersCart" type="unit" gid="112" x="332.264" y="-388.06" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1465,7 +1465,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="24" name="machineGuns" type="unit" gid="95" x="332.264" y="-298.644" width="64" height="64">
+  <object id="24" name="machineGuns" type="unit" gid="111" x="332.264" y="-298.644" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1477,7 +1477,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="25" name="artillery" type="unit" gid="94" x="332.264" y="-198.279" width="64" height="64">
+  <object id="25" name="artillery" type="unit" gid="110" x="332.264" y="-198.279" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1489,7 +1489,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="26" name="armoredCar" type="unit" gid="93" x="332.264" y="-96.0892" width="64" height="64">
+  <object id="26" name="armoredCar" type="unit" gid="109" x="332.264" y="-96.0892" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1501,7 +1501,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="27" name="carrier" type="unit" gid="103" x="528.448" y="-700.644" width="64" height="64">
+  <object id="27" name="carrier" type="unit" gid="119" x="528.448" y="-700.644" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1517,7 +1517,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="28" name="battleship" type="unit" gid="100" x="528.444" y="-379.21" width="64" height="64">
+  <object id="28" name="battleship" type="unit" gid="116" x="528.444" y="-379.21" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1529,7 +1529,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="29" name="cruiser" type="unit" gid="101" x="528.444" y="-481.43" width="64" height="64">
+  <object id="29" name="cruiser" type="unit" gid="117" x="528.444" y="-481.43" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1541,7 +1541,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="30" name="destroyer" type="unit" gid="102" x="528.444" y="-584.542" width="64" height="64">
+  <object id="30" name="destroyer" type="unit" gid="118" x="528.444" y="-584.542" width="64" height="64">
    <properties>
     <property name="boost1" value=""/>
     <property name="boost2" value=""/>
@@ -1553,7 +1553,7 @@
     <property name="movementPoints" type="float" value="1"/>
    </properties>
   </object>
-  <object id="31" name="austriaHungary" type="ownership" gid="123" x="664.454" y="-705.084" width="64" height="64">
+  <object id="31" name="austriaHungary" type="ownership" gid="139" x="664.454" y="-705.084" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1563,7 +1563,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="32" name="usa" type="ownership" gid="104" x="942.967" y="-442.954" width="64" height="64">
+  <object id="32" name="usa" type="ownership" gid="120" x="942.967" y="-442.954" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1573,7 +1573,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="33" name="usSouth" type="ownership" gid="105" x="1023.22" y="-705.084" width="64" height="64">
+  <object id="33" name="usSouth" type="ownership" gid="121" x="1023.22" y="-705.084" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1583,7 +1583,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="34" name="usNorth" type="ownership" gid="106" x="948.877" y="-354.524" width="64" height="64">
+  <object id="34" name="usNorth" type="ownership" gid="122" x="948.877" y="-354.524" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1593,7 +1593,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="35" name="greatBritain" type="ownership" gid="107" x="770.485" y="-614.114" width="64" height="64">
+  <object id="35" name="greatBritain" type="ownership" gid="123" x="770.485" y="-614.114" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1603,7 +1603,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="36" name="turkey" type="ownership" gid="108" x="948.887" y="-528.314" width="64" height="64">
+  <object id="36" name="turkey" type="ownership" gid="124" x="948.887" y="-528.314" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1613,7 +1613,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="37" name="serbia" type="ownership" gid="109" x="942.867" y="-614.114" width="64" height="64">
+  <object id="37" name="serbia" type="ownership" gid="125" x="942.867" y="-614.114" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1623,7 +1623,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="38" name="russia" type="ownership" gid="110" x="865.487" y="-354.524" width="64" height="64">
+  <object id="38" name="russia" type="ownership" gid="126" x="865.487" y="-354.524" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1633,7 +1633,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="39" name="romania" type="ownership" gid="111" x="942.017" y="-705.084" width="64" height="64">
+  <object id="39" name="romania" type="ownership" gid="127" x="942.017" y="-705.084" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1643,7 +1643,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="40" name="montenegro" type="ownership" gid="112" x="861.847" y="-442.954" width="64" height="64">
+  <object id="40" name="montenegro" type="ownership" gid="128" x="861.847" y="-442.954" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1653,7 +1653,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="41" name="mongolia" type="ownership" gid="113" x="857.357" y="-528.314" width="64" height="64">
+  <object id="41" name="mongolia" type="ownership" gid="129" x="857.357" y="-528.314" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1663,7 +1663,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="42" name="mexico" type="ownership" gid="114" x="859.867" y="-614.114" width="64" height="64">
+  <object id="42" name="mexico" type="ownership" gid="130" x="859.867" y="-614.114" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1673,7 +1673,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="43" name="korea" type="ownership" gid="115" x="860.077" y="-705.084" width="64" height="64">
+  <object id="43" name="korea" type="ownership" gid="131" x="860.077" y="-705.084" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1683,7 +1683,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="44" name="japan" type="ownership" gid="116" x="773.947" y="-354.524" width="64" height="64">
+  <object id="44" name="japan" type="ownership" gid="132" x="773.947" y="-354.524" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1693,7 +1693,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="45" name="italy" type="ownership" gid="117" x="770.187" y="-442.954" width="64" height="64">
+  <object id="45" name="italy" type="ownership" gid="133" x="770.187" y="-442.954" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1703,7 +1703,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="46" name="germany" type="ownership" gid="118" x="772.472" y="-705.084" width="64" height="64">
+  <object id="46" name="germany" type="ownership" gid="134" x="772.472" y="-705.084" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1713,7 +1713,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="47" name="france" type="ownership" gid="119" x="667.666" y="-354.526" width="64" height="64">
+  <object id="47" name="france" type="ownership" gid="135" x="667.666" y="-354.526" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1723,7 +1723,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="48" name="china" type="ownership" gid="120" x="667.729" y="-442.954" width="64" height="64">
+  <object id="48" name="china" type="ownership" gid="136" x="667.729" y="-442.954" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1733,7 +1733,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="49" name="bulgaria" type="ownership" gid="121" x="666.014" y="-528.312" width="64" height="64">
+  <object id="49" name="bulgaria" type="ownership" gid="137" x="666.014" y="-528.312" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1743,7 +1743,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="50" name="belgium" type="ownership" gid="122" x="662.374" y="-614.114" width="64" height="64">
+  <object id="50" name="belgium" type="ownership" gid="138" x="662.374" y="-614.114" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1753,7 +1753,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="51" name="greece" type="ownership" gid="124" x="769.674" y="-528.314" width="64" height="64">
+  <object id="51" name="greece" type="ownership" gid="140" x="769.674" y="-528.314" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -1763,6 +1763,6 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="105" name="landFort" type="terrainModifier" gid="76" x="141.734" y="-647.43" width="64" height="64"/>
+  <object id="105" name="landFort" type="terrainModifier" gid="92" x="141.734" y="-647.43" width="64" height="64"/>
  </objectgroup>
 </map>

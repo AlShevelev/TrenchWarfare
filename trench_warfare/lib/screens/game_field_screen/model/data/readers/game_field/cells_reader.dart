@@ -59,7 +59,9 @@ class CellsReader {
         >= 17 && <= 25 => CellTerrain.wood,
         >= 4 && <= 6 => CellTerrain.marsh,
         >= 12 && <= 16 => CellTerrain.hills,
+        >= 73 && <= 77 => CellTerrain.hills,
         >= 7 && <= 11 => CellTerrain.mountains,
+        >= 78 && <= 82 => CellTerrain.mountains,
         _ => throw FormatException('This tile index is unsupported: $terrainTileIndex')
       };
 

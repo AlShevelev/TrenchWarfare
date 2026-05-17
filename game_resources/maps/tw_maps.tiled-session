@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/south_west_africa_campaign.tmx",
+    "activeFile": "tiles/real/europe/east_african_campaign.tmx",
     "expandedProjectPaths": [
+        "tiles/real/europe",
+        "tiles/game_objects/templates",
+        "tiles_source_metadata",
+        "tiles/game_objects/atlas",
+        "tiles/help",
         "tiles/test",
         "tiles/game_objects",
-        "tiles/game_objects/templates",
         "tiles/templates",
-        "tiles_source_metadata",
-        ".",
         "tiles/templates/units",
-        "tiles",
-        "tiles/help",
         "tiles/real",
-        "tiles/game_objects/atlas",
-        "tiles/real/europe"
+        "tiles",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -155,13 +155,14 @@
         },
         "tiles/real/europe/battle_of_amiens.tmx": {
             "expandedObjectLayers": [
-                3
+                3,
+                4
             ],
-            "scale": 0.4619,
-            "selectedLayer": 3,
+            "scale": 1.1038,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1385.5812946525223,
-                "y": 5.412426932236372
+                "x": 691.2484145678566,
+                "y": 1174.5787280304403
             }
         },
         "tiles/real/europe/battle_of_amiens.tmx#TempBackground": {
@@ -175,11 +176,11 @@
                 5,
                 4
             ],
-            "scale": 0.6095,
-            "selectedLayer": 3,
+            "scale": 1.1579,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 114.84823625922888,
-                "y": 379.81952420016404
+                "x": 405.9072458761551,
+                "y": 336.3848346143881
             }
         },
         "tiles/real/europe/battle_of_cantigny.tmx#TempBackground": {
@@ -192,11 +193,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.4353,
-            "selectedLayer": 3,
+            "scale": 0.918,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 558.2356995175742,
-                "y": 655.8695152768207
+                "x": 467.3202614379085,
+                "y": 468.954248366013
             }
         },
         "tiles/real/europe/battle_of_passchendaele.tmx#TempBackground": {
@@ -209,11 +210,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.3637,
-            "selectedLayer": 0,
+            "scale": 0.6668,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 833.1042067638163,
-                "y": 815.2323343414902
+                "x": 710.8578284343133,
+                "y": 975.5548890221957
             }
         },
         "tiles/real/europe/battle_of_tannenburg.tmx#TempBackground": {
@@ -227,11 +228,11 @@
                 5,
                 4
             ],
-            "scale": 0.5638,
-            "selectedLayer": 3,
+            "scale": 0.7971,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 500.17736786094355,
-                "y": 1013.6573252926569
+                "x": 728.8922343495169,
+                "y": 457.28264960481744
             }
         },
         "tiles/real/europe/battle_of_verdun.tmx#TempBackground": {
@@ -242,14 +243,14 @@
         },
         "tiles/real/europe/brusilov_offensive.tmx": {
             "expandedObjectLayers": [
-                3,
-                5
+                5,
+                3
             ],
-            "scale": 0.3636,
+            "scale": 1.2912,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 420.792079207921,
-                "y": 878.7128712871288
+                "x": 655.9789343246593,
+                "y": 1654.6623296158614
             }
         },
         "tiles/real/europe/brusilov_offensive.tmx#TempBackground": {
@@ -258,15 +259,33 @@
         "tiles/real/europe/brusilov_offensive.tmx#terrain_atlas": {
             "scaleInDock": 0.5981
         },
+        "tiles/real/europe/east_african_campaign.tmx": {
+            "expandedObjectLayers": [
+                5,
+                3
+            ],
+            "scale": 0.397,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 874.0554156171283,
+                "y": 978.5894206549117
+            }
+        },
+        "tiles/real/europe/east_african_campaign.tmx#TempBackground": {
+            "scaleInDock": 1
+        },
+        "tiles/real/europe/east_african_campaign.tmx#terrain_atlas": {
+            "scaleInDock": 0.5613
+        },
         "tiles/real/europe/first_battle_of_the_marne.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.3216,
-            "selectedLayer": 4,
+            "scale": 0.8324,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 696.5174129353235,
-                "y": 654.539800995025
+                "x": 708.7938491110043,
+                "y": 841.5425276309466
             }
         },
         "tiles/real/europe/first_battle_of_the_marne.tmx#TempBackground": {
@@ -280,11 +299,11 @@
                 3,
                 4
             ],
-            "scale": 0.2301,
+            "scale": 0.7278,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1056.0625814863104,
-                "y": 814.8631029986961
+                "x": 809.2882660071449,
+                "y": 1127.3701566364387
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
@@ -298,11 +317,11 @@
                 8,
                 3
             ],
-            "scale": 0.261,
-            "selectedLayer": 0,
+            "scale": 0.7326,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 869.7318007662836,
-                "y": 567.0498084291187
+                "x": 596.5055965055966,
+                "y": 889.2983892983893
             }
         },
         "tiles/real/europe/german_spring_offensive.tmx#TempBackground": {
@@ -313,21 +332,20 @@
         },
         "tiles/real/europe/south_west_africa_campaign.tmx": {
             "expandedObjectLayers": [
-                3,
-                5
+                3
             ],
-            "scale": 0.7279,
-            "selectedLayer": 3,
+            "scale": 0.43,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1195.2191235059763,
-                "y": 1646.5173787608187
+                "x": 895.3488372093024,
+                "y": 1047.6744186046515
             }
         },
         "tiles/real/europe/south_west_africa_campaign.tmx#TempBackground": {
             "scaleInDock": 1
         },
         "tiles/real/europe/south_west_africa_campaign.tmx#terrain_atlas": {
-            "scaleInDock": 0.6791
+            "scaleInDock": 0.4862
         },
         "tiles/real/europe/the_battle_of_tannenburg.tmx": {
             "scale": 0.419,
@@ -347,11 +365,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.311,
-            "selectedLayer": 3,
+            "scale": 0.8682,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 697.749196141479,
-                "y": 815.1125401929261
+                "x": 729.0946786454733,
+                "y": 571.8728403593642
             }
         },
         "tiles/real/europe/the_first_battle_of_the_somme.tmx#TempBackground": {
@@ -1340,26 +1358,25 @@
     "map.renderOrder": "1",
     "map.tileHeight": 64,
     "map.tileWidth": 74,
-    "map.width": 25,
+    "map.width": 32,
     "openFiles": [
-        "tiles/real/europe/battle_of_amiens.tmx",
-        "tiles/real/europe/south_west_africa_campaign.tmx"
+        "tiles/real/europe/east_african_campaign.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "tiles/real/europe/battle_of_amiens.tmx",
+        "tiles/real/europe/east_african_campaign.tmx",
+        "tiles/real/europe/brusilov_offensive.tmx",
+        "tiles/real/europe/first_battle_of_the_marne.tmx",
         "tiles/real/europe/south_west_africa_campaign.tmx",
-        "tiles/real/europe/battle_of_cantigny.tmx",
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx",
+        "tiles/real/europe/german_spring_offensive.tmx",
         "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/test/10x10_ai_win_defeat_dialogs.tmx",
-        "tiles/test/10x10_attack_unreachable_unit.tmx",
-        "tiles/test/15x15_carriers_enemy_pc_and_air_field.tmx",
-        "tiles/test/10x10_withdraw_from_fort.tmx",
-        "tiles/test/10x10_attack_unreachable_unit_ai.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
-        "tiles/test/10x10_attack_unreachable_unit_land.tmx",
-        "tiles/test/15x15_balance_general.tmx"
+        "tiles/real/europe/battle_of_tannenburg.tmx",
+        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/battle_of_cantigny.tmx",
+        "tiles/real/europe/battle_of_amiens.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
