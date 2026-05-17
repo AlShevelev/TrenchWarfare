@@ -5,18 +5,18 @@
     },
     "activeFile": "tiles/real/europe/east_african_campaign.tmx",
     "expandedProjectPaths": [
-        "tiles/real/europe",
-        "tiles/game_objects/templates",
         "tiles_source_metadata",
-        "tiles/game_objects/atlas",
-        "tiles/help",
-        "tiles/test",
+        "tiles/game_objects/templates",
         "tiles/game_objects",
         "tiles/templates",
-        "tiles/templates/units",
-        "tiles/real",
         "tiles",
-        "."
+        "tiles/game_objects/atlas",
+        "tiles/real/europe",
+        "tiles/help",
+        "tiles/templates/units",
+        "tiles/test",
+        ".",
+        "tiles/real"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -261,14 +261,14 @@
         },
         "tiles/real/europe/east_african_campaign.tmx": {
             "expandedObjectLayers": [
-                5,
-                3
+                3,
+                5
             ],
-            "scale": 0.397,
+            "scale": 3.0587,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 874.0554156171283,
-                "y": 978.5894206549117
+                "x": 708.7978552980024,
+                "y": 1536.1101121391441
             }
         },
         "tiles/real/europe/east_african_campaign.tmx#TempBackground": {
