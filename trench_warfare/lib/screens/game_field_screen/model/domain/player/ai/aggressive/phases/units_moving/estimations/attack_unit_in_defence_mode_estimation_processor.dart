@@ -81,11 +81,11 @@ class _AttackUnitInDefenceModeEstimationProcessor extends _UnitEstimationProcess
 
     if ((attacker.hasArtillery || attackerCell.terrainModifier?.type == TerrainModifierType.landFort) &&
         !defender.hasArtillery) {
-      weight *= 1.5;
+      weight *= 3.0;
     }
 
     if (attacker.hasMachineGun && !defender.isMechanical) {
-      weight *= 1.5;
+      weight *= 3.0;
     }
 
     final result = math.exp(math.pow(weight + 1, 1.5));

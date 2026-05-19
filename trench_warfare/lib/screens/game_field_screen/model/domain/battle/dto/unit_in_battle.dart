@@ -13,7 +13,8 @@ part of battle;
 class UnitInBattle {
   final UnitType type;
 
-  final Range<double> damage;
+  Range<double> _damage;
+  Range<double> get damage => _damage;
 
   double _attack;
   double get attack => _attack;
@@ -49,7 +50,7 @@ class UnitInBattle {
 
   UnitInBattle({
     required this.type,
-    required this.damage,
+    required Range<double> damage,
     required double attack,
     required double defence,
     required int tookPartInBattles,
@@ -62,6 +63,7 @@ class UnitInBattle {
     required bool hasArtillery,
     required bool takeHalfDamage,
   })  : _tookPartInBattles = tookPartInBattles,
+        _damage = damage,
         _fatigue = fatigue,
         _health = health,
         _hasArtillery = hasArtillery,
@@ -81,6 +83,8 @@ class UnitInBattle {
   void reduceHealth(double valueToReduce) => _health -= valueToReduce * (_takeHalfDamage ? 0.5 : 1.0);
 
   void setTakeHalfDamage(bool takeHalfDamage) => _takeHalfDamage = takeHalfDamage;
+
+  void updateDamage(double valueToAdd) => _damage = Range(_damage.min * valueToAdd, _damage.max * valueToAdd);
 
   void reduceFatigue(double valueToReduce) {
     _fatigue -= valueToReduce;

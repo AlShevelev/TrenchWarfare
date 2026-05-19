@@ -329,6 +329,7 @@ class UnitInBattlePreparationCalculator {
   UnitInBattle _updateUnitByRival(UnitInBattle unit, Unit rivalUnit) {
     if (unit.hasMachineGun && !rivalUnit.isMechanical) {
       unit.updateAttack(1.5);
+      unit.updateDamage(2.5);
     }
 
     return unit;

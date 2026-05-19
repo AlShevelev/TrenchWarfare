@@ -100,15 +100,15 @@ class _AttackEstimationProcessor extends _UnitEstimationProcessorBase {
     double weight = UnitPowerEstimation.estimate(attacker) / UnitPowerEstimation.estimate(defender);
 
     if (attacker.hasArtillery && !defender.hasArtillery) {
-      weight *= 1.5;
+      weight *= 3.0;
     }
 
     if (attacker.hasMachineGun && !defender.isMechanical) {
-      weight *= 1.5;
+      weight *= 3.0;
     }
 
     if (defenderCell.productionCenter != null) {
-      weight *= 1.5;
+      weight *= 3.0;
     }
 
     return weight + 1;

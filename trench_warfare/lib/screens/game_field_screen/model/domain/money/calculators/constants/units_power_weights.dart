@@ -23,7 +23,7 @@ class UnitsPowerWeights {
   // Round2 2.7(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 3.08 infantry unit
   // Round3 2.65(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 2.96 infantry unit
   // Round4 3(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 3.2 infantry unit
-  static const armoredCar = 3.0;
+  static const armoredCar = 5.0;
 
   // An infantry attacks an artillery
   // Round1 0.05(from 4) infantry vs 3(from 4) artillery => 3.95 artillery unit == 3.95 infantry unit
@@ -33,7 +33,7 @@ class UnitsPowerWeights {
   // An artillery attacks an infantry
   // Round1 2(from 4) infantry vs 4(from 4) artillery (result is the same)
   // Total 1 artillery == 4.22 infantry units
-  static const artillery = 3.5;
+  static const artillery = 4.0;
 
   static const infantry = 1.0;
 
@@ -57,7 +57,7 @@ class UnitsPowerWeights {
   // Round1 0.6(from 4) machineGunnersCart vs 0(from 4) infantry => 1 machineGunnersCart unit == 1.17 infantry unit
   // Round1 0.45(from 4) machineGunnersCart vs 0(from 4) infantry => 1 machineGunnersCart unit == 1.27 infantry unit
   // Total 1 machineGunnersCart == 1.62 infantry units
-  static const machineGunnersCart = 1.5;
+  static const machineGunnersCart = 2.5;
 
   // An infantry attacks a machineGuns
   // Round1 1.35(from 4) infantry vs 2.(from 4) machineGuns => 1 machineGuns unit == 1.325 infantry unit
@@ -66,14 +66,14 @@ class UnitsPowerWeights {
   // Round1 3.05(from 4) machineGuns vs 2.6(from 4) infantry => 1 machineGuns unit == 1.47 infantry unit
   // Round1 2.95(from 4) machineGuns vs 2.55(from 4) infantry => 1 machineGuns unit == 1.38 infantry unit
   // Total 1 machineGuns == 1.4 infantry units
-  static const machineGuns = 1.5;
+  static const machineGuns = 2.0;
 
   // An infantry attacks a tank
   // Round1 0(from 4) infantry vs 3.85(from 4) tank => 1 tank unit == 26.66 infantry unit
   // Round1 0(from 4) infantry vs 4(from 4) tank (all the next rounds are the same)
   // A tank attacks an infantry
   // Round1 4(from 4) infantry vs 0(from 4) infantry (all the rounds are the same)
-  static const tank = 15.0;
+  static const tank = 20.0;
   
   static const destroyer = 1.0;
 
