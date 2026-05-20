@@ -23,7 +23,7 @@ class UnitsPowerWeights {
   // Round2 2.7(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 3.08 infantry unit
   // Round3 2.65(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 2.96 infantry unit
   // Round4 3(from 4) armoredCar vs 0(from 4) infantry => 1 armored car unit == 3.2 infantry unit
-  static const armoredCar = 5.0;
+  static const armoredCar = 4.0;
 
   // An infantry attacks an artillery
   // Round1 0.05(from 4) infantry vs 3(from 4) artillery => 3.95 artillery unit == 3.95 infantry unit
@@ -73,7 +73,7 @@ class UnitsPowerWeights {
   // Round1 0(from 4) infantry vs 4(from 4) tank (all the next rounds are the same)
   // A tank attacks an infantry
   // Round1 4(from 4) infantry vs 0(from 4) infantry (all the rounds are the same)
-  static const tank = 20.0;
+  static const tank = 16.0;
   
   static const destroyer = 1.0;
 
