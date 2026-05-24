@@ -3,25 +3,25 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/east_african_campaign.tmx",
+    "activeFile": "tiles/real/europe/battle_of_caporetto.tmx",
     "expandedProjectPaths": [
-        "tiles_source_metadata",
+        "tiles/real",
         "tiles/game_objects/templates",
-        "tiles/game_objects",
-        "tiles/templates",
         "tiles",
-        "tiles/game_objects/atlas",
+        "tiles/test",
         "tiles/real/europe",
         "tiles/help",
-        "tiles/templates/units",
-        "tiles/test",
         ".",
-        "tiles/real"
+        "tiles/game_objects",
+        "tiles/game_objects/atlas",
+        "tiles/templates",
+        "tiles_source_metadata",
+        "tiles/templates/units"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.3895,
             "scaleInEditor": 1
         },
         "/Users/aleksandr_shevelev/Prog/My/Flutter/projects/TrenchWarfare/trench_warfare/assets/game_objects.tsx": {
@@ -173,14 +173,13 @@
         },
         "tiles/real/europe/battle_of_cantigny.tmx": {
             "expandedObjectLayers": [
-                5,
                 4
             ],
-            "scale": 1.1579,
-            "selectedLayer": 1,
+            "scale": 1.0607,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 405.9072458761551,
-                "y": 336.3848346143881
+                "x": 170.64202884887337,
+                "y": 527.481851607429
             }
         },
         "tiles/real/europe/battle_of_cantigny.tmx#TempBackground": {
@@ -188,6 +187,25 @@
         },
         "tiles/real/europe/battle_of_cantigny.tmx#terrain_atlas": {
             "scaleInDock": 0.7015
+        },
+        "tiles/real/europe/battle_of_caporetto.tmx": {
+            "expandedObjectLayers": [
+                3,
+                4,
+                5
+            ],
+            "scale": 0.3804,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1014.7213459516299,
+                "y": 658.5173501577286
+            }
+        },
+        "tiles/real/europe/battle_of_caporetto.tmx#TempBackground": {
+            "scaleInDock": 0.3895
+        },
+        "tiles/real/europe/battle_of_caporetto.tmx#terrain_atlas": {
+            "scaleInDock": 0.6332
         },
         "tiles/real/europe/battle_of_passchendaele.tmx": {
             "expandedObjectLayers": [
@@ -261,14 +279,13 @@
         },
         "tiles/real/europe/east_african_campaign.tmx": {
             "expandedObjectLayers": [
-                3,
-                5
+                3
             ],
-            "scale": 3.0587,
+            "scale": 0.3766,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 708.7978552980024,
-                "y": 1536.1101121391441
+                "x": 791.2904938927245,
+                "y": 1289.166224110462
             }
         },
         "tiles/real/europe/east_african_campaign.tmx#TempBackground": {
@@ -1351,20 +1368,22 @@
     "last.externalTilesetPath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/maps/tiles",
     "last.imagePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfare/maps/images/temp_backgrounds",
     "last.objectTemplatePath": "/Users/aleksandr_shevelev/Yandex.Disk.localized/Prog/Flutter/Trench warfire/maps/tiles/game_objects/templates/units",
-    "map.height": 30,
+    "map.height": 21,
     "map.lastUsedFormat": "tmx",
     "map.layerDataFormat": "5",
     "map.orientation": "4",
     "map.renderOrder": "1",
     "map.tileHeight": 64,
     "map.tileWidth": 74,
-    "map.width": 32,
+    "map.width": 35,
     "openFiles": [
-        "tiles/real/europe/east_african_campaign.tmx"
+        "tiles/real/europe/battle_of_caporetto.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "tiles/real/europe/battle_of_caporetto.tmx",
+        "tiles/real/europe/battle_of_cantigny.tmx",
         "tiles/real/europe/east_african_campaign.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
@@ -1374,9 +1393,7 @@
         "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/real/europe/battle_of_tannenburg.tmx",
-        "tiles/real/europe/battle_of_passchendaele.tmx",
-        "tiles/real/europe/battle_of_cantigny.tmx",
-        "tiles/real/europe/battle_of_amiens.tmx"
+        "tiles/real/europe/battle_of_passchendaele.tmx"
     ],
     "textEdit.monospace": true,
     "tileset.embedInMap": true,
