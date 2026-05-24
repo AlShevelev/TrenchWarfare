@@ -66,6 +66,8 @@ class _TransportEstimator extends Estimator<_UnitBoosterEstimationData> {
     for (final cell in cellsPossibleToBuild) {
       for (var i = 0; i < cell.units.length; i++) {
         final unit = cell.units.elementAt(i);
+        if (unit.isInDefenceMode) continue;
+
         if (UnitBoosterBuildCalculator.canBuildForUnit(unit, _type)) {
           cellsPossibleToBuildExt.add(_TransportCellWithFactors(
             cell: cell,
