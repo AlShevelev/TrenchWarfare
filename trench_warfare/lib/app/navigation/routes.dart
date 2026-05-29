@@ -14,6 +14,7 @@ class Routes {
   static const cover = '/';
   static const fromCoverToMapSelection = '/from_cover_to_map_selection';
   static const fromCoverToLoadGame = '/from_cover_to_loadGame';
+  static const fromCoverToTutorials = '/from_cover_to_tutorials';
   static const fromMapSelectionToGameFieldNewGame = '/from_map_selection_to_game_field_new_game';
   static const fromLoadToGameFieldLoadGame = '/from_load_to_game_field_load_game';
   static const fromCoverToDebugLogging = '/from_cover_to_debug_logging';
@@ -34,6 +35,10 @@ class Routes {
       case fromCoverToLoadGame:
         {
           return _FadeRoute(const SaveLoadScreen());
+        }
+      case fromCoverToTutorials:
+        {
+          return _FadeRoute(const TutorialsScreen());
         }
       case fromMapSelectionToGameFieldNewGame:
         {

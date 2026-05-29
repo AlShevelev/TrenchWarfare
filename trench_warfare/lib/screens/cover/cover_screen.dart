@@ -87,6 +87,15 @@ class _CoverScreenState extends State<CoverScreen> {
             Padding(
               padding: buttonsPadding,
               child: CoverScreenButton(
+                text: localization.tr('cover_tutorials'),
+                onPress: () {
+                  Navigator.of(context).pushNamed(Routes.fromCoverToTutorials);
+                },
+              ),
+            ),
+            Padding(
+              padding: buttonsPadding,
+              child: CoverScreenButton(
                 text: localization.tr('cover_settings'),
                 onPress: () {
                   Navigator.of(context).pushNamed(Routes.fromCoverToSettings);

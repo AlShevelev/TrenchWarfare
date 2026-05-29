@@ -19,6 +19,7 @@ import 'package:trench_warfare/screens/game_field_screen/game_field_screen.dart'
 import 'package:trench_warfare/screens/new_game/new_game_screen.dart';
 import 'package:trench_warfare/screens/save_load/save_load_library.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
+import 'package:trench_warfare/screens/tutorials/tutorials_screen.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
 
