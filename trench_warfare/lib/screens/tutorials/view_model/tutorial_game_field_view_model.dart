@@ -1,8 +1,9 @@
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/data/game_builders/game_builders_library.dart';
-import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_state.dart';
-import 'package:trench_warfare/screens/tutorials/model/dto/tutorial_game_field_controls_state.dart';
+import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
+import 'package:trench_warfare/shared/architecture/stream/streams_library.dart';
 import 'package:trench_warfare/shared/architecture/view_model_base.dart';
 
 class TutorialGameFieldViewModel extends ViewModelBase {
@@ -14,9 +15,16 @@ class TutorialGameFieldViewModel extends ViewModelBase {
 
   //GameFieldRead get gameField => _model.gameField;
 
-  TutorialGameFieldViewModel() {
-    //_model = GameFieldModel(gamePauseWait);
-  }
+  final SingleStream<Iterable<UpdateGameEvent>> _updateGameObjectsEvent =
+      SingleStream<Iterable<UpdateGameEvent>>();
+
+  Stream<Iterable<UpdateGameEvent>> get updateGameObjectsEvent => _updateGameObjectsEvent.output;
+
+  late final GameBuildResult _builtGame;
+
+  GameFieldRead get gameField => _builtGame.gameField;
+
+  TutorialGameFieldViewModel();
 
   Future<void> initNewGame({
     required RenderableTiledMap tileMap,
@@ -28,11 +36,17 @@ class TutorialGameFieldViewModel extends ViewModelBase {
       tileMap: tileMap,
       selectedNation: selectedNation,
     );
-//    await _model.init(builder: builder);
+
+    _builtGame = await builder.build();
   }
 
   @override
   void dispose() {
-    //_model.dispose();
+    _updateGameObjectsEvent.close();
+  }
+
+  void fireInitializationEvents() {
+    final events = _builtGame.gameField.cells.map((c) => UpdateCell(c, updateBorderCells: []));
+    _updateGameObjectsEvent.update(events);
   }
 }

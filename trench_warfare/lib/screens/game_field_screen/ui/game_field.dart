@@ -36,6 +36,8 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/ui/game_pause.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
 import 'package:trench_warfare/screens/settings/settings_library.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_read_impl.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
@@ -105,6 +107,8 @@ class GameField extends FlameGame
 
   final AppLocale _locale;
 
+  late final SettingsStorageRead _settings;
+
   StreamSubscription? _updateGameObjectsSubscription;
   StreamSubscription? _gameFieldStateSubscription;
 
@@ -150,6 +154,8 @@ class GameField extends FlameGame
     );
     world.add(_mapComponent);
 
+    _settings = SettingsStorageReadImpl();
+
     _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(_onUpdateGameEvent);
     _gameFieldStateSubscription = _viewModel.gameFieldState.listen(_onGameFieldStateUpdate);
 
@@ -166,6 +172,7 @@ class GameField extends FlameGame
       _mapComponent,
       _spritesAtlas,
       _locale,
+      _settings,
       animationAtlas: await images.load('sprites/animation.webp'),
     );
 

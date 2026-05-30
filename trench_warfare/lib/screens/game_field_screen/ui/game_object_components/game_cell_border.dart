@@ -17,6 +17,8 @@ class GameCellBorder extends PositionComponent {
   late final Nation _nation;
   late final List<bool> _sidesToDraw;
 
+  late final SettingsStorageRead _settings;
+
   static final _borderAreaSize = ComponentConstants.cellRealSize * 0.96;
   static final _borderWidth =
       ((ComponentConstants.cellRealSize.x - _borderAreaSize.x) + (ComponentConstants.cellRealSize.y - _borderAreaSize.y)) / 2;
@@ -27,7 +29,9 @@ class GameCellBorder extends PositionComponent {
   // ignore: unnecessary_late
   static late final Map<Nation, List<Paint>> _paints = {};
 
-  GameCellBorder(GameFieldCellRead cell, GameFieldRead gameField) {
+  GameCellBorder(GameFieldCellRead cell, GameFieldRead gameField, SettingsStorageRead settings) {
+    _settings = settings;
+
     _nation = cell.nation!;
 
     _sidesToDraw = [true, true, true, true, true, true];
@@ -51,7 +55,7 @@ class GameCellBorder extends PositionComponent {
 
   @override
   void render(Canvas canvas) {
-    if (!SettingsStorageFacade.showBorders) {
+    if (!_settings.showBorders) {
       return;
     }
 

@@ -26,7 +26,7 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/enums/unit_state.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/sprite_atlas/sprite_atlas_names.dart';
-import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
 import 'package:trench_warfare/shared/utils/math.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';

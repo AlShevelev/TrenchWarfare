@@ -17,15 +17,19 @@ final class GameObjectCell extends GameObjectComponentBase {
 
   final AppLocale _locale;
 
+  final SettingsStorageRead _settings;
+
   GameObjectCell(
     TextureAtlas spritesAtlas,
     GameFieldCellRead cell,
     bool isHuman,
     GameFieldRead gameField,
     AppLocale locale,
+    SettingsStorageRead settings,
   )   : _cell = cell,
         _gameField = gameField,
         _locale = locale,
+        _settings = settings,
         super(spritesAtlas: spritesAtlas, position: cell.center, isHuman: isHuman);
 
   static bool needToDrawCell(GameFieldCellRead cell, GameFieldRead gameField) {
@@ -153,7 +157,7 @@ final class GameObjectCell extends GameObjectComponentBase {
     }
 
     // The low priority (-1000) moves this component to back
-    final border = GameCellBorder(_cell, _gameField)..priority = -1000;
+    final border = GameCellBorder(_cell, _gameField, _settings)..priority = -1000;
     await (root ?? this).add(border);
   }
 }

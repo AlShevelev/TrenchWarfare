@@ -21,6 +21,7 @@ import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/update_game_event.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_object_components/game_field_components_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/view_model/game_field_view_model.dart';
+import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
 import 'package:tuple/tuple.dart';
@@ -41,15 +42,19 @@ class GameObjectsComposer {
 
   final AppLocale _locale;
 
+  final SettingsStorageRead _settings;
+
   GameObjectsComposer(
     TiledComponent mapComponent,
     TextureAtlas spritesAtlas,
-    AppLocale locale, {
+    AppLocale locale,
+    SettingsStorageRead settings, {
     required Image animationAtlas,
   })  : _spritesAtlas = spritesAtlas,
         _animationAtlas = animationAtlas,
         _mapComponent = mapComponent,
-        _locale = locale;
+        _locale = locale,
+        _settings = settings;
 
   void init(GameFieldRead gameField, GameFieldViewModelInput viewModelInput) {
     _gameField = gameField;
@@ -130,6 +135,7 @@ class GameObjectsComposer {
             _viewModelInput.isHumanPlayer,
             _gameField,
             _locale,
+            _settings,
           ),
           _getCellComponentKey(updateBorderCell),
         );
@@ -144,6 +150,7 @@ class GameObjectsComposer {
           _viewModelInput.isHumanPlayer,
           _gameField,
           _locale,
+          _settings,
         ),
         _getCellComponentKey(cell),
       );
