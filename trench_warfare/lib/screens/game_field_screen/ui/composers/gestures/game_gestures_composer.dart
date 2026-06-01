@@ -13,11 +13,11 @@ part of game_gesture_composer;
 class GameGesturesComposer {
   static const int longTapDuration = 700; // ms
 
-  double _zoom = ZoomConstants.startZoom;
+  double _zoom;
 
-  late final GesturesCamera _camera;
+  final GesturesCamera _camera;
 
-  late final Offset _mapSize;
+  final Offset _mapSize;
 
   late final double _minZoom;
 
@@ -29,10 +29,10 @@ class GameGesturesComposer {
   GameGesturesComposer({
     required Offset mapSize,
     required GesturesCamera camera,
-  }) {
-    _mapSize = mapSize;
-    _camera = camera;
-
+    double zoom = ZoomConstants.startZoom,
+  })  : _zoom = zoom,
+        _mapSize = mapSize,
+        _camera = camera {
     _minZoom = _calculateMinZoom().let((z) => z < ZoomConstants.maxZoom ? z : ZoomConstants.maxZoom)!;
 
     _checkBorders();

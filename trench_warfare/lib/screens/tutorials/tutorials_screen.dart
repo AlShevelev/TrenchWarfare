@@ -3,6 +3,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/core/localization/app_locale.dart';
+import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_game_field_controls.dart';
 import 'package:trench_warfare/screens/tutorials/ui/tutorial_game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 
@@ -27,14 +28,11 @@ class TutorialsScreen extends StatelessWidget {
             selectedNation: _selectedNation,
             locale: locale,
           ),
-          // overlayBuilderMap: {
-          //   GameFieldControls.overlayKey: (BuildContext context, GameField gameField) {
-          //     return GameFieldControls(gameField);
-          //   },
-          //   GameFieldControlsAiProgress.overlayKey: (BuildContext context, GameField gameField) {
-          //     return GameFieldControlsAiProgress(gameField);
-          //   },
-          // },
+          overlayBuilderMap: {
+            TutorialGameFieldControls.overlayKey: (BuildContext context, TutorialGameField gameField) {
+              return TutorialGameFieldControls(gameField);
+            },
+          },
         ),
       ),
     );
