@@ -69,6 +69,10 @@ class TutorialGameFieldViewModel extends ViewModelBase {
 
   void onPhoneBackAction() => _complete();
 
+  void onTap() {
+    _moveToCell(10, 10);
+  }
+
   void _createInitialGameObjects() {
     final events = _builtGame.gameField.cells.map((c) => UpdateCell(c, updateBorderCells: []));
     _updateGameObjectsEvent.update(events);

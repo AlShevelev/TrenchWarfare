@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
 import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -26,7 +27,7 @@ import 'package:trench_warfare/screens/tutorials/view_model/tutorial_game_field_
 import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
 
-class TutorialGameField extends FlameGame with HasGameRef implements GameFieldForControls {
+class TutorialGameField extends FlameGame with TapDetector, HasGameRef implements GameFieldForControls {
   late final TutorialGameFieldViewModel _viewModel;
 
   late TiledComponent _mapComponent;
@@ -149,6 +150,9 @@ class TutorialGameField extends FlameGame with HasGameRef implements GameFieldFo
       );
     }
   }
+
+  @override
+  void onTap() => _viewModel.onTap();
 
   @override
   void onCancelled() {
