@@ -26,53 +26,72 @@ class GameFieldGeneralPanel extends StatelessWidget {
   final double _left;
   final double _top;
 
+  final bool _showTutorialBorder;
+
   const GameFieldGeneralPanel({
     super.key,
     required MoneyUnit money,
     required Nation nation,
     required double left,
     required double top,
+    bool showTutorialBorder = false,
   })  : _money = money,
         _nation = nation,
         _left = left,
-        _top = top;
+        _top = top,
+        _showTutorialBorder = showTutorialBorder;
 
   @override
   Widget build(BuildContext context) {
+    final borderSide = BorderSide(
+      color: _showTutorialBorder ? Colors.red : Colors.transparent,
+      width: _showTutorialBorder ? 4.0 : 0.0,
+    );
+
     return Positioned(
       left: _left,
       top: _top,
-      width: _width,
-      height: _height,
-      child: Material(
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppColors.black.withAlpha(100),
-            image: const DecorationImage(
-              image: AssetImage("assets/images/screens/game_field/main/panel_general_info.webp"),
-              fit: BoxFit.fill,
-            ),
+      width: _width + (_showTutorialBorder ? 8 : 0),
+      height: _height + (_showTutorialBorder ? 4 : 0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            left: borderSide,
+            right: borderSide,
+            bottom: borderSide,
           ),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
-                  child: Image.asset(
-                    _getBanner(),
-                    width: _bannerSize,
-                    height: _bannerSize,
+          borderRadius: BorderRadius.circular(_showTutorialBorder ? 4.0 : 0.0),
+        ),
+        child: Material(
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.black.withAlpha(100),
+              image: const DecorationImage(
+                image: AssetImage("assets/images/screens/game_field/main/panel_general_info.webp"),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+                    child: Image.asset(
+                      _getBanner(),
+                      width: _bannerSize,
+                      height: _bannerSize,
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: MoneyPanel(
-                    money: _money,
-                    smallFont: false,
-                    stretch: true,
+                  Expanded(
+                    child: MoneyPanel(
+                      money: _money,
+                      smallFont: false,
+                      stretch: true,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

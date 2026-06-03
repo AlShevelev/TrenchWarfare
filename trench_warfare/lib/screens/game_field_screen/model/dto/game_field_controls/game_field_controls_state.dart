@@ -25,6 +25,8 @@ class MainControls extends GameFieldControlsState {
 
   final bool showDismissButton;
 
+  final GameFieldControlType? tutorialBorder;
+
   MainControls({
     required this.totalSum,
     required this.cellInfo,
@@ -32,6 +34,7 @@ class MainControls extends GameFieldControlsState {
     required this.carrierInfo,
     required this.nation,
     required this.showDismissButton,
+    this.tutorialBorder,
   });
 
   MainControls setCarrierInfo(GameFieldControlsArmyInfo? carrierInfo) => MainControls(
@@ -41,6 +44,7 @@ class MainControls extends GameFieldControlsState {
         carrierInfo: carrierInfo,
         nation: nation,
         showDismissButton: showDismissButton,
+        tutorialBorder: tutorialBorder,
       );
 
   MainControls setShowDismissButton(bool showDismissButton) => MainControls(
@@ -50,7 +54,18 @@ class MainControls extends GameFieldControlsState {
         carrierInfo: carrierInfo,
         nation: nation,
         showDismissButton: showDismissButton,
+        tutorialBorder: tutorialBorder,
       );
+
+  MainControls setTutorialBorder(GameFieldControlType? tutorialBorder) => MainControls(
+    totalSum: totalSum,
+    cellInfo: cellInfo,
+    armyInfo: armyInfo,
+    carrierInfo: carrierInfo,
+    nation: nation,
+    showDismissButton: showDismissButton,
+    tutorialBorder: tutorialBorder,
+  );
 }
 
 class CardsSelectionControls extends GameFieldControlsState {

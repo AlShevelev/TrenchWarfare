@@ -5,19 +5,19 @@
     },
     "activeFile": "tiles/tutorial/tutorial.tmx",
     "expandedProjectPaths": [
+        "tiles/help",
         "tiles/game_objects/atlas",
-        "tiles/test",
-        "tiles/real/europe",
-        "tiles",
-        ".",
         "tiles/templates/units",
+        "tiles/templates",
+        "tiles/real/europe",
+        ".",
+        "tiles/test",
+        "tiles/game_objects/templates",
+        "tiles",
         "tiles_source_metadata",
         "tiles/game_objects",
-        "tiles/templates",
-        "tiles/help",
-        "tiles/real",
         "tiles/tutorial",
-        "tiles/game_objects/templates"
+        "tiles/real"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {

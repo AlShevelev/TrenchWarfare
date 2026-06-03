@@ -25,6 +25,8 @@ class CornerButton extends StatelessWidget {
 
   final bool enabled;
 
+  final bool showTutorialBorder;
+
   const CornerButton({
     super.key,
     this.left,
@@ -33,6 +35,7 @@ class CornerButton extends StatelessWidget {
     this.bottom,
     required this.image,
     this.enabled = true,
+    this.showTutorialBorder = false,
     required this.onPress,
   });
 
@@ -43,14 +46,23 @@ class CornerButton extends StatelessWidget {
       top: top,
       right: right,
       bottom: bottom,
-      width: size,
-      height: size,
-      child: ImageButton.forImages(
-        image: image,
-        imageWidth: size,
-        imageHeight: size,
-        enabled: enabled,
-        onPress: onPress,
+      width: size + (showTutorialBorder ? 8 : 0),
+      height: size + (showTutorialBorder ? 8 : 0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: showTutorialBorder ? Colors.red : Colors.transparent,
+            width: showTutorialBorder ? 4.0 : 0.0,
+          ),
+          borderRadius: BorderRadius.circular(showTutorialBorder ? 4.0 : 0.0),
+        ),
+        child: ImageButton.forImages(
+          image: image,
+          imageWidth: size,
+          imageHeight: size,
+          enabled: enabled,
+          onPress: onPress,
+        ),
       ),
     );
   }

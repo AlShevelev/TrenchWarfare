@@ -48,6 +48,7 @@ class MainControlsWidget extends StatelessWidget {
           left: generalPadding,
           bottom: CornerButton.size + 2 * generalPadding,
           image: const AssetImage('assets/images/screens/game_field/main/button_disband_unit.webp'),
+          showTutorialBorder: state.tutorialBorder == GameFieldControlType.dismissUnit,
           onPress: () {
             _gameField.onDisbandUnitButtonClick();
           },
@@ -58,6 +59,7 @@ class MainControlsWidget extends StatelessWidget {
         left: generalPadding,
         bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_cards.webp'),
+        showTutorialBorder: state.tutorialBorder == GameFieldControlType.cards,
         onPress: () {
           _gameField.onCardsButtonClick();
         },
@@ -67,6 +69,7 @@ class MainControlsWidget extends StatelessWidget {
         right: generalPadding,
         bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_next_turn.webp'),
+        showTutorialBorder: state.tutorialBorder == GameFieldControlType.nextTurn,
         onPress: () {
           _gameField.onEndOfTurnButtonClick();
         },
@@ -76,6 +79,7 @@ class MainControlsWidget extends StatelessWidget {
         right: generalPadding,
         top: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_menu.webp'),
+        showTutorialBorder: state.tutorialBorder == GameFieldControlType.menu,
         onPress: () {
           _gameField.onMenuButtonClick();
         },
@@ -85,6 +89,7 @@ class MainControlsWidget extends StatelessWidget {
         nation: _nation,
         left: generalPadding,
         top: 0,
+        showTutorialBorder: state.tutorialBorder == GameFieldControlType.generalPanel,
       ),
     ]);
 

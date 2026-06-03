@@ -86,6 +86,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
       carrierInfo: null,
       nation: Nation.greatBritain,
       showDismissButton: true,
+      tutorialBorder: GameFieldControlType.generalPanel,
     );
     _controlsState.update(state);
   }
