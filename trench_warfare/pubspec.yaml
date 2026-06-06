@@ -75,6 +75,7 @@ flutter:
     - assets/images/screens/shared/
     - assets/images/screens/shared/banners/
     - assets/images/screens/shared/bookmarks/
+    - assets/images/screens/tutorial/
 
     # localisation
     - assets/translations/
