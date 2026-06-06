@@ -13,6 +13,7 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_controls/game_field_controls_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
+import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_assistant_girl.dart';
 import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -48,7 +49,7 @@ class MainControlsWidget extends StatelessWidget {
           left: generalPadding,
           bottom: CornerButton.size + 2 * generalPadding,
           image: const AssetImage('assets/images/screens/game_field/main/button_disband_unit.webp'),
-          showTutorialBorder: state.tutorialBorder == GameFieldControlType.dismissUnit,
+          showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.dismissUnit,
           onPress: () {
             _gameField.onDisbandUnitButtonClick();
           },
@@ -59,7 +60,7 @@ class MainControlsWidget extends StatelessWidget {
         left: generalPadding,
         bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_cards.webp'),
-        showTutorialBorder: state.tutorialBorder == GameFieldControlType.cards,
+        showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.cards,
         onPress: () {
           _gameField.onCardsButtonClick();
         },
@@ -69,7 +70,7 @@ class MainControlsWidget extends StatelessWidget {
         right: generalPadding,
         bottom: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_next_turn.webp'),
-        showTutorialBorder: state.tutorialBorder == GameFieldControlType.nextTurn,
+        showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.nextTurn,
         onPress: () {
           _gameField.onEndOfTurnButtonClick();
         },
@@ -79,7 +80,7 @@ class MainControlsWidget extends StatelessWidget {
         right: generalPadding,
         top: generalPadding,
         image: const AssetImage('assets/images/screens/game_field/main/button_menu.webp'),
-        showTutorialBorder: state.tutorialBorder == GameFieldControlType.menu,
+        showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.menu,
         onPress: () {
           _gameField.onMenuButtonClick();
         },
@@ -89,7 +90,7 @@ class MainControlsWidget extends StatelessWidget {
         nation: _nation,
         left: generalPadding,
         top: 0,
-        showTutorialBorder: state.tutorialBorder == GameFieldControlType.generalPanel,
+        showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.generalPanel,
       ),
     ]);
 
@@ -132,6 +133,10 @@ class MainControlsWidget extends StatelessWidget {
           isCarrier: true,
         ),
       );
+    }
+
+    if (state.tutorialInfo != null) {
+      widgets.add(const TutorialAssistantGirl());
     }
 
     return Stack(

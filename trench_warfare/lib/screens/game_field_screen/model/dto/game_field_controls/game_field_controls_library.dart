@@ -26,3 +26,4 @@ part 'game_field_controls_cards.dart';
 part 'game_field_controls_main.dart';
 part 'game_field_controls_state.dart';
 part 'game_field_control_type.dart';
+part 'game_field_tutorial_info.dart';
