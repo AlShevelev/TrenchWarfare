@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_ui_calculator.dart';
 
 class TutorialAssistantGirl extends StatelessWidget {
   static const sizeX = 112.0;
@@ -14,17 +15,14 @@ class TutorialAssistantGirl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
-    final double screenWidth = screenSize.width;
-    final double screenHeight = screenSize.height;
 
-    final left = screenWidth - offsetX - sizeX;
-    final top = screenHeight - offsetY - sizeY;
+    final rect = TutorialUiCalculator.getAssistantRect(screenSize);
 
     return Positioned(
-      left: left,
-      top: top,
-      width: sizeX,
-      height: sizeY,
+      left: rect.left,
+      top: rect.top,
+      width: rect.width,
+      height: rect.height,
       child: const Image(
         image: AssetImage('assets/images/screens/tutorial/tutorial_girl.webp'),
         width: sizeX,

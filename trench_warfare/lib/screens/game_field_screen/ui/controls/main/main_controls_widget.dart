@@ -14,6 +14,7 @@ import 'package:trench_warfare/screens/game_field_screen/model/dto/game_field_co
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/army_info/game_field_army_info_library.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/main/cell_info/game_field_cell_info_library.dart';
 import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_assistant_girl.dart';
+import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_info_panel.dart';
 import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_general_panel.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
@@ -135,8 +136,14 @@ class MainControlsWidget extends StatelessWidget {
       );
     }
 
-    if (state.tutorialInfo != null) {
+    final tutorialInfo = state.tutorialInfo;
+    if (tutorialInfo != null) {
       widgets.add(const TutorialAssistantGirl());
+
+      widgets.add(TutorialInfoPanel(
+        isBottom: tutorialInfo.panelOnTop == false,
+        textLocaleCode: tutorialInfo.textLocaleCode,
+      ));
     }
 
     return Stack(
