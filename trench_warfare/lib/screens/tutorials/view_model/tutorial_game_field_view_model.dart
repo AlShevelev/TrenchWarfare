@@ -88,8 +88,8 @@ class TutorialGameFieldViewModel extends ViewModelBase {
       showDismissButton: true,
       tutorialInfo: GameFieldTutorialInfo(
         border: null,
-        panelOnTop: true,
-        textLocaleCode: 'tutorial_step_14',
+        panelOnTop: false,
+        textLocaleCode: 'tutorial_step_24',
       ),
     );
     _controlsState.update(state);
