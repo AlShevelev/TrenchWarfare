@@ -31,6 +31,8 @@ class TutorialGameFieldViewModel extends ViewModelBase {
 
   GameFieldRead get gameField => _builtGame.gameField;
 
+  int _tutorialStep = 1;
+
   TutorialGameFieldViewModel();
 
   Future<void> initNewGame({
@@ -64,13 +66,394 @@ class TutorialGameFieldViewModel extends ViewModelBase {
 
     _gameFieldState.update(Playing());
 
-    //_moveToCell(10, 10);  // Bases on the scenario stem
+    _moveToCell(18, 9);
   }
 
   void onPhoneBackAction() => _complete();
 
   void onTap() {
-    _moveToCell(10, 10);
+    _tutorialStep++;
+
+    switch (_tutorialStep) {
+      case 2:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_2',
+            ),
+          ));
+        }
+      case 3:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_3',
+            ),
+          ));
+        }
+      case 4:
+        {
+          _moveToCell(2, 2);
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_4',
+            ),
+          ));
+        }
+      case 5:
+        {
+          _moveToCell(8, 2);
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_5',
+            ),
+          ));
+        }
+      case 6:
+        {
+          _moveToCell(14, 1);
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_6',
+            ),
+          ));
+        }
+      case 7:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_7',
+            ),
+          ));
+        }
+      case 8:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.generalPanel,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_8',
+            ),
+          ));
+        }
+      case 9:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.nextTurn,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_9',
+            ),
+          ));
+        }
+      case 10:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.dismissUnit,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_10',
+            ),
+          ));
+        }
+      case 11:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.cards,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_11',
+            ),
+          ));
+        }
+      case 12:
+        {
+          _moveToCell(4, 13);
+
+          final cell = gameField.getCell(4, 13);
+
+          _controlsState.update(MainControls(
+            totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
+            cellInfo: GameFieldControlsCellInfo(
+              income: MoneyUnit(currency: 0, industryPoints: 0),
+              terrain: cell.terrain,
+              terrainModifier: cell.terrainModifier?.type,
+              productionCenter: cell.productionCenter,
+              nation: cell.nation,
+              units: cell.units.toList(growable: true),
+            ),
+            armyInfo: null,
+            carrierInfo: null,
+            nation: Nation.greatBritain,
+            showDismissButton: true,
+            tutorialInfo: GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_12',
+            ),
+          ));
+        }
+      case 13:
+        {
+          _moveToCell(4, 19);
+
+          final cell = gameField.getCell(4, 19);
+
+          _controlsState.update(MainControls(
+            totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
+            cellInfo: null,
+            armyInfo: GameFieldControlsArmyInfo(
+              cellId: cell.id,
+              nation: cell.nation!,
+              units: cell.units.toList(growable: true),
+            ),
+            carrierInfo: null,
+            nation: Nation.greatBritain,
+            showDismissButton: true,
+            tutorialInfo: GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_13',
+            ),
+          ));
+        }
+      case 14:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_14',
+            ),
+          ));
+        }
+      case 15:
+        {
+          _moveToCell(4, 8);
+
+          _controlsState.update(MainControls(
+            totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
+            cellInfo: null,
+            armyInfo: null,
+            carrierInfo: null,
+            nation: Nation.greatBritain,
+            showDismissButton: true,
+            tutorialInfo: GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_15',
+            ),
+          ));
+        }
+      case 16:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_16',
+            ),
+          ));
+        }
+      case 17:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_17',
+            ),
+          ));
+        }
+      case 18:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_18',
+            ),
+          ));
+        }
+      case 19:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_19',
+            ),
+          ));
+        }
+      case 20:
+        {
+          _moveToCell(19, 16);
+
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_20',
+            ),
+          ));
+        }
+      case 21:
+        {
+          _moveToCell(26, 2);
+
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_21',
+            ),
+          ));
+        }
+      case 22:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_22',
+            ),
+          ));
+        }
+      case 23:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_23',
+            ),
+          ));
+        }
+      case 24:
+        {
+          _moveToCell(9, 7);
+
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_24',
+            ),
+          ));
+        }
+      case 25:
+        {
+          _moveToCell(9, 9);
+
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_25',
+            ),
+          ));
+        }
+      case 26:
+        {
+          _moveToCell(8, 26);
+
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_26',
+            ),
+          ));
+        }
+      case 27:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_27',
+            ),
+          ));
+        }
+      case 28:
+        {
+          _moveToCell(10, 16);
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_28',
+            ),
+          ));
+        }
+      case 29:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_29',
+            ),
+          ));
+        }
+      case 30:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_30',
+            ),
+          ));
+        }
+      case 31:
+        {
+          _moveToCell(17, 24);
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_31',
+            ),
+          ));
+        }
+      case 32:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_32',
+            ),
+          ));
+        }
+      case 33:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_33',
+            ),
+          ));
+        }
+      case 34:
+        {
+          _complete();
+        }
+    }
   }
 
   void _createInitialGameObjects() {
@@ -89,7 +472,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
       tutorialInfo: GameFieldTutorialInfo(
         border: null,
         panelOnTop: false,
-        textLocaleCode: 'tutorial_step_24',
+        textLocaleCode: 'tutorial_step_1',
       ),
     );
     _controlsState.update(state);

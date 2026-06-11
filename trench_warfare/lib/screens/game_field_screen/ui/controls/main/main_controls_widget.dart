@@ -138,11 +138,16 @@ class MainControlsWidget extends StatelessWidget {
 
     final tutorialInfo = state.tutorialInfo;
     if (tutorialInfo != null) {
-      widgets.add(const TutorialAssistantGirl());
+      widgets.add(
+          TutorialAssistantGirl(
+            onPress: () => _gameField.onUserConfirmed(),
+          )
+      );
 
       widgets.add(TutorialInfoPanel(
         isBottom: tutorialInfo.panelOnTop == false,
         textLocaleCode: tutorialInfo.textLocaleCode,
+        onPress: () => _gameField.onUserConfirmed(),
       ));
     }
 

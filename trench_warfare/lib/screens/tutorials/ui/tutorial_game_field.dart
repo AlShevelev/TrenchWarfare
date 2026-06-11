@@ -88,6 +88,7 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
 
     _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(_onUpdateGameEvent);
     _gameFieldStateSubscription = _viewModel.gameFieldState.listen(_onGameFieldStateChange);
+    //_gameFieldControlsState = _viewModel.controlsState.listen(_onGameFieldStateChange);
 
     _gameGesturesComposer = GameGesturesComposer(
       zoom: ZoomConstants.maxZoom,
@@ -229,10 +230,10 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
     // not implemented for the tutorial
   }
 
+  // It's a dirty hack here - we use onUserConfirmed to avoid adding a new method in GameFieldForControls
+  // for tutorial only (due to the method must be implemented on the game field as well)
   @override
-  void onUserConfirmed() {
-    // not implemented for the tutorial
-  }
+  void onUserConfirmed() => _viewModel.onTap();
 
   @override
   void onUserDeclined() {

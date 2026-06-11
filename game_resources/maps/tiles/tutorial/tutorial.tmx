@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="30" height="30" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="5" nextobjectid="103">
+<map version="1.10" tiledversion="1.11.0" orientation="hexagonal" renderorder="right-up" width="30" height="30" tilewidth="74" tileheight="64" infinite="0" hexsidelength="37" staggeraxis="x" staggerindex="odd" nextlayerid="5" nextobjectid="104">
  <properties>
   <property name="metadata" value="{ &quot;version&quot;: 1, &quot;title&quot;: { &quot;en&quot;: &quot;&quot;, &quot;ru&quot;: &quot;&quot; }, &quot;description&quot;: { &quot;en&quot;: &quot;&quot;, &quot;ru&quot;: &quot;&quot; }, &quot;dates&quot;: { &quot;from&quot;: &quot;1916-07-01&quot;, &quot;to&quot;: &quot;1916-11-18&quot; }, &quot;params&quot;: { &quot;land_only_ai&quot;: true }, &quot;nations&quot;: [ { &quot;code&quot;: &quot;france&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2500, &quot;startIndustryPoints&quot;: 2500 }, { &quot;code&quot;: &quot;greatBritain&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 2500, &quot;startIndustryPoints&quot;: 2500 }, { &quot;code&quot;: &quot;germany&quot;, &quot;aggressiveness&quot;: &quot;aggressive&quot;, &quot;startMoney&quot;: 5000, &quot;startIndustryPoints&quot;: 5000 } ], &quot;diplomacy&quot;: [ { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;germany&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;greatBritain&quot;, &quot;secondNation&quot;: &quot;germany&quot;, &quot;relationship&quot;: &quot;war&quot; }, { &quot;firstNation&quot;: &quot;france&quot;, &quot;secondNation&quot;: &quot;greatBritain&quot;, &quot;relationship&quot;: &quot;allied&quot; } ] }"/>
  </properties>
@@ -34,9 +34,9 @@
 28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
 28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
 28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
-2,2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
-2,2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
-2,2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
+2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
+2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
+2,2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
 2,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,
 28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28
 </data>
@@ -156,7 +156,7 @@
     <property name="name_ru" value=""/>
    </properties>
   </object>
-  <object id="11" name="greatBritain" type="ownership" gid="123" x="114.911" y="575.829" width="64" height="64">
+  <object id="11" name="greatBritain" type="ownership" gid="123" x="113.264" y="636.785" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="18"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -166,7 +166,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="12" name="greatBritain" type="ownership" gid="123" x="118.103" y="515.681" width="64" height="64">
+  <object id="12" name="greatBritain" type="ownership" gid="123" x="115.632" y="570.87" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="17"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -349,7 +349,7 @@
     <property name="unit4" type="object" value="33"/>
    </properties>
   </object>
-  <object id="35" name="greatBritain" type="ownership" gid="123" x="115.35" y="1666.94" width="64" height="64">
+  <object id="35" name="greatBritain" type="ownership" gid="123" x="59.2034" y="1695.9" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -359,7 +359,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="36" name="greatBritain" type="ownership" gid="123" x="113.34" y="1728.49" width="64" height="64">
+  <object id="36" name="greatBritain" type="ownership" gid="123" x="57.1934" y="1759.22" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -369,7 +369,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="37" name="greatBritain" type="ownership" gid="123" x="117.686" y="1793.18" width="64" height="64">
+  <object id="37" name="greatBritain" type="ownership" gid="123" x="58.5843" y="1822.73" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -379,7 +379,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="38" name="greatBritain" type="ownership" gid="123" x="167.462" y="1693.12" width="64" height="64">
+  <object id="38" name="greatBritain" type="ownership" gid="123" x="113.679" y="1725.63" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -389,7 +389,7 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
-  <object id="39" name="greatBritain" type="ownership" gid="123" x="170.174" y="1763.66" width="64" height="64">
+  <object id="39" name="greatBritain" type="ownership" gid="123" x="116.391" y="1790.85" width="64" height="64">
    <properties>
     <property name="productionCenter" type="object" value="0"/>
     <property name="terrainModifier" type="object" value="0"/>
@@ -989,6 +989,26 @@
     <property name="unit4" type="object" value="0"/>
    </properties>
   </object>
+  <object id="32" name="germany" type="ownership" gid="134" x="720.242" y="355.128" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="27"/>
+    <property name="unit1" type="object" value="28"/>
+    <property name="unit2" type="object" value="29"/>
+    <property name="unit3" type="object" value="30"/>
+    <property name="unit4" type="object" value="31"/>
+   </properties>
+  </object>
+  <object id="103" name="greatBritain" type="ownership" gid="123" x="885.705" y="770.373" width="64" height="64">
+   <properties>
+    <property name="productionCenter" type="object" value="0"/>
+    <property name="terrainModifier" type="object" value="0"/>
+    <property name="unit1" type="object" value="28"/>
+    <property name="unit2" type="object" value="0"/>
+    <property name="unit3" type="object" value="0"/>
+    <property name="unit4" type="object" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="4" name="Templates">
   <object id="1" name="level2" type="navalBase" gid="96" x="177.606" y="-718.954" width="64" height="64">
@@ -1427,15 +1447,5 @@
    </properties>
   </object>
   <object id="52" name="landFort" type="terrainModifier" gid="92" x="327.226" y="-742.56" width="64" height="64"/>
-  <object id="32" name="germany" type="ownership" gid="134" x="720.242" y="355.128" width="64" height="64">
-   <properties>
-    <property name="productionCenter" type="object" value="0"/>
-    <property name="terrainModifier" type="object" value="27"/>
-    <property name="unit1" type="object" value="28"/>
-    <property name="unit2" type="object" value="29"/>
-    <property name="unit3" type="object" value="30"/>
-    <property name="unit4" type="object" value="31"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

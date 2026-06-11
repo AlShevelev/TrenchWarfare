@@ -5,19 +5,19 @@
     },
     "activeFile": "tiles/tutorial/tutorial.tmx",
     "expandedProjectPaths": [
-        "tiles/help",
-        "tiles/game_objects/atlas",
-        "tiles/templates/units",
-        "tiles/templates",
         "tiles/real/europe",
-        ".",
-        "tiles/test",
-        "tiles/game_objects/templates",
-        "tiles",
-        "tiles_source_metadata",
         "tiles/game_objects",
+        "tiles/templates",
+        "tiles_source_metadata",
+        "tiles/templates/units",
+        "tiles/test",
+        "tiles/real",
         "tiles/tutorial",
-        "tiles/real"
+        "tiles/game_objects/atlas",
+        "tiles/game_objects/templates",
+        ".",
+        "tiles",
+        "tiles/help"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1351,11 +1351,11 @@
             "scaleInDock": 0.5332
         },
         "tiles/tutorial/tutorial.tmx": {
-            "scale": 0.6911,
+            "scale": 1.2268,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 426.85573723050214,
-                "y": 456.51859354652004
+                "x": 1243.8865340723835,
+                "y": 1088.6044995109228
             }
         },
         "tiles/tutorial/tutorial.tmx#terrain_atlas": {

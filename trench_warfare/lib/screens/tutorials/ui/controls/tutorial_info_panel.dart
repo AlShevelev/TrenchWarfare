@@ -9,10 +9,13 @@ class TutorialInfoPanel extends StatelessWidget {
 
   final String textLocaleCode;
 
+  final Function onPress;
+
   const TutorialInfoPanel({
     super.key,
     required this.isBottom,
     required this.textLocaleCode,
+    required this.onPress,
   });
 
   @override
@@ -27,23 +30,28 @@ class TutorialInfoPanel extends StatelessWidget {
       height: rect.height,
       child: Material(
         type: MaterialType.transparency,
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/screens/tutorial/tutorial_card.webp'),
-              fit: BoxFit.fill,
+        child: GestureDetector(
+          onTap: () {
+            onPress();
+          },
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/screens/tutorial/tutorial_card.webp'),
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                localization.tr(textLocaleCode),
-                textAlign: TextAlign.start,
-                softWrap: true,
-                style: AppTypography.s15w400.copyWith(color: AppColors.black),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 50,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  localization.tr(textLocaleCode),
+                  textAlign: TextAlign.start,
+                  softWrap: true,
+                  style: AppTypography.s15w400.copyWith(color: AppColors.black),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 50,
+                ),
               ),
             ),
           ),
