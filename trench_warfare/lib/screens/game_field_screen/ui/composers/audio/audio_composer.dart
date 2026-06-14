@@ -18,18 +18,8 @@ class AudioComposer {
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {
     switch (event) {
-      case PlaySound(
-          type: var type,
-          duration: var duration,
-          strategy: var strategy,
-          ignoreIfPlayed: var ignoreIfPlayed,
-        ):
-        await _audioController?.playSound(
-          type,
-          duration: duration,
-          strategy: strategy,
-          ignoreIfPlayed: ignoreIfPlayed,
-        );
+      case PlaySound(type: var type):
+        await _audioController?.playSound(type);
 
       default:
         {}

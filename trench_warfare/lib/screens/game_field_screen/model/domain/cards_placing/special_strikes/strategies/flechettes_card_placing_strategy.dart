@@ -60,10 +60,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
   Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
     final events = <UpdateGameEvent>[];
 
-    events.add(PlaySound(
-      type: SoundType.attackFlechettes,
-      duration: killedUnit == null ? null : _animationTime.damageAnimationTime,
-    ));
+    events.add(PlaySound(type: SoundType.attackFlechettes));
 
     events.add(ShowDamage(
       cell: _cell,
@@ -72,10 +69,7 @@ class FlechettesCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     ));
 
     if (killedUnit != null) {
-      events.add(PlaySound(
-        type: killedUnit.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
-      ));
+      events.add(PlaySound(type: killedUnit.getDeathSoundType()));
     }
 
     events.add(UpdateCell(

@@ -381,10 +381,7 @@ class MovementWithBattleCalculator extends MovementCalculator with ShowDamageCal
     ));
 
     if (pcCaptured) {
-      updateEvents.add(PlaySound(
-        type: SoundType.battleResultPcCaptured,
-        strategy: SoundStrategy.putToQueue,
-      ));
+      updateEvents.add(PlaySound(type: SoundType.battleResultPcCaptured));
     }
 
     // Update the defending cell

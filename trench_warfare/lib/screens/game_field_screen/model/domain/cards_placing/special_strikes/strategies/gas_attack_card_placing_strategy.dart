@@ -91,8 +91,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
     final updateEvents = <UpdateGameEvent>[];
 
     updateEvents.add(PlaySound(
-      type: SoundType.attackGas,
-      duration: killedUnit == null ? null : (_animationTime.damageAnimationTime * 1.5).toInt(),
+      type: SoundType.attackGas
     ));
 
     updateEvents.add(
@@ -104,8 +103,7 @@ class GasAttackCardPlacingStrategy extends SpecialStrikesCardsPlacingStrategy {
 
     if (killedUnit != null) {
       updateEvents.add(PlaySound(
-        type: killedUnit.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
+        type: killedUnit.getDeathSoundType()
       ));
     }
 

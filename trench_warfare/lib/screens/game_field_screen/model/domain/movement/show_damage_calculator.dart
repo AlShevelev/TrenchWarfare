@@ -34,7 +34,6 @@ mixin ShowDamageCalculator {
     if (attackingUnitHasArtillery && !defendingUnitHasArtillery) {
       result.add(PlaySound(
         type: attackingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
-        duration: deadUnits.isNotEmpty ? animationTime.damageAnimationTime : null,
       ));
 
       result.add(
@@ -51,7 +50,6 @@ mixin ShowDamageCalculator {
       result.add(
         PlaySound(
           type: attackingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
-          duration: animationTime.damageAnimationTime,
         ),
       );
 
@@ -66,8 +64,6 @@ mixin ShowDamageCalculator {
       result.add(
         PlaySound(
           type: defendingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
-          duration: deadUnits.isNotEmpty ? animationTime.damageAnimationTime : null,
-          ignoreIfPlayed: false,
         ),
       );
 
@@ -86,7 +82,6 @@ mixin ShowDamageCalculator {
         type: attackingUnitHasArtillery || defendingUnitHasArtillery
             ? SoundType.attackExplosion
             : SoundType.attackShot,
-        duration: deadUnits.isNotEmpty ? animationTime.damageAnimationTime : null,
       ));
 
       result.add(
@@ -104,7 +99,6 @@ mixin ShowDamageCalculator {
     if (!attackingUnitHasArtillery && defendingUnitHasArtillery) {
       result.add(PlaySound(
         type: defendingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
-        duration: animationTime.damageAnimationTime,
       ));
 
       result.add(
@@ -117,7 +111,6 @@ mixin ShowDamageCalculator {
 
       result.add(PlaySound(
         type: attackingUnitHasArtillery ? SoundType.attackExplosion : SoundType.attackShot,
-        duration: deadUnits.isNotEmpty ? animationTime.damageAnimationTime : null,
       ));
 
       result.add(
@@ -130,10 +123,7 @@ mixin ShowDamageCalculator {
     }
 
     if (deadUnits.isNotEmpty) {
-      result.add(PlaySound(
-        type: deadUnits.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
-      ));
+      result.add(PlaySound(type: deadUnits.getDeathSoundType()));
     }
 
     return result;

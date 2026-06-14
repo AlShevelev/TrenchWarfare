@@ -175,16 +175,10 @@ class MovementWithMineFieldCalculator extends MovementCalculator {
       priorCell = cell;
     }
 
-    updateEvents.add(PlaySound(
-      type: SoundType.attackExplosion,
-      duration: isUnitAlive ? null : _animationTime.damageAnimationTime,
-    ));
+    updateEvents.add(PlaySound(type: SoundType.attackExplosion));
 
     if (!isUnitAlive) {
-      updateEvents.add(PlaySound(
-        type: unit.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
-      ));
+      updateEvents.add(PlaySound(type: unit.getDeathSoundType()));
     }
 
     updateEvents.add(

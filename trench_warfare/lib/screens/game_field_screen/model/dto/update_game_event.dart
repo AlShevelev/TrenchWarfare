@@ -125,19 +125,7 @@ class PlaySound implements UpdateGameEvent {
   /// Type of sound to play
   final SoundType type;
 
-  /// Duration of the sound to play (null - without restriction)
-  final int? duration;
-
-  /// The playing strategy
-  final SoundStrategy strategy;
-
-  /// If the sound with the same type is played or in the queue - do nothing
-  final bool ignoreIfPlayed;
-
   PlaySound({
-    required this.type,
-    this.duration,
-    this.strategy = SoundStrategy.interrupt,
-    this.ignoreIfPlayed = true,
+    required this.type
   });
 }

@@ -11,12 +11,7 @@
 part of audio;
 
 abstract interface class AudioControllerPlaySound {
-  Future<void> playSound(
-    SoundType type, {
-    int? duration,
-    SoundStrategy strategy = SoundStrategy.interrupt,
-    bool ignoreIfPlayed = true,
-  });
+  Future<void> playSound(SoundType type);
 }
 
 abstract interface class AudioControllerSetVolume {
@@ -56,18 +51,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
   }
 
   @override
-  Future<void> playSound(
-    SoundType type, {
-    int? duration,
-    SoundStrategy strategy = SoundStrategy.interrupt,
-    bool ignoreIfPlayed = true,
-  }) async =>
-      await _soundsPlayer.play(
-        type: type,
-        duration: duration,
-        strategy: strategy,
-        ignoreIfPlayed: ignoreIfPlayed,
-      );
+  Future<void> playSound(SoundType type) async => await _soundsPlayer.play(type: type);
 
   @override
   void setMusicVolume(double value) => _musicPlayer.setVolume(value);

@@ -56,10 +56,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
     final events = <UpdateGameEvent>[];
 
     events.add(
-      PlaySound(
-        type: SoundType.attackExplosion,
-        duration: killedUnit == null ? null : _animationTime.damageAnimationTime,
-      ),
+      PlaySound(type: SoundType.attackExplosion),
     );
 
     events.add(
@@ -72,10 +69,7 @@ class AirBombardmentCardPlacingStrategy extends SpecialStrikesCardsPlacingStrate
 
     if (killedUnit != null) {
       events.add(
-        PlaySound(
-          type: killedUnit.getDeathSoundType(),
-          strategy: SoundStrategy.putToQueue,
-        ),
+        PlaySound(type: killedUnit.getDeathSoundType()),
       );
     }
 

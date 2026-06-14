@@ -55,10 +55,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
   Iterable<UpdateGameEvent> _getUpdateEvents(Unit? killedUnit) {
     final events = <UpdateGameEvent>[];
 
-    events.add(PlaySound(
-      type: SoundType.attackFlame,
-      duration: killedUnit == null ? null : _animationTime.damageAnimationTime,
-    ));
+    events.add(PlaySound(type: SoundType.attackFlame));
 
     events.add(ShowDamage(
       cell: _cell,
@@ -67,10 +64,7 @@ class FlameTroopersCardPlacingStrategy extends SpecialStrikesCardsPlacingStrateg
     ));
 
     if (killedUnit != null) {
-      events.add(PlaySound(
-        type: killedUnit.getDeathSoundType(),
-        strategy: SoundStrategy.putToQueue,
-      ));
+      events.add(PlaySound(type: killedUnit.getDeathSoundType()));
     }
 
     events.add(UpdateCell(
