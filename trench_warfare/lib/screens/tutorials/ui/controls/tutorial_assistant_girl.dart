@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:trench_warfare/screens/tutorials/ui/controls/tutorial_ui_calculator.dart';
 
 class TutorialAssistantGirl extends StatelessWidget {
+  static const _sizeX = 112.0;
+  static const _sizeY = 381.0;
+
+  static const _offsetX = 5.0;
+
   final Function onPress;
 
   const TutorialAssistantGirl({
@@ -13,21 +17,19 @@ class TutorialAssistantGirl extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.sizeOf(context);
 
-    final rect = TutorialUiCalculator.getAssistantRect(screenSize);
-
     return Positioned(
-      left: rect.left,
-      top: rect.top,
-      width: rect.width,
-      height: rect.height,
+      left: screenSize.width - _sizeX - _offsetX,
+      top: (screenSize.height - _sizeY) / 2,
+      width: _sizeX,
+      height: _sizeY,
       child: GestureDetector(
         onTap: () {
           onPress();
         },
-        child: Image(
-          image: const AssetImage('assets/images/screens/tutorial/tutorial_girl.webp'),
-          width: rect.width,
-          height: rect.height,
+        child: const Image(
+          image: AssetImage('assets/images/screens/tutorial/tutorial_girl.webp'),
+          width: _sizeX,
+          height: _sizeY,
         ),
       ),
     );
