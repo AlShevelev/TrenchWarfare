@@ -35,23 +35,22 @@ class TutorialInfoPanel extends StatelessWidget {
             onPress();
           },
           child: Container(
+            alignment: Alignment.centerLeft,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/screens/tutorial/tutorial_card.webp'),
                 fit: BoxFit.fill,
               ),
             ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  localization.tr(textLocaleCode),
-                  textAlign: TextAlign.start,
-                  softWrap: true,
-                  style: AppTypography.s15w400.copyWith(color: AppColors.black),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 50,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                localization.tr(textLocaleCode),
+                textAlign: TextAlign.start,
+                softWrap: true,
+                style: AppTypography.s15w400.copyWith(color: AppColors.black),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 50,
               ),
             ),
           ),
