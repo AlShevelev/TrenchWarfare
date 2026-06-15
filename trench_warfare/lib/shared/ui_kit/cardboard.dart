@@ -38,7 +38,9 @@ class Cardboard extends StatelessWidget {
         decoration: BoxDecoration(
           image: const DecorationImage(
             image: AssetImage('assets/images/screens/shared/card_background.webp'),
-            fit: BoxFit.fill,
+            repeat: ImageRepeat.repeat,
+            fit: BoxFit.none,
+            alignment: Alignment.topLeft,
           ),
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: _getBorderColor(), width: 4),
