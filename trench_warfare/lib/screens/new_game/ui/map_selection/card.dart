@@ -45,10 +45,17 @@ class _Card extends StatelessWidget {
 
     final audioController = context.read<AudioController>();
 
+    final screenSize = ScreenSize(context);
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.fromLTRB(
+          12 * screenSize.relativeToBaseline,
+          12,
+          12 * screenSize.relativeToBaseline,
+          12,
+        ),
         child: GestureDetector(
           onTap: () {
             if (!_selected) {
@@ -81,8 +88,16 @@ class _Card extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: Image.asset(_getPhoto()),
+                      padding: EdgeInsets.fromLTRB(
+                        3 * screenSize.relativeToBaseline,
+                        0,
+                        3 * screenSize.relativeToBaseline,
+                        8,
+                      ),
+                      child: Image.asset(
+                        _getPhoto(),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),

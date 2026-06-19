@@ -33,6 +33,7 @@ import 'package:trench_warfare/shared/ui_kit/background.dart';
 import 'package:trench_warfare/shared/ui_kit/corner_button.dart';
 import 'package:trench_warfare/shared/ui_kit/image_loading.dart';
 import 'package:trench_warfare/shared/ui_kit/stroked_text.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 part 'card_banners/card_banners.dart';
 part 'card_banners/card_banners_neutrals.dart';

@@ -49,6 +49,8 @@ class _SettingsState extends State<Settings> with ImageLoading {
     final audioController = context.read<AudioController>();
     _viewModel.setAudioController(audioController);
 
+    final screenSize = ScreenSize(context);
+
     return StreamBuilder<_SettingsScreenState>(
         stream: _viewModel.uiState,
         builder: (context, value) {
@@ -75,7 +77,10 @@ class _SettingsState extends State<Settings> with ImageLoading {
                           child: Background(
                             imagePath: 'assets/images/screens/shared/old_paper.webp',
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 24,
+                                horizontal: 20 * screenSize.relativeToBaseline,
+                              ),
                               alignment: AlignmentDirectional.topCenter,
                               child: _getContent(value.data),
                             ),
