@@ -57,6 +57,8 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
         final state = value.data as _DataIsReady;
         final selectedTab = state.selectedTab;
 
+        final screenSize = ScreenSize(context);
+
         return Background(
           imagePath: 'assets/images/screens/shared/screen_background.webp',
           child: Stack(
@@ -78,7 +80,10 @@ class _CardsSelectionScreenState extends State<CardsSelectionScreen> with ImageL
                         child: Background(
                           imagePath: 'assets/images/screens/shared/old_paper.webp',
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 24,
+                              horizontal: 16 * screenSize.relativeToBaseline,
+                            ),
                             alignment: AlignmentDirectional.topCenter,
                             child: _CardsList(
                               key: ObjectKey(selectedTab),

@@ -29,6 +29,8 @@ abstract class _CardBase<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final audioController = context.read<AudioController>();
 
+    final screenSize = ScreenSize(context);
+
     return DefaultTextStyle(
       style: const TextStyle(),
       child: Padding(
@@ -47,17 +49,27 @@ abstract class _CardBase<T> extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 6),
                       child: Text(
                         _getTitleText(),
                         style: AppTypography.s20w600,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                      child: Image.asset(_getPhoto()),
+                      padding: EdgeInsets.fromLTRB(
+                        3 * screenSize.relativeToBaseline,
+                        0,
+                        3 * screenSize.relativeToBaseline,
+                        8,
+                      ),
+                      child: Image.asset(
+                        _getPhoto(),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),

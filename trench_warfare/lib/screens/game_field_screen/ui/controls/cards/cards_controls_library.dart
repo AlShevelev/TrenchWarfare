@@ -38,6 +38,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core/enums/unit_type.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 part 'dto/card_dto.dart';
 part 'dto/cards_screen_state.dart';

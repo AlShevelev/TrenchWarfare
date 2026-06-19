@@ -21,36 +21,36 @@ class _CardUnit extends _CardBase<UnitType> {
 
   @override
   String _getDescriptionText() => switch (_card.card.type) {
-    UnitType.armoredCar => tr('armored_car_card_description'),
-    UnitType.artillery => tr('artillery_card_description'),
-    UnitType.infantry => tr('infantry_card_description'),
-    UnitType.cavalry => tr('cavalry_card_description'),
-    UnitType.machineGunnersCart => tr('machine_gunners_cart_card_description'),
-    UnitType.machineGuns => tr('machine_gunners_card_description'),
-    UnitType.tank => tr('tank_card_description'),
-    UnitType.destroyer => tr('destroyer_card_description'),
-    UnitType.cruiser => tr('cruiser_card_description'),
-    UnitType.battleship => tr('battleship_card_description'),
-    UnitType.carrier => tr('carrier_card_description'),
-  };
+        UnitType.armoredCar => tr('armored_car_card_description'),
+        UnitType.artillery => tr('artillery_card_description'),
+        UnitType.infantry => tr('infantry_card_description'),
+        UnitType.cavalry => tr('cavalry_card_description'),
+        UnitType.machineGunnersCart => tr('machine_gunners_cart_card_description'),
+        UnitType.machineGuns => tr('machine_gunners_card_description'),
+        UnitType.tank => tr('tank_card_description'),
+        UnitType.destroyer => tr('destroyer_card_description'),
+        UnitType.cruiser => tr('cruiser_card_description'),
+        UnitType.battleship => tr('battleship_card_description'),
+        UnitType.carrier => tr('carrier_card_description'),
+      };
 
   @override
   MoneyUnit _getFooterMoney() => _card.card.cost;
 
   @override
   String _getTitleText() => switch (_card.card.type) {
-    UnitType.armoredCar => tr('armored_car_card_name'),
-    UnitType.artillery => tr('artillery_card_name'),
-    UnitType.infantry => tr('infantry_card_name'),
-    UnitType.cavalry => tr('cavalry_card_name'),
-    UnitType.machineGunnersCart => tr('machine_gunners_cart_card_name'),
-    UnitType.machineGuns => tr('machine_gunners_card_name'),
-    UnitType.tank => tr('tank_card_name'),
-    UnitType.destroyer => tr('destroyer_card_name'),
-    UnitType.cruiser => tr('cruiser_card_name'),
-    UnitType.battleship => tr('battleship_card_name'),
-    UnitType.carrier => tr('carrier_card_name'),
-  };
+        UnitType.armoredCar => tr('armored_car_card_name'),
+        UnitType.artillery => tr('artillery_card_name'),
+        UnitType.infantry => tr('infantry_card_name'),
+        UnitType.cavalry => tr('cavalry_card_name'),
+        UnitType.machineGunnersCart => tr('machine_gunners_cart_card_name'),
+        UnitType.machineGuns => tr('machine_gunners_card_name'),
+        UnitType.tank => tr('tank_card_name'),
+        UnitType.destroyer => tr('destroyer_card_name'),
+        UnitType.cruiser => tr('cruiser_card_name'),
+        UnitType.battleship => tr('battleship_card_name'),
+        UnitType.carrier => tr('carrier_card_name'),
+      };
 
   @override
   CardboardStyle _getCardStyle() => CardboardStyle.red;
@@ -60,44 +60,52 @@ class _CardUnit extends _CardBase<UnitType> {
     final card = _card.card as GameFieldControlsUnitCard;
 
     return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      _getFeature(card.maxHealth.toString(), '${_pathToImages}icon_health.webp'),
-      _getFeature(card.attack.toString(), '${_pathToImages}icon_attack.webp'),
-      _getFeature(card.defence.toString(), '${_pathToImages}icon_defence.webp'),
-      _getFeature('${card.damage.min}-${card.damage.max}', '${_pathToImages}icon_damage.webp'),
-      _getFeature(card.movementPoints.toInt().toString(), '${_pathToImages}icon_speed.webp'),
-    ],
-  );
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _getFeature(card.maxHealth.toString(), '${_pathToImages}icon_health.webp'),
+        _getFeature(card.attack.toString(), '${_pathToImages}icon_attack.webp'),
+        _getFeature(card.defence.toString(), '${_pathToImages}icon_defence.webp'),
+        _getFeature('${card.damage.min}-${card.damage.max}', '${_pathToImages}icon_damage.webp'),
+        _getFeature(card.movementPoints.toInt().toString(), '${_pathToImages}icon_speed.webp'),
+      ],
+    );
   }
 
   Widget _getFeature(String text, String icon) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        Image.asset(
-          icon,
-          scale: 1.15,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: AppTypography.s22w600.fontSize,
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 3
-              ..color = AppColors.black,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        10,
+        0,
+        10,
+        0,
+      ),
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          Image.asset(
+            icon,
+            scale: 1.15,
           ),
-        ),
-        // Solid text as fill.
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: AppTypography.s22w600.fontSize,
-            color: AppColors.white,
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: AppTypography.s22w600.fontSize,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 3
+                ..color = AppColors.black,
+            ),
           ),
-        ),
-      ],
+          // Solid text as fill.
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: AppTypography.s22w600.fontSize,
+              color: AppColors.white,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
