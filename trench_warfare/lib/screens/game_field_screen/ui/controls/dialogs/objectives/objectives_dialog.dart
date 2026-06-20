@@ -20,6 +20,7 @@ import 'package:trench_warfare/core/enums/production_center_type.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/dialogs/objectives/objectives_production_center_painter.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 class ObjectivesDialog extends StatelessWidget {
   static const _iconSize = 65.0;
@@ -39,6 +40,8 @@ class ObjectivesDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final audioController = context.read<AudioController>();
 
+    final screenSize = ScreenSize(context);
+
     return GestureDetector(
       onTap: () {
         audioController.playSound(SoundType.buttonClick);
@@ -49,7 +52,7 @@ class ObjectivesDialog extends StatelessWidget {
         child: DefaultTextStyle(
           style: const TextStyle(),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0 * screenSize.relativeToBaselineExp),
             child: Center(
               child: Cardboard(
                   child: Padding(
