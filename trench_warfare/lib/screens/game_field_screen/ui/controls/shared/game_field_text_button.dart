@@ -50,6 +50,7 @@ class GameFieldTextButton extends StatelessWidget {
             image: const DecorationImage(
               image: AssetImage('assets/images/screens/game_field/button_text.webp'),
               fit: BoxFit.fill,
+              centerSlice: Rect.fromLTWH(5, 5, 147, 30),
             ),
           ),
           child: Center(

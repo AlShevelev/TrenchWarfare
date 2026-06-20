@@ -14,6 +14,7 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/controls/shared/game_field_text_button.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 class MenuDialog extends StatelessWidget {
   final Nation nation;
@@ -30,6 +31,8 @@ class MenuDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSize(context);
+
     return GestureDetector(
       onTap: () {
         _gameField.onPopupDialogClosed(fireCallbackForAi: false);
@@ -39,7 +42,7 @@ class MenuDialog extends StatelessWidget {
         child: DefaultTextStyle(
           style: const TextStyle(),
           child: Padding(
-            padding: const EdgeInsets.all(64.0),
+            padding: EdgeInsets.all(64.0 * screenSize.relativeToBaseline),
             child: Center(
               child: Cardboard(
                 child: Padding(
