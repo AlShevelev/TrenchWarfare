@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class ScreenSize {
@@ -12,6 +13,8 @@ class ScreenSize {
   double get aspectRatio => _size.longestSide / _size.shortestSide;
 
   double get relativeToBaseline => _size.shortestSide / _baselineWidth;
+
+  double get relativeToBaselineExp => math.pow(relativeToBaseline, 2.5).toDouble();
 
   ScreenSize(BuildContext context) : _size = MediaQuery.sizeOf(context);
 }

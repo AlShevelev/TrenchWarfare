@@ -8,6 +8,7 @@
  * al.e.shevelev@gmail.com
  */
 
+import 'dart:math' as math;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ import 'package:trench_warfare/core/enums/nation.dart';
 import 'package:trench_warfare/screens/game_field_screen/ui/game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/cardboard.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 enum WinDefeatTurnDialogType { win, defeat, defeatGlobal, turn }
 
@@ -41,6 +43,8 @@ class WinDefeatTurnDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final audioController = context.read<AudioController>();
 
+    final screenSize = ScreenSize(context);
+
     return GestureDetector(
       onTap: () {
         audioController.playSound(SoundType.buttonClick);
@@ -51,7 +55,7 @@ class WinDefeatTurnDialog extends StatelessWidget {
         child: DefaultTextStyle(
           style: const TextStyle(),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: EdgeInsets.all(24.0 * screenSize.relativeToBaselineExp),
             child: Center(
               child: Cardboard(
                   child: Padding(
