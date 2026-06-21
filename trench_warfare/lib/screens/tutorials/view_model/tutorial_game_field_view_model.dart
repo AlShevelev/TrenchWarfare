@@ -66,7 +66,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
 
     _gameFieldState.update(Playing());
 
-    _moveToCell(18, 9);
+    _moveToCell(4, 45);
   }
 
   void onPhoneBackAction() => _complete();
@@ -97,7 +97,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 4:
         {
-          _moveToCell(2, 2);
+          _moveToCell(24, 35);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: GameFieldControlType.generalPanel,
@@ -108,7 +108,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 5:
         {
-          _moveToCell(8, 2);
+          _moveToCell(34, 35);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: GameFieldControlType.generalPanel,
@@ -119,7 +119,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 6:
         {
-          _moveToCell(14, 1);
+          _moveToCell(34, 45);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: GameFieldControlType.generalPanel,
@@ -180,9 +180,9 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 12:
         {
-          _moveToCell(4, 13);
+          _moveToCell(14, 15);
 
-          final cell = gameField.getCell(4, 13);
+          final cell = gameField.getCell(14, 15);
 
           _controlsState.update(MainControls(
             totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
@@ -207,9 +207,9 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 13:
         {
-          _moveToCell(4, 19);
+          _moveToCell(14, 25);
 
-          final cell = gameField.getCell(4, 19);
+          final cell = gameField.getCell(14, 25);
 
           _controlsState.update(MainControls(
             totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
@@ -241,7 +241,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 15:
         {
-          _moveToCell(4, 8);
+          _moveToCell(25, 45);
 
           _controlsState.update(MainControls(
             totalSum: MoneyUnit(currency: 1000, industryPoints: 1000),
@@ -289,7 +289,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 19:
         {
-          _moveToCell(19, 16);
+          _moveToCell(15, 35);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -301,7 +301,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 20:
         {
-          _moveToCell(26, 2);
+          _moveToCell(44, 15);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -333,7 +333,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 23:
         {
-          _moveToCell(9, 7);
+          _moveToCell(24, 13);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -345,7 +345,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 24:
         {
-          _moveToCell(9, 9);
+          _moveToCell(24, 15);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -357,7 +357,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 25:
         {
-          _moveToCell(8, 26);
+          _moveToCell(14, 45);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -379,7 +379,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 27:
         {
-          _moveToCell(10, 16);
+          _moveToCell(25, 25);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -410,7 +410,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 30:
         {
-          _moveToCell(17, 24);
+          _moveToCell(45, 45);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
