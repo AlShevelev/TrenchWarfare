@@ -23,7 +23,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
   final double left;
   final double top;
 
-  late final TextureAtlas _spritesAtlas;
+  late final TexturePackerAtlas _spritesAtlas;
 
   late final GameFieldForControls _gameField;
 
@@ -36,7 +36,7 @@ class GameFieldArmyInfoPanel extends StatefulWidget {
     required this.armyInfo,
     required this.left,
     required this.top,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
     required GameFieldForControls gameField,
     required bool isCarrier,
   }) {

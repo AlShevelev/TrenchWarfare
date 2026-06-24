@@ -13,9 +13,9 @@ part of game_field_cell_info;
 class GameFieldCellInfoGameObjectPainter extends CustomPainter {
   late final GameFieldControlsCellInfo _cellInfo;
 
-  late final TextureAtlas _spritesAtlas;
+  late final TexturePackerAtlas _spritesAtlas;
 
-  GameFieldCellInfoGameObjectPainter(GameFieldControlsCellInfo cellInfo, TextureAtlas spritesAtlas) {
+  GameFieldCellInfoGameObjectPainter(GameFieldControlsCellInfo cellInfo, TexturePackerAtlas spritesAtlas) {
     _cellInfo = cellInfo;
     _spritesAtlas = spritesAtlas;
   }

@@ -11,7 +11,7 @@
 import 'dart:ui';
 
 import 'package:flame/game.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
@@ -26,13 +26,13 @@ class ObjectivesProductionCenterPainter extends CustomPainter {
 
   final Nation _nation;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   ObjectivesProductionCenterPainter({
     required ProductionCenterType type,
     required ProductionCenterLevel level,
     required Nation nation,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
   })  : _type = type,
         _level = level,
         _nation = nation,

@@ -13,8 +13,8 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
-import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
+import 'package:flame/input.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +48,7 @@ abstract interface class GameFieldForControls {
 
   Stream<GameFieldControlsState> get aiProgressState;
 
-  TextureAtlas get spritesAtlas;
+  TexturePackerAtlas get spritesAtlas;
 
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier});
 
@@ -121,9 +121,9 @@ class GameField extends FlameGame
   @override
   Stream<GameFieldControlsState> get aiProgressState => _viewModel.aiProgressState;
 
-  late final TextureAtlas _spritesAtlas;
+  late final TexturePackerAtlas _spritesAtlas;
   @override
-  TextureAtlas get spritesAtlas => _spritesAtlas;
+  TexturePackerAtlas get spritesAtlas => _spritesAtlas;
 
   GameField({
     required String mapFileName,
@@ -164,7 +164,7 @@ class GameField extends FlameGame
       camera: GesturesCamera(camera),
     );
 
-    _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+    _spritesAtlas = await TexturePackerAtlas.load('images/sprites/sprites_atlas');
 
     _audioComposer = AudioComposer();
 

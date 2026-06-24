@@ -28,526 +28,623 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(3, 4332078635293440905),
-      name: 'TalkerDataDbEntity',
-      lastPropertyId: const obx_int.IdUid(10, 3181093964923468091),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 7950731184131067211),
-            name: 'message',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 846178785455145106),
-            name: 'logLevel',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 3659514362481207735),
-            name: 'title',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5488543279267005750),
-            name: 'key',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 7150606349020566957),
-            name: 'penFColor',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 3439737037213805236),
-            name: 'penBColor',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 2559605263898787672),
-            name: 'time',
-            type: 10,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 5918448870015553261),
-            name: 'stackTrace',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 3181093964923468091),
-            name: 'dbId',
-            type: 6,
-            flags: 1)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(3, 4332078635293440905),
+    name: 'TalkerDataDbEntity',
+    lastPropertyId: const obx_int.IdUid(10, 3181093964923468091),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 7950731184131067211),
+        name: 'message',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 846178785455145106),
+        name: 'logLevel',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 3659514362481207735),
+        name: 'title',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 5488543279267005750),
+        name: 'key',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 7150606349020566957),
+        name: 'penFColor',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 3439737037213805236),
+        name: 'penBColor',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 2559605263898787672),
+        name: 'time',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 5918448870015553261),
+        name: 'stackTrace',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(10, 3181093964923468091),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(10, 1040213547054064254),
-      name: 'SaveSlotDbEntity',
-      lastPropertyId: const obx_int.IdUid(9, 1912319832816708282),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 4117495722552876526),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6801832129691860140),
-            name: 'slotNumber',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 7871652896794284433),
-            name: 'isAutosave',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 4622065262205933966),
-            name: 'saveDateTime',
-            type: 10,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 5618103816987610024),
-            name: 'mapFileName',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 3395918268164948918),
-            name: 'rows',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 1912319832816708282),
-            name: 'cols',
-            type: 6,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(10, 1040213547054064254),
+    name: 'SaveSlotDbEntity',
+    lastPropertyId: const obx_int.IdUid(9, 1912319832816708282),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 4117495722552876526),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 6801832129691860140),
+        name: 'slotNumber',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 7871652896794284433),
+        name: 'isAutosave',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 4622065262205933966),
+        name: 'saveDateTime',
+        type: 10,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 5618103816987610024),
+        name: 'mapFileName',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 3395918268164948918),
+        name: 'rows',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 1912319832816708282),
+        name: 'cols',
+        type: 6,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(11, 1437931050667927488),
-      name: 'SaveNationDbEntity',
-      lastPropertyId: const obx_int.IdUid(14, 3726927680983737400),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6308539860530982832),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 9197993734280969182),
-            name: 'slotDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 660569144689210780),
-            name: 'isHuman',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 1651703899837590429),
-            name: 'playingOrder',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 7547474347340048216),
-            name: 'nation',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 8219479900666684200),
-            name: 'defeated',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 3375040025276721492),
-            name: 'isSideOfConflict',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 2055787052188701658),
-            name: 'totalSumCurrency',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 8755844885931037959),
-            name: 'totalSumIndustryPoints',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 7902434076942519920),
-            name: 'totalIncomeCurrency',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 1705521373804679970),
-            name: 'totalIncomeIndustryPoints',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 3612879627547597853),
-            name: 'totalExpensesCurrency',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 5395939840080142209),
-            name: 'totalExpensesIndustryPoints',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 3726927680983737400),
-            name: 'day',
-            type: 6,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(11, 1437931050667927488),
+    name: 'SaveNationDbEntity',
+    lastPropertyId: const obx_int.IdUid(14, 3726927680983737400),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 6308539860530982832),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 9197993734280969182),
+        name: 'slotDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 660569144689210780),
+        name: 'isHuman',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 1651703899837590429),
+        name: 'playingOrder',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 7547474347340048216),
+        name: 'nation',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 8219479900666684200),
+        name: 'defeated',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 3375040025276721492),
+        name: 'isSideOfConflict',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 2055787052188701658),
+        name: 'totalSumCurrency',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 8755844885931037959),
+        name: 'totalSumIndustryPoints',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(10, 7902434076942519920),
+        name: 'totalIncomeCurrency',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(11, 1705521373804679970),
+        name: 'totalIncomeIndustryPoints',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(12, 3612879627547597853),
+        name: 'totalExpensesCurrency',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(13, 5395939840080142209),
+        name: 'totalExpensesIndustryPoints',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(14, 3726927680983737400),
+        name: 'day',
+        type: 6,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(12, 4539461880704731537),
-      name: 'SaveGameFieldCellDbEntity',
-      lastPropertyId: const obx_int.IdUid(18, 9079641929135168054),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6147713984517289448),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6049306112226815698),
-            name: 'slotDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 1094721130423806962),
-            name: 'row',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 363560737356829310),
-            name: 'col',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5745310263863727245),
-            name: 'cellId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 3354814174224889542),
-            name: 'centerX',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 5234866254199254993),
-            name: 'centerY',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 2708942461314732610),
-            name: 'terrain',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 905864833417428207),
-            name: 'hasRiver',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 9007265416311538423),
-            name: 'hasRoad',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 6368114927253321665),
-            name: 'nation',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 1628058348067218159),
-            name: 'productionCenterType',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 7056200872501783292),
-            name: 'productionCenterLevel',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 5185032003331599384),
-            name: 'terrainModifier',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 1082260380171769246),
-            name: 'pathItemType',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(16, 7667205361873840075),
-            name: 'pathItemIsActive',
-            type: 1,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(17, 458752511003461786),
-            name: 'pathItemMovementPointsLeft',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(18, 9079641929135168054),
-            name: 'productionCenterName',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(12, 4539461880704731537),
+    name: 'SaveGameFieldCellDbEntity',
+    lastPropertyId: const obx_int.IdUid(18, 9079641929135168054),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 6147713984517289448),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 6049306112226815698),
+        name: 'slotDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 1094721130423806962),
+        name: 'row',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 363560737356829310),
+        name: 'col',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 5745310263863727245),
+        name: 'cellId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 3354814174224889542),
+        name: 'centerX',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 5234866254199254993),
+        name: 'centerY',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 2708942461314732610),
+        name: 'terrain',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 905864833417428207),
+        name: 'hasRiver',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(10, 9007265416311538423),
+        name: 'hasRoad',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(11, 6368114927253321665),
+        name: 'nation',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(12, 1628058348067218159),
+        name: 'productionCenterType',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(13, 7056200872501783292),
+        name: 'productionCenterLevel',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(14, 5185032003331599384),
+        name: 'terrainModifier',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(15, 1082260380171769246),
+        name: 'pathItemType',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(16, 7667205361873840075),
+        name: 'pathItemIsActive',
+        type: 1,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(17, 458752511003461786),
+        name: 'pathItemMovementPointsLeft',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(18, 9079641929135168054),
+        name: 'productionCenterName',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(13, 6794878945204015277),
-      name: 'SaveSettingsStorageDbEntity',
-      lastPropertyId: const obx_int.IdUid(5, 8444359514622985928),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 3304341201350078980),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 235477472828294941),
-            name: 'slotDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 6038154289184347314),
-            name: 'zoom',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 343628000269625665),
-            name: 'cameraPositionX',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 8444359514622985928),
-            name: 'cameraPositionY',
-            type: 8,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(13, 6794878945204015277),
+    name: 'SaveSettingsStorageDbEntity',
+    lastPropertyId: const obx_int.IdUid(5, 8444359514622985928),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 3304341201350078980),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 235477472828294941),
+        name: 'slotDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 6038154289184347314),
+        name: 'zoom',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 343628000269625665),
+        name: 'cameraPositionX',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 8444359514622985928),
+        name: 'cameraPositionY',
+        type: 8,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(14, 8117750202096937206),
-      name: 'SaveTroopTransferDbEntity',
-      lastPropertyId: const obx_int.IdUid(18, 209249109067945736),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 2973004054171060271),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6458528796736679805),
-            name: 'slotDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 6314674949536594689),
-            name: 'nationDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 7858854561201788816),
-            name: 'troopTransferId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 2346859158054322192),
-            name: 'targetCellId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 7284614715421360826),
-            name: 'stateAlias',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 4290502473834067691),
-            name: 'selectedCarrierId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 7284941263785447254),
-            name: 'landingPointCarrierCellId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(16, 4960946921766921957),
-            name: 'landingPointUnitsCellId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(17, 314221348976168079),
-            name: 'gatheringPointCarrierCellId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(18, 209249109067945736),
-            name: 'gatheringPointUnitsCellId',
-            type: 6,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(14, 8117750202096937206),
+    name: 'SaveTroopTransferDbEntity',
+    lastPropertyId: const obx_int.IdUid(18, 209249109067945736),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 2973004054171060271),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 6458528796736679805),
+        name: 'slotDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 6314674949536594689),
+        name: 'nationDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 7858854561201788816),
+        name: 'troopTransferId',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(12, 2346859158054322192),
+        name: 'targetCellId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(13, 7284614715421360826),
+        name: 'stateAlias',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(14, 4290502473834067691),
+        name: 'selectedCarrierId',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(15, 7284941263785447254),
+        name: 'landingPointCarrierCellId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(16, 4960946921766921957),
+        name: 'landingPointUnitsCellId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(17, 314221348976168079),
+        name: 'gatheringPointCarrierCellId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(18, 209249109067945736),
+        name: 'gatheringPointUnitsCellId',
+        type: 6,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(15, 2175914356507412232),
-      name: 'SaveUnitDbEntity',
-      lastPropertyId: const obx_int.IdUid(18, 2395540779890927160),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 8703771321645119094),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 5370556051243908738),
-            name: 'slotDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 8606007826707148696),
-            name: 'cellDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 6119930070725851935),
-            name: 'carrierDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 6238237813914495269),
-            name: 'troopTransferDbId',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 4725291537360303283),
-            name: 'unitId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 5098937685066668783),
-            name: 'orderInCell',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 1034292354275987411),
-            name: 'boost1',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 2352160163819472764),
-            name: 'boost2',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 9073526809556470795),
-            name: 'boost3',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 2379082465618962847),
-            name: 'tookPartInBattles',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 6547404303085189075),
-            name: 'fatigue',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 7518774066430957308),
-            name: 'health',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 4951607007978919855),
-            name: 'movementPoints',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 1065679314975604211),
-            name: 'defence',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(16, 1334931364143495087),
-            name: 'type',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(17, 7961012675947139287),
-            name: 'state',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(18, 2395540779890927160),
-            name: 'isInDefenceMode',
-            type: 1,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(15, 2175914356507412232),
+    name: 'SaveUnitDbEntity',
+    lastPropertyId: const obx_int.IdUid(18, 2395540779890927160),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 8703771321645119094),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 5370556051243908738),
+        name: 'slotDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 8606007826707148696),
+        name: 'cellDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 6119930070725851935),
+        name: 'carrierDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 6238237813914495269),
+        name: 'troopTransferDbId',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 4725291537360303283),
+        name: 'unitId',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 5098937685066668783),
+        name: 'orderInCell',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(8, 1034292354275987411),
+        name: 'boost1',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(9, 2352160163819472764),
+        name: 'boost2',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(10, 9073526809556470795),
+        name: 'boost3',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(11, 2379082465618962847),
+        name: 'tookPartInBattles',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(12, 6547404303085189075),
+        name: 'fatigue',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(13, 7518774066430957308),
+        name: 'health',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(14, 4951607007978919855),
+        name: 'movementPoints',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(15, 1065679314975604211),
+        name: 'defence',
+        type: 8,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(16, 1334931364143495087),
+        name: 'type',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(17, 7961012675947139287),
+        name: 'state',
+        type: 6,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(18, 2395540779890927160),
+        name: 'isInDefenceMode',
+        type: 1,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(16, 8236510794821688330),
-      name: 'KeyValueDbEntity',
-      lastPropertyId: const obx_int.IdUid(3, 1504312151144897400),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 1462349663655532551),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 7129891787318555872),
-            name: 'key',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 1504312151144897400),
-            name: 'value',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
+    id: const obx_int.IdUid(16, 8236510794821688330),
+    name: 'KeyValueDbEntity',
+    lastPropertyId: const obx_int.IdUid(3, 1504312151144897400),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 1462349663655532551),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 7129891787318555872),
+        name: 'key',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 1504312151144897400),
+        name: 'value',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(17, 7910013008264069462),
-      name: 'CompletedGamesDbEntity',
-      lastPropertyId: const obx_int.IdUid(3, 3284394859017204054),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 672041765786438416),
-            name: 'dbId',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 6452124646784586723),
-            name: 'mapName',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 3284394859017204054),
-            name: 'nation',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[])
+    id: const obx_int.IdUid(17, 7910013008264069462),
+    name: 'CompletedGamesDbEntity',
+    lastPropertyId: const obx_int.IdUid(3, 3284394859017204054),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 672041765786438416),
+        name: 'dbId',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 6452124646784586723),
+        name: 'mapName',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 3284394859017204054),
+        name: 'nation',
+        type: 9,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -561,410 +658,566 @@ final _entities = <obx_int.ModelEntity>[
 /// For Flutter apps, also calls `loadObjectBoxLibraryAndroidCompat()` from
 /// the ObjectBox Flutter library to fix loading the native ObjectBox library
 /// on Android 6 and older.
-Future<obx.Store> openStore(
-    {String? directory,
-    int? maxDBSizeInKB,
-    int? maxDataSizeInKB,
-    int? fileMode,
-    int? maxReaders,
-    bool queriesCaseSensitiveDefault = true,
-    String? macosApplicationGroup}) async {
+Future<obx.Store> openStore({
+  String? directory,
+  int? maxDBSizeInKB,
+  int? maxDataSizeInKB,
+  int? fileMode,
+  int? maxReaders,
+  bool queriesCaseSensitiveDefault = true,
+  String? macosApplicationGroup,
+}) async {
   await loadObjectBoxLibraryAndroidCompat();
-  return obx.Store(getObjectBoxModel(),
-      directory: directory ?? (await defaultStoreDirectory()).path,
-      maxDBSizeInKB: maxDBSizeInKB,
-      maxDataSizeInKB: maxDataSizeInKB,
-      fileMode: fileMode,
-      maxReaders: maxReaders,
-      queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
-      macosApplicationGroup: macosApplicationGroup);
+  return obx.Store(
+    getObjectBoxModel(),
+    directory: directory ?? (await defaultStoreDirectory()).path,
+    maxDBSizeInKB: maxDBSizeInKB,
+    maxDataSizeInKB: maxDataSizeInKB,
+    fileMode: fileMode,
+    maxReaders: maxReaders,
+    queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
+    macosApplicationGroup: macosApplicationGroup,
+  );
 }
 
 /// Returns the ObjectBox model definition for this project for use with
 /// [obx.Store.new].
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
-      entities: _entities,
-      lastEntityId: const obx_int.IdUid(17, 7910013008264069462),
-      lastIndexId: const obx_int.IdUid(0, 0),
-      lastRelationId: const obx_int.IdUid(0, 0),
-      lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [
-        4036390663965995175,
-        3377034406171530323,
-        7265005250924840115,
-        5488259739573876180,
-        2584860954723214695,
-        141307843514975521,
-        2870091722131245637,
-        7992481250001969133
-      ],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [
-        3037082238910709093,
-        8322230449658626567,
-        7154222840745891179,
-        5223827669256880326,
-        3001136329678658329,
-        3758257046697067388,
-        3725789529605501120,
-        499134733215046961,
-        3202753595630021765,
-        3015041911764701074,
-        5858936920019458924,
-        6914137639230071088,
-        2346508508294854882,
-        7699715947932068148,
-        3919681862940740580,
-        3119890857270017098,
-        9204318584145459748,
-        8510908930930246586,
-        8198649107745803603,
-        9222674986630137049,
-        1982447814945758675,
-        1216408798301396005,
-        2108424479992420204,
-        3379624133236898592,
-        5108976252907175863,
-        7879237364617943618,
-        6487927793305111598,
-        967016149888671011,
-        7070309215998504011,
-        3542013145447974883,
-        6906849320745192742,
-        2302832993723656847,
-        8967063881275941973,
-        6370618163235450240,
-        6057139241673096031,
-        3312061508882638378,
-        23331675457897085,
-        7425611682876222675,
-        3991117852524915672,
-        29437573330790147,
-        7632846892965344478,
-        1583461904148019674,
-        4643150806232148737,
-        858460789532876093,
-        4527598852177685121,
-        3157440884635458884,
-        848531376258273068,
-        8751535538282896593,
-        4274289572528455127,
-        8625951146968705867,
-        1202190954201722294,
-        7868884929488387309,
-        7486737272307907639,
-        3734186168019185700,
-        5030971328290255911,
-        5194479859638298177,
-        7113549210264704353,
-        5399591010706132583,
-        3867929186897409936,
-        2350365455894567183,
-        1780749163820742816,
-        7973842784409447590,
-        3951771488074873496,
-        6563515790805412294,
-        2123119138604678955,
-        6215896288488951288,
-        7865063958674587994,
-        8962069957569227542,
-        6813210193979648069,
-        4381179438768504147,
-        2396225912229908875,
-        3925115168425226353,
-        2648842374723589670,
-        2580653982863827470,
-        6214167357598596438,
-        5462481609398381840,
-        2932859531878735973,
-        2641836734400550081,
-        5599467821880043061,
-        320055416084879567,
-        6970300456076311016,
-        344405784960220718,
-        4107078212765266895,
-        1808350503915593098,
-        101274425392636489,
-        3641881253890080781,
-        3391301510739558413,
-        2920873775308592272,
-        1929170078315949513,
-        4841850396354497904
-      ],
-      retiredRelationUids: const [],
-      modelVersion: 5,
-      modelVersionParserMinimum: 5,
-      version: 1);
+    // If this version is not found, it means that this file was generated
+    // with an older version of the ObjectBox Dart generator.
+    // Please regenerate this file with the current generator version.
+    // Typically, this is done with `dart run build_runner build`.
+    generatorVersion: obx_int.GeneratorVersion.v2025_12_16,
+    entities: _entities,
+    lastEntityId: const obx_int.IdUid(17, 7910013008264069462),
+    lastIndexId: const obx_int.IdUid(0, 0),
+    lastRelationId: const obx_int.IdUid(0, 0),
+    lastSequenceId: const obx_int.IdUid(0, 0),
+    retiredEntityUids: const [
+      4036390663965995175,
+      3377034406171530323,
+      7265005250924840115,
+      5488259739573876180,
+      2584860954723214695,
+      141307843514975521,
+      2870091722131245637,
+      7992481250001969133,
+    ],
+    retiredIndexUids: const [],
+    retiredPropertyUids: const [
+      3037082238910709093,
+      8322230449658626567,
+      7154222840745891179,
+      5223827669256880326,
+      3001136329678658329,
+      3758257046697067388,
+      3725789529605501120,
+      499134733215046961,
+      3202753595630021765,
+      3015041911764701074,
+      5858936920019458924,
+      6914137639230071088,
+      2346508508294854882,
+      7699715947932068148,
+      3919681862940740580,
+      3119890857270017098,
+      9204318584145459748,
+      8510908930930246586,
+      8198649107745803603,
+      9222674986630137049,
+      1982447814945758675,
+      1216408798301396005,
+      2108424479992420204,
+      3379624133236898592,
+      5108976252907175863,
+      7879237364617943618,
+      6487927793305111598,
+      967016149888671011,
+      7070309215998504011,
+      3542013145447974883,
+      6906849320745192742,
+      2302832993723656847,
+      8967063881275941973,
+      6370618163235450240,
+      6057139241673096031,
+      3312061508882638378,
+      23331675457897085,
+      7425611682876222675,
+      3991117852524915672,
+      29437573330790147,
+      7632846892965344478,
+      1583461904148019674,
+      4643150806232148737,
+      858460789532876093,
+      4527598852177685121,
+      3157440884635458884,
+      848531376258273068,
+      8751535538282896593,
+      4274289572528455127,
+      8625951146968705867,
+      1202190954201722294,
+      7868884929488387309,
+      7486737272307907639,
+      3734186168019185700,
+      5030971328290255911,
+      5194479859638298177,
+      7113549210264704353,
+      5399591010706132583,
+      3867929186897409936,
+      2350365455894567183,
+      1780749163820742816,
+      7973842784409447590,
+      3951771488074873496,
+      6563515790805412294,
+      2123119138604678955,
+      6215896288488951288,
+      7865063958674587994,
+      8962069957569227542,
+      6813210193979648069,
+      4381179438768504147,
+      2396225912229908875,
+      3925115168425226353,
+      2648842374723589670,
+      2580653982863827470,
+      6214167357598596438,
+      5462481609398381840,
+      2932859531878735973,
+      2641836734400550081,
+      5599467821880043061,
+      320055416084879567,
+      6970300456076311016,
+      344405784960220718,
+      4107078212765266895,
+      1808350503915593098,
+      101274425392636489,
+      3641881253890080781,
+      3391301510739558413,
+      2920873775308592272,
+      1929170078315949513,
+      4841850396354497904,
+    ],
+    retiredRelationUids: const [],
+    modelVersion: 5,
+    modelVersionParserMinimum: 5,
+    version: 1,
+  );
 
   final bindings = <Type, obx_int.EntityDefinition>{
     TalkerDataDbEntity: obx_int.EntityDefinition<TalkerDataDbEntity>(
-        model: _entities[0],
-        toOneRelations: (TalkerDataDbEntity object) => [],
-        toManyRelations: (TalkerDataDbEntity object) => {},
-        getId: (TalkerDataDbEntity object) => object.dbId,
-        setId: (TalkerDataDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (TalkerDataDbEntity object, fb.Builder fbb) {
-          final messageOffset =
-              object.message == null ? null : fbb.writeString(object.message!);
-          final titleOffset =
-              object.title == null ? null : fbb.writeString(object.title!);
-          final keyOffset =
-              object.key == null ? null : fbb.writeString(object.key!);
-          final stackTraceOffset = object.stackTrace == null
-              ? null
-              : fbb.writeString(object.stackTrace!);
-          fbb.startTable(11);
-          fbb.addOffset(1, messageOffset);
-          fbb.addInt64(2, object.logLevel);
-          fbb.addOffset(3, titleOffset);
-          fbb.addOffset(4, keyOffset);
-          fbb.addInt64(5, object.penFColor);
-          fbb.addInt64(6, object.penBColor);
-          fbb.addInt64(7, object.time.millisecondsSinceEpoch);
-          fbb.addOffset(8, stackTraceOffset);
-          fbb.addInt64(9, object.dbId);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0);
-          final messageParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 6);
-          final logLevelParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
-          final titleParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 10);
-          final keyParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 12);
-          final timeParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0));
-          final penFColorParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 14);
-          final penBColorParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 16);
-          final stackTraceParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 20);
-          final object = TalkerDataDbEntity(
-              dbId: dbIdParam,
-              message: messageParam,
-              logLevel: logLevelParam,
-              title: titleParam,
-              key: keyParam,
-              time: timeParam,
-              penFColor: penFColorParam,
-              penBColor: penBColorParam,
-              stackTrace: stackTraceParam);
+      model: _entities[0],
+      toOneRelations: (TalkerDataDbEntity object) => [],
+      toManyRelations: (TalkerDataDbEntity object) => {},
+      getId: (TalkerDataDbEntity object) => object.dbId,
+      setId: (TalkerDataDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (TalkerDataDbEntity object, fb.Builder fbb) {
+        final messageOffset = object.message == null
+            ? null
+            : fbb.writeString(object.message!);
+        final titleOffset = object.title == null
+            ? null
+            : fbb.writeString(object.title!);
+        final keyOffset = object.key == null
+            ? null
+            : fbb.writeString(object.key!);
+        final stackTraceOffset = object.stackTrace == null
+            ? null
+            : fbb.writeString(object.stackTrace!);
+        fbb.startTable(11);
+        fbb.addOffset(1, messageOffset);
+        fbb.addInt64(2, object.logLevel);
+        fbb.addOffset(3, titleOffset);
+        fbb.addOffset(4, keyOffset);
+        fbb.addInt64(5, object.penFColor);
+        fbb.addInt64(6, object.penBColor);
+        fbb.addInt64(7, object.time.millisecondsSinceEpoch);
+        fbb.addOffset(8, stackTraceOffset);
+        fbb.addInt64(9, object.dbId);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          22,
+          0,
+        );
+        final messageParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 6);
+        final logLevelParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          8,
+        );
+        final titleParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 10);
+        final keyParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 12);
+        final timeParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0),
+        );
+        final penFColorParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          14,
+        );
+        final penBColorParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          16,
+        );
+        final stackTraceParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 20);
+        final object = TalkerDataDbEntity(
+          dbId: dbIdParam,
+          message: messageParam,
+          logLevel: logLevelParam,
+          title: titleParam,
+          key: keyParam,
+          time: timeParam,
+          penFColor: penFColorParam,
+          penBColor: penBColorParam,
+          stackTrace: stackTraceParam,
+        );
 
-          return object;
-        }),
+        return object;
+      },
+    ),
     SaveSlotDbEntity: obx_int.EntityDefinition<SaveSlotDbEntity>(
-        model: _entities[1],
-        toOneRelations: (SaveSlotDbEntity object) => [],
-        toManyRelations: (SaveSlotDbEntity object) => {},
-        getId: (SaveSlotDbEntity object) => object.dbId,
-        setId: (SaveSlotDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (SaveSlotDbEntity object, fb.Builder fbb) {
-          final mapFileNameOffset = fbb.writeString(object.mapFileName);
-          fbb.startTable(10);
-          fbb.addInt64(0, object.dbId);
-          fbb.addInt64(1, object.slotNumber);
-          fbb.addBool(3, object.isAutosave);
-          fbb.addInt64(5, object.saveDateTime.millisecondsSinceEpoch);
-          fbb.addOffset(6, mapFileNameOffset);
-          fbb.addInt64(7, object.rows);
-          fbb.addInt64(8, object.cols);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final slotNumberParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final mapFileNameParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 16, '');
-          final isAutosaveParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 10, false);
-          final rowsParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
-          final colsParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
-          final saveDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
-          final object = SaveSlotDbEntity(
-              dbId: dbIdParam,
-              slotNumber: slotNumberParam,
-              mapFileName: mapFileNameParam,
-              isAutosave: isAutosaveParam,
-              rows: rowsParam,
-              cols: colsParam,
-              saveDateTime: saveDateTimeParam);
+      model: _entities[1],
+      toOneRelations: (SaveSlotDbEntity object) => [],
+      toManyRelations: (SaveSlotDbEntity object) => {},
+      getId: (SaveSlotDbEntity object) => object.dbId,
+      setId: (SaveSlotDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (SaveSlotDbEntity object, fb.Builder fbb) {
+        final mapFileNameOffset = fbb.writeString(object.mapFileName);
+        fbb.startTable(10);
+        fbb.addInt64(0, object.dbId);
+        fbb.addInt64(1, object.slotNumber);
+        fbb.addBool(3, object.isAutosave);
+        fbb.addInt64(5, object.saveDateTime.millisecondsSinceEpoch);
+        fbb.addOffset(6, mapFileNameOffset);
+        fbb.addInt64(7, object.rows);
+        fbb.addInt64(8, object.cols);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final slotNumberParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final mapFileNameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 16, '');
+        final isAutosaveParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          false,
+        );
+        final rowsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          18,
+          0,
+        );
+        final colsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          20,
+          0,
+        );
+        final saveDateTimeParam = DateTime.fromMillisecondsSinceEpoch(
+          const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0),
+        );
+        final object = SaveSlotDbEntity(
+          dbId: dbIdParam,
+          slotNumber: slotNumberParam,
+          mapFileName: mapFileNameParam,
+          isAutosave: isAutosaveParam,
+          rows: rowsParam,
+          cols: colsParam,
+          saveDateTime: saveDateTimeParam,
+        );
 
-          return object;
-        }),
+        return object;
+      },
+    ),
     SaveNationDbEntity: obx_int.EntityDefinition<SaveNationDbEntity>(
-        model: _entities[2],
-        toOneRelations: (SaveNationDbEntity object) => [],
-        toManyRelations: (SaveNationDbEntity object) => {},
-        getId: (SaveNationDbEntity object) => object.dbId,
-        setId: (SaveNationDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (SaveNationDbEntity object, fb.Builder fbb) {
-          fbb.startTable(15);
-          fbb.addInt64(0, object.dbId);
-          fbb.addInt64(1, object.slotDbId);
-          fbb.addBool(2, object.isHuman);
-          fbb.addInt64(3, object.playingOrder);
-          fbb.addInt64(4, object.nation);
-          fbb.addBool(5, object.defeated);
-          fbb.addBool(6, object.isSideOfConflict);
-          fbb.addInt64(7, object.totalSumCurrency);
-          fbb.addInt64(8, object.totalSumIndustryPoints);
-          fbb.addInt64(9, object.totalIncomeCurrency);
-          fbb.addInt64(10, object.totalIncomeIndustryPoints);
-          fbb.addInt64(11, object.totalExpensesCurrency);
-          fbb.addInt64(12, object.totalExpensesIndustryPoints);
-          fbb.addInt64(13, object.day);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final slotDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final isHumanParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 8, false);
-          final playingOrderParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          final nationParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
-          final dayParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 30, 0);
-          final defeatedParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 14, false);
-          final isSideOfConflictParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
-          final totalSumCurrencyParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
-          final totalSumIndustryPointsParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
-          final totalIncomeCurrencyParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0);
-          final totalIncomeIndustryPointsParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0);
-          final totalExpensesCurrencyParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0);
-          final totalExpensesIndustryPointsParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 28, 0);
-          final object = SaveNationDbEntity(
-              dbId: dbIdParam,
-              slotDbId: slotDbIdParam,
-              isHuman: isHumanParam,
-              playingOrder: playingOrderParam,
-              nation: nationParam,
-              day: dayParam,
-              defeated: defeatedParam,
-              isSideOfConflict: isSideOfConflictParam,
-              totalSumCurrency: totalSumCurrencyParam,
-              totalSumIndustryPoints: totalSumIndustryPointsParam,
-              totalIncomeCurrency: totalIncomeCurrencyParam,
-              totalIncomeIndustryPoints: totalIncomeIndustryPointsParam,
-              totalExpensesCurrency: totalExpensesCurrencyParam,
-              totalExpensesIndustryPoints: totalExpensesIndustryPointsParam);
+      model: _entities[2],
+      toOneRelations: (SaveNationDbEntity object) => [],
+      toManyRelations: (SaveNationDbEntity object) => {},
+      getId: (SaveNationDbEntity object) => object.dbId,
+      setId: (SaveNationDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (SaveNationDbEntity object, fb.Builder fbb) {
+        fbb.startTable(15);
+        fbb.addInt64(0, object.dbId);
+        fbb.addInt64(1, object.slotDbId);
+        fbb.addBool(2, object.isHuman);
+        fbb.addInt64(3, object.playingOrder);
+        fbb.addInt64(4, object.nation);
+        fbb.addBool(5, object.defeated);
+        fbb.addBool(6, object.isSideOfConflict);
+        fbb.addInt64(7, object.totalSumCurrency);
+        fbb.addInt64(8, object.totalSumIndustryPoints);
+        fbb.addInt64(9, object.totalIncomeCurrency);
+        fbb.addInt64(10, object.totalIncomeIndustryPoints);
+        fbb.addInt64(11, object.totalExpensesCurrency);
+        fbb.addInt64(12, object.totalExpensesIndustryPoints);
+        fbb.addInt64(13, object.day);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final slotDbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final isHumanParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          8,
+          false,
+        );
+        final playingOrderParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        final nationParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          12,
+          0,
+        );
+        final dayParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          30,
+          0,
+        );
+        final defeatedParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          14,
+          false,
+        );
+        final isSideOfConflictParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          false,
+        );
+        final totalSumCurrencyParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          18,
+          0,
+        );
+        final totalSumIndustryPointsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          20,
+          0,
+        );
+        final totalIncomeCurrencyParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          22,
+          0,
+        );
+        final totalIncomeIndustryPointsParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          24,
+          0,
+        );
+        final totalExpensesCurrencyParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          26,
+          0,
+        );
+        final totalExpensesIndustryPointsParam = const fb.Int64Reader()
+            .vTableGet(buffer, rootOffset, 28, 0);
+        final object = SaveNationDbEntity(
+          dbId: dbIdParam,
+          slotDbId: slotDbIdParam,
+          isHuman: isHumanParam,
+          playingOrder: playingOrderParam,
+          nation: nationParam,
+          day: dayParam,
+          defeated: defeatedParam,
+          isSideOfConflict: isSideOfConflictParam,
+          totalSumCurrency: totalSumCurrencyParam,
+          totalSumIndustryPoints: totalSumIndustryPointsParam,
+          totalIncomeCurrency: totalIncomeCurrencyParam,
+          totalIncomeIndustryPoints: totalIncomeIndustryPointsParam,
+          totalExpensesCurrency: totalExpensesCurrencyParam,
+          totalExpensesIndustryPoints: totalExpensesIndustryPointsParam,
+        );
 
-          return object;
-        }),
-    SaveGameFieldCellDbEntity: obx_int.EntityDefinition<
-            SaveGameFieldCellDbEntity>(
-        model: _entities[3],
-        toOneRelations: (SaveGameFieldCellDbEntity object) => [],
-        toManyRelations: (SaveGameFieldCellDbEntity object) => {},
-        getId: (SaveGameFieldCellDbEntity object) => object.dbId,
-        setId: (SaveGameFieldCellDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (SaveGameFieldCellDbEntity object, fb.Builder fbb) {
-          final productionCenterNameOffset = object.productionCenterName == null
-              ? null
-              : fbb.writeString(object.productionCenterName!);
-          fbb.startTable(19);
-          fbb.addInt64(0, object.dbId);
-          fbb.addInt64(1, object.slotDbId);
-          fbb.addInt64(2, object.row);
-          fbb.addInt64(3, object.col);
-          fbb.addInt64(4, object.cellId);
-          fbb.addFloat64(5, object.centerX);
-          fbb.addFloat64(6, object.centerY);
-          fbb.addInt64(7, object.terrain);
-          fbb.addBool(8, object.hasRiver);
-          fbb.addBool(9, object.hasRoad);
-          fbb.addInt64(10, object.nation);
-          fbb.addInt64(11, object.productionCenterType);
-          fbb.addInt64(12, object.productionCenterLevel);
-          fbb.addInt64(13, object.terrainModifier);
-          fbb.addInt64(14, object.pathItemType);
-          fbb.addBool(15, object.pathItemIsActive);
-          fbb.addFloat64(16, object.pathItemMovementPointsLeft);
-          fbb.addOffset(17, productionCenterNameOffset);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final slotDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final rowParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          final colParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          final cellIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
-          final centerXParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 14, 0);
-          final centerYParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 16, 0);
-          final terrainParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
-          final hasRiverParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false);
-          final hasRoadParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 22, false);
-          final nationParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 24);
-          final productionCenterTypeParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 26);
-          final productionCenterLevelParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28);
-          final productionCenterNameParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 38);
-          final terrainModifierParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 30);
-          final pathItemTypeParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 32);
-          final pathItemIsActiveParam =
-              const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 34);
-          final pathItemMovementPointsLeftParam = const fb.Float64Reader()
-              .vTableGetNullable(buffer, rootOffset, 36);
-          final object = SaveGameFieldCellDbEntity(
+        return object;
+      },
+    ),
+    SaveGameFieldCellDbEntity:
+        obx_int.EntityDefinition<SaveGameFieldCellDbEntity>(
+          model: _entities[3],
+          toOneRelations: (SaveGameFieldCellDbEntity object) => [],
+          toManyRelations: (SaveGameFieldCellDbEntity object) => {},
+          getId: (SaveGameFieldCellDbEntity object) => object.dbId,
+          setId: (SaveGameFieldCellDbEntity object, int id) {
+            object.dbId = id;
+          },
+          objectToFB: (SaveGameFieldCellDbEntity object, fb.Builder fbb) {
+            final productionCenterNameOffset =
+                object.productionCenterName == null
+                ? null
+                : fbb.writeString(object.productionCenterName!);
+            fbb.startTable(19);
+            fbb.addInt64(0, object.dbId);
+            fbb.addInt64(1, object.slotDbId);
+            fbb.addInt64(2, object.row);
+            fbb.addInt64(3, object.col);
+            fbb.addInt64(4, object.cellId);
+            fbb.addFloat64(5, object.centerX);
+            fbb.addFloat64(6, object.centerY);
+            fbb.addInt64(7, object.terrain);
+            fbb.addBool(8, object.hasRiver);
+            fbb.addBool(9, object.hasRoad);
+            fbb.addInt64(10, object.nation);
+            fbb.addInt64(11, object.productionCenterType);
+            fbb.addInt64(12, object.productionCenterLevel);
+            fbb.addInt64(13, object.terrainModifier);
+            fbb.addInt64(14, object.pathItemType);
+            fbb.addBool(15, object.pathItemIsActive);
+            fbb.addFloat64(16, object.pathItemMovementPointsLeft);
+            fbb.addOffset(17, productionCenterNameOffset);
+            fbb.finish(fbb.endTable());
+            return object.dbId;
+          },
+          objectFromFB: (obx.Store store, ByteData fbData) {
+            final buffer = fb.BufferContext(fbData);
+            final rootOffset = buffer.derefObject(0);
+            final dbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              4,
+              0,
+            );
+            final slotDbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              6,
+              0,
+            );
+            final rowParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              8,
+              0,
+            );
+            final colParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              10,
+              0,
+            );
+            final cellIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              12,
+              0,
+            );
+            final centerXParam = const fb.Float64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              14,
+              0,
+            );
+            final centerYParam = const fb.Float64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              16,
+              0,
+            );
+            final terrainParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              18,
+              0,
+            );
+            final hasRiverParam = const fb.BoolReader().vTableGet(
+              buffer,
+              rootOffset,
+              20,
+              false,
+            );
+            final hasRoadParam = const fb.BoolReader().vTableGet(
+              buffer,
+              rootOffset,
+              22,
+              false,
+            );
+            final nationParam = const fb.Int64Reader().vTableGetNullable(
+              buffer,
+              rootOffset,
+              24,
+            );
+            final productionCenterTypeParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 26);
+            final productionCenterLevelParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 28);
+            final productionCenterNameParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGetNullable(buffer, rootOffset, 38);
+            final terrainModifierParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 30);
+            final pathItemTypeParam = const fb.Int64Reader().vTableGetNullable(
+              buffer,
+              rootOffset,
+              32,
+            );
+            final pathItemIsActiveParam = const fb.BoolReader()
+                .vTableGetNullable(buffer, rootOffset, 34);
+            final pathItemMovementPointsLeftParam = const fb.Float64Reader()
+                .vTableGetNullable(buffer, rootOffset, 36);
+            final object = SaveGameFieldCellDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
               row: rowParam,
@@ -982,109 +1235,143 @@ obx_int.ModelDefinition getObjectBoxModel() {
               terrainModifier: terrainModifierParam,
               pathItemType: pathItemTypeParam,
               pathItemIsActive: pathItemIsActiveParam,
-              pathItemMovementPointsLeft: pathItemMovementPointsLeftParam);
+              pathItemMovementPointsLeft: pathItemMovementPointsLeftParam,
+            );
 
-          return object;
-        }),
+            return object;
+          },
+        ),
     SaveSettingsStorageDbEntity:
         obx_int.EntityDefinition<SaveSettingsStorageDbEntity>(
-            model: _entities[4],
-            toOneRelations: (SaveSettingsStorageDbEntity object) => [],
-            toManyRelations: (SaveSettingsStorageDbEntity object) => {},
-            getId: (SaveSettingsStorageDbEntity object) => object.dbId,
-            setId: (SaveSettingsStorageDbEntity object, int id) {
-              object.dbId = id;
-            },
-            objectToFB: (SaveSettingsStorageDbEntity object, fb.Builder fbb) {
-              fbb.startTable(6);
-              fbb.addInt64(0, object.dbId);
-              fbb.addInt64(1, object.slotDbId);
-              fbb.addFloat64(2, object.zoom);
-              fbb.addFloat64(3, object.cameraPositionX);
-              fbb.addFloat64(4, object.cameraPositionY);
-              fbb.finish(fbb.endTable());
-              return object.dbId;
-            },
-            objectFromFB: (obx.Store store, ByteData fbData) {
-              final buffer = fb.BufferContext(fbData);
-              final rootOffset = buffer.derefObject(0);
-              final dbIdParam =
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-              final slotDbIdParam =
-                  const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-              final zoomParam = const fb.Float64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 8);
-              final cameraPositionXParam = const fb.Float64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 10);
-              final cameraPositionYParam = const fb.Float64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 12);
-              final object = SaveSettingsStorageDbEntity(
-                  dbId: dbIdParam,
-                  slotDbId: slotDbIdParam,
-                  zoom: zoomParam,
-                  cameraPositionX: cameraPositionXParam,
-                  cameraPositionY: cameraPositionYParam);
+          model: _entities[4],
+          toOneRelations: (SaveSettingsStorageDbEntity object) => [],
+          toManyRelations: (SaveSettingsStorageDbEntity object) => {},
+          getId: (SaveSettingsStorageDbEntity object) => object.dbId,
+          setId: (SaveSettingsStorageDbEntity object, int id) {
+            object.dbId = id;
+          },
+          objectToFB: (SaveSettingsStorageDbEntity object, fb.Builder fbb) {
+            fbb.startTable(6);
+            fbb.addInt64(0, object.dbId);
+            fbb.addInt64(1, object.slotDbId);
+            fbb.addFloat64(2, object.zoom);
+            fbb.addFloat64(3, object.cameraPositionX);
+            fbb.addFloat64(4, object.cameraPositionY);
+            fbb.finish(fbb.endTable());
+            return object.dbId;
+          },
+          objectFromFB: (obx.Store store, ByteData fbData) {
+            final buffer = fb.BufferContext(fbData);
+            final rootOffset = buffer.derefObject(0);
+            final dbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              4,
+              0,
+            );
+            final slotDbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              6,
+              0,
+            );
+            final zoomParam = const fb.Float64Reader().vTableGetNullable(
+              buffer,
+              rootOffset,
+              8,
+            );
+            final cameraPositionXParam = const fb.Float64Reader()
+                .vTableGetNullable(buffer, rootOffset, 10);
+            final cameraPositionYParam = const fb.Float64Reader()
+                .vTableGetNullable(buffer, rootOffset, 12);
+            final object = SaveSettingsStorageDbEntity(
+              dbId: dbIdParam,
+              slotDbId: slotDbIdParam,
+              zoom: zoomParam,
+              cameraPositionX: cameraPositionXParam,
+              cameraPositionY: cameraPositionYParam,
+            );
 
-              return object;
-            }),
-    SaveTroopTransferDbEntity: obx_int.EntityDefinition<
-            SaveTroopTransferDbEntity>(
-        model: _entities[5],
-        toOneRelations: (SaveTroopTransferDbEntity object) => [],
-        toManyRelations: (SaveTroopTransferDbEntity object) => {},
-        getId: (SaveTroopTransferDbEntity object) => object.dbId,
-        setId: (SaveTroopTransferDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (SaveTroopTransferDbEntity object, fb.Builder fbb) {
-          final troopTransferIdOffset = fbb.writeString(object.troopTransferId);
-          final stateAliasOffset = fbb.writeString(object.stateAlias);
-          final selectedCarrierIdOffset = object.selectedCarrierId == null
-              ? null
-              : fbb.writeString(object.selectedCarrierId!);
-          fbb.startTable(19);
-          fbb.addInt64(0, object.dbId);
-          fbb.addInt64(1, object.slotDbId);
-          fbb.addInt64(2, object.nationDbId);
-          fbb.addOffset(4, troopTransferIdOffset);
-          fbb.addInt64(11, object.targetCellId);
-          fbb.addOffset(12, stateAliasOffset);
-          fbb.addOffset(13, selectedCarrierIdOffset);
-          fbb.addInt64(14, object.landingPointCarrierCellId);
-          fbb.addInt64(15, object.landingPointUnitsCellId);
-          fbb.addInt64(16, object.gatheringPointCarrierCellId);
-          fbb.addInt64(17, object.gatheringPointUnitsCellId);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final slotDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final nationDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 8, 0);
-          final targetCellIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0);
-          final troopTransferIdParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 12, '');
-          final stateAliasParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 28, '');
-          final selectedCarrierIdParam =
-              const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 30);
-          final landingPointCarrierCellIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 32);
-          final landingPointUnitsCellIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 34);
-          final gatheringPointCarrierCellIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 36);
-          final gatheringPointUnitsCellIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 38);
-          final object = SaveTroopTransferDbEntity(
+            return object;
+          },
+        ),
+    SaveTroopTransferDbEntity:
+        obx_int.EntityDefinition<SaveTroopTransferDbEntity>(
+          model: _entities[5],
+          toOneRelations: (SaveTroopTransferDbEntity object) => [],
+          toManyRelations: (SaveTroopTransferDbEntity object) => {},
+          getId: (SaveTroopTransferDbEntity object) => object.dbId,
+          setId: (SaveTroopTransferDbEntity object, int id) {
+            object.dbId = id;
+          },
+          objectToFB: (SaveTroopTransferDbEntity object, fb.Builder fbb) {
+            final troopTransferIdOffset = fbb.writeString(
+              object.troopTransferId,
+            );
+            final stateAliasOffset = fbb.writeString(object.stateAlias);
+            final selectedCarrierIdOffset = object.selectedCarrierId == null
+                ? null
+                : fbb.writeString(object.selectedCarrierId!);
+            fbb.startTable(19);
+            fbb.addInt64(0, object.dbId);
+            fbb.addInt64(1, object.slotDbId);
+            fbb.addInt64(2, object.nationDbId);
+            fbb.addOffset(4, troopTransferIdOffset);
+            fbb.addInt64(11, object.targetCellId);
+            fbb.addOffset(12, stateAliasOffset);
+            fbb.addOffset(13, selectedCarrierIdOffset);
+            fbb.addInt64(14, object.landingPointCarrierCellId);
+            fbb.addInt64(15, object.landingPointUnitsCellId);
+            fbb.addInt64(16, object.gatheringPointCarrierCellId);
+            fbb.addInt64(17, object.gatheringPointUnitsCellId);
+            fbb.finish(fbb.endTable());
+            return object.dbId;
+          },
+          objectFromFB: (obx.Store store, ByteData fbData) {
+            final buffer = fb.BufferContext(fbData);
+            final rootOffset = buffer.derefObject(0);
+            final dbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              4,
+              0,
+            );
+            final slotDbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              6,
+              0,
+            );
+            final nationDbIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              8,
+              0,
+            );
+            final targetCellIdParam = const fb.Int64Reader().vTableGet(
+              buffer,
+              rootOffset,
+              26,
+              0,
+            );
+            final troopTransferIdParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGet(buffer, rootOffset, 12, '');
+            final stateAliasParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGet(buffer, rootOffset, 28, '');
+            final selectedCarrierIdParam = const fb.StringReader(
+              asciiOptimization: true,
+            ).vTableGetNullable(buffer, rootOffset, 30);
+            final landingPointCarrierCellIdParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 32);
+            final landingPointUnitsCellIdParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 34);
+            final gatheringPointCarrierCellIdParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 36);
+            final gatheringPointUnitsCellIdParam = const fb.Int64Reader()
+                .vTableGetNullable(buffer, rootOffset, 38);
+            final object = SaveTroopTransferDbEntity(
               dbId: dbIdParam,
               slotDbId: slotDbIdParam,
               nationDbId: nationDbIdParam,
@@ -1095,167 +1382,254 @@ obx_int.ModelDefinition getObjectBoxModel() {
               landingPointCarrierCellId: landingPointCarrierCellIdParam,
               landingPointUnitsCellId: landingPointUnitsCellIdParam,
               gatheringPointCarrierCellId: gatheringPointCarrierCellIdParam,
-              gatheringPointUnitsCellId: gatheringPointUnitsCellIdParam);
+              gatheringPointUnitsCellId: gatheringPointUnitsCellIdParam,
+            );
 
-          return object;
-        }),
+            return object;
+          },
+        ),
     SaveUnitDbEntity: obx_int.EntityDefinition<SaveUnitDbEntity>(
-        model: _entities[6],
-        toOneRelations: (SaveUnitDbEntity object) => [],
-        toManyRelations: (SaveUnitDbEntity object) => {},
-        getId: (SaveUnitDbEntity object) => object.dbId,
-        setId: (SaveUnitDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (SaveUnitDbEntity object, fb.Builder fbb) {
-          final unitIdOffset = fbb.writeString(object.unitId);
-          fbb.startTable(19);
-          fbb.addInt64(0, object.dbId);
-          fbb.addInt64(1, object.slotDbId);
-          fbb.addInt64(2, object.cellDbId);
-          fbb.addInt64(3, object.carrierDbId);
-          fbb.addInt64(4, object.troopTransferDbId);
-          fbb.addOffset(5, unitIdOffset);
-          fbb.addInt64(6, object.orderInCell);
-          fbb.addInt64(7, object.boost1);
-          fbb.addInt64(8, object.boost2);
-          fbb.addInt64(9, object.boost3);
-          fbb.addInt64(10, object.tookPartInBattles);
-          fbb.addFloat64(11, object.fatigue);
-          fbb.addFloat64(12, object.health);
-          fbb.addFloat64(13, object.movementPoints);
-          fbb.addFloat64(14, object.defence);
-          fbb.addInt64(15, object.type);
-          fbb.addInt64(16, object.state);
-          fbb.addBool(17, object.isInDefenceMode);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final slotDbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 6, 0);
-          final cellDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8);
-          final troopTransferDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 12);
-          final carrierDbIdParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 10);
-          final unitIdParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 14, '');
-          final orderInCellParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
-          final boost1Param =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
-          final boost2Param =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 20);
-          final boost3Param =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 22);
-          final tookPartInBattlesParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 24, 0);
-          final fatigueParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 26, 0);
-          final healthParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 28, 0);
-          final movementPointsParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 30, 0);
-          final defenceParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 32, 0);
-          final typeParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 34, 0);
-          final stateParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 36, 0);
-          final isInDefenceModeParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 38, false);
-          final object = SaveUnitDbEntity(
-              dbId: dbIdParam,
-              slotDbId: slotDbIdParam,
-              cellDbId: cellDbIdParam,
-              troopTransferDbId: troopTransferDbIdParam,
-              carrierDbId: carrierDbIdParam,
-              unitId: unitIdParam,
-              orderInCell: orderInCellParam,
-              boost1: boost1Param,
-              boost2: boost2Param,
-              boost3: boost3Param,
-              tookPartInBattles: tookPartInBattlesParam,
-              fatigue: fatigueParam,
-              health: healthParam,
-              movementPoints: movementPointsParam,
-              defence: defenceParam,
-              type: typeParam,
-              state: stateParam,
-              isInDefenceMode: isInDefenceModeParam);
+      model: _entities[6],
+      toOneRelations: (SaveUnitDbEntity object) => [],
+      toManyRelations: (SaveUnitDbEntity object) => {},
+      getId: (SaveUnitDbEntity object) => object.dbId,
+      setId: (SaveUnitDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (SaveUnitDbEntity object, fb.Builder fbb) {
+        final unitIdOffset = fbb.writeString(object.unitId);
+        fbb.startTable(19);
+        fbb.addInt64(0, object.dbId);
+        fbb.addInt64(1, object.slotDbId);
+        fbb.addInt64(2, object.cellDbId);
+        fbb.addInt64(3, object.carrierDbId);
+        fbb.addInt64(4, object.troopTransferDbId);
+        fbb.addOffset(5, unitIdOffset);
+        fbb.addInt64(6, object.orderInCell);
+        fbb.addInt64(7, object.boost1);
+        fbb.addInt64(8, object.boost2);
+        fbb.addInt64(9, object.boost3);
+        fbb.addInt64(10, object.tookPartInBattles);
+        fbb.addFloat64(11, object.fatigue);
+        fbb.addFloat64(12, object.health);
+        fbb.addFloat64(13, object.movementPoints);
+        fbb.addFloat64(14, object.defence);
+        fbb.addInt64(15, object.type);
+        fbb.addInt64(16, object.state);
+        fbb.addBool(17, object.isInDefenceMode);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final slotDbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          6,
+          0,
+        );
+        final cellDbIdParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          8,
+        );
+        final troopTransferDbIdParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          12,
+        );
+        final carrierDbIdParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          10,
+        );
+        final unitIdParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 14, '');
+        final orderInCellParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          0,
+        );
+        final boost1Param = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          18,
+        );
+        final boost2Param = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          20,
+        );
+        final boost3Param = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          22,
+        );
+        final tookPartInBattlesParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          24,
+          0,
+        );
+        final fatigueParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          26,
+          0,
+        );
+        final healthParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          28,
+          0,
+        );
+        final movementPointsParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          30,
+          0,
+        );
+        final defenceParam = const fb.Float64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          32,
+          0,
+        );
+        final typeParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          34,
+          0,
+        );
+        final stateParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          36,
+          0,
+        );
+        final isInDefenceModeParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          38,
+          false,
+        );
+        final object = SaveUnitDbEntity(
+          dbId: dbIdParam,
+          slotDbId: slotDbIdParam,
+          cellDbId: cellDbIdParam,
+          troopTransferDbId: troopTransferDbIdParam,
+          carrierDbId: carrierDbIdParam,
+          unitId: unitIdParam,
+          orderInCell: orderInCellParam,
+          boost1: boost1Param,
+          boost2: boost2Param,
+          boost3: boost3Param,
+          tookPartInBattles: tookPartInBattlesParam,
+          fatigue: fatigueParam,
+          health: healthParam,
+          movementPoints: movementPointsParam,
+          defence: defenceParam,
+          type: typeParam,
+          state: stateParam,
+          isInDefenceMode: isInDefenceModeParam,
+        );
 
-          return object;
-        }),
+        return object;
+      },
+    ),
     KeyValueDbEntity: obx_int.EntityDefinition<KeyValueDbEntity>(
-        model: _entities[7],
-        toOneRelations: (KeyValueDbEntity object) => [],
-        toManyRelations: (KeyValueDbEntity object) => {},
-        getId: (KeyValueDbEntity object) => object.dbId,
-        setId: (KeyValueDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (KeyValueDbEntity object, fb.Builder fbb) {
-          final keyOffset = fbb.writeString(object.key);
-          final valueOffset = fbb.writeString(object.value);
-          fbb.startTable(4);
-          fbb.addInt64(0, object.dbId);
-          fbb.addOffset(1, keyOffset);
-          fbb.addOffset(2, valueOffset);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final keyParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final valueParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object = KeyValueDbEntity(
-              dbId: dbIdParam, key: keyParam, value: valueParam);
+      model: _entities[7],
+      toOneRelations: (KeyValueDbEntity object) => [],
+      toManyRelations: (KeyValueDbEntity object) => {},
+      getId: (KeyValueDbEntity object) => object.dbId,
+      setId: (KeyValueDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (KeyValueDbEntity object, fb.Builder fbb) {
+        final keyOffset = fbb.writeString(object.key);
+        final valueOffset = fbb.writeString(object.value);
+        fbb.startTable(4);
+        fbb.addInt64(0, object.dbId);
+        fbb.addOffset(1, keyOffset);
+        fbb.addOffset(2, valueOffset);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final keyParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final valueParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final object = KeyValueDbEntity(
+          dbId: dbIdParam,
+          key: keyParam,
+          value: valueParam,
+        );
 
-          return object;
-        }),
+        return object;
+      },
+    ),
     CompletedGamesDbEntity: obx_int.EntityDefinition<CompletedGamesDbEntity>(
-        model: _entities[8],
-        toOneRelations: (CompletedGamesDbEntity object) => [],
-        toManyRelations: (CompletedGamesDbEntity object) => {},
-        getId: (CompletedGamesDbEntity object) => object.dbId,
-        setId: (CompletedGamesDbEntity object, int id) {
-          object.dbId = id;
-        },
-        objectToFB: (CompletedGamesDbEntity object, fb.Builder fbb) {
-          final mapNameOffset = fbb.writeString(object.mapName);
-          final nationOffset = fbb.writeString(object.nation);
-          fbb.startTable(4);
-          fbb.addInt64(0, object.dbId);
-          fbb.addOffset(1, mapNameOffset);
-          fbb.addOffset(2, nationOffset);
-          fbb.finish(fbb.endTable());
-          return object.dbId;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final dbIdParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final mapNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final nationParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object = CompletedGamesDbEntity(
-              dbId: dbIdParam, mapName: mapNameParam, nation: nationParam);
+      model: _entities[8],
+      toOneRelations: (CompletedGamesDbEntity object) => [],
+      toManyRelations: (CompletedGamesDbEntity object) => {},
+      getId: (CompletedGamesDbEntity object) => object.dbId,
+      setId: (CompletedGamesDbEntity object, int id) {
+        object.dbId = id;
+      },
+      objectToFB: (CompletedGamesDbEntity object, fb.Builder fbb) {
+        final mapNameOffset = fbb.writeString(object.mapName);
+        final nationOffset = fbb.writeString(object.nation);
+        fbb.startTable(4);
+        fbb.addInt64(0, object.dbId);
+        fbb.addOffset(1, mapNameOffset);
+        fbb.addOffset(2, nationOffset);
+        fbb.finish(fbb.endTable());
+        return object.dbId;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final dbIdParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final mapNameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final nationParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final object = CompletedGamesDbEntity(
+          dbId: dbIdParam,
+          mapName: mapNameParam,
+          nation: nationParam,
+        );
 
-          return object;
-        })
+        return object;
+      },
+    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -1264,106 +1638,130 @@ obx_int.ModelDefinition getObjectBoxModel() {
 /// [TalkerDataDbEntity] entity fields to define ObjectBox queries.
 class TalkerDataDbEntity_ {
   /// See [TalkerDataDbEntity.message].
-  static final message =
-      obx.QueryStringProperty<TalkerDataDbEntity>(_entities[0].properties[0]);
+  static final message = obx.QueryStringProperty<TalkerDataDbEntity>(
+    _entities[0].properties[0],
+  );
 
   /// See [TalkerDataDbEntity.logLevel].
-  static final logLevel =
-      obx.QueryIntegerProperty<TalkerDataDbEntity>(_entities[0].properties[1]);
+  static final logLevel = obx.QueryIntegerProperty<TalkerDataDbEntity>(
+    _entities[0].properties[1],
+  );
 
   /// See [TalkerDataDbEntity.title].
-  static final title =
-      obx.QueryStringProperty<TalkerDataDbEntity>(_entities[0].properties[2]);
+  static final title = obx.QueryStringProperty<TalkerDataDbEntity>(
+    _entities[0].properties[2],
+  );
 
   /// See [TalkerDataDbEntity.key].
-  static final key =
-      obx.QueryStringProperty<TalkerDataDbEntity>(_entities[0].properties[3]);
+  static final key = obx.QueryStringProperty<TalkerDataDbEntity>(
+    _entities[0].properties[3],
+  );
 
   /// See [TalkerDataDbEntity.penFColor].
-  static final penFColor =
-      obx.QueryIntegerProperty<TalkerDataDbEntity>(_entities[0].properties[4]);
+  static final penFColor = obx.QueryIntegerProperty<TalkerDataDbEntity>(
+    _entities[0].properties[4],
+  );
 
   /// See [TalkerDataDbEntity.penBColor].
-  static final penBColor =
-      obx.QueryIntegerProperty<TalkerDataDbEntity>(_entities[0].properties[5]);
+  static final penBColor = obx.QueryIntegerProperty<TalkerDataDbEntity>(
+    _entities[0].properties[5],
+  );
 
   /// See [TalkerDataDbEntity.time].
-  static final time =
-      obx.QueryDateProperty<TalkerDataDbEntity>(_entities[0].properties[6]);
+  static final time = obx.QueryDateProperty<TalkerDataDbEntity>(
+    _entities[0].properties[6],
+  );
 
   /// See [TalkerDataDbEntity.stackTrace].
-  static final stackTrace =
-      obx.QueryStringProperty<TalkerDataDbEntity>(_entities[0].properties[7]);
+  static final stackTrace = obx.QueryStringProperty<TalkerDataDbEntity>(
+    _entities[0].properties[7],
+  );
 
   /// See [TalkerDataDbEntity.dbId].
-  static final dbId =
-      obx.QueryIntegerProperty<TalkerDataDbEntity>(_entities[0].properties[8]);
+  static final dbId = obx.QueryIntegerProperty<TalkerDataDbEntity>(
+    _entities[0].properties[8],
+  );
 }
 
 /// [SaveSlotDbEntity] entity fields to define ObjectBox queries.
 class SaveSlotDbEntity_ {
   /// See [SaveSlotDbEntity.dbId].
-  static final dbId =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[0]);
+  static final dbId = obx.QueryIntegerProperty<SaveSlotDbEntity>(
+    _entities[1].properties[0],
+  );
 
   /// See [SaveSlotDbEntity.slotNumber].
-  static final slotNumber =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[1]);
+  static final slotNumber = obx.QueryIntegerProperty<SaveSlotDbEntity>(
+    _entities[1].properties[1],
+  );
 
   /// See [SaveSlotDbEntity.isAutosave].
-  static final isAutosave =
-      obx.QueryBooleanProperty<SaveSlotDbEntity>(_entities[1].properties[2]);
+  static final isAutosave = obx.QueryBooleanProperty<SaveSlotDbEntity>(
+    _entities[1].properties[2],
+  );
 
   /// See [SaveSlotDbEntity.saveDateTime].
-  static final saveDateTime =
-      obx.QueryDateProperty<SaveSlotDbEntity>(_entities[1].properties[3]);
+  static final saveDateTime = obx.QueryDateProperty<SaveSlotDbEntity>(
+    _entities[1].properties[3],
+  );
 
   /// See [SaveSlotDbEntity.mapFileName].
-  static final mapFileName =
-      obx.QueryStringProperty<SaveSlotDbEntity>(_entities[1].properties[4]);
+  static final mapFileName = obx.QueryStringProperty<SaveSlotDbEntity>(
+    _entities[1].properties[4],
+  );
 
   /// See [SaveSlotDbEntity.rows].
-  static final rows =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[5]);
+  static final rows = obx.QueryIntegerProperty<SaveSlotDbEntity>(
+    _entities[1].properties[5],
+  );
 
   /// See [SaveSlotDbEntity.cols].
-  static final cols =
-      obx.QueryIntegerProperty<SaveSlotDbEntity>(_entities[1].properties[6]);
+  static final cols = obx.QueryIntegerProperty<SaveSlotDbEntity>(
+    _entities[1].properties[6],
+  );
 }
 
 /// [SaveNationDbEntity] entity fields to define ObjectBox queries.
 class SaveNationDbEntity_ {
   /// See [SaveNationDbEntity.dbId].
-  static final dbId =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[0]);
+  static final dbId = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[0],
+  );
 
   /// See [SaveNationDbEntity.slotDbId].
-  static final slotDbId =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[1]);
+  static final slotDbId = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[1],
+  );
 
   /// See [SaveNationDbEntity.isHuman].
-  static final isHuman =
-      obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[2]);
+  static final isHuman = obx.QueryBooleanProperty<SaveNationDbEntity>(
+    _entities[2].properties[2],
+  );
 
   /// See [SaveNationDbEntity.playingOrder].
-  static final playingOrder =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[3]);
+  static final playingOrder = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[3],
+  );
 
   /// See [SaveNationDbEntity.nation].
-  static final nation =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[4]);
+  static final nation = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[4],
+  );
 
   /// See [SaveNationDbEntity.defeated].
-  static final defeated =
-      obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[5]);
+  static final defeated = obx.QueryBooleanProperty<SaveNationDbEntity>(
+    _entities[2].properties[5],
+  );
 
   /// See [SaveNationDbEntity.isSideOfConflict].
-  static final isSideOfConflict =
-      obx.QueryBooleanProperty<SaveNationDbEntity>(_entities[2].properties[6]);
+  static final isSideOfConflict = obx.QueryBooleanProperty<SaveNationDbEntity>(
+    _entities[2].properties[6],
+  );
 
   /// See [SaveNationDbEntity.totalSumCurrency].
-  static final totalSumCurrency =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[7]);
+  static final totalSumCurrency = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[7],
+  );
 
   /// See [SaveNationDbEntity.totalSumIndustryPoints].
   static final totalSumIndustryPoints =
@@ -1386,272 +1784,331 @@ class SaveNationDbEntity_ {
       obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[12]);
 
   /// See [SaveNationDbEntity.day].
-  static final day =
-      obx.QueryIntegerProperty<SaveNationDbEntity>(_entities[2].properties[13]);
+  static final day = obx.QueryIntegerProperty<SaveNationDbEntity>(
+    _entities[2].properties[13],
+  );
 }
 
 /// [SaveGameFieldCellDbEntity] entity fields to define ObjectBox queries.
 class SaveGameFieldCellDbEntity_ {
   /// See [SaveGameFieldCellDbEntity.dbId].
   static final dbId = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[0]);
+    _entities[3].properties[0],
+  );
 
   /// See [SaveGameFieldCellDbEntity.slotDbId].
   static final slotDbId = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[1]);
+    _entities[3].properties[1],
+  );
 
   /// See [SaveGameFieldCellDbEntity.row].
   static final row = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[2]);
+    _entities[3].properties[2],
+  );
 
   /// See [SaveGameFieldCellDbEntity.col].
   static final col = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[3]);
+    _entities[3].properties[3],
+  );
 
   /// See [SaveGameFieldCellDbEntity.cellId].
   static final cellId = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[4]);
+    _entities[3].properties[4],
+  );
 
   /// See [SaveGameFieldCellDbEntity.centerX].
   static final centerX = obx.QueryDoubleProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[5]);
+    _entities[3].properties[5],
+  );
 
   /// See [SaveGameFieldCellDbEntity.centerY].
   static final centerY = obx.QueryDoubleProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[6]);
+    _entities[3].properties[6],
+  );
 
   /// See [SaveGameFieldCellDbEntity.terrain].
   static final terrain = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[7]);
+    _entities[3].properties[7],
+  );
 
   /// See [SaveGameFieldCellDbEntity.hasRiver].
   static final hasRiver = obx.QueryBooleanProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[8]);
+    _entities[3].properties[8],
+  );
 
   /// See [SaveGameFieldCellDbEntity.hasRoad].
   static final hasRoad = obx.QueryBooleanProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[9]);
+    _entities[3].properties[9],
+  );
 
   /// See [SaveGameFieldCellDbEntity.nation].
   static final nation = obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-      _entities[3].properties[10]);
+    _entities[3].properties[10],
+  );
 
   /// See [SaveGameFieldCellDbEntity.productionCenterType].
   static final productionCenterType =
       obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[11]);
+        _entities[3].properties[11],
+      );
 
   /// See [SaveGameFieldCellDbEntity.productionCenterLevel].
   static final productionCenterLevel =
       obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[12]);
+        _entities[3].properties[12],
+      );
 
   /// See [SaveGameFieldCellDbEntity.terrainModifier].
   static final terrainModifier =
       obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[13]);
+        _entities[3].properties[13],
+      );
 
   /// See [SaveGameFieldCellDbEntity.pathItemType].
   static final pathItemType =
       obx.QueryIntegerProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[14]);
+        _entities[3].properties[14],
+      );
 
   /// See [SaveGameFieldCellDbEntity.pathItemIsActive].
   static final pathItemIsActive =
       obx.QueryBooleanProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[15]);
+        _entities[3].properties[15],
+      );
 
   /// See [SaveGameFieldCellDbEntity.pathItemMovementPointsLeft].
   static final pathItemMovementPointsLeft =
       obx.QueryDoubleProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[16]);
+        _entities[3].properties[16],
+      );
 
   /// See [SaveGameFieldCellDbEntity.productionCenterName].
   static final productionCenterName =
       obx.QueryStringProperty<SaveGameFieldCellDbEntity>(
-          _entities[3].properties[17]);
+        _entities[3].properties[17],
+      );
 }
 
 /// [SaveSettingsStorageDbEntity] entity fields to define ObjectBox queries.
 class SaveSettingsStorageDbEntity_ {
   /// See [SaveSettingsStorageDbEntity.dbId].
   static final dbId = obx.QueryIntegerProperty<SaveSettingsStorageDbEntity>(
-      _entities[4].properties[0]);
+    _entities[4].properties[0],
+  );
 
   /// See [SaveSettingsStorageDbEntity.slotDbId].
   static final slotDbId = obx.QueryIntegerProperty<SaveSettingsStorageDbEntity>(
-      _entities[4].properties[1]);
+    _entities[4].properties[1],
+  );
 
   /// See [SaveSettingsStorageDbEntity.zoom].
   static final zoom = obx.QueryDoubleProperty<SaveSettingsStorageDbEntity>(
-      _entities[4].properties[2]);
+    _entities[4].properties[2],
+  );
 
   /// See [SaveSettingsStorageDbEntity.cameraPositionX].
   static final cameraPositionX =
       obx.QueryDoubleProperty<SaveSettingsStorageDbEntity>(
-          _entities[4].properties[3]);
+        _entities[4].properties[3],
+      );
 
   /// See [SaveSettingsStorageDbEntity.cameraPositionY].
   static final cameraPositionY =
       obx.QueryDoubleProperty<SaveSettingsStorageDbEntity>(
-          _entities[4].properties[4]);
+        _entities[4].properties[4],
+      );
 }
 
 /// [SaveTroopTransferDbEntity] entity fields to define ObjectBox queries.
 class SaveTroopTransferDbEntity_ {
   /// See [SaveTroopTransferDbEntity.dbId].
   static final dbId = obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-      _entities[5].properties[0]);
+    _entities[5].properties[0],
+  );
 
   /// See [SaveTroopTransferDbEntity.slotDbId].
   static final slotDbId = obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-      _entities[5].properties[1]);
+    _entities[5].properties[1],
+  );
 
   /// See [SaveTroopTransferDbEntity.nationDbId].
   static final nationDbId = obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-      _entities[5].properties[2]);
+    _entities[5].properties[2],
+  );
 
   /// See [SaveTroopTransferDbEntity.troopTransferId].
   static final troopTransferId =
       obx.QueryStringProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[3]);
+        _entities[5].properties[3],
+      );
 
   /// See [SaveTroopTransferDbEntity.targetCellId].
   static final targetCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[4]);
+        _entities[5].properties[4],
+      );
 
   /// See [SaveTroopTransferDbEntity.stateAlias].
   static final stateAlias = obx.QueryStringProperty<SaveTroopTransferDbEntity>(
-      _entities[5].properties[5]);
+    _entities[5].properties[5],
+  );
 
   /// See [SaveTroopTransferDbEntity.selectedCarrierId].
   static final selectedCarrierId =
       obx.QueryStringProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[6]);
+        _entities[5].properties[6],
+      );
 
   /// See [SaveTroopTransferDbEntity.landingPointCarrierCellId].
   static final landingPointCarrierCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[7]);
+        _entities[5].properties[7],
+      );
 
   /// See [SaveTroopTransferDbEntity.landingPointUnitsCellId].
   static final landingPointUnitsCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[8]);
+        _entities[5].properties[8],
+      );
 
   /// See [SaveTroopTransferDbEntity.gatheringPointCarrierCellId].
   static final gatheringPointCarrierCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[9]);
+        _entities[5].properties[9],
+      );
 
   /// See [SaveTroopTransferDbEntity.gatheringPointUnitsCellId].
   static final gatheringPointUnitsCellId =
       obx.QueryIntegerProperty<SaveTroopTransferDbEntity>(
-          _entities[5].properties[10]);
+        _entities[5].properties[10],
+      );
 }
 
 /// [SaveUnitDbEntity] entity fields to define ObjectBox queries.
 class SaveUnitDbEntity_ {
   /// See [SaveUnitDbEntity.dbId].
-  static final dbId =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[0]);
+  static final dbId = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[0],
+  );
 
   /// See [SaveUnitDbEntity.slotDbId].
-  static final slotDbId =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[1]);
+  static final slotDbId = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[1],
+  );
 
   /// See [SaveUnitDbEntity.cellDbId].
-  static final cellDbId =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[2]);
+  static final cellDbId = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[2],
+  );
 
   /// See [SaveUnitDbEntity.carrierDbId].
-  static final carrierDbId =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[3]);
+  static final carrierDbId = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[3],
+  );
 
   /// See [SaveUnitDbEntity.troopTransferDbId].
-  static final troopTransferDbId =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[4]);
+  static final troopTransferDbId = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[4],
+  );
 
   /// See [SaveUnitDbEntity.unitId].
-  static final unitId =
-      obx.QueryStringProperty<SaveUnitDbEntity>(_entities[6].properties[5]);
+  static final unitId = obx.QueryStringProperty<SaveUnitDbEntity>(
+    _entities[6].properties[5],
+  );
 
   /// See [SaveUnitDbEntity.orderInCell].
-  static final orderInCell =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[6]);
+  static final orderInCell = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[6],
+  );
 
   /// See [SaveUnitDbEntity.boost1].
-  static final boost1 =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[7]);
+  static final boost1 = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[7],
+  );
 
   /// See [SaveUnitDbEntity.boost2].
-  static final boost2 =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[8]);
+  static final boost2 = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[8],
+  );
 
   /// See [SaveUnitDbEntity.boost3].
-  static final boost3 =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[9]);
+  static final boost3 = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[9],
+  );
 
   /// See [SaveUnitDbEntity.tookPartInBattles].
-  static final tookPartInBattles =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[10]);
+  static final tookPartInBattles = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[10],
+  );
 
   /// See [SaveUnitDbEntity.fatigue].
-  static final fatigue =
-      obx.QueryDoubleProperty<SaveUnitDbEntity>(_entities[6].properties[11]);
+  static final fatigue = obx.QueryDoubleProperty<SaveUnitDbEntity>(
+    _entities[6].properties[11],
+  );
 
   /// See [SaveUnitDbEntity.health].
-  static final health =
-      obx.QueryDoubleProperty<SaveUnitDbEntity>(_entities[6].properties[12]);
+  static final health = obx.QueryDoubleProperty<SaveUnitDbEntity>(
+    _entities[6].properties[12],
+  );
 
   /// See [SaveUnitDbEntity.movementPoints].
-  static final movementPoints =
-      obx.QueryDoubleProperty<SaveUnitDbEntity>(_entities[6].properties[13]);
+  static final movementPoints = obx.QueryDoubleProperty<SaveUnitDbEntity>(
+    _entities[6].properties[13],
+  );
 
   /// See [SaveUnitDbEntity.defence].
-  static final defence =
-      obx.QueryDoubleProperty<SaveUnitDbEntity>(_entities[6].properties[14]);
+  static final defence = obx.QueryDoubleProperty<SaveUnitDbEntity>(
+    _entities[6].properties[14],
+  );
 
   /// See [SaveUnitDbEntity.type].
-  static final type =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[15]);
+  static final type = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[15],
+  );
 
   /// See [SaveUnitDbEntity.state].
-  static final state =
-      obx.QueryIntegerProperty<SaveUnitDbEntity>(_entities[6].properties[16]);
+  static final state = obx.QueryIntegerProperty<SaveUnitDbEntity>(
+    _entities[6].properties[16],
+  );
 
   /// See [SaveUnitDbEntity.isInDefenceMode].
-  static final isInDefenceMode =
-      obx.QueryBooleanProperty<SaveUnitDbEntity>(_entities[6].properties[17]);
+  static final isInDefenceMode = obx.QueryBooleanProperty<SaveUnitDbEntity>(
+    _entities[6].properties[17],
+  );
 }
 
 /// [KeyValueDbEntity] entity fields to define ObjectBox queries.
 class KeyValueDbEntity_ {
   /// See [KeyValueDbEntity.dbId].
-  static final dbId =
-      obx.QueryIntegerProperty<KeyValueDbEntity>(_entities[7].properties[0]);
+  static final dbId = obx.QueryIntegerProperty<KeyValueDbEntity>(
+    _entities[7].properties[0],
+  );
 
   /// See [KeyValueDbEntity.key].
-  static final key =
-      obx.QueryStringProperty<KeyValueDbEntity>(_entities[7].properties[1]);
+  static final key = obx.QueryStringProperty<KeyValueDbEntity>(
+    _entities[7].properties[1],
+  );
 
   /// See [KeyValueDbEntity.value].
-  static final value =
-      obx.QueryStringProperty<KeyValueDbEntity>(_entities[7].properties[2]);
+  static final value = obx.QueryStringProperty<KeyValueDbEntity>(
+    _entities[7].properties[2],
+  );
 }
 
 /// [CompletedGamesDbEntity] entity fields to define ObjectBox queries.
 class CompletedGamesDbEntity_ {
   /// See [CompletedGamesDbEntity.dbId].
   static final dbId = obx.QueryIntegerProperty<CompletedGamesDbEntity>(
-      _entities[8].properties[0]);
+    _entities[8].properties[0],
+  );
 
   /// See [CompletedGamesDbEntity.mapName].
   static final mapName = obx.QueryStringProperty<CompletedGamesDbEntity>(
-      _entities[8].properties[1]);
+    _entities[8].properties[1],
+  );
 
   /// See [CompletedGamesDbEntity.nation].
   static final nation = obx.QueryStringProperty<CompletedGamesDbEntity>(
-      _entities[8].properties[2]);
+    _entities[8].properties[2],
+  );
 }

@@ -15,12 +15,12 @@ class GameFieldCellInfoPc extends StatelessWidget
 
   final GameFieldControlsCellInfo cellInfo;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   GameFieldCellInfoPc({
     super.key,
     required this.cellInfo,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
   })  : _spritesAtlas = spritesAtlas;
 
   @override

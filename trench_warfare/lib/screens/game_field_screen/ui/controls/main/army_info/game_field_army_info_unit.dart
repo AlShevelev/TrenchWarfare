@@ -16,7 +16,7 @@ class GameFieldArmyInfoUnit extends StatelessWidget {
 
   final Unit _unit;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   final Nation _nation;
 
@@ -26,7 +26,7 @@ class GameFieldArmyInfoUnit extends StatelessWidget {
     super.key,
     required Unit unit,
     required Nation nation,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
     required GameFieldArmyInfoUnitsCache cache,
   })  : _unit = unit,
         _spritesAtlas = spritesAtlas,

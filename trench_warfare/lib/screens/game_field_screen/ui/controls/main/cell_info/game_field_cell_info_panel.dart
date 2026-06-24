@@ -20,7 +20,7 @@ enum _PanelType {
 class GameFieldCellInfoPanel extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   final double left;
   final double top;
@@ -34,7 +34,7 @@ class GameFieldCellInfoPanel extends StatelessWidget {
       required this.cellInfo,
       required this.left,
       required this.top,
-      required TextureAtlas spritesAtlas})
+      required TexturePackerAtlas spritesAtlas})
       : _spritesAtlas = spritesAtlas {
     _type = _getPanelType(cellInfo);
   }

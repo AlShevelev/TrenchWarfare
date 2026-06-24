@@ -11,7 +11,7 @@
 import 'dart:ui';
 
 import 'package:flame/game.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';
@@ -22,12 +22,12 @@ class AskToDisbandDialogUnitPainter extends CustomPainter {
 
   final Nation _nation;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   AskToDisbandDialogUnitPainter({
     required Unit unit,
     required Nation nation,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
   }) :
     _unit = unit,
     _nation = nation,
@@ -85,8 +85,6 @@ class AskToDisbandDialogUnitPainter extends CustomPainter {
     final sprite = _spritesAtlas.findSpriteByName(spriteName);
 
     if (sprite != null) {
-      sprite.decorator.removeLast();
-
       sprite.render(
         canvas,
         position: Vector2(drawingRect.left, drawingRect.top),

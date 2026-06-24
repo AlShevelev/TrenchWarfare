@@ -20,7 +20,7 @@ final class GameObjectCell extends GameObjectComponentBase {
   final SettingsStorageRead _settings;
 
   GameObjectCell(
-    TextureAtlas spritesAtlas,
+    TexturePackerAtlas spritesAtlas,
     GameFieldCellRead cell,
     bool isHuman,
     GameFieldRead gameField,

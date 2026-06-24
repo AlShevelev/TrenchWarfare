@@ -13,7 +13,7 @@ library game_field_cell_info;
 import 'dart:ui';
 
 import 'package:flame/components.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flutter/material.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';

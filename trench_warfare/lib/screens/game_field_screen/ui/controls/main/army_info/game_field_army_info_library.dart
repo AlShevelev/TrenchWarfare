@@ -10,12 +10,13 @@
 
 library game_field_army_info;
 
+import 'dart:ffi' hide Size;
 import 'dart:ui';
 
-import 'package:flame/extensions.dart';
+import 'package:flame/extensions.dart' hide Size;
 import 'package:flame/rendering.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
-import 'package:flutter/material.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
+import 'package:flutter/material.dart' hide Size;
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
 import 'package:trench_warfare/core/enums/nation.dart';

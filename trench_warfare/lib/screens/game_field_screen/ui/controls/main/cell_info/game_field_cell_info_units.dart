@@ -13,12 +13,12 @@ part of game_field_cell_info;
 class GameFieldCellInfoUnits extends StatelessWidget with GameFieldArmyInfoUnitsCache {
   final GameFieldControlsCellInfo cellInfo;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   GameFieldCellInfoUnits({
     super.key,
     required this.cellInfo,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
   })  : _spritesAtlas = spritesAtlas;
 
   @override

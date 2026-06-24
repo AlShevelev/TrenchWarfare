@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
-import 'package:flame_gdx_texture_packer/flame_gdx_texture_packer.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trench_warfare/app/navigation/navigation_library.dart';
@@ -43,10 +42,10 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
   StreamSubscription? _updateGameObjectsSubscription;
   StreamSubscription? _gameFieldStateSubscription;
 
-  late final TextureAtlas _spritesAtlas;
+  late final TexturePackerAtlas _spritesAtlas;
 
   @override
-  TextureAtlas get spritesAtlas => _spritesAtlas;
+  TexturePackerAtlas get spritesAtlas => _spritesAtlas;
 
   @override
   int get gameFieldId => hashCode;
@@ -96,7 +95,7 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
       camera: GesturesCamera(camera),
     );
 
-    _spritesAtlas = await fromAtlas('images/sprites/sprites_atlas');
+    _spritesAtlas = await TexturePackerAtlas.load('images/sprites/sprites_atlas');
 
     _settings = SettingsStorageReadStubImpl();
 

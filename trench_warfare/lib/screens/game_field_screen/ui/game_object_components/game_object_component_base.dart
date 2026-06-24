@@ -20,7 +20,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
   @protected
   late final Vector2 _baseSize;
   @protected
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
   @protected
   final Vector2 _position;
 
@@ -32,7 +32,7 @@ abstract base class GameObjectComponentBase extends PositionComponent {
   final bool _isHuman;
 
   GameObjectComponentBase({
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
     required Vector2 position,
     required bool isHuman,
   })  : _spritesAtlas = spritesAtlas,

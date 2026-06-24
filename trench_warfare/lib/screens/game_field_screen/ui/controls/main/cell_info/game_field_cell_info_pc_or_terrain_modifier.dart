@@ -13,7 +13,7 @@ part of game_field_cell_info;
 class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
 
   static const _width = 220.0;
   static const _height = 132.0;
@@ -26,7 +26,7 @@ class GameFieldCellInfoPcOrTerrainModifier extends StatelessWidget {
   const GameFieldCellInfoPcOrTerrainModifier({
     super.key,
     required this.cellInfo,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
     required double left,
     required double top,
     required String backgroundPath,

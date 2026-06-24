@@ -15,14 +15,14 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
 
   late final Nation _nation;
 
-  late final TextureAtlas _spritesAtlas;
+  late final TexturePackerAtlas _spritesAtlas;
 
   late final GameFieldArmyInfoUnitsCache _cache;
 
   GameFieldArmyInfoUnitPainter({
     required Unit unit,
     required Nation nation,
-    required TextureAtlas spritesAtlas,
+    required TexturePackerAtlas spritesAtlas,
     required GameFieldArmyInfoUnitsCache cache,
   }) {
     _unit = unit;
@@ -59,13 +59,13 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
       spriteName: SpriteAtlasNames.getUnitPrimary(_unit, _nation),
       canvas: picCanvas,
       drawingRect: drawingRect,
-      decorator: _unit.state == UnitState.disabled ? _getDisabledDecorator() : null,
+      disabled: _unit.state == UnitState.disabled,
     );
     _draw(
       spriteName: SpriteAtlasNames.getUnitSecondary(_unit),
       canvas: picCanvas,
       drawingRect: drawingRect,
-      decorator: _unit.state == UnitState.disabled ? _getDisabledDecorator() : null,
+      disabled: _unit.state == UnitState.disabled,
     );
 
     _drawAll(
@@ -85,35 +85,37 @@ class GameFieldArmyInfoUnitPainter extends CustomPainter {
 
   void _drawAll(Canvas canvas, {required List<String?> spriteNames, required Rect drawingRect}) {
     for (var s in spriteNames) {
-      _draw(spriteName: s, canvas: canvas, drawingRect: drawingRect, decorator: null);
+      _draw(spriteName: s, canvas: canvas, drawingRect: drawingRect, disabled: false);
     }
   }
 
-  void _draw({String? spriteName, required Canvas canvas, required Rect drawingRect, Decorator? decorator}) {
+  void _draw({
+    String? spriteName,
+    required Canvas canvas,
+    required Rect drawingRect,
+    required bool disabled,
+  }) {
     if (spriteName == null) {
       return;
     }
 
     final sprite = _spritesAtlas.findSpriteByName(spriteName);
 
-    if (sprite != null) {
-      if (decorator != null) {
-        sprite.decorator.addLast(decorator);
-      } else {
-        sprite.decorator.removeLast();
-      }
+    final paintEffect = disabled ? _getDisabledPaint() : null;
 
+    if (sprite != null) {
       sprite.render(
         canvas,
         position: Vector2(drawingRect.left, drawingRect.top),
         size: Vector2(drawingRect.width, drawingRect.height),
+        overridePaint: paintEffect,
       );
-
-      if (decorator != null) {
-        sprite.decorator.removeLast();
-      }
     }
   }
 
-  Decorator _getDisabledDecorator() => PaintDecorator.tint(AppColors.halfDark);
+  Paint _getDisabledPaint() => Paint()
+    ..colorFilter = ColorFilter.mode(
+      AppColors.halfDark,
+      BlendMode.srcATop,
+    );
 }

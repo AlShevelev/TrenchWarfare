@@ -13,7 +13,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flame_gdx_texture_packer/atlas/texture_atlas.dart';
+import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:trench_warfare/core/entities/game_field/game_field_library.dart';
 import 'package:trench_warfare/core/entities/game_objects/game_object_library.dart';
@@ -31,7 +31,7 @@ typedef OnAnimationCompletedCallback = void Function();
 class GameObjectsComposer {
   late final GameFieldRead _gameField;
 
-  final TextureAtlas _spritesAtlas;
+  final TexturePackerAtlas _spritesAtlas;
   final Image _animationAtlas;
 
   final TiledComponent _mapComponent;
@@ -46,7 +46,7 @@ class GameObjectsComposer {
 
   GameObjectsComposer(
     TiledComponent mapComponent,
-    TextureAtlas spritesAtlas,
+    TexturePackerAtlas spritesAtlas,
     AppLocale locale,
     SettingsStorageRead settings, {
     required Image animationAtlas,
