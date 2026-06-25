@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
 import 'package:flame_texturepacker/flame_texturepacker.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:flutter/widgets.dart';
@@ -25,8 +25,11 @@ import 'package:trench_warfare/screens/tutorials/view_model/stub_game_field_view
 import 'package:trench_warfare/screens/tutorials/view_model/tutorial_game_field_view_model.dart';
 import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
+import 'package:trench_warfare/shared/utils/map_file_name_utils.dart';
 
-class TutorialGameField extends FlameGame with TapDetector, HasGameRef implements GameFieldForControls {
+class TutorialGameField extends FlameGame
+    with TapCallbacks, HasGameReference, MapFileNameUtils
+    implements GameFieldForControls {
   late final TutorialGameFieldViewModel _viewModel;
 
   late TiledComponent _mapComponent;
@@ -80,14 +83,15 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
       ..anchor = Anchor.center;
 
     _mapComponent = await TiledComponent.load(
-      _mapFileName.replaceFirst('assets/tiles/', ''),
+      getFile(_mapFileName),
+      prefix: getPrefix(_mapFileName),
       ComponentConstants.cellRealSize,
     );
+
     world.add(_mapComponent);
 
     _updateGameObjectsSubscription = _viewModel.updateGameObjectsEvent.listen(_onUpdateGameEvent);
     _gameFieldStateSubscription = _viewModel.gameFieldState.listen(_onGameFieldStateChange);
-    //_gameFieldControlsState = _viewModel.controlsState.listen(_onGameFieldStateChange);
 
     _gameGesturesComposer = GameGesturesComposer(
       zoom: ZoomConstants.maxZoom,
@@ -142,7 +146,7 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
 
   Future<void> _onGameFieldStateChange(GameFieldState state) async {
     if (state is Completed) {
-      gameRef.buildContext?.let(
+      game.buildContext?.let(
         (context) => Navigator.of(context).pushNamedAndRemoveUntil(
           Routes.cover,
           (r) => false,
@@ -152,7 +156,7 @@ class TutorialGameField extends FlameGame with TapDetector, HasGameRef implement
   }
 
   @override
-  void onTap() => _viewModel.onTap();
+  void onTapUp(TapUpEvent event) => _viewModel.onTap();
 
   @override
   void onCancelled() {
