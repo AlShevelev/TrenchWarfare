@@ -21,7 +21,7 @@ import 'package:trench_warfare/shared/utils/range.dart';
 
 /// Returns a sprite name from the sprite atlas
 class SpriteAtlasNames {
-  static String? getUnitQuantity(int? unitsTotal) => unitsTotal != null ? 'Unit-Quantity-$unitsTotal' : null;
+  static String? getUnitQuantity(int? unitsTotal) => unitsTotal != null ? 'Unit-$unitsTotal-Quantity' : null;
 
   static String getUnitHealth(Unit unit) {
     final relativeHealth = unit.health / unit.maxHealth;
@@ -65,15 +65,15 @@ class SpriteAtlasNames {
         : Range(0.90, 0.95).isInRange(relativeHealth)
         ? 95
         : 100;
-    return 'Unit-Health-$healthSuffix';
+    return 'Unit-$healthSuffix-Health';
   }
 
   static String? getUnitExperienceRank(Unit unit) => switch (unit.experienceRank) {
       UnitExperienceRank.rookies => null,
-      UnitExperienceRank.fighters => unit.isLand ? 'Unit-Land-Rank-2' : 'Unit-Sea-Rank-2',
-      UnitExperienceRank.proficients => unit.isLand ? 'Unit-Land-Rank-3' : 'Unit-Sea-Rank-3',
-      UnitExperienceRank.veterans => unit.isLand ? 'Unit-Land-Rank-4' : 'Unit-Sea-Rank-4',
-      UnitExperienceRank.elite => unit.isLand ? 'Unit-Land-Rank-5' : 'Unit-Sea-Rank-5',
+      UnitExperienceRank.fighters => unit.isLand ? 'Unit-Land-2-Rank' : 'Unit-Sea-2-Rank',
+      UnitExperienceRank.proficients => unit.isLand ? 'Unit-Land-3-Rank' : 'Unit-Sea-3-Rank',
+      UnitExperienceRank.veterans => unit.isLand ? 'Unit-Land-4-Rank' : 'Unit-Sea-4-Rank',
+      UnitExperienceRank.elite => unit.isLand ? 'Unit-Land-5-Rank' : 'Unit-Sea-5-Rank',
     };
 
   static String? getUnitBoost1(Unit unit) => switch (unit.boost1) {
@@ -151,15 +151,15 @@ class SpriteAtlasNames {
     final levelDigit = _getProductionCenterLevelDigit(productionCenter);
 
     return switch (productionCenter.type) {
-      ProductionCenterType.airField => 'Production-centers-air-field-level-$levelDigit',
-      ProductionCenterType.navalBase => 'Production-centers-naval-base-level-$levelDigit',
-      ProductionCenterType.factory => 'Production-centers-factory-level-$levelDigit',
-      ProductionCenterType.city => 'Production-centers-city-level-$levelDigit',
+      ProductionCenterType.airField => 'Production-centers-air-field-$levelDigit-level',
+      ProductionCenterType.navalBase => 'Production-centers-naval-base-$levelDigit-level',
+      ProductionCenterType.factory => 'Production-centers-factory-$levelDigit-level',
+      ProductionCenterType.city => 'Production-centers-city-$levelDigit-level',
     };
   }
 
   static String getProductionCenterLevel(ProductionCenter productionCenter) =>
-      'Production-centers-level-${_getProductionCenterLevelDigit(productionCenter)}';
+      'Production-centers-${_getProductionCenterLevelDigit(productionCenter)}-level';
 
   static String getSelectionFrame() => 'Selection-Frame';
 

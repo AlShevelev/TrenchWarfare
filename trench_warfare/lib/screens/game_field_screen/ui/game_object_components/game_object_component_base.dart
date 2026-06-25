@@ -161,19 +161,21 @@ abstract base class GameObjectComponentBase extends PositionComponent {
       _SpriteSize.large => _largeSize,
     };
 
-    final sprite = SpriteComponent(
+    final sprite = _spritesAtlas.findSpriteByName(spriteName);
+
+    final spriteComponent = SpriteComponent(
       size: componentSize,
-      sprite: _spritesAtlas.findSpriteByName(spriteName),
+      sprite: sprite,
       anchor: Anchor.center,
     );
 
     if (decorator != null) {
-      sprite.decorator.addLast(decorator);
+      spriteComponent.decorator.addLast(decorator);
     } else {
-      sprite.decorator.removeLast();
+      spriteComponent.decorator.removeLast();
     }
 
-    await (root ?? this).add(sprite);
+    await (root ?? this).add(spriteComponent);
   }
 
   /// See https://docs.flame-engine.org/1.3.0/flame/rendering/decorators.html#paintdecorator-grayscale
