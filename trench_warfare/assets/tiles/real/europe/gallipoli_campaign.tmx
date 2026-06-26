@@ -6,7 +6,7 @@
  <tileset firstgid="1" name="terrain_atlas" tilewidth="74" tileheight="64" tilecount="88" columns="8">
   <image source="../images/tiles/terrain_atlas_new.png" width="592" height="704"/>
  </tileset>
- <tileset firstgid="73" source="game_objects.tsx"/>
+ <tileset firstgid="73" source="../../game_objects.tsx"/>
  <layer id="1" name="Terrain" width="38" height="25">
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,8,28,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,9,

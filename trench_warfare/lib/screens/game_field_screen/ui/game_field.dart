@@ -40,6 +40,7 @@ import 'package:trench_warfare/shared/data/settings/settings_storage_read.dart';
 import 'package:trench_warfare/shared/data/settings/settings_storage_read_impl.dart';
 import 'package:trench_warfare/shared/utils/extensions.dart';
 import 'package:trench_warfare/shared/logger/logger_library.dart';
+import 'package:trench_warfare/shared/utils/map_file_name_utils.dart';
 
 abstract interface class GameFieldForControls {
   int get gameFieldId;
@@ -88,7 +89,7 @@ abstract interface class GameFieldForControls {
 }
 
 class GameField extends FlameGame
-    with ScaleDetector, TapDetector, HasGameRef
+    with ScaleDetector, TapCallbacks, HasGameReference, MapFileNameUtils
     implements GameFieldForControls {
   late final GameFieldViewModel _viewModel;
 
@@ -149,7 +150,8 @@ class GameField extends FlameGame
       ..anchor = Anchor.center;
 
     _mapComponent = await TiledComponent.load(
-      _mapFileName.replaceFirst('assets/tiles/', ''),
+      getFile(_mapFileName),
+      prefix: getPrefix(_mapFileName),
       ComponentConstants.cellRealSize,
     );
     world.add(_mapComponent);
@@ -195,9 +197,9 @@ class GameField extends FlameGame
 
   @override
   void onAttach() {
-    _audioComposer.setAudioController(gameRef.buildContext?.read<AudioController>());
+    _audioComposer.setAudioController(game.buildContext?.read<AudioController>());
 
-    gameRef.buildContext
+    game.buildContext
         ?.read<ValueNotifier<AppLifecycleState>>()
         .let((n) => _gamePause.attachLifecycleNotifier(n));
   }
@@ -215,13 +217,13 @@ class GameField extends FlameGame
   void onScaleEnd(ScaleEndInfo info) => _gameGesturesComposer.onScaleEnd();
 
   @override
-  void onTapDown(TapDownInfo info) => _gameGesturesComposer.onTapStart(info.eventPosition.global);
+  void onTapDown(TapDownEvent event) => _gameGesturesComposer.onTapStart(event.devicePosition);
 
   @override
-  void onTapUp(TapUpInfo info) => _gameGesturesComposer.onTapEnd();
+  void onTapUp(TapUpEvent event) => _gameGesturesComposer.onTapEnd();
 
   @override
-  void onTapCancel() => _gameGesturesComposer.onTapEnd();
+  void onTapCancel(TapCancelEvent event) => _gameGesturesComposer.onTapEnd();
 
   @override
   void onResortUnits(int cellId, Iterable<String> unitsId, {required bool isCarrier}) =>
@@ -247,7 +249,7 @@ class GameField extends FlameGame
   Future<void> _onGameFieldStateUpdate(GameFieldState state) async {
     if (state is Completed) {
       Logger.info('pop to the cover screen', tag: 'NAVIGATION');
-      gameRef.buildContext?.let((context) => Navigator.of(context).pushNamedAndRemoveUntil(
+      game.buildContext?.let((context) => Navigator.of(context).pushNamedAndRemoveUntil(
             Routes.cover,
             (r) => false,
           ));
