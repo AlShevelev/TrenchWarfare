@@ -11,13 +11,7 @@
 part of audio;
 
 class SoundsPlayer {
-  late final List<AudioPlayer> _players = [
-    AudioPlayer(playerId: 'SOUND_PLAYER_1'),
-    AudioPlayer(playerId: 'SOUND_PLAYER_2'),
-    AudioPlayer(playerId: 'SOUND_PLAYER_3'),
-    AudioPlayer(playerId: 'SOUND_PLAYER_4'),
-    AudioPlayer(playerId: 'SOUND_PLAYER_5'),
-  ];
+  late final List<AudioPlayer> _players;
 
   final _cachedSounds = <SoundType, Uri>{};
 
@@ -30,6 +24,14 @@ class SoundsPlayer {
   SoundsPlayer();
 
   Future<void> init() async {
+    _players = [
+      await _createNewPlayer('SOUND_PLAYER_1'),
+      await _createNewPlayer('SOUND_PLAYER_2'),
+      await _createNewPlayer('SOUND_PLAYER_3'),
+      await _createNewPlayer('SOUND_PLAYER_4'),
+      await _createNewPlayer('SOUND_PLAYER_5'),
+    ];
+
     for (final soundType in SoundType.values) {
       _cachedSounds[soundType] = await AudioCache.instance.load(_getSoundFile(soundType));
     }
@@ -49,9 +51,9 @@ class SoundsPlayer {
   }
 
   /// the [value] is from [SettingsConstants.minValue] to [SettingsConstants.maxValue]
-  void setVolume(double value) {
+  Future<void> setVolume(double value) async {
     for (var player in _players) {
-      player.setVolume(
+      await player.setVolume(
         _musicReduceVolumeFactor * value / SettingsConstants.maxValue,
       );
     }
@@ -69,6 +71,8 @@ class SoundsPlayer {
       _nextPlayerIndex = 0;
     }
 
+    // Logger.debug('Play sound. Player ${player.playerId}; sound: $type', tag: 'SOUND_PLAYER');
+    await player.stop();
     await player.play(UrlSource(_cachedSounds[type].toString()));
   }
 
@@ -104,5 +108,19 @@ class SoundsPlayer {
     };
 
     return 'audio/sounds/$fileName.ogg';
+  }
+
+  Future<AudioPlayer> _createNewPlayer(String id) async {
+    final player = AudioPlayer(playerId: id);
+
+    await player.setAudioContext(
+      AudioContext(
+        android: const AudioContextAndroid(audioFocus: AndroidAudioFocus.none),
+      ),
+    );
+
+    await player.setPlayerMode(PlayerMode.lowLatency);
+
+    return player;
   }
 }

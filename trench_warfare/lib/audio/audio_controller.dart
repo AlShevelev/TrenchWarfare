@@ -57,7 +57,7 @@ class AudioController implements AudioControllerPlaySound, AudioControllerSetVol
   void setMusicVolume(double value) => _musicPlayer.setVolume(value);
 
   @override
-  void setSoundsVolume(double value) => _soundsPlayer.setVolume(value);
+  Future<void> setSoundsVolume(double value) async => await _soundsPlayer.setVolume(value);
 
   void _handleAppLifecycle() {
     switch (_lifecycleNotifier!.value) {
