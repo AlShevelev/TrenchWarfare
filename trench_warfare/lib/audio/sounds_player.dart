@@ -71,7 +71,6 @@ class SoundsPlayer {
       _nextPlayerIndex = 0;
     }
 
-    // Logger.debug('Play sound. Player ${player.playerId}; sound: $type', tag: 'SOUND_PLAYER');
     await player.stop();
     await player.play(UrlSource(_cachedSounds[type].toString()));
   }

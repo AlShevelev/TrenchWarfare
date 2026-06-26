@@ -169,6 +169,7 @@ class GameField extends FlameGame
     _spritesAtlas = await TexturePackerAtlas.load('images/sprites/sprites_atlas');
 
     _audioComposer = AudioComposer();
+    _audioComposer.setAudioController(game.buildContext?.read<AudioController>());
 
     _gameObjectsComposer = GameObjectsComposer(
       _mapComponent,
@@ -193,11 +194,6 @@ class GameField extends FlameGame
 
     overlays.add(GameFieldControls.overlayKey);
     overlays.add(GameFieldControlsAiProgress.overlayKey);
-  }
-
-  @override
-  void onAttach() {
-    _audioComposer.setAudioController(game.buildContext?.read<AudioController>());
 
     game.buildContext
         ?.read<ValueNotifier<AppLifecycleState>>()
