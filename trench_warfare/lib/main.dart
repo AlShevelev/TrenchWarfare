@@ -11,6 +11,9 @@
 import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/widgets.dart' hide Animation, Image;
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 
@@ -18,6 +21,9 @@ import 'app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EasyLocalization.ensureInitialized();
 
   //debugPaintSizeEnabled=true;
@@ -25,10 +31,12 @@ void main() async {
   FlutterError.onError = (details) {
     Logger.error(details.exception.toString(), exception: details.exception, stackTrace: details.stack);
     FlutterError.presentError(details);
+    FirebaseCrashlytics.instance.recordError(details.exception, details.stack, fatal: true);
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
     Logger.error(error.toString(), exception: error, stackTrace: stack);
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
 

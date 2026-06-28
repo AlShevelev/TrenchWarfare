@@ -24,6 +24,8 @@ dependencies:
   xml: ^6.3.0
   audioplayers: ^6.8.0
   package_info_plus: ^10.1.0
+  firebase_crashlytics: ^5.2.4
+  firebase_analytics: ^12.4.3
 
 dev_dependencies:
   flutter_test:
