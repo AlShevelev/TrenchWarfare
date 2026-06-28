@@ -14,6 +14,7 @@ class SoundsPlayer {
   late final List<AudioPlayer> _players;
 
   final _cachedSounds = <SoundType, Uri>{};
+  final _lastPlayTime = <SoundType, int>{};
 
   var _nextPlayerIndex = 0;
 
@@ -60,7 +61,7 @@ class SoundsPlayer {
   }
 
   Future<void> play({required SoundType type}) async {
-    if (_isMuted) {
+    if (_isMuted || !isTimeToPlay(type)) {
       return;
     }
 
@@ -109,6 +110,31 @@ class SoundsPlayer {
     return 'audio/sounds/$fileName.ogg';
   }
 
+  int _getSoundDurationMs(SoundType type) {
+    return switch (type) {
+      SoundType.attackShot => 1438,
+      SoundType.attackExplosion => 1276,
+      SoundType.attackFlame => 2013,
+      SoundType.attackGas => 1495,
+      SoundType.attackFlechettes => 1564,
+      SoundType.attackPropagandaSuccess => 1078,
+      SoundType.attackPropagandaFail => 1033,
+      SoundType.battleResultVictory => 4487,
+      SoundType.battleResultDefeat => 3269,
+      SoundType.battleResultPcCaptured => 2004,
+      SoundType.battleResultManDeath => 1070,
+      SoundType.battleResultMechanicalDestroyed => 1970,
+      SoundType.battleResultShipDestroyed => 2151,
+      SoundType.productionCavalry => 1001,
+      SoundType.productionInfantry => 1108,
+      SoundType.productionMechanical => 1057,
+      SoundType.productionPC => 1203,
+      SoundType.productionShip => 1179,
+      SoundType.buttonClick => 36,
+      SoundType.dingUniversal => 609,
+    };
+  }
+
   Future<AudioPlayer> _createNewPlayer(String id) async {
     final player = AudioPlayer(playerId: id);
 
@@ -121,5 +147,17 @@ class SoundsPlayer {
     await player.setPlayerMode(PlayerMode.lowLatency);
 
     return player;
+  }
+
+  bool isTimeToPlay(SoundType type) {
+    final lastTime = _lastPlayTime[type];
+    final now = DateTime.now().millisecondsSinceEpoch;
+
+    if (lastTime == null || now - lastTime > _getSoundDurationMs(type)) {
+      _lastPlayTime[type] = now;
+      return true;
+    }
+
+    return false;
   }
 }
