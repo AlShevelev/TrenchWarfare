@@ -46,7 +46,7 @@ flutter:
     # maps
     - assets/tiles/
     - assets/tiles/test/
-    - assets/tiles/tutorial/
+    - assets/tiles/tutorial/tutorial/
     - assets/tiles/real/asia/
     - assets/tiles/real/europe/
     - assets/tiles/real/new_world/

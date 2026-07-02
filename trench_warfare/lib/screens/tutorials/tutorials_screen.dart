@@ -8,7 +8,7 @@ import 'package:trench_warfare/screens/tutorials/ui/tutorial_game_field.dart';
 import 'package:trench_warfare/shared/ui_kit/background.dart';
 
 class TutorialsScreen extends StatelessWidget {
-  final String _mapFileName = 'assets/tiles/tutorial/tutorial.tmx';
+  final String _mapFileName = 'assets/tiles/tutorial/tutorial/tutorial.tmx';
 
   final Nation _selectedNation = Nation.greatBritain;
 
