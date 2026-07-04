@@ -3,20 +3,20 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/tutorial/tutorial.tmx",
+    "activeFile": "tiles/real/europe/battle_of_caporetto.tmx",
     "expandedProjectPaths": [
-        "tiles",
-        "tiles/game_objects/atlas",
-        "tiles/templates",
         "tiles/test",
+        "tiles/templates",
+        "tiles/real/europe",
+        "tiles/game_objects/templates",
         "tiles/templates/units",
         "tiles/help",
+        "tiles",
         "tiles/real",
-        "tiles/real/europe",
         "tiles/tutorial",
-        "tiles_source_metadata",
+        "tiles/game_objects/atlas",
         "tiles/game_objects",
-        "tiles/game_objects/templates",
+        "tiles_source_metadata",
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -192,13 +192,13 @@
         "tiles/real/europe/battle_of_caporetto.tmx": {
             "expandedObjectLayers": [
                 5,
-                4,
-                3
+                3,
+                4
             ],
             "scale": 0.6755,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 746.1139896373057,
+                "x": 746.1139896373056,
                 "y": 940.7846039970393
             }
         },
@@ -1389,21 +1389,22 @@
     "map.tileWidth": 74,
     "map.width": 30,
     "openFiles": [
-        "tiles/tutorial/tutorial.tmx"
+        "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/battle_of_caporetto.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/battle_of_caporetto.tmx",
         "tiles/tutorial/tutorial.tmx",
         "tiles/real/europe/the_first_battle_of_the_somme.tmx",
-        "tiles/real/europe/battle_of_caporetto.tmx",
         "tiles/real/europe/battle_of_cantigny.tmx",
         "tiles/real/europe/east_african_campaign.tmx",
         "tiles/real/europe/brusilov_offensive.tmx",
         "tiles/real/europe/first_battle_of_the_marne.tmx",
         "tiles/real/europe/south_west_africa_campaign.tmx",
         "tiles/real/europe/german_spring_offensive.tmx",
-        "tiles/real/europe/gallipoli_campaign.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
         "tiles/real/europe/battle_of_tannenburg.tmx"
     ],

@@ -55,6 +55,8 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = ScreenSize(context);
+
     return StreamBuilder<_SaveLoadScreenState>(
         stream: _viewModel.state,
         builder: (context, value) {
@@ -81,7 +83,10 @@ class _SlotSelectionState extends State<SlotSelection> with ImageLoading {
                           child: Background(
                             imagePath: 'assets/images/screens/shared/old_paper.webp',
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 24,
+                                horizontal: 16 * screenSize.relativeToBaseline,
+                              ),
                               alignment: AlignmentDirectional.topCenter,
                               child: _getList(value.data),
                             ),
