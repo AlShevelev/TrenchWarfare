@@ -11,8 +11,6 @@
 part of game_gesture_composer;
 
 class GameGesturesComposer {
-  static const int longTapDuration = 700; // ms
-
   double _zoom;
 
   final GesturesCamera _camera;
@@ -22,7 +20,7 @@ class GameGesturesComposer {
   late final double _minZoom;
 
   Vector2? _tapPosition;
-  bool _longTapStarted = false;
+  Vector2? _longTapPosition;
 
   late final GameFieldViewModelInput _viewModelInput;
 
@@ -71,7 +69,7 @@ class GameGesturesComposer {
     _viewModelInput.input.onCameraUpdated(_camera.zoom, _camera.position);
   }
 
-  Future<void> onTapStart(Vector2 position) async {
+  void onTapStart(Vector2 position) {
     if (!_viewModelInput.isHumanPlayer) {
       return;
     }
@@ -81,15 +79,20 @@ class GameGesturesComposer {
     }
 
     _tapPosition = _camera.globalPositionToLocal(position);
-    _longTapStarted = false;
+  }
 
-    await Future.delayed(const Duration(milliseconds: longTapDuration));
-
-    final tapPosition = _tapPosition;
-    if (tapPosition != null) {
-      _longTapStarted = true;
-      _viewModelInput.input.onLongClickStart(tapPosition);
+  void onLongTapStart(Vector2 position) {
+    if (!_viewModelInput.isHumanPlayer) {
+      return;
     }
+
+    if (_longTapPosition != null) {
+      return;
+    }
+
+    final longTapPosition = _camera.globalPositionToLocal(position);
+    _longTapPosition = longTapPosition;
+    _viewModelInput.input.onLongClickStart(longTapPosition);
   }
 
   void onTapEnd() {
@@ -97,19 +100,17 @@ class GameGesturesComposer {
       return;
     }
 
-    final position = _tapPosition;
-    _tapPosition = null;
+    final tapPosition = _tapPosition;
+    final longTapPosition = _longTapPosition;
 
-    if (position != null) {
-      if (_longTapStarted) {
-        _viewModelInput.input.onLongClickEnd();
-      } else {
-        _viewModelInput.input.onClick(position);
-      }
+    if (longTapPosition != null) {
+      _viewModelInput.input.onLongClickEnd();
+    } else if (tapPosition != null) {
+      _viewModelInput.input.onClick(tapPosition);
     }
 
     _tapPosition = null;
-    _longTapStarted = false;
+    _longTapPosition = null;
   }
 
   Future<void> onUpdateGameEvent(UpdateGameEvent event) async {

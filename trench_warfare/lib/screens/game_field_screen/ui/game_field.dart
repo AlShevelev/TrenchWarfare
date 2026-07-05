@@ -213,7 +213,10 @@ class GameField extends FlameGame
   void onScaleEnd(ScaleEndInfo info) => _gameGesturesComposer.onScaleEnd();
 
   @override
-  void onTapDown(TapDownEvent event) => _gameGesturesComposer.onTapStart(event.devicePosition);
+  void onTapDown(TapDownEvent event) => _gameGesturesComposer.onTapStart(event.localPosition);
+
+  @override
+  void onLongTapDown(TapDownEvent event) => _gameGesturesComposer.onLongTapStart(event.localPosition);
 
   @override
   void onTapUp(TapUpEvent event) => _gameGesturesComposer.onTapEnd();
