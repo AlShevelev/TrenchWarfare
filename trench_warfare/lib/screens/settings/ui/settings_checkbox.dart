@@ -67,6 +67,8 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
             textAlign: TextAlign.start,
             widget._title,
             style: AppTypography.s20w600,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
           Image(
             image: _value ? widget._checkedIcon : widget._uncheckedIcon,

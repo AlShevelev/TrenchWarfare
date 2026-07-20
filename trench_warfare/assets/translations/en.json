@@ -141,7 +141,7 @@
   "settings_enemy_units": "Enemy units speed",
   "settings_title": "Settings",
   "settings_show_borders": "Show borders",
-  "settings_show_debug_info": "Show debug info",
+  "settings_show_debug_info": "Show debug",
 
   "tutorial_step_1": "Welcome to the front, General! My name is Lieutenant Elena; I am your personal assistant.\n\nLet me briefly bring you up to speed.",
   "tutorial_step_2": "This is the panel displaying your resources. You have two types of resources at your disposal: money and industrial power.",
