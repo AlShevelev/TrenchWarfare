@@ -103,7 +103,10 @@ final class GameObjectCell extends GameObjectComponentBase {
       return;
     }
 
-    await _addSprite(SpriteAtlasNames.getNationBanner(_cell.nation!), root: root);
+    await _addSprite(
+      SpriteAtlasNames.getNationBanner(_cell.nation!),
+      root: root,
+    );
   }
 
   Future<void> _addPathSprites({Component? root}) async {
