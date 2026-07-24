@@ -8,12 +8,15 @@
  * al.e.shevelev@gmail.com
  */
 
+import 'package:easy_localization/easy_localization.dart' as localization;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trench_warfare/app/theme/colors.dart';
 import 'package:trench_warfare/app/theme/typography.dart';
 import 'package:trench_warfare/audio/audio_library.dart';
+import 'package:trench_warfare/core/localization/app_locale.dart';
 import 'package:trench_warfare/shared/ui_kit/stroked_text.dart';
+import 'package:trench_warfare/shared/utils/screen_size/screen_size.dart';
 
 class CoverScreenButton extends StatelessWidget {
   final String text;
@@ -29,6 +32,13 @@ class CoverScreenButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final audioController = context.read<AudioController>();
+
+    final locale = AppLocale.fromString((localization.EasyLocalization.of(context)?.locale.toString())!);
+    final screenSize = ScreenSize(context);
+
+    final textStyle = locale == AppLocale.es && !screenSize.isLong && !screenSize.isTablet
+        ? AppTypography.s18w600
+        : AppTypography.s20w600;
 
     return Material(
       child: InkWell(
@@ -55,7 +65,7 @@ class CoverScreenButton extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: StrokedText(
                 text: text,
-                style: AppTypography.s20w600,
+                style: textStyle,
                 textColor: AppColors.white,
                 strokeColor: AppColors.darkGray,
                 strokeWidth: 5,

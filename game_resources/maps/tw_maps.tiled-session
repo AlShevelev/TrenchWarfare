@@ -3,21 +3,21 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/battle_of_caporetto.tmx",
+    "activeFile": "tiles/real/europe/the_first_battle_of_the_somme.tmx",
     "expandedProjectPaths": [
-        "tiles/test",
-        "tiles/templates",
-        "tiles/real/europe",
-        "tiles/game_objects/templates",
-        "tiles/templates/units",
-        "tiles/help",
-        "tiles",
-        "tiles/real",
         "tiles/tutorial",
-        "tiles/game_objects/atlas",
-        "tiles/game_objects",
+        "tiles",
+        ".",
         "tiles_source_metadata",
-        "."
+        "tiles/game_objects/templates",
+        "tiles/game_objects/atlas",
+        "tiles/real/europe",
+        "tiles/real",
+        "tiles/templates",
+        "tiles/test",
+        "tiles/templates/units",
+        "tiles/game_objects",
+        "tiles/help"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -156,8 +156,8 @@
         },
         "tiles/real/europe/battle_of_amiens.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 1.1038,
             "selectedLayer": 1,
@@ -179,8 +179,8 @@
             "scale": 1.0607,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 170.64202884887337,
-                "y": 527.481851607429
+                "x": 171.58480248892243,
+                "y": 336.0988026774772
             }
         },
         "tiles/real/europe/battle_of_cantigny.tmx#TempBackground": {
@@ -192,8 +192,8 @@
         "tiles/real/europe/battle_of_caporetto.tmx": {
             "expandedObjectLayers": [
                 5,
-                3,
-                4
+                4,
+                3
             ],
             "scale": 0.6755,
             "selectedLayer": 1,
@@ -215,7 +215,7 @@
             "scale": 0.918,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 467.3202614379085,
+                "x": 467.32026143790847,
                 "y": 468.954248366013
             }
         },
@@ -232,7 +232,7 @@
             "scale": 0.6668,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 710.8578284343133,
+                "x": 710.8578284343132,
                 "y": 975.5548890221957
             }
         },
@@ -302,7 +302,7 @@
             "scale": 0.8324,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 708.7938491110043,
+                "x": 708.7938491110042,
                 "y": 841.5425276309466
             }
         },
@@ -314,14 +314,14 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 0.7278,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 809.2882660071448,
-                "y": 1127.3701566364387
+                "x": 1053.8609508106624,
+                "y": 815.4712833195933
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
@@ -338,7 +338,7 @@
             "scale": 0.7326,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 596.5055965055966,
+                "x": 596.5055965055965,
                 "y": 889.2983892983893
             }
         },
@@ -386,7 +386,7 @@
             "scale": 0.8682,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 696.8440451508869,
+                "x": 696.8440451508868,
                 "y": 816.0562082469478
             }
         },
@@ -1389,24 +1389,23 @@
     "map.tileWidth": 74,
     "map.width": 30,
     "openFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/battle_of_caporetto.tmx"
+        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/battle_of_caporetto.tmx",
-        "tiles/tutorial/tutorial.tmx",
         "tiles/real/europe/the_first_battle_of_the_somme.tmx",
-        "tiles/real/europe/battle_of_cantigny.tmx",
-        "tiles/real/europe/east_african_campaign.tmx",
-        "tiles/real/europe/brusilov_offensive.tmx",
-        "tiles/real/europe/first_battle_of_the_marne.tmx",
         "tiles/real/europe/south_west_africa_campaign.tmx",
         "tiles/real/europe/german_spring_offensive.tmx",
+        "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/first_battle_of_the_marne.tmx",
+        "tiles/real/europe/east_african_campaign.tmx",
+        "tiles/real/europe/brusilov_offensive.tmx",
         "tiles/real/europe/battle_of_verdun.tmx",
-        "tiles/real/europe/battle_of_tannenburg.tmx"
+        "tiles/real/europe/battle_of_tannenburg.tmx",
+        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/battle_of_caporetto.tmx",
+        "tiles/real/europe/battle_of_amiens.tmx"
     ],
     "resizeMap.removeObjects": false,
     "textEdit.monospace": true,

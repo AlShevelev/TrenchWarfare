@@ -10,7 +10,8 @@
 
 enum AppLocale {
   en,
-  ru;
+  ru,
+  es;
 
   static AppLocale fromString(String name) => AppLocale.values.where((v) => v.name == name).first;
 }
