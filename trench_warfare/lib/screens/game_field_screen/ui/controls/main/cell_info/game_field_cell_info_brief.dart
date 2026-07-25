@@ -13,7 +13,7 @@ part of game_field_cell_info;
 class GameFieldCellInfoBrief extends StatelessWidget {
   final GameFieldControlsCellInfo cellInfo;
 
-  static const _width = 192.0;
+  static const _width = 212.0;
   static const _height = 52.0;
 
   final double _left;
