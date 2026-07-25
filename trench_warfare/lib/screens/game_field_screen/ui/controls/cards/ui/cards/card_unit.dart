@@ -61,6 +61,7 @@ class _CardUnit extends _CardBase<UnitType> {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 10.0,
       children: [
         _getFeature(card.maxHealth.toString(), '${_pathToImages}icon_health.webp'),
         _getFeature(card.attack.toString(), '${_pathToImages}icon_attack.webp'),
@@ -72,40 +73,32 @@ class _CardUnit extends _CardBase<UnitType> {
   }
 
   Widget _getFeature(String text, String icon) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        10,
-        0,
-        10,
-        0,
-      ),
-      child: Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          Image.asset(
-            icon,
-            scale: 1.15,
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Image.asset(
+          icon,
+          scale: 1.15,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: AppTypography.s22w600.fontSize,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 3
+              ..color = AppColors.black,
           ),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: AppTypography.s22w600.fontSize,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 3
-                ..color = AppColors.black,
-            ),
+        ),
+        // Solid text as fill.
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: AppTypography.s22w600.fontSize,
+            color: AppColors.white,
           ),
-          // Solid text as fill.
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: AppTypography.s22w600.fontSize,
-              color: AppColors.white,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
