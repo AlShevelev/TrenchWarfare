@@ -54,7 +54,7 @@ class MainControlsWidget extends StatelessWidget {
               ? 2 * CornerButton.size + 3 * generalPadding
               : CornerButton.size + 2 * generalPadding,
           image: const AssetImage('${imagesPrefix}button_next_unit.webp'),
-          showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.dismissUnit,
+          showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.nextActiveUnit,
           onPress: () {
             _gameField.onNextEnabledUnitButtonClick();
           },

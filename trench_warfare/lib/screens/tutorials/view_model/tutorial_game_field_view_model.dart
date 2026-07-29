@@ -172,13 +172,23 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         {
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
-              border: GameFieldControlType.cards,
+              border: GameFieldControlType.nextActiveUnit,
               panelOnTop: true,
               textLocaleCode: 'tutorial_step_11',
             ),
           ));
         }
       case 12:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: GameFieldControlType.cards,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_12',
+            ),
+          ));
+        }
+      case 13:
         {
           _moveToCell(14, 15);
 
@@ -202,11 +212,11 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             tutorialInfo: GameFieldTutorialInfo(
               border: null,
               panelOnTop: false,
-              textLocaleCode: 'tutorial_step_12',
+              textLocaleCode: 'tutorial_step_13',
             ),
           ));
         }
-      case 13:
+      case 14:
         {
           _moveToCell(14, 25);
 
@@ -227,21 +237,21 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             tutorialInfo: GameFieldTutorialInfo(
               border: null,
               panelOnTop: true,
-              textLocaleCode: 'tutorial_step_13',
-            ),
-          ));
-        }
-      case 14:
-        {
-          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
-            GameFieldTutorialInfo(
-              border: null,
-              panelOnTop: true,
               textLocaleCode: 'tutorial_step_14',
             ),
           ));
         }
       case 15:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: true,
+              textLocaleCode: 'tutorial_step_15',
+            ),
+          ));
+        }
+      case 16:
         {
           _moveToCell(25, 45);
 
@@ -254,16 +264,6 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             showDismissButton: true,
             showNextActiveUnitButton: true,
             tutorialInfo: GameFieldTutorialInfo(
-              border: null,
-              panelOnTop: false,
-              textLocaleCode: 'tutorial_step_15',
-            ),
-          ));
-        }
-      case 16:
-        {
-          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
-            GameFieldTutorialInfo(
               border: null,
               panelOnTop: false,
               textLocaleCode: 'tutorial_step_16',
@@ -292,8 +292,6 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 19:
         {
-          _moveToCell(15, 35);
-
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -304,7 +302,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 20:
         {
-          _moveToCell(44, 15);
+          _moveToCell(15, 35);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -316,6 +314,8 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 21:
         {
+          _moveToCell(44, 15);
+
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -336,8 +336,6 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 23:
         {
-          _moveToCell(24, 13);
-
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -348,7 +346,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 24:
         {
-          _moveToCell(24, 15);
+          _moveToCell(24, 13);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -360,7 +358,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 25:
         {
-          _moveToCell(14, 45);
+          _moveToCell(24, 15);
 
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
@@ -372,6 +370,8 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 26:
         {
+          _moveToCell(14, 45);
+
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -382,7 +382,6 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 27:
         {
-          _moveToCell(25, 25);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -393,6 +392,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 28:
         {
+          _moveToCell(25, 25);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -413,7 +413,6 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 30:
         {
-          _moveToCell(45, 45);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -424,6 +423,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
         }
       case 31:
         {
+          _moveToCell(45, 45);
           _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
             GameFieldTutorialInfo(
               border: null,
@@ -443,6 +443,16 @@ class TutorialGameFieldViewModel extends ViewModelBase {
           ));
         }
       case 33:
+        {
+          _controlsState.update((_controlsState.current as MainControls).setTutorialInfo(
+            GameFieldTutorialInfo(
+              border: null,
+              panelOnTop: false,
+              textLocaleCode: 'tutorial_step_33',
+            ),
+          ));
+        }
+      case 34:
         {
           _complete();
         }

@@ -5,5 +5,6 @@ enum GameFieldControlType {
   menu,
   nextTurn,
   cards,
-  dismissUnit
+  dismissUnit,
+  nextActiveUnit,
 }
