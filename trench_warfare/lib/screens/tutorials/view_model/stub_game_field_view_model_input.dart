@@ -134,4 +134,9 @@ class StubGameFieldViewModelInput implements GameFieldViewModelInput, PlayerInpu
   void onAnimationComplete() {
     // do nothing here
   }
+
+  @override
+  void onNextEnabledUnitButtonClick() {
+    // do nothing here
+  }
 }

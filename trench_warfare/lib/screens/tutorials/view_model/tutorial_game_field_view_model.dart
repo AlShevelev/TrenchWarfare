@@ -198,6 +198,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             carrierInfo: null,
             nation: Nation.greatBritain,
             showDismissButton: true,
+            showNextActiveUnitButton: true,
             tutorialInfo: GameFieldTutorialInfo(
               border: null,
               panelOnTop: false,
@@ -222,6 +223,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             carrierInfo: null,
             nation: Nation.greatBritain,
             showDismissButton: true,
+            showNextActiveUnitButton: true,
             tutorialInfo: GameFieldTutorialInfo(
               border: null,
               panelOnTop: true,
@@ -250,6 +252,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
             carrierInfo: null,
             nation: Nation.greatBritain,
             showDismissButton: true,
+            showNextActiveUnitButton: true,
             tutorialInfo: GameFieldTutorialInfo(
               border: null,
               panelOnTop: false,
@@ -459,6 +462,7 @@ class TutorialGameFieldViewModel extends ViewModelBase {
       carrierInfo: null,
       nation: Nation.greatBritain,
       showDismissButton: true,
+      showNextActiveUnitButton: true,
       tutorialInfo: GameFieldTutorialInfo(
         border: null,
         panelOnTop: false,

@@ -25,5 +25,5 @@ class FromWaitingForEndOfPathOnEndOfTurnButtonClick {
     return TransitionUtils(_context).processEndOfTurn();
   }
 
-  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
+  void _hideArmyPanel() => TransitionUtils(_context).closeAllUIPopups();
 }

@@ -21,15 +21,18 @@ class TransitionUtils {
 
   TransitionUtils(GameFieldStateMachineContext context) : _context = context;
 
-  void closeUI() {
-    _context.controlsState.update(MainControls(
-      totalSum: _context.money.totalSum,
-      cellInfo: null,
-      armyInfo: null,
-      carrierInfo: null,
-      nation: _context.myNation,
-      showDismissButton: false,
-    ));
+  void closeAllUIPopups({bool? showNextActiveUnitButton}) {
+    _context.controlsState.update(
+      MainControls(
+        totalSum: _context.money.totalSum,
+        cellInfo: null,
+        armyInfo: null,
+        carrierInfo: null,
+        nation: _context.myNation,
+        showDismissButton: false,
+        showNextActiveUnitButton: showNextActiveUnitButton ?? hasActiveUnit(),
+      ),
+    );
   }
 
   Iterable<GameFieldCellRead> calculatePath({
@@ -76,4 +79,7 @@ class TransitionUtils {
       return TurnEndConfirmationNeeded(activeUnitCell);
     }
   }
+
+  bool hasActiveUnit() => _context.gameField.cells.any((c) =>
+      c.nation == _context.myNation && c.units.isNotEmpty && c.units.first.state != UnitState.disabled);
 }

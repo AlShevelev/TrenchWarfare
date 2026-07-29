@@ -34,8 +34,6 @@ class FromPathIsShownOnResortUnit {
     } else {
       if (activeUnit != null && activeUnit.state == UnitState.active) {
         activeUnit.setState(UnitState.enabled);
-
-        TransitionUtils(_context).closeUI();
       }
 
       cell.resortUnits(unitsId);
@@ -44,6 +42,8 @@ class FromPathIsShownOnResortUnit {
     for (var pathCell in pathToProcess) {
       pathCell.setPathItem(null);
     }
+
+    TransitionUtils(_context).closeAllUIPopups();
 
     _context.updateGameObjectsEvent.update(pathToProcess.map((c) => UpdateCell(c, updateBorderCells: [])));
 

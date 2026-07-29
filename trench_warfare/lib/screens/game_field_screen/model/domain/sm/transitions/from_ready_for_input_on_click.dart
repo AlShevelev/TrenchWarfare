@@ -59,6 +59,7 @@ class FromReadyForInputOnClick {
         carrierInfo: carrierInfo,
         nation: _context.myNation,
         showDismissButton: true,
+        showNextActiveUnitButton: true,
       ),
     );
 

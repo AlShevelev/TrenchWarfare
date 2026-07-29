@@ -26,9 +26,6 @@ class FromDisbandUnitConfirmationNeededOnUserConfirmed {
         _pathOfUnit = pathOfUnit;
 
   State process() {
-    // Hid the dialog
-    TransitionUtils(_context).closeUI();
-
     // Disbanded the unit
     (_cellWithUnitToDisband as GameFieldCell).removeActiveUnit();
 
@@ -42,6 +39,9 @@ class FromDisbandUnitConfirmationNeededOnUserConfirmed {
         : _pathOfUnit.map((c) => UpdateCell(c, updateBorderCells: [])).toList(growable: false);
 
     _context.updateGameObjectsEvent.update(updateGameFieldEvents);
+
+    // Hid the dialog
+    TransitionUtils(_context).closeAllUIPopups();
 
     return ReadyForInput();
   }

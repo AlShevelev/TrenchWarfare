@@ -16,7 +16,7 @@ class FromCardSelectingOnCardsSelectionCancelled {
   FromCardSelectingOnCardsSelectionCancelled(this._context);
 
   State process() {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     return ReadyForInput();
   }

@@ -39,6 +39,9 @@ class GameFieldStateMachineContext {
 
   final UnitUpdateResultBridge? unitUpdateResultBridge;
 
+  /// Row and col of the last cell with an active unit
+  Tuple2<int, int> nextActiveUnitLastSearchCell = Tuple2(0, 0);
+
   GameFieldStateMachineContext({
     required this.gameField,
     required this.myNation,

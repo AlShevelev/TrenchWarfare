@@ -13,6 +13,8 @@ part of game_field_sm;
 class FromMovingInProgressOnAnimationCompleted {
   final GameFieldStateMachineContext _context;
 
+  late final TransitionUtils _transitionUtils = TransitionUtils(_context);
+
   FromMovingInProgressOnAnimationCompleted(this._context);
 
   State process(bool isVictory, Nation? defeated, Iterable<GameFieldCellRead> cellsToUpdate) {
@@ -50,6 +52,9 @@ class FromMovingInProgressOnAnimationCompleted {
     }
 
     _context.money.recalculateIncomeAndExpenses();
+
+    _transitionUtils.closeAllUIPopups(); // to update showNextActiveUnitButton state
+
     return ReadyForInput();
   }
 }

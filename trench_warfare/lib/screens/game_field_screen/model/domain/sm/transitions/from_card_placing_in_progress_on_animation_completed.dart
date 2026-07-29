@@ -59,7 +59,7 @@ class FromCardPlacingInProgressOnAnimationCompleted {
 
       return CardPlacing(_card, _newInactiveCells);
     } else {
-      TransitionUtils(_context).closeUI();
+      TransitionUtils(_context).closeAllUIPopups();
 
       if (!_context.isAI) {
         _context.updateGameObjectsEvent.update([

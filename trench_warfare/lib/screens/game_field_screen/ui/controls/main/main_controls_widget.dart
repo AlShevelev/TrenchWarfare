@@ -43,7 +43,23 @@ class MainControlsWidget extends StatelessWidget {
 
     final List<Widget> widgets = [];
 
+    const imagesPrefix = 'assets/images/screens/game_field/main/';
+
     widgets.addAll([
+      // Next active unit button
+      if (state.showNextActiveUnitButton)
+        CornerButton(
+          left: generalPadding,
+          bottom: state.showDismissButton
+              ? 2 * CornerButton.size + 3 * generalPadding
+              : CornerButton.size + 2 * generalPadding,
+          image: const AssetImage('${imagesPrefix}button_next_unit.webp'),
+          showTutorialBorder: state.tutorialInfo?.border == GameFieldControlType.dismissUnit,
+          onPress: () {
+            _gameField.onNextEnabledUnitButtonClick();
+          },
+        ),
+
       // Disband unit button
       if (state.showDismissButton)
         CornerButton(
@@ -138,11 +154,9 @@ class MainControlsWidget extends StatelessWidget {
 
     final tutorialInfo = state.tutorialInfo;
     if (tutorialInfo != null) {
-      widgets.add(
-          TutorialAssistantGirl(
-            onPress: () => _gameField.onUserConfirmed(),
-          )
-      );
+      widgets.add(TutorialAssistantGirl(
+        onPress: () => _gameField.onUserConfirmed(),
+      ));
 
       widgets.add(TutorialInfoPanel(
         isBottom: tutorialInfo.panelOnTop == false,

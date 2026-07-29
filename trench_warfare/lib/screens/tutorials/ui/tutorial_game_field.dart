@@ -242,4 +242,9 @@ class TutorialGameField extends FlameGame
   void onUserDeclined() {
     // not implemented for the tutorial
   }
+
+  @override
+  void onNextEnabledUnitButtonClick() {
+    // not implemented for the tutorial
+  }
 }

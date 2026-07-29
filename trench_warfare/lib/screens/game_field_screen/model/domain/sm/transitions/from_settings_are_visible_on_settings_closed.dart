@@ -16,7 +16,7 @@ class FromSettingsAreVisibleOnSettingsClosed {
   FromSettingsAreVisibleOnSettingsClosed(this._context);
 
   State process(SettingsResult result) {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
     
     _context.animationTimeFacade.updateTime(result);
 

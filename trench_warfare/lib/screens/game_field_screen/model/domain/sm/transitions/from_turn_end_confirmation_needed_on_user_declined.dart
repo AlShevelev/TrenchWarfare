@@ -16,7 +16,7 @@ class FromTurnEndConfirmationNeededOnUserDeclined {
   FromTurnEndConfirmationNeededOnUserDeclined(this._context);
 
   State process(GameFieldCellRead cellToMoveCamera) {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     //_context.updateGameObjectsEvent.update([MoveCameraToCell(cellToMoveCamera)]);
 

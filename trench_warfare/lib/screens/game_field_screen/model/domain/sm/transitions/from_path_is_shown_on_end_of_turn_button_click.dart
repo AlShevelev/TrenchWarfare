@@ -38,5 +38,5 @@ class FromPathIsShownOnEndOfTurnButtonClick {
     _context.updateGameObjectsEvent.update(path.map((c) => UpdateCell(c, updateBorderCells: [])));
   }
 
-  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
+  void _hideArmyPanel() => TransitionUtils(_context).closeAllUIPopups();
 }

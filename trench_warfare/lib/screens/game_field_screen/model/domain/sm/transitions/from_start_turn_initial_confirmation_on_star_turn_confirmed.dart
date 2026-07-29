@@ -18,7 +18,7 @@ class FromStartTurnInitialConfirmationOnStarTurnConfirmed {
   FromStartTurnInitialConfirmationOnStarTurnConfirmed(this._context);
 
   State process() {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     List<UpdateGameEvent> events = [];
 

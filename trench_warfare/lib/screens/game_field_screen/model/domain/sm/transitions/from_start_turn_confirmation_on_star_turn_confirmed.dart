@@ -65,16 +65,7 @@ class FromStartTurnConfirmationOnStarTurnConfirmed {
 
     _context.updateGameObjectsEvent.update(events);
 
-    _context.controlsState.update(
-      MainControls(
-        totalSum: _context.money.totalSum,
-        cellInfo: null,
-        armyInfo: null,
-        carrierInfo: null,
-        nation: _context.myNation,
-        showDismissButton: false,
-      ),
-    );
+    _transitionUtils.closeAllUIPopups();
 
     return ReadyForInput();
   }

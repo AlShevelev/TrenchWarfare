@@ -20,7 +20,7 @@ class FromSaveSlotSelectionOnSaveSlotSelected {
   State process() {
     _context.modelCallback.saveGame(_slot);
 
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     return ReadyForInput();
   }

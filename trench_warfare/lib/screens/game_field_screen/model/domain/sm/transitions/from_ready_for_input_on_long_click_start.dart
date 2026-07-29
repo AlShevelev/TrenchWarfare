@@ -31,6 +31,7 @@ class FromReadyForInputOnLongClickStart {
         carrierInfo: null,
         nation: _context.myNation,
         showDismissButton: false,
+        showNextActiveUnitButton: false,
       ),
     );
 

@@ -86,6 +86,8 @@ abstract interface class GameFieldForControls {
   void onUserDeclined();
 
   void onDisbandUnitButtonClick();
+
+  void onNextEnabledUnitButtonClick();
 }
 
 class GameField extends FlameGame
@@ -309,4 +311,7 @@ class GameField extends FlameGame
 
   @override
   void onDisbandUnitButtonClick() => _viewModel.input.onDisbandUnitButtonClick();
+
+  @override
+  void onNextEnabledUnitButtonClick() => _viewModel.input.onNextEnabledUnitButtonClick();
 }

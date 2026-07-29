@@ -16,7 +16,7 @@ class FromCardPlacingOnCardPlacingCancelled {
   FromCardPlacingOnCardPlacingCancelled(GameFieldStateMachineContext context): _context = context;
 
   State process(Map<int, GameFieldCellRead> cellsImpossibleToBuild) {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     if (!_context.isAI) {
       _context.updateGameObjectsEvent.update([

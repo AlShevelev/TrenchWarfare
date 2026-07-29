@@ -16,7 +16,7 @@ class FromMenuIsVisibleOnPhoneBackAction {
   FromMenuIsVisibleOnPhoneBackAction(GameFieldStateMachineContext context) : _context = context;
 
   State process() {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     return ReadyForInput();
   }

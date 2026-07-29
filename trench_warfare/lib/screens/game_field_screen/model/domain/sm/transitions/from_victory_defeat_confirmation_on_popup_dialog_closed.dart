@@ -16,7 +16,7 @@ class FromVictoryDefeatConfirmationOnPopupDialogClosed {
   FromVictoryDefeatConfirmationOnPopupDialogClosed(this._context);
 
   State process(bool isVictory, Iterable<GameFieldCellRead> cellsToUpdate) {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
 
     if (isVictory) {
       if (!_context.isAI) {

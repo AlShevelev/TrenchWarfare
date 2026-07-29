@@ -16,7 +16,7 @@ class FromTurnEndConfirmationNeededOnUserConfirmed {
   FromTurnEndConfirmationNeededOnUserConfirmed(this._context);
 
   State process() {
-    TransitionUtils(_context).closeUI();
+    TransitionUtils(_context).closeAllUIPopups();
     return TurnIsEnded();
   }
 }

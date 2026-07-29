@@ -32,11 +32,11 @@ class FromWaitingForEndOfPathOnResortUnit {
     } else {
       if (activeUnit != null && activeUnit.state == UnitState.active) {
         activeUnit.setState(UnitState.enabled);
-
-        TransitionUtils(_context).closeUI();
       }
 
       cell.resortUnits(unitsId);
+
+      TransitionUtils(_context).closeAllUIPopups();
 
       _context.updateGameObjectsEvent.update([UpdateCell(cell, updateBorderCells: [])]);
 

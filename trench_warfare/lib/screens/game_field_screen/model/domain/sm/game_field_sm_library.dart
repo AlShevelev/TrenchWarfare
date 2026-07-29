@@ -51,12 +51,14 @@ import 'package:trench_warfare/shared/data/settings/settings_storage_facade.dart
 import 'package:trench_warfare/shared/logger/logger_library.dart';
 import 'package:trench_warfare/shared/utils/random_gen.dart';
 import 'package:trench_warfare/shared/utils/range.dart';
+import 'package:tuple/tuple.dart';
 
 part 'game_field_sm.dart';
 part 'game_field_sm_context.dart';
 part 'event.dart';
 part 'result.dart';
 part 'state.dart';
+part 'transitions/from_any_state_on_next_active_unit_button_click.dart';
 part 'transitions/from_card_placing_on_card_placing_cancelled.dart';
 part 'transitions/from_card_placing_on_cell_clicked.dart';
 part 'transitions/from_card_placing_in_progress_on_animation_completed.dart';

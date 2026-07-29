@@ -86,6 +86,8 @@ class GameFieldStateMachine {
           OnEndOfTurnButtonClick() => FromReadyForInputOnEndOfTurnButtonClick(_context).process(),
           OnMenuButtonClick() => FromReadyForInputOnMenuButtonClick(_context).process(),
           OnPhoneBackAction() => FromReadyForInputOnMenuButtonClick(_context).process(),
+          OnNextActiveUnitButtonClick() =>
+            FromAnyStateOnNextActiveUnitButtonClick(_context).process(_currentState),
           _ => _currentState,
         },
       WaitingForEndOfPath(startPathCell: var startPathCell) => switch (event) {
@@ -102,6 +104,8 @@ class GameFieldStateMachine {
           OnPhoneBackAction() => FromWaitingForEndOfPathOnMenuButtonClick(_context, startPathCell).process(),
           OnDisbandUnitButtonClick() =>
             FromWaitingForEndOfPathOnDisbandUnitButtonClick(_context, startPathCell).process(),
+          OnNextActiveUnitButtonClick() =>
+            FromAnyStateOnNextActiveUnitButtonClick(_context).process(_currentState),
           _ => _currentState,
         },
       PathIsShown(path: var path) => switch (event) {
@@ -117,6 +121,8 @@ class GameFieldStateMachine {
           OnMenuButtonClick() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
           OnPhoneBackAction() => FromPathIsShownOnMenuButtonClick(_context, path).process(),
           OnDisbandUnitButtonClick() => FromPathIsShownOnDisbandUnitButtonClick(_context, path).process(),
+          OnNextActiveUnitButtonClick() =>
+            FromAnyStateOnNextActiveUnitButtonClick(_context).process(_currentState),
           _ => _currentState,
         },
       MovingInProgress(

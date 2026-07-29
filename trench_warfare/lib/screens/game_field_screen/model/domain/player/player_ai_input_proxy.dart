@@ -135,4 +135,9 @@ class PlayerAiInputProxy extends PlayerInputProxy implements PlayerMoney {
   void onDisbandUnitButtonClick() {
     // do nothing
   }
+
+  @override
+  void onNextEnabledUnitButtonClick() {
+    // do nothing
+  }
 }

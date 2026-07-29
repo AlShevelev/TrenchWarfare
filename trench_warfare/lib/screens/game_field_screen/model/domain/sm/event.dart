@@ -165,3 +165,11 @@ class OnDisbandUnitButtonClick implements Event {
   @override
   String toString() => 'ON_DISBAND_UNIT_BUTTON_CLICK';
 }
+
+class OnNextActiveUnitButtonClick implements Event {
+  OnNextActiveUnitButtonClick();
+
+  @override
+  String toString() => 'ON_NEXT_ACTIVE_UNIT_BUTTON_CLICK';
+}
+

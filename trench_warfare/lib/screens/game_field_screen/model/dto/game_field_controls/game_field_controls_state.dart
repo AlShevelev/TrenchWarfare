@@ -25,6 +25,8 @@ class MainControls extends GameFieldControlsState {
 
   final bool showDismissButton;
 
+  final bool showNextActiveUnitButton;
+
   final GameFieldTutorialInfo? tutorialInfo;
 
   MainControls({
@@ -34,6 +36,7 @@ class MainControls extends GameFieldControlsState {
     required this.carrierInfo,
     required this.nation,
     required this.showDismissButton,
+    required this.showNextActiveUnitButton,
     this.tutorialInfo,
   });
 
@@ -44,6 +47,7 @@ class MainControls extends GameFieldControlsState {
         carrierInfo: carrierInfo,
         nation: nation,
         showDismissButton: showDismissButton,
+        showNextActiveUnitButton: showNextActiveUnitButton,
         tutorialInfo: tutorialInfo,
       );
 
@@ -54,8 +58,20 @@ class MainControls extends GameFieldControlsState {
         carrierInfo: carrierInfo,
         nation: nation,
         showDismissButton: showDismissButton,
+        showNextActiveUnitButton: showNextActiveUnitButton,
         tutorialInfo: tutorialInfo,
       );
+
+  MainControls setShowNextActiveUnitButton(bool showNextActiveUnitButton) => MainControls(
+    totalSum: totalSum,
+    cellInfo: cellInfo,
+    armyInfo: armyInfo,
+    carrierInfo: carrierInfo,
+    nation: nation,
+    showDismissButton: showDismissButton,
+    showNextActiveUnitButton: showNextActiveUnitButton,
+    tutorialInfo: tutorialInfo,
+  );
 
   MainControls setTutorialInfo(GameFieldTutorialInfo? tutorialInfo) => MainControls(
     totalSum: totalSum,
@@ -64,6 +80,7 @@ class MainControls extends GameFieldControlsState {
     carrierInfo: carrierInfo,
     nation: nation,
     showDismissButton: showDismissButton,
+    showNextActiveUnitButton: showNextActiveUnitButton,
     tutorialInfo: tutorialInfo,
   );
 }

@@ -63,4 +63,6 @@ abstract interface class PlayerInput {
   void onUserDeclined();
 
   void onDisbandUnitButtonClick();
+
+  void onNextEnabledUnitButtonClick();
 }

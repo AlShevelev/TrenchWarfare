@@ -26,13 +26,13 @@ class FromPathIsShownOnClick {
 
     // Click to the unit cell - reset the selection
     if (cell == pathToProcess.first) {
-      _hideArmyPanel();
+      TransitionUtils(_context).closeAllUIPopups();
       return _resetPathAndEnableUnit(pathToProcess, unit);
     }
 
     // Click to the last cell of the path - move the unit
     if (cell == pathToProcess.last) {
-      _hideArmyPanel();
+      TransitionUtils(_context).closeAllUIPopups(showNextActiveUnitButton: false);
 
       _context.updateGameObjectsEvent.update([_getSoundForUnit(unit)]);
 
@@ -87,8 +87,6 @@ class FromPathIsShownOnClick {
     _resetPath(path);
     return ReadyForInput();
   }
-
-  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
 
   PlaySound _getSoundForUnit(Unit unit) => PlaySound(type: unit.getProductionSoundType());
 }

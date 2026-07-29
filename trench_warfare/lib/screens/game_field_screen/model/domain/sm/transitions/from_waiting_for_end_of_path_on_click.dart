@@ -55,5 +55,5 @@ class FromWaitingForEndOfPathOnClick {
     return PathIsShown(estimatedPath);
   }
 
-  void _hideArmyPanel() => TransitionUtils(_context).closeUI();
+  void _hideArmyPanel() => TransitionUtils(_context).closeAllUIPopups();
 }
