@@ -8,20 +8,16 @@ class FromAnyStateOnNextActiveUnitButtonClick {
   State process(State currentState) {
     final events = <UpdateGameEvent>[];
 
-    int lastRow = _context.nextActiveUnitLastSearchCell.item1;
-    int lastCol = _context.nextActiveUnitLastSearchCell.item2;
+    int lastIndex = _context.nextActiveUnitLastSearchCellIndex;
 
-    for (int r = lastRow + 1; r < _context.gameField.rows; r++) {
-      for (int c = lastCol + 1; c < _context.gameField.cols; c++) {
-        if (_checkCell(r, c, events)) break;
-      }
+    for (int i = lastIndex + 1; i < _context.gameField.cells.length; i++) {
+      if (_checkCell(i, events)) break;
     }
 
+
     if (events.isEmpty) {
-      for (int r = 0; r <= lastRow; r++) {
-        for (int c = 0; c < lastCol; c++) {
-          if (_checkCell(r, c, events)) break;
-        }
+      for (int i = 0; i < lastIndex; i++) {
+        if (_checkCell(i, events)) break;
       }
     }
 
@@ -32,15 +28,15 @@ class FromAnyStateOnNextActiveUnitButtonClick {
     return currentState;
   }
 
-  bool _checkCell(int row, int col, List<UpdateGameEvent> events) {
-    final cell = _context.gameField.getCell(row, col);
+  bool _checkCell(int index, List<UpdateGameEvent> events) {
+    final cell = _context.gameField.cells.elementAt(index);
 
     if (cell.nation == _context.myNation &&
         cell.units.isNotEmpty &&
         cell.units.first.state != UnitState.disabled) {
 
       events.add(MoveCameraToCell(cell));
-      _context.nextActiveUnitLastSearchCell = Tuple2(row, col);
+      _context.nextActiveUnitLastSearchCellIndex = index;
 
       return true;
     }
