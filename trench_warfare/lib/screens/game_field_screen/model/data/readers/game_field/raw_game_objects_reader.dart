@@ -149,6 +149,7 @@ class RawGameObjectReader {
       level: ProductionCenterLevel.values.byName(tiledObject.name),
       nameEn: properties.getString("name_en"),
       nameRu: properties.getString("name_ru"),
+      nameEs: properties.getString("name_es"),
       center: _calculateCenter(tiledObject),
     );
   }

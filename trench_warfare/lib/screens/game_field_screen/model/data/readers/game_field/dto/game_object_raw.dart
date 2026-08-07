@@ -73,6 +73,7 @@ class ProductionCenterRaw extends GameObjectRaw {
   final ProductionCenterLevel level;
   final String nameRu;
   final String nameEn;
+  final String nameEs;
 
   bool get isLand => type != ProductionCenterType.navalBase;
 
@@ -82,6 +83,7 @@ class ProductionCenterRaw extends GameObjectRaw {
     required this.level,
     required this.nameRu,
     required this.nameEn,
+    required this.nameEs,
     required super.center,
   });
 }

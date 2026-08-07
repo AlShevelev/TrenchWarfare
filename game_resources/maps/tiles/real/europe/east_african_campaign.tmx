@@ -105,6 +105,7 @@
   <object id="3" name="level1" type="city" gid="104" x="189.106" y="194.587" width="64" height="64">
    <properties>
     <property name="name_en" value="Beni"/>
+    <property name="name_es" value="Beni"/>
     <property name="name_ru" value="Бени"/>
    </properties>
   </object>
@@ -121,6 +122,7 @@
   <object id="6" name="level1" type="city" gid="104" x="-109.661" y="650.503" width="64" height="64">
    <properties>
     <property name="name_en" value="Nya Lukemba"/>
+    <property name="name_es" value="Nya Lukemba"/>
     <property name="name_ru" value="Нуа Лукемба"/>
    </properties>
   </object>
@@ -367,150 +369,175 @@
   <object id="36" name="level2" type="city" gid="105" x="-84.1472" y="1914.83" width="64" height="64">
    <properties>
     <property name="name_en" value="Elisabethville"/>
+    <property name="name_es" value="Elisabethville"/>
     <property name="name_ru" value="Элизабетвилле"/>
    </properties>
   </object>
   <object id="37" name="level2" type="factory" gid="101" x="63.092" y="1251.23" width="64" height="64">
    <properties>
     <property name="name_en" value="Albertville"/>
+    <property name="name_es" value="Albertville"/>
     <property name="name_ru" value="Альбертвилле"/>
    </properties>
   </object>
   <object id="38" name="level1" type="city" gid="104" x="556.47" y="255.253" width="64" height="64">
    <properties>
     <property name="name_en" value="Kampala"/>
+    <property name="name_es" value="Kampala"/>
     <property name="name_ru" value="Кампала"/>
    </properties>
   </object>
   <object id="39" name="level1" type="city" gid="104" x="503.033" y="1756.24" width="64" height="64">
    <properties>
     <property name="name_en" value="Kasama"/>
+    <property name="name_es" value="Kasama"/>
     <property name="name_ru" value="Касама"/>
    </properties>
   </object>
   <object id="40" name="level1" type="factory" gid="100" x="425.529" y="1611.85" width="64" height="64">
    <properties>
     <property name="name_en" value="Abercorn"/>
+    <property name="name_es" value="Abercorn"/>
     <property name="name_ru" value="Аберкорн"/>
    </properties>
   </object>
   <object id="41" name="level1" type="city" gid="104" x="459.906" y="1399.96" width="64" height="64">
    <properties>
     <property name="name_en" value="Bismarckburg"/>
+    <property name="name_es" value="Bismarckburg"/>
     <property name="name_ru" value="Бисмаркбург"/>
    </properties>
   </object>
   <object id="42" name="level2" type="city" gid="105" x="1626.19" y="1321.08" width="64" height="64">
    <properties>
     <property name="name_en" value=" Dar-es-Salaam"/>
+    <property name="name_es" value="Dar es-Salam"/>
     <property name="name_ru" value="Дар-эс-Салаам"/>
    </properties>
   </object>
   <object id="43" name="level2" type="factory" gid="101" x="1382.99" y="1316.66" width="64" height="64">
    <properties>
     <property name="name_en" value="Morogoro"/>
+    <property name="name_es" value="Morogoro"/>
     <property name="name_ru" value="Морогоро"/>
    </properties>
   </object>
   <object id="44" name="level2" type="city" gid="105" x="1217" y="439.524" width="64" height="64">
    <properties>
     <property name="name_en" value="Nairobi"/>
+    <property name="name_es" value="Nairobi"/>
     <property name="name_ru" value="Найроби"/>
    </properties>
   </object>
   <object id="45" name="level2" type="factory" gid="101" x="1429.42" y="767.248" width="64" height="64">
    <properties>
     <property name="name_en" value="Voi"/>
+    <property name="name_es" value="Voi"/>
     <property name="name_ru" value="Вои"/>
    </properties>
   </object>
   <object id="46" name="level2" type="city" gid="105" x="1543.28" y="824.732" width="64" height="64">
    <properties>
     <property name="name_en" value="Mombasa"/>
+    <property name="name_es" value="Mombasa"/>
     <property name="name_ru" value="Момбаса"/>
    </properties>
   </object>
   <object id="47" name="level2" type="city" gid="105" x="662.229" y="952.966" width="64" height="64">
    <properties>
     <property name="name_en" value="Tabora"/>
+    <property name="name_es" value="Tabora"/>
     <property name="name_ru" value="Табора"/>
    </properties>
   </object>
   <object id="48" name="level1" type="factory" gid="100" x="1434.95" y="1537.75" width="64" height="64">
    <properties>
     <property name="name_en" value="Kibata"/>
+    <property name="name_es" value="Kibata"/>
     <property name="name_ru" value="Кибата"/>
    </properties>
   </object>
   <object id="49" name="level1" type="city" gid="104" x="1493.54" y="1827.39" width="64" height="64">
    <properties>
     <property name="name_en" value="Mahiwa"/>
+    <property name="name_es" value="Mahiwa"/>
     <property name="name_ru" value="Махива"/>
    </properties>
   </object>
   <object id="50" name="level1" type="city" gid="104" x="213.412" y="961.809" width="64" height="64">
    <properties>
     <property name="name_en" value="Kigoma"/>
+    <property name="name_es" value="Kigoma"/>
     <property name="name_ru" value="Кигома"/>
    </properties>
   </object>
   <object id="51" name="level1" type="city" gid="104" x="1057.29" y="1317.47" width="64" height="64">
    <properties>
     <property name="name_en" value="Iringa"/>
+    <property name="name_es" value="Iringa"/>
     <property name="name_ru" value="Иринга"/>
    </properties>
   </object>
   <object id="52" name="level1" type="city" gid="104" x="556.751" y="512.896" width="64" height="64">
    <properties>
     <property name="name_en" value="Bikoba"/>
+    <property name="name_es" value="Bikoba"/>
     <property name="name_ru" value="Бикоба"/>
    </properties>
   </object>
   <object id="54" name="level1" type="city" gid="104" x="891.144" y="268.406" width="64" height="64">
    <properties>
     <property name="name_en" value="Kisumu"/>
+    <property name="name_es" value="Kisumu"/>
     <property name="name_ru" value="Кисуму"/>
    </properties>
   </object>
   <object id="55" name="level1" type="city" gid="104" x="1491.96" y="1058.89" width="64" height="64">
    <properties>
     <property name="name_en" value="Tanga"/>
+    <property name="name_es" value="Tanga"/>
     <property name="name_ru" value="Танга"/>
    </properties>
   </object>
   <object id="56" name="level1" type="city" gid="104" x="1108.23" y="1022.71" width="64" height="64">
    <properties>
-    <property name="name_en" value="Kondoa-Irangi"/>
+    <property name="name_en" value="Kondoa Irangi"/>
+    <property name="name_es" value="Kondoa Irangi"/>
     <property name="name_ru" value="Кондоа-Иранги"/>
    </properties>
   </object>
   <object id="57" name="level1" type="city" gid="104" x="885.663" y="962.409" width="64" height="64">
    <properties>
     <property name="name_en" value="Mkalama"/>
+    <property name="name_es" value="Mkalama"/>
     <property name="name_ru" value="Мкалама"/>
    </properties>
   </object>
   <object id="59" name="level1" type="city" gid="104" x="773.833" y="761.773" width="64" height="64">
    <properties>
     <property name="name_en" value="Mwanza"/>
+    <property name="name_es" value="Mwanza"/>
     <property name="name_ru" value="Мванза"/>
    </properties>
   </object>
   <object id="60" name="level1" type="city" gid="104" x="1055.6" y="1633.39" width="64" height="64">
    <properties>
     <property name="name_en" value="Lupembe"/>
+    <property name="name_es" value="Lupembe"/>
     <property name="name_ru" value="Лупембе"/>
    </properties>
   </object>
   <object id="61" name="level1" type="city" gid="104" x="1265.01" y="1700.27" width="64" height="64">
    <properties>
     <property name="name_en" value="Livale"/>
+    <property name="name_es" value="Livale"/>
     <property name="name_ru" value="Ливале"/>
    </properties>
   </object>
   <object id="62" name="level1" type="city" gid="104" x="1216.77" y="1541.29" width="64" height="64">
    <properties>
     <property name="name_en" value="Mahenge"/>
+    <property name="name_es" value="Mahenge"/>
     <property name="name_ru" value="Махенге"/>
    </properties>
   </object>
@@ -899,84 +926,98 @@
   <object id="460" name="level2" type="navalBase" gid="96" x="412.534" y="-717.093" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="461" name="level1" type="navalBase" gid="95" x="412.534" y="-798.432" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="462" name="level3" type="navalBase" gid="97" x="412.534" y="-629.332" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="463" name="level1" type="airField" gid="98" x="335.717" y="-717.013" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="464" name="level2" type="airField" gid="99" x="335.714" y="-635.387" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="465" name="level1" type="factory" gid="100" x="256.707" y="-798.132" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="466" name="level2" type="factory" gid="101" x="256.704" y="-720.443" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="467" name="level3" type="factory" gid="102" x="256.704" y="-630.711" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="468" name="level4" type="factory" gid="103" x="256.704" y="-553.144" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="470" name="level2" type="city" gid="105" x="183.224" y="-719.613" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="471" name="level1" type="city" gid="104" x="183.219" y="-795.042" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="472" name="level3" type="city" gid="106" x="183.224" y="-641.21" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="473" name="level4" type="city" gid="107" x="183.224" y="-554.208" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>
   <object id="474" name="capital" type="city" gid="108" x="183.224" y="-478.154" width="64" height="64">
    <properties>
     <property name="name_en" value=""/>
+    <property name="name_es" value=""/>
     <property name="name_ru" value=""/>
    </properties>
   </object>

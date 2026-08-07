@@ -69,168 +69,196 @@
   <object id="1" name="level4" type="city" gid="107" x="621.048" y="1549.42" width="47.4425" height="46.0027">
    <properties>
     <property name="name_en" value="Paris"/>
+    <property name="name_es" value="París"/>
     <property name="name_ru" value="Париж"/>
    </properties>
   </object>
   <object id="8" name="level1" type="city" gid="104" x="1284.11" y="592.215" width="46.4505" height="47.2482">
    <properties>
     <property name="name_en" value="Mons"/>
+    <property name="name_es" value="Mons"/>
     <property name="name_ru" value="Монс"/>
    </properties>
   </object>
   <object id="7" name="level1" type="city" gid="104" x="1668.6" y="560.766" width="47.2482" height="47.2482">
    <properties>
     <property name="name_en" value="Namur"/>
+    <property name="name_es" value="Namur"/>
     <property name="name_ru" value="Намюр"/>
    </properties>
   </object>
   <object id="5" name="level2" type="city" gid="105" x="951.827" y="71.6604" width="46.4505" height="43.2597">
    <properties>
     <property name="name_en" value="Brugge"/>
+    <property name="name_es" value="Brujas"/>
     <property name="name_ru" value="Брюгге"/>
    </properties>
   </object>
   <object id="9" name="level1" type="city" gid="104" x="1285.11" y="1548.21" width="43.1232" height="43.1232">
    <properties>
     <property name="name_en" value="Epernay"/>
+    <property name="name_es" value="Épernay"/>
     <property name="name_ru" value="Эперне"/>
    </properties>
   </object>
   <object id="10" name="level1" type="city" gid="104" x="1176.23" y="1161.38" width="44.0574" height="43.2597">
    <properties>
     <property name="name_en" value="Laon"/>
+    <property name="name_es" value="Laon"/>
     <property name="name_ru" value="Лан"/>
    </properties>
   </object>
   <object id="11" name="level1" type="city" gid="104" x="1559.82" y="749.956" width="44.8551" height="45.6528">
    <properties>
     <property name="name_en" value="Philippeville"/>
+    <property name="name_es" value="Philippeville"/>
     <property name="name_ru" value="Филиппвиль"/>
    </properties>
   </object>
   <object id="12" name="level1" type="city" gid="104" x="895.849" y="625.205" width="48.8437" height="48.0459">
    <properties>
     <property name="name_en" value="Douai"/>
+    <property name="name_es" value="Douai"/>
     <property name="name_ru" value="Дуэ"/>
    </properties>
   </object>
   <object id="13" name="level1" type="city" gid="104" x="1504.82" y="1547.19" width="44.563" height="42.4033">
    <properties>
     <property name="name_en" value="Chalons-sur-Marne"/>
+    <property name="name_es" value="Châlons-en-Champagne"/>
     <property name="name_ru" value="Шалон-на-Марне"/>
    </properties>
   </object>
   <object id="14" name="level1" type="city" gid="104" x="1395.12" y="1355.35" width="42.462" height="44.0574">
    <properties>
-    <property name="name_en" value="Reins"/>
-    <property name="name_ru" value="Рейнс"/>
+    <property name="name_en" value="Reims"/>
+    <property name="name_es" value="Reims"/>
+    <property name="name_ru" value="Реймс"/>
    </properties>
   </object>
   <object id="15" name="level1" type="city" gid="104" x="850.458" y="1545.67" width="40.2436" height="38.8038">
    <properties>
     <property name="name_en" value="Meaux"/>
+    <property name="name_es" value="Meaux"/>
     <property name="name_ru" value="Мо"/>
    </properties>
   </object>
   <object id="17" name="level1" type="city" gid="104" x="72.8514" y="1296.58" width="44.563" height="47.4425">
    <properties>
     <property name="name_en" value="Rouen"/>
+    <property name="name_es" value="Ruan"/>
     <property name="name_ru" value="Руан"/>
    </properties>
   </object>
   <object id="18" name="level1" type="city" gid="104" x="75.0071" y="971.636" width="42.2254" height="42.2254">
    <properties>
     <property name="name_en" value="Dieppe"/>
+    <property name="name_es" value="Dieppe"/>
     <property name="name_ru" value="Дьеп"/>
    </properties>
   </object>
   <object id="19" name="level1" type="city" gid="104" x="348.948" y="874.404" width="41.5449" height="38.8231">
    <properties>
     <property name="name_en" value="Abbeville"/>
+    <property name="name_es" value="Abbeville"/>
     <property name="name_ru" value="Абвиль"/>
    </properties>
   </object>
   <object id="20" name="level1" type="city" gid="104" x="847.927" y="1284.39" width="41.6834" height="40.9635">
    <properties>
     <property name="name_en" value="Compiegne"/>
+    <property name="name_es" value="Compiègne"/>
     <property name="name_ru" value="Компьень"/>
    </properties>
   </object>
   <object id="21" name="level1" type="city" gid="104" x="568.897" y="1002.51" width="43.5863" height="42.2254">
    <properties>
     <property name="name_en" value="Amiens"/>
+    <property name="name_es" value="Amiens"/>
     <property name="name_ru" value="Амьен"/>
    </properties>
   </object>
   <object id="22" name="level2" type="city" gid="105" x="626.299" y="199.44" width="43.8842" height="41.4459">
    <properties>
     <property name="name_en" value="Dunkirk"/>
+    <property name="name_es" value="Dunkerque"/>
     <property name="name_ru" value="Дюнкерк"/>
    </properties>
   </object>
   <object id="23" name="level1" type="city" gid="104" x="732.341" y="917.38" width="49.0299" height="47.669">
    <properties>
     <property name="name_en" value="Albert"/>
+    <property name="name_es" value="Albert"/>
     <property name="name_ru" value="Альбер"/>
    </properties>
   </object>
   <object id="24" name="level1" type="city" gid="104" x="292.957" y="398.876" width="44.9472" height="45.6277">
    <properties>
     <property name="name_en" value="Boulogne"/>
+    <property name="name_es" value="Boulogne"/>
     <property name="name_ru" value="Булонь"/>
    </properties>
   </object>
   <object id="25" name="level1" type="city" gid="104" x="297.737" y="591.363" width="42.2254" height="43.5863">
    <properties>
     <property name="name_en" value="Berck"/>
+    <property name="name_es" value="Berck"/>
     <property name="name_ru" value="Берк"/>
    </properties>
   </object>
   <object id="27" name="level1" type="city" gid="104" x="901.293" y="935.83" width="41.8386" height="40.8955">
    <properties>
     <property name="name_en" value="Peronne"/>
+    <property name="name_es" value="Péronne"/>
     <property name="name_ru" value="Перон"/>
    </properties>
   </object>
   <object id="28" name="level2" type="factory" gid="101" x="1113.68" y="109.695" width="51.2368" height="49.6414">
    <properties>
-    <property name="name_en" value="Gent"/>
+    <property name="name_en" value="Ghent"/>
+    <property name="name_es" value="Gante"/>
     <property name="name_ru" value="Гент"/>
    </properties>
   </object>
   <object id="29" name="level2" type="factory" gid="101" x="1615.18" y="1037.23" width="44.8551" height="47.2482">
    <properties>
     <property name="name_en" value="Charleville-Mezieres"/>
+    <property name="name_es" value="Charleville-Mézières"/>
     <property name="name_ru" value="Шарлевиль-Мезьер"/>
    </properties>
   </object>
   <object id="30" name="level2" type="factory" gid="101" x="567.363" y="687.041" width="46.9886" height="45.6277">
    <properties>
     <property name="name_en" value="Frevent"/>
+    <property name="name_es" value="Frévent"/>
     <property name="name_ru" value="Фреван"/>
    </properties>
   </object>
   <object id="31" name="level2" type="factory" gid="101" x="464.882" y="1387.48" width="38.8038" height="42.4033">
    <properties>
     <property name="name_en" value="Pontoise"/>
+    <property name="name_es" value="Pontoise"/>
     <property name="name_ru" value="Понтуаз"/>
    </properties>
   </object>
   <object id="32" name="level3" type="city" gid="106" x="1456.35" y="292.587" width="35.578" height="35.578">
    <properties>
     <property name="name_en" value="Brussels"/>
+    <property name="name_es" value="Bruselas-Capital"/>
     <property name="name_ru" value="Брюссель"/>
    </properties>
   </object>
   <object id="33" name="level1" type="city" gid="104" x="1063" y="780.341" width="44.8551" height="44.8551">
    <properties>
     <property name="name_en" value="Caudry"/>
+    <property name="name_es" value="Caudry"/>
     <property name="name_ru" value="Кодри"/>
    </properties>
   </object>
   <object id="34" name="level1" type="city" gid="104" x="847.263" y="330.595" width="45.7129" height="42.665">
    <properties>
     <property name="name_en" value="Ypres"/>
+    <property name="name_es" value="Ypres"/>
     <property name="name_ru" value="Ипр"/>
    </properties>
   </object>
@@ -247,6 +275,7 @@
   <object id="37" name="level2" type="city" gid="105" x="1454.57" y="41.1509" width="38.2864" height="39.8293">
    <properties>
     <property name="name_en" value="Antwerp"/>
+    <property name="name_es" value="Amberes"/>
     <property name="name_ru" value="Антверпен"/>
    </properties>
   </object>

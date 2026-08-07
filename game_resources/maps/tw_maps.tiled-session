@@ -3,21 +3,21 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tiles/real/europe/the_first_battle_of_the_somme.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
-        "tiles/tutorial",
+        "tiles/templates/units",
+        "tiles/help",
+        "tiles/real",
+        "tiles/test",
+        "tiles/game_objects/atlas",
+        "tiles/game_objects",
+        "tiles/game_objects/templates",
+        "tiles_source_metadata",
         "tiles",
         ".",
-        "tiles_source_metadata",
-        "tiles/game_objects/templates",
-        "tiles/game_objects/atlas",
-        "tiles/real/europe",
-        "tiles/real",
         "tiles/templates",
-        "tiles/test",
-        "tiles/templates/units",
-        "tiles/game_objects",
-        "tiles/help"
+        "tiles/tutorial",
+        "tiles/real/europe"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -156,14 +156,15 @@
         },
         "tiles/real/europe/battle_of_amiens.tmx": {
             "expandedObjectLayers": [
+                5,
                 4,
                 3
             ],
-            "scale": 1.1038,
-            "selectedLayer": 1,
+            "scale": 0.5729,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 691.2484145678566,
-                "y": 1174.5787280304403
+                "x": 363.0651073485774,
+                "y": 608.3086053412462
             }
         },
         "tiles/real/europe/battle_of_amiens.tmx#TempBackground": {
@@ -176,11 +177,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.0607,
-            "selectedLayer": 4,
+            "scale": 0.9491,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 171.58480248892243,
-                "y": 336.0988026774772
+                "x": 84.29038036034137,
+                "y": 18.438520703824622
             }
         },
         "tiles/real/europe/battle_of_cantigny.tmx#TempBackground": {
@@ -195,11 +196,11 @@
                 4,
                 3
             ],
-            "scale": 0.6755,
-            "selectedLayer": 1,
+            "scale": 0.957,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 746.1139896373056,
-                "y": 940.7846039970393
+                "x": 1247.6489028213166,
+                "y": 1114.4200626959246
             }
         },
         "tiles/real/europe/battle_of_caporetto.tmx#TempBackground": {
@@ -210,13 +211,14 @@
         },
         "tiles/real/europe/battle_of_passchendaele.tmx": {
             "expandedObjectLayers": [
-                5
+                5,
+                3
             ],
-            "scale": 0.918,
-            "selectedLayer": 1,
+            "scale": 1.099,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 467.32026143790847,
-                "y": 468.954248366013
+                "x": 98.27115559599633,
+                "y": 1240.673339399454
             }
         },
         "tiles/real/europe/battle_of_passchendaele.tmx#TempBackground": {
@@ -227,13 +229,14 @@
         },
         "tiles/real/europe/battle_of_tannenburg.tmx": {
             "expandedObjectLayers": [
-                5
+                5,
+                3
             ],
-            "scale": 0.6668,
-            "selectedLayer": 1,
+            "scale": 0.8933,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 710.8578284343132,
-                "y": 975.5548890221957
+                "x": 463.45012873614684,
+                "y": 840.1432889286914
             }
         },
         "tiles/real/europe/battle_of_tannenburg.tmx#TempBackground": {
@@ -248,10 +251,10 @@
                 4
             ],
             "scale": 0.7971,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 728.8922343495169,
-                "y": 457.28264960481744
+                "x": 632.292058712834,
+                "y": 1137.2475222682224
             }
         },
         "tiles/real/europe/battle_of_verdun.tmx#TempBackground": {
@@ -263,13 +266,14 @@
         "tiles/real/europe/brusilov_offensive.tmx": {
             "expandedObjectLayers": [
                 5,
+                4,
                 3
             ],
             "scale": 1.2912,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 655.9789343246593,
-                "y": 1654.6623296158614
+                "x": 208.33333333333331,
+                "y": 341.1555142503098
             }
         },
         "tiles/real/europe/brusilov_offensive.tmx#TempBackground": {
@@ -282,11 +286,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.3766,
+            "scale": 1.2036,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 791.2904938927245,
-                "y": 1289.166224110462
+                "x": 1467.2648720505151,
+                "y": 1569.873712196743
             }
         },
         "tiles/real/europe/east_african_campaign.tmx#TempBackground": {
@@ -299,11 +303,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.8324,
-            "selectedLayer": 1,
+            "scale": 2.8188,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 708.7938491110042,
-                "y": 841.5425276309466
+                "x": 1146.2324393358876,
+                "y": 1017.9863771817795
             }
         },
         "tiles/real/europe/first_battle_of_the_marne.tmx#TempBackground": {
@@ -314,14 +318,14 @@
         },
         "tiles/real/europe/gallipoli_campaign.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
-            "scale": 0.7278,
-            "selectedLayer": 3,
+            "scale": 0.9741,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 1053.8609508106624,
-                "y": 815.4712833195933
+                "x": 570.7832871368444,
+                "y": -804.3322040858229
             }
         },
         "tiles/real/europe/gallipoli_campaign.tmx#TempBackground": {
@@ -332,14 +336,14 @@
         },
         "tiles/real/europe/german_spring_offensive.tmx": {
             "expandedObjectLayers": [
-                8,
-                3
+                3,
+                8
             ],
-            "scale": 0.7326,
-            "selectedLayer": 1,
+            "scale": 0.8242,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 596.5055965055965,
-                "y": 889.2983892983893
+                "x": 185.63455471972821,
+                "y": 1022.2033487017715
             }
         },
         "tiles/real/europe/german_spring_offensive.tmx#TempBackground": {
@@ -352,11 +356,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.43,
-            "selectedLayer": 1,
+            "scale": 1.0596,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 895.3488372093024,
-                "y": 1047.6744186046515
+                "x": 1029.6338240845603,
+                "y": 745.0924877312193
             }
         },
         "tiles/real/europe/south_west_africa_campaign.tmx#TempBackground": {
@@ -383,11 +387,11 @@
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.8682,
-            "selectedLayer": 1,
+            "scale": 0.878,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 696.8440451508868,
-                "y": 816.0562082469478
+                "x": 1144.6469248291571,
+                "y": 955.0113895216401
             }
         },
         "tiles/real/europe/the_first_battle_of_the_somme.tmx#TempBackground": {
@@ -1389,23 +1393,22 @@
     "map.tileWidth": 74,
     "map.width": 30,
     "openFiles": [
-        "tiles/real/europe/the_first_battle_of_the_somme.tmx"
     ],
     "project": "tw_maps.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "tiles/real/europe/the_first_battle_of_the_somme.tmx",
-        "tiles/real/europe/south_west_africa_campaign.tmx",
-        "tiles/real/europe/german_spring_offensive.tmx",
-        "tiles/real/europe/gallipoli_campaign.tmx",
-        "tiles/real/europe/first_battle_of_the_marne.tmx",
-        "tiles/real/europe/east_african_campaign.tmx",
-        "tiles/real/europe/brusilov_offensive.tmx",
-        "tiles/real/europe/battle_of_verdun.tmx",
-        "tiles/real/europe/battle_of_tannenburg.tmx",
-        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/battle_of_cantigny.tmx",
+        "tiles/real/europe/battle_of_amiens.tmx",
         "tiles/real/europe/battle_of_caporetto.tmx",
-        "tiles/real/europe/battle_of_amiens.tmx"
+        "tiles/real/europe/battle_of_passchendaele.tmx",
+        "tiles/real/europe/battle_of_tannenburg.tmx",
+        "tiles/real/europe/battle_of_verdun.tmx",
+        "tiles/real/europe/brusilov_offensive.tmx",
+        "tiles/real/europe/east_african_campaign.tmx",
+        "tiles/real/europe/first_battle_of_the_marne.tmx",
+        "tiles/real/europe/gallipoli_campaign.tmx",
+        "tiles/real/europe/german_spring_offensive.tmx",
+        "tiles/real/europe/south_west_africa_campaign.tmx"
     ],
     "resizeMap.removeObjects": false,
     "textEdit.monospace": true,

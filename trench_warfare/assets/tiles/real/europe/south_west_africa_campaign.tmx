@@ -119,18 +119,21 @@
   <object id="20" name="level1" type="city" gid="104" x="879.777" y="2026.53" width="64" height="64">
    <properties>
     <property name="name_en" value="Port Nolloth"/>
+    <property name="name_es" value="Port Nolloth"/>
     <property name="name_ru" value="Порт-Ноллот"/>
    </properties>
   </object>
   <object id="22" name="level2" type="city" gid="105" x="545.221" y="1538.03" width="64" height="64">
    <properties>
     <property name="name_en" value="Lüderitz Bay"/>
+    <property name="name_es" value="Angra Pequeña"/>
     <property name="name_ru" value="Людерицбухта"/>
    </properties>
   </object>
   <object id="24" name="level1" type="factory" gid="100" x="1116.49" y="1473.02" width="64" height="64">
    <properties>
     <property name="name_en" value="Keetmanshoop"/>
+    <property name="name_es" value="Keetmanshoop"/>
     <property name="name_ru" value="Китмансхуп"/>
    </properties>
   </object>
@@ -147,12 +150,14 @@
   <object id="26" name="level1" type="factory" gid="100" x="386.918" y="929.541" width="64" height="64">
    <properties>
     <property name="name_en" value="Botha"/>
+    <property name="name_es" value="Botha"/>
     <property name="name_ru" value="Бота"/>
    </properties>
   </object>
   <object id="27" name="level2" type="factory" gid="101" x="384.876" y="806.273" width="64" height="64">
    <properties>
     <property name="name_en" value="Swakopmund"/>
+    <property name="name_es" value="Swakopmund"/>
     <property name="name_ru" value="Свакопмунд"/>
    </properties>
   </object>
@@ -169,6 +174,7 @@
   <object id="29" name="level2" type="factory" gid="101" x="997.518" y="713.14" width="64" height="64">
    <properties>
     <property name="name_en" value="Windhuk"/>
+    <property name="name_es" value="Windhoek"/>
     <property name="name_ru" value="Виндхук"/>
    </properties>
   </object>
@@ -285,66 +291,77 @@
   <object id="43" name="level1" type="city" gid="104" x="1269.8" y="820.259" width="64" height="64">
    <properties>
     <property name="name_en" value="Gobabis"/>
+    <property name="name_es" value="Gobabis"/>
     <property name="name_ru" value="Гобабис"/>
    </properties>
   </object>
   <object id="44" name="level1" type="city" gid="104" x="668.07" y="1049.71" width="64" height="64">
    <properties>
     <property name="name_en" value="Nauchas"/>
+    <property name="name_es" value="Nauchas"/>
     <property name="name_ru" value="Начас"/>
    </properties>
   </object>
   <object id="45" name="level2" type="city" gid="105" x="885.818" y="232.575" width="64" height="64">
    <properties>
     <property name="name_en" value="Otavi"/>
+    <property name="name_es" value="Otavi"/>
     <property name="name_ru" value="Отави"/>
    </properties>
   </object>
   <object id="46" name="level1" type="city" gid="104" x="1062.63" y="-4.74792" width="64" height="64">
    <properties>
     <property name="name_en" value="Tsumeb"/>
+    <property name="name_es" value="Tsumeb"/>
     <property name="name_ru" value="Цумеб"/>
    </properties>
   </object>
   <object id="47" name="level1" type="city" gid="104" x="1122.8" y="1875.66" width="64" height="64">
    <properties>
     <property name="name_en" value="Warmbad"/>
+    <property name="name_es" value="Warmbad"/>
     <property name="name_ru" value="Вармбад"/>
    </properties>
   </object>
   <object id="48" name="level1" type="city" gid="104" x="828.538" y="1573.38" width="64" height="64">
    <properties>
     <property name="name_en" value="Bethanien"/>
+    <property name="name_es" value="Bethanie"/>
     <property name="name_ru" value="Бетанен"/>
    </properties>
   </object>
   <object id="49" name="level1" type="city" gid="104" x="892.695" y="1153.73" width="64" height="64">
    <properties>
     <property name="name_en" value="Gibeon"/>
+    <property name="name_es" value="Gabaón"/>
     <property name="name_ru" value="Гибеон"/>
    </properties>
   </object>
   <object id="50" name="level1" type="city" gid="104" x="944.884" y="992.755" width="64" height="64">
    <properties>
     <property name="name_en" value="Rehoboth"/>
+    <property name="name_es" value="Rehoboth"/>
     <property name="name_ru" value="Рехобот"/>
    </properties>
   </object>
   <object id="51" name="level1" type="city" gid="104" x="1214.7" y="1152.68" width="64" height="64">
    <properties>
     <property name="name_en" value="Gochas"/>
+    <property name="name_es" value="Gochas"/>
     <property name="name_ru" value="Гочас"/>
    </properties>
   </object>
   <object id="52" name="level1" type="city" gid="104" x="612.641" y="592.35" width="64" height="64">
    <properties>
     <property name="name_en" value="Karibib"/>
+    <property name="name_es" value="Karibib"/>
     <property name="name_ru" value="Карибиб"/>
    </properties>
   </object>
   <object id="54" name="level1" type="city" gid="104" x="998.863" y="512.306" width="64" height="64">
    <properties>
     <property name="name_en" value="Waterberg"/>
+    <property name="name_es" value="Waterberg"/>
     <property name="name_ru" value="Ватерберх"/>
    </properties>
   </object>

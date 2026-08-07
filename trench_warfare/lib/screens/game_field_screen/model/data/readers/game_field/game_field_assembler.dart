@@ -81,7 +81,11 @@ class GameFieldAssembler {
   static ProductionCenter _mapProductionCenter(ProductionCenterRaw raw) => ProductionCenter(
         type: raw.type,
         level: raw.level,
-        name: {AppLocale.en: raw.nameEn, AppLocale.ru: raw.nameRu},
+        name: {
+          AppLocale.en: raw.nameEn,
+          AppLocale.ru: raw.nameRu,
+          AppLocale.es: raw.nameEs,
+        },
       );
 
   static TerrainModifier _mapTerrainModifier(TerrainModifierRaw raw) => TerrainModifier(type: raw.type);

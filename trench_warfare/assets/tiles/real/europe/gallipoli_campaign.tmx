@@ -68,49 +68,57 @@
  <objectgroup id="4" name="GameObjects">
   <object id="2" name="level2" type="city" gid="105" x="385.755" y="1371.24" width="64" height="64">
    <properties>
-    <property name="name_en" value="Kum Kale"/>
+    <property name="name_en" value="Kumkale"/>
+    <property name="name_es" value="Kumkale"/>
     <property name="name_ru" value="Кумкале"/>
    </properties>
   </object>
   <object id="4" name="level2" type="city" gid="105" x="556.89" y="1086.63" width="64" height="64">
    <properties>
     <property name="name_en" value="Krithia"/>
-    <property name="name_ru" value="Критию"/>
+    <property name="name_es" value="Krithia"/>
+    <property name="name_ru" value="Крития"/>
    </properties>
   </object>
   <object id="5" name="level1" type="factory" gid="100" x="775.787" y="903.39" width="64" height="64">
    <properties>
     <property name="name_en" value="Achi Baba"/>
+    <property name="name_es" value="Achi Baba"/>
     <property name="name_ru" value="Ачибаба"/>
    </properties>
   </object>
   <object id="6" name="level1" type="city" gid="104" x="992.013" y="570.959" width="64" height="64">
    <properties>
     <property name="name_en" value="Gaba Tepe"/>
+    <property name="name_es" value="Gaba Tepe"/>
     <property name="name_ru" value="Габатепе"/>
    </properties>
   </object>
   <object id="7" name="level2" type="city" gid="105" x="1384.12" y="735.665" width="64" height="64">
    <properties>
-    <property name="name_en" value="Maidos"/>
+    <property name="name_en" value="Maydos"/>
+    <property name="name_es" value="Maydos"/>
     <property name="name_ru" value="Маидос"/>
    </properties>
   </object>
   <object id="8" name="level3" type="city" gid="106" x="1498.83" y="1071.1" width="64" height="64">
    <properties>
-    <property name="name_en" value="Chanak Kale"/>
+    <property name="name_en" value="Çanakkale"/>
+    <property name="name_es" value="Çanakkale"/>
     <property name="name_ru" value="Чанаккале"/>
    </properties>
   </object>
   <object id="10" name="level2" type="factory" gid="101" x="1298.01" y="519.581" width="64" height="64">
    <properties>
-    <property name="name_en" value="Mal Tepe"/>
+    <property name="name_en" value="Maltepe"/>
+    <property name="name_es" value="Maltepe"/>
     <property name="name_ru" value="Малтепе"/>
    </properties>
   </object>
   <object id="39" name="level4" type="city" gid="107" x="1481.83" y="413.816" width="64" height="64">
    <properties>
     <property name="name_en" value="Boghali"/>
+    <property name="name_es" value="Boghali"/>
     <property name="name_ru" value="Богхали"/>
    </properties>
   </object>

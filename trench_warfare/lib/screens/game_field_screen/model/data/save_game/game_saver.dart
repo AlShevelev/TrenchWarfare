@@ -266,7 +266,7 @@ class GameSaver implements GameSaverBuilder {
       return null;
     }
 
-    return '${pc.name[AppLocale.en]}|${pc.name[AppLocale.ru]}';
+    return '${pc.name[AppLocale.en]}|${pc.name[AppLocale.ru]}|${pc.name[AppLocale.es]}';
   }
 
   SaveUnitDbEntity _mapUnitToDbEntity(

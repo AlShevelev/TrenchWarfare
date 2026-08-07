@@ -73,18 +73,21 @@
   <object id="4" name="level1" type="factory" gid="100" x="52.0472" y="-13.2506" width="64" height="64">
    <properties>
     <property name="name_en" value="Le Plessier"/>
+    <property name="name_es" value="Le Plessier"/>
     <property name="name_ru" value="Ле-Плесьэ"/>
    </properties>
   </object>
   <object id="5" name="level2" type="city" gid="105" x="-82.1389" y="628.867" width="64" height="64">
    <properties>
     <property name="name_en" value="Villers-Tournelle"/>
+    <property name="name_es" value="Villers-Tournelle"/>
     <property name="name_ru" value="Виллер-Турнель"/>
    </properties>
   </object>
   <object id="6" name="level3" type="city" gid="106" x="586.582" y="338.303" width="64" height="64">
    <properties>
     <property name="name_en" value="Cantigny"/>
+    <property name="name_es" value="Cantigny"/>
     <property name="name_ru" value="Кантиньи"/>
    </properties>
   </object>

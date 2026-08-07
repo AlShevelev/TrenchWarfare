@@ -141,7 +141,11 @@ class LoadedGameBuilder implements GameBuilder {
     }
 
     final parts = dbName.split('|');
-    return {AppLocale.en: parts[0], AppLocale.ru: parts[1],};
+    return {
+      AppLocale.en: parts.elementAtOrNull(0) ?? '',
+      AppLocale.ru: parts.elementAtOrNull(1) ?? '',
+      AppLocale.es: parts.elementAtOrNull(2) ?? '',
+    };
   }
 
   Unit _mapUnitFromDb(SaveUnitDbEntity dbUnit, List<SaveUnitDbEntity> allUnits) {
